@@ -4,7 +4,7 @@ import {
 } from '../actions/index.js';
 
 const initialState = {
-    user: {loggedIn:true, name: ""},
+    user: {loggedIn:false, name: ""},
     message: "" 
 }
 
