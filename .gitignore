@@ -1,0 +1,5 @@
+# iOS Build files
+ios/build/
+
+# Node.js modules
+node_modules/
