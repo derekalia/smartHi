@@ -25,7 +25,8 @@ import ProductReducer from './reducers/product.js';
 // Combine reducers
 let store = createStore(combineReducers({UserReducer,SearchReducer,ProductReducer,}),applyMiddleware(thunk));
 
-export class herby extends Component {
+// This object is the Entrypoint for the app on both android and ios
+export class entrypoint extends Component {
   render() {
     return (
         <Provider store={store}>

@@ -1,4 +1,4 @@
 const {AppRegistry} = require('react-native');
-const herby = require('./entrypoint');
+const {entrypoint} = require('./entrypoint');
 
-AppRegistry.registerComponent('herby', () => herby);
+AppRegistry.registerComponent('herby', () => entrypoint);
