@@ -3,3 +3,12 @@ ios/build/
 
 # Node.js modules
 node_modules/
+
+
+# Macintosh bullshit files
+.DS_Store
+*/.DS_Store
+
+# Xcode files
+ios/*.xcodeproj/project.xcworkspace/
+ios/*.xcodeproj/xcuserdata/
