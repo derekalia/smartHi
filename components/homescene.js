@@ -44,7 +44,7 @@ class HomeScene extends Component {
                          <View>
                             <TouchableOpacity style={[Styles.FindProductButton]}
                               onPress={this._onToSearch.bind(this)}>
-                                <Text style={{color:'white',fontSize:22}}>Find Product</Text>
+                                <Text style={{color:'white',fontSize:22,fontFamily:"Avenir Next"}}>Find Product</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={[{height:120,margin:10}]}>
@@ -142,7 +142,7 @@ const Styles = StyleSheet.create({
         height:42,
         marginHorizontal: 10,
         marginTop: 0,
-        borderRadius: 6,
+        borderRadius: 3,
         backgroundColor: '#4A90E2',
         justifyContent: 'center',
         alignItems: 'center',

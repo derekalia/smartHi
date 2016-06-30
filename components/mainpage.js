@@ -51,8 +51,8 @@ class MainPage extends Component {
                 unselectedTintColor="grey"
                 tintColor="#4A90E2"
                 barTintColor="#F9F9F9"
-                translucent="True">
-                <TabBarIOS.Item style={{color:"blue"}}
+                >
+                <TabBarIOS.Item
                     title="Home Tab"
                     icon={homeIcon}
                     selected={this.state.selectedTab == HomeTabId}
