@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import {StyleSheet,Text,View,ScrollView,Image,TextInput,TouchableOpacity,Navigator} from 'react-native';
 
 //get internal components
-import Styles        from './styles.js';
+
 import HomeScene     from './homescene.js';
 import SearchScene   from './searchscene.js';
 import ProductScene  from './productscene.js';
@@ -74,7 +74,7 @@ var HomeTabScenes = [
 var HomeTabRouteMapper = {
     LeftButton: function(route, navigator, index, navState) {
         // BatsFix. Do something other than "Back" text
-        
+
         if (index > 0) {
             return (
                 <Text onPress={navigator.jumpBack}>Back</Text>
@@ -109,9 +109,9 @@ class HomeTab extends Component {
 
     renderScene(route, navigator) {
         return (
-            <route.component navigator={navigator} 
-                   searchScene={HomeTabScenes[SearchSceneIndex]} 
-                   producerScene={HomeTabScenes[ProducerSceneIndex]} 
+            <route.component navigator={navigator}
+                   searchScene={HomeTabScenes[SearchSceneIndex]}
+                   producerScene={HomeTabScenes[ProducerSceneIndex]}
                    productScene={HomeTabScenes[ProductSceneIndex]}/>
         );
     }
@@ -135,5 +135,46 @@ class HomeTab extends Component {
         );
     }
 }
+
+const Styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'stretch',
+    },
+    buttonLarge: {
+        flex: 1,
+        marginHorizontal: 10,
+        marginTop: 10,
+        borderRadius: 20,
+        backgroundColor: '#8888ff',
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'stretch',
+    },
+    buttonSmall: {
+        flex: 1,
+        marginHorizontal: 3,
+        borderRadius: 20,
+        backgroundColor: '#8888ff',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    input: {
+        flex: 1,
+        fontSize: 10,
+        textAlign: 'center',
+        margin: 10,
+        borderRadius: 20,
+        backgroundColor: '#999999',
+    },
+    backgroundImage: {
+        flex: 1,
+        width: null,
+        height: null,
+    },
+});
+
 
 module.exports = HomeTab;
