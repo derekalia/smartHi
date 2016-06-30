@@ -31,25 +31,25 @@ class RegisterScene extends Component {
 
     render() {
              return (
-                <View style={styles.container}>
-                   <View style={[styles.container,{flex:3}]}>
+                <View style={Styles.container}>
+                   <View style={[Styles.container,{flex:3}]}>
                    </View>
-                   <View style={[styles.container,{alignItems: 'center',flex:2}]}>
-                        <TextInput style={styles.input}
+                   <View style={[Styles.container,{alignItems: 'center',flex:2}]}>
+                        <TextInput style={Styles.input}
                             autoCapitalize  = "none"
                             autoCorrect     = {false}
                             placeholder     = "Enter user name here"
                             returnKeyType   = "next"
                             onEndEditing    = {this._enterUserName.bind(this)}
                         />
-                        <TextInput style={styles.input}
+                        <TextInput style={Styles.input}
                             password        = {true}
                             autoCapitalize  = "none"
                             autoCorrect     = {false}
                             placeholder     = "Enter password here"
                             onSubmitEditing = {this._enterUserPassword.bind(this)}
                         />
-                        <TextInput style={styles.input}
+                        <TextInput style={Styles.input}
                             password        = {true}
                             autoCapitalize  = "none"
                             autoCorrect     = {false}
@@ -57,7 +57,7 @@ class RegisterScene extends Component {
                             onSubmitEditing = {this._confirmUserPassword.bind(this)}
                         />
                    </View>
-                   <View style={[styles.container,{flex:1}]}>
+                   <View style={[Styles.container,{flex:1}]}>
                         <Text>{this._message}</Text>
                    </View>
                 </View>

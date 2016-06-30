@@ -64,7 +64,7 @@ const RegisterSceneIndex = 2;
 var LoginPageScenes = [
     {title: "Herby",    component: LaunchScene,   index: LaunchSceneIndex},
     {title: "Herby",    component: AboutScene,    index: AboutSceneIndex},
-    {title: "Herby", component: RegisterScene,    index: RegisterSceneIndex},
+    {title: "Herby",    component: RegisterScene, index: RegisterSceneIndex},
     {title: "Herby",    component: LoginScene,    index: LoginSceneIndex},
 ];
 

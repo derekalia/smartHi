@@ -10,46 +10,9 @@ import ProductScene  from './productscene.js';
 
 const HomeSceneIndex       = 0;
 const SearchSceneIndex     = 1;
-const ResultSceneIndex     = 2;
-const ProductSceneIndex    = 3;
+const ProductSceneIndex    = 2;
 const ProducerSceneIndex   = 4;
 
-/*
-class SearchScene extends Component {
-
-    render() {
-            return (
-                <View style={Styles.container}>
-                    <Text>Search Scene Placeholder</Text>
-                </View>
-            );
-    }
-}
-*/
-
-class ResultScene extends Component {
-
-    render() {
-            return (
-                <View style={Styles.container}>
-                    <Text>Search Result Scene Placeholder</Text>
-                </View>
-            );
-    }
-}
-
-/*
-class ProductScene extends Component {
-
-    render() {
-            return (
-                <View style={Styles.container}>
-                    <Text>Product Scene Placeholder</Text>
-                </View>
-            );
-    }
-}
-*/
 class ProducerScene extends Component {
 
     render() {
@@ -61,12 +24,9 @@ class ProducerScene extends Component {
     }
 }
 
-
-
 var HomeTabScenes = [
     {title: "Herby",          component: HomeScene,     index: HomeSceneIndex},
     {title: "Search",         component: SearchScene,   index: SearchSceneIndex},
-    {title: "Search Results", component: ResultScene,   index: ResultSceneIndex},
     {title: "Producer",       component: ProductScene,  index: ProductSceneIndex},
     {title: "Product",        component: ProducerScene, index: ProducerSceneIndex},
 ];
