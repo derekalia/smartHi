@@ -1,6 +1,6 @@
 //loginscenes.js
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,ScrollView,Image,TextInput,TouchableOpacity,Navigator} from 'react-native'
+import {StyleSheet,Text,View,ScrollView,Image,TextInput,TouchableOpacity,TouchableHighlight,Navigator} from 'react-native'
 
 //get state management components
 import {bindActionCreators} from 'redux';
@@ -8,6 +8,8 @@ import {connect} from 'react-redux';
 
 //get internal components
 // import Styles from './styles.js';
+
+
 
 class HomeScene extends Component {
     constructor(props) {
@@ -57,6 +59,47 @@ class HomeScene extends Component {
                                     <Text>Washington</Text>
                                 </View>
                         </View>
+
+
+      <TouchableHighlight
+        underlayColor='#dddddd'>
+        <View style={{ backgroundColor: 'white' }}>
+          <View style={Styles.outside}>
+            <Image style={Styles.thumb} source={require('../media/Rosin2.png')}/>
+            <View style={Styles.flexContainer}>
+              <View style={Styles.rowContainer}>
+                <Text style={Styles.title} numberOfLines={1}>XJ-13 Rosin</Text>
+                <Text style={Styles.price}>$34.99</Text>
+              </View>
+              <View style={Styles.rowContainerStars}>
+                {/*<StarRating
+                  disabled={false}
+                  maxStars={5}
+                  starColor={'red'}
+                  starSize={17}
+                  rating={this.state.starCount}
+                  selectedStar={(rating) => this.onStarRatingPress(rating) }
+                  />*/}
+                <Text>(39) </Text>
+                <Text style={Styles.company}>FORGED Cannabis</Text>
+              </View>
+              <View style={Styles.tagContainer}>
+                <TouchableHighlight style={Styles.button}>
+                  <Text style={Styles.buttonText}>flower</Text>
+                </TouchableHighlight>
+                <TouchableHighlight style={Styles.button}>
+                  <Text style={Styles.buttonText}>indica</Text>
+                </TouchableHighlight>
+                <TouchableHighlight style={Styles.button}>
+                  <Text style={Styles.buttonText}>sleepy</Text>
+                </TouchableHighlight>
+              </View>
+            </View>
+          </View>
+          <View style={Styles.separator}/>
+        </View>
+      </TouchableHighlight>
+
                         <View style={[Styles.container,{height:80,margin:10}]}>
                                  <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
                                     <Text> Activities </Text>
@@ -169,6 +212,107 @@ const Styles = StyleSheet.create({
         width: null,
         height: null,
     },
+    company: {
+    flex: 1,
+    textAlign: 'right',
+    fontSize: 13,
+    marginRight: 4,
+    flexWrap: 'nowrap',
+    height: 13
+  },
+  buttonText: {
+    fontSize: 15,
+    color: '#48BBEC',
+    alignSelf: 'center',
+  },
+  button: {
+    height: 33,
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 22,
+    margin: 8,
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+
+  },
+
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
+  },
+  box: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  root: {
+    backgroundColor: '#F5FCFF',
+  },
+  thumb: {
+    width: 100,
+    height: 100,
+    marginRight: 7,
+    borderRadius: 5,
+    // borderTopLeftRadius: 60,
+    // borderTopRightRadius: 0,
+  },
+  separator: {
+    // height: 1,
+    // backgroundColor: '#dddddd'
+  },
+  price: {
+    marginTop: 3,
+    marginRight: 4,
+    flex: 1,
+    textAlign: 'right',
+    fontSize: 18,
+    // fontWeight: 'bold',
+    color: 'black'
+  },
+  title: {
+    marginTop: 3,
+    flex: 1,
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: 'black'
+  },
+  rowContainer: {
+    flexDirection: 'row',
+    marginRight: 3,
+  },
+  outside: {
+    flex: 1,
+    flexDirection: 'row',
+    backgroundColor: 'white',
+    borderColor: '#48BBEC',
+    borderWidth: 1,
+    borderRadius: 6,
+    margin: 8,
+  },
+  rowContainerStars: {
+    flexDirection: 'row',
+    marginTop: 8,
+    marginRight: 3,
+  },
+  tagContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  flexContainer: {
+    flex: 1,
+    flexDirection: 'column'
+  }
 });
 
 module.exports         = connect(mapStateToProps)(HomeScene);
