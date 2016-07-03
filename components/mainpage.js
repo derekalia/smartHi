@@ -5,10 +5,11 @@ import {StyleSheet,Text,View,Image,TextInput,TouchableOpacity,Navigator,TabBarIO
 //get internal components
 import HomeTab       from './hometab.js';
 
-const HomeTabId   = 'HomeTabId';
-const SearchTabId = 'SearchTabId';
-const ReviewTabId = 'ReviewTabId';
-const MapTabId    = 'MapTabId';
+const HomeTabId    = 'HomeTabId';
+const SearchTabId  = 'SearchTabId';
+const ReviewTabId  = 'ReviewTabId';
+const MapTabId     = 'MapTabId';
+const ProfileTabId = 'ProfileTabId';
 
 const homeIcon = {
   scale: 2.3,

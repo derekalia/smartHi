@@ -1,6 +1,6 @@
 //loginscenes.js
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,ListView,ListViewDataSource,ScrollView,Image,TextInput,TouchableOpacity,Navigator} from 'react-native'
+import {StyleSheet,Text,View,Slider,ListView,ListViewDataSource,ScrollView,Image,TextInput,TouchableOpacity,Navigator} from 'react-native'
 
 //get state management components
 import {bindActionCreators} from 'redux';
@@ -316,6 +316,11 @@ class SearchScene extends Component {
             <View style={[{flex:1,margin:6,marginTop:45}]}>
               <Text style={{fontSize:18,marginBottom:10,fontFamily:"Avenir Next"}}> Distance </Text>
               <View style={[{flexDirection:'row'}]}>
+
+                <Slider
+                  maximumValue={100}
+                  minimumValue = {.2}
+                  />
 
               </View>
             </View>
