@@ -49,7 +49,10 @@ class HomeScene extends Component {
                                 <Text style={{color:'white',fontSize:22,fontFamily:"Avenir Next"}}>Find Product</Text>
                             </TouchableOpacity>
                         </View>
-                        <View style={[{height:120,margin:10}]}>
+                        <View style={[Styles.container,{flex:1,alignItems:'flex-start',marginTop:20,marginBottom:10}]}>
+                            <Text style={{fontSize:16, fontWeight: 'bold'}}> Featured </Text>
+                        </View>
+                        {/*<View style={[{height:120,margin:10}]}>
                                 <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
                                     <Text style={{fontSize:16, fontWeight: 'bold'}}> Featured </Text>
                                 </View>
@@ -58,7 +61,7 @@ class HomeScene extends Component {
                                     <Text>Issaquah</Text>
                                     <Text>Washington</Text>
                                 </View>
-                        </View>
+                        </View>*/}
 
 
       <TouchableHighlight
