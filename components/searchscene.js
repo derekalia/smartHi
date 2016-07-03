@@ -165,7 +165,7 @@ class SearchScene extends Component {
 
             <View style={[{flex:1,alignItems:'flex-start',margin:6,marginTop:15}]}>
               <Text style={{fontSize:18,marginBottom:10,fontFamily:"Avenir Next"}}> Activity </Text>
-              <View style={[{flexDirection:'row'}]}>
+              <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
                 <TouchableOpacity style={Styles.tagActivity}>
                   <Text style={Styles.tagTextActivity}>{this.state.act[0]}</Text>
                 </TouchableOpacity>
@@ -178,8 +178,6 @@ class SearchScene extends Component {
                 <TouchableOpacity style={Styles.tagActivity}>
                   <Text style={Styles.tagTextActivity}>{this.state.act[3]}</Text>
                 </TouchableOpacity>
-              </View>
-              <View style={[{flexDirection:'row'}]}>
                 <TouchableOpacity style={Styles.tagActivity}>
                   <Text style={Styles.tagTextActivity}>{this.state.act[4]}</Text>
                 </TouchableOpacity>
@@ -197,7 +195,7 @@ class SearchScene extends Component {
 
             <View style={[{flex:1,alignItems:'flex-start',margin:6,marginTop:45}]}>
               <Text style={{fontSize:18,marginBottom:10,fontFamily:"Avenir Next"}}> Effects </Text>
-              <View style={[{flexDirection:'row'}]}>
+              <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
                 <TouchableOpacity style={Styles.tag}>
                   <Text style={Styles.tagText}>{this.state.eff[0]}</Text>
                 </TouchableOpacity>
@@ -210,8 +208,6 @@ class SearchScene extends Component {
                 <TouchableOpacity style={Styles.tag}>
                   <Text style={Styles.tagText}>{this.state.eff[3]}</Text>
                 </TouchableOpacity>
-              </View>
-              <View style={[{flexDirection:'row'}]}>
                 <TouchableOpacity style={Styles.tag}>
                   <Text style={Styles.tagText}>{this.state.eff[4]}</Text>
                 </TouchableOpacity>
@@ -229,7 +225,7 @@ class SearchScene extends Component {
 
             <View style={[{flex:1,alignItems:'flex-start',margin:6,marginTop:45}]}>
               <Text style={{fontSize:18,marginBottom:10,fontFamily:"Avenir Next"}}> Type </Text>
-              <View style={[{flexDirection:'row'}]}>
+              <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
                 <TouchableOpacity style={Styles.tagType}>
                   <Text style={Styles.tagTextType}>{this.state.type[0]}</Text>
                 </TouchableOpacity>
@@ -242,8 +238,6 @@ class SearchScene extends Component {
                 <TouchableOpacity style={Styles.tagType}>
                   <Text style={Styles.tagTextType}>{this.state.type[3]}</Text>
                 </TouchableOpacity>
-              </View>
-              <View style={[{flexDirection:'row'}]}>
                 <TouchableOpacity style={Styles.tagType}>
                   <Text style={Styles.tagTextType}>{this.state.type[4]}</Text>
                 </TouchableOpacity>
@@ -261,7 +255,7 @@ class SearchScene extends Component {
 
             <View style={[{flex:1,alignItems:'flex-start',margin:6,marginTop:45}]}>
               <Text style={{fontSize:18,marginBottom:10,fontFamily:"Avenir Next"}}> Symptoms </Text>
-              <View style={[{flexDirection:'row'}]}>
+              <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
                 <TouchableOpacity style={Styles.tagSymptoms}>
                   <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[0]}</Text>
                 </TouchableOpacity>
@@ -274,8 +268,6 @@ class SearchScene extends Component {
                 <TouchableOpacity style={Styles.tagSymptoms}>
                   <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[3]}</Text>
                 </TouchableOpacity>
-              </View>
-              <View style={[{flexDirection:'row'}]}>
                 <TouchableOpacity style={Styles.tagSymptoms}>
                   <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[4]}</Text>
                 </TouchableOpacity>
@@ -293,7 +285,7 @@ class SearchScene extends Component {
 
             <View style={[{flex:1,margin:6,marginTop:45}]}>
               <Text style={{fontSize:18,marginBottom:10,fontFamily:"Avenir Next"}}> Category </Text>
-              <View style={[{flexDirection:'row'}]}>
+              <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
                 <TouchableOpacity style={Styles.tagCategory}>
                   <Text style={Styles.tagTextCategory}>{this.state.category[0]}</Text>
                 </TouchableOpacity>
