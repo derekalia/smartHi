@@ -93,20 +93,24 @@ class MainPage extends Component {
           selected={this.state.selectedTab == ProfileTabId}
           onPress={()=>{this.setState({selectedTab: ProfileTabId})}}>
 
-          <View style={[{flex:1}]}>
             <ScrollView>
 
               <View style={[{flex:1}]}/>
               <View style={{flex:1,alignItems:"center",marginTop:0}}>
 
                 <Image source={require('../media/headshot1.png')} style={{width:100,height:100}}/>
-                <Text style={{fontSize:22,marginTop:0}}>Batman</Text>
+                <Text style={{fontSize:22,margin:10}}>Batman</Text>
                 <Text style={{fontSize:18,marginTop:0}}>Seattle, WA</Text>
-                <Text style={{fontSize:18,marginTop:0}}>Instagram: @batman</Text>
+                <Text style={{fontSize:18,marginTop:2}}>Instagram: @batman</Text>
 
               </View>
 
+
+
               <View style={[{flex:4}]}/>
+
+              <View style={{borderWidth:1,borderColor:"#dddddd",width:380,alignItems: 'center',alignItems:"center",justifyContent:"center",left:0,marginBottom:18}}/>
+
 
               <View style={{flex:1,alignItems:"center",marginTop:0,borderWidth:1,borderColor:"white"}}>
                 <View style={{marginTop:0,flexDirection:'row',alignItems:"center",}}>
@@ -116,20 +120,28 @@ class MainPage extends Component {
                 </View>
               </View>
 
+              <View style={{borderWidth:1,borderColor:"#dddddd",width:380,alignItems: 'center',alignItems:"center",justifyContent:"center",left:0}}/>
 
-              <View style={{flex:1,alignItems:"center",marginTop:20}}>
+              <View style={{flex:1,alignItems:"center",marginTop:0}}>
 
                 <View style={{marginTop:0,flexDirection:'row',alignItems:"center"}}>
                   <View style={{flex:1,alignItems:"center",borderWidth:1,borderColor:"white"}}>
                     <Text style={{fontSize:18}}> 23 </Text>
                     <Text style={{fontSize:16,fontWeight:'bold'}}> Reviews </Text>
                   </View>
+
+                  <View style={{borderWidth:1,borderColor:"#dddddd",height:66,alignItems: 'center',alignItems:"center",justifyContent:"center",left:0}}/>
+
+
                   <View style={{flex:1,alignItems:"center",borderWidth:1,borderColor:"white"}}>
                     <Text style={{fontSize:18}}> 89 </Text>
                     <Text style={{fontSize:16,fontWeight:'bold'}}> Followers </Text>
                   </View>
                 </View>
               </View>
+
+              <View style={{borderWidth:1,borderColor:"#dddddd",width:380,alignItems: 'center',alignItems:"center",justifyContent:"center",left:0,marginTop:20}}/>
+
 
               <View style={{flex:1,marginTop:30}}>
                 <Text style={{fontSize:16,fontWeight:'bold',marginLeft:10,marginTop:10}}>Favorites</Text>
@@ -174,7 +186,7 @@ class MainPage extends Component {
                 </View>
 
               </ScrollView>
-            </View>
+
 
           </TabBarIOS.Item>
         </TabBarIOS>
