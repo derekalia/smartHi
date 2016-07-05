@@ -1,14 +1,15 @@
 //components/mainpage.js
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,Image,TextInput,TouchableOpacity,Navigator,TabBarIOS,} from 'react-native'
+import {StyleSheet,Text,View,ScrollView,Image,TouchableHighlight,TextInput,TouchableOpacity,Navigator,TabBarIOS,} from 'react-native'
 
 //get internal components
 import HomeTab       from './hometab.js';
-
-const HomeTabId   = 'HomeTabId';
-const SearchTabId = 'SearchTabId';
-const ReviewTabId = 'ReviewTabId';
-const MapTabId    = 'MapTabId';
+import SearchScene from './searchscene.js'
+const HomeTabId    = 'HomeTabId';
+const SearchTabId  = 'SearchTabId';
+const ReviewTabId  = 'ReviewTabId';
+const MapTabId     = 'MapTabId';
+const ProfileTabId = 'ProfileTabId';
 
 const homeIcon = {
   scale: 2.3,
@@ -38,65 +39,289 @@ const mapIcon = {
 
 
 class MainPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedTab: HomeTabId
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedTab: HomeTabId
     }
+  }
 
-    render() {
-        return (
-            <TabBarIOS
-                unselectedTintColor="grey"
-                tintColor="#4A90E2"
-                barTintColor="#F9F9F9"
-                translucent="True">
-                <TabBarIOS.Item style={{color:"blue"}}
-                    title="Home Tab"
-                    icon={homeIcon}
-                    selected={this.state.selectedTab == HomeTabId}
-                    onPress={()=>{this.setState({selectedTab: HomeTabId})}}>
-                    <HomeTab/>
-                </TabBarIOS.Item>
-                <TabBarIOS.Item
-                    title="Map"
-                    icon={mapIcon}
-                    selected={this.state.selectedTab == MapTabId}
-                    onPress={()=>{this.setState({selectedTab: MapTabId})}}>
-                    <View style={[{backgroundColor:'white'}]}>
-                        <Text> This is the map tab </Text>
+  render() {
+    return (
+      <TabBarIOS
+        unselectedTintColor="grey"
+        tintColor="#4A90E2"
+        barTintColor="#F9F9F9"
+        >
+        <TabBarIOS.Item
+          title="Home Tab"
+          icon={homeIcon}
+          selected={this.state.selectedTab == HomeTabId}
+          onPress={()=>{this.setState({selectedTab: HomeTabId})}}>
+          <HomeTab/>
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
+          title="Map"
+          icon={mapIcon}
+          selected={this.state.selectedTab == MapTabId}
+          onPress={()=>{this.setState({selectedTab: MapTabId})}}>
+          <View style={[{backgroundColor:'white'}]}>
+            <Text> This is the map tab </Text>
+          </View>
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
+          title="Search"
+          icon={searchIcon}
+          selected={this.state.selectedTab == SearchTabId}
+          onPress={()=>{this.setState({selectedTab: SearchTabId})}}>
+          <View style={[{backgroundColor:'white'}]}>
+            <SearchScene/>
+          </View>
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
+          title="Review"
+          icon={rateIcon}
+          selected={this.state.selectedTab == ReviewTabId}
+          onPress={()=>{this.setState({selectedTab: ReviewTabId})}}>
+          <View style={[{backgroundColor:'gray'}]}>
+            <Text> This is the review tab </Text>
+          </View>
+        </TabBarIOS.Item>
+        <TabBarIOS.Item
+          title="Profile"
+          icon={profileIcon}
+          selected={this.state.selectedTab == ProfileTabId}
+          onPress={()=>{this.setState({selectedTab: ProfileTabId})}}>
+
+          <View style={[{flex:1}]}>
+            <ScrollView>
+
+              <View style={[{flex:1}]}/>
+              <View style={{flex:1,alignItems:"center",marginTop:0}}>
+
+                <Image source={require('../media/headshot1.png')} style={{width:100,height:100}}/>
+                <Text style={{fontSize:22,marginTop:0}}>Batman</Text>
+                <Text style={{fontSize:18,marginTop:0}}>Seattle, WA</Text>
+                <Text style={{fontSize:18,marginTop:0}}>Instagram: @batman</Text>
+
+              </View>
+
+              <View style={[{flex:4}]}/>
+
+              <View style={{flex:1,alignItems:"center",marginTop:0,borderWidth:1,borderColor:"white"}}>
+                <View style={{marginTop:0,flexDirection:'row',alignItems:"center",}}>
+                  <Text style={{fontSize:18}}> 198 </Text>
+                  <Image source={require('../media/Oval129.png')} style={{width:25,height:25}}/>
+                  <Text style={{fontSize:18}}> Points </Text>
+                </View>
+              </View>
+
+
+              <View style={{flex:1,alignItems:"center",marginTop:20}}>
+
+                <View style={{marginTop:0,flexDirection:'row',alignItems:"center"}}>
+                  <View style={{flex:1,alignItems:"center",borderWidth:1,borderColor:"white"}}>
+                    <Text style={{fontSize:18}}> 23 </Text>
+                    <Text style={{fontSize:16,fontWeight:'bold'}}> Reviews </Text>
+                  </View>
+                  <View style={{flex:1,alignItems:"center",borderWidth:1,borderColor:"white"}}>
+                    <Text style={{fontSize:18}}> 89 </Text>
+                    <Text style={{fontSize:16,fontWeight:'bold'}}> Followers </Text>
+                  </View>
+                </View>
+              </View>
+
+              <View style={{flex:1,marginTop:30}}>
+                <Text style={{fontSize:16,fontWeight:'bold',marginLeft:10,marginTop:10}}>Favorites</Text>
+                <TouchableHighlight
+                  underlayColor='#dddddd'>
+                  <View style={{ backgroundColor: 'white' }}>
+                    <View style={Styles.outside}>
+                      <Image style={Styles.thumb} source={require('../media/Rosin2.png')}/>
+                      <View style={Styles.flexContainer}>
+                        <View style={Styles.rowContainer}>
+                          <Text style={Styles.title} numberOfLines={1}>XJ-13 Rosin</Text>
+                          <Text style={Styles.price}>$34.99</Text>
+                        </View>
+                        <View style={Styles.rowContainerStars}>
+                          {/*<StarRating
+                            disabled={false}
+                            maxStars={5}
+                            starColor={'red'}
+                            starSize={17}
+                            rating={this.state.starCount}
+                            selectedStar={(rating) => this.onStarRatingPress(rating) }
+                            />*/}
+                            <Text>(39) </Text>
+                            <Text style={Styles.company}>FORGED Cannabis</Text>
+                          </View>
+                          <View style={Styles.tagContainer}>
+                            <TouchableHighlight style={Styles.button}>
+                              <Text style={Styles.buttonText}>flower</Text>
+                            </TouchableHighlight>
+                            <TouchableHighlight style={Styles.button}>
+                              <Text style={Styles.buttonText}>indica</Text>
+                            </TouchableHighlight>
+                            <TouchableHighlight style={Styles.button}>
+                              <Text style={Styles.buttonText}>sleepy</Text>
+                            </TouchableHighlight>
+                          </View>
+                        </View>
+                      </View>
+
                     </View>
-                </TabBarIOS.Item>
-                <TabBarIOS.Item
-                    title="Search"
-                    icon={searchIcon}
-                    selected={this.state.selectedTab == SearchTabId}
-                    onPress={()=>{this.setState({selectedTab: SearchTabId})}}>
-                    <View style={[{backgroundColor:'gray'}]}>
-                        <Text> This is the search tab </Text>
-                    </View>
-                </TabBarIOS.Item>
-                <TabBarIOS.Item
-                    title="Review"
-                    icon={rateIcon}
-                    selected={this.state.selectedTab == ReviewTabId}
-                    onPress={()=>{this.setState({selectedTab: ReviewTabId})}}>
-                    <View style={[{backgroundColor:'gray'}]}>
-                        <Text> This is the review tab </Text>
-                    </View>
-                </TabBarIOS.Item>
-                <TabBarIOS.Item
-                    title="Profile"
-                    icon={profileIcon}
-                    >
-                    <View style={[{backgroundColor:'gray'}]}>
-                        <Text> This is the map tab </Text>
-                    </View>
-                </TabBarIOS.Item>
-            </TabBarIOS>
-        )
+                  </TouchableHighlight>
+                </View>
+
+              </ScrollView>
+            </View>
+
+          </TabBarIOS.Item>
+        </TabBarIOS>
+      )
     }
-}
+  }
 
-module.exports = MainPage;
+  const Styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'stretch',
+    },
+    FindProductButton: {
+      flex: 1,
+      height:42,
+      marginHorizontal: 10,
+      marginTop: 0,
+      borderRadius: 3,
+      backgroundColor: '#4A90E2',
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'stretch',
+    },
+    buttonSmall: {
+      flex: 1,
+      marginHorizontal: 3,
+      borderRadius: 20,
+      backgroundColor: '#8888ff',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    input: {
+      flex: 1,
+      fontSize: 10,
+      textAlign: 'center',
+      margin: 10,
+      borderRadius: 20,
+      backgroundColor: '#999999',
+    },
+    backgroundImage: {
+      flex: 1,
+      width: null,
+      height: null,
+    },
+    company: {
+      flex: 1,
+      textAlign: 'right',
+      fontSize: 13,
+      marginRight: 4,
+      flexWrap: 'nowrap',
+      height: 13
+    },
+    buttonText: {
+      fontSize: 15,
+      color: '#48BBEC',
+      alignSelf: 'center',
+    },
+    button: {
+      height: 33,
+      flex: 1,
+      flexDirection: 'row',
+      backgroundColor: 'white',
+      borderColor: '#48BBEC',
+      borderWidth: 1,
+      borderRadius: 22,
+      margin: 8,
+      alignSelf: 'stretch',
+      justifyContent: 'center',
+
+    },
+
+    welcome: {
+      fontSize: 20,
+      textAlign: 'center',
+      margin: 10,
+    },
+    instructions: {
+      textAlign: 'center',
+      color: '#333333',
+      marginBottom: 5,
+    },
+    box: {
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#F5FCFF',
+    },
+    root: {
+      backgroundColor: '#F5FCFF',
+    },
+    thumb: {
+      width: 100,
+      height: 100,
+      marginRight: 7,
+      borderRadius: 5,
+      // borderTopLeftRadius: 60,
+      // borderTopRightRadius: 0,
+    },
+    separator: {
+      height: 1,
+      backgroundColor: '#dddddd'
+    },
+    price: {
+      marginTop: 3,
+      marginRight: 4,
+      flex: 1,
+      textAlign: 'right',
+      fontSize: 18,
+      // fontWeight: 'bold',
+      color: 'black'
+    },
+    title: {
+      marginTop: 3,
+      flex: 1,
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: 'black'
+    },
+    rowContainer: {
+      flexDirection: 'row',
+      marginRight: 3,
+    },
+    outside: {
+      flex: 1,
+      flexDirection: 'row',
+      backgroundColor: 'white',
+      borderColor: '#48BBEC',
+      borderWidth: 1,
+      borderRadius: 6,
+      margin: 8,
+    },
+    rowContainerStars: {
+      flexDirection: 'row',
+      marginTop: 8,
+      marginRight: 3,
+    },
+    tagContainer: {
+      flex: 1,
+      flexDirection: 'row',
+    },
+    flexContainer: {
+      flex: 1,
+      flexDirection: 'column'
+    }
+  });
+
+  module.exports = MainPage;

@@ -4,8 +4,11 @@ import {
 } from '../actions/index.js';
 
 const initialState = {
-    act: ['walking','hiking','eating'],
-    eff: ['sleepy','happy','active'],
+    act: ['hike','study','work','read','movie', 'sleep', 'eat', 'sex', 'social', 'wake-up', 'adventure'],
+    eff: ['sleepy','energetic','euphoric','focused ','aroused','psychedelic','giggly','happy','hungry','relaxed','talkative'],
+    type: ['rosin','vaporizer','edible','flower','dab ','joint','topical','co2','bho','dab','tincture'],
+    category: ['sativa','indica','hybrid'],
+    symptoms: ['cramps','depression','fatigue','glycoma','insomnia','headaches','inflammation','appetite','spams','nausea','pain','seizures','stress'],
     producers: [],
 }
 
@@ -28,6 +31,9 @@ export default function ProductReducer(state, action) {
             newState.producers = action.producers; 
             newState.act       = action.act; 
             newState.eff       = action.eff; 
+            newState.type      = action.type;
+            newState.category  = action.category;
+            newState.symptoms  = action.symptoms;
             return newState;
         
        //    

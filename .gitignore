@@ -1,3 +1,7 @@
+# VSCode
+.vscode/
+tsconfig.json
+
 # iOS Build files
 ios/build/
 

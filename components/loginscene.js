@@ -2,13 +2,13 @@
 import React, { Component } from 'react';
 import {StyleSheet,Text,View,Image,TextInput,TouchableOpacity,Navigator} from 'react-native'
 
-//get state management components 
+//get state management components
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-//get internal components 
+//get internal components
 import {LoginAction,LogoffAction} from '../actions';
-import Styles from './styles.js';
+
 
 class LoginScene extends Component {
     constructor(props) {
@@ -17,7 +17,7 @@ class LoginScene extends Component {
         this._userPassword = null;
         this._message = "";
         this.state = {
-            message: 0 
+            message: 0
         }
     }
 
@@ -32,25 +32,33 @@ class LoginScene extends Component {
     render() {
              return (
                 <View style={Styles.container}>
-                   <View style={[Styles.container,{flex:2}]}>
-                   </View>
+                     <View style={[{flex:2, alignItems: 'center',marginTop:50}]}>
+                       <Image style={Styles.icon} source={require('../media/Icon.png')}/>
+                       <Text style={{fontFamily: 'Pacifico', fontSize: 38, marginTop:10}}>Weedly</Text>
+                     </View>
+
                    <View style={[Styles.container,{alignItems: 'center'}]}>
-                        <TextInput style={Styles.input}
+                        <TextInput style={[Styles.input,{fontSize:20}]}
                             autoCapitalize  = "none"
                             autoCorrect     = {false}
-                            placeholder     = "Enter user name here"
+                            placeholder     = "Email"
                             returnKeyType   = "next"
                             onEndEditing    = {this._enterUserName.bind(this)}
                         />
-                        <TextInput style={Styles.input}
+                      <TextInput style={[Styles.input,{fontSize:20}]}
                             password        = {true}
                             autoCapitalize  = "none"
                             autoCorrect     = {false}
-                            placeholder     = "Enter password here"
+                            placeholder     = "Password"
                             onSubmitEditing = {this._enterUserPassword.bind(this)}
                         />
                    </View>
-                   <View style={[Styles.container,{flex:2}]}>
+                   <View style={[Styles.container]}>
+
+                     <TouchableOpacity style={Styles.loginButton}>
+                        <Text style={{color:"white", fontFamily:"Avenir Next",fontSize:20}}> Login </Text>
+                    </TouchableOpacity>
+
                         <Text>{this.props.userMessage}</Text>
                    </View>
                 </View>
@@ -58,12 +66,78 @@ class LoginScene extends Component {
     }
 }
 
+
+const Styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'stretch',
+    },
+
+    icon: {
+        marginTop:70,
+        height:246/2.7,
+        width:240/2.7,
+    },
+
+    loginButton: {
+        flex: 1,
+        height:10,
+        marginHorizontal: 30,
+        marginTop: 50,
+        marginBottom: 30,
+        borderRadius: 3,
+        backgroundColor: '#4A90E2',
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'stretch',
+    },
+
+    signUpButton: {
+        flex: 1,
+        height:52,
+        marginHorizontal: 30,
+        marginTop: 10,
+        marginBottom: 10,
+        borderRadius: 3,
+        backgroundColor: '#50E3C2',
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf: 'stretch',
+    },
+    buttonSmall: {
+        flex: 1,
+        marginHorizontal: 3,
+        borderRadius: 20,
+        backgroundColor: '#8888ff',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    input: {
+        flex: 1,
+        height: 30,
+        fontSize: 10,
+        marginHorizontal: 30,
+        textAlign: 'left',
+        margin: 10,
+        backgroundColor: 'white',
+        borderRadius: 0,
+        borderBottomColor:"black",
+        borderColor:"white",
+        borderTopColor:"white",
+
+        borderWidth:1,
+    },
+});
+
+
 // BatsFix. This function is used to convert state to props passed to this component
 // In this example, there is now prop called user that contains state.UserReducer.user section
 // Why is it UserReducer???
 function mapStateToProps(state) { return {userMessage: state.UserReducer.message} }
 // BatsFix. This function is used to convert action to props passed to this component.
-// In this example, there is now prop called LoginAction. 
+// In this example, there is now prop called LoginAction.
 function mapActionToProps(dispatch) {return bindActionCreators({LoginAction,LogoffAction}, dispatch);}
 
 module.exports         = connect(mapStateToProps,mapActionToProps)(LoginScene);

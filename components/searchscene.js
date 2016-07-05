@@ -1,152 +1,528 @@
 //loginscenes.js
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,ListView,ListViewDataSource,ScrollView,Image,TextInput,TouchableOpacity,Navigator} from 'react-native'
+import {StyleSheet,Text,View,Slider,ListView,ListViewDataSource,ScrollView,Image,TextInput,TouchableOpacity,Navigator} from 'react-native'
 
-//get state management components 
+//get state management components
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-//get internal components 
-import Styles from './styles.js';
+import Accordion from 'react-native-collapsible/Accordion';
+
+
+//get internal components
 import {StartSearchAction,GetProductAction} from '../actions';
 
-class SearchScene extends Component {
-    constructor(props) {
-        super(props);
-        // these should come from the app state. 
-        for (key in props.products) {
-            console.log("my prop "+props.products[key]);
-        }
-        this.state = {
-            act  :  this.props.act, 
-            eff  :  this.props.eff, 
-        }
-    }
-
-    _enterKeyWord(event) {
-        this._searchTerm = event.nativeEvent.text;
-        this.props.StartSearchAction(this._searchTerm);
-    }
-
-    _plusActivity() {
-        // set activities to search
-    }
-
-    _plusEffect() {
-        // set effects to search
-    }
-
-    _startSearch() {
-        //
-        // BatsFix. call searchStartAction 
-        //
-        console.log("search started");
-        this.props.StartSearchAction(this._searchTerm);
-    }
-
-    _goProduct(rowData:string) {
-        // BatsFix. should set a product state first.
-        this.props.GetProductAction(rowData);
-        // then go product scene
-        this.props.navigator.push(this.props.productScene);
-    }
-
-    _renderRow(rowData:string) {
-        return (
-            <TouchableOpacity style={Styles.buttonLarge} onPress={()=>this._goProduct(rowData)}>
-                <Text>{rowData}</Text>
-            </TouchableOpacity>
-        )
-    }
-     
-    _renderList() {
-        if (this.props.products.size !== 0)
-        {
-            var ds = new ListView.DataSource({rowHasChanged: (r1,r2) => (r1 != r2),});
-            return (
-                <ListView dataSource = {ds.cloneWithRows(this.props.products)}
-                          enableEmptySections = {true}
-                          renderRow  = {this._renderRow.bind(this)}
-                          />
-
-            );
-        }
-        else
-        return null; 
-    }
-    
-    // BatsFix. These should be broken into components later.
-    render() {
-        return (
-                <View style={[Styles.container,{marginTop:70}]}>
-                      <View style={[Styles.container,{flex:1}]}>
-                        <TextInput style={Styles.input}
-                            autoCapitalize  = "none"
-                            autoCorrect     = {false}
-                            placeholder     = "Enter key word here"
-                            returnKeyType   = "next"
-                            onEndEditing    = {this._enterKeyWord.bind(this)}
-                        />
-                       </View>
-                       <View style={[Styles.container,{flex:1}]}>
-                                 <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
-                                    <Text> Activities </Text>
-                                    <View style={[Styles.container,{flex:3,flexDirection:'row'}]}>
-                                            <TouchableOpacity style={Styles.buttonSmall}>
-                                                <Text>{this.state.act[0]}</Text>
-                                            </TouchableOpacity>
-                                            <TouchableOpacity style={Styles.buttonSmall}>
-                                                <Text>{this.state.act[1]}</Text>
-                                            </TouchableOpacity>
-                                            <TouchableOpacity style={Styles.buttonSmall}>
-                                                <Text>{this.state.act[2]}</Text>
-                                            </TouchableOpacity>
-                                            <TouchableOpacity onPress={()=> this._plusActivity()} style={Styles.buttonSmall}>
-                                                <Text>+</Text>
-                                            </TouchableOpacity>
-                                    </View>
-                                </View>
-                        </View>
-                        <View style={[Styles.container,{flex:1}]}>
-                                 <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
-                                    <Text> Effects </Text>
-                                    <View style={[Styles.container,{flex:3,flexDirection:'row'}]}>
-                                            <TouchableOpacity style={Styles.buttonSmall}>
-                                                <Text>{this.state.eff[0]}</Text>
-                                            </TouchableOpacity>
-                                            <TouchableOpacity style={Styles.buttonSmall}>
-                                                <Text>{this.state.eff[1]}</Text>
-                                            </TouchableOpacity>
-                                            <TouchableOpacity style={Styles.buttonSmall}>
-                                                <Text>{this.state.eff[2]}</Text>
-                                            </TouchableOpacity>
-                                            <TouchableOpacity onPress={()=> this._plusEffect()} style={Styles.buttonSmall}>
-                                                <Text>+</Text>
-                                            </TouchableOpacity>
-                                    </View>
-                                </View>
-                        </View>
-                        <View style={Styles.container}>
-                            <ScrollView>
-                                {this._renderList()}
-                            </ScrollView>
-                        </View>
-                </View>
-        );
-    }
+const searchIcon = {
+  scale: 2.3,
+  uri: 'data:image/png;base64,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'
 }
 
+const SECTIONS = [
+  {
+    title: 'Activity',
+    content: 'Lorem ipsum...',
+  },
+  {
+    title: 'Effects',
+    content: 'Lorem ipsum...',
+  },
+  {
+    title: 'Type',
+    content: 'Lorem ipsum...',
+  },
+  {
+    title: 'Price',
+    content: 'Lorem ipsum...',
+  },
+  {
+    title: 'Distance',
+    content: 'Lorem ipsum...',
+  },
+];
+
+
+class SearchScene extends Component {
+  constructor(props) {
+    super(props);
+    // these should come from the app state.
+    for (key in props.products) {
+      console.log("my prop "+props.products[key]);
+    }
+    this.state = {
+      act  :  this.props.act,
+      eff  :  this.props.eff,
+      type :  this.props.type,
+      category : this.props.category,
+      symptoms : this.props.symptoms,
+    }
+  }
+
+  _renderHeader(section) {
+    return (
+      <View style={Styles.header}>
+        <Text style={Styles.headerText}>{section.title}</Text>
+      </View>
+    );
+  }
+
+  _renderContent(section) {
+    return (
+      <View style={Styles.content}>
+        <Text>{section.content}</Text>
+      </View>
+    );
+  }
+
+
+
+  _enterKeyWord(event) {
+    this._searchTerm = event.nativeEvent.text;
+    this.props.StartSearchAction(this._searchTerm);
+  }
+
+  _plusActivity() {
+    // set activities to search
+  }
+
+  _plusEffect() {
+    // set effects to search
+  }
+
+  _startSearch() {
+    //
+    // BatsFix. call searchStartAction
+    //
+    console.log("search started");
+    this.props.StartSearchAction(this._searchTerm);
+  }
+
+  _goProduct(rowData:string) {
+    // BatsFix. should set a product state first.
+    this.props.GetProductAction(rowData);
+    // then go product scene
+    this.props.navigator.push(this.props.productScene);
+  }
+
+  _renderRow(rowData:string) {
+    return (
+      <TouchableOpacity style={Styles.buttonLarge} onPress={()=>this._goProduct(rowData)}>
+        <Text>{rowData}</Text>
+      </TouchableOpacity>
+    )
+  }
+
+  _renderList() {
+    if (this.props.products.size !== 0)
+    {
+      var ds = new ListView.DataSource({rowHasChanged: (r1,r2) => (r1 != r2),});
+      return (
+        <ListView dataSource = {ds.cloneWithRows(this.props.products)}
+          enableEmptySections = {true}
+          renderRow  = {this._renderRow.bind(this)}
+          />
+
+      );
+    }
+    else
+    return null;
+  }
+
+  // BatsFix. These should be broken into components later.
+  render() {
+    return (
+      <View>
+
+        <View style={{flex:1,flexDirection:"row",marginTop:40,marginHorizontal:10}}>
+          <View style={[{flex:5}]}>
+            <TextInput style={[Styles.input]}
+              autoCapitalize  = "none"
+              autoCorrect     = {false}
+              placeholder     = " Keyword"
+              returnKeyType   = "next"
+              onEndEditing    = {this._enterKeyWord.bind(this)}
+              />
+          </View>
+          <View style={[{flex:1,borderWidth:1,borderColor:"#4A90E2",backgroundColor:"#4A90E2",height:50}]}>
+            <TouchableOpacity style={{}}>
+              <Image style={{height:32,width:32,marginLeft:13,marginTop:8}} source={require("../media/SearchIcon0.png")}/>
+            </TouchableOpacity>
+          </View>
+        </View>
+
+
+
+        {/*<View style={[Styles.container]}>
+        <Accordion
+        sections={SECTIONS}
+        renderHeader={this._renderHeader}
+        renderContent={this._renderContent}
+        />
+        </View>*/}
+
+
+        <View style={[{flex:8}]}>
+          <ScrollView>
+
+            <View style={[{flex:1,alignItems:'flex-start',margin:6,marginTop:15}]}>
+              <Text style={{fontSize:18,marginBottom:10,fontFamily:"Avenir Next"}}> Activity </Text>
+              <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
+                <TouchableOpacity style={Styles.tagActivity}>
+                  <Text style={Styles.tagTextActivity}>{this.state.act[0]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagActivity}>
+                  <Text style={Styles.tagTextActivity}>{this.state.act[1]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagActivity}>
+                  <Text style={Styles.tagTextActivity}>{this.state.act[2]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagActivity}>
+                  <Text style={Styles.tagTextActivity}>{this.state.act[3]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagActivity}>
+                  <Text style={Styles.tagTextActivity}>{this.state.act[4]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagActivity}>
+                  <Text style={Styles.tagTextActivity}>{this.state.act[5]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagActivity}>
+                  <Text style={Styles.tagTextActivity}>{this.state.act[6]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagActivity}>
+                  <Text style={Styles.tagTextActivity}>{this.state.act[7]}</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={[{flex:1,alignItems:'flex-start',margin:6,marginTop:45}]}>
+              <Text style={{fontSize:18,marginBottom:10,fontFamily:"Avenir Next"}}> Effects </Text>
+              <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
+                <TouchableOpacity style={Styles.tag}>
+                  <Text style={Styles.tagText}>{this.state.eff[0]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tag}>
+                  <Text style={Styles.tagText}>{this.state.eff[1]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tag}>
+                  <Text style={Styles.tagText}>{this.state.eff[2]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tag}>
+                  <Text style={Styles.tagText}>{this.state.eff[3]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tag}>
+                  <Text style={Styles.tagText}>{this.state.eff[4]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tag}>
+                  <Text style={Styles.tagText}>{this.state.eff[5]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tag}>
+                  <Text style={Styles.tagText}>{this.state.eff[6]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tag}>
+                  <Text style={Styles.tagText}>{this.state.eff[7]}</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={[{flex:1,alignItems:'flex-start',margin:6,marginTop:45}]}>
+              <Text style={{fontSize:18,marginBottom:10,fontFamily:"Avenir Next"}}> Type </Text>
+              <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
+                <TouchableOpacity style={Styles.tagType}>
+                  <Text style={Styles.tagTextType}>{this.state.type[0]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagType}>
+                  <Text style={Styles.tagTextType}>{this.state.type[1]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagType}>
+                  <Text style={Styles.tagTextType}>{this.state.type[2]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagType}>
+                  <Text style={Styles.tagTextType}>{this.state.type[3]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagType}>
+                  <Text style={Styles.tagTextType}>{this.state.type[4]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagType}>
+                  <Text style={Styles.tagTextType}>{this.state.type[5]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagType}>
+                  <Text style={Styles.tagTextType}>{this.state.type[6]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagType}>
+                  <Text style={Styles.tagTextType}>{this.state.type[7]}</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={[{flex:1,alignItems:'flex-start',margin:6,marginTop:45}]}>
+              <Text style={{fontSize:18,marginBottom:10,fontFamily:"Avenir Next"}}> Symptoms </Text>
+              <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
+                <TouchableOpacity style={Styles.tagSymptoms}>
+                  <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[0]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagSymptoms}>
+                  <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[1]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagSymptoms}>
+                  <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[2]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagSymptoms}>
+                  <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[3]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagSymptoms}>
+                  <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[4]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagSymptoms}>
+                  <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[5]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagSymptoms}>
+                  <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[6]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagSymptoms}>
+                  <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[7]}</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={[{flex:1,margin:6,marginTop:45}]}>
+              <Text style={{fontSize:18,marginBottom:10,fontFamily:"Avenir Next"}}> Category </Text>
+              <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
+                <TouchableOpacity style={Styles.tagCategory}>
+                  <Text style={Styles.tagTextCategory}>{this.state.category[0]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagCategory}>
+                  <Text style={Styles.tagTextCategory}>{this.state.category[1]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagCategory}>
+                  <Text style={Styles.tagTextCategory}>{this.state.category[2]}</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={[{flex:1,margin:6,marginTop:45}]}>
+              <Text style={{fontSize:18,marginBottom:10,fontFamily:"Avenir Next"}}> Price </Text>
+              <View style={[{flexDirection:'row'}]}>
+
+              </View>
+            </View>
+
+            <View style={[{flex:1,margin:6,marginTop:45}]}>
+              <Text style={{fontSize:18,marginBottom:10,fontFamily:"Avenir Next"}}> Distance </Text>
+              <View style={[{flexDirection:'row'}]}>
+
+                <Slider
+                  maximumValue={100}
+                  minimumValue = {.2}
+                  />
+
+              </View>
+            </View>
+
+          </ScrollView>
+        </View>
+
+        {/*<View style={[Styles.container,{flex:1}]}>
+        <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
+        <Text> Effects </Text>
+        <View style={[Styles.container,{flex:3,flexDirection:'row'}]}>
+        <TouchableOpacity style={Styles.buttonSmall}>
+        <Text>{this.state.eff[0]}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={Styles.buttonSmall}>
+        <Text>{this.state.eff[1]}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={Styles.buttonSmall}>
+        <Text>{this.state.eff[2]}</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={()=> this._plusEffect()} style={Styles.buttonSmall}>
+        <Text>+</Text>
+        </TouchableOpacity>
+        </View>
+        </View>
+        </View>*/}
+        <View style={Styles.container}>
+          <ScrollView>
+            {this._renderList()}
+          </ScrollView>
+        </View>
+      </View>
+    );
+  }
+}
+
+const Styles = StyleSheet.create({
+  loginButton: {
+    flex: 1,
+    height:10,
+    marginHorizontal: 30,
+    marginTop: 50,
+    marginBottom: 30,
+    borderRadius: 3,
+    backgroundColor: '#4A90E2',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'stretch',
+  },
+
+  signUpButton: {
+    flex: 1,
+    height:52,
+    marginHorizontal: 30,
+    marginTop: 10,
+    marginBottom: 10,
+    borderRadius: 3,
+    backgroundColor: '#50E3C2',
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'stretch',
+  },
+  input: {
+    height: 50,
+    fontSize: 20,
+
+    backgroundColor: 'white',
+    borderRadius: 0,
+    borderColor:"#4A90E2",
+
+    borderWidth:1,
+  },
+  container: {
+    flex: 1,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: '300',
+    marginBottom: 20,
+  },
+  header: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    padding: 10,
+  },
+  headerText: {
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  content: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  active: {
+    backgroundColor: 'rgba(255,255,255,1)',
+  },
+  inactive: {
+    backgroundColor: 'white',
+  },
+  tagEffects: {
+    margin:5,
+    borderRadius: 20,
+    borderWidth:1,
+    borderColor:"#4A90E2",
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  tagTextEffects:{
+    color:"#4A90E2",
+    marginTop:10,
+    marginBottom:10,
+    marginHorizontal: 15,
+  },
+
+  tagActivity: {
+    margin:5,
+    borderRadius: 20,
+    borderWidth:1,
+    borderColor:"#F5A623",
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  tagTextActivity:{
+    color:"#F5A623",
+    marginTop:10,
+    marginBottom:10,
+    marginHorizontal: 15,
+  },
+
+  tagType: {
+    margin:5,
+    borderRadius: 20,
+    borderWidth:1,
+    borderColor:"#BD10E0",
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  tagTextType:{
+    color:"#BD10E0",
+    marginTop:10,
+    marginBottom:10,
+    marginHorizontal: 15,
+  },
+
+  tagSymptoms: {
+    margin:5,
+    borderRadius: 20,
+    borderWidth:1,
+    borderColor:"#50E3C2",
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  tagTextSymptoms:{
+    color:"#50E3C2",
+    marginTop:10,
+    marginBottom:10,
+    marginHorizontal: 15,
+  },
+
+  tagCategory: {
+    margin:5,
+    borderRadius: 20,
+    borderWidth:1,
+    borderColor:"#70D600",
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  tagTextCategory:{
+    color:"#70D600",
+    marginTop:10,
+    marginBottom:10,
+    marginHorizontal: 15,
+  },
+
+  tag: {
+    margin:5,
+    borderRadius: 20,
+    borderWidth:1,
+    borderColor:"#4A90E2",
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  tagText:{
+    color:"#4A90E2",
+    marginTop:10,
+    marginBottom:10,
+    marginHorizontal: 15,
+  },
+});
 
 // BatsFix. This function is used to convert state to props passed to this component
 function mapStateToProps(state) {
-    return {
-        act:  state.SearchReducer.act, 
-        eff:  state.SearchReducer.eff, 
-        products: state.SearchReducer.products,
-    } 
+  return {
+    act:  state.SearchReducer.act,
+    eff:  state.SearchReducer.eff,
+    products: state.SearchReducer.products,
+    type: state.SearchReducer.type,
+    category: state.SearchReducer.category,
+    symptoms: state.SearchReducer.symptoms,
+  }
 }
 // BatsFix. This function is used to convert action to props passed to this component.
-// In this example, there is now prop called StartSearchAction. 
+// In this example, there is now prop called StartSearchAction.
 //
 function mapActionToProps(dispatch) {return bindActionCreators({StartSearchAction,GetProductAction}, dispatch);}
 
