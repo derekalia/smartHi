@@ -5,7 +5,7 @@ export const LOGON_USER    ='LOGON_USER';
 export function LoginAction(userCredentials) {
     // should really be a dispatch function. BatsFix
 
-    if (userCredentials.name === 'bats' && userCredentials.password ==='1234') {
+    if (userCredentials.name === 'b' && userCredentials.password ==='1') {
         return {
             type: LOGIN_SUCCESS,
             name: userCredentials.name,
