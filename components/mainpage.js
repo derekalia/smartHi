@@ -99,9 +99,9 @@ class MainPage extends Component {
               <View style={{flex:1,alignItems:"center",marginTop:0}}>
 
                 <Image source={require('../media/headshot1.png')} style={{width:100,height:100}}/>
-                <Text style={{fontSize:22,margin:10}}>Batman</Text>
-                <Text style={{fontSize:18,marginTop:0}}>Seattle, WA</Text>
-                <Text style={{fontSize:18,marginTop:2}}>Instagram: @batman</Text>
+                <Text style={{fontSize:22,margin:8,fontWeight:"bold"}}>Batman</Text>
+                <Text style={{fontSize:18,marginTop:1}}>Seattle, WA</Text>
+                <Text style={{fontSize:18,marginTop:8}}>Instagram: @batman</Text>
 
               </View>
 
