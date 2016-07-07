@@ -6,15 +6,11 @@ import {StyleSheet,Text,View,Image,TextInput,TouchableOpacity,Navigator} from 'r
 import LoginScene    from './loginscene.js';
 import RegisterScene from './registerscene.js';
 
-
-
-
-
-
 class LaunchScene extends Component {
 
     _onToRegister() {
         // should call navigator here to move to register page
+        console.log("moving to register scene");
         this.props.navigator.push(LoginPageScenes[RegisterSceneIndex]);
     }
 
@@ -22,17 +18,19 @@ class LaunchScene extends Component {
         // should call navigator here to move to login page
         this.props.navigator.push(LoginPageScenes[LoginSceneIndex]);
     }
+    test() {
+        console.log("test test");
+    }
 
     render() {
             return (
                 <View style={Styles.container}>
-                   <View style={[{flex:10, alignItems: 'center'}]}>
+                   <View style={[{flex:4, alignItems: 'center'}]}>
                      <Image style={Styles.icon} source={require('../media/Icon.png')}/>
                      <Text style={{fontFamily: 'Pacifico', fontSize: 52, marginTop:10}}>Weedly</Text>
                    </View>
-
-                   <View style={[Styles.container,{flex:1}]}>
-                         <TouchableOpacity style={Styles.loginButton} onPress={this._onToLogin.bind(this)}>
+                   <View style={[Styles.container,{flex:2}]}>
+                        <TouchableOpacity style={Styles.loginButton} onPress={this._onToLogin.bind(this)}>
                             <Text style={{color:"white", fontFamily:"Avenir Next",fontSize:20}}> Login </Text>
                         </TouchableOpacity>
                         <Text style={{color:"black", fontFamily:"Avenir Next",fontSize:20}}> or </Text>
@@ -40,7 +38,7 @@ class LaunchScene extends Component {
                             <Text style={{color:"white", fontFamily:"Avenir Next",fontSize:20}}> Register </Text>
                         </TouchableOpacity>
                    </View>
-                   <View style={[Styles.container,{flex:2}]}>
+                   <View style={[Styles.container,{flex:1}]}>
                    </View>
                 </View>
             );

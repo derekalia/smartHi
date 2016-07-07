@@ -13,20 +13,30 @@ import {LoginAction,LogoffAction} from '../actions';
 class LoginScene extends Component {
     constructor(props) {
         super(props);
-        this._userName = null;
-        this._userPassword = null;
-        this._message = "";
-        this.state = {
-            message: 0
-        }
+        this._userName = "";
+        this._userPassword = "";
+        this.state = {showMessage:false};
+    }
+
+    _hideMessage() {
+       if (this.state.showMessage == true) {
+           this.setState({showMessage:false});
+       }
     }
 
     _enterUserName(event) {
+        this._hideMessage();
         this._userName = event.nativeEvent.text;
     }
 
     _enterUserPassword(event) {
-        this.props.LoginAction({name:this._userName, password:event.nativeEvent.text});
+        this._hideMessage();
+        this._userPassword = event.nativeEvent.text
+    }
+
+    _submit() {
+        this.setState({showMessage:true});
+        this.props.LoginAction({name:this._userName, password: this._userPassword});
     }
 
     render() {
@@ -43,23 +53,25 @@ class LoginScene extends Component {
                             autoCorrect     = {false}
                             placeholder     = "Email"
                             returnKeyType   = "next"
-                            onEndEditing    = {this._enterUserName.bind(this)}
+                            onChange        = {this._enterUserName.bind(this)}
                         />
                       <TextInput style={[Styles.input,{fontSize:20}]}
                             password        = {true}
                             autoCapitalize  = "none"
                             autoCorrect     = {false}
                             placeholder     = "Password"
-                            onSubmitEditing = {this._enterUserPassword.bind(this)}
+                            returnKeyType   = "next"
+                            onChange        = {this._enterUserPassword.bind(this)}
                         />
                    </View>
                    <View style={[Styles.container]}>
 
-                     <TouchableOpacity style={Styles.loginButton}>
+                     <TouchableOpacity style={Styles.loginButton}
+                            onPress = {this._submit.bind(this)}
+                     >
                         <Text style={{color:"white", fontFamily:"Avenir Next",fontSize:20}}> Login </Text>
                     </TouchableOpacity>
-
-                        <Text>{this.props.userMessage}</Text>
+                        <Text>{this.state.showMessage? this.props.userMessage:""}</Text>
                    </View>
                 </View>
             );

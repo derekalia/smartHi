@@ -6,7 +6,7 @@ import {StyleSheet,Text,View,Slider,ListView,ListViewDataSource,ScrollView,Image
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import Accordion from 'react-native-collapsible/Accordion';
+import Accordion from 'react-native-accordion';
 
 
 //get internal components
