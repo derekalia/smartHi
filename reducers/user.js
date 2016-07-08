@@ -1,6 +1,7 @@
 import {
     LOGIN_SUCCESS,
     LOGIN_ERROR,
+    LOGIN_PROCESS,
     REGISTER_SUCCESS,
     REGISTER_ERROR,
 } from '../actions/index.js';
@@ -13,7 +14,6 @@ const initialState = {
 export default function UserReducer(state, action) {
 
     switch(action.type) {
-
        case LOGIN_SUCCESS:
             // BatsFix. this creates a copy of the state object
             // In redux, it uses the reference of an object to decide
@@ -33,6 +33,11 @@ export default function UserReducer(state, action) {
 
             newState               = Object.assign({},state);
             newState.message       = action.message; 
+            return newState;
+
+       case LOGIN_PROCESS:
+            newState               = Object.assign({},state);
+            newState.message       = action.message;
             return newState;
 
        case REGISTER_SUCCESS:

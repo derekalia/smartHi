@@ -1,23 +1,38 @@
+export const LOGIN_PROCESS ='LOGIN_PROCESS';
 export const LOGIN_SUCCESS ='LOGIN_SUCCESS';
 export const LOGIN_ERROR   ='LOGIN_ERROR';
 export const LOGON_USER    ='LOGON_USER';
 
 export function LoginAction(userCredentials) {
-    // should really be a dispatch function. BatsFix
-    // should really send LOGIN_START message because
-    // server could take its time returning
-
-    if (userCredentials.name === 'bats' && userCredentials.password ==='1234') {
-        return {
-            type: LOGIN_SUCCESS,
-            name: userCredentials.name,
-        };
-    }
-    else {
-        return {
-            type: LOGIN_ERROR,
-            message: "login password or user name is wrong",
-        }
+    return function(dispatch,getState) { 
+        // Notify that login is in process
+        dispatch (
+        {
+            type: LOGIN_PROCESS,
+            message: "logging on ....",
+        });
+        // Contact the server to verify user credentials.
+        var data = JSON.stringify({'name':userCredentials.name,'password':userCredentials.password});
+        // Boilerplate code to post data to the server
+        fetch('http://127.0.0.1:3000/login',{method:'POST',headers:{'Accept':'application/json','Content-Type':'application/json'},body:data}).
+            then((response) => response.json()).
+            then((responseData)=> {
+                console.log("response was ["+JSON.stringify(responseData)+"]");
+                if (responseData.status == "success") {
+                    dispatch(
+                    {
+                        type: LOGIN_SUCCESS,
+                        name: userCredentials.name,
+                    });
+                }
+                else {
+                    dispatch(
+                    {
+                        type: LOGIN_ERROR,
+                        name: responseData.message,
+                    });
+                } 
+        }).done();
     }
 }
 
