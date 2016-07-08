@@ -47,31 +47,43 @@ class LoginScene extends Component {
                        <Text style={{fontFamily: 'Pacifico', fontSize: 38, marginTop:10}}>Weedly</Text>
                      </View>
 
-                   <View style={[Styles.container,{alignItems: 'center'}]}>
-                        <TextInput style={[Styles.input,{fontSize:20}]}
+                   <View style={[{flexDirection: 'row',width:300,alignItems: 'center',alignItems:"center",justifyContent:"center",marginLeft:40}]}>
+                        <TextInput style={[Styles.input,{fontSize:20,flex:3}]}
                             autoCapitalize  = "none"
                             autoCorrect     = {false}
                             placeholder     = "Email"
                             returnKeyType   = "next"
                             onChange        = {this._enterUserName.bind(this)}
                         />
-                      <TextInput style={[Styles.input,{fontSize:20}]}
-                            password        = {true}
-                            autoCapitalize  = "none"
-                            autoCorrect     = {false}
-                            placeholder     = "Password"
-                            returnKeyType   = "next"
-                            onChange        = {this._enterUserPassword.bind(this)}
-                        />
-                   </View>
-                   <View style={[Styles.container]}>
+                      <View style={{flex:1,alignItems: 'center',alignItems:"center"}}>
+                      <Image style={{margin:9,width:30,height:30}} source={require("../media/mailicon1.png")}/>
+                      </View>
+                    </View>
 
-                     <TouchableOpacity style={Styles.loginButton}
-                            onPress = {this._submit.bind(this)}
-                     >
+                      <View style={{borderWidth:1,borderColor:"#dddddd",width:280,alignItems: 'center',alignItems:"center",justifyContent:"center",left:44}}/>
+
+                        <View style={[{flexDirection: 'row',width:300,alignItems: 'center',alignItems:"center",justifyContent:"center",marginLeft:40,marginTop:25}]}>
+                             <TextInput style={[Styles.input,{fontSize:20,flex:3}]}
+                               password        = {true}
+                               autoCapitalize  = "none"
+                               autoCorrect     = {false}
+                               placeholder     = "Password"
+                               onChange        = {this._enterUserPassword.bind(this)}
+                             />
+                           <View style={{flex:1,alignItems: 'center',alignItems:"center"}}>
+                           <Image style={{margin:9,width:32,height:30}} source={require("../media/passwordIcon.png")}/>
+                           </View>
+                         </View>
+
+                           <View style={{borderWidth:1,borderColor:"#dddddd",width:280,alignItems: 'center',alignItems:"center",justifyContent:"center",left:44}}/>
+
+                   <View style={[Styles.container]}>
+                     <TouchableOpacity style={Styles.loginButton} onPress={this._submit.bind(this)}>
                         <Text style={{color:"white", fontFamily:"Avenir Next",fontSize:20}}> Login </Text>
                     </TouchableOpacity>
-                        <Text>{this.state.showMessage? this.props.userMessage:""}</Text>
+                    <View style={{flex:1,justifyContent:"center",alignItems: 'center'}}>
+                        <Text style={{color:"red",fontSize:16,justifyContent:"center"}}>{this.state.showMessage?this.props.userMessage:""}</Text>
+                    </View>
                    </View>
                 </View>
             );
@@ -82,15 +94,17 @@ class LoginScene extends Component {
 const Styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'stretch',
     },
 
     icon: {
         marginTop:70,
         height:246/2.7,
         width:240/2.7,
+    },
+
+    separator: {
+      height: 2,
+      backgroundColor: '#dddddd'
     },
 
     loginButton: {
@@ -130,16 +144,11 @@ const Styles = StyleSheet.create({
         flex: 1,
         height: 30,
         fontSize: 10,
-        marginHorizontal: 30,
+        marginHorizontal: 10,
         textAlign: 'left',
         margin: 10,
         backgroundColor: 'white',
-        borderRadius: 0,
-        borderBottomColor:"black",
-        borderColor:"white",
-        borderTopColor:"white",
 
-        borderWidth:1,
     },
 });
 

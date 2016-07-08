@@ -40,17 +40,96 @@ class HomeScene extends Component {
   // BatsFix. These should be broken into components later.
   render() {
     return (
-      <View style={[{marginTop:30}]}>
+      <View style={[{marginTop:20,flex:1}]}>
         <ScrollView>
-          <View>
+
+
             <TouchableOpacity style={[Styles.FindProductButton]}
               onPress={this._onToSearch.bind(this)}>
-              <Text style={{color:'white',fontSize:22,fontFamily:"Avenir Next"}}>Find Product</Text>
+              <Text style={{color:'white',fontSize:22,}}>Find Product</Text>
             </TouchableOpacity>
+
+
+          <View style={[Styles.container,{alignItems:'flex-start',marginLeft:5,height:20}]}>
+            <Text style={{fontSize:16, fontWeight: 'bold'}}> Activity </Text>
           </View>
-          <View style={[Styles.container,{flex:1,alignItems:'flex-start',marginTop:20,marginBottom:10}]}>
-            <Text style={{fontSize:16, fontWeight: 'bold'}}> Featured </Text>
+
+          <View style={{flex:1,flexDirection:"row",height:140,}}>
+            <View style={{flex:1,}}>
+              <TouchableOpacity>
+              <Image style={{width:165,height:165,justifyContent: 'center',alignItems:'center',alignSelf:'center'}} source={require("../media/musicTile1.png")}>
+                <View style={{borderWidth:1.5,borderRadius:20,borderColor:"white"}}>
+                  <Text style={{textShadowOffset:{width: 1, height: 1},textShadowRadius:5,textShadowColor:"black",fontSize:20,color:"white",margin:8}}> music </Text>
+                </View>
+                </Image>
+                </TouchableOpacity>
+            </View>
+            <View style={{flex:1,}}>
+              <TouchableOpacity>
+              <Image style={{width:165,height:165,justifyContent: 'center',alignItems:'center',alignSelf:'center'}} source={require("../media/movieTile1.png")}>
+                <View style={{borderWidth:1.5,borderRadius:20,borderColor:"white"}}>
+                  <Text style={{textShadowOffset:{width: 1, height: 1},textShadowRadius:5,textShadowColor:"black",fontSize:20,color:"white",margin:8}}> movie </Text>
+                </View>
+                </Image>
+              </TouchableOpacity>
+            </View>
           </View>
+
+          <View style={{flex:1,flexDirection:"row",height:140,marginTop:15}}>
+            <View style={{flex:1,}}>
+              <TouchableOpacity>
+              <Image style={{width:165,height:165,justifyContent: 'center',alignItems:'center',alignSelf:'center'}} source={require("../media/exerciseTile1.png")}>
+                <View style={{borderWidth:1.5,borderRadius:20,borderColor:"white"}}>
+                  <Text style={{textShadowOffset:{width: 1, height: 1},textShadowRadius:5,textShadowColor:"black",fontSize:20,color:"white",margin:8}}> exercise </Text>
+                </View>
+                </Image>
+                </TouchableOpacity>
+            </View>
+            <View style={{flex:1,}}>
+              <TouchableOpacity>
+              <Image style={{width:165,height:165,justifyContent: 'center',alignItems:'center',alignSelf:'center'}} source={require("../media/createTile11.png")}>
+                <View style={{borderWidth:1.5,borderRadius:20,borderColor:"white"}}>
+                  <Text style={{textShadowOffset:{width: 1, height: 1},textShadowRadius:5,textShadowColor:"black",fontSize:20,color:"white",margin:8}}> create </Text>
+                </View>
+                </Image>
+                </TouchableOpacity>
+            </View>
+          </View>
+
+
+
+                    <View style={[Styles.container,{alignItems:'flex-start',marginLeft:5,height:20,marginTop:10}]}>
+                      <Text style={{fontSize:16, fontWeight: 'bold'}}> Effects </Text>
+                    </View>
+
+                      <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
+                        <TouchableOpacity style={Styles.tag}>
+                          <Text style={Styles.tagText}>{this.state.eff[0]}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={Styles.tag}>
+                          <Text style={Styles.tagText}>{this.state.eff[1]}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={Styles.tag}>
+                          <Text style={Styles.tagText}>{this.state.eff[2]}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={Styles.tag}>
+                          <Text style={Styles.tagText}>{this.state.eff[3]}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={Styles.tag}>
+                          <Text style={Styles.tagText}>{this.state.eff[4]}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={Styles.tag}>
+                          <Text style={Styles.tagText}>{this.state.eff[5]}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={Styles.tag}>
+                          <Text style={Styles.tagText}>{this.state.eff[6]}</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={Styles.tag}>
+                          <Text style={Styles.tagText}>{this.state.eff[7]}</Text>
+                        </TouchableOpacity>
+                      </View>
+
+
           {/*<View style={[{height:120,margin:10}]}>
           <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
           <Text style={{fontSize:16, fontWeight: 'bold'}}> Featured </Text>
@@ -62,9 +141,12 @@ class HomeScene extends Component {
           </View>
           </View>*/}
 
+          <View style={[Styles.container,{alignItems:'flex-start',marginLeft:5,height:20,marginTop:10}]}>
+            <Text style={{fontSize:16, fontWeight: 'bold'}}> Trending </Text>
+          </View>
 
-          <TouchableHighlight
-            underlayColor='#dddddd'>
+        <View style={{flex:1}}>
+          <TouchableHighlight underlayColor='#dddddd'>
             <View style={{ backgroundColor: 'white' }}>
               <View style={Styles.outside}>
                 <Image style={Styles.thumb} source={require('../media/Rosin2.png')}/>
@@ -101,8 +183,11 @@ class HomeScene extends Component {
                 <View style={Styles.separator}/>
               </View>
             </TouchableHighlight>
+          </View>
 
-            <View style={[Styles.container,{height:80,margin:10}]}>
+
+
+            {/*<View style={[Styles.container,{height:80,margin:10}]}>
               <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
                 <Text> Activities </Text>
                 <View style={[Styles.container,{flex:3,flexDirection:'row'}]}>
@@ -120,8 +205,9 @@ class HomeScene extends Component {
                   </TouchableOpacity>
                 </View>
               </View>
-            </View>
-            <View style={[Styles.container,{height:120,margin:10}]}>
+            </View>*/}
+
+            {/*<View style={[Styles.container,{height:120,margin:10}]}>
               <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
                 <Text> Effects </Text>
                 <View style={[Styles.container,{flex:3,flexDirection:'row'}]}>
@@ -139,8 +225,9 @@ class HomeScene extends Component {
                   </TouchableOpacity>
                 </View>
               </View>
-            </View>
-            <View style={[Styles.container,{height:120,margin:10}]}>
+            </View>*/}
+
+            {/*<View style={[Styles.container,{height:120,margin:10}]}>
               <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
                 <Text> On Sale Products </Text>
               </View>
@@ -158,7 +245,9 @@ class HomeScene extends Component {
                   <Text>+</Text>
                 </TouchableOpacity>
               </View>
-            </View>
+            </View>*/}
+
+
           </ScrollView>
         </View>
       );
@@ -184,7 +273,7 @@ class HomeScene extends Component {
     },
     FindProductButton: {
       flex: 1,
-      height:42,
+      height:30,
       marginHorizontal: 10,
       marginTop: 0,
       borderRadius: 3,
@@ -314,7 +403,37 @@ class HomeScene extends Component {
     flexContainer: {
       flex: 1,
       flexDirection: 'column'
-    }
+    },
+    tagActivity: {
+      margin:5,
+      borderRadius: 20,
+      borderWidth:1,
+      borderColor:"#F5A623",
+      backgroundColor: 'white',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    tagTextActivity:{
+      color:"#F5A623",
+      marginTop:10,
+      marginBottom:10,
+      marginHorizontal: 15,
+    },
+    tag: {
+      margin:5,
+      borderRadius: 20,
+      borderWidth:1,
+      borderColor:"#4A90E2",
+      backgroundColor: 'white',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    tagText:{
+      color:"#4A90E2",
+      marginTop:10,
+      marginBottom:10,
+      marginHorizontal: 15,
+    },
   });
 
   module.exports         = connect(mapStateToProps)(HomeScene);
