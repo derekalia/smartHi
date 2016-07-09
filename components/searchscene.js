@@ -104,6 +104,7 @@ class SearchScene extends Component {
   }
 
   _renderRow(rowData:string) {
+    console.log("rendering row " + rowData);
     return (
       <TouchableOpacity style={Styles.buttonLarge} onPress={()=>this._goProduct(rowData)}>
         <Text>{rowData}</Text>
@@ -114,6 +115,7 @@ class SearchScene extends Component {
   _renderList() {
     if (this.props.products.size !== 0)
     {
+      console.log("props are not empty");
       var ds = new ListView.DataSource({rowHasChanged: (r1,r2) => (r1 != r2),});
       return (
         <ListView dataSource = {ds.cloneWithRows(this.props.products)}

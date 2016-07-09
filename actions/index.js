@@ -29,7 +29,7 @@ export function LoginAction(userCredentials) {
                     dispatch(
                     {
                         type: LOGIN_ERROR,
-                        name: responseData.message,
+                        message: responseData.message,
                     });
                 } 
         }).done();

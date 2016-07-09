@@ -30,7 +30,6 @@ export default function UserReducer(state, action) {
             return newState;
 
        case LOGIN_ERROR:
-
             newState               = Object.assign({},state);
             newState.message       = action.message; 
             return newState;
