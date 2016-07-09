@@ -48,6 +48,7 @@ class SearchScene extends Component {
     for (key in props.products) {
       console.log("my prop "+props.products[key]);
     }
+    this._searchTerm = "";
     this.state = {
       act  :  this.props.act,
       eff  :  this.props.eff,
@@ -57,27 +58,8 @@ class SearchScene extends Component {
     }
   }
 
-  _renderHeader(section) {
-    return (
-      <View style={Styles.header}>
-        <Text style={Styles.headerText}>{section.title}</Text>
-      </View>
-    );
-  }
-
-  _renderContent(section) {
-    return (
-      <View style={Styles.content}>
-        <Text>{section.content}</Text>
-      </View>
-    );
-  }
-
-
-
-  _enterKeyWord(event) {
+  _setKeyWord(event) {
     this._searchTerm = event.nativeEvent.text;
-    this.props.StartSearchAction(this._searchTerm);
   }
 
   _plusActivity() {
@@ -94,6 +76,7 @@ class SearchScene extends Component {
     //
     console.log("search started");
     this.props.StartSearchAction(this._searchTerm);
+    this.props.navigator.push(this.props.productsScene);
   }
 
   _goProduct(rowData:string) {
@@ -141,11 +124,11 @@ class SearchScene extends Component {
               autoCorrect     = {false}
               placeholder     = " Keyword"
               returnKeyType   = "next"
-              onEndEditing    = {this._enterKeyWord.bind(this)}
+              onChange        = {this._setKeyWord.bind(this)}
               />
           </View>
           <View style={[{flex:1,borderWidth:1,borderColor:"#4A90E2",backgroundColor:"#4A90E2",height:50}]}>
-            <TouchableOpacity style={{}}>
+            <TouchableOpacity style={{}} onPress={this._startSearch.bind(this)}>
               <Image style={{height:32,width:32,marginLeft:13,marginTop:8}} source={require("../media/SearchIcon0.png")}/>
             </TouchableOpacity>
           </View>
@@ -319,31 +302,6 @@ class SearchScene extends Component {
               </View>
             </View>
 
-          </ScrollView>
-        </View>
-
-        {/*<View style={[Styles.container,{flex:1}]}>
-        <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
-        <Text> Effects </Text>
-        <View style={[Styles.container,{flex:3,flexDirection:'row'}]}>
-        <TouchableOpacity style={Styles.buttonSmall}>
-        <Text>{this.state.eff[0]}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={Styles.buttonSmall}>
-        <Text>{this.state.eff[1]}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={Styles.buttonSmall}>
-        <Text>{this.state.eff[2]}</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=> this._plusEffect()} style={Styles.buttonSmall}>
-        <Text>+</Text>
-        </TouchableOpacity>
-        </View>
-        </View>
-        </View>*/}
-        <View style={Styles.container}>
-          <ScrollView>
-            {this._renderList()}
           </ScrollView>
         </View>
       </View>

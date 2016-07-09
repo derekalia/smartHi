@@ -7,12 +7,20 @@ import {StyleSheet,Text,View,ScrollView,Image,TextInput,TouchableOpacity,Navigat
 import HomeScene     from './homescene.js';
 import SearchScene   from './searchscene.js';
 import ProductScene  from './productscene.js';
+import ProductsScene from './productsscene.js';
 
-const HomeSceneIndex       = 0;
-const SearchSceneIndex     = 1;
-const ProductSceneIndex    = 2;
-const ProducerSceneIndex   = 4;
+/*
+class ProductsScene extends Component {
 
+    render() {
+            return (
+                <View style={Styles.container}>
+                    <Text>Products Scene Placeholder</Text>
+                </View>
+            );
+    }
+}
+*/
 class ProducerScene extends Component {
 
     render() {
@@ -23,12 +31,30 @@ class ProducerScene extends Component {
             );
     }
 }
+class ProducersScene extends Component {
+
+    render() {
+            return (
+                <View style={Styles.container}>
+                    <Text>Producers Scene Placeholder</Text>
+                </View>
+            );
+    }
+}
+const HomeSceneIndex       = 0;
+const SearchSceneIndex     = 1;
+const ProductSceneIndex    = 2;
+const ProducerSceneIndex   = 3;
+const ProductsSceneIndex   = 4;
+const ProducersSceneIndex  = 5;
 
 var HomeTabScenes = [
     {title: "Herby",          component: HomeScene,     index: HomeSceneIndex},
     {title: "Search",         component: SearchScene,   index: SearchSceneIndex},
     {title: "Producer",       component: ProductScene,  index: ProductSceneIndex},
     {title: "Product",        component: ProducerScene, index: ProducerSceneIndex},
+    {title: "Products",       component: ProductsScene, index: ProductsSceneIndex},
+    {title: "Producers",      component: ProducersScene,index: ProducersSceneIndex},
 ];
 
 var HomeTabRouteMapper = {
@@ -72,7 +98,8 @@ class HomeTab extends Component {
             <route.component navigator={navigator}
                    searchScene={HomeTabScenes[SearchSceneIndex]}
                    producerScene={HomeTabScenes[ProducerSceneIndex]}
-                   productScene={HomeTabScenes[ProductSceneIndex]}/>
+                   productScene={HomeTabScenes[ProductSceneIndex]}
+                   productsScene={HomeTabScenes[ProductsSceneIndex]}/>
         );
     }
 

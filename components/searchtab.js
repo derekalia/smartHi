@@ -11,7 +11,19 @@ const HomeSceneIndex       = 0;
 const SearchSceneIndex     = 1;
 const ProductSceneIndex    = 2;
 const ProducerSceneIndex   = 3;
+const ProducersSceneIndex  = 4;
+const ProductsSceneIndex   = 5;
 
+class ProductsScene extends Component {
+
+    render() {
+            return (
+                <View style={Styles.container}>
+                    <Text>Products Scene Placeholder</Text>
+                </View>
+            );
+    }
+}
 class ProducerScene extends Component {
 
     render() {
@@ -22,17 +34,26 @@ class ProducerScene extends Component {
             );
     }
 }
+class ProducersScene extends Component {
 
+    render() {
+            return (
+                <View style={Styles.container}>
+                    <Text>Producers Scene Placeholder</Text>
+                </View>
+            );
+    }
+}
 
-
-var HomeTabScenes = [
-    {title: "Herby",          component: HomeScene,     index: HomeSceneIndex},
-    {title: "Search",         component: SearchScene,   index: SearchSceneIndex},
-    {title: "Producer",       component: ProductScene,  index: ProductSceneIndex},
-    {title: "Product",        component: ProducerScene, index: ProducerSceneIndex},
+var SearchTabScenes = [
+    {title: "Search",         component: SearchScene,    index: SearchSceneIndex},
+    {title: "Producer",       component: ProductScene,   index: ProductSceneIndex},
+    {title: "Product",        component: ProducerScene,  index: ProducerSceneIndex},
+    {title: "Products",       component: ProducersScene, index: ProducersSceneIndex},
+    {title: "Producers",      component: ProductsScene,  index: ProductsSceneIndex},
 ];
 
-var HomeTabRouteMapper = {
+var SearchTabRouteMapper = {
     LeftButton: function(route, navigator, index, navState) {
         // BatsFix. Do something other than "Back" text
         
@@ -66,14 +87,14 @@ var HomeTabRouteMapper = {
     }
 }
 
-class HomeTab extends Component {
+class SearchTab extends Component {
 
     renderScene(route, navigator) {
         return (
             <route.component navigator={navigator} 
-                   searchScene={HomeTabScenes[SearchSceneIndex]} 
-                   producerScene={HomeTabScenes[ProducerSceneIndex]} 
-                   productScene={HomeTabScenes[ProductSceneIndex]}/>
+                   searchScene={SearchTabScenes[SearchSceneIndex]} 
+                   producerScene={SearchTabScenes[ProducerSceneIndex]} 
+                   productScene={SearchTabScenes[ProductSceneIndex]}/>
         );
     }
 
@@ -86,10 +107,10 @@ class HomeTab extends Component {
             <Navigator
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
-                initialRoute = {HomeTabScenes[HomeSceneIndex]}
+                initialRoute = {SearchTabScenes[SearchSceneIndex]}
                 navigationBar={
                     <Navigator.NavigationBar
-                        routeMapper = {HomeTabRouteMapper}
+                        routeMapper = {SearchTabRouteMapper}
                     />
                 }
             />
@@ -97,4 +118,4 @@ class HomeTab extends Component {
     }
 }
 
-module.exports = HomeTab;
+module.exports = SearchTab;
