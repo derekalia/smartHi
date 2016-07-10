@@ -2,21 +2,21 @@
 import React, { Component } from 'react';
 import {StyleSheet,Text,View,ListView,ListViewDataSource,ScrollView,Image,TextInput,TouchableOpacity,Navigator} from 'react-native'
 
-//get state management components 
+//get state management components
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-//get internal components 
+//get internal components
 import Styles from './styles.js';
 import {GetProducerAction} from '../actions';
 
 class ProductScene extends Component {
     constructor(props) {
         super(props);
-        // these should come from the app state. 
+        // these should come from the app state.
         this.state = {
-            act  :  this.props.act, 
-            eff  :  this.props.eff, 
+            act  :  this.props.act,
+            eff  :  this.props.eff,
         }
     }
 
@@ -32,7 +32,7 @@ class ProductScene extends Component {
             </TouchableOpacity>
         )
     }
-     
+
     _renderList() {
         if (this.props.producers.size !== 0)
         {
@@ -46,15 +46,53 @@ class ProductScene extends Component {
             );
         }
         else
-        return null; 
+        return null;
     }
-    
+
     // BatsFix. These should be broken into components later.
     render() {
         return (
-                <View style={[Styles.container,{marginTop:70}]}>
+
+                <ScrollView>
+
+                <View style={{flex:1,marginTop:60}}>
+
+                  <Image source={require('../media/RosinXJ.png')} style={{height:190,width:380}}/>
+
+                  <Text style={{}}>FORGED XJ-13 ROSIN</Text>
+                <Text style={{}}>*****(34)</Text>
+              <Text style={{}}>
+                FORGED Rosin Is our process of extracting oils from cannabis. We use very low temperatures to reduce the terpene evaporation which is critical to the experience of our product.
+              </Text>
+
+              <Text style={{}}>Rating</Text>
+            <Text style={{}}>Quality</Text>
+          <Text style={{}}>Flavor</Text>
+        <Text style={{}}>Potency</Text>
+
+      <Text style={{}}>Test Results</Text>
+    <Text style={{}}>THC: 13% CBD: 49% THCA: 32%
+TOTAL CANNABNOIDS: 100%
+</Text>
+
+<Text style={{}}>Effects</Text>
+
+
+  <Text style={{}}>Activies</Text>
+
+<Text style={{}}>Reviews</Text>
+
+
+<Text style={{}}>Retail</Text>
+
+
+                </View>
+
+
+
+
                       <View style={[Styles.container,{flex:1}]}>
-                        <Image source={require('./background.png')} style={[Styles.container,{height:64,width:64}]}/>
+
                       </View>
                       <View style={[Styles.container,{flex:1}]}>
                                  <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
@@ -93,7 +131,7 @@ class ProductScene extends Component {
                                 {this._renderList()}
                             </ScrollView>
                         </View>
-                </View>
+                </ScrollView>
         );
     }
 }
@@ -102,13 +140,13 @@ class ProductScene extends Component {
 // BatsFix. This function is used to convert state to props passed to this component
 function mapStateToProps(state) {
     return {
-        act:  state.ProductReducer.act, 
-        eff:  state.ProductReducer.eff, 
+        act:  state.ProductReducer.act,
+        eff:  state.ProductReducer.eff,
         producers: state.ProductReducer.producers,
-    } 
+    }
 }
 // BatsFix. This function is used to convert action to props passed to this component.
-// In this example, there is now prop called GetProducerAction. 
+// In this example, there is now prop called GetProducerAction.
 //
 function mapActionToProps(dispatch) {return bindActionCreators({GetProducerAction,}, dispatch);}
 

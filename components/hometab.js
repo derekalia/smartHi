@@ -63,7 +63,10 @@ var HomeTabRouteMapper = {
 
         if (index > 0) {
             return (
-                <Text onPress={navigator.jumpBack}>Back</Text>
+            <View style={{flex:1,marginTop:0,flexDirection:"row",justifyContent: 'center',alignItems: 'center',marginLeft:13}}>
+                <Image source={require("../media/BackArrow.png")} style={{width:12,height:19}} />
+                <Text onPress={navigator.jumpBack} style={{fontSize:18,color:"#007AFF"}}> Back</Text>
+            </View>
             );
         }
     },
@@ -74,7 +77,7 @@ var HomeTabRouteMapper = {
         console.log("on index "+index);
         if (routelist.length > index+1) {
             return (
-                <Text onPress={navigator.jumpForward}>Forward</Text>
+                <Text onPress={navigator.jumpForward} style={{fontSize:18,marginTop:11,color:"#007AFF", marginRight:13}}>Forward</Text>
              );
         }
         else {
@@ -84,7 +87,7 @@ var HomeTabRouteMapper = {
     },
     Title: function(route, navigator, index, navState) {
         return (
-            <Text style={Styles.header}>
+            <Text style={{fontSize:18,marginTop:11,fontWeight:'bold'}}>
                   {route.title}
             </Text>
         );
@@ -114,9 +117,13 @@ class HomeTab extends Component {
                 renderScene={this.renderScene}
                 initialRoute = {HomeTabScenes[HomeSceneIndex]}
                 navigationBar={
-                    <Navigator.NavigationBar
+
+                    <Navigator.NavigationBar style={{flex:1,alignSelf:"center",justifyContent:"center",backgroundColor:"rgba(248,248,248,1)",borderWidth:1,borderColor:"#B2B2B2"}}
                         routeMapper = {HomeTabRouteMapper}
-                    />
+                    >
+
+                    </Navigator.NavigationBar>
+
                 }
             />
         );
