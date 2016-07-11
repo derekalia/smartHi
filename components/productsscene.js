@@ -61,7 +61,8 @@ class ProductsScene extends Component {
     return (
       <View style={[Styles.container,{flex:1,marginTop:70}]}>
         <View style={[{flex:8}]}>
-          <ScrollView>
+          <ScrollView>        
+
             {this._renderList()}
           </ScrollView>
         </View>
@@ -82,5 +83,3 @@ function mapStateToProps(state) {
 function mapActionToProps(dispatch) {return bindActionCreators({GetProductAction}, dispatch);}
 
 module.exports         = connect(mapStateToProps,mapActionToProps)(ProductsScene);
-
-

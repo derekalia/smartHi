@@ -215,7 +215,7 @@ render() {
                                     </View>
                                 </View>
                                 <Text style={{ fontSize: 14, marginTop: 8 }}>
-                                    This is a comment.Dont give Farzad any cookies.Cookie monster is dangerous!
+                                    This is a comment. Dont give Farzad cookies. Cookie monster is dangerous!
                                 </Text>
                                 <View style={Styles.row}>
                                     <Text style={{ fontSize: 13, marginTop: 8 }}>2 </Text>
@@ -251,7 +251,7 @@ render() {
         </View>
 
 
-        <View style={{marginHorizontal:10,marginTop:20}}>
+        <View style={{marginHorizontal:10,marginTop:10}}>
         <View style={{height:40,justifyContent: 'center'}}>
         <Text style={{fontSize:20,fontWeight:'bold',}}>Locations</Text>
         </View>
@@ -280,47 +280,13 @@ render() {
 
 
 
-{/*
-  <View style={[Styles.container,{flex:1}]}>
-  <View style={[Styles.container,{flex:1}]}>
-  <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
-  <Text> Activities </Text>
-  <View style={[Styles.container,{flex:3,flexDirection:'row'}]}>
-  <TouchableOpacity style={Styles.buttonSmall}>
-  <Text>{this.state.act[0]}</Text>
-  </TouchableOpacity>
-  <TouchableOpacity style={Styles.buttonSmall}>
-  <Text>{this.state.act[1]}</Text>
-  </TouchableOpacity>
-  <TouchableOpacity style={Styles.buttonSmall}>
-  <Text>{this.state.act[2]}</Text>
-  </TouchableOpacity>
-  </View>
-  </View>
-  </View>
-  <View style={[Styles.container,{flex:1}]}>
-  <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
-  <Text> Effects </Text>
-  <View style={[Styles.container,{flex:3,flexDirection:'row'}]}>
-  <TouchableOpacity style={Styles.buttonSmall}>
-  <Text>{this.state.eff[0]}</Text>
-  </TouchableOpacity>
-  <TouchableOpacity style={Styles.buttonSmall}>
-  <Text>{this.state.eff[1]}</Text>
-  </TouchableOpacity>
-  <TouchableOpacity style={Styles.buttonSmall}>
-  <Text>{this.state.eff[2]}</Text>
-  </TouchableOpacity>
-  </View>
-  </View>
-  </View>
+
+
   <View style={Styles.container}>
   <ScrollView>
   {this._renderList()}
   </ScrollView>
   </View>
-
-  </View>*/}
 </View>
   </ScrollView>
 );
@@ -346,10 +312,24 @@ const Styles = StyleSheet.create({
   },
 
 
-  storeItem: {         flex: 1,         flexDirection: 'row',         height: 100,     },
-  column: {         flexDirection: 'column'     },
-  row: {         flexDirection: 'row'     },
-  bg: {         position: 'absolute',         width: 352,         height: 100,         borderTopLeftRadius: 60,         borderRadius: 6     },
+  storeItem: {
+    flex: 1,
+    flexDirection: 'row',
+    height: 100,
+  },
+  column: {
+    flexDirection: 'column'
+  },
+  row: {
+    flexDirection: 'row'
+  },
+  bg: {
+    position: 'absolute',
+    width: 352,
+    height: 100,
+    borderTopLeftRadius: 60,
+    borderRadius: 6
+  },
   storeName: {
         margin: 3,
         marginTop: 5,

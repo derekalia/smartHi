@@ -2,21 +2,21 @@
 import React, { Component } from 'react';
 import {StyleSheet,Text,View,ListView,ListViewDataSource,ScrollView,Image,TextInput,TouchableOpacity,Navigator} from 'react-native'
 
-//get state management components 
+//get state management components
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-//get internal components 
+//get internal components
 import Styles from './styles.js';
 import {GetProductAction} from '../actions';
 
 class ProducerScene extends Component {
     constructor(props) {
         super(props);
-        // these should come from the app state. 
+        // these should come from the app state.
         this.state = {
-            act  :  this.props.act, 
-            eff  :  this.props.eff, 
+            act  :  this.props.act,
+            eff  :  this.props.eff,
         }
     }
 
@@ -36,7 +36,7 @@ class ProducerScene extends Component {
             </TouchableOpacity>
         )
     }
-     
+
     _renderList() {
         if (this.props.products.size !== 0)
         {
@@ -50,9 +50,9 @@ class ProducerScene extends Component {
             );
         }
         else
-        return null; 
+        return null;
     }
-    
+
     // BatsFix. These should be broken into components later.
     render() {
         return (
@@ -62,7 +62,7 @@ class ProducerScene extends Component {
                       </View>
                       <View style={[Styles.container,{flex:1}]}>
                              <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
-                                <Text> Something about this producer </Text>
+                                <Text> Something about this producer</Text>
                            </View>
                     </View>
                        <View style={Styles.container}>
@@ -80,10 +80,10 @@ class ProducerScene extends Component {
 function mapStateToProps(state) {
     return {
         products: state.ProducerReducer.products,
-    } 
+    }
 }
 // BatsFix. This function is used to convert action to props passed to this component.
-// In this example, there is now prop called GetProductAction. 
+// In this example, there is now prop called GetProductAction.
 //
 function mapActionToProps(dispatch) {return bindActionCreators({GetProductAction,}, dispatch);}
 
