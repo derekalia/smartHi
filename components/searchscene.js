@@ -133,8 +133,11 @@ class SearchScene extends Component {
           </View>
         </View>
 
+
+
+
         <ScrollView style={[{flex:8,marginLeft:10}]}>
-          <View>
+          <View style={{}}>
             <View style={{height:40,justifyContent: 'center',}}>
               <Text style={{fontSize:18,fontFamily:"Avenir Next"}}> Activity </Text>
             </View>
@@ -165,7 +168,8 @@ class SearchScene extends Component {
               </TouchableOpacity>
             </View>
           </View>
-          <View>
+
+                      <View>
                       <View style={{height:40,justifyContent: 'center',}}>
                         <Text style={{fontSize:18,fontFamily:"Avenir Next"}}> Effects </Text>
                       </View>
@@ -195,7 +199,8 @@ class SearchScene extends Component {
                           <Text style={Styles.tagText}>{this.state.eff[7]}</Text>
                         </TouchableOpacity>
                       </View>
-                    </View>
+                      </View>
+
 
 
                     <View>
@@ -301,6 +306,7 @@ class SearchScene extends Component {
                         minimumValue = {.2}
                         />
                     </View>
+
 
 
                   </ScrollView>

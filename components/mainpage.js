@@ -1,6 +1,6 @@
 //components/mainpage.js
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,ScrollView,Image,TouchableHighlight,TextInput,TouchableOpacity,Navigator,TabBarIOS,} from 'react-native'
+import {StyleSheet,Text,View,ScrollView,MapView,Image,TouchableHighlight,TextInput,TouchableOpacity,Navigator,TabBarIOS,} from 'react-native'
 
 //get internal components
 import HomeTab       from './hometab.js';
@@ -60,15 +60,25 @@ class MainPage extends Component {
           onPress={()=>{this.setState({selectedTab: HomeTabId})}}>
           <HomeTab/>
         </TabBarIOS.Item>
+
+
         <TabBarIOS.Item
           title="Map"
           icon={mapIcon}
           selected={this.state.selectedTab == MapTabId}
           onPress={()=>{this.setState({selectedTab: MapTabId})}}>
           <View style={[{backgroundColor:'white'}]}>
-            <Text> This is the map tab </Text>
+              <MapView
+          style={{height: 620,width: 377}}
+          showsUserLocation={true}
+          region={{latitude: 47.597713, longitude: -122.321777}}
+          showsCompass = {true}
+        />
           </View>
         </TabBarIOS.Item>
+
+
+
         <TabBarIOS.Item
           title="Search"
           icon={searchIcon}
