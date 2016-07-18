@@ -1,16 +1,18 @@
 //loginscenes.js
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,Slider,ListView,ListViewDataSource,ScrollView,Image,TextInput,TouchableOpacity,Navigator} from 'react-native'
+import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
+
+import Accordion from 'react-native-collapsible/Accordion';
 
 //get state management components
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import Accordion from 'react-native-accordion';
+
 
 
 //get internal components
-import {StartSearchAction,GetProductAction} from '../actions';
+import {StartSearchAction, GetProductAction} from '../actions';
 
 const searchIcon = {
   scale: 2.3,
@@ -46,15 +48,15 @@ class SearchScene extends Component {
     super(props);
     // these should come from the app state.
     for (key in props.products) {
-      console.log("my prop "+props.products[key]);
+      console.log("my prop " + props.products[key]);
     }
     this._searchTerm = "";
     this.state = {
-      act  :  this.props.act,
-      eff  :  this.props.eff,
-      type :  this.props.type,
-      category : this.props.category,
-      symptoms : this.props.symptoms,
+      act: this.props.act,
+      eff: this.props.eff,
+      type: this.props.type,
+      category: this.props.category,
+      symptoms: this.props.symptoms,
     }
   }
 
@@ -79,56 +81,55 @@ class SearchScene extends Component {
     this.props.navigator.push(this.props.productsScene);
   }
 
-  _goProduct(rowData:string) {
+  _goProduct(rowData: string) {
     // BatsFix. should set a product state first.
     this.props.GetProductAction(rowData);
     // then go product scene
     this.props.navigator.push(this.props.productScene);
   }
 
-  _renderRow(rowData:string) {
+  _renderRow(rowData: string) {
     console.log("rendering row " + rowData);
     return (
-      <TouchableOpacity style={Styles.buttonLarge} onPress={()=>this._goProduct(rowData)}>
+      <TouchableOpacity style={Styles.buttonLarge} onPress={() => this._goProduct(rowData) }>
         <Text>{rowData}</Text>
       </TouchableOpacity>
     )
   }
 
   _renderList() {
-    if (this.props.products.size !== 0)
-    {
+    if (this.props.products.size !== 0) {
       console.log("props are not empty");
-      var ds = new ListView.DataSource({rowHasChanged: (r1,r2) => (r1 != r2),});
+      var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => (r1 != r2), });
       return (
-        <ListView dataSource = {ds.cloneWithRows(this.props.products)}
+        <ListView dataSource = {ds.cloneWithRows(this.props.products) }
           enableEmptySections = {true}
-          renderRow  = {this._renderRow.bind(this)}
+          renderRow  = {this._renderRow.bind(this) }
           />
 
       );
     }
     else
-    return null;
+      return null;
   }
 
   // BatsFix. These should be broken into components later.
   render() {
     return (
       <View>
-        <View style={{flex:1,flexDirection:"row",marginTop:40,marginHorizontal:10}}>
-          <View style={[{flex:5}]}>
+        <View style={{ flex: 1, flexDirection: "row", marginTop: 40, marginHorizontal: 10 }}>
+          <View style={[{ flex: 5 }]}>
             <TextInput style={[Styles.input]}
               autoCapitalize  = "none"
               autoCorrect     = {false}
               placeholder     = " Keyword"
               returnKeyType   = "next"
-              onChange        = {this._setKeyWord.bind(this)}
+              onChange        = {this._setKeyWord.bind(this) }
               />
           </View>
-          <View style={[{flex:1,borderWidth:1,borderColor:"#4A90E2",backgroundColor:"#4A90E2",height:50}]}>
-            <TouchableOpacity style={{}} onPress={this._startSearch.bind(this)}>
-              <Image style={{height:32,width:32,marginLeft:13,marginTop:8}} source={require("../media/SearchIcon0.png")}/>
+          <View style={[{ flex: 1, borderWidth: 1, borderColor: "#4A90E2", backgroundColor: "#4A90E2", height: 50 }]}>
+            <TouchableOpacity style={{}} onPress={this._startSearch.bind(this) }>
+              <Image style={{ height: 32, width: 32, marginLeft: 13, marginTop: 8 }} source={require("../media/SearchIcon0.png") }/>
             </TouchableOpacity>
           </View>
         </View>
@@ -136,12 +137,19 @@ class SearchScene extends Component {
 
 
 
-        <ScrollView style={[{flex:8,marginLeft:10}]}>
+
+        <ScrollView style={[{ flex: 8, marginLeft: 10 }]}>
+
+
+
+
+
+
           <View style={{}}>
-            <View style={{height:40,justifyContent: 'center',}}>
-              <Text style={{fontSize:18,fontFamily:"Avenir Next"}}> Activity </Text>
+            <View style={{ height: 40, justifyContent: 'center', }}>
+              <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Activity </Text>
             </View>
-            <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
+            <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
               <TouchableOpacity style={Styles.tagActivity}>
                 <Text style={Styles.tagTextActivity}>{this.state.act[0]}</Text>
               </TouchableOpacity>
@@ -169,148 +177,150 @@ class SearchScene extends Component {
             </View>
           </View>
 
-                      <View>
-                      <View style={{height:40,justifyContent: 'center',}}>
-                        <Text style={{fontSize:18,fontFamily:"Avenir Next"}}> Effects </Text>
-                      </View>
-                      <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
-                        <TouchableOpacity style={Styles.tag}>
-                          <Text style={Styles.tagText}>{this.state.eff[0]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tag}>
-                          <Text style={Styles.tagText}>{this.state.eff[1]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tag}>
-                          <Text style={Styles.tagText}>{this.state.eff[2]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tag}>
-                          <Text style={Styles.tagText}>{this.state.eff[3]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tag}>
-                          <Text style={Styles.tagText}>{this.state.eff[4]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tag}>
-                          <Text style={Styles.tagText}>{this.state.eff[5]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tag}>
-                          <Text style={Styles.tagText}>{this.state.eff[6]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tag}>
-                          <Text style={Styles.tagText}>{this.state.eff[7]}</Text>
-                        </TouchableOpacity>
-                      </View>
-                      </View>
+
+
+          <View>
+            <View style={{ height: 40, justifyContent: 'center', }}>
+              <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Effects </Text>
+            </View>
+            <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
+              <TouchableOpacity style={Styles.tag}>
+                <Text style={Styles.tagText}>{this.state.eff[0]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tag}>
+                <Text style={Styles.tagText}>{this.state.eff[1]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tag}>
+                <Text style={Styles.tagText}>{this.state.eff[2]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tag}>
+                <Text style={Styles.tagText}>{this.state.eff[3]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tag}>
+                <Text style={Styles.tagText}>{this.state.eff[4]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tag}>
+                <Text style={Styles.tagText}>{this.state.eff[5]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tag}>
+                <Text style={Styles.tagText}>{this.state.eff[6]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tag}>
+                <Text style={Styles.tagText}>{this.state.eff[7]}</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
 
 
 
-                    <View>
-                      <View style={{height:40,justifyContent: 'center',}}>
-                        <Text style={{fontSize:18,fontFamily:"Avenir Next"}}> Type </Text>
-                      </View>
-                      <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
-                        <TouchableOpacity style={Styles.tagType}>
-                          <Text style={Styles.tagTextType}>{this.state.type[0]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagType}>
-                          <Text style={Styles.tagTextType}>{this.state.type[1]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagType}>
-                          <Text style={Styles.tagTextType}>{this.state.type[2]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagType}>
-                          <Text style={Styles.tagTextType}>{this.state.type[3]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagType}>
-                          <Text style={Styles.tagTextType}>{this.state.type[4]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagType}>
-                          <Text style={Styles.tagTextType}>{this.state.type[5]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagType}>
-                          <Text style={Styles.tagTextType}>{this.state.type[6]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagType}>
-                          <Text style={Styles.tagTextType}>{this.state.type[7]}</Text>
-                        </TouchableOpacity>
-                      </View>
-                    </View>
+          <View>
+            <View style={{ height: 40, justifyContent: 'center', }}>
+              <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Type </Text>
+            </View>
+            <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
+              <TouchableOpacity style={Styles.tagType}>
+                <Text style={Styles.tagTextType}>{this.state.type[0]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagType}>
+                <Text style={Styles.tagTextType}>{this.state.type[1]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagType}>
+                <Text style={Styles.tagTextType}>{this.state.type[2]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagType}>
+                <Text style={Styles.tagTextType}>{this.state.type[3]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagType}>
+                <Text style={Styles.tagTextType}>{this.state.type[4]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagType}>
+                <Text style={Styles.tagTextType}>{this.state.type[5]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagType}>
+                <Text style={Styles.tagTextType}>{this.state.type[6]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagType}>
+                <Text style={Styles.tagTextType}>{this.state.type[7]}</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
 
 
-                    <View>
-                      <View style={{height:40,justifyContent: 'center',}}>
-                        <Text style={{fontSize:18,fontFamily:"Avenir Next"}}> Symptoms </Text>
-                      </View>
-                      <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
+          <View>
+            <View style={{ height: 40, justifyContent: 'center', }}>
+              <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Symptoms </Text>
+            </View>
+            <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
 
-                        <TouchableOpacity style={Styles.tagSymptoms}>
-                          <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[0]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagSymptoms}>
-                          <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[1]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagSymptoms}>
-                          <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[2]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagSymptoms}>
-                          <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[3]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagSymptoms}>
-                          <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[4]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagSymptoms}>
-                          <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[5]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagSymptoms}>
-                          <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[6]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagSymptoms}>
-                          <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[7]}</Text>
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-
-
-
-                    <View>
-                      <View style={{height:40,justifyContent: 'center',}}>
-                        <Text style={{fontSize:18,fontFamily:"Avenir Next"}}> Category </Text>
-                      </View>
-                      <View style={[{flexDirection:'row',flexWrap:'wrap'}]}>
-                        <TouchableOpacity style={Styles.tagCategory}>
-                          <Text style={Styles.tagTextCategory}>{this.state.category[0]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagCategory}>
-                          <Text style={Styles.tagTextCategory}>{this.state.category[1]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagCategory}>
-                          <Text style={Styles.tagTextCategory}>{this.state.category[2]}</Text>
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-
-
-                    <View>
-                      <View style={{height:40,justifyContent: 'center',}}>
-                        <Text style={{fontSize:18,fontFamily:"Avenir Next"}}> Price </Text>
-                      </View>
-                    </View>
+              <TouchableOpacity style={Styles.tagSymptoms}>
+                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[0]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagSymptoms}>
+                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[1]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagSymptoms}>
+                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[2]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagSymptoms}>
+                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[3]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagSymptoms}>
+                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[4]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagSymptoms}>
+                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[5]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagSymptoms}>
+                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[6]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagSymptoms}>
+                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[7]}</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
 
 
 
-                    <View>
-                      <View style={{height:40,justifyContent: 'center',}}>
-                        <Text style={{fontSize:18,fontFamily:"Avenir Next"}}> Distance </Text>
-                      </View>
-                      <Slider
-                        maximumValue={100}
-                        minimumValue = {.2}
-                        />
-                    </View>
+          <View>
+            <View style={{ height: 40, justifyContent: 'center', }}>
+              <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Category </Text>
+            </View>
+            <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
+              <TouchableOpacity style={Styles.tagCategory}>
+                <Text style={Styles.tagTextCategory}>{this.state.category[0]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagCategory}>
+                <Text style={Styles.tagTextCategory}>{this.state.category[1]}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagCategory}>
+                <Text style={Styles.tagTextCategory}>{this.state.category[2]}</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+
+
+          <View>
+            <View style={{ height: 40, justifyContent: 'center', }}>
+              <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Price </Text>
+            </View>
+          </View>
 
 
 
-                  </ScrollView>
-        </View>
+          <View>
+            <View style={{ height: 40, justifyContent: 'center', }}>
+              <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Distance </Text>
+            </View>
+            <Slider
+              maximumValue={100}
+              minimumValue = {.2}
+              />
+          </View>
+
+        </ScrollView>
+      </View>
+
+
     );
   }
 }
@@ -318,7 +328,7 @@ class SearchScene extends Component {
 const Styles = StyleSheet.create({
   loginButton: {
     flex: 1,
-    height:10,
+    height: 10,
     marginHorizontal: 30,
     marginTop: 50,
     marginBottom: 30,
@@ -331,7 +341,7 @@ const Styles = StyleSheet.create({
 
   signUpButton: {
     flex: 1,
-    height:52,
+    height: 52,
     marginHorizontal: 30,
     marginTop: 10,
     marginBottom: 10,
@@ -347,9 +357,9 @@ const Styles = StyleSheet.create({
 
     backgroundColor: 'white',
     borderRadius: 0,
-    borderColor:"#4A90E2",
+    borderColor: "#4A90E2",
 
-    borderWidth:1,
+    borderWidth: 1,
   },
   container: {
     flex: 1,
@@ -380,98 +390,98 @@ const Styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   tagEffects: {
-    margin:5,
+    margin: 5,
     borderRadius: 20,
-    borderWidth:1,
-    borderColor:"#4A90E2",
+    borderWidth: 1,
+    borderColor: "#4A90E2",
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  tagTextEffects:{
-    color:"#4A90E2",
-    marginTop:10,
-    marginBottom:10,
+  tagTextEffects: {
+    color: "#4A90E2",
+    marginTop: 10,
+    marginBottom: 10,
     marginHorizontal: 15,
   },
 
   tagActivity: {
-    margin:5,
+    margin: 5,
     borderRadius: 20,
-    borderWidth:1,
-    borderColor:"#F5A623",
+    borderWidth: 1,
+    borderColor: "#F5A623",
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  tagTextActivity:{
-    color:"#F5A623",
-    marginTop:10,
-    marginBottom:10,
+  tagTextActivity: {
+    color: "#F5A623",
+    marginTop: 10,
+    marginBottom: 10,
     marginHorizontal: 15,
   },
 
   tagType: {
-    margin:5,
+    margin: 5,
     borderRadius: 20,
-    borderWidth:1,
-    borderColor:"#BD10E0",
+    borderWidth: 1,
+    borderColor: "#BD10E0",
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  tagTextType:{
-    color:"#BD10E0",
-    marginTop:10,
-    marginBottom:10,
+  tagTextType: {
+    color: "#BD10E0",
+    marginTop: 10,
+    marginBottom: 10,
     marginHorizontal: 15,
   },
 
   tagSymptoms: {
-    margin:5,
+    margin: 5,
     borderRadius: 20,
-    borderWidth:1,
-    borderColor:"#50E3C2",
+    borderWidth: 1,
+    borderColor: "#50E3C2",
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  tagTextSymptoms:{
-    color:"#50E3C2",
-    marginTop:10,
-    marginBottom:10,
+  tagTextSymptoms: {
+    color: "#50E3C2",
+    marginTop: 10,
+    marginBottom: 10,
     marginHorizontal: 15,
   },
 
   tagCategory: {
-    margin:5,
+    margin: 5,
     borderRadius: 20,
-    borderWidth:1,
-    borderColor:"#70D600",
+    borderWidth: 1,
+    borderColor: "#70D600",
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  tagTextCategory:{
-    color:"#70D600",
-    marginTop:10,
-    marginBottom:10,
+  tagTextCategory: {
+    color: "#70D600",
+    marginTop: 10,
+    marginBottom: 10,
     marginHorizontal: 15,
   },
 
   tag: {
-    margin:5,
+    margin: 5,
     borderRadius: 20,
-    borderWidth:1,
-    borderColor:"#4A90E2",
+    borderWidth: 1,
+    borderColor: "#4A90E2",
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  tagText:{
-    color:"#4A90E2",
-    marginTop:10,
-    marginBottom:10,
+  tagText: {
+    color: "#4A90E2",
+    marginTop: 10,
+    marginBottom: 10,
     marginHorizontal: 15,
   },
 });
@@ -479,8 +489,8 @@ const Styles = StyleSheet.create({
 // BatsFix. This function is used to convert state to props passed to this component
 function mapStateToProps(state) {
   return {
-    act:  state.SearchReducer.act,
-    eff:  state.SearchReducer.eff,
+    act: state.SearchReducer.act,
+    eff: state.SearchReducer.eff,
     products: state.SearchReducer.products,
     type: state.SearchReducer.type,
     category: state.SearchReducer.category,
@@ -490,6 +500,6 @@ function mapStateToProps(state) {
 // BatsFix. This function is used to convert action to props passed to this component.
 // In this example, there is now prop called StartSearchAction.
 //
-function mapActionToProps(dispatch) {return bindActionCreators({StartSearchAction,GetProductAction}, dispatch);}
+function mapActionToProps(dispatch) { return bindActionCreators({ StartSearchAction, GetProductAction }, dispatch); }
 
-module.exports         = connect(mapStateToProps,mapActionToProps)(SearchScene);
+module.exports = connect(mapStateToProps, mapActionToProps)(SearchScene);

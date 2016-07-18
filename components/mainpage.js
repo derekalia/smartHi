@@ -1,6 +1,8 @@
-//components/mainpage.js
+  //components/mainpage.js
 import React, { Component } from 'react';
 import {StyleSheet,Text,View,ScrollView,MapView,Image,TouchableHighlight,TextInput,TouchableOpacity,Navigator,TabBarIOS,} from 'react-native'
+import StarRating from 'react-native-star-rating';
+
 
 //get internal components
 import HomeTab       from './hometab.js';
@@ -42,9 +44,16 @@ class MainPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: HomeTabId
+      selectedTab: HomeTabId,
+      starCount: 3.5
     }
   }
+
+  onStarRatingPress(rating) {
+      this.setState({
+        starCount: rating
+      });
+    }
 
   render() {
     return (
@@ -166,14 +175,14 @@ class MainPage extends Component {
                           <Text style={Styles.price}>$34.99</Text>
                         </View>
                         <View style={Styles.rowContainerStars}>
-                          {/*<StarRating
+                          <StarRating
                             disabled={false}
                             maxStars={5}
                             starColor={'red'}
                             starSize={17}
                             rating={this.state.starCount}
                             selectedStar={(rating) => this.onStarRatingPress(rating) }
-                            />*/}
+                            />
                             <Text>(39) </Text>
                             <Text style={Styles.company}>FORGED Cannabis</Text>
                           </View>

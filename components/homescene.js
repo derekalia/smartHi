@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 
 //get internal components
 // import Styles from './styles.js';
+import StarRating from 'react-native-star-rating';
 
 
 class HomeScene extends Component {
@@ -18,8 +19,17 @@ class HomeScene extends Component {
       act  :  this.props.act,
       eff  :  this.props.eff,
       sale : ['good','bad','ugly'],
+      starCount: 3.5
     }
   }
+
+
+  onStarRatingPress(rating) {
+      this.setState({
+        starCount: rating
+      });
+    }
+
 
   _onToSearch() {
     //
@@ -156,14 +166,14 @@ class HomeScene extends Component {
                     <Text style={Styles.price}>$34.99</Text>
                   </View>
                   <View style={Styles.rowContainerStars}>
-                    {/*<StarRating
-                      disabled={false}
-                      maxStars={5}
-                      starColor={'red'}
-                      starSize={17}
-                      rating={this.state.starCount}
-                      selectedStar={(rating) => this.onStarRatingPress(rating) }
-                      />*/}
+                      <StarRating
+                         disabled={false}
+                         maxStars={5}
+                         starColor={'red'}
+                         starSize={17}
+                         rating={this.state.starCount}
+                         selectedStar={(rating) => this.onStarRatingPress(rating)}
+                       />
                       <Text>(39) </Text>
                       <Text style={Styles.company}>FORGED Cannabis</Text>
                     </View>
