@@ -1,6 +1,6 @@
 //loginscenes.js
 import React, { Component } from 'react';
-import {StyleSheet,Text,View,Image,TextInput,TouchableOpacity,Navigator} from 'react-native'
+import {StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
 
 //get state management components
 import {bindActionCreators} from 'redux';
@@ -16,13 +16,13 @@ class LoginScene extends Component {
         this._userName = "";
         this._userPassword = "";
         this._userPassword2 = "";
-        this.state = {showMessage:false};
+        this.state = { showMessage: false };
     }
 
     _hideMessage() {
         if (this.state.showMessage == true) {
             this._message = "";
-            this.setState({showMessage:false});
+            this.setState({ showMessage: false });
         }
     }
 
@@ -42,51 +42,51 @@ class LoginScene extends Component {
     }
 
     _submit() {
-        this.setState({showMessage:true});
-        this.props.RegisterAction({name:this._userName, password: this._userPassword, password2: this._userPassword2});
+        this.setState({ showMessage: true });
+        this.props.RegisterAction({ name: this._userName, password: this._userPassword, password2: this._userPassword2 });
     }
 
     render() {
-             return (
-                <View style={Styles.container}>
-                     <View style={[{flex:2, alignItems: 'center',marginTop:50}]}>
-                       <Image style={Styles.icon} source={require('../media/Icon.png')}/>
-                       <Text style={{fontFamily: 'Pacifico', fontSize: 38, marginTop:10}}>Weedly</Text>
-                     </View>
-
-                   <View style={[Styles.container,{alignItems: 'center'}]}>
-                        <TextInput style={[Styles.input,{fontSize:20}]}
-                            autoCapitalize  = "none"
-                            autoCorrect     = {false}
-                            placeholder     = "Email"
-                            returnKeyType   = "next"
-                            onChange        = {this._enterUserName.bind(this)}
-                        />
-                      <TextInput style={[Styles.input,{fontSize:20}]}
-                            password        = {true}
-                            autoCapitalize  = "none"
-                            autoCorrect     = {false}
-                            placeholder     = "Password"
-                            onChange         = {this._enterUserPassword.bind(this)}
-                        />
-                      <TextInput style={[Styles.input,{fontSize:20}]}
-                            password        = {true}
-                            autoCapitalize  = "none"
-                            autoCorrect     = {false}
-                            placeholder     = "Password"
-                            onChange         = {this._confirmUserPassword.bind(this)}
-                        />
-                   </View>
-                   <View style={[Styles.container]}>
-                       <TouchableOpacity style={Styles.loginButton}
-                            onPress = {this._submit.bind(this)}
-                       >
-                           <Text style={{color:"white", fontFamily:"Avenir Next",fontSize:20}}> Register </Text>
-                       </TouchableOpacity>
-                       <Text>{this.state.showMessage ? this.props.userMessage:""}</Text>
-                   </View>
+        return (
+            <View style={Styles.container}>
+                <View style={[{ flex: 2, alignItems: 'center', marginTop: 50 }]}>
+                    <Image style={Styles.icon} source={require('../media/Icon.png') }/>
+                    <Text style={{ fontFamily: 'Pacifico', fontSize: 38, marginTop: 10 }}>Weedly</Text>
                 </View>
-            );
+
+                <View style={[Styles.container, { alignItems: 'center' }]}>
+                    <TextInput style={[Styles.input, { fontSize: 20 }]}
+                        autoCapitalize  = "none"
+                        autoCorrect     = {false}
+                        placeholder     = "Email"
+                        returnKeyType   = "next"
+                        onChange        = {this._enterUserName.bind(this) }
+                        />
+                    <TextInput style={[Styles.input, { fontSize: 20 }]}
+                        password        = {true}
+                        autoCapitalize  = "none"
+                        autoCorrect     = {false}
+                        placeholder     = "Password"
+                        onChange         = {this._enterUserPassword.bind(this) }
+                        />
+                    <TextInput style={[Styles.input, { fontSize: 20 }]}
+                        password        = {true}
+                        autoCapitalize  = "none"
+                        autoCorrect     = {false}
+                        placeholder     = "Password"
+                        onChange         = {this._confirmUserPassword.bind(this) }
+                        />
+                </View>
+                <View style={[Styles.container]}>
+                    <TouchableOpacity style={Styles.loginButton}
+                        onPress = {this._submit.bind(this) }
+                        >
+                        <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 20 }}> Register </Text>
+                    </TouchableOpacity>
+                    <Text>{this.state.showMessage ? this.props.userMessage : ""}</Text>
+                </View>
+            </View>
+        );
     }
 }
 
@@ -100,14 +100,14 @@ const Styles = StyleSheet.create({
     },
 
     icon: {
-        marginTop:70,
-        height:246/2.7,
-        width:240/2.7,
+        marginTop: 70,
+        height: 246 / 2.7,
+        width: 240 / 2.7,
     },
 
     loginButton: {
         flex: 1,
-        height:10,
+        height: 10,
         marginHorizontal: 30,
         marginTop: 50,
         marginBottom: 30,
@@ -120,7 +120,7 @@ const Styles = StyleSheet.create({
 
     signUpButton: {
         flex: 1,
-        height:52,
+        height: 52,
         marginHorizontal: 30,
         marginTop: 10,
         marginBottom: 10,
@@ -147,11 +147,11 @@ const Styles = StyleSheet.create({
         margin: 10,
         backgroundColor: 'white',
         borderRadius: 0,
-        borderBottomColor:"black",
-        borderColor:"white",
-        borderTopColor:"white",
+        borderBottomColor: "black",
+        borderColor: "white",
+        borderTopColor: "white",
 
-        borderWidth:1,
+        borderWidth: 1,
     },
 });
 
@@ -159,9 +159,9 @@ const Styles = StyleSheet.create({
 // BatsFix. This function is used to convert state to props passed to this component
 // In this example, there is now prop called user that contains state.UserReducer.user section
 // Why is it UserReducer???
-function mapStateToProps(state) { return {userMessage: state.UserReducer.message} }
+function mapStateToProps(state) { return { userMessage: state.UserReducer.message } }
 // BatsFix. This function is used to convert action to props passed to this component.
 // In this example, there is now prop called RegisterAction.
-function mapActionToProps(dispatch) {return bindActionCreators({RegisterAction}, dispatch);}
+function mapActionToProps(dispatch) { return bindActionCreators({ RegisterAction }, dispatch); }
 
-module.exports         = connect(mapStateToProps,mapActionToProps)(LoginScene);
+module.exports = connect(mapStateToProps, mapActionToProps)(LoginScene);

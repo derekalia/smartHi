@@ -7,14 +7,14 @@ import {
 } from '../actions/index.js';
 
 const initialState = {
-    user: {loggedIn:false, name: ""},
-    message: "" 
+    user: { loggedIn: false, name: "" },
+    message: ""
 }
 
 export default function UserReducer(state, action) {
 
-    switch(action.type) {
-       case LOGIN_SUCCESS:
+    switch (action.type) {
+        case LOGIN_SUCCESS:
             // BatsFix. this creates a copy of the state object
             // In redux, it uses the reference of an object to decide
             // whether two objects are different. So to make the new 
@@ -22,24 +22,24 @@ export default function UserReducer(state, action) {
             // new copy! This could become an issue if the state needs
             // to maintain a high number of items. 
             //
-            newState               = Object.assign({},state);
+            newState = Object.assign({}, state);
             // BatsFix then modify the item needed in the new
             // state. 
-            newState.user.loggedIn = true; 
-            newState.user.name     = action.name; 
+            newState.user.loggedIn = true;
+            newState.user.name = action.name;
             return newState;
 
-       case LOGIN_ERROR:
-            newState               = Object.assign({},state);
-            newState.message       = action.message; 
+        case LOGIN_ERROR:
+            newState = Object.assign({}, state);
+            newState.message = action.message;
             return newState;
 
-       case LOGIN_PROCESS:
-            newState               = Object.assign({},state);
-            newState.message       = action.message;
+        case LOGIN_PROCESS:
+            newState = Object.assign({}, state);
+            newState.message = action.message;
             return newState;
 
-       case REGISTER_SUCCESS:
+        case REGISTER_SUCCESS:
             // BatsFix. this creates a copy of the state object
             // In redux, it uses the reference of an object to decide
             // whether two objects are different. So to make the new 
@@ -47,20 +47,20 @@ export default function UserReducer(state, action) {
             // new copy! This could become an issue if the state needs
             // to maintain a high number of items. 
             //
-            newState               = Object.assign({},state);
+            newState = Object.assign({}, state);
             // BatsFix then modify the item needed in the new
             // state. 
-            newState.user.loggedIn = true; 
-            newState.user.name     = action.name; 
+            newState.user.loggedIn = true;
+            newState.user.name = action.name;
             return newState;
 
-       case REGISTER_ERROR:
+        case REGISTER_ERROR:
 
-            newState               = Object.assign({},state);
-            newState.message       = action.message; 
+            newState = Object.assign({}, state);
+            newState.message = action.message;
             return newState;
 
-       default:
-            return state?state:initialState;
+        default:
+            return state ? state : initialState;
     }
 }

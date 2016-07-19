@@ -1,19 +1,19 @@
 //components/loginpage.js
 import React, { Component } from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TextInput,
-  TouchableOpacity,
-  Navigator,
-} 
+    StyleSheet,
+    Text,
+    View,
+    Image,
+    TextInput,
+    TouchableOpacity,
+    Navigator,
+}
 from 'react-native';
 
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {LoginAction,LogoffAction} from '../actions';
+import {LoginAction, LogoffAction} from '../actions';
 
 import LoginPage from './loginpage.js';
 import MainPage  from './mainpage.js';
@@ -22,7 +22,7 @@ import Styles from './styles.js';
 class Herby extends Component {
     constructor(props) {
         super(props);
-        
+
     }
 
     render() {
@@ -43,7 +43,7 @@ class Herby extends Component {
 // changed it will not trip render action! Could be a case of shallow comparison. Or could be a
 // bug in redux/redux-native/react-native!!!!!
 
-function mapStateToProps(state) { return {userLoggedIn: state.UserReducer.user.loggedIn} }
+function mapStateToProps(state) { return { userLoggedIn: state.UserReducer.user.loggedIn } }
 // BatsFix. This function is used to convert action to props passed to this component.
 // In this example, there is now prop called LoginAction. 
 
