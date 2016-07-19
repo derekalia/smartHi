@@ -1,8 +1,9 @@
 //loginscenes.js
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
+import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource,TouchableHighlight, ScrollView, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
 
 import Accordion from 'react-native-collapsible/Accordion';
+import StarRating from 'react-native-star-rating';
 
 //get state management components
 import {bindActionCreators} from 'redux';
@@ -54,7 +55,14 @@ class SearchScene extends Component {
             category: this.props.category,
             symptoms: this.props.symptoms,
             attributes: [],
+            starCount: 3.5
         }
+    }
+
+    onStarRatingPress(rating) {
+        this.setState({
+            starCount: rating
+        });
     }
 
     _setKeyWord(event) {
@@ -63,7 +71,7 @@ class SearchScene extends Component {
 
     _plusActivity(activity) {
         // set activities to search
-        
+
         console.log("activity added " + activity);
         var attributes = this.state.attributes;
         var index = attributes.indexOf(activity);
@@ -96,9 +104,46 @@ class SearchScene extends Component {
     _renderRow(rowData: string) {
         // BatsFix. styling for product row data needs to be added.
         return (
-            <TouchableOpacity style={Styles.tagCategory} onPress={() => this._goProduct(rowData) }>
-                <Text style={Styles.tagTextCategory}>{rowData}</Text>
-            </TouchableOpacity>
+
+            <View style={{ flex: 1 }}>
+                <TouchableHighlight underlayColor='#dddddd' onPress={() =>  this._goProduct(rowData)}>
+                    <View style={{ backgroundColor: 'white' }}>
+                        <View style={Styles.outside}>
+                            <Image style={Styles.thumb} source={require('../media/Rosin2.png') }/>
+                            <View style={Styles.flexContainer}>
+                                <View style={Styles.rowContainer}>
+                                    <Text style={Styles.title} numberOfLines={1}>{rowData}</Text>
+                                    <Text style={Styles.price}>$34.99</Text>
+                                </View>
+                                <View style={Styles.rowContainerStars}>
+                                    <StarRating
+                                        disabled={false}
+                                        maxStars={5}
+                                        starColor={'red'}
+                                        starSize={17}
+                                        rating={this.state.starCount}
+                                        selectedStar={(rating) => this.onStarRatingPress(rating) }
+                                        />
+                                    <Text>(39) </Text>
+                                    <Text style={Styles.company}>FORGED Cannabis</Text>
+                                </View>
+                                <View style={Styles.tagContainer}>
+                                    <TouchableHighlight style={Styles.button}>
+                                        <Text style={Styles.buttonText}>flower</Text>
+                                    </TouchableHighlight>
+                                    <TouchableHighlight style={Styles.button}>
+                                        <Text style={Styles.buttonText}>indica</Text>
+                                    </TouchableHighlight>
+                                    <TouchableHighlight style={Styles.button}>
+                                        <Text style={Styles.buttonText}>sleepy</Text>
+                                    </TouchableHighlight>
+                                </View>
+                            </View>
+                        </View>
+                        <View style={Styles.separator}/>
+                    </View>
+                </TouchableHighlight>
+            </View>
         )
     }
     _renderList() {
@@ -132,6 +177,7 @@ class SearchScene extends Component {
             <TouchableOpacity style={Styles.tagActivity} onPress={() => this._removeAttribute(attribute) }>
                 <Text style={Styles.tagTextActivity}>{attribute}</Text>
             </TouchableOpacity>
+
         )
     }
 
@@ -193,7 +239,7 @@ class SearchScene extends Component {
                             <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[3])} >
                                 <Text style={Styles.tagTextActivity}>{this.state.act[3]}</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[4])}> 
+                            <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[4])}>
                                 <Text style={Styles.tagTextActivity}>{this.state.act[4]}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={Styles.tagActivity}>
@@ -363,6 +409,24 @@ const Styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'stretch',
     },
+    buttonText: {
+        fontSize: 15,
+        color: '#48BBEC',
+        alignSelf: 'center',
+    },
+    button: {
+        height: 33,
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        borderColor: '#48BBEC',
+        borderWidth: 1,
+        borderRadius: 22,
+        margin: 8,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+
+    },
 
     signUpButton: {
         flex: 1,
@@ -376,6 +440,48 @@ const Styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'stretch',
     },
+    price: {
+        marginTop: 3,
+        marginRight: 4,
+        flex: 1,
+        textAlign: 'right',
+        fontSize: 18,
+        // fontWeight: 'bold',
+        color: 'black'
+    },
+    title: {
+        marginTop: 3,
+        flex: 1,
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: 'black'
+    },
+    rowContainer: {
+        flexDirection: 'row',
+        marginRight: 3,
+    },
+    outside: {
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: 'white',
+        borderColor: '#48BBEC',
+        borderWidth: 1,
+        borderRadius: 6,
+        margin: 8,
+    },
+    rowContainerStars: {
+        flexDirection: 'row',
+        marginTop: 8,
+        marginRight: 3,
+    },
+    tagContainer: {
+        flex: 1,
+        flexDirection: 'row',
+    },
+    flexContainer: {
+        flex: 1,
+        flexDirection: 'column'
+    },
     input: {
         height: 50,
         fontSize: 20,
@@ -386,13 +492,16 @@ const Styles = StyleSheet.create({
 
         borderWidth: 1,
     },
+    company: {
+        flex: 1,
+        textAlign: 'right',
+        fontSize: 13,
+        marginRight: 4,
+        flexWrap: 'nowrap',
+        height: 13
+    },
     container: {
         flex: 1,
-    },
-    title: {
-        fontSize: 22,
-        fontWeight: '300',
-        marginBottom: 20,
     },
     header: {
         backgroundColor: 'white',
@@ -422,6 +531,14 @@ const Styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    thumb: {
+        width: 100,
+        height: 100,
+        marginRight: 7,
+        borderRadius: 5,
+        // borderTopLeftRadius: 60,
+        // borderTopRightRadius: 0,
     },
     tagTextEffects: {
         color: "#4A90E2",
