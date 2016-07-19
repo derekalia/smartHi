@@ -6,6 +6,7 @@ import {StyleSheet, Text, View, ListView, ListViewDataSource, ScrollView, Image,
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
+import StarRating from 'react-native-star-rating';
 //get internal components
 // import Styles from './styles.js';
 import {GetProducerAction} from '../actions';
@@ -17,8 +18,15 @@ class ProductScene extends Component {
         this.state = {
             act: this.props.act,
             eff: this.props.eff,
+            starCount: 3.5
         }
     }
+
+    onStarRatingPress(rating) {
+    this.setState({
+      starCount: rating
+    });
+  }
 
     _goProducer(rowData: string) {
         // BatsFix. should set a producer state first.
@@ -27,8 +35,50 @@ class ProductScene extends Component {
 
     _renderRow(rowData: string) {
         return (
-            <TouchableOpacity style={Styles.buttonLarge} onPress={() => this._goProducer(rowData) }>
-                <Text>{rowData}</Text>
+            <TouchableOpacity style={[Styles.storeItem]}  onPress={() => this._goProducer(rowData)}>
+                <View style={Styles.column}>
+
+                        <Image style={Styles.bg} source={require('../media/ikes1.png') } />
+                        <View style={Styles.row}>
+                            <Text style={Styles.storeName}>{rowData}</Text>
+                        </View>
+
+                        <View style={Styles.row}>
+                        <View style={Styles.rowContainerStars}>
+                        <StarRating
+                           disabled={false}
+                           maxStars={5}
+                           starSize={24}
+                          starColor={'red'}
+                           rating={this.state.starCount}
+                           selectedStar={(rating) => this.onStarRatingPress(rating)}
+                         />
+                        </View>
+                        <Text style={{color:"white",fontSize:20,
+
+                        alignSelf:"center",
+
+                        marginLeft: 7,
+                        color: 'white',
+                        textShadowOffset: { width: 1.2, height: 1.2 },
+                        textShadowColor: 'black',
+                        textShadowRadius: 2}}>(32)</Text>
+                        <Text style={{margin: 3,
+                        flex: 1,
+                        marginTop: 5,
+                        marginLeft: 95,
+                        color: 'white',
+                        fontSize: 26,
+
+                        textShadowOffset: { width: 1.5, height: 1.5 },
+                        textShadowColor: 'black',
+                        textShadowRadius: 2}
+                        }>$43.99</Text>
+                    </View>
+                    <View style={Styles.row}>
+                        <Text style={Styles.storeLocation}>Seattle, WA</Text>
+                    </View>
+                </View>
             </TouchableOpacity>
         )
     }
@@ -254,17 +304,47 @@ class ProductScene extends Component {
                         <View style={{ height: 40, justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Locations</Text>
                         </View>
+                            {this._renderList() }
+                    </View>
+
+
+
+                    <View style={{ marginHorizontal: 10, marginTop: 10 }}>
+                        <View style={{ height: 40, justifyContent: 'center' }}>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Company</Text>
+                        </View>
                         <TouchableOpacity style={Styles.storeItem}>
                             <View style={Styles.column}>
                                 <View style={Styles.row}>
-                                    <Image style={Styles.bg} source={require('../media/ikes1.png') } />
+                                    <Image style={Styles.bg} source={require('../media/forged1.png') } />
                                     <View style={Styles.row}>
-                                        <Text style={Styles.storeName}>Uncle Ikes</Text>
-                                    </View>
-                                    <Text style={Styles.storePrice1}>$43.99</Text>
+                                        <Text style={Styles.storeName}>Forged Cannabis</Text>
+                                  </View>
                                 </View>
+                                    <View style={Styles.row}>
+                                    <View style={Styles.rowContainerStars}>
+                                    </View>
+                                    <StarRating
+                                       disabled={false}
+                                       maxStars={5}
+                                       starSize={24}
+                                      starColor={'red'}
+                                       rating={this.state.starCount}
+                                       selectedStar={(rating) => this.onStarRatingPress(rating)}
+                                     />
+                                     <Text style={{color:"white",fontSize:20,
+
+                                     alignSelf:"center",
+
+                                     marginLeft: 7,
+                                     color: 'white',
+                                     textShadowOffset: { width: 1.2, height: 1.2 },
+                                     textShadowColor: 'black',
+                                     textShadowRadius: 2}}>(32)</Text>
+                                    </View>
+
                                 <View style={Styles.row}>
-                                    <Text style={Styles.storeLocation}>Seattle, WA</Text>
+                                    <Text style={Styles.storeLocation}>Issaquah, WA</Text>
                                 </View>
                             </View>
                         </TouchableOpacity>
@@ -277,15 +357,6 @@ class ProductScene extends Component {
                         </View>
                     </View>
 
-
-
-
-
-                    <View style={Styles.container}>
-                        <ScrollView>
-                            {this._renderList() }
-                        </ScrollView>
-                    </View>
                 </View>
             </ScrollView>
         );
@@ -315,6 +386,8 @@ const Styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         height: 100,
+        margin:5,
+
     },
     column: {
         flexDirection: 'column'
@@ -338,6 +411,11 @@ const Styles = StyleSheet.create({
         textShadowOffset: { width: 1.2, height: 1.2 },
         textShadowColor: 'black',
         textShadowRadius: 2
+    },
+    rowContainerStars: {
+        flexDirection: 'row',
+        marginTop: 8,
+        marginRight: 3,
     },
     storePrice1: {
         margin: 3,
