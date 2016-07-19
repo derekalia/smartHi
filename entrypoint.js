@@ -30,7 +30,7 @@ export class entrypoint extends Component {
   render() {
     return (
         <Provider store={store}>
-        <Herby/>
+            <Herby/>
         </Provider>
     );
   }
