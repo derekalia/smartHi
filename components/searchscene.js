@@ -259,6 +259,20 @@ class SearchScene extends Component {
                     <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
                         {this._renderAttributes() }
                     </View>
+
+                    <TouchableHighlight style={{  height: 35,
+                      flex: 1,
+                      backgroundColor: 'white',
+                      borderColor: 'black',
+                      borderWidth: 1,
+                      borderRadius: 22,
+                      margin: 3,
+                      justifyContent: 'center',}}>
+                        <Text style={{fontSize: 14,
+                        color: 'black',
+                        alignSelf: 'center',}}>Hide Filtering Options</Text>
+                    </TouchableHighlight>
+
                     <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                         <View style={{ height: 40, justifyContent: 'center', }}>
                             <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Activity </Text>
