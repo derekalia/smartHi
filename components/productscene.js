@@ -52,7 +52,7 @@ class ProductScene extends Component {
                           alignSelf:"flex-start",
                             color: 'white',
                             fontSize: 22,
-                            textShadowOffset: { width: 1.2, height: 1.2 },
+                            textShadowOffset: { width: 1.5, height: 1.5 },
                             textShadowColor: 'black',
                             textShadowRadius: 4}}>{rowData}</Text>
                             </View>
@@ -61,7 +61,7 @@ class ProductScene extends Component {
                           justifyContent:'flex-end',alignItems:"flex-end",alignSelf:"flex-end",
                             color: 'white',
                             fontSize: 22,
-                            textShadowOffset: { width: 1.2, height: 1.2 },
+                            textShadowOffset: { width: 1.5, height: 1.5 },
                             textShadowColor: 'black',
                             textShadowRadius: 4}}>$43.99</Text>
                             </View>
@@ -83,7 +83,7 @@ class ProductScene extends Component {
                                 <Text style={{
                                     color: "white",
                                     fontSize: 20,
-                                    textShadowOffset: { width: 1.2, height: 1.2 },
+                                    textShadowOffset: { width: 1.5, height: 1.5 },
                                     textShadowColor: 'black',
                                     textShadowRadius: 4}}> (32)</Text>
 
@@ -93,9 +93,9 @@ class ProductScene extends Component {
                             marginTop:5,
                             color: 'white',
                             fontSize: 16,
-                            textShadowOffset: { width: 1.2, height: 1.2 },
+                            textShadowOffset: { width: 1.5, height: 1.5 },
                             textShadowColor: 'black',
-                            textShadowRadius: 2
+                            textShadowRadius: 4
                         }}>Seattle, WA</Text>
                     </View>
 
@@ -332,18 +332,31 @@ class ProductScene extends Component {
                     <View style={{ marginHorizontal: 10, marginTop: 10 }}>
                         <View style={{ height: 40, justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Company</Text>
-                        </View>
-                        <TouchableOpacity style={Styles.storeItem}>
-                            <View style={Styles.column}>
-                                <View style={Styles.row}>
-                                    <Image style={Styles.bg} source={require('../media/forged1.png') } />
-                                    <View style={Styles.row}>
-                                        <Text style={Styles.storeName}>Forged Cannabis</Text>
+                        </View>                        
+                    <TouchableOpacity style={{
+                        flexDirection: 'row',
+                        height:100,
+                        marginBottom: 10,
+                    }}>
+                    <Image style={Styles.bg} source={require('../media/forged1.png') } />
+                        <View style={{ flexDirection: 'column', margin: 4,marginHorizontal:6 }}>
+
+                            <View style={{flexDirection: 'row',width:342 }}>
+
+                            <View style={{flex:2,justifyContent:'flex-end',alignItems:"flex-end",alignSelf:"flex-end"}}>
+                                <Text style={{
+                                  alignSelf:"flex-start",
+                                    color: 'white',
+                                    fontSize: 22,
+                                    textShadowOffset: { width: 1.5, height: 1.5 },
+                                    textShadowColor: 'black',
+                                    textShadowRadius: 4}}>Forged Cannabis</Text>
                                     </View>
-                                </View>
-                                <View style={Styles.row}>
-                                    <View style={Styles.rowContainerStars}>
-                                    </View>
+                            </View>
+                                <View style={{
+                                    flexDirection: 'row',
+                                    marginTop: 3,
+                                    }}>
                                     <StarRating
                                         disabled={false}
                                         maxStars={5}
@@ -352,24 +365,26 @@ class ProductScene extends Component {
                                         rating={this.state.starCount}
                                         selectedStar={(rating) => this.onStarRatingPress(rating) }
                                         />
-                                    <Text style={{
-                                        color: "white", fontSize: 20,
+                                        <Text style={{
+                                            color: "white",
+                                            fontSize: 20,
+                                            textShadowOffset: { width: 1.5, height: 1.5 },
+                                            textShadowColor: 'black',
+                                            textShadowRadius: 4}}> (10)</Text>
 
-                                        alignSelf: "center",
-
-                                        marginLeft: 7,
-                                        color: 'white',
-                                        textShadowOffset: { width: 1.2, height: 1.2 },
-                                        textShadowColor: 'black',
-                                        textShadowRadius: 2
-                                    }}>(32) </Text>
-                                </View>
-
-                                <View style={Styles.row}>
-                                    <Text style={Styles.storeLocation}>Issaquah, WA</Text>
-                                </View>
                             </View>
-                        </TouchableOpacity>
+                                <Text style={{
+                                    marginTop:5,
+                                    color: 'white',
+                                    fontSize: 16,
+                                    textShadowOffset: { width: 1.5, height: 1.5 },
+                                    textShadowColor: 'black',
+                                    textShadowRadius: 4
+                                }}>Issaquah, WA</Text>
+                            </View>
+
+                    </TouchableOpacity>
+
                     </View>
 
 
