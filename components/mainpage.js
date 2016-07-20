@@ -128,10 +128,10 @@ class MainPage extends Component {
 
                         <View style={[{ flex: 4 }]}/>
 
-                        <View style={{ borderWidth: 1, borderColor: "#dddddd", width: 380, alignItems: 'center', alignItems: "center", justifyContent: "center", left: 0, marginBottom: 18 }}/>
+                        <View style={{ borderWidth: 1, borderColor: "#dddddd", width: 380, alignItems: 'center', alignItems: "center", justifyContent: "center", left: 0, marginBottom: 0 }}/>
 
 
-                        <View style={{ flex: 1, alignItems: "center", marginTop: 0, borderWidth: 1, borderColor: "white" }}>
+                        <View style={{ flex: 1, alignItems: "center", marginTop: 0, borderWidth: 1, borderColor: "white",justifyContent:'center',height:18 }}>
                             <View style={{ marginTop: 0, flexDirection: 'row', alignItems: "center", }}>
                                 <Text style={{ fontSize: 18 }}> 198 </Text>
                                 <Image source={require('../media/Oval129.png') } style={{ width: 25, height: 25 }}/>
@@ -139,7 +139,7 @@ class MainPage extends Component {
                             </View>
                         </View>
 
-                        <View style={{ borderWidth: 1, borderColor: "#dddddd", width: 380, alignItems: 'center', alignItems: "center", justifyContent: "center", left: 0 }}/>
+   <View style={{ borderWidth: 1, borderColor: "#dddddd", width: 380, alignItems: 'center', alignItems: "center", justifyContent: "center", left: 0,marginTop:0,marginBottom:0 }}/>
 
                         <View style={{ flex: 1, alignItems: "center", marginTop: 0 }}>
 
@@ -159,22 +159,45 @@ class MainPage extends Component {
                             </View>
                         </View>
 
-                        <View style={{ borderWidth: 1, borderColor: "#dddddd", width: 380, alignItems: 'center', alignItems: "center", justifyContent: "center", left: 0, marginTop: 20 }}/>
+                        <View style={{ borderWidth: 1, borderColor: "#dddddd", width: 380, alignItems: 'center', alignItems: "center", justifyContent: "center", left: 0, marginTop: 18 }}/>
 
 
                         <View style={{ flex: 1, marginTop: 30 }}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold', marginLeft: 10, marginTop: 10 }}>Favorites</Text>
-                            <TouchableHighlight
-                                underlayColor='#dddddd'>
-                                <View style={{ backgroundColor: 'white' }}>
-                                    <View style={Styles.outside}>
-                                        <Image style={Styles.thumb} source={require('../media/Rosin2.png') }/>
-                                        <View style={Styles.flexContainer}>
-                                            <View style={Styles.rowContainer}>
-                                                <Text style={Styles.title} numberOfLines={1}>XJ-13 Rosin</Text>
-                                                <Text style={Styles.price}>$34.99</Text>
+
+                            <View style={{ flex: 1 }}>
+                            <TouchableHighlight>
+                                    <View style={{  flexDirection: 'row',
+                                      backgroundColor: 'white',
+                                      borderColor: '#48BBEC',
+                                      borderWidth: 1,
+                                      borderRadius: 6,
+                                      margin: 6}}>
+                                        <Image style={{  width: 100,
+                                          height: 100,
+                                          marginRight: 8,
+                                          borderRadius: 5,}} source={require('../media/Rosin2.png') }/>
+                                        <View style={{
+                                          flex: 1,
+                                          flexDirection: 'column',padding:5,}}>
+                                            <View style={{  flexDirection: 'row',}}>
+                                                <Text style={{
+                                                  fontSize: 18,
+                                                  fontWeight: 'bold',
+                                                  color: 'black'}} numberOfLines={1}>XJ-17 Rosin</Text>
+                                                  <View style={{
+                                                    flex:1,
+                                                  alignItems:
+                                                  'flex-end',}}>
+                                                <Text style={{
+                                                fontSize: 18,
+                                                // fontWeight: 'bold',
+                                                color: 'black'}}>$34.99</Text>
+                                                </View>
                                             </View>
-                                            <View style={Styles.rowContainerStars}>
+                                            <View style={{    flexDirection: 'row',
+                                                marginTop: 6,
+                                                }}>
                                                 <StarRating
                                                     disabled={false}
                                                     maxStars={5}
@@ -183,25 +206,61 @@ class MainPage extends Component {
                                                     rating={this.state.starCount}
                                                     selectedStar={(rating) => this.onStarRatingPress(rating) }
                                                     />
-                                                <Text>(39) </Text>
-                                                <Text style={Styles.company}>FORGED Cannabis</Text>
+                                                    <Text style={{
+                                                    fontSize: 13,
+                                                    color: 'black'}}> (39)</Text>
+                                                    <View style={{
+                                                      flex:1,
+                                                    alignItems:'flex-end',}}>
+                                                  <Text style={{
+                                                  fontSize: 13,
+                                                  color: 'black'}}>Forged Cannabis</Text>
+                                                  </View>
                                             </View>
-                                            <View style={Styles.tagContainer}>
-                                                <TouchableHighlight style={Styles.button}>
-                                                    <Text style={Styles.buttonText}>flower</Text>
+                                            <View style={{flexDirection: 'row',paddingTop:4}}>
+                                                <TouchableHighlight style={{  height: 35,
+                                                  flex: 1,
+                                                  backgroundColor: 'white',
+                                                  borderColor: '#48BBEC',
+                                                  borderWidth: 1,
+                                                  borderRadius: 22,
+                                                  margin: 3,
+                                                  justifyContent: 'center',}}>
+                                                    <Text style={{fontSize: 14,
+                                                    color: '#48BBEC',
+                                                    alignSelf: 'center',}}>flower</Text>
                                                 </TouchableHighlight>
-                                                <TouchableHighlight style={Styles.button}>
-                                                    <Text style={Styles.buttonText}>indica</Text>
+                                                <TouchableHighlight style={{  height: 35,
+                                                  flex: 1,
+                                                  backgroundColor: 'white',
+                                                  borderColor: '#48BBEC',
+                                                  borderWidth: 1,
+                                                  borderRadius: 22,
+                                                  margin: 3,
+                                                  justifyContent: 'center',}}>
+                                                    <Text style={{fontSize: 14,
+                                                    color: '#48BBEC',
+                                                    alignSelf: 'center',}}>indica</Text>
                                                 </TouchableHighlight>
-                                                <TouchableHighlight style={Styles.button}>
-                                                    <Text style={Styles.buttonText}>sleepy</Text>
+                                                <TouchableHighlight style={{  height: 35,
+                                                  flex: 1,
+                                                  backgroundColor: 'white',
+                                                  borderColor: '#48BBEC',
+                                                  borderWidth: 1,
+                                                  borderRadius: 22,
+                                                  margin: 3,
+                                                  justifyContent: 'center',}}>
+                                                    <Text style={{fontSize: 14,
+                                                    color: '#48BBEC',
+                                                    alignSelf: 'center',}}>sleepy</Text>
                                                 </TouchableHighlight>
                                             </View>
                                         </View>
                                     </View>
-
-                                </View>
                             </TouchableHighlight>
+                            </View>
+
+
                         </View>
 
                     </ScrollView>

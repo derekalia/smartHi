@@ -255,23 +255,31 @@ class SearchScene extends Component {
                     </View>
                 </View>
 
-                <ScrollView style={[{ flex: 8, marginLeft: 10 }]}>
+                <ScrollView style={[{ flex: 8, marginHorizontal: 10 }]}>
                     <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
                         {this._renderAttributes() }
                     </View>
 
-                    <TouchableHighlight style={{  height: 35,
+                    <View style={{borderWidth: 1, borderColor: "#dddddd", width: 360, alignItems: "center", justifyContent: "center", left: 0,marginTop:10,marginBottom:10 }}/>
+
+                    <View style={{
                       flex: 1,
+                      flexDirection: 'row',
+                      alignItems: "center",
+                      justifyContent: 'center'}}>
+                    <TouchableHighlight style={{
+                      height: 40,
+                      width:340,
                       backgroundColor: 'white',
                       borderColor: 'black',
                       borderWidth: 1,
                       borderRadius: 22,
-                      margin: 3,
                       justifyContent: 'center',}}>
                         <Text style={{fontSize: 14,
                         color: 'black',
                         alignSelf: 'center',}}>Hide Filtering Options</Text>
                     </TouchableHighlight>
+                    </View>
 
                     <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
                         <View style={{ height: 40, justifyContent: 'center', }}>
@@ -426,20 +434,40 @@ class SearchScene extends Component {
                         <View style={{ height: 40, justifyContent: 'center', }}>
                             <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Price </Text>
                         </View>
+                        <View>
+                        <Slider
+                            maximumValue={100}
+                            minimumValue = {.2}
+                            />
+                            </View>
                     </View>
 
                     <View>
                         <View style={{ height: 40, justifyContent: 'center', }}>
                             <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Distance </Text>
                         </View>
+                        <View>
                         <Slider
                             maximumValue={100}
                             minimumValue = {.2}
                             />
+                          </View>
                     </View>
+
+                    <View style={{ borderWidth: 1, borderColor: "#dddddd", width: 380, alignItems: 'center', alignItems: "center", justifyContent: "center", left: 0,marginTop:10,marginBottom:10 }}/>
+
+
                     <View>
                         {this._renderList() }
                     </View>
+
+
+                    <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                        <View style={{ height: 40, justifyContent: 'center', }}>
+                            <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> </Text>
+                        </View>
+                        </View>
+
                 </ScrollView>
             </View>
 

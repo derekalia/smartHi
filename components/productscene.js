@@ -23,10 +23,10 @@ class ProductScene extends Component {
     }
 
     onStarRatingPress(rating) {
-    this.setState({
-      starCount: rating
-    });
-  }
+        this.setState({
+            starCount: rating
+        });
+    }
 
     _goProducer(rowData: string) {
         // BatsFix. should set a producer state first.
@@ -35,50 +35,70 @@ class ProductScene extends Component {
 
     _renderRow(rowData: string) {
         return (
-            <TouchableOpacity style={[Styles.storeItem]}  onPress={() => this._goProducer(rowData)}>
-                <View style={Styles.column}>
+            <TouchableOpacity style={{
+                flexDirection: 'row',
+                height:100,
+                marginBottom: 10,
 
-                        <Image style={Styles.bg} source={require('../media/ikes1.png') } />
-                        <View style={Styles.row}>
-                            <Text style={Styles.storeName}>{rowData}</Text>
-                        </View>
 
-                        <View style={Styles.row}>
-                        <View style={Styles.rowContainerStars}>
-                        <StarRating
-                           disabled={false}
-                           maxStars={5}
-                           starSize={24}
-                          starColor={'red'}
-                           rating={this.state.starCount}
-                           selectedStar={(rating) => this.onStarRatingPress(rating)}
-                         />
-                        </View>
-                        <Text style={{color:"white",fontSize:20,
+            }}  onPress={() => this._goProducer(rowData) }>
+                <Image style={Styles.bg} source={require('../media/ikes1.png') } />
+                <View style={{ flexDirection: 'column', margin: 4,marginHorizontal:6 }}>
 
-                        alignSelf:"center",
+                    <View style={{flexDirection: 'row',width:342 }}>
 
-                        marginLeft: 7,
-                        color: 'white',
-                        textShadowOffset: { width: 1.2, height: 1.2 },
-                        textShadowColor: 'black',
-                        textShadowRadius: 2}}>(32)</Text>
-                        <Text style={{margin: 3,
-                        flex: 1,
-                        marginTop: 5,
-                        marginLeft: 95,
-                        color: 'white',
-                        fontSize: 26,
-
-                        textShadowOffset: { width: 1.5, height: 1.5 },
-                        textShadowColor: 'black',
-                        textShadowRadius: 2}
-                        }>$43.99</Text>
+                    <View style={{flex:2,justifyContent:'flex-end',alignItems:"flex-end",alignSelf:"flex-end"}}>
+                        <Text style={{
+                          alignSelf:"flex-start",
+                            color: 'white',
+                            fontSize: 22,
+                            textShadowOffset: { width: 1.2, height: 1.2 },
+                            textShadowColor: 'black',
+                            textShadowRadius: 4}}>{rowData}</Text>
+                            </View>
+                      <View style={{flex:1,justifyContent:'flex-end',alignItems:"flex-end",alignSelf:"flex-end"}}>
+                        <Text style={{
+                          justifyContent:'flex-end',alignItems:"flex-end",alignSelf:"flex-end",
+                            color: 'white',
+                            fontSize: 22,
+                            textShadowOffset: { width: 1.2, height: 1.2 },
+                            textShadowColor: 'black',
+                            textShadowRadius: 4}}>$43.99</Text>
+                            </View>
                     </View>
-                    <View style={Styles.row}>
-                        <Text style={Styles.storeLocation}>Seattle, WA</Text>
+
+
+                        <View style={{
+                            flexDirection: 'row',
+                            marginTop: 3,
+                            }}>
+                            <StarRating
+                                disabled={false}
+                                maxStars={5}
+                                starSize={24}
+                                starColor={'red'}
+                                rating={this.state.starCount}
+                                selectedStar={(rating) => this.onStarRatingPress(rating) }
+                                />
+                                <Text style={{
+                                    color: "white",
+                                    fontSize: 20,
+                                    textShadowOffset: { width: 1.2, height: 1.2 },
+                                    textShadowColor: 'black',
+                                    textShadowRadius: 4}}> (32)</Text>
+
                     </View>
-                </View>
+
+                        <Text style={{
+                            marginTop:5,
+                            color: 'white',
+                            fontSize: 16,
+                            textShadowOffset: { width: 1.2, height: 1.2 },
+                            textShadowColor: 'black',
+                            textShadowRadius: 2
+                        }}>Seattle, WA</Text>
+                    </View>
+
             </TouchableOpacity>
         )
     }
@@ -304,7 +324,7 @@ class ProductScene extends Component {
                         <View style={{ height: 40, justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Locations</Text>
                         </View>
-                            {this._renderList() }
+                        {this._renderList() }
                     </View>
 
 
@@ -319,29 +339,31 @@ class ProductScene extends Component {
                                     <Image style={Styles.bg} source={require('../media/forged1.png') } />
                                     <View style={Styles.row}>
                                         <Text style={Styles.storeName}>Forged Cannabis</Text>
-                                  </View>
+                                    </View>
                                 </View>
-                                    <View style={Styles.row}>
+                                <View style={Styles.row}>
                                     <View style={Styles.rowContainerStars}>
                                     </View>
                                     <StarRating
-                                       disabled={false}
-                                       maxStars={5}
-                                       starSize={24}
-                                      starColor={'red'}
-                                       rating={this.state.starCount}
-                                       selectedStar={(rating) => this.onStarRatingPress(rating)}
-                                     />
-                                     <Text style={{color:"white",fontSize:20,
+                                        disabled={false}
+                                        maxStars={5}
+                                        starSize={24}
+                                        starColor={'red'}
+                                        rating={this.state.starCount}
+                                        selectedStar={(rating) => this.onStarRatingPress(rating) }
+                                        />
+                                    <Text style={{
+                                        color: "white", fontSize: 20,
 
-                                     alignSelf:"center",
+                                        alignSelf: "center",
 
-                                     marginLeft: 7,
-                                     color: 'white',
-                                     textShadowOffset: { width: 1.2, height: 1.2 },
-                                     textShadowColor: 'black',
-                                     textShadowRadius: 2}}>(32)</Text>
-                                    </View>
+                                        marginLeft: 7,
+                                        color: 'white',
+                                        textShadowOffset: { width: 1.2, height: 1.2 },
+                                        textShadowColor: 'black',
+                                        textShadowRadius: 2
+                                    }}>(32) </Text>
+                                </View>
 
                                 <View style={Styles.row}>
                                     <Text style={Styles.storeLocation}>Issaquah, WA</Text>
@@ -386,7 +408,7 @@ const Styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         height: 100,
-        margin:5,
+        margin: 5,
 
     },
     column: {
@@ -397,7 +419,7 @@ const Styles = StyleSheet.create({
     },
     bg: {
         position: 'absolute',
-        width: 352,
+        width: 355,
         height: 100,
         borderTopLeftRadius: 60,
         borderRadius: 6
@@ -413,9 +435,9 @@ const Styles = StyleSheet.create({
         textShadowRadius: 2
     },
     rowContainerStars: {
-        flexDirection: 'row',
-        marginTop: 8,
-        marginRight: 3,
+      flexDirection: 'row',
+      marginTop: 8,
+      marginRight: 3,
     },
     storePrice1: {
         margin: 3,
