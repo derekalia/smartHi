@@ -3,65 +3,14 @@ import React, { Component } from 'react';
 import {StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
 
 //get internal components
+import AboutScene    from './aboutscene.js';
+import LaunchScene   from './launchscene.js';
 import LoginScene    from './loginscene.js';
 import RegisterScene from './registerscene.js';
 
-class LaunchScene extends Component {
-
-    _onToRegister() {
-        // should call navigator here to move to register page
-        console.log("moving to register scene");
-        this.props.navigator.push(LoginPageScenes[RegisterSceneIndex]);
-    }
-
-    _onToLogin() {
-        // should call navigator here to move to login page
-        this.props.navigator.push(LoginPageScenes[LoginSceneIndex]);
-    }
-
-    render() {
-        return (
-            <View style={Styles.container}>
-                <View style={[{ flex: 4, alignItems: 'center' }]}>
-                    <Image style={Styles.icon} source={require('../media/Icon.png') }/>
-                    <Text style={{ fontFamily: 'Pacifico', fontSize: 52, marginTop: 10 }}>Weedly</Text>
-                </View>
-                <View style={[Styles.container, { flex: 2 }]}>
-                    <TouchableOpacity style={Styles.loginButton} onPress={this._onToLogin.bind(this) }>
-                        <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 20 }}> Login </Text>
-                    </TouchableOpacity>
-                    <Text style={{ color: "black", fontFamily: "Avenir Next", fontSize: 20 }}> or </Text>
-                    <TouchableOpacity style={Styles.signUpButton} onPress={this._onToRegister.bind(this) }>
-                        <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 20 }}> Register </Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={[Styles.container, { flex: 1 }]}>
-                </View>
-            </View>
-        );
-    }
-}
-
-class AboutScene extends Component {
-
-    render() {
-        return (
-            <View style={Styles.container}>
-                <View style={[Styles.container, { flex: 2 }]}>
-                </View>
-                <View style={[Styles.container, { alignItems: 'center', flex: 1 }]}>
-                    <Text> This is where text about the app should go </Text>
-                </View>
-                <View style={[Styles.container, { flex: 2 }]}>
-                </View>
-            </View>
-        );
-    }
-}
-
-const LaunchSceneIndex = 0;
-const AboutSceneIndex = 1;
-const LoginSceneIndex = 3;
+const LaunchSceneIndex   = 0;
+const AboutSceneIndex    = 1;
+const LoginSceneIndex    = 3;
 const RegisterSceneIndex = 2;
 
 var LoginPageScenes = [
@@ -74,46 +23,49 @@ var LoginPageScenes = [
 var LoginPageRouteMapper = {
     LeftButton: function (route, navigator, index, navState) {
         // BatsFix. Do something other than "Back" text
+
         if (index > 0) {
             return (
-                <Text onPress={navigator.jumpBack}>Back</Text>
+                <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
+                    <Image source={require("../media/BackArrow.png") } style={{ width: 12, height: 19 }} />
+                    <Text onPress={navigator.jumpBack} style={{ fontSize: 18, color: "#007AFF" }}> Back</Text>
+                </View>
             );
         }
     },
     RightButton: function (route, navigator, index, navState) {
-        return null;
-    },
-    Title: function (route, navigator, index, navState) {
-        if (route.index == AboutSceneIndex) {
+        //  Do make sure to go to the next page if there is one
+        var routelist = navigator.getCurrentRoutes();
+        if (routelist.length > index + 1) {
             return (
-                <Text style={Styles.header}>
-                    {route.title}
-                </Text>
+                <Text onPress={navigator.jumpForward} style={{ fontSize: 18, marginTop: 11, color: "#007AFF", marginRight: 13 }}>Forward</Text>
             );
         }
-        return (
-            <Text style={Styles.header}
-                onPress={() => navigator.push(LoginPageScenes[AboutSceneIndex]) }>
-                {route.title}
-            </Text>
-        );
+        else {
+            return null;
+        }
+
+    },
+    Title: function (route, navigator, index, navState) {
+        return null;
     }
 }
 
 class LoginPage extends Component {
 
     renderScene(route, navigator) {
-        if (route.index == RegisterSceneIndex || route.index == LoginSceneIndex) {
+        if (route.index != LaunchSceneIndex) {
             return (
                 <route.component navigator={navigator}/>
             );
         }
         else {
             return (
-                <route.component navigator={navigator}/>
+                <route.component navigator={navigator} loginScene = {LoginPageScenes[LoginSceneIndex]} registerScene = {LoginPageScenes[RegisterSceneIndex]}/>
             );
         }
     }
+
     configureScene(route, routeStack) {
         return Navigator.SceneConfigs.FloatFromBottom;
     }

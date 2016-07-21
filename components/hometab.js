@@ -131,12 +131,6 @@ class ProducerScene extends Component {
                     </View>
                 </View>
 
-
-
-
-
-
-
                 <View style={{ marginHorizontal: 10, marginTop: 20 }}>
                     <View style={{ height: 40, justifyContent: 'center' }}>
                         <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Reviews</Text>
