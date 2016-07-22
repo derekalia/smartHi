@@ -1,3 +1,9 @@
+import {
+    SWITCH_TAB,
+    SWITCH_SCENE,
+    SWITCH_TAB_SCENE,
+} from './navigation.js';
+
 export const SEARCH_START = 'SEARCH_START';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
 export const SEARCH_ERROR = 'SEARCH_ERROR';
@@ -10,16 +16,15 @@ export function StartSearchAction(searchTerm) {
     };
 }
 
-export const PRODUCT_SUCCESS = 'PRODUCT_SUCCESS';
-export const PRODUCT_ERROR = 'PRODUCT_ERROR';
-
-export function GetProductAction(searchTerm) {
-    // should really be a dispatch function. BatsFix. When server comes
-    // back returns this.
-    return {
-        type: PRODUCT_SUCCESS,
-        producers: ['HerbyGood Maker', 'Herby Maker', 'SmokeHouse Maker', 'Serendipity Producer'],
-        act: ['walking', 'eating', 'relaxing'],
-        eff: ['sleepy', 'active', 'happy'],
-    };
+export function GoSearchAction(searchTerm) {
+    return function (dispatch, getState) {
+        dispatch({
+			type: SWITCH_TAB,
+			tabName: 'SearchTabId',
+		});
+        dispatch({
+			type: SWITCH_SCENE,
+			sceneName: 'SearchScene',
+		});
+    }
 }

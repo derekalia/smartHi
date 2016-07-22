@@ -21,9 +21,6 @@ class SearchScene extends Component {
     constructor(props) {
         super(props);
         // these should come from the app state.
-        for (key in props.products) {
-            console.log("my prop " + props.products[key]);
-        }
         this._searchTerm = "";
         this.state = {
             act: this.props.act,
@@ -32,10 +29,17 @@ class SearchScene extends Component {
             category: this.props.category,
             symptoms: this.props.symptoms,
             attributes: [],
-            starCount: 3.5
+            starCount: 3.5,
+            filtersVisible: true,
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        // BatsFix. for now assume all updates are related to
+        // search success. Therefore hide somethings.
+
+    }
+ 
     onStarRatingPress(rating) {
         this.setState({
             starCount: rating
@@ -49,7 +53,6 @@ class SearchScene extends Component {
     _plusActivity(activity) {
         // set activities to search
 
-        console.log("activity added " + activity);
         var attributes = this.state.attributes;
         var index = attributes.indexOf(activity);
         if (index < 0) {
@@ -60,7 +63,6 @@ class SearchScene extends Component {
 
     _plusEffect(effects) {
         // set effects to search
-        console.log("effects added " + effects);
         var attributes = this.state.attributes;
         var index = attributes.indexOf(effects);
         if (index < 0) {
@@ -73,16 +75,21 @@ class SearchScene extends Component {
         //
         // BatsFix. call searchStartAction
         //
-        console.log("search started");
         this.props.StartSearchAction(this._searchTerm);
-        //this.props.navigator.push(this.props.productsScene);
     }
+
+    _switchFiltering() {
+        var current = this.state.filtersVisible;
+        console.log("filtering is called" + this.state.filtersVisible);
+        this.setState({filtersVisible:!current});
+    }
+
+
 
     _goProduct(rowData: string) {
         // BatsFix. should set a product state first.
         this.props.GetProductAction(rowData);
         // then go product scene
-        this.props.navigator.push(this.props.productScene);
     }
 
     _renderRow(rowData: string) {
@@ -186,7 +193,6 @@ class SearchScene extends Component {
     }
     _renderList() {
         if (this.props.products.size !== 0) {
-            console.log("props are not empty");
             var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => (r1 != r2), });
             return (
                 <ListView dataSource = {ds.cloneWithRows(this.props.products) }
@@ -277,182 +283,184 @@ class SearchScene extends Component {
                       justifyContent: 'center',}}>
                         <Text style={{fontSize: 14,
                         color: 'black',
-                        alignSelf: 'center',}}>Hide Filtering Options</Text>
+                        alignSelf: 'center',}}
+                      onPress = {()=> this._switchFiltering()}
+                      >
+                        {this.state.filtersVisible? "Hide Filtering Options":"Show Filtering Options"}
+                      </Text>
                     </TouchableHighlight>
                     </View>
-
-                    <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-                        <View style={{ height: 40, justifyContent: 'center', }}>
-                            <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Activity </Text>
-                        </View>
-                        <View style={[{ flexDirection: 'row', flexWrap: 'wrap',width:370 }]}>
-                            {/*BatsFix adding attributes similar. In ship code it will be done in a list */}
-                            <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[0]) }>
-                                <Text style={Styles.tagTextActivity}>{this.state.act[0]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[1]) }>
-                                <Text style={Styles.tagTextActivity}>{this.state.act[1]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[2]) }>
-                                <Text style={Styles.tagTextActivity}>{this.state.act[2]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[3]) } >
-                                <Text style={Styles.tagTextActivity}>{this.state.act[3]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[4]) }>
-                                <Text style={Styles.tagTextActivity}>{this.state.act[4]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[5]) }>
-                                <Text style={Styles.tagTextActivity}>{this.state.act[5]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[6]) }>
-                                <Text style={Styles.tagTextActivity}>{this.state.act[6]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[7]) }>
-                                <Text style={Styles.tagTextActivity}>{this.state.act[7]}</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-
-                    <View>
-                        <View style={{ height: 40, justifyContent: 'center', }}>
-                            <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Effects </Text>
-                        </View>
-                        <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
-                            <TouchableOpacity style={Styles.tag} onPress={() => this._plusEffect(this.state.eff[0])} >
-                                <Text style={Styles.tagText}>{this.state.eff[0]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tag} onPress={() => this._plusEffect(this.state.eff[1])}>
-                                <Text style={Styles.tagText}>{this.state.eff[1]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tag} onPress={() => this._plusEffect(this.state.eff[2])}>
-                                <Text style={Styles.tagText}>{this.state.eff[2]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tag}onPress={() => this._plusEffect(this.state.eff[3])}>
-                                <Text style={Styles.tagText}>{this.state.eff[3]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tag}onPress={() => this._plusEffect(this.state.eff[4])}>
-                                <Text style={Styles.tagText}>{this.state.eff[4]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tag}onPress={() => this._plusEffect(this.state.eff[5])}>
-                                <Text style={Styles.tagText}>{this.state.eff[5]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tag}onPress={() => this._plusEffect(this.state.eff[6])}>
-                                <Text style={Styles.tagText}>{this.state.eff[6]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tag}onPress={() => this._plusEffect(this.state.eff[7])}>
-                                <Text style={Styles.tagText}>{this.state.eff[7]}</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-
-                    <View>
-                        <View style={{ height: 40, justifyContent: 'center', }}>
-                            <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Type </Text>
-                        </View>
-                        <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
-                            <TouchableOpacity style={Styles.tagType}>
-                                <Text style={Styles.tagTextType}>{this.state.type[0]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagType}>
-                                <Text style={Styles.tagTextType}>{this.state.type[1]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagType}>
-                                <Text style={Styles.tagTextType}>{this.state.type[2]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagType}>
-                                <Text style={Styles.tagTextType}>{this.state.type[3]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagType}>
-                                <Text style={Styles.tagTextType}>{this.state.type[4]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagType}>
-                                <Text style={Styles.tagTextType}>{this.state.type[5]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagType}>
-                                <Text style={Styles.tagTextType}>{this.state.type[6]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagType}>
-                                <Text style={Styles.tagTextType}>{this.state.type[7]}</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-
-
-                    <View>
-                        <View style={{ height: 40, justifyContent: 'center', }}>
-                            <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Symptoms </Text>
-                        </View>
-                        <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
-
-                            <TouchableOpacity style={Styles.tagSymptoms}>
-                                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[0]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagSymptoms}>
-                                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[1]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagSymptoms}>
-                                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[2]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagSymptoms}>
-                                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[3]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagSymptoms}>
-                                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[4]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagSymptoms}>
-                                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[5]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagSymptoms}>
-                                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[6]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagSymptoms}>
-                                <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[7]}</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-
-                    <View>
-                        <View style={{ height: 40, justifyContent: 'center', }}>
-                            <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Category </Text>
-                        </View>
-                        <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
-                            <TouchableOpacity style={Styles.tagCategory}>
-                                <Text style={Styles.tagTextCategory}>{this.state.category[0]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagCategory}>
-                                <Text style={Styles.tagTextCategory}>{this.state.category[1]}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagCategory}>
-                                <Text style={Styles.tagTextCategory}>{this.state.category[2]}</Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-
-
-                    <View>
-                        <View style={{ height: 40, justifyContent: 'center', }}>
-                            <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Price </Text>
-                        </View>
-                        <View>
-                        <Slider
-                            maximumValue={100}
-                            minimumValue = {.2}
-                            />
+                        <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+                            <View style={{ height: 40, justifyContent: 'center', }}>
+                                <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Activity </Text>
                             </View>
-                    </View>
-
-                    <View>
-                        <View style={{ height: 40, justifyContent: 'center', }}>
-                            <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Distance </Text>
+                            <View style={[{ flexDirection: 'row', flexWrap: 'wrap',width:370 }]}>
+                                {/*BatsFix adding attributes similar. In ship code it will be done in a list */}
+                                <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[0]) }>
+                                    <Text style={Styles.tagTextActivity}>{this.state.act[0]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[1]) }>
+                                    <Text style={Styles.tagTextActivity}>{this.state.act[1]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[2]) }>
+                                    <Text style={Styles.tagTextActivity}>{this.state.act[2]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[3]) } >
+                                    <Text style={Styles.tagTextActivity}>{this.state.act[3]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[4]) }>
+                                    <Text style={Styles.tagTextActivity}>{this.state.act[4]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[5]) }>
+                                    <Text style={Styles.tagTextActivity}>{this.state.act[5]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[6]) }>
+                                    <Text style={Styles.tagTextActivity}>{this.state.act[6]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagActivity} onPress={() => this._plusActivity(this.state.act[7]) }>
+                                    <Text style={Styles.tagTextActivity}>{this.state.act[7]}</Text>
+                                </TouchableOpacity>
+                            </View>
                         </View>
                         <View>
-                        <Slider
-                            maximumValue={100}
-                            minimumValue = {.2}
-                            />
-                          </View>
-                    </View>
+                            <View style={{ height: 40, justifyContent: 'center', }}>
+                                <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Effects </Text>
+                            </View>
+                            <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
+                                <TouchableOpacity style={Styles.tag} onPress={() => this._plusEffect(this.state.eff[0])} >
+                                    <Text style={Styles.tagText}>{this.state.eff[0]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tag} onPress={() => this._plusEffect(this.state.eff[1])}>
+                                    <Text style={Styles.tagText}>{this.state.eff[1]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tag} onPress={() => this._plusEffect(this.state.eff[2])}>
+                                    <Text style={Styles.tagText}>{this.state.eff[2]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tag}onPress={() => this._plusEffect(this.state.eff[3])}>
+                                    <Text style={Styles.tagText}>{this.state.eff[3]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tag}onPress={() => this._plusEffect(this.state.eff[4])}>
+                                    <Text style={Styles.tagText}>{this.state.eff[4]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tag}onPress={() => this._plusEffect(this.state.eff[5])}>
+                                    <Text style={Styles.tagText}>{this.state.eff[5]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tag}onPress={() => this._plusEffect(this.state.eff[6])}>
+                                    <Text style={Styles.tagText}>{this.state.eff[6]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tag}onPress={() => this._plusEffect(this.state.eff[7])}>
+                                    <Text style={Styles.tagText}>{this.state.eff[7]}</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+
+                        <View>
+                            <View style={{ height: 40, justifyContent: 'center', }}>
+                                <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Type </Text>
+                            </View>
+                            <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
+                                <TouchableOpacity style={Styles.tagType}>
+                                    <Text style={Styles.tagTextType}>{this.state.type[0]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagType}>
+                                    <Text style={Styles.tagTextType}>{this.state.type[1]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagType}>
+                                    <Text style={Styles.tagTextType}>{this.state.type[2]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagType}>
+                                    <Text style={Styles.tagTextType}>{this.state.type[3]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagType}>
+                                    <Text style={Styles.tagTextType}>{this.state.type[4]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagType}>
+                                    <Text style={Styles.tagTextType}>{this.state.type[5]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagType}>
+                                    <Text style={Styles.tagTextType}>{this.state.type[6]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagType}>
+                                    <Text style={Styles.tagTextType}>{this.state.type[7]}</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+
+
+                        <View>
+                            <View style={{ height: 40, justifyContent: 'center', }}>
+                                <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Symptoms </Text>
+                            </View>
+                            <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
+
+                                <TouchableOpacity style={Styles.tagSymptoms}>
+                                    <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[0]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagSymptoms}>
+                                    <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[1]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagSymptoms}>
+                                    <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[2]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagSymptoms}>
+                                    <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[3]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagSymptoms}>
+                                    <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[4]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagSymptoms}>
+                                    <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[5]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagSymptoms}>
+                                    <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[6]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagSymptoms}>
+                                    <Text style={Styles.tagTextSymptoms}>{this.state.symptoms[7]}</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+
+                        <View>
+                            <View style={{ height: 40, justifyContent: 'center', }}>
+                                <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Category </Text>
+                            </View>
+                            <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
+                                <TouchableOpacity style={Styles.tagCategory}>
+                                    <Text style={Styles.tagTextCategory}>{this.state.category[0]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagCategory}>
+                                    <Text style={Styles.tagTextCategory}>{this.state.category[1]}</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagCategory}>
+                                    <Text style={Styles.tagTextCategory}>{this.state.category[2]}</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+
+
+                        <View>
+                            <View style={{ height: 40, justifyContent: 'center', }}>
+                                <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Price </Text>
+                            </View>
+                            <View>
+                            <Slider
+                                maximumValue={100}
+                                minimumValue = {.2}
+                                />
+                                </View>
+                        </View>
+
+                        <View>
+                            <View style={{ height: 40, justifyContent: 'center', }}>
+                                <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Distance </Text>
+                            </View>
+                            <View>
+                            <Slider
+                                maximumValue={100}
+                                minimumValue = {.2}
+                                />
+                              </View>
+                        </View>
 
                     <View style={{ borderWidth: 1, borderColor: "#dddddd", width: 380, alignItems: 'center', alignItems: "center", justifyContent: "center", left: 0,marginTop:10,marginBottom:10 }}/>
 

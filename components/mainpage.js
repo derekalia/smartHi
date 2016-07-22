@@ -3,9 +3,14 @@ import React, { Component } from 'react';
 import {StyleSheet, Text, View, ScrollView, MapView, Image, TouchableHighlight, TextInput, TouchableOpacity, Navigator, TabBarIOS, } from 'react-native'
 import StarRating from 'react-native-star-rating';
 
+//get internal components
+import {connect} from 'react-redux';
+
+
 
 //get internal components
 import HomeTab       from './hometab.js';
+import SearchTab     from './searchtab.js';
 import SearchScene from './searchscene.js'
 const HomeTabId = 'HomeTabId';
 const SearchTabId = 'SearchTabId';
@@ -49,6 +54,13 @@ class MainPage extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        //
+        var tabName = nextProps.tabName;
+        console.log("mainpage componentWillReceive is called ["+tabName + "]");
+        this.setState({selectedTab: tabName});
+    }
+
     onStarRatingPress(rating) {
         this.setState({
             starCount: rating
@@ -56,6 +68,7 @@ class MainPage extends Component {
     }
 
     render() {
+        console.log("rendering main frame now");
         return (
             <TabBarIOS
                 unselectedTintColor="grey"
@@ -67,7 +80,7 @@ class MainPage extends Component {
                     icon={homeIcon}
                     selected={this.state.selectedTab == HomeTabId}
                     onPress={() => { this.setState({ selectedTab: HomeTabId }) } }>
-                    <HomeTab/>
+                    <HomeTab selectedTab = {this.state.selectedTab}/>
                 </TabBarIOS.Item>
 
 
@@ -93,9 +106,7 @@ class MainPage extends Component {
                     icon={searchIcon}
                     selected={this.state.selectedTab == SearchTabId}
                     onPress={() => { this.setState({ selectedTab: SearchTabId }) } }>
-                    <View style={[{ backgroundColor: 'white' }]}>
-                        <SearchScene/>
-                    </View>
+                    <SearchTab selectedTab = {this.state.selectedTab}/>
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Review"
@@ -414,4 +425,8 @@ const Styles = StyleSheet.create({
     }
 });
 
-module.exports = MainPage;
+// This function is used to convert state to props passed to this component
+// In this example, there is now prop called switchTab that contains state.NavigationReducer.switchTab 
+// In this example, there is now prop called tabName that contains state.NavigationReducer.tabName 
+function mapStateToProps(state) { return { tabName: state.NavigationReducer.tabName, switchTab: state.NavigationReducer.switchTab } }
+module.exports = connect(mapStateToProps)(MainPage);

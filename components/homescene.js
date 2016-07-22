@@ -8,6 +8,9 @@ import {connect} from 'react-redux';
 
 //get internal components
 // import Styles from './styles.js';
+import {GoSearchAction, GetProductAction} from '../actions';
+
+
 import StarRating from 'react-native-star-rating';
 
 class HomeScene extends Component {
@@ -29,12 +32,18 @@ class HomeScene extends Component {
     }
 
     _onToSearch() {
-        //
-        // BatsFix. should it call setSearchAction criteria first?
-        // Does it make sense to make all scenes available on all tabs?
-        //
-        this.props.navigator.push(this.props.searchScene);
+        // BatsFix. this should pass a lot more than just keyword.
+        // Go to search scene
+        // 
+        this.props.GoSearchAction("testtest");
     }
+    _onToProduct(productId) {
+        // 
+        console.log("going onto product");
+        this.props.GetProductAction(productId);
+    }
+
+
     _plusActivity() {
         console.log("plus category called");
     }
@@ -114,7 +123,9 @@ class HomeScene extends Component {
                               borderColor: '#48BBEC',
                               borderWidth: 1,
                               borderRadius: 6,
-                              margin: 6}}>
+                              margin: 6}}
+                              onPress={()=>this._onToProduct('testtest').bind(this)}
+                              >
                                 <Image style={{  width: 100,
                                   height: 100,
                                   marginRight: 8,
@@ -549,4 +560,11 @@ const Styles = StyleSheet.create({
     },
 });
 
-module.exports = connect(mapStateToProps)(HomeScene);
+//
+// This function is used to convert action to props passed to this component.
+// There is now prop called GoSearchAction used to go to the search scene.
+// GetProductAction is used to display the featured product info.
+//
+
+function mapActionToProps(dispatch) { return bindActionCreators({ GoSearchAction, GetProductAction }, dispatch); }
+module.exports = connect(mapStateToProps,mapActionToProps)(HomeScene);

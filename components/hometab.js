@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import {StyleSheet, Text, View, ScrollView, Image, TextInput, TouchableOpacity, TouchableHighlight, Navigator} from 'react-native';
 
 //get internal components
+import {connect} from 'react-redux';
+
 
 import HomeScene     from './homescene.js';
 import SearchScene   from './searchscene.js';
@@ -212,12 +214,12 @@ class ProducersScene extends Component {
         );
     }
 }
-const HomeSceneIndex = 0;
-const SearchSceneIndex = 1;
-const ProductSceneIndex = 2;
-const ProducerSceneIndex = 3;
-const ProductsSceneIndex = 4;
-const ProducersSceneIndex = 5;
+const HomeSceneIndex      = 'HomeScene';
+const SearchSceneIndex    = 'SearchScene';
+const ProductSceneIndex   = 'ProductScene';
+const ProducerSceneIndex  = 'ProducerScene';
+const ProductsSceneIndex  = 'ProductsScene';
+const ProducersSceneIndex = 'ProducersScene';
 
 var HomeTabScenes = [
     { title: "Herby", component: HomeScene, index: HomeSceneIndex },
@@ -244,8 +246,6 @@ var HomeTabRouteMapper = {
     RightButton: function (route, navigator, index, navState) {
         // BatsFix. Do make sure to go to the next page if there is one
         var routelist = navigator.getCurrentRoutes();
-        console.log("on route size " + routelist.length);
-        console.log("on index " + index);
         if (routelist.length > index + 1) {
             return (
                 <Text onPress={navigator.jumpForward} style={{ fontSize: 18, marginTop: 11, color: "#007AFF", marginRight: 13 }}>Forward</Text>
@@ -267,13 +267,30 @@ var HomeTabRouteMapper = {
 
 class HomeTab extends Component {
 
+    _setNavigator(navigator) {
+        this._navigator = navigator;
+    }
+    
+    componentWillReceiveProps(nextProps) {
+        //
+        if (nextProps.selectedTab == 'HomeTab') {
+            var sceneName = nextProps.sceneName;
+            console.log("hopetab componentWillReceive is called ["+sceneName + "]");
+            for (var i=0; i < HomeTabScenes.length; i++) {
+                 if (HomeTabScenes[i].index == sceneName) {
+                    console.log("found matching scene index");
+                    this.refs.navigator.push(HomeTabScenes[i]);
+                 }
+            }
+        }
+        else {
+            console.log("selected tab is not HomeTab");
+        }
+    }
+    
     renderScene(route, navigator) {
         return (
-            <route.component navigator={navigator}
-                searchScene={HomeTabScenes[SearchSceneIndex]}
-                producerScene={HomeTabScenes[ProducerSceneIndex]}
-                productScene={HomeTabScenes[ProductSceneIndex]}
-                productsScene={HomeTabScenes[ProductsSceneIndex]}/>
+            <route.component navigator={navigator}/>
         );
     }
 
@@ -284,9 +301,10 @@ class HomeTab extends Component {
     render() {
         return (
             <Navigator
+                ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
-                initialRoute = {HomeTabScenes[HomeSceneIndex]}
+                initialRoute = {HomeTabScenes[0]}
                 navigationBar={
 
                     <Navigator.NavigationBar style={{ flex: 1, alignSelf: "center", justifyContent: "center", backgroundColor: "rgba(248,248,248,1)", borderWidth: 1, borderColor: "#B2B2B2" }}
@@ -481,5 +499,7 @@ const Styles = StyleSheet.create({
     },
 });
 
-
-module.exports = HomeTab;
+// BatsFix. This function is used to convert state to props passed to this component
+// In this example, there is now prop called resetTab that contains state.NavigationReducer.resetTab section
+function mapStateToProps(state) { return { sceneName: state.NavigationReducer.sceneName, switchScene: state.NavigationReducer.switchScene } }
+module.exports = connect(mapStateToProps)(HomeTab);

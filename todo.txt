@@ -1,0 +1,4 @@
+1. Add tab navigation. Done
+2. Add product and producer actions. Done.
+3. Make id pass in actions.
+4. Cleanup home scene to go to featured product and featured items.

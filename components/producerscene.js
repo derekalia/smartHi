@@ -26,7 +26,6 @@ class ProducerScene extends Component {
         // that is probably better
         // That means UI state will be wholly managed by
         // the state not locally.
-        this.props.navigator.push(this.props.productScene);
     }
 
     _renderRow(rowData: string) {

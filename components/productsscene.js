@@ -27,7 +27,6 @@ class ProductsScene extends Component {
         // BatsFix. should set a product state first.
         this.props.GetProductAction(rowData);
         // then go product scene
-        this.props.navigator.push(this.props.productScene);
     }
 
     _renderRow(rowData: string) {

@@ -3,85 +3,56 @@ import React, { Component } from 'react';
 import {StyleSheet,Text,View,ScrollView,Image,TextInput,TouchableOpacity,Navigator} from 'react-native';
 
 //get internal components
-import Styles        from './styles.js';
-import SearchScene   from './searchscene.js';
-import ProductScene  from './productscene.js';
+import {connect} from 'react-redux';
 
-const HomeSceneIndex       = 0;
-const SearchSceneIndex     = 1;
-const ProductSceneIndex    = 2;
-const ProducerSceneIndex   = 3;
-const ProducersSceneIndex  = 4;
-const ProductsSceneIndex   = 5;
 
-class ProductsScene extends Component {
+//get internal components
+import Styles         from './styles.js';
 
-    render() {
-            return (
-                <View style={Styles.container}>
-                    <Text>Products Scene Placeholder</Text>
-                </View>
-            );
-    }
-}
-class ProducerScene extends Component {
+import SearchScene    from './searchscene.js';
+import ProductScene   from './productscene.js';
+import ProducerScene  from './producerscene.js';
 
-    render() {
-            return (
-                <View style={Styles.container}>
-                    <Text>Producer Scene Placeholder</Text>
-                </View>
-            );
-    }
-}
-class ProducersScene extends Component {
-
-    render() {
-            return (
-                <View style={Styles.container}>
-                    <Text>Producers Scene Placeholder</Text>
-                </View>
-            );
-    }
-}
+const SearchSceneIndex     = 'SearchScene';
+const ProductSceneIndex    = 'ProductScene';
+const ProducerSceneIndex   = 'ProducerScene';
 
 var SearchTabScenes = [
     {title: "Search",         component: SearchScene,    index: SearchSceneIndex},
     {title: "Producer",       component: ProductScene,   index: ProductSceneIndex},
     {title: "Product",        component: ProducerScene,  index: ProducerSceneIndex},
-    {title: "Products",       component: ProducersScene, index: ProducersSceneIndex},
-    {title: "Producers",      component: ProductsScene,  index: ProductsSceneIndex},
 ];
 
 var SearchTabRouteMapper = {
-    LeftButton: function(route, navigator, index, navState) {
+    LeftButton: function (route, navigator, index, navState) {
         // BatsFix. Do something other than "Back" text
-        
+
         if (index > 0) {
             return (
-                <Text onPress={navigator.jumpBack}>Back</Text>
+                <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
+                    <Image source={require("../media/BackArrow.png") } style={{ width: 12, height: 19 }} />
+                    <Text onPress={navigator.jumpBack} style={{ fontSize: 18, color: "#007AFF" }}> Back</Text>
+                </View>
             );
         }
     },
-    RightButton: function(route, navigator, index, navState) {
+    RightButton: function (route, navigator, index, navState) {
         // BatsFix. Do make sure to go to the next page if there is one
         var routelist = navigator.getCurrentRoutes();
-        console.log("on route size "+routelist.length);
-        console.log("on index "+index);
-        if (routelist.length > index+1) {
+        if (routelist.length > index + 1) {
             return (
-                <Text onPress={navigator.jumpForward}>Forward</Text>
-             );
+                <Text onPress={navigator.jumpForward} style={{ fontSize: 18, marginTop: 11, color: "#007AFF", marginRight: 13 }}>Forward</Text>
+            );
         }
         else {
             return null;
         }
 
     },
-    Title: function(route, navigator, index, navState) {
+    Title: function (route, navigator, index, navState) {
         return (
-            <Text style={Styles.header}>
-                  {route.title}
+            <Text style={{ fontSize: 18, marginTop: 11, fontWeight: 'bold' }}>
+                {route.title}
             </Text>
         );
     }
@@ -89,12 +60,35 @@ var SearchTabRouteMapper = {
 
 class SearchTab extends Component {
 
+    componentWillReceiveProps(nextProps) {
+        //
+        console.log("searchtab being called here now "+nextProps.sceneName);
+        sceneName = nextProps.sceneName;
+        // first try to find the scene in the current route list
+        var foundExisting = false;
+        var routelist = this.refs.navigator.getCurrentRoutes();
+        for (var i=0; i < routelist.length; i++) {
+            if (routelist[i].index == sceneName) {
+                this.refs.navigator.jumpTo(routelist[i]);
+                foundExisting = true;
+                break;
+            }
+        }
+        if (foundExisting == false) {
+            for (var i=0; i < SearchTabScenes.length; i++) {
+                 if (SearchTabScenes[i].index == sceneName) {
+                    this.refs.navigator.push(SearchTabScenes[i]);
+                 }
+            }
+        }
+    }
+ 
     renderScene(route, navigator) {
         return (
             <route.component navigator={navigator} 
-                   searchScene={SearchTabScenes[SearchSceneIndex]} 
-                   producerScene={SearchTabScenes[ProducerSceneIndex]} 
-                   productScene={SearchTabScenes[ProductSceneIndex]}/>
+                   searchScene={SearchTabScenes[0]} 
+                   producerScene={SearchTabScenes[1]} 
+                   productScene={SearchTabScenes[2]}/>
         );
     }
 
@@ -105,9 +99,10 @@ class SearchTab extends Component {
     render() {
         return (
             <Navigator
+                ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
-                initialRoute = {SearchTabScenes[SearchSceneIndex]}
+                initialRoute = {SearchTabScenes[0]}
                 navigationBar={
                     <Navigator.NavigationBar
                         routeMapper = {SearchTabRouteMapper}
@@ -118,4 +113,7 @@ class SearchTab extends Component {
     }
 }
 
-module.exports = SearchTab;
+// BatsFix. This function is used to convert state to props passed to this component
+// In this example, there is now prop called resetTab that contains state.NavigationReducer.resetTab section
+function mapStateToProps(state) { return { sceneName: state.NavigationReducer.sceneName, switchScene: state.NavigationReducer.switchScene } }
+module.exports = connect(mapStateToProps)(SearchTab);

@@ -28,9 +28,9 @@ class ProductScene extends Component {
         });
     }
 
-    _goProducer(rowData: string) {
+    _goProducer(producerId: string) {
         // BatsFix. should set a producer state first.
-        this.props.navigator.push(this.props.producerScene);
+        this.props.GetProducerAction(producerId);
     }
 
     _renderRow(rowData: string) {
@@ -122,7 +122,7 @@ class ProductScene extends Component {
     render() {
         return (
 
-            <ScrollView>
+            <ScrollView style={{marginTop:50}}>
                 <View style={{ flex: 1 }}>
 
                     <View style={{ height: 248, justifyContent: "flex-end" }}>
