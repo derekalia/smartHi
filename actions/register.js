@@ -17,29 +17,31 @@ export function RegisterAction(userCredentials) {
         // 
         // Fetch data from the server here and then dispatch appropriate actions.
         // 
-        /*
-        var data = JSON.stringify({ 'name': userCredentials.name, 'password': userCredentials.password });
+
+        // First encodeURI data
+        var data = [];
+        data.push(encodeURIComponent('grant_type')+'=' +encodeURIComponent('password'));
+        data.push(encodeURIComponent('username')  +'=' +encodeURIComponent(userCredentials.name));
+        data.push(encodeURIComponent('password')  +'=' +encodeURIComponent(userCredentials.password));
+        var message = data.join("&"); 
+        console.log("message is ["+message+"]");
         // Boilerplate code to post data to the server
         fetch('http://lcbapi.forged.io/connect/Token', 
             { 
                 method: 'POST', 
                 headers: { 'cache-control': 'no-cache', 
-                           'content-Type': 'application/xxx-www-form-urlencoded' 
+                           'content-Type': 'application/x-www-form-urlencoded' 
                 }, 
-                data: {
-                      'grant-type': 'password',
-                      'username'  : userCredentials.name,
-                      'password'  : userCredentials.password,
-                      'scope'     : ''
+                data: message,
             }).
             then((response) => response.json()).
             then((responseData) => {
                 console.log("response was [" + JSON.stringify(responseData) + "]");
                 if (responseData.status == "success") {
-                    //dispatch({
-				    //		type: REGISTER_SUCCESS,
-				    //		name: userCredentials.name,
-					//});
+                    dispatch({
+				    		type: REGISTER_SUCCESS,
+				    		name: userCredentials.name,
+					});
                 }
                 else {
                     dispatch({
@@ -54,7 +56,7 @@ export function RegisterAction(userCredentials) {
 						message: "Unable to contact the login server",
 			    });
             }).done();
-        */
+        /* 
         if (userCredentials.name === 'bats') {
             dispatch({
                 type: REGISTER_ERROR,
@@ -67,5 +69,6 @@ export function RegisterAction(userCredentials) {
                 name: userCredentials.name,
             });
         }
+        */
     }
 }
