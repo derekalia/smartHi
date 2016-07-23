@@ -7,11 +7,9 @@ import {
 export const PRODUCT_SUCCESS = 'PRODUCT_SUCCESS';
 export const PRODUCT_ERROR = 'PRODUCT_ERROR';
 
-export function GetProductAction(searchTerm) {
-    // should really be a dispatch function. BatsFix. When server comes
-    // back returns this.
+export function GetProductAction(productId) {
     return function (dispatch, getState) {
-        // Fetch product data first.
+        // BatsFix. Fetch product data first.
         
         // Then dispatch product data
         dispatch({

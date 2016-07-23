@@ -29,7 +29,6 @@ class ProductScene extends Component {
     }
 
     _goProducer(producerId: string) {
-        // BatsFix. should set a producer state first.
         this.props.GetProducerAction(producerId);
     }
 

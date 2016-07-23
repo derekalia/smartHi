@@ -1,9 +1,9 @@
 1. Add tab navigation. Done
 2. Add product and producer actions. Done.
-3. Make id pass in actions.
+3. Make id pass in actions. Done.
 4. Cleanup home scene to go to featured product and featured items.
 5. Integrate object model into the flow.
-6. Make filter show/hide work
+6. Make filter show/hide work. Done.
 7. Move repeated items out into their own functions.
 8. Make login and register functions work with lcbapi. Done.
 9. Save app state locally

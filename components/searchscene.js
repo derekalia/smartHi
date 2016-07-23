@@ -35,7 +35,7 @@ class SearchScene extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        // BatsFix. for now assume all updates are related to
+        // BatsFix. For now assume all updates are related to
         // search success. Therefore hide somethings.
         this.setState({filtersVisible:false});
     }
@@ -52,7 +52,6 @@ class SearchScene extends Component {
 
     _plusActivity(activity) {
         // set activities to search
-
         var attributes = this.state.attributes;
         var index = attributes.indexOf(activity);
         if (index < 0) {
@@ -72,24 +71,16 @@ class SearchScene extends Component {
     }
 
     _startSearch() {
-        //
-        // BatsFix. call searchStartAction
-        //
         this.props.StartSearchAction(this._searchTerm);
     }
 
     _switchFiltering() {
         var current = this.state.filtersVisible;
-        console.log("filtering is called" + this.state.filtersVisible);
         this.setState({filtersVisible:!current});
     }
 
-
-
-    _goProduct(rowData: string) {
-        // BatsFix. should set a product state first.
-        this.props.GetProductAction(rowData);
-        // then go product scene
+    _goProduct(productId: string) {
+        this.props.GetProductAction(productId);
     }
 
     _renderRow(rowData: string) {

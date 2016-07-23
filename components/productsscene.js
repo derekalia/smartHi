@@ -26,11 +26,9 @@ class ProductsScene extends Component {
     _goProduct(rowData: string) {
         // BatsFix. should set a product state first.
         this.props.GetProductAction(rowData);
-        // then go product scene
     }
 
     _renderRow(rowData: string) {
-        console.log("rendering row " + rowData);
         return (
             <TouchableOpacity style={Styles.buttonLarge} onPress={() => this._goProduct(rowData) }>
                 <Text>{rowData}</Text>
@@ -40,7 +38,6 @@ class ProductsScene extends Component {
 
     _renderList() {
         if (this.props.products.size !== 0) {
-            console.log("props are not empty");
             var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => (r1 != r2), });
             return (
                 <ListView dataSource = {ds.cloneWithRows(this.props.products) }
@@ -60,7 +57,6 @@ class ProductsScene extends Component {
             <View style={[Styles.container, { flex: 1, marginTop: 70 }]}>
                 <View style={[{ flex: 8 }]}>
                     <ScrollView>
-
                         {this._renderList() }
                     </ScrollView>
                 </View>
@@ -69,13 +65,13 @@ class ProductsScene extends Component {
     }
 }
 
-// BatsFix. This function is used to convert state to props passed to this component
+// Function is used to convert state to props passed to this component
 function mapStateToProps(state) {
     return {
         products: state.SearchReducer.products,
     }
 }
-// BatsFix. This function is used to convert action to props passed to this component.
+// Function used to convert action to props passed to this component.
 // In this example, there is now prop called GetProductAction.
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction }, dispatch); }
