@@ -5,4 +5,5 @@
 5. Integrate object model into the flow.
 6. Make filter show/hide work
 7. Move repeated items out into their own functions.
-8. Make login and register functions work with lcbapi.
+8. Make login and register functions work with lcbapi. Done.
+9. Save app state locally
