@@ -2,3 +2,6 @@
 2. Add product and producer actions. Done.
 3. Make id pass in actions.
 4. Cleanup home scene to go to featured product and featured items.
+5. Integrate object model into the flow.
+6. Make filter show/hide work
+7. Move repeated items out into their own functions.
