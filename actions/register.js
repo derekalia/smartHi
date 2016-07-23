@@ -14,6 +14,7 @@ export function RegisterAction(userCredentials) {
                 message: "user passwords not matching",
             });
         }
+
         // 
         // Fetch data from the server here and then dispatch appropriate actions.
         // 
@@ -25,7 +26,7 @@ export function RegisterAction(userCredentials) {
         data.push(encodeURIComponent('Password')  +'=' +encodeURIComponent(userCredentials.password));
         data.push(encodeURIComponent('ConfirmPassword')  +'=' +encodeURIComponent(userCredentials.password));
         var message = data.join("&"); 
-        console.log("message is ["+message+"]");
+
         // Boilerplate code to post data to the server
         fetch('http://lcbapi.forged.io/api/User/Register', 
             { 
@@ -37,17 +38,18 @@ export function RegisterAction(userCredentials) {
             }).
             then((response) => response.json()).
             then((responseData) => {
-                console.log("response was [" + JSON.stringify(responseData) + "]");
-                if (responseData.status == "success") {
+                if (responseData.error == null) {
                     dispatch({
 				    		type: REGISTER_SUCCESS,
 				    		name: userCredentials.name,
 					});
+                    // BatsFix. get the login token
                 }
                 else {
+                    var error = responseData.error.join(".");
                     dispatch({
 						type: REGISTER_ERROR,
-						message: responseData.message,
+						message: error, 
 					});
                 }
 			}).catch((error) => {
@@ -57,19 +59,5 @@ export function RegisterAction(userCredentials) {
 						message: "Unable to contact the login server",
 			    });
             }).done();
-        /* 
-        if (userCredentials.name === 'bats') {
-            dispatch({
-                type: REGISTER_ERROR,
-                message: "user name already taken",
-            });
-        }
-        else {
-            dispatch({
-                type: REGISTER_SUCCESS,
-                name: userCredentials.name,
-            });
-        }
-        */
     }
 }
