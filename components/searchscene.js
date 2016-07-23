@@ -195,11 +195,12 @@ class SearchScene extends Component {
         if (this.props.products.size !== 0) {
             var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => (r1 != r2), });
             return (
+                <View>
                 <ListView dataSource = {ds.cloneWithRows(this.props.products) }
                     enableEmptySections = {true}
                     renderRow  = {this._renderRow.bind(this) }
                     />
-
+                </View>
             );
         }
         else
@@ -244,67 +245,15 @@ class SearchScene extends Component {
     render() {
         return (
             <View style={{ flex: 1, marginTop: 50 }}>
-                <View style={{ flex: 1, flexDirection: "row", marginTop: 20, marginHorizontal: 10 }}>
-                    <View style={[{ flex: 5 }]}>
-                        <TextInput style={[Styles.input]}
-                            autoCapitalize  = "none"
-                            autoCorrect     = {false}
-                            placeholder     = " Keyword"
-                            returnKeyType   = "next"
-                            onChange        = {this._setKeyWord.bind(this) }
-                            />
-                    </View>
-                    <View style={[{ flex: 1, borderWidth: 1, borderColor: "#4A90E2", backgroundColor: "#4A90E2", height: 50 }]}>
-                        <TouchableOpacity style={{}} onPress={this._startSearch.bind(this) }>
-                            <Image style={{ height: 32, width: 32, marginLeft: 13, marginTop: 8 }} source={require("../media/SearchIcon0.png") }/>
-                        </TouchableOpacity>
-                    </View>
-                </View>
-
+                {this._getSearchBar()} 
                 <ScrollView style={[{ flex: 8, marginHorizontal: 10 }]}>
                     <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
                         {this._renderAttributes() }
                     </View>
 
-                    <View style={{borderWidth: 1, borderColor: "#dddddd", width: 360, alignItems: "center", justifyContent: "center", left: 0,marginTop:10,marginBottom:10 }}/>
-
-                    <View style={{
-                      flex: 1,
-                      flexDirection: 'row',
-                      alignItems: "center",
-                      justifyContent: 'center'}}>
-                    <TouchableHighlight style={{
-                      height: 40,
-                      width:340,
-                      backgroundColor: 'white',
-                      borderColor: 'black',
-                      borderWidth: 1,
-                      borderRadius: 22,
-                      justifyContent: 'center',}}>
-                        <Text style={{fontSize: 14,
-                        color: 'black',
-                        alignSelf: 'center',}}
-                      onPress = {()=> this._switchFiltering()}
-                      >
-                        {this.state.filtersVisible? "Hide Filtering Options":"Show Filtering Options"}
-                      </Text>
-                    </TouchableHighlight>
-                    </View>
-                    {this.state.filtersVisible?this._getFilters():<View></View>}
-
-                    <View style={{ borderWidth: 1, borderColor: "#dddddd", width: 380, alignItems: 'center', alignItems: "center", justifyContent: "center", left: 0,marginTop:10,marginBottom:10 }}/>
-
-
-                    <View>
-                        {this._renderList() }
-                    </View>
-
-
-                    <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-                        <View style={{ height: 40, justifyContent: 'center', }}>
-                            <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> </Text>
-                        </View>
-                        </View>
+                    {this._getFilterButton()}
+                    {this._getFilters()}
+                    {this._renderList() }
 
                 </ScrollView>
             </View>
@@ -312,7 +261,64 @@ class SearchScene extends Component {
 
         );
     }
+
+    _getSearchBar() {
+        return (
+             <View style={{ flex: 1, flexDirection: "row", marginTop: 20, marginHorizontal: 10 }}>
+                <View style={[{ flex: 5 }]}>
+                    <TextInput style={[Styles.input]}
+                        autoCapitalize  = "none"
+                        autoCorrect     = {false}
+                        placeholder     = " Keyword"
+                        returnKeyType   = "next"
+                        onChange        = {this._setKeyWord.bind(this) }
+                        />
+                </View>
+                <View style={[{ flex: 1, borderWidth: 1, borderColor: "#4A90E2", backgroundColor: "#4A90E2", height: 50 }]}>
+                    <TouchableOpacity style={{}} onPress={this._startSearch.bind(this) }>
+                        <Image style={{ height: 32, width: 32, marginLeft: 13, marginTop: 8 }} source={require("../media/SearchIcon0.png") }/>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        );
+    }
+
+    _getFilterButton() {
+        if (this.props.products.length === 0) {
+            return null;
+        }
+        var filterText;
+        if (this.state.filtersVisible) {
+            filterButtonText = "Hide Filtering Options";
+        }
+        else {
+            filterButtonText = "Show Filtering Options";
+        }
+        //<View style={{borderWidth: 1, borderColor: "#dddddd", width: 360, alignItems: "center", justifyContent: "center", left: 0,marginTop:10,marginBottom:10 }}/>
+        return ( 
+            <TouchableHighlight style={{
+              height: 40,
+              width:340,
+              backgroundColor: 'white',
+              borderColor: 'black',
+              borderWidth: 1,
+              borderRadius: 22,
+              justifyContent: 'center',}}>
+                <Text style={{fontSize: 14,
+                color: 'black',
+                alignSelf: 'center',}}
+              onPress = {()=> this._switchFiltering()}
+              >
+                {filterButtonText}
+              </Text>
+            </TouchableHighlight>
+        ); 
+    }
+
     _getFilters() {
+        if (this.state.filtersVisible == false) {
+            return null;
+        }
         return (
             <View>
             <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
