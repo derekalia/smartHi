@@ -21,18 +21,19 @@ export function RegisterAction(userCredentials) {
         // First encodeURI data
         var data = [];
         data.push(encodeURIComponent('grant_type')+'=' +encodeURIComponent('password'));
-        data.push(encodeURIComponent('username')  +'=' +encodeURIComponent(userCredentials.name));
-        data.push(encodeURIComponent('password')  +'=' +encodeURIComponent(userCredentials.password));
+        data.push(encodeURIComponent('Email')  +'=' +encodeURIComponent(userCredentials.name));
+        data.push(encodeURIComponent('Password')  +'=' +encodeURIComponent(userCredentials.password));
+        data.push(encodeURIComponent('ConfirmPassword')  +'=' +encodeURIComponent(userCredentials.password));
         var message = data.join("&"); 
         console.log("message is ["+message+"]");
         // Boilerplate code to post data to the server
-        fetch('http://lcbapi.forged.io/connect/Token', 
+        fetch('http://lcbapi.forged.io/api/User/Register', 
             { 
                 method: 'POST', 
                 headers: { 'cache-control': 'no-cache', 
                            'content-Type': 'application/x-www-form-urlencoded' 
                 }, 
-                data: message,
+                body: message,
             }).
             then((response) => response.json()).
             then((responseData) => {
