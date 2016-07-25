@@ -34,11 +34,11 @@ class HomeScene extends Component {
     _onToSearch() {
         // BatsFix. this should pass a lot more than just keyword.
         // Go to search scene
-        // 
+        //
         this.props.GoSearchAction("testtest");
     }
     _onToProduct(productId) {
-        // 
+        //
         console.log("going onto product");
         this.props.GetProductAction(productId);
     }
@@ -312,68 +312,6 @@ class HomeScene extends Component {
                             </View>
                     </TouchableHighlight>
                     </View>
-
-
-                    {/*<View style={[Styles.container,{height:80,margin:10}]}>
-              <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
-                <Text> Activities </Text>
-                <View style={[Styles.container,{flex:3,flexDirection:'row'}]}>
-                  <TouchableOpacity style={Styles.buttonSmall}>
-                    <Text>{this.state.act[0]}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={Styles.buttonSmall}>
-                    <Text>{this.state.act[1]}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={Styles.buttonSmall}>
-                    <Text>{this.state.act[2]}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={()=> this._plusActivity()} style={Styles.buttonSmall}>
-                    <Text>+</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>*/}
-
-                    {/*<View style={[Styles.container,{height:120,margin:10}]}>
-              <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
-                <Text> Effects </Text>
-                <View style={[Styles.container,{flex:3,flexDirection:'row'}]}>
-                  <TouchableOpacity style={Styles.buttonSmall}>
-                    <Text>{this.state.eff[0]}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={Styles.buttonSmall}>
-                    <Text>{this.state.eff[1]}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={Styles.buttonSmall}>
-                    <Text>{this.state.eff[2]}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={()=> this._plusEffect()} style={Styles.buttonSmall}>
-                    <Text>+</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>*/}
-
-                    {/*<View style={[Styles.container,{height:120,margin:10}]}>
-              <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
-                <Text> On Sale Products </Text>
-              </View>
-              <View style={[Styles.container,{flex:3,flexDirection:'row'}]}>
-                <TouchableOpacity style={Styles.buttonSmall}>
-                  <Text>{this.state.sale[0]}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.buttonSmall}>
-                  <Text>{this.state.sale[1]}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.buttonSmall}>
-                  <Text>{this.state.sale[2]}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={()=> this._plusSale()} style={Styles.buttonSmall}>
-                  <Text>+</Text>
-                </TouchableOpacity>
-              </View>
-            </View>*/}
-
                 </ScrollView>
             </View>
         );

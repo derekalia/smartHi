@@ -109,8 +109,8 @@ const Styles = StyleSheet.create({
 
     loginButton: {
         flex: 1,
-        height: 10,
-        marginHorizontal: 30,
+        height: 40,
+        marginHorizontal: 44,
         marginTop: 50,
         marginBottom: 30,
         borderRadius: 3,
