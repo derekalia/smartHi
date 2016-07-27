@@ -10,7 +10,7 @@ import {StyleSheet, View, Text, ScrollView, Image, TouchableHighlight, Navigator
 import {connect} from 'react-redux';
 
 // Import const ids. 
-import {HomeSceneId, ProductSceneId, ProducerSceneId,} from '../common/const.js';
+import {HomeSceneId, ProductSceneId, ProducerSceneId, HomeTabId} from '../common/const.js';
 
 // Import internal modules
 import HomeScene     from './homescene.js';
@@ -31,12 +31,25 @@ const HomeTabScenes = [
 class HomeTab extends Component {
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.selectedTab == 'HomeTab') {
+        if (nextProps.selectedTab == HomeTabId) {
             var sceneId = nextProps.sceneId;
-            for(var index in HomeTabScenes) {
-                 if (HomeTabScenes.index == sceneId) {
-                    this.refs.navigator.push(HomeTabScenes[i]);
-                 }
+            var foundExisting = false;
+            // Check existing routes first
+            var routelist = this.refs.navigator.getCurrentRoutes();
+            for (var i=0; i < routelist.length; i++) {
+                if (routelist[i].index == sceneId) {
+                    this.refs.navigator.jumpTo(routelist[i]);
+                    foundExisting = true;
+                    break;
+                }
+            }
+            // If not found in existing push
+            if (foundExisting == false) {
+                for(var i=0; i < HomeTabScenes.length; i++) {
+                     if (HomeTabScenes[i].index == sceneId) {
+                        this.refs.navigator.push(HomeTabScenes[i]);
+                     }
+                }
             }
         }
     }

@@ -1,378 +1,67 @@
-//loginscenes.js
+//
+// Description: homescene.js
+// This contains the declaration home scene, containing latest news,
+// staff picks, trending topics etc. Included topics should have their
+// own file and included here as a class only similar to Activities and
+// ProductItem.
+// 
+
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, ScrollView, Image, TextInput, TouchableOpacity, TouchableHighlight, Navigator} from 'react-native'
+import {StyleSheet, Text, View, ScrollView, TouchableOpacity, } from 'react-native'
 
 //get state management components
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 //get internal components
-// import Styles from './styles.js';
+import ActivitySection  from './activitysection.js';
+import ProductItem      from './productitem.js';
 import {GoSearchAction, GetProductAction} from '../actions';
-
-
-import StarRating from 'react-native-star-rating';
 
 class HomeScene extends Component {
     constructor(props) {
         super(props);
-        // these should come from the app state.
-        this.state = {
-            act: this.props.act,
-            eff: this.props.eff,
-            sale: ['good', 'bad', 'ugly'],
-            starCount: 3.5
-        }
-    }
-
-    onStarRatingPress(rating) {
-        this.setState({
-            starCount: rating
-        });
+        this._activityCount = 4;
     }
 
     _onToSearch() {
-        // BatsFix. this should pass a lot more than just keyword.
-        // Go to search scene
         // 
-        this.props.GoSearchAction("testtest");
+        // Go to search scene. 
+        // 
+        this.props.GoSearchAction();
     }
+
     _onToProduct(productId) {
-        // 
-        console.log("going onto product");
+        //
+        // Go to product page
+        //
         this.props.GetProductAction(productId);
     }
 
-
-    _plusActivity() {
-        console.log("plus category called");
-    }
-    _plusEffect() {
-        console.log("plus category called");
-    }
-    _plusSale() {
-        console.log("plus sale called");
-    }
-    // BatsFix. These should be broken into components later.
     render() {
         return (
             <View style={[{ marginTop: 50, flex: 1 }]}>
                 <ScrollView>
-
+                    {/* Find Button */}
                     <TouchableOpacity style={[Styles.FindProductButton]}
                         onPress={this._onToSearch.bind(this) }>
                         <Text style={{ color: 'white', fontSize: 22, }}>Find Product</Text>
                     </TouchableOpacity>
 
-                    <View style={{ alignItems: 'flex-end', marginLeft: 5, height:40,flexDirection:'row',justifyContent: 'flex-start',marginBottom:10 }}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Activity </Text>
-                        <TouchableHighlight>
-                          <Text style={{ fontSize: 16,color:'blue' }}> show more </Text>
-                          </TouchableHighlight>
-                    </View>
+                    {/* Activities */} 
+                    <ActivitySection/>
 
-                    <View style={{ flex: 1, flexDirection: "row", height: 154, }}>
-                        <View style={{ flex: 1, }}>
-                            <TouchableOpacity>
-                                <Image style={{ width: 170, height: 170, justifyContent: 'center', alignItems: 'center', alignSelf: 'center' }} source={require("../media/musicTile1.png") }>
-                                    <View style={{ borderWidth: 1.5, borderRadius: 20, borderColor: "white" }}>
-                                        <Text style={{ textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 5, textShadowColor: "black", fontSize: 20, color: "white", margin: 8 }}> music </Text>
-                                    </View>
-                                </Image>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ flex: 1, }}>
-                            <TouchableOpacity>
-                                <Image style={{ width: 170, height: 170, justifyContent: 'center', alignItems: 'center', alignSelf: 'center' }} source={require("../media/movieTile1.png") }>
-                                    <View style={{ borderWidth: 1.5, borderRadius: 20, borderColor: "white" }}>
-                                        <Text style={{ textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 5, textShadowColor: "black", fontSize: 20, color: "white", margin: 8 }}> movie </Text>
-                                    </View>
-                                </Image>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-
-                    <View style={{ flex: 1, flexDirection: "row", height: 154, marginTop: 15 }}>
-                        <View style={{ flex: 1, }}>
-                            <TouchableOpacity>
-                                <Image style={{ width: 170, height: 170, justifyContent: 'center', alignItems: 'center', alignSelf: 'center' }} source={require("../media/exerciseTile1.png") }>
-                                    <View style={{ borderWidth: 1.5, borderRadius: 20, borderColor: "white" }}>
-                                        <Text style={{ textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 5, textShadowColor: "black", fontSize: 20, color: "white", margin: 8 }}> exercise </Text>
-                                    </View>
-                                </Image>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ flex: 1, }}>
-                            <TouchableOpacity>
-                                <Image style={{ width: 170, height: 170, justifyContent: 'center', alignItems: 'center', alignSelf: 'center' }} source={require("../media/createTile11.png") }>
-                                    <View style={{ borderWidth: 1.5, borderRadius: 20, borderColor: "white" }}>
-                                        <Text style={{ textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 5, textShadowColor: "black", fontSize: 20, color: "white", margin: 8 }}> create </Text>
-                                    </View>
-                                </Image>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-
+                    {/* Staff Picks */}
                     <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 10 }]}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Staff Picks </Text>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Staff Pick </Text>
                     </View>
+                    <ProductItem product={this.props.staffPick} onToProduct={() => this._onToProduct(this.props.staffPick) }/>
 
-                    <TouchableHighlight>
-                            <View style={{  flexDirection: 'row',
-                              backgroundColor: 'white',
-                              borderColor: '#48BBEC',
-                              borderWidth: 1,
-                              borderRadius: 6,
-                              margin: 6}}
-                              onPress={()=>this._onToProduct('testtest').bind(this)}
-                              >
-                                <Image style={{  width: 100,
-                                  height: 100,
-                                  marginRight: 8,
-                                  borderRadius: 5,}} source={require('../media/Rosin2.png') }/>
-                                <View style={{
-                                  flex: 1,
-                                  flexDirection: 'column',padding:5,}}>
-                                    <View style={{  flexDirection: 'row',}}>
-                                        <Text style={{
-                                          fontSize: 18,
-                                          fontWeight: 'bold',
-                                          color: 'black'}} numberOfLines={1}>XJ-17 Rosin</Text>
-                                          <View style={{
-                                            flex:1,
-                                          alignItems:
-                                          'flex-end',}}>
-                                        <Text style={{
-                                        fontSize: 18,
-                                        // fontWeight: 'bold',
-                                        color: 'black'}}>$34.99</Text>
-                                        </View>
-                                    </View>
-                                    <View style={{    flexDirection: 'row',
-                                        marginTop: 6,
-                                        }}>
-                                        <StarRating
-                                            disabled={false}
-                                            maxStars={5}
-                                            starColor={'red'}
-                                            starSize={17}
-                                            rating={this.state.starCount}
-                                            selectedStar={(rating) => this.onStarRatingPress(rating) }
-                                            />
-                                            <Text style={{
-                                            fontSize: 13,
-                                            color: 'black'}}> (39)</Text>
-                                            <View style={{
-                                              flex:1,
-                                            alignItems:'flex-end',}}>
-                                          <Text style={{
-                                          fontSize: 13,
-                                          color: 'black'}}>Forged Cannabis</Text>
-                                          </View>
-                                    </View>
-                                    <View style={{flexDirection: 'row',paddingTop:4}}>
-                                        <TouchableHighlight style={{  height: 35,
-                                          flex: 1,
-                                          backgroundColor: 'white',
-                                          borderColor: '#48BBEC',
-                                          borderWidth: 1,
-                                          borderRadius: 22,
-                                          margin: 3,
-                                          justifyContent: 'center',}}>
-                                            <Text style={{fontSize: 14,
-                                            color: '#48BBEC',
-                                            alignSelf: 'center',}}>flower</Text>
-                                        </TouchableHighlight>
-                                        <TouchableHighlight style={{  height: 35,
-                                          flex: 1,
-                                          backgroundColor: 'white',
-                                          borderColor: '#48BBEC',
-                                          borderWidth: 1,
-                                          borderRadius: 22,
-                                          margin: 3,
-                                          justifyContent: 'center',}}>
-                                            <Text style={{fontSize: 14,
-                                            color: '#48BBEC',
-                                            alignSelf: 'center',}}>indica</Text>
-                                        </TouchableHighlight>
-                                        <TouchableHighlight style={{  height: 35,
-                                          flex: 1,
-                                          backgroundColor: 'white',
-                                          borderColor: '#48BBEC',
-                                          borderWidth: 1,
-                                          borderRadius: 22,
-                                          margin: 3,
-                                          justifyContent: 'center',}}>
-                                            <Text style={{fontSize: 14,
-                                            color: '#48BBEC',
-                                            alignSelf: 'center',}}>sleepy</Text>
-                                        </TouchableHighlight>
-                                    </View>
-                                </View>
-                            </View>
-                    </TouchableHighlight>
-
-
-
+                    {/* Trending */}
                     <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 10 }]}>
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Trending </Text>
                     </View>
-
-                    <View style={{ flex: 1 }}>
-                    <TouchableHighlight>
-                            <View style={{  flexDirection: 'row',
-                              backgroundColor: 'white',
-                              borderColor: '#48BBEC',
-                              borderWidth: 1,
-                              borderRadius: 6,
-                              margin: 6}}>
-                                <Image style={{  width: 100,
-                                  height: 100,
-                                  marginRight: 8,
-                                  borderRadius: 5,}} source={require('../media/Rosin2.png') }/>
-                                <View style={{
-                                  flex: 1,
-                                  flexDirection: 'column',padding:5,}}>
-                                    <View style={{  flexDirection: 'row',}}>
-                                        <Text style={{
-                                          fontSize: 18,
-                                          fontWeight: 'bold',
-                                          color: 'black'}} numberOfLines={1}>XJ-17 Rosin</Text>
-                                          <View style={{
-                                            flex:1,
-                                          alignItems:
-                                          'flex-end',}}>
-                                        <Text style={{
-                                        fontSize: 18,
-                                        // fontWeight: 'bold',
-                                        color: 'black'}}>$34.99</Text>
-                                        </View>
-                                    </View>
-                                    <View style={{    flexDirection: 'row',
-                                        marginTop: 6,
-                                        }}>
-                                        <StarRating
-                                            disabled={false}
-                                            maxStars={5}
-                                            starColor={'red'}
-                                            starSize={17}
-                                            rating={this.state.starCount}
-                                            selectedStar={(rating) => this.onStarRatingPress(rating) }
-                                            />
-                                            <Text style={{
-                                            fontSize: 13,
-                                            color: 'black'}}> (39)</Text>
-                                            <View style={{
-                                              flex:1,
-                                            alignItems:'flex-end',}}>
-                                          <Text style={{
-                                          fontSize: 13,
-                                          color: 'black'}}>Forged Cannabis</Text>
-                                          </View>
-                                    </View>
-                                    <View style={{flexDirection: 'row',paddingTop:4}}>
-                                        <TouchableHighlight style={{  height: 35,
-                                          flex: 1,
-                                          backgroundColor: 'white',
-                                          borderColor: '#48BBEC',
-                                          borderWidth: 1,
-                                          borderRadius: 22,
-                                          margin: 3,
-                                          justifyContent: 'center',}}>
-                                            <Text style={{fontSize: 14,
-                                            color: '#48BBEC',
-                                            alignSelf: 'center',}}>flower</Text>
-                                        </TouchableHighlight>
-                                        <TouchableHighlight style={{  height: 35,
-                                          flex: 1,
-                                          backgroundColor: 'white',
-                                          borderColor: '#48BBEC',
-                                          borderWidth: 1,
-                                          borderRadius: 22,
-                                          margin: 3,
-                                          justifyContent: 'center',}}>
-                                            <Text style={{fontSize: 14,
-                                            color: '#48BBEC',
-                                            alignSelf: 'center',}}>indica</Text>
-                                        </TouchableHighlight>
-                                        <TouchableHighlight style={{  height: 35,
-                                          flex: 1,
-                                          backgroundColor: 'white',
-                                          borderColor: '#48BBEC',
-                                          borderWidth: 1,
-                                          borderRadius: 22,
-                                          margin: 3,
-                                          justifyContent: 'center',}}>
-                                            <Text style={{fontSize: 14,
-                                            color: '#48BBEC',
-                                            alignSelf: 'center',}}>sleepy</Text>
-                                        </TouchableHighlight>
-                                    </View>
-                                </View>
-                            </View>
-                    </TouchableHighlight>
-                    </View>
-
-
-                    {/*<View style={[Styles.container,{height:80,margin:10}]}>
-              <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
-                <Text> Activities </Text>
-                <View style={[Styles.container,{flex:3,flexDirection:'row'}]}>
-                  <TouchableOpacity style={Styles.buttonSmall}>
-                    <Text>{this.state.act[0]}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={Styles.buttonSmall}>
-                    <Text>{this.state.act[1]}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={Styles.buttonSmall}>
-                    <Text>{this.state.act[2]}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={()=> this._plusActivity()} style={Styles.buttonSmall}>
-                    <Text>+</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>*/}
-
-                    {/*<View style={[Styles.container,{height:120,margin:10}]}>
-              <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
-                <Text> Effects </Text>
-                <View style={[Styles.container,{flex:3,flexDirection:'row'}]}>
-                  <TouchableOpacity style={Styles.buttonSmall}>
-                    <Text>{this.state.eff[0]}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={Styles.buttonSmall}>
-                    <Text>{this.state.eff[1]}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={Styles.buttonSmall}>
-                    <Text>{this.state.eff[2]}</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={()=> this._plusEffect()} style={Styles.buttonSmall}>
-                    <Text>+</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>*/}
-
-                    {/*<View style={[Styles.container,{height:120,margin:10}]}>
-              <View style={[Styles.container,{flex:1,alignItems:'flex-start'}]}>
-                <Text> On Sale Products </Text>
-              </View>
-              <View style={[Styles.container,{flex:3,flexDirection:'row'}]}>
-                <TouchableOpacity style={Styles.buttonSmall}>
-                  <Text>{this.state.sale[0]}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.buttonSmall}>
-                  <Text>{this.state.sale[1]}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={Styles.buttonSmall}>
-                  <Text>{this.state.sale[2]}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={()=> this._plusSale()} style={Styles.buttonSmall}>
-                  <Text>+</Text>
-                </TouchableOpacity>
-              </View>
-            </View>*/}
+                    <ProductItem product={this.props.trending}/>
 
                 </ScrollView>
             </View>
@@ -380,13 +69,21 @@ class HomeScene extends Component {
     }
 }
 
-// BatsFix. This function is used to convert state to props passed to this component
+//
+// Connect state.SearchReducer.activities and state.SearchReducer.effects to props. 
+//
 function mapStateToProps(state) {
     return {
-        act: state.SearchReducer.act,
-        eff: state.SearchReducer.eff,
+        activities: state.SearchReducer.activities,
+        effects: state.SearchReducer.effects,
     }
 }
+
+//
+// Connect GoSearchAction, GetProductAction to props 
+//
+function mapActionToProps(dispatch) { return bindActionCreators({ GoSearchAction, GetProductAction }, dispatch); }
+module.exports = connect(mapStateToProps,mapActionToProps)(HomeScene);
 
 const Styles = StyleSheet.create({
     container: {
@@ -560,11 +257,4 @@ const Styles = StyleSheet.create({
     },
 });
 
-//
-// This function is used to convert action to props passed to this component.
-// There is now prop called GoSearchAction used to go to the search scene.
-// GetProductAction is used to display the featured product info.
-//
 
-function mapActionToProps(dispatch) { return bindActionCreators({ GoSearchAction, GetProductAction }, dispatch); }
-module.exports = connect(mapStateToProps,mapActionToProps)(HomeScene);

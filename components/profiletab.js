@@ -57,16 +57,13 @@ class ProfileTab extends Component {
                                 </View>
                             </View>
                         </View>
-                        {/* Favorites */}
-                        {/*<View style={{ alignItems: 'center', paddingTop: 10, borderTopWidth: 1, borderColor: '#dddddd',}}/>*/}
 
+                        {/* Favorites */}
                         <View style={{ marginTop: 10, borderTopWidth: 1, borderColor: '#dddddd', }}>
                             <Text style={{ fontSize: 16, fontWeight: 'bold', marginLeft: 10, marginTop: 10 }}>Favorites</Text>
                             <ProductItem/>
                         </View>
                     </ScrollView>
-
-
         );
     }
 }

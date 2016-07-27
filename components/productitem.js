@@ -30,7 +30,7 @@ class ProductItem extends Component {
         var iS = 'Rosin2.png'; 
 
         return (
-                <TouchableHighlight>
+                <TouchableHighlight onPress={this.props.onToProduct}>
                     <View style={{flex: 1, flexDirection: 'row', margin: 5,borderWidth: 1, borderColor: aC, borderRadius: bR}}>
                             <Image style={{  width: iW,height: iH, marginRight: bM, borderRadius: bR}} source={require('../media/Rosin2.png')}/>
                             <View style={{flex: 1, flexDirection: 'column', padding:5,}}>

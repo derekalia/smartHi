@@ -35,7 +35,11 @@ var RouteMapper = {
 
     },
     Title: function (route, navigator, index, navState) {
-        return null;
+        return (
+            <Text style={{ fontSize: 18, marginTop: 11, fontWeight: 'bold' }}>
+                {route.title}
+            </Text>
+        );
     }
 }
 

@@ -720,8 +720,8 @@ const Styles = StyleSheet.create({
 // BatsFix. This function is used to convert state to props passed to this component
 function mapStateToProps(state) {
     return {
-        act: state.SearchReducer.act,
-        eff: state.SearchReducer.eff,
+        act: state.SearchReducer.activities,
+        eff: state.SearchReducer.effects,
         products: state.SearchReducer.products,
         type: state.SearchReducer.type,
         category: state.SearchReducer.category,
