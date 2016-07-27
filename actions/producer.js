@@ -4,6 +4,8 @@ import {
     SWITCH_TAB_SCENE,
 } from './navigation.js';
 
+import {ProducerSceneId} from '../common/const.js';
+
 export const PRODUCER_SUCCESS = 'PRODUCER_SUCCESS';
 export const PRODUCER_ERROR = 'PRODUCER_ERROR';
 
@@ -22,7 +24,7 @@ export function GetProducerAction(producerId) {
         // Then show product data scene 
         dispatch({
 			type: SWITCH_SCENE,
-			sceneName: 'ProducerScene',
+			sceneId: ProducerSceneId,
 		});
     }
 }

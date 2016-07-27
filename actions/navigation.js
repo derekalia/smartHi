@@ -2,22 +2,22 @@ export const SWITCH_TAB       = 'SWITCH_TAB';
 export const SWITCH_SCENE     = 'SWITCH_SCENE';
 export const SWITCH_TAB_SCENE = 'SWITCH_TAB_SCENE';
 
-export function SwitchTabAction(tabName) {
+export function SwitchTabAction(tabId) {
     return({
         type: SWITCH_TAB,
-        tabName: tabName,
+        tabId: tabId,
     });
 }
-export function SwitchSceneAction(sceneName) {
+export function SwitchSceneAction(sceneId) {
     return({
         type: SWITCH_SCENE,
-        sceneName: sceneName,
+        sceneId: sceneId,
     });
 }
-export function SwitchTabSceneAction(tabName, sceneName) {
+export function SwitchTabSceneAction(tabId, sceneId) {
     return({
         type: SWITCH_TAB_SCENE,
-        sceneName: sceneName,
-        tabName: tabName,
+        sceneId: sceneId,
+        tabId: tabId,
     });
 }

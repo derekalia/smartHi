@@ -22,4 +22,3 @@ class AboutScene extends Component {
 }
 
 module.exports = AboutScene
-

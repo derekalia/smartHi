@@ -4,9 +4,11 @@ import {
     SWITCH_TAB_SCENE,
 } from '../actions/index.js';
 
+import {HomeSceneId,HomeTabId} from '../common/const.js';
+
 const initialState = {
-    tabName  : 'HomeTab', 
-    sceneName: 'HomeScene',
+    tabId    : HomeTabId, 
+    sceneId  : HomeSceneId,
     switchScene: 0,
     switchTab: 0,
 }
@@ -24,7 +26,7 @@ export default function NavigationReducer(state, action) {
             newState = Object.assign({}, state);
             // BatsFix then modify the item needed in the new
             // state. 
-            newState.tabName = action.tabName;
+            newState.tabId = action.tabId;
             // This flips the switch so that update happens
             newState.switchTab = newState.switchTab == 0 ? 1: 0;
             console.log("switch tab happening now");
@@ -42,7 +44,7 @@ export default function NavigationReducer(state, action) {
             newState = Object.assign({}, state);
             // BatsFix then modify the item needed in the new
             // state. 
-            newState.sceneName = action.sceneName;
+            newState.sceneId = action.sceneId;
             // This flips the switch so that update happens
             newState.switchScene = newState.switchScene == 0 ? 1: 0;
             console.log("switch scene happening now");
@@ -59,11 +61,11 @@ export default function NavigationReducer(state, action) {
             newState = Object.assign({}, state);
             // BatsFix then modify the item needed in the new
             // state. 
-            newState.sceneName  = action.sceneName;
+            newState.sceneId  = action.sceneId;
             // This flips the switch so that scene update happens
             newState.switchScene = newState.switchScene == 0 ? 1: 0;
 
-            newState.tabName  = action.tabName;
+            newState.tabId  = action.tabId;
             // This flips the switch so that tab update happens
             newState.switchTab = newState.switchTab == 0 ? 1: 0;
             return newState;
@@ -79,8 +81,8 @@ export default function NavigationReducer(state, action) {
             newState = Object.assign({}, state);
             // BatsFix then modify the item needed in the new
             // state. 
-            newState.sceneName  = action.sceneName;
-            newState.tabName    = action.tabName;
+            newState.sceneId  = action.sceneId;
+            newState.tabId    = action.tabId;
             return newState;
 
         default:

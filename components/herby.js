@@ -1,23 +1,15 @@
-//components/loginpage.js
-import React, { Component } from 'react';
-import {
-    StyleSheet,
-    Text,
-    View,
-    Image,
-    TextInput,
-    TouchableOpacity,
-    Navigator,
-}
-from 'react-native';
+//
+// Description: herby.js
+// Entry point for the app. App consists of 2 main pages, LoginPage
+// which handles login logistics and MainPage which contains all other 
+// scenes/scenarios. 
+// 
 
-import {bindActionCreators} from 'redux';
+import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {LoginAction, LogoffAction} from '../actions';
 
 import LoginPage from './loginpage.js';
 import MainPage  from './mainpage.js';
-import Styles from './styles.js';
 
 class Herby extends Component {
     constructor(props) {
@@ -28,7 +20,8 @@ class Herby extends Component {
     render() {
         isUserLoggedIn = this.props.userLoggedIn;
         if (isUserLoggedIn == false) {
-            return (<LoginPage/>);
+            //return (<LoginPage/>);
+            return (<MainPage/>);
         }
         else {
             return (<MainPage/>);
@@ -36,15 +29,9 @@ class Herby extends Component {
     }
 }
 
-// BatsFix. This function is used to convert state to props passed to this component
-// In this example, there is now prop called user that contains state.UserReducer.user section
-// Why is it UserReducer??? ReactNative will call render only if the prop reference changes.
-// Therefore, cannot use complex prop (in this case user) because if only user's user.loggedIn state
-// changed it will not trip render action! Could be a case of shallow comparison. Or could be a
-// bug in redux/redux-native/react-native!!!!!
-
+// 
+// map state.UserReducer.user.loggedIn as a prop
+//
 function mapStateToProps(state) { return { userLoggedIn: state.UserReducer.user.loggedIn } }
-// BatsFix. This function is used to convert action to props passed to this component.
-// In this example, there is now prop called LoginAction. 
 
 module.exports = connect(mapStateToProps)(Herby);

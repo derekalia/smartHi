@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 
 //get internal components
 import Styles         from './styles.js';
+import {SearchSceneId, ProductSceneId, ProducerSceneId}   from '../common/const.js';
 
 import SearchScene    from './searchscene.js';
 import ProductScene   from './productscene.js';
@@ -18,9 +19,9 @@ const ProductSceneIndex    = 'ProductScene';
 const ProducerSceneIndex   = 'ProducerScene';
 
 var SearchTabScenes = [
-    {title: "Search",         component: SearchScene,    index: SearchSceneIndex},
-    {title: "Producer",       component: ProductScene,   index: ProductSceneIndex},
-    {title: "Product",        component: ProducerScene,  index: ProducerSceneIndex},
+    {title: "Search",         component: SearchScene,    index: SearchSceneId},
+    {title: "Product",       component: ProductScene,    index: ProductSceneId},
+    {title: "Producer",        component: ProducerScene, index: ProducerSceneId},
 ];
 
 var SearchTabRouteMapper = {
@@ -62,13 +63,14 @@ class SearchTab extends Component {
 
     componentWillReceiveProps(nextProps) {
         //
-        console.log("searchtab being called here now "+nextProps.sceneName);
-        sceneName = nextProps.sceneName;
+        console.log("searchtab being called here now "+nextProps.sceneId);
+        sceneId = nextProps.sceneId;
         // first try to find the scene in the current route list
         var foundExisting = false;
         var routelist = this.refs.navigator.getCurrentRoutes();
         for (var i=0; i < routelist.length; i++) {
-            if (routelist[i].index == sceneName) {
+            if (routelist[i].index == sceneId) {
+                console.log("found existing scene");
                 this.refs.navigator.jumpTo(routelist[i]);
                 foundExisting = true;
                 break;
@@ -76,7 +78,7 @@ class SearchTab extends Component {
         }
         if (foundExisting == false) {
             for (var i=0; i < SearchTabScenes.length; i++) {
-                 if (SearchTabScenes[i].index == sceneName) {
+                 if (SearchTabScenes[i].index == sceneId) {
                     this.refs.navigator.push(SearchTabScenes[i]);
                  }
             }
@@ -115,5 +117,5 @@ class SearchTab extends Component {
 
 // BatsFix. This function is used to convert state to props passed to this component
 // In this example, there is now prop called resetTab that contains state.NavigationReducer.resetTab section
-function mapStateToProps(state) { return { sceneName: state.NavigationReducer.sceneName, switchScene: state.NavigationReducer.switchScene } }
+function mapStateToProps(state) { return { sceneId: state.NavigationReducer.sceneId, switchScene: state.NavigationReducer.switchScene } }
 module.exports = connect(mapStateToProps)(SearchTab);
