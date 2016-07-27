@@ -35,7 +35,7 @@ class HomeScene extends Component {
         //
         // Go to product page
         //
-        this.props.GetProductAction(productId);
+       this.props.GetProductAction(productId);
     }
 
     render() {
@@ -62,7 +62,6 @@ class HomeScene extends Component {
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Trending </Text>
                     </View>
                     <ProductItem product={this.props.trending}/>
-
                 </ScrollView>
             </View>
         );

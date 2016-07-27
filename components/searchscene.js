@@ -39,7 +39,7 @@ class SearchScene extends Component {
         // search success. Therefore hide somethings.
         this.setState({filtersVisible:false});
     }
- 
+
     onStarRatingPress(rating) {
         this.setState({
             starCount: rating
@@ -235,8 +235,8 @@ class SearchScene extends Component {
     // BatsFix. These should be broken into components later.
     render() {
         return (
-            <View style={{ flex: 1, marginTop: 50 }}>
-                {this._getSearchBar()} 
+            <View style={{ flex: 1, marginTop: 50, }}>
+                {this._getSearchBar()}
                 <ScrollView style={[{ flex: 8, marginHorizontal: 10 }]}>
                     <View style={[{ flexDirection: 'row', flexWrap: 'wrap' }]}>
                         {this._renderAttributes() }
@@ -255,8 +255,8 @@ class SearchScene extends Component {
 
     _getSearchBar() {
         return (
-             <View style={{ flex: 1, flexDirection: "row", marginTop: 20, marginHorizontal: 10 }}>
-                <View style={[{ flex: 5 }]}>
+             <View style={{ flex: 1, flexDirection: "row", marginTop: 20, marginHorizontal: 10, }}>
+                <View style={[{ flex: 5, }]}>
                     <TextInput style={[Styles.input]}
                         autoCapitalize  = "none"
                         autoCorrect     = {false}
@@ -286,9 +286,10 @@ class SearchScene extends Component {
             filterButtonText = "Show Filtering Options";
         }
         //<View style={{borderWidth: 1, borderColor: "#dddddd", width: 360, alignItems: "center", justifyContent: "center", left: 0,marginTop:10,marginBottom:10 }}/>
-        return ( 
+        return (
             <TouchableHighlight style={{
               height: 40,
+              margin:10,
               width:340,
               backgroundColor: 'white',
               borderColor: 'black',
@@ -303,7 +304,7 @@ class SearchScene extends Component {
                 {filterButtonText}
               </Text>
             </TouchableHighlight>
-        ); 
+        );
     }
 
     _getFilters() {
@@ -312,7 +313,7 @@ class SearchScene extends Component {
         }
         return (
             <View>
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+            <View style={{ flexDirection: 'row', flexWrap: 'wrap', }}>
                 <View style={{ height: 40, justifyContent: 'center', }}>
                     <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Activity </Text>
                 </View>
