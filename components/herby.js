@@ -20,7 +20,7 @@ class Herby extends Component {
     render() {
         isUserLoggedIn = this.props.userLoggedIn;
         if (isUserLoggedIn == false) {
-            return (<MainPage/>);
+            return (<LoginPage/>);
         }
         else {
             return (<MainPage/>);
