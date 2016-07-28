@@ -43,7 +43,7 @@ class ProductItem extends Component {
                                 </View>
                                 {/*Product rating*/}
                                 <View style={{  flexDirection: 'row',}}>
-                                    <StarRating disabled={true} maxStars={5} starColor={'red'} starSize={15} rating={3} selectedStar={(r)=>this.onStarRating(r)}/>
+                                    <StarRating disabled={true} maxStars={5} starColor={'red'} starSize={15} rating={3}/>
                                     <Text style={{ fontSize: fS, color: 'black'}}> (39) </Text>
                                     <View style={{flex: 1,alignItems:'flex-end'}}>
                                       <Text style={{fontSize: fS,  color:'black'}}>Forged Cannabis</Text>

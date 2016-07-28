@@ -25,7 +25,7 @@ const ProducerIndex   = 2;
 var SearchTabScenes = [
     {title: "Search",        component: SearchScene,   index: SearchSceneId},
     {title: "Product",       component: ProductScene,  index: ProductSceneId},
-    {title: "Producer",      component: ProducerScene, index: ProducerSceneId},
+    {title: "Retail",        component: ProducerScene, index: ProducerSceneId},
 ];
 
 class SearchTab extends Component {
@@ -49,7 +49,7 @@ class SearchTab extends Component {
             }
         }
     }
- 
+
     renderScene(route, navigator) {
         return (
             <route.component navigator={navigator} 
