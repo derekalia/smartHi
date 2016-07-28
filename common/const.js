@@ -13,3 +13,9 @@ export const RegisterSceneId = '3';
 export const ProductSceneId  = '4';
 export const ProducerSceneId = '5';
 export const HomeSceneId     = '6';
+
+export const FilterActivity   = 'Activity';
+export const FilterEffect     = 'Effect';
+export const FilterCategory   = 'Category';
+export const FilterSymptom    = 'Symptom';
+export const FilterType       = 'Type';
