@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 import StarRating from 'react-native-star-rating';
 //get internal components
 // import Styles from './styles.js';
-import {GetProducerAction} from '../actions';
+import {GetRetailerAction} from '../actions';
 
 class ProductScene extends Component {
     constructor(props) {
@@ -28,8 +28,8 @@ class ProductScene extends Component {
         });
     }
 
-    _goProducer(producerId: string) {
-        this.props.GetProducerAction(producerId);
+    _goRetailer(retailerId: string) {
+        this.props.GetRetailerAction(retailerId);
     }
 
     _renderRow(rowData: string) {
@@ -40,7 +40,7 @@ class ProductScene extends Component {
                 marginBottom: 10,
 
 
-            }}  onPress={() => this._goProducer(rowData) }>
+            }}  onPress={() => this._goRetailer(rowData) }>
                 <Image style={Styles.bg} source={require('../media/ikes1.png') } />
                 <View style={{ flexDirection: 'column', margin: 4,marginHorizontal:6 }}>
 
@@ -103,10 +103,10 @@ class ProductScene extends Component {
     }
 
     _renderList() {
-        if (this.props.producers.size !== 0) {
+        if (this.props.retailers.size !== 0) {
             var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => (r1 != r2), });
             return (
-                <ListView dataSource = {ds.cloneWithRows(this.props.producers) }
+                <ListView dataSource = {ds.cloneWithRows(this.props.retailers) }
                     enableEmptySections = {true}
                     renderRow  = {this._renderRow.bind(this) }
                     />
@@ -481,12 +481,12 @@ function mapStateToProps(state) {
     return {
         act: state.ProductReducer.act,
         eff: state.ProductReducer.eff,
-        producers: state.ProductReducer.producers,
+        retailers: state.ProductReducer.retailers,
     }
 }
 // BatsFix. This function is used to convert action to props passed to this component.
-// In this example, there is now prop called GetProducerAction.
+// In this example, there is now prop called GetRetailerAction.
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetProducerAction, }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ GetRetailerAction, }, dispatch); }
 
 module.exports = connect(mapStateToProps, mapActionToProps)(ProductScene);

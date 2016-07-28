@@ -10,8 +10,8 @@ export const AboutSceneId    = '0';
 export const LaunchSceneId   = '1';
 export const LoginSceneId    = '2';
 export const RegisterSceneId = '3';
-export const ProductSceneId  = '4';
-export const ProducerSceneId = '5';
+export const RetailerSceneId = '4';
+export const ProductSceneId  = '5';
 export const HomeSceneId     = '6';
 
 export const FilterActivity   = 'Activity';

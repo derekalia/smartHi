@@ -9,7 +9,7 @@ const initialState = {
     type: ['rosin', 'vaporizer', 'edible', 'flower', 'dab ', 'joint', 'topical', 'co2', 'bho', 'dab', 'tincture'],
     category: ['sativa', 'indica', 'hybrid'],
     symptoms: ['cramps', 'depression', 'fatigue', 'glycoma', 'insomnia', 'headaches', 'inflammation', 'appetite', 'spams', 'nausea', 'pain', 'seizures', 'stress'],
-    producers: [],
+    retailers: [],
 }
 
 export default function ProductReducer(state, action) {
@@ -28,7 +28,7 @@ export default function ProductReducer(state, action) {
             newState = Object.assign({}, state);
             // BatsFix then modify the item needed in the new
             // state. 
-            newState.producers = action.producers;
+            newState.retailers = action.retailers;
             newState.act = action.act;
             newState.eff = action.eff;
             newState.type = action.type;

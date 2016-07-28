@@ -29,7 +29,6 @@ export default function NavigationReducer(state, action) {
             newState.tabId = action.tabId;
             // This flips the switch so that update happens
             newState.switchTab = newState.switchTab == 0 ? 1: 0;
-            console.log("switch tab happening now");
             return newState;
 
         case SWITCH_SCENE:
@@ -45,9 +44,9 @@ export default function NavigationReducer(state, action) {
             // BatsFix then modify the item needed in the new
             // state. 
             newState.sceneId = action.sceneId;
+            console.log("action scene id is "+action.sceneId);
             // This flips the switch so that update happens
             newState.switchScene = newState.switchScene == 0 ? 1: 0;
-            console.log("switch scene happening now");
             return newState;
 
         case SWITCH_TAB_SCENE:

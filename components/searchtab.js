@@ -9,23 +9,23 @@ import {connect} from 'react-redux';
 
 //get internal components
 import Styles         from './styles.js';
-import {SearchSceneId, ProductSceneId, ProducerSceneId}   from '../common/const.js';
+import {SearchSceneId, ProductSceneId, RetailerSceneId}   from '../common/const.js';
 
 import SearchScene    from './searchscene.js';
 import ProductScene   from './productscene.js';
-import ProducerScene  from './producerscene.js';
+import RetailerScene  from './retailerscene.js';
 
 // import navigation route mapper
 import RouteMapper   from './routemapper.js';
 
 const SearchIndex     = 0;
 const ProductIndex    = 1;
-const ProducerIndex   = 2;
+const RetailerIndex   = 2;
 
 var SearchTabScenes = [
     {title: "Search",        component: SearchScene,   index: SearchSceneId},
     {title: "Product",       component: ProductScene,  index: ProductSceneId},
-    {title: "Retail",        component: ProducerScene, index: ProducerSceneId},
+    {title: "Retail",        component: RetailerScene, index: RetailerSceneId},
 ];
 
 class SearchTab extends Component {
@@ -54,7 +54,7 @@ class SearchTab extends Component {
         return (
             <route.component navigator={navigator} 
                    searchScene={SearchTabScenes[SearchIndex]} 
-                   producerScene={SearchTabScenes[ProducerIndex]} 
+                   retailerScene={SearchTabScenes[RetailerIndex]} 
                    productScene={SearchTabScenes[ProductIndex]}/>
         );
     }

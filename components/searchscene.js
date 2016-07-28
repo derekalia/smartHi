@@ -13,7 +13,7 @@ import {connect} from 'react-redux';
 import ProductItem           from './productitem.js';
 import SearchBar             from './searchbar.js';
 import FiltersSection        from './filterssection.js';
-import {StartSearchAction}   from '../actions';
+import {StartSearchAction,GetProductAction}   from '../actions';
 
 class SearchScene extends Component {
     constructor(props) {
@@ -30,6 +30,13 @@ class SearchScene extends Component {
 
     _setSearchTerm(term) {
         this._searchTerm = term;
+    }
+
+    _onToProduct(productId) {
+        //
+        // Go to product page
+        //
+       this.props.GetProductAction(productId);
     }
 
     render() {
@@ -63,7 +70,7 @@ class SearchScene extends Component {
 
     _renderRow(rowData) {
         return (
-            <ProductItem/>
+            <ProductItem onToProduct={(t)=> this._onToProduct(t)}/>
         );
     }
 }
@@ -80,6 +87,6 @@ function mapStateToProps(state) {
 //
 // Connect StartSearchAction to props 
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ StartSearchAction }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ StartSearchAction,GetProductAction }, dispatch); }
 
 module.exports = connect(mapStateToProps,mapActionToProps)(SearchScene);

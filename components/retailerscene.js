@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 //get internal components
 import {GetProductAction} from '../actions';
 
-class ProducerScene extends Component {
+class RetailerScene extends Component {
 
     render() {
         return (
@@ -206,7 +206,7 @@ class ProducerScene extends Component {
 // BatsFix. This function is used to convert state to props passed to this component
 function mapStateToProps(state) {
     return {
-        products: state.ProducerReducer.products,
+        products: state.RetailerReducer.products,
     }
 }
 // BatsFix. This function is used to convert action to props passed to this component.
@@ -214,7 +214,7 @@ function mapStateToProps(state) {
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction, }, dispatch); }
 
-module.exports = connect(mapStateToProps, mapActionToProps)(ProducerScene);
+module.exports = connect(mapStateToProps, mapActionToProps)(RetailerScene);
 
 const Styles = StyleSheet.create({
     container: {
