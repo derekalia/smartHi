@@ -21,7 +21,7 @@ const ProducerSceneIndex   = 'ProducerScene';
 var SearchTabScenes = [
     {title: "Search",         component: SearchScene,    index: SearchSceneId},
     {title: "Product",       component: ProductScene,    index: ProductSceneId},
-    {title: "Producer",        component: ProducerScene, index: ProducerSceneId},
+    {title: "Retail",        component: ProducerScene, index: ProducerSceneId},
 ];
 
 var SearchTabRouteMapper = {
@@ -84,12 +84,12 @@ class SearchTab extends Component {
             }
         }
     }
- 
+
     renderScene(route, navigator) {
         return (
-            <route.component navigator={navigator} 
-                   searchScene={SearchTabScenes[0]} 
-                   producerScene={SearchTabScenes[1]} 
+            <route.component navigator={navigator}
+                   searchScene={SearchTabScenes[0]}
+                   producerScene={SearchTabScenes[1]}
                    productScene={SearchTabScenes[2]}/>
         );
     }

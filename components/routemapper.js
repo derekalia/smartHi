@@ -3,7 +3,7 @@
 // This contains the declaration for the route mapper used throughout the app.
 // It should only contain forward and back manipulation logic, style of the navigation
 // map
-// 
+//
 
 import React, { Component } from 'react';
 import {StyleSheet, Navigator, Text, View, Image } from 'react-native';
@@ -21,19 +21,10 @@ var RouteMapper = {
         }
     },
     RightButton: function (route, navigator, index, navState) {
-        // BatsFix. Styling is not consistent.
-        //  Do make sure to go to the next page if there is one
-        var routelist = navigator.getCurrentRoutes();
-        if (routelist.length > index + 1) {
-            return (
-                <Text onPress={navigator.jumpForward} style={{ fontSize: 18, marginTop: 11, color: "#007AFF", marginRight: 13 }}>Forward</Text>
-            );
-        }
-        else {
             return null;
-        }
+        },
 
-    },
+
     Title: function (route, navigator, index, navState) {
         return (
             <Text style={{ fontSize: 18, marginTop: 11, fontWeight: 'bold' }}>
@@ -44,4 +35,3 @@ var RouteMapper = {
 }
 
 module.exports = RouteMapper;
-
