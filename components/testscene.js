@@ -17,6 +17,7 @@ class TestScene extends Component {
                 <Text>Click Forward/Back to go to a different test scene. To add an additional test
                 scene modify create the scene similar to testscene.js and add it to reviewtab.js route stack.
                 similar to how TestScene was added.
+                </Text>
             </View>
         );
     }
