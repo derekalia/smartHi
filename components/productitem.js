@@ -31,8 +31,10 @@ class ProductItem extends Component {
 
         return (
                 <TouchableHighlight onPress={this.props.onToProduct} underlayColor={'white'}>
-                    <View style={{flex: 1, flexDirection: 'row', margin: 5,borderWidth: 1, borderColor: aC, borderRadius: bR,marginHorizontal:10}}>
-                            <Image style={{  width: iW,height: iH, marginRight: bM, borderRadius: bR}} source={require('../media/Rosin2.png')}/>
+                    <View style={{flex: 1, flexDirection: 'row', margin: 5,borderWidth: 1, borderColor: 'black', borderRadius: bR,marginHorizontal:10}}>
+                          <View style={{  width: iW,height: iH,borderRadius:10,borderTopRightRadius:0,borderBottomRightRadius:0}}>
+                            <Image style={{  width: iW,height: iH, marginRight: bM,}} source={require('../media/Rosin2.png')}/>
+                            </View>
                             <View style={{flex: 1, flexDirection: 'column', padding:5,}}>
                                 {/*Product pricing*/}
                                 <View style={{  flexDirection: 'row',}}>
