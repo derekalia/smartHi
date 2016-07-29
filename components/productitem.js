@@ -12,6 +12,17 @@ import {Connect} from 'react-redux';
 import StarRating from 'react-native-star-rating';
 
 class ProductItem extends Component {
+    constructor(props) {
+        super(props);
+        this.state={
+            cost: '34.99',
+            name: 'XJ-17 Rosin',
+            producerName: 'Forged Cannabis',
+            rating: 3,
+            attributes: ['sleepy','happy','relaxed'],
+        }
+    }
+
     render() {
         //
         // BatsFix. This needs to be flexible with regard to a device with and height.
@@ -28,7 +39,6 @@ class ProductItem extends Component {
 
         // BatsFix. this should come from the product
         var iS = 'Rosin2.png'; 
-
         return (
                 <TouchableHighlight onPress={this.props.onToProduct}>
                     <View style={{flex: 1, flexDirection: 'row', margin: 5,borderWidth: 1, borderColor: aC, borderRadius: bR}}>
@@ -36,29 +46,29 @@ class ProductItem extends Component {
                             <View style={{flex: 1, flexDirection: 'column', padding:5,}}>
                                 {/*Product pricing*/}
                                 <View style={{  flexDirection: 'row',}}>
-                                    <Text style={{flex: 1, fontSize: fB, fontWeight: 'bold', color:'black'}}>XJ-17 Rosin</Text>
+                                    <Text style={{flex: 1, fontSize: fB, fontWeight: 'bold', color:'black'}}>{this.state.name}</Text>
                                     <View style={{alignItems:'flex-end'}}>
-                                      <Text style={{flex: 1, fontSize: fB, fontWeight: 'bold', color:'black'}}>$34.99</Text>
+                                      <Text style={{flex: 1, fontSize: fB, fontWeight: 'bold', color:'black'}}>${this.state.cost}</Text>
                                     </View>
                                 </View>
                                 {/*Product rating*/}
                                 <View style={{  flexDirection: 'row',}}>
-                                    <StarRating disabled={false} maxStars={5} starColor={'red'} starSize={15} rating={3} selectedStar={(r)=>this.onStarRating(r)}/>
+                                    <StarRating disabled={false} maxStars={5} starColor={'red'} starSize={15} rating={this.state.rating} selectedStar={(r)=>this.onStarRating(r)}/>
                                     <Text style={{ fontSize: fS, color: 'black'}}> (39) </Text>
                                     <View style={{flex: 1,alignItems:'flex-end'}}>
-                                      <Text style={{fontSize: fS,  color:'black'}}>Forged Cannabis</Text>
+                                      <Text style={{fontSize: fS,  color:'black'}}>{this.state.producerName}</Text>
                                     </View>
                                 </View>
                                 {/*Product attributes */}
                                 <View style={{flexDirection: 'row',}}>
                                     <TouchableHighlight style={{flex:1, borderColor:aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}}>
-                                        <Text style={{fontSize:fS, color: aC, alignSelf: 'center'}}>flower</Text>
+                                        <Text style={{fontSize:fS, color: aC, alignSelf: 'center'}}>{this.state.attributes[0]}</Text>
                                     </TouchableHighlight>
                                     <TouchableHighlight style={{flex:1,borderColor: aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}}>
-                                        <Text style={{fontSize:fS, color: aC, alignSelf:'center'}}>indica</Text>
+                                        <Text style={{fontSize:fS, color: aC, alignSelf:'center'}}>{this.state.attributes[1]}</Text>
                                     </TouchableHighlight>
                                     <TouchableHighlight style={{flex:1, borderColor:aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}}>
-                                        <Text style={{fontSize:fS, color: aC, alignSelf:'center'}}>sleepy</Text>
+                                        <Text style={{fontSize:fS, color: aC, alignSelf:'center'}}>{this.state.attributes[2]}</Text>
                                     </TouchableHighlight>
                                 </View>
                             </View>

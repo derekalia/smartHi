@@ -42,6 +42,7 @@ class FiltersSection extends Component {
             }
         }
         else {
+            filter.isCurrent = null;
             var current = this.state.currentFilters;
             var index = current.indexOf(filter);
             if (index >= 0) {

@@ -17,17 +17,23 @@ class ProducerItem extends Component {
         super(props);
         // these should come from the app state.
         this.state = {
-            starCount: 3.5
+            rating: 3.5,
+            address: 'Issaquah, WA',
+            name: 'Forged Cannabis',
+            image: '../media/forged1.png',
         }
     }
 
     render() {
+        //
+        // BatsFix. There should be no hard coded value below here
+        //
         return (
             <TouchableOpacity style={{
                 flexDirection: 'row',
                 height:100,
                 marginBottom: 10,
-            }}>
+            }} onPress={this.props.onPress}>
                 <Image style={Styles.bg} source={require('../media/forged1.png') } />
                 <View style={{ flexDirection: 'column', margin: 4,marginHorizontal:6 }}>
 
@@ -39,7 +45,7 @@ class ProducerItem extends Component {
                             textShadowOffset: { width: 1.5, height: 1.5 },
                             textShadowColor: 'black',
                             textShadowRadius: 4}}>
-                            Forged Cannabis
+                            {this.state.name}
                         </Text>
                     </View>
                     <View style={{ flexDirection: 'row', marginTop: 3}}>
@@ -48,7 +54,7 @@ class ProducerItem extends Component {
                                 maxStars={5}
                                 starSize={24}
                                 starColor={'red'}
-                                rating={this.state.starCount}
+                                rating={this.state.rating}
                                 selectedStar={(rating) => this.onStarRatingPress(rating) }
                                 />
                                 <Text style={{
@@ -67,14 +73,14 @@ class ProducerItem extends Component {
                         textShadowOffset: { width: 1.5, height: 1.5 },
                         textShadowColor: 'black',
                         textShadowRadius: 4
-                    }}>Issaquah, WA</Text>
+                    }}>{this.state.address}</Text>
                 </View>
             </TouchableOpacity>
         );
     }
 }
 
-module.exports = RetailerItem;
+module.exports = ProducerItem;
 
 const Styles = StyleSheet.create({
     tagType: {
