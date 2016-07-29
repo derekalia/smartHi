@@ -142,7 +142,6 @@ class FiltersSection extends Component {
                 <View style={{ height: 40, justifyContent: 'center', }}>
                     <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Price </Text>
                 </View>
-                <MultiSlider values={[3,7]} sliderLength={280} />
             </View>
         );
     }
