@@ -1,71 +1,87 @@
 //
-// Description: profilestab.js
-// This contains the declaration for the profile tab  of the app
-// It should only contain profile scene navigation logic and nothing else.
+// Description: profiletab.js
+// This contains the declaration for the profile tab  of the app.
+// It should only contain profile scenes navigation.
+// BatsFix. We are using this as a test tab for now!!!
+// Follow TestScene sample for an example of how to test a scene.
 // 
 
 // Import modules
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, ScrollView, Image, TouchableHighlight } from 'react-native';
+import {StyleSheet, View, Text, Navigator, Image } from 'react-native';
 import {Connect} from 'react-redux';
 
-import StarRating from 'react-native-star-rating';
+// Import internal modules
+import TestScene     from './testscene.js';
+import ProfileScene  from './profilescene.js';
+
+// Import const ids. 
+
+const ReviewTabScenes = [ 
+    { title: "Test",         component: TestScene,    index: 0 },
+    { title: "ProfileTest",  component: ProfileScene, index: 1 },
+];
+
+var TestRouteMapper = {
+    LeftButton: function (route, navigator, index, navState) {
+        // BatsFix. Styling should be moved to common
+        if (index > 0) {
+            return (
+                <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
+                    <Text onPress={navigator.jumpBack} style={{ fontSize: 18, color: "#007AFF" }}> Back</Text>
+                </View>
+            );
+        }
+    },
+    RightButton: function (route, navigator, index, navState) {
+            return (
+                <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginRight: 13 }}>
+                    <Text onPress={navigator.jumpForward} style={{ fontSize: 18, color: "#007AFF" }}> Forward</Text>
+                </View>
+            );
+        },
 
 
-// Import internals
-import ProductItem from './productitem.js';
-
-class ProfileTab extends Component {
-    render() {
+    Title: function (route, navigator, index, navState) {
         return (
-                    <ScrollView style={{marginTop:50}}>
-                        {/*Image and Location*/}
-                        <View style={{alignItems: 'center',}}>
-                            <Image source={require('../media/headshot1.png') } style={{ width: 100, height: 100 }}/>
-                            <Text style={{ fontSize: 22, margin: 8, fontWeight: "bold" }}>Batman</Text>
-                            <Text style={{ fontSize: 18, marginTop: 1 }}>Seattle, WA</Text>
-                            <Text style={{ fontSize: 18, marginTop: 8 }}>Instagram: @batman</Text>
-                        </View>
-
-                        {/* Line */}
-
-                        {/* Points entry */}
-                        <View style={{ flexDirection: 'row',
-                                       marginTop:10,
-                                       paddingTop: 10, 
-                                       paddingBottom: 10, 
-                                       borderTopWidth: 1, 
-                                       borderColor: '#dddddd', 
-                                       alignItems:'center',
-                                       justifyContent:'center',}}>
-                                <Text style={{ fontSize: 18 }}> 198 </Text>
-                                <Image source={require('../media/Oval129.png') } style={{ width: 25, height: 25 }}/>
-                                <Text style={{ fontSize: 18 }}> Points </Text>
-                        </View>
-
-
-                        {/* Reviews and Followers */}
-                        <View style={{ alignItems: 'center', marginTop:10, paddingTop:10, borderTopWidth: 1, borderColor: '#dddddd'}}>
-                            <View style={{ flexDirection: 'row', alignItems: "center" }}>
-                                <View style={{ flex: 1, alignItems: 'center',borderRightWidth: 2, borderColor: '#dddddd'}}>
-                                    <Text style={{ fontSize: 18 }}> 23 </Text>
-                                    <Text style={{ fontSize: 16, fontWeight: 'bold' }}> Reviews </Text>
-                                </View>
-                                <View style={{ flex: 1, alignItems: 'center'}}>
-                                    <Text style={{ fontSize: 18 }}> 89 </Text>
-                                    <Text style={{ fontSize: 16, fontWeight: 'bold' }}> Followers </Text>
-                                </View>
-                            </View>
-                        </View>
-
-                        {/* Favorites */}
-                        <View style={{ marginTop: 10, borderTopWidth: 1, borderColor: '#dddddd', }}>
-                            <Text style={{ fontSize: 16, fontWeight: 'bold', marginLeft: 10, marginTop: 10 }}>Favorites</Text>
-                            <ProductItem/>
-                        </View>
-                    </ScrollView>
+            <Text style={{ fontSize: 18, marginTop: 11, fontWeight: 'bold' }}>
+                {route.title}
+            </Text>
         );
     }
 }
 
-module.exports = ProfileTab;
+
+
+class ReviewTab extends Component {
+
+    renderScene(route, navigator) {
+        return (
+            <route.component navigator={navigator} title={route.title}/>
+        );
+    }
+
+    configureScene(route, routeStack) {
+        return Navigator.SceneConfigs.PushFromRight;
+    }
+
+    render() {
+        return (
+            <Navigator
+                ref="navigator"
+                configureScene={this.configureScene}
+                renderScene={this.renderScene}
+                initialRoute = {ReviewTabScenes[0]}
+                initialRouteStack = {ReviewTabScenes}
+                navigationBar={
+                    <Navigator.NavigationBar 
+                        routeMapper = {TestRouteMapper}
+                        >
+                    </Navigator.NavigationBar>
+                }
+                />
+        );
+    }
+}
+
+module.exports = ReviewTab;

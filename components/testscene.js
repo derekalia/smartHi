@@ -1,0 +1,23 @@
+//
+// Description: testscene.js
+// Used for testing various UI components
+//
+import React, { Component } from 'react';
+import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
+
+class TestScene extends Component {
+    constructor(props) {
+        super(props);
+    }
+
+    render() {
+        return (
+            <View style={{ flex: 1, marginTop: 70 }}>
+                <Text>Placeholder for {this.props.title} </Text>
+                <Text>Click Forward/Back to go to a different test scene </Text>
+            </View>
+        );
+    }
+}
+
+module.exports = TestScene;
