@@ -1,18 +1,18 @@
 import {
-    RETAILER_SUCCESS,
-    RETAILER_ERROR,
+    PRODUCER_SUCCESS,
+    PRODUCER_ERROR,
 } from '../actions/index.js';
 
 const initialState = {
-    retailerId: 'None',
+    producerId: 'None',
     products: ['happy','smiley','others']
 }
 
-export default function RetailerReducer(state, action) {
+export default function ProducerReducer(state, action) {
 
     switch (action.type) {
 
-        case RETAILER_SUCCESS:
+        case PRODUCER_SUCCESS:
 
             // BatsFix. this creates a copy of the state object
             // In redux, it uses the reference of an object to decide
@@ -24,7 +24,7 @@ export default function RetailerReducer(state, action) {
             newState = Object.assign({}, state);
             // BatsFix then modify the item needed in the new
             // state. 
-            newState.retailerId = action.retailerId;
+            newState.producerId = action.producerId;
             newState.products   = action.products;
             return newState;
 

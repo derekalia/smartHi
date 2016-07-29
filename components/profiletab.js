@@ -14,12 +14,14 @@ import {Connect} from 'react-redux';
 // Import internal modules
 import TestScene     from './testscene.js';
 import ProfileScene  from './profilescene.js';
+import TestProduct  from './testproduct.js';
 
 // Import const ids. 
 
 const ReviewTabScenes = [ 
     { title: "Test",         component: TestScene,    index: 0 },
     { title: "ProfileTest",  component: ProfileScene, index: 1 },
+    { title: "ProductTest",  component: TestProduct, index: 2 },
 ];
 
 var TestRouteMapper = {

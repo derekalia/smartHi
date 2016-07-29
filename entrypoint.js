@@ -22,10 +22,11 @@ import UserReducer       from './reducers/user.js';
 import SearchReducer     from './reducers/search.js';
 import ProductReducer    from './reducers/product.js';
 import RetailerReducer   from './reducers/retailer.js';
+import ProducerReducer   from './reducers/producer.js';
 import NavigationReducer from './reducers/navigation.js';
 
 // Combine reducers
-let store = createStore(combineReducers({UserReducer,SearchReducer,ProductReducer,RetailerReducer,NavigationReducer,}),applyMiddleware(thunk));
+let store = createStore(combineReducers({UserReducer,SearchReducer,ProductReducer,ProducerReducer,RetailerReducer,NavigationReducer,}),applyMiddleware(thunk));
 
 // This object is the Entrypoint for the app on both android and ios
 export class entrypoint extends Component {

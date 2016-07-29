@@ -13,6 +13,7 @@ export const RegisterSceneId = '3';
 export const RetailerSceneId = '4';
 export const ProductSceneId  = '5';
 export const HomeSceneId     = '6';
+export const ProducerSceneId = '7';
 
 export const FilterActivity   = 'Activity';
 export const FilterEffect     = 'Effect';

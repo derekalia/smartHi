@@ -16,7 +16,7 @@ export function GetProductAction(productId) {
         // Then dispatch product data
         dispatch({
             type: PRODUCT_SUCCESS,
-            retailers: ['HerbyGood Maker', 'Herby Maker', 'SmokeHouse Maker', 'Serendipity Producer'],
+            retailers: [{name:'HerbyGood Maker',id:0}, {name:'Herby Maker',id:1},, {name:'SmokeHouse Maker',id:2}, {name:'Serendipity Producer',id:3}],
             act: ['walking', 'eating', 'relaxing'],
             eff: ['sleepy', 'active', 'happy'],
 		});

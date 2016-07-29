@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 import StarRating from 'react-native-star-rating';
 //get internal components
 // import Styles from './styles.js';
-import {GetRetailerAction,GetProducerAction,} from '../actions';
+import {GetRetailerAction} from '../actions';
 import RetailerItem from './retaileritem.js';
 
 class ProductScene extends Component {
@@ -32,11 +32,6 @@ class ProductScene extends Component {
     _goRetailer(retailerId: string) {
         this.props.GetRetailerAction(retailerId);
     }
-
-    _goProducer(producerId: string) {
-        this.props.GetProducerAction(producerId);
-    }
-
 
     _renderRow(rowData) {
         return (
@@ -270,7 +265,7 @@ class ProductScene extends Component {
                         flexDirection: 'row',
                         height:100,
                         marginBottom: 10,
-                    }} onPress={() => this._goProducer("testtest")}>
+                    }}>
                     <Image style={Styles.bg} source={require('../media/forged1.png') } />
                         <View style={{ flexDirection: 'column', margin: 4,marginHorizontal:6 }}>
 
@@ -421,6 +416,6 @@ function mapStateToProps(state) {
 // BatsFix. This function is used to convert action to props passed to this component.
 // In this example, there is now prop called GetRetailerAction.
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetRetailerAction,GetProducerAction }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ GetRetailerAction, }, dispatch); }
 
 module.exports = connect(mapStateToProps, mapActionToProps)(ProductScene);

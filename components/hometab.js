@@ -10,12 +10,13 @@ import {StyleSheet, View, Text, ScrollView, Image, TouchableHighlight, Navigator
 import {connect} from 'react-redux';
 
 // Import const ids. 
-import {HomeSceneId, ProductSceneId, RetailerSceneId, HomeTabId} from '../common/const.js';
+import {HomeSceneId, ProductSceneId, RetailerSceneId, HomeTabId, ProducerSceneId,} from '../common/const.js';
 
 // Import internal modules
 import HomeScene     from './homescene.js';
 import ProductScene  from './productscene.js';
 import RetailerScene from './retailerscene.js';
+import ProducerScene from './producerscene.js';
 import RouteMapper   from './routemapper.js';
 
 const HomeIndex     = 0;
@@ -26,6 +27,7 @@ const HomeTabScenes = [
     { title: "Herby",    component: HomeScene,     index: HomeSceneId },
     { title: "Product",  component: ProductScene,  index: ProductSceneId },
     { title: "Retailer", component: RetailerScene, index: RetailerSceneId },
+    { title: "Producer", component: ProducerScene, index: ProducerSceneId },
 ];
 
 class HomeTab extends Component {
