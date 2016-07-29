@@ -1,7 +1,7 @@
 //
 // Description: activitysection.js
-// This contains the declaration for the activity section  
-// 
+// This contains the declaration for the activity section
+//
 
 // Import modules
 import React, { Component } from 'react';
@@ -19,7 +19,7 @@ class ActivitySection extends Component {
                 <View style={{ alignItems: 'flex-end', marginLeft: 5, height:40,flexDirection:'row',justifyContent: 'flex-start',marginBottom:10 }}>
                     <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Activity </Text>
                     <TouchableHighlight>
-                      <Text style={{ fontSize: 16,color:'blue' }}> show more </Text>
+                      <Text style={{ fontSize: 16,color:'blue' }}> more </Text>
                     </TouchableHighlight>
                 </View>
                 {/* Activity Items BatsFix. should be dynamically generated here*/}

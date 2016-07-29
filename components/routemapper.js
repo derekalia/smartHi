@@ -13,7 +13,7 @@ var RouteMapper = {
         // BatsFix. Styling should be moved to common
         if (index > 0) {
             return (
-                <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
+                <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginLeft: 13, }}>
                     <Image source={require("../media/BackArrow.png") } style={{ width: 12, height: 19 }} />
                     <Text onPress={navigator.jumpBack} style={{ fontSize: 18, color: "#007AFF" }}> Back</Text>
                 </View>
