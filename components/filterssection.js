@@ -152,22 +152,21 @@ class FiltersSection extends Component {
             filterButtonText = "Hide Filtering Options";
         }
         return (
-            <TouchableHighlight style={{
-              height: 40,
-              margin:10,
-              width:340,
-              backgroundColor: 'white',
-              borderColor: 'black',
-              borderWidth: 1,
-              borderRadius: 22,
-              justifyContent: 'center',}}>
-                <Text style={{fontSize: 14,
-                color: 'black',
-                alignSelf: 'center',}}
-              onPress = {()=> this._switchFiltering()}
-              >
-                {filterButtonText}
-              </Text>
+            <TouchableHighlight onPress = {()=> this._switchFiltering()} underlayColor={'white'} style={{  }}>
+              <View style={{  height: 40,
+                margin:10,
+                width:340,
+                backgroundColor: 'white',
+                borderColor: 'black',
+                borderWidth: 1,
+                borderRadius: 22,
+                justifyContent: 'center',}}>
+                  <Text style={{fontSize: 14,
+                  color: 'black',
+                  alignSelf: 'center',}}>
+                  {filterButtonText}
+                </Text>
+              </View>
             </TouchableHighlight>
         );
     }
