@@ -14,7 +14,9 @@ class TestScene extends Component {
         return (
             <View style={{ flex: 1, marginTop: 70 }}>
                 <Text>Placeholder for {this.props.title} </Text>
-                <Text>Click Forward/Back to go to a different test scene </Text>
+                <Text>Click Forward/Back to go to a different test scene. To add an additional test
+                scene modify create the scene similar to testscene.js and add it to reviewtab.js route stack.
+                similar to how TestScene was added.
             </View>
         );
     }
