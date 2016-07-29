@@ -61,7 +61,7 @@ class HomeScene extends Component {
                     <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 10 }]}>
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Trending </Text>
                     </View>
-                    <ProductItem product={this.props.trending}/>
+                    <ProductItem product={this.props.trending} onToProduct={() => this._onToProduct(this.props.trending) }/>
                 </ScrollView>
             </View>
         );
