@@ -12,7 +12,7 @@ class AboutScene extends Component {
                 <View style={[Styles.container, { flex: 2 }]}>
                 </View>
                 <View style={[Styles.container, { alignItems: 'center', flex: 1 }]}>
-                    <Text> This will explain what the app does</Text>
+                    <Text>This will explain what the app does</Text>
                 </View>
                 <View style={[Styles.container, { flex: 2 }]}>
                 </View>

@@ -1,6 +1,6 @@
 //
 // Description: searchscene.js
-// 
+//
 
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, ScrollView, ListView } from 'react-native'
@@ -41,12 +41,14 @@ class SearchScene extends Component {
 
     render() {
         return (
-            <View style={[{ marginTop: 50, flex: 1 }]}>
+            <View style={[{ marginTop: 50, flex: 1,marginHorizontal:5}]}>
                 <SearchBar startSearch={()=>this._startSearch()} setSearchTerm={(t)=>this._setSearchTerm(t)}/>
-                <ScrollView style={{marginTop: 0}}>
+                <ScrollView style={{marginTop: 0,}}>
+                <View style={{}}>
                     <FiltersSection productCount={this.props.products.length}/>
                     {/*Search results section*/}
-                    {this._renderSearchResults()} 
+                    {this._renderSearchResults()}
+                </View>
                 </ScrollView>
             </View>
         );
@@ -85,7 +87,7 @@ function mapStateToProps(state) {
 }
 
 //
-// Connect StartSearchAction to props 
+// Connect StartSearchAction to props
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ StartSearchAction,GetProductAction }, dispatch); }
 

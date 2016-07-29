@@ -4,10 +4,10 @@
 // staff picks, trending topics etc. Included topics should have their
 // own file and included here as a class only similar to Activities and
 // ProductItem.
-// 
+//
 
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, ScrollView, TouchableOpacity, } from 'react-native'
+import {StyleSheet, Text, View, ScrollView, TouchableOpacity,TouchableHighlight } from 'react-native'
 
 //get state management components
 import {bindActionCreators} from 'redux';
@@ -25,9 +25,9 @@ class HomeScene extends Component {
     }
 
     _onToSearch() {
-        // 
-        // Go to search scene. 
-        // 
+        //
+        // Go to search scene.
+        //
         this.props.GoSearchAction();
     }
 
@@ -40,25 +40,32 @@ class HomeScene extends Component {
 
     render() {
         return (
-            <View style={[{ marginTop: 50, flex: 1 }]}>
+            <View style={[{ marginTop: 35, flex: 1 }]}>
                 <ScrollView>
                     {/* Find Button */}
-                    <TouchableOpacity style={[Styles.FindProductButton]}
+                    {/*<TouchableOpacity style={[Styles.FindProductButton]}
                         onPress={this._onToSearch.bind(this) }>
                         <Text style={{ color: 'white', fontSize: 22, }}>Find Product</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity>*/}
 
-                    {/* Activities */} 
+                    {/* Activities */}
+                    {/* Section Header */}
+                    <View style={{ alignItems: 'flex-end', marginLeft: 5, height:40,flexDirection:'row',justifyContent: 'flex-start',marginBottom:0 }}>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Activity </Text>
+                        <TouchableHighlight>
+                          <Text style={{ fontSize: 16,color:'blue' }}> more </Text>
+                        </TouchableHighlight>
+                    </View>
                     <ActivitySection/>
 
                     {/* Staff Picks */}
-                    <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 10 }]}>
+                    <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 15,marginBottom:5 }]}>
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Staff Pick </Text>
                     </View>
                     <ProductItem product={this.props.staffPick} onToProduct={() => this._onToProduct(this.props.staffPick) }/>
 
                     {/* Trending */}
-                    <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 10 }]}>
+                    <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 15,marginBottom:5 }]}>
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Trending </Text>
                     </View>
                     <ProductItem product={this.props.trending} onToProduct={() => this._onToProduct(this.props.trending) }/>
@@ -69,7 +76,7 @@ class HomeScene extends Component {
 }
 
 //
-// Connect state.SearchReducer.activities and state.SearchReducer.effects to props. 
+// Connect state.SearchReducer.activities and state.SearchReducer.effects to props.
 //
 function mapStateToProps(state) {
     return {
@@ -79,7 +86,7 @@ function mapStateToProps(state) {
 }
 
 //
-// Connect GoSearchAction, GetProductAction to props 
+// Connect GoSearchAction, GetProductAction to props
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GoSearchAction, GetProductAction }, dispatch); }
 module.exports = connect(mapStateToProps,mapActionToProps)(HomeScene);
@@ -255,5 +262,3 @@ const Styles = StyleSheet.create({
         marginHorizontal: 15,
     },
 });
-
-

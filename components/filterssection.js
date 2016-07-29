@@ -1,12 +1,12 @@
 //
 // Description: filterssection.js
-// Handles filters manipulation and display.  
+// Handles filters manipulation and display.
 //
 
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, TouchableHighlight, TouchableOpacity, ListView } from 'react-native';
+import {StyleSheet, Text, View, TouchableHighlight, TouchableOpacity, ListView, } from 'react-native';
 
-// Import filters. 
+// Import filters.
 import {FiltersActivity, FiltersEffect, FiltersType} from '../common/filters.js';
 
 class FiltersSection extends Component {
@@ -25,7 +25,7 @@ class FiltersSection extends Component {
             this.setState({filtersVisible: false});
         }
     }
- 
+
     //
     // If the filter is not in the list of current filters
     // add to the current list. If it is in the current filters
@@ -33,7 +33,7 @@ class FiltersSection extends Component {
     //
     _addRemoveFilter(filter) {
         var current = this.state.currentFilters;
-        if (filter.isCurrent == null) { 
+        if (filter.isCurrent == null) {
             var index = current.indexOf(filter);
             if (index < 0) {
                 filter.isCurrent = true;
@@ -48,24 +48,26 @@ class FiltersSection extends Component {
             if (index >= 0) {
                 current.splice(index, 1);
                 this.setState({currentFilters: current});
-            } 
+            }
         }
     }
 
     _switchFiltering() {
         var current = this.state.filtersVisible;
-        this.setState({filtersVisible: !current}); 
+        this.setState({filtersVisible: !current});
     }
 
     render() {
         return (
-            <View>
+            <View >
                 <View>
-                    {this._renderFiltersArray(this.state.currentFilters, true)} 
+                    {this._renderFiltersArray(this.state.currentFilters, true)}
                 </View>
-
+<View style={{alignItems:'center'}}>
                 {this._renderFilterButton()}
-                {this._renderFilters()}                
+
+                </View>
+                {this._renderFilters()}
             </View>
         );
     }
@@ -80,7 +82,7 @@ class FiltersSection extends Component {
             tagStyle = Styles.tagActivity;
             textStyle = Styles.tagTextActivity;
         }
-        else 
+        else
         if (filter.type == 'effect') {
             tagStyle = Styles.tagEffects;
             textStyle = Styles.tagTextEffects;
@@ -124,19 +126,22 @@ class FiltersSection extends Component {
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Activity </Text>
                     </View>
-                    {this._renderFiltersArray(FiltersActivity)} 
+                    {this._renderFiltersArray(FiltersActivity)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Effects </Text>
                     </View>
-                    {this._renderFiltersArray(FiltersEffect)} 
+                    {this._renderFiltersArray(FiltersEffect)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Type </Text>
                     </View>
-                    {this._renderFiltersArray(FiltersType)} 
+                    {this._renderFiltersArray(FiltersType)}
+                </View>
+                <View style={{ height: 40, justifyContent: 'center', }}>
+                    <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Price </Text>
                 </View>
             </View>
         );
@@ -148,22 +153,21 @@ class FiltersSection extends Component {
             filterButtonText = "Hide Filtering Options";
         }
         return (
-            <TouchableHighlight style={{
-              height: 40,
-              margin:10,
-              width:340,
-              backgroundColor: 'white',
-              borderColor: 'black',
-              borderWidth: 1,
-              borderRadius: 22,
-              justifyContent: 'center',}}>
-                <Text style={{fontSize: 14,
-                color: 'black',
-                alignSelf: 'center',}}
-              onPress = {()=> this._switchFiltering()}
-              >
-                {filterButtonText}
-              </Text>
+            <TouchableHighlight onPress = {()=> this._switchFiltering()} underlayColor={'white'} style={{  }}>
+              <View style={{  height: 40,
+                margin:10,
+                width:340,
+                backgroundColor: 'white',
+                borderColor: 'black',
+                borderWidth: 1,
+                borderRadius: 22,
+                justifyContent: 'center',}}>
+                  <Text style={{fontSize: 14,
+                  color: 'black',
+                  alignSelf: 'center',}}>
+                  {filterButtonText}
+                </Text>
+              </View>
             </TouchableHighlight>
         );
     }

@@ -2,14 +2,14 @@
 // Description: hometab.js
 // This contains the declaration for the home tab  of the app
 // It should only contain home tab scene navigation logic and nothing else.
-// 
+//
 
 // Import modules
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, ScrollView, Image, TouchableHighlight, Navigator } from 'react-native';
 import {connect} from 'react-redux';
 
-// Import const ids. 
+// Import const ids.
 import {HomeSceneId, ProductSceneId, RetailerSceneId, HomeTabId, ProducerSceneId,} from '../common/const.js';
 
 // Import internal modules
@@ -23,7 +23,7 @@ const HomeIndex     = 0;
 const ProductIndex  = 1;
 const RetailerIndex = 2;
 
-const HomeTabScenes = [ 
+const HomeTabScenes = [
     { title: "Herby",    component: HomeScene,     index: HomeSceneId },
     { title: "Product",  component: ProductScene,  index: ProductSceneId },
     { title: "Retailer", component: RetailerScene, index: RetailerSceneId },
@@ -55,7 +55,7 @@ class HomeTab extends Component {
             }
         }
     }
-    
+
     renderScene(route, navigator) {
         return (
             <route.component navigator={navigator}/>
@@ -68,18 +68,21 @@ class HomeTab extends Component {
 
     render() {
         return (
+
             <Navigator
                 ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
                 initialRoute = {HomeTabScenes[HomeIndex]}
                 navigationBar={
-                    <Navigator.NavigationBar 
+                    <Navigator.NavigationBar
                         routeMapper = {RouteMapper}
-                        >
+                        style={{backgroundColor:'#F9F9F9',borderBottomWidth:1,borderColor:'#B2B2B2'}} >
                     </Navigator.NavigationBar>
                 }
                 />
+
+
         );
     }
 }

@@ -15,13 +15,13 @@ class ProducerScene extends Component {
         return (
             <ScrollView>
                 <View style={{ flex: 1 }}>
-                
+
                     <View style={{ height: 248, justifyContent: "flex-end" }}>
-                        <Image source={require('../media/ikes1.png') } style={{ height: 190, width: 380 }}/>
+                        <Image source={require('../media/forged1.png') } style={{ height: 190, width: 380 }}/>
                     </View>
 
                     <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
-                        <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Uncle Ikes - Seattle</Text>
+                        <Text style={{ fontSize: 22, fontWeight: 'bold' }}>FORGED CANNABIS</Text>
                         <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
                             <Image source={require('../media/fullStar1.png') } style={{ height: 25, width: 25, marginRight: 3 }}/>
                             <Image source={require('../media/fullStar1.png') } style={{ height: 25, width: 25, marginRight: 3 }}/>
@@ -29,27 +29,23 @@ class ProducerScene extends Component {
                             <Image source={require('../media/fullStar1.png') } style={{ height: 25, width: 25, marginRight: 3 }}/>
                             <Image source={require('../media/fullStar1.png') } style={{ height: 25, width: 25 }}/>
                             <Text style={{ fontSize: 20 }}> (13) </Text>
-                            <TouchableOpacity style={{ backgroundColor: "#4A90E2", borderRadius: 8, borderWidth: 1, justifyContent: 'flex-end', borderColor: '#4A90E2', marginLeft: 74 }}>
-                                <Text style={{ fontSize: 18, color: "white", margin: 4 }}> Show Map </Text>
-                            </TouchableOpacity>
                         </View>
                     </View>
 
                     <View style={{ marginHorizontal: 10 }}>
                         <View style={{ flex: 1, height: 85, justifyContent: 'center' }}>
-                            <Text>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.Integer fringilla pharetra ex sed sagittis.Curabitur ligula ex, viverra eu magna vel, pretium tincidunt turpis.</Text>
+                            <Text>FORGED Rosin Is our process of extracting oils from cannabis. We use very low temperatures to reduce the terpene evaporation which is critical to the experience of our product.</Text>
                         </View>
                     </View>
 
                     <View style={{ marginHorizontal: 10 }}>
                         <View style={{ height: 40, justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Menu</Text>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Products</Text>
                         </View>
 
 
                         <View style={{ flex: 1 }}>
-                            <TouchableHighlight underlayColor='#dddddd'>
+                            <TouchableHighlight underlayColor='white'>
                                 <View style={{ backgroundColor: 'white' }}>
                                     <View style={Styles.outside}>
                                         <Image style={Styles.thumb} source={require('../media/Rosin2.png') }/>
@@ -130,6 +126,15 @@ class ProducerScene extends Component {
                         </View>
                     </View>
                 </View>
+
+
+                <View style={{ marginHorizontal: 10, marginTop: 10 }}>
+                    <View style={{ height: 40, justifyContent: 'center' }}>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Retail Stores</Text>
+                    </View>
+
+                </View>
+
 
                 <View style={{ marginHorizontal: 10, marginTop: 20 }}>
                     <View style={{ height: 40, justifyContent: 'center' }}>
@@ -360,7 +365,7 @@ const Styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         backgroundColor: 'white',
-        borderColor: '#48BBEC',
+        borderColor: 'black',
         borderWidth: 1,
         borderRadius: 6,
         margin: 8,
@@ -395,5 +400,3 @@ const Styles = StyleSheet.create({
         borderRadius: 5,
     },
 });
-
-
