@@ -13,6 +13,7 @@ import {GetRetailerAction,GetProducerAction,} from '../actions';
 import RetailerItem from './retailerItem.js';
 import ProducerItem from './producerItem.js';
 import ReviewList   from './reviewList.js';
+import RetailerList from './retailerList.js';
 
 class ProductScene extends Component {
     constructor(props) {
@@ -62,25 +63,6 @@ class ProductScene extends Component {
 
     _goProducer(producerId: string) {
         this.props.GetProducerAction(producerId);
-    }
-
-    _renderRetailer(rowData) {
-        return (
-            <RetailerItem goRetailer={(retailerId) => this._goRetailer(retailerId)} retailer={rowData}/>
-        )
-    }
-
-    _renderRetailers() {
-        if (this.props.retailers.size !== 0) {
-            var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => (r1 != r2), });
-            return (
-                <ListView dataSource = {ds.cloneWithRows(this.props.retailers) }
-                    enableEmptySections = {true}
-                    renderRow  = {this._renderRetailer.bind(this) }
-                    />
-            );
-        }
-        return null;
     }
 
     // BatsFix. There should be no hardcode items in render! 
@@ -226,7 +208,7 @@ class ProductScene extends Component {
                         <View style={{ height: 40, justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Locations</Text>
                         </View>
-                        {this._renderRetailers() }
+                        <RetailerList retailers={this.props.retailers}/>
                     </View>
                     {/* Producer item */}
                     <View style={{ marginHorizontal: 10, marginTop: 10 }}>
