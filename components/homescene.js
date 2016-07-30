@@ -14,7 +14,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 //get internal components
-import ActivitySection  from './activitysection.js';
+import ActivitySection  from './activityList.js';
 import ProductItem      from './productitem.js';
 import {GoSearchAction, GetProductAction} from '../actions';
 

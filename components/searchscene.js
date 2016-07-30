@@ -12,7 +12,7 @@ import {connect} from 'react-redux';
 //get internal components
 import ProductItem           from './productitem.js';
 import SearchBar             from './searchbar.js';
-import FiltersSection        from './filterssection.js';
+import FiltersSection        from './filterList.js';
 import {StartSearchAction,GetProductAction}   from '../actions';
 
 class SearchScene extends Component {

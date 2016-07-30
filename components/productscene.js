@@ -12,7 +12,7 @@ import StarRating from 'react-native-star-rating';
 import {GetRetailerAction,GetProducerAction,} from '../actions';
 import RetailerItem from './retaileritem.js';
 import ProducerItem from './produceritem.js';
-import ReviewSection from './reviewsection.js';
+import ReviewSection from './reviewList.js';
 
 class ProductScene extends Component {
     constructor(props) {
