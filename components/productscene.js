@@ -65,7 +65,7 @@ class ProductScene extends Component {
         this.props.GetProducerAction(producerId);
     }
 
-    // BatsFix. There should be no hardcode items in render! 
+    // BatsFix. There should be no hardcode items in render!
     render() {
         return (
             <ScrollView style={{marginTop:50}}>
@@ -74,7 +74,7 @@ class ProductScene extends Component {
                     <View style={{ height: 248, justifyContent: "flex-end" }}>
                         <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380 }}/>
                     </View>
-                    {/* Overall rating */} 
+                    {/* Overall rating */}
                     <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
                         <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
                         <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
@@ -89,7 +89,7 @@ class ProductScene extends Component {
                             <Text style={{ fontSize: 19 }}> ({this.state.reviewCount}) </Text>
                         </View>
                     </View>
-                    {/* Description */} 
+                    {/* Description */}
                     <View style={{ marginHorizontal: 10 }}>
                         <View style={{ flex: 1, height: 85, justifyContent: 'center' }}>
                             <Text>
@@ -214,7 +214,7 @@ class ProductScene extends Component {
                     <View style={{ marginHorizontal: 10, marginTop: 10 }}>
                         <View style={{ height: 40, justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Company</Text>
-                        </View>                        
+                        </View>
                         <ProducerItem producer={this.state.producer} onPress={() => this._goProducer(this.state.producer.id)}/>
                     </View>
                 </View>
