@@ -12,7 +12,7 @@ import StarRating from 'react-native-star-rating';
 
 
 // Import internals
-import ProductItem from './productitem.js';
+import ProductItem from './productItem.js';
 
 class ProfileScene extends Component {
     render() {

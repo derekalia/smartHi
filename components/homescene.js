@@ -15,7 +15,7 @@ import {connect} from 'react-redux';
 
 //get internal components
 import ActivityList     from './activityList.js';
-import ProductItem      from './productitem.js';
+import ProductItem      from './productItem.js';
 import {GoSearchAction, GetProductAction} from '../actions';
 
 class HomeScene extends Component {

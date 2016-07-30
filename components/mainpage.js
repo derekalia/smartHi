@@ -17,11 +17,11 @@ import {HomeTabId,SearchTabId,ReviewTabId,MapTabId,ProfileTabId} from '../common
 import {HomeIcon,SearchIcon,ProfileIcon,MapIcon,ReviewIcon}        from '../common/icons.js';
 
 // Import tab elements
-import HomeTab       from './hometab.js';
-import SearchTab     from './searchtab.js';
-import MapTab        from './maptab.js';
-import ReviewTab     from './reviewtab.js';
-import ProfileTab    from './profiletab.js';
+import HomeTab       from './homeTab.js';
+import SearchTab     from './searchTab.js';
+import MapTab        from './mapTab.js';
+import ReviewTab     from './reviewTab.js';
+import ProfileTab    from './profileTab.js';
 
 
 class MainPage extends Component {

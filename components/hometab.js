@@ -13,11 +13,11 @@ import {connect} from 'react-redux';
 import {HomeSceneId, ProductSceneId, RetailerSceneId, HomeTabId, ProducerSceneId,} from '../common/const.js';
 
 // Import internal modules
-import HomeScene     from './homescene.js';
-import ProductScene  from './productscene.js';
-import RetailerScene from './retailerscene.js';
-import ProducerScene from './producerscene.js';
-import RouteMapper   from './routemapper.js';
+import HomeScene     from './homeScene.js';
+import ProductScene  from './productScene.js';
+import RetailerScene from './retailerScene.js';
+import ProducerScene from './producerScene.js';
+import RouteMapper   from './routeMapper.js';
 
 const HomeIndex     = 0;
 const ProductIndex  = 1;

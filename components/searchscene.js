@@ -10,8 +10,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 //get internal components
-import ProductItem           from './productitem.js';
-import SearchBar             from './searchbar.js';
+import ProductItem           from './productItem.js';
+import SearchBar             from './searchBar.js';
 import FilterList            from './filterList.js';
 import {StartSearchAction,GetProductAction}   from '../actions';
 

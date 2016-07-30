@@ -12,9 +12,9 @@ import {StyleSheet, View, Text, Navigator, Image } from 'react-native';
 import {Connect} from 'react-redux';
 
 // Import internal modules
-import TestScene     from './testscene.js';
-import ProfileScene  from './profilescene.js';
-import TestProduct  from './testproduct.js';
+import TestScene     from './testScene.js';
+import ProfileScene  from './profileScene.js';
+import TestProduct  from './testProduct.js';
 
 // Import const ids. 
 

@@ -10,8 +10,8 @@ import StarRating from 'react-native-star-rating';
 //get internal components
 // import Styles from './styles.js';
 import {GetRetailerAction,GetProducerAction,} from '../actions';
-import RetailerItem from './retaileritem.js';
-import ProducerItem from './produceritem.js';
+import RetailerItem from './retailerItem.js';
+import ProducerItem from './producerItem.js';
 import ReviewList   from './reviewList.js';
 
 class ProductScene extends Component {

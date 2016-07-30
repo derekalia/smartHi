@@ -11,9 +11,9 @@ import {connect} from 'react-redux';
 import Styles         from './styles.js';
 import {SearchSceneId, ProductSceneId, RetailerSceneId}   from '../common/const.js';
 
-import SearchScene    from './searchscene.js';
-import ProductScene   from './productscene.js';
-import RetailerScene  from './retailerscene.js';
+import SearchScene    from './searchScene.js';
+import ProductScene   from './productScene.js';
+import RetailerScene  from './retailerScene.js';
 
 // import navigation route mapper
 import RouteMapper   from './routemapper.js';
