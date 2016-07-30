@@ -68,7 +68,7 @@ class ProductScene extends Component {
     // BatsFix. There should be no hardcode items in render!
     render() {
         return (
-            <ScrollView style={{marginTop:50}}>
+            <ScrollView style={{marginTop:0}}>
                 <View style={{ flex: 1 }}>
                     {/*Product Image*/}
                     <View style={{ height: 248, justifyContent: "flex-end" }}>
@@ -213,7 +213,15 @@ class ProductScene extends Component {
                     {/* Producer item */}
                     <View style={{ marginHorizontal: 10, marginTop: 10 }}>
                         <View style={{ height: 40, justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Company</Text>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Producer</Text>
+                        </View>
+                        <ProducerItem producer={this.state.producer} onPress={() => this._goProducer(this.state.producer.id)}/>
+                    </View>
+
+                    {/* Related Products */}
+                    <View style={{ marginHorizontal: 10, marginTop: 10 }}>
+                        <View style={{ height: 40, justifyContent: 'center' }}>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Related Products</Text>
                         </View>
                         <ProducerItem producer={this.state.producer} onPress={() => this._goProducer(this.state.producer.id)}/>
                     </View>

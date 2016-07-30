@@ -2,7 +2,7 @@
 // Description: reviewsection.js
 //
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
+import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource,TouchableHighlight, ScrollView, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
 
 class ReviewItem extends Component {
     constructor(props) {
@@ -21,10 +21,10 @@ class ReviewItem extends Component {
                     <View style={{ height: 30, width: 30, borderWidth: 15, borderColor: 'lightblue', marginRight: 10 }}></View>
                     <View style={Styles.column}>
                         <Text style={{ fontSize: 14, fontWeight: 'bold', marginTop: -2 }}>
-                            {this.state.userName} 
+                            {this.state.userName}
                         </Text>
                         <Text style={{ fontSize: 13 }}>
-                            {this.state.time} 
+                            {this.state.time}
                         </Text>
                     </View>
                 </View>
@@ -33,9 +33,9 @@ class ReviewItem extends Component {
                 </Text>
                 <View style={Styles.row}>
                     <Text style={{ fontSize: 13, marginTop: 8 }}>2 </Text>
-                    <Image style={{ width: 20, height: 10, alignSelf: 'center', marginTop: 8, marginLeft: 15 }}source={require('../media/up1.png') }/>
-                    <Image style={{ width: 20, height: 10, alignSelf: 'center', marginTop: 8, marginLeft: 20, marginRight: 15 }}source={require('../media/down1.png') }/>
-                    <Text style={{ fontSize: 13, marginTop: 8, fontWeight: 'bold' }}> Reply </Text>
+                    <TouchableHighlight><Image style={{ width: 20, height: 10, alignSelf: 'center', marginTop: 8, marginLeft: 15 }}source={require('../media/up1.png') }/></TouchableHighlight>
+                    <TouchableHighlight><Image style={{ width: 20, height: 10, alignSelf: 'center', marginTop: 8, marginLeft: 20, marginRight: 15 }}source={require('../media/down1.png') }/></TouchableHighlight>
+                    <TouchableHighlight><Text style={{ fontSize: 13, marginTop: 6, fontWeight: 'bold' }}> Reply </Text></TouchableHighlight>
                 </View>
             </View>
         );
@@ -45,7 +45,7 @@ class ReviewItem extends Component {
 class ReviewList extends Component {
     constructor(props) {
         super(props);
-        this.state = {text:'Say something here'};
+        this.state = {text:' Say something here'};
     }
 
     render() {
@@ -60,7 +60,7 @@ class ReviewList extends Component {
                             style={{ height: 30, width: 345, borderColor: 'gray', borderWidth: 1, margin: 2, borderRadius: 4, fontSize: 15 }}
                             onChangeText={(text) => this.setState({ text }) }
                             value={this.state.text}
-                            placeholder={'Say something'}
+                            placeholder={' Say something'}
                             />
                     </View>
                     <ReviewItem/>
