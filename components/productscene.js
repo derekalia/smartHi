@@ -19,16 +19,40 @@ class ProductScene extends Component {
         super(props);
         // these should come from the app state.
         this.state = {
-            act: this.props.act,
-            eff: this.props.eff,
-            starCount: 3.5,
+            reviewCount: 403,
+            rating: 3.5,
+            quality: 4,
+            potency: 3,
+            flavor: 3,
+            thc: 13,
+            cbd: 35,
+            thca: 52,
+            effect: [{name:'giggly',strength:110},{name:'happy',strength:250},{name:'sound',strength:200}],
+            activity: ['movies','social','hike'],
+            name: 'FORGED XJ-13 ROSIN',
+            description:'FORGED Rosin. We use very low temperatures to reduce the terpene  evaporation which is critical to the experienc of our product.',
             producer: {id:'placeholderProducerId',name:'Forged Cannabis'},
         }
     }
 
-    onStarRatingPress(rating) {
+    _onRatingPress(rating) {
         this.setState({
-            starCount: rating
+            rating: rating
+        });
+    }
+    _onQuality(rating) {
+        this.setState({
+            quality: rating
+        });
+    }
+    _onPotency(rating) {
+        this.setState({
+            potency: rating
+        });
+    }
+    _onFlavor(rating) {
+        this.setState({
+            flavor: rating
         });
     }
 
@@ -39,7 +63,6 @@ class ProductScene extends Component {
     _goProducer(producerId: string) {
         this.props.GetProducerAction(producerId);
     }
-
 
     _renderRetailer(rowData) {
         return (
@@ -60,7 +83,7 @@ class ProductScene extends Component {
         return null;
     }
 
-    // BatsFix. These should be broken into components later.
+    // BatsFix. There should be no hardcode items in render! 
     render() {
         return (
             <ScrollView style={{marginTop:50}}>
@@ -71,26 +94,25 @@ class ProductScene extends Component {
                     </View>
                     {/* Overall rating */} 
                     <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
-                        <Text style={{ fontSize: 22, fontWeight: 'bold' }}>FORGED XJ-13 ROSIN</Text>
+                        <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
                         <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
                             <StarRating
                                 disabled={true}
                                 maxStars={5}
                                 starSize={30}
                                 starColor={'red'}
-                                rating={this.state.starCount}
-                                selectedStar={(rating) => this.onStarRatingPress(rating) }
+                                rating={this.state.rating}
+                                selectedStar={(rating) => this._onRating(rating) }
                                 />
-                            <Text style={{ fontSize: 19 }}> (403) </Text>
+                            <Text style={{ fontSize: 19 }}> ({this.state.reviewCount}) </Text>
                         </View>
                     </View>
                     {/* Description */} 
                     <View style={{ marginHorizontal: 10 }}>
                         <View style={{ flex: 1, height: 85, justifyContent: 'center' }}>
                             <Text>
-                                FORGED Rosin Is our process of extracting oils from cannabis.We use very low temperatures to reduce the terpene 
-                                evaporation which is critical to the experience of our product.
-                            </Text>
+                                {this.state.description}
+                           </Text>
                         </View>
                     </View>
                     {/*Rating breakdown*/}
@@ -113,32 +135,32 @@ class ProductScene extends Component {
                             <View style={{ flex: 3 }}>
                                 <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
                                     <StarRating
-                                        disabled={true}
+                                        disabled={false}
                                         maxStars={5}
                                         starSize={30}
                                         starColor={'red'}
-                                        rating={this.state.starCount}
-                                        selectedStar={(rating) => this.onStarRatingPress(rating) }
+                                        rating={this.state.quality}
+                                        selectedStar={(rating) => this._onQuality(rating) }
                                         />
                                 </View>
                                 <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
                                     <StarRating
-                                        disabled={true}
+                                        disabled={false}
                                         maxStars={5}
                                         starSize={30}
                                         starColor={'red'}
-                                        rating={this.state.starCount}
-                                        selectedStar={(rating) => this.onStarRatingPress(rating) }
+                                        rating={this.state.flavor}
+                                        selectedStar={(rating) => this._onFlavor(rating) }
                                         />
                                 </View>
                                 <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
                                     <StarRating
-                                        disabled={true}
+                                        disabled={false}
                                         maxStars={5}
                                         starSize={30}
                                         starColor={'red'}
-                                        rating={this.state.starCount}
-                                        selectedStar={(rating) => this.onStarRatingPress(rating) }
+                                        rating={this.state.potency}
+                                        selectedStar={(rating) => this._onPotency(rating) }
                                         />
                                 </View>
                             </View>
@@ -148,7 +170,7 @@ class ProductScene extends Component {
                     <View style={{ marginHorizontal: 10, marginTop: 20 }}>
                         <View style={{ height: 40, justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Test Results</Text>
-                            <Text style={{}}>THC: 13% CBD: 49% THCA: 32% TOTAL CANNABNOIDS: 100%</Text>
+                            <Text style={{}}>THC: {this.state.thc}% CBD: {this.state.cbd}% THCA: {this.state.thca}% TOTAL CANNABNOIDS: 100%</Text>
                         </View>
                     </View>
                     <View style={{ marginHorizontal: 10, marginTop: 20 }}>
@@ -158,23 +180,23 @@ class ProductScene extends Component {
                         <View style={{ flexDirection: "row" }}>
                             <View style={{ flex: 1 }}>
                                 <TouchableOpacity style={Styles.tagType}>
-                                    <Text style={Styles.tagTextType}>euphoric</Text>
+                                    <Text style={Styles.tagTextType}>{this.state.effect[0].name}</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={Styles.tagType}>
-                                    <Text style={Styles.tagTextType}>giggly</Text>
+                                    <Text style={Styles.tagTextType}>{this.state.effect[1].name}</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={Styles.tagType}>
-                                    <Text style={Styles.tagTextType}>sleepy</Text>
+                                    <Text style={Styles.tagTextType}>{this.state.effect[2].name}</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={{ flex: 3 }}>
-                                <View style={[Styles.tagType, { backgroundColor: '#BD10E0', width: 250 }]}>
+                                <View style={[Styles.tagType, { backgroundColor: '#BD10E0', width: this.state.effect[0].strength }]}>
                                     <Text style={Styles.tagTextType}> </Text>
                                 </View>
-                                <View style={[Styles.tagType, { backgroundColor: '#BD10E0', width: 190 }]}>
+                                <View style={[Styles.tagType, { backgroundColor: '#BD10E0', width: this.state.effect[1].strength }]}>
                                     <Text style={Styles.tagTextType}> </Text>
                                 </View>
-                                <View style={[Styles.tagType, { backgroundColor: '#BD10E0', width: 110 }]}>
+                                <View style={[Styles.tagType, { backgroundColor: '#BD10E0', width: this.state.effect[2].strength }]}>
                                     <Text style={Styles.tagTextType}> </Text>
                                 </View>
                             </View>
@@ -187,13 +209,13 @@ class ProductScene extends Component {
                         </View>
                         <View style={{ flexDirection: "row" }}>
                             <TouchableOpacity style={Styles.tagType}>
-                                <Text style={Styles.tagTextType}>movies</Text>
+                                <Text style={Styles.tagTextType}>{this.state.activity[0]}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={Styles.tagType}>
-                                <Text style={Styles.tagTextType}>social</Text>
+                                <Text style={Styles.tagTextType}>{this.state.activity[1]}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={Styles.tagType}>
-                                <Text style={Styles.tagTextType}>hike</Text>
+                                <Text style={Styles.tagTextType}>{this.state.activity[2]}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
