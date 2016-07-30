@@ -6,7 +6,7 @@
 // Import modules
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TouchableHighlight } from 'react-native';
-import ActivityItem from './activityitem.js';
+import ActivityItem from './activityItem.js';
 
 class ActivityList extends Component {
     render() {

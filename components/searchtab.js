@@ -16,7 +16,7 @@ import ProductScene   from './productScene.js';
 import RetailerScene  from './retailerScene.js';
 
 // import navigation route mapper
-import RouteMapper   from './routemapper.js';
+import RouteMapper   from './routeMapper.js';
 
 const SearchIndex     = 0;
 const ProductIndex    = 1;

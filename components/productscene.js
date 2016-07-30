@@ -208,7 +208,7 @@ class ProductScene extends Component {
                         <View style={{ height: 40, justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Locations</Text>
                         </View>
-                        <RetailerList retailers={this.props.retailers}/>
+                        <RetailerList retailers={this.props.retailers} goRetailer={(id) => this._goRetailer(id)}/>
                     </View>
                     {/* Producer item */}
                     <View style={{ marginHorizontal: 10, marginTop: 10 }}>

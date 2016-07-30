@@ -4,6 +4,9 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
 
+import RetailerItem from './retailerItem.js';
+
+
 class RetailerList extends Component {
     constructor(props) {
         super(props);
@@ -12,14 +15,14 @@ class RetailerList extends Component {
     render() {
         return (
             <View>
-                {_renderRetailers()}
+                {this._renderRetailers()}
             </View>
         );
     }
 
     _renderRetailer(rowData) {
         return (
-            <RetailerItem goRetailer={(retailerId) => this._goRetailer(retailerId)} retailer={rowData}/>
+            <RetailerItem goRetailer={(retailerId) => this.props.goRetailer(retailerId)} retailer={rowData}/>
         )
     }
 

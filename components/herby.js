@@ -8,8 +8,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
-import LoginPage from './loginpage.js';
-import MainPage  from './mainpage.js';
+import LoginPage from './loginPage.js';
+import MainPage  from './mainPage.js';
 
 class Herby extends Component {
     constructor(props) {

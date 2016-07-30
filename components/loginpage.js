@@ -12,10 +12,10 @@ import {Navigator, } from 'react-native';
 import {LoginSceneId,RegisterSceneId,LaunchSceneId} from '../common/const.js';
 
 //get internal components
-import LaunchScene   from './launchscene.js';
-import LoginScene    from './loginscene.js';
-import RegisterScene from './registerscene.js';
-import RouteMapper   from './routemapper.js';
+import LaunchScene   from './launchScene.js';
+import LoginScene    from './loginScene.js';
+import RegisterScene from './registerScene.js';
+import RouteMapper   from './routeMapper.js';
 
 //
 // BatsFix. It appears javascript doesnt have true map set so we have to
