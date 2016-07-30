@@ -1,5 +1,5 @@
 //
-// Description: filterssection.js
+// Description: filterList.js
 // Handles filters manipulation and display.
 //
 
@@ -9,7 +9,7 @@ import {StyleSheet, Text, View, TouchableHighlight, TouchableOpacity, ListView, 
 // Import filters.
 import {FiltersActivity, FiltersEffect, FiltersType} from '../common/filters.js';
 
-class FiltersSection extends Component {
+class FilterList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -173,7 +173,7 @@ class FiltersSection extends Component {
     }
 }
 
-module.exports = FiltersSection;
+module.exports = FilterList;
 
 const Styles = StyleSheet.create({
     buttonText: {

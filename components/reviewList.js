@@ -42,7 +42,7 @@ class ReviewItem extends Component {
     }
 }
 
-class ReviewSection extends Component {
+class ReviewList extends Component {
     constructor(props) {
         super(props);
         this.state = {text:'Say something here'};
@@ -72,7 +72,7 @@ class ReviewSection extends Component {
     }
 }
 
-module.exports = ReviewSection;
+module.exports = ReviewList;
 
 const Styles = StyleSheet.create({
     tagType: {

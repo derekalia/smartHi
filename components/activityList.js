@@ -1,5 +1,5 @@
 //
-// Description: activitysection.js
+// Description: activityList.js
 // This contains the declaration for the activity section
 //
 
@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import {StyleSheet, View, Text, TouchableHighlight } from 'react-native';
 import ActivityItem from './activityitem.js';
 
-class ActivitySection extends Component {
+class ActivityList extends Component {
     render() {
         //
         // BatsFix. This needs to be flexible with regard to a device with and height.
@@ -27,4 +27,4 @@ class ActivitySection extends Component {
     }
 }
 
-module.exports = ActivitySection;
+module.exports = ActivityList;

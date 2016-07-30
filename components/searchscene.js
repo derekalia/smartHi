@@ -12,7 +12,7 @@ import {connect} from 'react-redux';
 //get internal components
 import ProductItem           from './productitem.js';
 import SearchBar             from './searchbar.js';
-import FiltersSection        from './filterList.js';
+import FilterList            from './filterList.js';
 import {StartSearchAction,GetProductAction}   from '../actions';
 
 class SearchScene extends Component {
@@ -45,7 +45,7 @@ class SearchScene extends Component {
                 <SearchBar startSearch={()=>this._startSearch()} setSearchTerm={(t)=>this._setSearchTerm(t)}/>
                 <ScrollView style={{marginTop: 0,}}>
                 <View style={{}}>
-                    <FiltersSection productCount={this.props.products.length}/>
+                    <FilterList productCount={this.props.products.length}/>
                     {/*Search results section*/}
                     {this._renderSearchResults()}
                 </View>

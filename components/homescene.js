@@ -14,7 +14,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 //get internal components
-import ActivitySection  from './activityList.js';
+import ActivityList     from './activityList.js';
 import ProductItem      from './productitem.js';
 import {GoSearchAction, GetProductAction} from '../actions';
 
@@ -56,7 +56,7 @@ class HomeScene extends Component {
                           <Text style={{ fontSize: 16,color:'blue' }}> more </Text>
                         </TouchableHighlight>
                     </View>
-                    <ActivitySection/>
+                    <ActivityList/>
 
                     {/* Staff Picks */}
                     <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 15,marginBottom:5 }]}>

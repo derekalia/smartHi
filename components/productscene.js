@@ -12,7 +12,7 @@ import StarRating from 'react-native-star-rating';
 import {GetRetailerAction,GetProducerAction,} from '../actions';
 import RetailerItem from './retaileritem.js';
 import ProducerItem from './produceritem.js';
-import ReviewSection from './reviewList.js';
+import ReviewList   from './reviewList.js';
 
 class ProductScene extends Component {
     constructor(props) {
@@ -220,7 +220,7 @@ class ProductScene extends Component {
                         </View>
                     </View>
                     {/* Reviews */}
-                    <ReviewSection/>
+                    <ReviewList/>
                     {/* Retailers */}
                     <View style={{ marginHorizontal: 10, marginTop: 10 }}>
                         <View style={{ height: 40, justifyContent: 'center' }}>
