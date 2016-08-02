@@ -1,47 +1,126 @@
 //
-// Description: reviewtab.js
-// This contains the declaration for the review tab  of the app.
-// It should only contain rate scenes navigation.
+// Description: hometab.js
+// This contains the declaration for the home tab  of the app
+// It should only contain home tab scene navigation logic and nothing else.
 //
 
 // Import modules
 import React, { Component } from 'react';
-import {StyleSheet, View, Text,Image,TouchableHighlight, } from 'react-native';
-import {Connect} from 'react-redux';
+import {StyleSheet, View, Text, ScrollView, Image, TouchableHighlight, Navigator } from 'react-native';
+import {connect} from 'react-redux';
+//import {Camera} from 'react-native-camera';
 
+// Import const ids.
+import {CameraSceneId, ProductInfoId, RateProductId, RateStoreId, ReviewTabId,} from '../common/const.js';
 
-class ReviewTab extends Component {
-    render() {
+// Import internal modules
+import CameraScene        from './cameraScene.js';
+import ProductInfoScene   from './productInfoScene.js';
+import RateProductScene   from './rateProductScene.js';
+import RateStoreScene     from './rateStoreScene.js';
+
+const CameraIndex       = 0;
+const ProductInfoIndex  = 1;
+const RateProductIndex  = 2;
+const RateStoreIndex    = 3;
+
+const ReviewTabScenes = [
+    { title: "Camera",       component: CameraScene,       index: CameraSceneId },
+    { title: "Product Info", component: ProductInfoScene,  index: ProductInfoId },
+    { title: "Rate Product", component: RateProductScene,  index: RateProductId },
+    { title: "Rate Store",   component: RateStoreScene,    index: RateStoreId },
+];
+
+var RouteMapper = {
+    LeftButton: function (route, navigator, index, navState) {
+        // BatsFix. Styling should be moved to common
+        if (index > 0) {
+            return (
+                <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginLeft: 13, }}>
+                    <Image source={require("../media/BackArrow.png") } style={{ width: 12, height: 19 }} />
+                    <Text onPress={navigator.jumpBack} style={{ fontSize: 18, color: "#007AFF" }}> Back</Text>
+                </View>
+            );
+        }
+    },
+    RightButton: function (route, navigator, index, navState) {
+        if (index < (ReviewTabScenes.length - 1)) {
+            return (
+                <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginRight: 13, }}>
+                    <Text onPress={navigator.jumpForward} style={{ fontSize: 18, color: "#007AFF" }}> Next</Text>
+                </View>
+            );
+        }
+    },
+    
+
+    Title: function (route, navigator, index, navState) {
         return (
-          <View style={{flex:1}}>
-            <View style={{height:70,alignItems:'center',justifyContent: "center",backgroundColor:'#F9F9F9',borderBottomWidth:1,borderColor:'#B2B2B2'}}>
-              <View style={{marginTop:18}}>
-                <Text style={{fontSize: 18, marginTop: 1, fontWeight: 'bold'}}>Review</Text>
-              </View>
-            </View>
-            <View style={{alignItems:'center', marginTop:30}}>
-            <View style={{marginHorizontal:49}}>
-              <Text style={{fontSize:16,textAlign:'center'}}>Take a picture of the product’s front and back</Text>
-              </View>
-              <View style={{marginTop:20,borderWidth:3,borderColor:'black',padding:20,borderRadius:10}}>
-                 <Image source={require("../media/imageIcon1.png") } style={{ width: 140, height: 100 }} />
-                 <Text style={{fontSize:16,textAlign:'center',marginTop:10}}>Upload Front</Text>
-              </View>
-              <View style={{marginTop:20,borderWidth:3,borderColor:'black',padding:20,borderRadius:10}}>
-                 <Image source={require("../media/imageIcon1.png") } style={{ width: 140, height: 100 }} />
-                 <Text style={{fontSize:16,textAlign:'center',marginTop:10}}>Upload Back</Text>
-              </View>
-              <View style={{marginTop:20}}>
-                <TouchableHighlight underlayColor='#dddddd'>
-                    <View style={{ backgroundColor: '#007AFF',width:200,height:55,alignItems:'center',justifyContent: "center",borderRadius:15 }}>
-                 <Text style={{color:"white",fontSize:16,textAlign:'center'}}>Submit</Text>
-                 </View>
-                 </TouchableHighlight>
-              </View>
-            </View>
-          </View>
+            <Text style={{ fontSize: 18, marginTop: 11, fontWeight: 'bold' }}>
+                {route.title}
+            </Text>
         );
     }
 }
 
-module.exports = ReviewTab;
+
+class ReviewTab extends Component {
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.selectedTab == ReviewTabId) {
+            var sceneId = nextProps.sceneId;
+            var foundExisting = false;
+            // Check existing routes first
+            var routelist = this.refs.navigator.getCurrentRoutes();
+            for (var i=0; i < routelist.length; i++) {
+                if (routelist[i].index == sceneId) {
+                    this.refs.navigator.jumpTo(routelist[i]);
+                    foundExisting = true;
+                    break;
+                }
+            }
+            // If not found in existing push
+            if (foundExisting == false) {
+                for(var i=0; i < ReviewTabScenes.length; i++) {
+                     if (ReviewTabScenes[i].index == sceneId) {
+                        this.refs.navigator.push(ReviewTabScenes[i]);
+                     }
+                }
+            }
+        }
+    }
+
+    renderScene(route, navigator) {
+        return (
+            <route.component navigator={navigator}/>
+        );
+    }
+
+    configureScene(route, routeStack) {
+        return Navigator.SceneConfigs.PushFromRight;
+    }
+
+    render() {
+        return (
+
+            <Navigator
+                ref="navigator"
+                configureScene={this.configureScene}
+                renderScene={this.renderScene}
+                initialRoute = {ReviewTabScenes[CameraIndex]}
+                initialRouteStack = {ReviewTabScenes}
+                navigationBar={
+                    <Navigator.NavigationBar
+                        routeMapper = {RouteMapper}
+                        style={{backgroundColor:'#F9F9F9',borderBottomWidth:1,borderColor:'#B2B2B2'}} >
+                    </Navigator.NavigationBar>
+                }
+                />
+
+
+        );
+    }
+}
+
+function mapStateToProps(state) { return { sceneId: state.NavigationReducer.sceneId, switchScene: state.NavigationReducer.switchScene } }
+module.exports = connect(mapStateToProps)(ReviewTab);

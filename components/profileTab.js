@@ -12,16 +12,14 @@ import {StyleSheet, View, Text, Navigator, Image } from 'react-native';
 import {Connect} from 'react-redux';
 
 // Import internal modules
-import TestScene     from './testScene.js';
 import ProfileScene  from './profileScene.js';
-import TestProduct  from './testProduct.js';
+import TestScene     from './testScene.js';
 
 // Import const ids. 
 
-const ReviewTabScenes = [ 
-    { title: "Test",         component: TestScene,    index: 0 },
-    { title: "ProfileTest",  component: ProfileScene, index: 1 },
-    { title: "ProductTest",  component: TestProduct, index: 2 },
+const ProfileTabScenes = [ 
+    { title: "Profile",      component: ProfileScene, index: 1 },
+    { title: "TestScene",    component: TestScene,    index: 2 },
 ];
 
 var TestRouteMapper = {
@@ -36,13 +34,14 @@ var TestRouteMapper = {
         }
     },
     RightButton: function (route, navigator, index, navState) {
+        if (index < (ProfileTabScenes.length - 1)) {
             return (
-                <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginRight: 13 }}>
-                    <Text onPress={navigator.jumpForward} style={{ fontSize: 18, color: "#007AFF" }}> Forward</Text>
+                <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginRight: 13, }}>
+                    <Text onPress={navigator.jumpForward} style={{ fontSize: 18, color: "#007AFF" }}> Next</Text>
                 </View>
             );
-        },
-
+        }
+    },
 
     Title: function (route, navigator, index, navState) {
         return (
@@ -53,9 +52,7 @@ var TestRouteMapper = {
     }
 }
 
-
-
-class ReviewTab extends Component {
+class ProfileTab extends Component {
 
     renderScene(route, navigator) {
         return (
@@ -73,8 +70,8 @@ class ReviewTab extends Component {
                 ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
-                initialRoute = {ReviewTabScenes[0]}
-                initialRouteStack = {ReviewTabScenes}
+                initialRoute = {ProfileTabScenes[0]}
+                initialRouteStack = {ProfileTabScenes}
                 navigationBar={
                     <Navigator.NavigationBar 
                         routeMapper = {TestRouteMapper}
@@ -86,4 +83,4 @@ class ReviewTab extends Component {
     }
 }
 
-module.exports = ReviewTab;
+module.exports = ProfileTab;

@@ -33,6 +33,13 @@ export default function UserReducer(state, action) {
             newState.user.name = action.name;
             newState.user.accessToken = action.accessToken;
             newState.user.tokenType   = action.tokenType;
+
+            // BatsFix. Following need to be returned with logon token etc.
+            newState.user.ratingCount   = 224;
+            newState.user.followerCount = 120;
+            newState.user.points        = 789;
+            newState.user.address       = 'Seattle, WA';
+            newState.user.instagram     = 'Derek @ Instagram';
             return newState;
 
         case LOGIN_ERROR:

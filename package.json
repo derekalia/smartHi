@@ -10,6 +10,7 @@
     "react": "15.1.0",
     "react-native": "0.28.0",
     "react-native-accordion": "^1.0.0",
+    "react-native-camera": "^0.3.8",
     "react-native-collapsible": "^0.7.0",
     "react-native-multi-slider": "^0.3.5",
     "react-native-star-rating": "^1.0.6",

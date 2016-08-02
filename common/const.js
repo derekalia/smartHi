@@ -15,6 +15,13 @@ export const ProductSceneId  = '5';
 export const HomeSceneId     = '6';
 export const ProducerSceneId = '7';
 
+export const CameraSceneId     = 'CameraScene';
+export const ProductInfoId     = 'ProductInfo';
+export const RateProductId     = 'RateProduct';
+export const RateStoreId       = 'RateStore';
+
+
+
 export const FilterActivity   = 'Activity';
 export const FilterEffect     = 'Effect';
 export const FilterCategory   = 'Category';
