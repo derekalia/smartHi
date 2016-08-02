@@ -122,7 +122,7 @@ class ProductScene extends Component {
                                         starSize={30}
                                         starColor={'red'}
                                         rating={this.state.quality}
-                                        selectedStar={(rating) => this._onQuality(rating) }
+                                        selectedStar={(rating) => this._onQuality(rating)}
                                         />
                                 </View>
                                 <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
@@ -219,7 +219,7 @@ class ProductScene extends Component {
                     </View>
 
                     {/* Related Products */}
-                    <View style={{ marginHorizontal: 10, marginTop: 10 }}>
+                    <View style={{ marginHorizontal: 10, marginTop: 10,marginBottom:55 }}>
                         <View style={{ height: 40, justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Related Products</Text>
                         </View>
