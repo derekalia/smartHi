@@ -68,7 +68,7 @@ class ProductScene extends Component {
     // BatsFix. There should be no hardcode items in render!
     render() {
         return (
-            <ScrollView style={{marginTop:0}}>
+            <ScrollView style={{marginTop:0,backgroundColor:'white'}}>
                 <View style={{ flex: 1 }}>
                     {/*Product Image*/}
                     <View style={{ height: 248, justifyContent: "flex-end" }}>

@@ -13,7 +13,7 @@ class ProducerScene extends Component {
 
     render() {
         return (
-            <ScrollView>
+            <ScrollView style={{backgroundColor:'white'}}>
                 <View style={{ flex: 1 }}>
 
                     <View style={{ height: 248, justifyContent: "flex-end" }}>

@@ -1,8 +1,8 @@
 //
 // Description: retaileritem.js
-// This contains the declaration for the retailer item 
+// This contains the declaration for the retailer item
 // It should only contain retailer item logic and nothing else.
-// 
+//
 
 // Import modules
 import React, { Component } from 'react';
@@ -26,7 +26,7 @@ class RetailerItem extends Component {
             <TouchableOpacity style={{
                 flexDirection: 'row',
                 height:100,
-                marginBottom: 10,
+                marginBottom: 10,backgroundColor:'transparent'
             }}  onPress={() => this.props.goRetailer(this.props.retailer.id) }>
                 <Image style={Styles.bg} source={require('../media/ikes1.png') } />
                 <View style={{ flexDirection: 'column', margin: 4,marginHorizontal:6 }}>
@@ -167,5 +167,3 @@ const Styles = StyleSheet.create({
         textShadowRadius: 2
     },
 })
-
-
