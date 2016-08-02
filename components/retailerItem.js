@@ -16,18 +16,21 @@ class RetailerItem extends Component {
     constructor(props) {
         super(props);
         // these should come from the app state.
-        this.state = {
-            starCount: 3.5
-        }
+        this.state = this.props.retailer; 
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState(nextProps.retailer);
     }
 
     render() {
+        // BatsFix. There shouldn't be any hardcoded data in this function.
         return (
             <TouchableOpacity style={{
                 flexDirection: 'row',
                 height:100,
                 marginBottom: 10,
-            }}  onPress={() => this.props.goRetailer(this.props.retailer.id) }>
+            }}  onPress={() => this.props.goRetailer(this.state.id) }>
                 <Image style={Styles.bg} source={require('../media/ikes1.png') } />
                 <View style={{ flexDirection: 'column', margin: 4,marginHorizontal:6 }}>
 
@@ -40,7 +43,7 @@ class RetailerItem extends Component {
                             fontSize: 22,
                             textShadowOffset: { width: 1.5, height: 1.5 },
                             textShadowColor: 'black',
-                            textShadowRadius: 4}}>{this.props.retailer.name}</Text>
+                            textShadowRadius: 4}}>{this.state.name}</Text>
                             </View>
                       <View style={{flex:1,justifyContent:'flex-end',alignItems:"flex-end",alignSelf:"flex-end"}}>
                         <Text style={{
@@ -63,7 +66,7 @@ class RetailerItem extends Component {
                                 maxStars={5}
                                 starSize={24}
                                 starColor={'red'}
-                                rating={this.state.starCount}
+                                rating={this.state.rating}
                                 selectedStar={(rating) => this.onStarRatingPress(rating) }
                                 />
                                 <Text style={{
@@ -71,7 +74,7 @@ class RetailerItem extends Component {
                                     fontSize: 20,
                                     textShadowOffset: { width: 1.5, height: 1.5 },
                                     textShadowColor: 'black',
-                                    textShadowRadius: 4}}> (32)</Text>
+                                    textShadowRadius: 4}}> ({this.state.ratingCount})</Text>
 
                     </View>
 
@@ -82,7 +85,7 @@ class RetailerItem extends Component {
                             textShadowOffset: { width: 1.5, height: 1.5 },
                             textShadowColor: 'black',
                             textShadowRadius: 4
-                        }}>Seattle, WA</Text>
+                        }}>{this.state.address}</Text>
                     </View>
 
             </TouchableOpacity>

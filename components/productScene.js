@@ -19,22 +19,12 @@ class ProductScene extends Component {
     constructor(props) {
         super(props);
         // these should come from the app state.
-        this.state = {
-            reviewCount: 403,
-            rating: 3.5,
-            quality: 4,
-            potency: 3,
-            flavor: 3,
-            thc: 13,
-            cbd: 35,
-            thca: 52,
-            effect: [{name:'giggly',strength:110},{name:'happy',strength:250},{name:'sound',strength:200}],
-            activity: ['movies','social','hike'],
-            name: 'FORGED XJ-13 ROSIN',
-            description:'FORGED Rosin. We use very low temperatures to reduce the terpene  evaporation which is critical to the experienc of our product.',
-            producer: {id:'placeholderProducerId',name:'Forged Cannabis'},
-        }
+        this.state = this.props.product;
     }
+    componentWillReceiveProps(nextProps) {
+        this.setState(nextProps.product);
+    }
+
 
     _onRatingPress(rating) {
         this.setState({
@@ -58,6 +48,7 @@ class ProductScene extends Component {
     }
 
     _goRetailer(retailerId: string) {
+        console.log("going to retailer ["+retailerId+"]");
         this.props.GetRetailerAction(retailerId);
     }
 
@@ -83,10 +74,10 @@ class ProductScene extends Component {
                                 maxStars={5}
                                 starSize={30}
                                 starColor={'red'}
-                                rating={this.state.rating}
+                                rating={this.props.product.rating}
                                 selectedStar={(rating) => this._onRating(rating) }
                                 />
-                            <Text style={{ fontSize: 19 }}> ({this.state.reviewCount}) </Text>
+                            <Text style={{ fontSize: 19 }}> ({this.state.ratingCount}) </Text>
                         </View>
                     </View>
                     {/* Description */}
@@ -208,7 +199,7 @@ class ProductScene extends Component {
                         <View style={{ height: 40, justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Locations</Text>
                         </View>
-                        <RetailerList retailers={this.props.retailers} goRetailer={(id) => this._goRetailer(id)}/>
+                        <RetailerList retailers={this.state.retailers} goRetailer={(id) => this._goRetailer(id)}/>
                     </View>
                     {/* Producer item */}
                     <View style={{ marginHorizontal: 10, marginTop: 10 }}>
@@ -223,6 +214,19 @@ class ProductScene extends Component {
     }
 }
 
+
+// BatsFix. This function is used to convert state to props passed to this component
+function mapStateToProps(state) {
+    return {
+        product: state.ProductReducer.product,
+    }
+}
+// BatsFix. This function is used to convert action to props passed to this component.
+// In this example, there is now prop called GetRetailerAction.
+//
+function mapActionToProps(dispatch) { return bindActionCreators({ GetRetailerAction,GetProducerAction }, dispatch); }
+
+module.exports = connect(mapStateToProps, mapActionToProps)(ProductScene);
 
 const Styles = StyleSheet.create({
     tagType: {
@@ -300,17 +304,4 @@ const Styles = StyleSheet.create({
     },
 })
 
-// BatsFix. This function is used to convert state to props passed to this component
-function mapStateToProps(state) {
-    return {
-        act: state.ProductReducer.act,
-        eff: state.ProductReducer.eff,
-        retailers: state.ProductReducer.retailers,
-    }
-}
-// BatsFix. This function is used to convert action to props passed to this component.
-// In this example, there is now prop called GetRetailerAction.
-//
-function mapActionToProps(dispatch) { return bindActionCreators({ GetRetailerAction,GetProducerAction }, dispatch); }
 
-module.exports = connect(mapStateToProps, mapActionToProps)(ProductScene);

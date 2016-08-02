@@ -24,14 +24,14 @@ class HomeScene extends Component {
         this._activityCount = 4;
     }
 
-    _onToSearch() {
+    _goSearch() {
         //
         // Go to search scene.
         //
         this.props.GoSearchAction();
     }
 
-    _onToProduct(productId) {
+    _goProduct(productId) {
         //
         // Go to product page
         //
@@ -44,7 +44,7 @@ class HomeScene extends Component {
                 <ScrollView>
                     {/* Find Button */}
                     {/*<TouchableOpacity style={[Styles.FindProductButton]}
-                        onPress={this._onToSearch.bind(this) }>
+                        onPress={this._goSearch.bind(this) }>
                         <Text style={{ color: 'white', fontSize: 22, }}>Find Product</Text>
                     </TouchableOpacity>*/}
 
@@ -62,13 +62,13 @@ class HomeScene extends Component {
                     <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 15,marginBottom:5 }]}>
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Staff Pick </Text>
                     </View>
-                    <ProductItem product={this.props.staffPick} onToProduct={() => this._onToProduct(this.props.staffPick) }/>
+                    <ProductItem product={this.props.staffPick} goProduct={(id) => this._goProduct(id) }/>
 
                     {/* Trending */}
                     <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 15,marginBottom:5 }]}>
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Trending </Text>
                     </View>
-                    <ProductItem product={this.props.trending} onToProduct={() => this._onToProduct(this.props.trending) }/>
+                    <ProductItem product={this.props.trending} goProduct={(id) => this._goProduct(id) }/>
                 </ScrollView>
             </View>
         );
@@ -80,8 +80,8 @@ class HomeScene extends Component {
 //
 function mapStateToProps(state) {
     return {
-        activities: state.SearchReducer.activities,
-        effects: state.SearchReducer.effects,
+        staffPick: state.NewsReducer.staffPick,
+        trending:  state.NewsReducer.trending,
     }
 }
 

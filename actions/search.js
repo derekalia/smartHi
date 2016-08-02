@@ -5,6 +5,7 @@ import {
 } from './navigation.js';
 
 import {SearchTabId, SearchSceneId} from '../common/const.js';
+import {SearchProducts} from './data.js';
 
 export const SEARCH_START = 'SEARCH_START';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
@@ -12,9 +13,10 @@ export const SEARCH_ERROR = 'SEARCH_ERROR';
 
 export function StartSearchAction(searchTerm) {
     // should really be a dispatch function. BatsFix
+    var products = SearchProducts(searchTerm);
     return {
         type: SEARCH_SUCCESS,
-        products: ['HerbyGood', 'Herby', 'SmokeHouse', 'Serendipity', 'Musty', 'Misty', 'Sunny', 'Bono'],
+        products: products,
     };
 }
 

@@ -44,7 +44,7 @@ export default function NavigationReducer(state, action) {
             // BatsFix then modify the item needed in the new
             // state. 
             newState.sceneId = action.sceneId;
-            console.log("action scene id is "+action.sceneId);
+
             // This flips the switch so that update happens
             newState.switchScene = newState.switchScene == 0 ? 1: 0;
             return newState;

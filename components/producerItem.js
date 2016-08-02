@@ -16,12 +16,11 @@ class ProducerItem extends Component {
     constructor(props) {
         super(props);
         // these should come from the app state.
-        this.state = {
-            rating: 3.5,
-            address: 'Issaquah, WA',
-            name: 'Forged Cannabis',
-            image: '../media/forged1.png',
-        }
+        this.state = this.props.producer;
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState(nextProps.producer);
     }
 
     render() {

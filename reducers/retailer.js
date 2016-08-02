@@ -4,8 +4,14 @@ import {
 } from '../actions/index.js';
 
 const initialState = {
-    retailerId: 'None',
-    products: ['happy','smiley','others']
+    retailer: {
+    id:'0',
+    name:'Initial State',
+    description:'Initial State',
+    rating: 5,
+    ratingCount: 555,
+    description: 'Initial State',
+    },
 }
 
 export default function RetailerReducer(state, action) {
@@ -24,8 +30,7 @@ export default function RetailerReducer(state, action) {
             newState = Object.assign({}, state);
             // BatsFix then modify the item needed in the new
             // state. 
-            newState.retailerId = action.retailerId;
-            newState.products   = action.products;
+            newState.retailer = action.retailer;
             return newState;
 
         //    

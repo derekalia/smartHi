@@ -13,6 +13,7 @@ import {connect} from 'react-redux';
 import ProductItem           from './productItem.js';
 import SearchBar             from './searchBar.js';
 import FilterList            from './filterList.js';
+import ProductList           from './productList.js';
 import {StartSearchAction,GetProductAction}   from '../actions';
 
 class SearchScene extends Component {
@@ -32,7 +33,7 @@ class SearchScene extends Component {
         this._searchTerm = term;
     }
 
-    _onToProduct(productId) {
+    _goProduct(productId) {
         //
         // Go to product page
         //
@@ -47,13 +48,13 @@ class SearchScene extends Component {
                 <View style={{}}>
                     <FilterList productCount={this.props.products.length}/>
                     {/*Search results section*/}
-                    {this._renderSearchResults()}
+                    <ProductList productList={this.props.products} goProduct={(id)=> this._goProduct(id)}/>
                 </View>
                 </ScrollView>
             </View>
         );
     }
-
+    /*
     _renderSearchResults() {
         if (this.props.products.length !== 0) {
             var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => (r1 != r2), });
@@ -70,11 +71,12 @@ class SearchScene extends Component {
             return null;
     }
 
-    _renderRow(rowData) {
+    _renderRow(product) {
         return (
-            <ProductItem onToProduct={(t)=> this._onToProduct(t)}/>
+            <ProductItem goProduct={(t)=> this._goProduct(t)} product={product}/>
         );
     }
+    */
 }
 
 //

@@ -5,6 +5,7 @@ import {
 } from './navigation.js';
 
 import {ProductSceneId} from '../common/const.js';
+import {GetProduct} from './data.js';
 
 export const PRODUCT_SUCCESS = 'PRODUCT_SUCCESS';
 export const PRODUCT_ERROR = 'PRODUCT_ERROR';
@@ -12,13 +13,10 @@ export const PRODUCT_ERROR = 'PRODUCT_ERROR';
 export function GetProductAction(productId) {
     return function (dispatch, getState) {
         // BatsFix. Fetch product data first.
-        
-        // Then dispatch product data
+        product =  GetProduct(productId);
         dispatch({
             type: PRODUCT_SUCCESS,
-            retailers: [{name:'HerbyGood Maker',id:0}, {name:'Herby Maker',id:1},, {name:'SmokeHouse Maker',id:2}, {name:'Serendipity Producer',id:3}],
-            act: ['walking', 'eating', 'relaxing'],
-            eff: ['sleepy', 'active', 'happy'],
+            product: product,
 		});
 
         // Then show product data scene 

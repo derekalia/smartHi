@@ -4,6 +4,7 @@ const navigationActions = require('./navigation.js');
 const productActions    = require('./product.js');
 const retailerActions   = require('./retailer.js');
 const producerActions   = require('./producer.js');
+const newsActions       = require('./news.js');
 
 module.exports = {
   ...loginActions,
@@ -12,4 +13,5 @@ module.exports = {
   ...productActions,
   ...retailerActions,
   ...producerActions,
+  ...newsActions,
 };

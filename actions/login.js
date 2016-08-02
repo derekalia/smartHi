@@ -6,6 +6,9 @@ export const REGISTER_PROCESS = 'LOGIN_PROCESS';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_ERROR   = 'REGISTER_ERROR';
 
+import {NEWS_SUCCESS}  from './news.js';
+import {GetLatestNews} from './data.js';
+
 export function LoginAction(userCredentials) {
     return function (dispatch, getState) {
         // Notify that login is in process
@@ -17,7 +20,16 @@ export function LoginAction(userCredentials) {
         // Fetch data from the server
         // BatsFix. For test purposes we can use NodeApiLogin instead of LcbApiLogin
         //
-        LcbApiLogin(dispatch, userCredentials.name, userCredentials.password);
+        //LcbApiLogin(dispatch, userCredentials.name, userCredentials.password);
+        NodeApiLogin(dispatch, userCredentials.name, userCredentials.password);
+
+        // BatsFix. GetLatestNews should be promise function that can be called async.
+        var latestNews = GetLatestNews();
+        dispatch({
+            type: NEWS_SUCCESS,
+            staffPick: latestNews.staffPick,
+            trending: latestNews.trending,
+        });
     }
 }
 

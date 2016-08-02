@@ -4,12 +4,23 @@ import {
 } from '../actions/index.js';
 
 const initialState = {
-    act: ['hike', 'study', 'work', 'read', 'movie', 'sleep', 'eat', 'sex', 'social', 'wake-up', 'adventure'],
-    eff: ['sleepy', 'energetic', 'euphoric', 'focused ', 'aroused', 'psychedelic', 'giggly', 'happy', 'hungry', 'relaxed', 'talkative'],
-    type: ['rosin', 'vaporizer', 'edible', 'flower', 'dab ', 'joint', 'topical', 'co2', 'bho', 'dab', 'tincture'],
-    category: ['sativa', 'indica', 'hybrid'],
-    symptoms: ['cramps', 'depression', 'fatigue', 'glycoma', 'insomnia', 'headaches', 'inflammation', 'appetite', 'spams', 'nausea', 'pain', 'seizures', 'stress'],
+    product: {
+    id:'0',
+    name:'Initial State',
+    description:'Initial State',
+    price: 0,
+    rating: 5,
+    quality: 5,
+    flavor: 5,
+    potency:5,
+    thc:  50,
+    cbd:  50,
+    thca: 50,
     retailers: [],
+    producer: {},
+    activity:['state','state','state'],
+    effect:[{name:'state',strength:50},{name:'state',strength:50},{name:'state',strength:50}]
+    },
 }
 
 export default function ProductReducer(state, action) {
@@ -28,12 +39,7 @@ export default function ProductReducer(state, action) {
             newState = Object.assign({}, state);
             // BatsFix then modify the item needed in the new
             // state. 
-            newState.retailers = action.retailers;
-            newState.act = action.act;
-            newState.eff = action.eff;
-            newState.type = action.type;
-            newState.category = action.category;
-            newState.symptoms = action.symptoms;
+            newState.product = action.product;
             return newState;
 
         //    
