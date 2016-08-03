@@ -4,28 +4,32 @@
 // It should only contain profile scenes navigation.
 // BatsFix. We are using this as a test tab for now!!!
 // Follow TestScene sample for an example of how to test a scene.
-// 
+//
 
 // Import modules
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, Navigator, Image } from 'react-native';
+import {StyleSheet, View, Text, Navigator, Image,TouchableHighlight } from 'react-native';
 import {Connect} from 'react-redux';
 
 // Import internal modules
 import ProfileScene  from './profileScene.js';
 import TestScene     from './testScene.js';
+import SettingScene     from './settingScene.js';
+import LicenseeAuthScene from './licenseeAuthScene.js';
 
-// Import const ids. 
+// Import const ids.
 
-const ProfileTabScenes = [ 
+const ProfileTabScenes = [
     { title: "Profile",      component: ProfileScene, index: 1 },
-    { title: "TestScene",    component: TestScene,    index: 2 },
+    { title: "SettingScene",    component: SettingScene, index: 2 },
+    { title: "LicenseeAuthScene",    component: LicenseeAuthScene, index: 3 },
+    { title: "TestScene",    component: TestScene,    index: 4 },
 ];
 
 var TestRouteMapper = {
     LeftButton: function (route, navigator, index, navState) {
         // BatsFix. Styling should be moved to common
-        if (index > 0) {
+        if(index >0){
             return (
                 <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
                     <Text onPress={navigator.jumpBack} style={{ fontSize: 18, color: "#007AFF" }}> Back</Text>
@@ -73,7 +77,7 @@ class ProfileTab extends Component {
                 initialRoute = {ProfileTabScenes[0]}
                 initialRouteStack = {ProfileTabScenes}
                 navigationBar={
-                    <Navigator.NavigationBar 
+                    <Navigator.NavigationBar
                         routeMapper = {TestRouteMapper}
                         >
                     </Navigator.NavigationBar>
