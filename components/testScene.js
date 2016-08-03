@@ -39,7 +39,7 @@ class TestScene extends Component {
                   </View>
                   {/*Description*/}
                   <View style={{ marginHorizontal: 10 }}>
-                      <View style={{ flex: 1, height: 85, borderWidth:1,borderColor:'lightgrey',marginTop:20 }}>
+                      <View style={{ flex: 1, height: 85, borderWidth:1,borderColor:'lightgrey',marginTop:10 }}>
                           <Text style={{fontSize:16}}> Add Store Description</Text>
                       </View>
                   </View>

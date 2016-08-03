@@ -16,6 +16,7 @@ import ProfileScene  from './profileScene.js';
 import TestScene     from './testScene.js';
 import SettingScene     from './settingScene.js';
 import LicenseeAuthScene from './licenseeAuthScene.js';
+import TestScene2 from './testScene2.js';
 
 // Import const ids.
 
@@ -24,6 +25,7 @@ const ProfileTabScenes = [
     { title: "SettingScene",    component: SettingScene, index: 2 },
     { title: "LicenseeAuthScene",    component: LicenseeAuthScene, index: 3 },
     { title: "TestScene",    component: TestScene,    index: 4 },
+    { title: "TestScene2",    component: TestScene2,    index: 5 },
 ];
 
 var TestRouteMapper = {
