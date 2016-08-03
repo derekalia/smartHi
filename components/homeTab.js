@@ -68,7 +68,6 @@ class HomeTab extends Component {
 
     render() {
         return (
-
             <Navigator
                 ref="navigator"
                 configureScene={this.configureScene}
@@ -81,8 +80,6 @@ class HomeTab extends Component {
                     </Navigator.NavigationBar>
                 }
                 />
-
-
         );
     }
 }

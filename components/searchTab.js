@@ -9,11 +9,12 @@ import {connect} from 'react-redux';
 
 //get internal components
 import Styles         from './styles.js';
-import {SearchSceneId, ProductSceneId, RetailerSceneId}   from '../common/const.js';
+import {SearchSceneId, ProductSceneId, ProducerSceneId, RetailerSceneId}   from '../common/const.js';
 
 import SearchScene    from './searchScene.js';
 import ProductScene   from './productScene.js';
 import RetailerScene  from './retailerScene.js';
+import ProducerScene  from './producerScene.js';
 
 // import navigation route mapper
 import RouteMapper   from './routeMapper.js';
@@ -21,11 +22,13 @@ import RouteMapper   from './routeMapper.js';
 const SearchIndex     = 0;
 const ProductIndex    = 1;
 const RetailerIndex   = 2;
+const ProducerIndex   = 3;
 
 var SearchTabScenes = [
     {title: "Search",        component: SearchScene,   index: SearchSceneId},
     {title: "Product",       component: ProductScene,  index: ProductSceneId},
-    {title: "Retail",        component: RetailerScene, index: RetailerSceneId},
+    {title: "Retailer",      component: RetailerScene, index: RetailerSceneId},
+    {title: "Producer",      component: ProducerScene, index: ProducerSceneId},
 ];
 
 class SearchTab extends Component {
@@ -52,10 +55,7 @@ class SearchTab extends Component {
 
     renderScene(route, navigator) {
         return (
-            <route.component navigator={navigator}
-                   searchScene={SearchTabScenes[SearchIndex]}
-                   retailerScene={SearchTabScenes[RetailerIndex]}
-                   productScene={SearchTabScenes[ProductIndex]}/>
+            <route.component navigator={navigator}/>
         );
     }
 
