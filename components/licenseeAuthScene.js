@@ -51,24 +51,24 @@ class LicenseeAuthScene extends Component {
                   </View>
                 </View>
               </View>
+            </View>
 
 
 
-
-                <View style={{marginTop:40}}>
-                  <Text style={{marginLeft:20,marginBottom:10}}>STATUS</Text>
+                <View style={{marginTop:200}}>
+                  <Text style={{marginLeft:20,marginBottom:10}}>Status</Text>
                   <View style={{backgroundColor:'white',borderTopWidth:1,borderTopColor:'#C8C8CC',borderBottomWidth:1,borderBottomColor:'#C8C8CC'}}>
                     <View style={{marginLeft:20,marginTop:10,marginBottom:10,flexDirection:'row',height:26,alignItems:'center'}}>
-                      <TouchableHighlight><Text>Connection</Text></TouchableHighlight>
+                      <TouchableHighlight><Text>Licensee Login</Text></TouchableHighlight>
                       <View style={{alignItems:'flex-end',flex:1,marginRight:20}}>
-                        <Text style={{color:'#C8C8CC'}}>Synced</Text>
+                        <Image source={require('../media/ForwardArrow2.png') } style={{ width: 8, height: 14,alignItems:'flex-end' }}/>
                       </View>
                     </View>
                   </View>
                 </View>
 
 
-</View>
+
             </View>
         );
     }
