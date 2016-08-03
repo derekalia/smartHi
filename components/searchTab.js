@@ -2,7 +2,7 @@
 // Description: searchtab.js
 // This contains the declaration for the search tab  of the app
 // It should only contain search tab scene navigation logic and nothing else.
-// 
+//
 import React, { Component } from 'react';
 import {StyleSheet,Text,View,ScrollView,Image,TextInput,TouchableOpacity,Navigator} from 'react-native';
 import {connect} from 'react-redux';
@@ -52,9 +52,9 @@ class SearchTab extends Component {
 
     renderScene(route, navigator) {
         return (
-            <route.component navigator={navigator} 
-                   searchScene={SearchTabScenes[SearchIndex]} 
-                   retailerScene={SearchTabScenes[RetailerIndex]} 
+            <route.component navigator={navigator}
+                   searchScene={SearchTabScenes[SearchIndex]}
+                   retailerScene={SearchTabScenes[RetailerIndex]}
                    productScene={SearchTabScenes[ProductIndex]}/>
         );
     }
@@ -73,6 +73,7 @@ class SearchTab extends Component {
                 navigationBar={
                     <Navigator.NavigationBar
                         routeMapper = {RouteMapper}
+                        style={{backgroundColor:'white',borderBottomWidth:1,borderColor:'#B2B2B2'}}
                     />
                 }
             />

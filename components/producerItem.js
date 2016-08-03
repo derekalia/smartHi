@@ -1,8 +1,8 @@
 //
 // Description: produceritem.js
-// This contains the declaration for the producer item 
+// This contains the declaration for the producer item
 // It should only contain producer item logic and nothing else.
-// 
+//
 
 // Import modules
 import React, { Component } from 'react';
@@ -30,8 +30,8 @@ class ProducerItem extends Component {
         return (
             <TouchableOpacity style={{
                 flexDirection: 'row',
-                height:100,
-                marginBottom: 10,
+                height:90,
+                marginBottom: 10,backgroundColor:'transparent'
             }} onPress={this.props.onPress}>
                 <Image style={Styles.bg} source={require('../media/forged1.png') } />
                 <View style={{ flexDirection: 'column', margin: 4,marginHorizontal:6 }}>
@@ -156,5 +156,3 @@ const Styles = StyleSheet.create({
         textShadowRadius: 2
     },
 })
-
-

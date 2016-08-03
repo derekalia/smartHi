@@ -2,16 +2,16 @@
 // Description: mainpage.js
 // This contains the declaration for the main work area of the app
 // which consists of several tabs. All of the tabs are declared separately
-// It should only contain logic to manipulate tabs, specifically, it 
+// It should only contain logic to manipulate tabs, specifically, it
 // will change the selected tab based on SwitchTabAction result.
-// 
+//
 
 // Import modules
 import React, { Component } from 'react';
 import {StyleSheet, TabBarIOS, } from 'react-native';
 import {connect} from 'react-redux';
 
-// Import const ids. 
+// Import const ids.
 import {HomeTabId,SearchTabId,ReviewTabId,MapTabId,ProfileTabId} from '../common/const.js';
 // Import icons
 import {HomeIcon,SearchIcon,ProfileIcon,MapIcon,ReviewIcon}        from '../common/icons.js';
@@ -45,7 +45,7 @@ class MainPage extends Component {
                 barTintColor="#F9F9F9"
                 >
                 <TabBarIOS.Item
-                    title="Home" 
+                    title="Home"
                     icon={HomeIcon}
                     selected={this.state.selectedTab == HomeTabId}
                     onPress={() => { this.setState({ selectedTab: HomeTabId }) } }>
@@ -84,9 +84,8 @@ class MainPage extends Component {
     }
 }
 //
-// Connect state.NavigationReducer.tabId to tabId prop. Used to selected tab. 
+// Connect state.NavigationReducer.tabId to tabId prop. Used to selected tab.
 // Connect state.NavigationReducer.switchTab to switchTab prop. Used to initiate tab switch if changed.
 //
 function mapStateToProps(state) { return { tabId: state.NavigationReducer.tabId, switchTab: state.NavigationReducer.switchTab } }
 module.exports = connect(mapStateToProps)(MainPage);
-

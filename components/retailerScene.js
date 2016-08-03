@@ -38,7 +38,7 @@ class RetailerScene extends Component {
     //
     render() {
         return (
-            <ScrollView>
+            <ScrollView style={{backgroundColor:'white'}}>
                 <View style={{ flex: 1 }}>
                     <View style={{ height: 248, justifyContent: "flex-end" }}>
                         <Image source={require('../media/ikes1.png') } style={{ height: 190, width: 380 }}/>
@@ -278,5 +278,3 @@ const Styles = StyleSheet.create({
         borderRadius: 5,
     },
 });
-
-

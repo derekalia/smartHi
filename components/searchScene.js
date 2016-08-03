@@ -42,7 +42,7 @@ class SearchScene extends Component {
 
     render() {
         return (
-            <View style={[{ marginTop: 50, flex: 1,marginHorizontal:5}]}>
+            <View style={[{ marginTop: 50, flex: 1,marginHorizontal:5,}]}>
                 <SearchBar startSearch={()=>this._startSearch()} setSearchTerm={(t)=>this._setSearchTerm(t)}/>
                 <ScrollView style={{marginTop: 0,}}>
                 <View style={{}}>

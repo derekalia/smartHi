@@ -102,7 +102,6 @@ class ReviewTab extends Component {
 
     render() {
         return (
-
             <Navigator
                 ref="navigator"
                 configureScene={this.configureScene}
@@ -115,9 +114,7 @@ class ReviewTab extends Component {
                         style={{backgroundColor:'#F9F9F9',borderBottomWidth:1,borderColor:'#B2B2B2'}} >
                     </Navigator.NavigationBar>
                 }
-                />
-
-
+            />
         );
     }
 }

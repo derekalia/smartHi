@@ -59,7 +59,7 @@ class ProductScene extends Component {
     // BatsFix. There should be no hardcode items in render!
     render() {
         return (
-            <ScrollView style={{marginTop:50}}>
+            <ScrollView style={{marginTop:0,backgroundColor:'white'}}>
                 <View style={{ flex: 1 }}>
                     {/*Product Image*/}
                     <View style={{ height: 248, justifyContent: "flex-end" }}>
@@ -113,7 +113,7 @@ class ProductScene extends Component {
                                         starSize={30}
                                         starColor={'red'}
                                         rating={this.state.quality}
-                                        selectedStar={(rating) => this._onQuality(rating) }
+                                        selectedStar={(rating) => this._onQuality(rating)}
                                         />
                                 </View>
                                 <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
@@ -204,7 +204,15 @@ class ProductScene extends Component {
                     {/* Producer item */}
                     <View style={{ marginHorizontal: 10, marginTop: 10 }}>
                         <View style={{ height: 40, justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Company</Text>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Producer</Text>
+                        </View>
+                        <ProducerItem producer={this.state.producer} onPress={() => this._goProducer(this.state.producer.id)}/>
+                    </View>
+
+                    {/* Related Products */}
+                    <View style={{ marginHorizontal: 10, marginTop: 10,marginBottom:55 }}>
+                        <View style={{ height: 40, justifyContent: 'center' }}>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Related Products</Text>
                         </View>
                         <ProducerItem producer={this.state.producer} onPress={() => this._goProducer(this.state.producer.id)}/>
                     </View>

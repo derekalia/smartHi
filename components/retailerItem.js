@@ -1,8 +1,8 @@
 //
 // Description: retaileritem.js
-// This contains the declaration for the retailer item 
+// This contains the declaration for the retailer item
 // It should only contain retailer item logic and nothing else.
-// 
+//
 
 // Import modules
 import React, { Component } from 'react';
@@ -170,5 +170,3 @@ const Styles = StyleSheet.create({
         textShadowRadius: 2
     },
 })
-
-
