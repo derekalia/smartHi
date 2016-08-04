@@ -1,16 +1,8 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
+ * Herby's x-platform entrypoint.
  */
 
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
 
 // Boiler plate imports from redux and redux-native
 import {createStore, combineReducers, applyMiddleware} from 'redux';
