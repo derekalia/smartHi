@@ -8,8 +8,6 @@
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, ScrollView, Image, TouchableHighlight, Navigator } from 'react-native';
 import {connect} from 'react-redux';
-//import {Camera} from 'react-native-camera';
-
 // Import const ids.
 import {CameraSceneId, ProductInfoId, RateProductId, RateStoreId, ReviewTabId,} from '../common/const.js';
 
@@ -45,6 +43,7 @@ var RouteMapper = {
     },
     RightButton: function (route, navigator, index, navState) {
         if (index < (ReviewTabScenes.length - 1)) {
+            // BatsFix. Add a check here if the next scene is enabled.
             return (
                 <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginRight: 13, }}>
                     <Text onPress={navigator.jumpForward} style={{ fontSize: 18, color: "#007AFF" }}> Next</Text>
