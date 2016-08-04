@@ -3,9 +3,9 @@
 // Used for testing various UI components
 //
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity,TouchableHighlight, Navigator} from 'react-native'
+import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableHighlight, Navigator} from 'react-native'
 
-class ProductInfoScene extends Component {
+class LicenseeAuthScene extends Component {
     constructor(props) {
         super(props);
     }
@@ -13,53 +13,42 @@ class ProductInfoScene extends Component {
     render() {
         return (
           <View>
-            <View style={{backgroundColor:'#EFEFF4',height:600, marginTop:64}}>
+            <View style={{backgroundColor:'#EFEFF4',height:600, marginTop:66}}>
               <View style={{marginTop:30}}>
-
-                <Text style={{marginLeft:20,marginBottom:10}}>Product Info</Text>
+                <Text style={{marginLeft:20,marginBottom:10}}>USER INFO</Text>
                 <View style={{backgroundColor:'white',borderTopWidth:1,borderTopColor:'#C8C8CC',borderBottomWidth:1,borderBottomColor:'#C8C8CC'}}>
                   <View style={{marginLeft:20,marginTop:10,marginBottom:10,flexDirection:'row',height:26,alignItems:'center'}}>
-                    <TouchableHighlight><Text>Lot Number</Text></TouchableHighlight>
+                    <TouchableHighlight><Text>State</Text></TouchableHighlight>
                     <View style={{alignItems:'flex-end',flex:1,marginRight:20}}>
-                    <Text style={{color:'#C8C8CC'}}>5002 9281 8101 1239</Text>
+                    <Text style={{color:'#C8C8CC'}}>Washington</Text>
                     </View>
                   </View>
 
                   <View style={{alignSelf:'flex-end',width:1,width:356,borderTopWidth:1,borderTopColor:'#C8C8CC'}}></View>
 
                   <View style={{marginLeft:20,marginTop:10,marginBottom:10,flexDirection:'row',height:26,alignItems:'center'}}>
-                    <TouchableHighlight><Text>Retailer</Text></TouchableHighlight>
+                    <TouchableHighlight><Text>Email</Text></TouchableHighlight>
                     <View style={{alignItems:'flex-end',flex:1,marginRight:20}}>
-                      <Text style={{color:'#C8C8CC'}}>Uncle Ike's</Text>
+                      <Text style={{color:'#C8C8CC'}}>derek@forged.io</Text>
                     </View>
                   </View>
 
                   <View style={{alignSelf:'flex-end',width:1,width:356,borderTopWidth:1,borderTopColor:'#C8C8CC'}}></View>
 
                   <View style={{marginLeft:20,marginTop:10,marginBottom:10,flexDirection:'row',height:26,alignItems:'center'}}>
-                    <TouchableHighlight><Text>Producer</Text></TouchableHighlight>
+                    <TouchableHighlight><Text>UBI</Text></TouchableHighlight>
                     <View style={{alignItems:'flex-end',flex:1,marginRight:20}}>
-                      <Text style={{color:'#C8C8CC'}}>Forged Cannabis</Text>
+                      <Text style={{color:'#C8C8CC'}}>481939</Text>
                     </View>
                   </View>
                   <View style={{alignSelf:'flex-end',width:1,width:356,borderTopWidth:1,borderTopColor:'#C8C8CC'}}></View>
 
                   <View style={{marginLeft:20,marginTop:10,marginBottom:10,flexDirection:'row',height:26,alignItems:'center'}}>
-                    <TouchableHighlight><Text>Product</Text></TouchableHighlight>
+                    <TouchableHighlight><Text>Password</Text></TouchableHighlight>
                     <View style={{alignItems:'flex-end',flex:1,marginRight:20}}>
-                      <Text style={{color:'#C8C8CC'}}>ROJO Stargazer</Text>
+                      <Text style={{color:'#C8C8CC'}}>*******</Text>
                     </View>
                   </View>
-                  <View style={{alignSelf:'flex-end',width:1,width:356,borderTopWidth:1,borderTopColor:'#C8C8CC'}}></View>
-
-                  <View style={{marginLeft:20,marginTop:10,marginBottom:10,flexDirection:'row',height:26,alignItems:'center'}}>
-                    <TouchableHighlight><Text>Price</Text></TouchableHighlight>
-                    <View style={{alignItems:'flex-end',flex:1,marginRight:20}}>
-                      <Text style={{color:'#C8C8CC'}}>$30</Text>
-                    </View>
-                  </View>
-
-
                 </View>
               </View>
             </View>
@@ -85,4 +74,4 @@ class ProductInfoScene extends Component {
     }
 }
 
-module.exports = ProductInfoScene;
+module.exports = LicenseeAuthScene;

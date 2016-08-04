@@ -56,11 +56,11 @@ class RetailerScene extends Component {
                                 selectedStar={(rating) => this._onRating(rating) }
                                 />
                             <Text style={{ fontSize: 19 }}> ({this.state.ratingCount}) </Text>
-                           <TouchableOpacity style={{ backgroundColor: "#4A90E2", 
-                                                      borderRadius: 8, 
-                                                      borderWidth: 1, 
-                                                      justifyContent: 'flex-end', 
-                                                      borderColor: '#4A90E2', 
+                           <TouchableOpacity style={{ backgroundColor: "#4A90E2",
+                                                      borderRadius: 8,
+                                                      borderWidth: 1,
+                                                      justifyContent: 'flex-end',
+                                                      borderColor: '#4A90E2',
                                                       marginLeft: 74 }}>
                                 <Text style={{ fontSize: 18, color: "white", margin: 4 }}> Show Map </Text>
                             </TouchableOpacity>
