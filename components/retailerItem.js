@@ -16,7 +16,7 @@ class RetailerItem extends Component {
     constructor(props) {
         super(props);
         // these should come from the app state.
-        this.state = this.props.retailer; 
+        this.state = this.props.retailer;
     }
 
     componentWillReceiveProps(nextProps) {
@@ -26,20 +26,20 @@ class RetailerItem extends Component {
     render() {
         // BatsFix. There shouldn't be any hardcoded data in this function.
         return (
-            <TouchableOpacity style={{
+            <TouchableOpacity  style={{
                 flexDirection: 'row',
                 height:100,
                 marginBottom: 10,
             }}  onPress={() => this.props.goRetailer(this.state.id) }>
                 <Image style={Styles.bg} source={require('../media/ikes1.png') } />
-                <View style={{ flexDirection: 'column', margin: 4,marginHorizontal:6 }}>
+                <View style={{ backgroundColor: 'transparent',flexDirection: 'column', margin: 4,marginHorizontal:6 }}>
 
                     <View style={{flexDirection: 'row',width:342 }}>
 
                     <View style={{flex:2,justifyContent:'flex-end',alignItems:"flex-end",alignSelf:"flex-end"}}>
                         <Text style={{
                           alignSelf:"flex-start",
-                            color: 'white',
+                            color: 'white',                            
                             fontSize: 22,
                             textShadowOffset: { width: 1.5, height: 1.5 },
                             textShadowColor: 'black',
