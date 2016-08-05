@@ -41,3 +41,26 @@ export const FiltersType = [
     {type:'type',name:'co2'},
     {type:'type',name:'bho'},
 ];
+
+export const FiltersCategory = [
+    {type:'category',name:'sativa'},
+    {type:'category',name:'indica'},
+    {type:'category',name:'hybrid'},
+];
+
+
+export const FiltersSymptoms = [
+    {type:'symptoms',name:'cramps'},
+    {type:'symptoms',name:'depression'},
+    {type:'symptoms',name:'eye pressure '},
+    {type:'symptoms',name:'fatigue'},
+    {type:'symptoms',name:'insomnia'},
+    {type:'symptoms',name:'headaches'},
+    {type:'symptoms',name:'inflammation'},
+    {type:'symptoms',name:'appetite'},
+    {type:'symptoms',name:'spams'},
+    {type:'symptoms',name:'nausea'},
+    {type:'symptoms',name:'pain'},
+    {type:'symptoms',name:'seizures'},
+    {type:'symptoms',name:'stress'},
+];

@@ -59,7 +59,7 @@ class ProductScene extends Component {
     // BatsFix. There should be no hardcode items in render!
     render() {
         return (
-            <ScrollView style={{marginTop:0,backgroundColor:'white'}}>
+            <ScrollView style={{backgroundColor:'white'}}>
                 <View style={{ flex: 1 }}>
                     {/*Product Image*/}
                     <View style={{ height: 248, justifyContent: "flex-end" }}>
@@ -68,16 +68,26 @@ class ProductScene extends Component {
                     {/* Overall rating */}
                     <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
                         <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
-                        <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
+                    </View>
+                    <View style={{ marginTop: 5, marginHorizontal: 10,flexDirection: "row" }}>
+                        <View style={{flex:1.2,alignItems: 'flex-start', flexDirection: "row",marginTop:7}}>
                             <StarRating
                                 disabled={true}
                                 maxStars={5}
-                                starSize={30}
-                                starColor={'red'}
+                                starSize={28}
+                                starColor={'#D0021B'}
                                 rating={this.props.product.rating}
                                 selectedStar={(rating) => this._onRating(rating) }
                                 />
-                            <Text style={{ fontSize: 19 }}> ({this.state.ratingCount}) </Text>
+                            <Text style={{ fontSize: 19,marginTop:2 }}> ({this.state.ratingCount}) </Text>
+                        </View>
+                        <View style={{flex:1,flexDirection: "row",justifyContent:'flex-end' }}>
+                          <TouchableOpacity style={Styles.tagCategory}>
+                              <Text style={Styles.tagTextCategory}>rosin</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity style={Styles.tagType}>
+                              <Text style={Styles.tagTextType}>sativa</Text>
+                          </TouchableOpacity>
                         </View>
                     </View>
                     {/* Description */}
@@ -111,7 +121,7 @@ class ProductScene extends Component {
                                         disabled={false}
                                         maxStars={5}
                                         starSize={30}
-                                        starColor={'red'}
+                                        starColor={'#D0021B'}
                                         rating={this.state.quality}
                                         selectedStar={(rating) => this._onQuality(rating)}
                                         />
@@ -121,7 +131,7 @@ class ProductScene extends Component {
                                         disabled={false}
                                         maxStars={5}
                                         starSize={30}
-                                        starColor={'red'}
+                                        starColor={'#D0021B'}
                                         rating={this.state.flavor}
                                         selectedStar={(rating) => this._onFlavor(rating) }
                                         />
@@ -131,7 +141,7 @@ class ProductScene extends Component {
                                         disabled={false}
                                         maxStars={5}
                                         starSize={30}
-                                        starColor={'red'}
+                                        starColor={'#D0021B'}
                                         rating={this.state.potency}
                                         selectedStar={(rating) => this._onPotency(rating) }
                                         />
@@ -151,26 +161,26 @@ class ProductScene extends Component {
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Effects</Text>
                         </View>
                         <View style={{ flexDirection: "row" }}>
-                            <View style={{ flex: 1 }}>
-                                <TouchableOpacity style={Styles.tagType}>
-                                    <Text style={Styles.tagTextType}>{this.state.effect[0].name}</Text>
+                            <View style={{ flex: 1.3 }}>
+                                <TouchableOpacity style={Styles.tagEffect}>
+                                    <Text style={Styles.tagTextEffect}>{this.state.effect[0].name}</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={Styles.tagType}>
-                                    <Text style={Styles.tagTextType}>{this.state.effect[1].name}</Text>
+                                <TouchableOpacity style={Styles.tagEffect}>
+                                    <Text style={Styles.tagTextEffect}>{this.state.effect[1].name}</Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={Styles.tagType}>
-                                    <Text style={Styles.tagTextType}>{this.state.effect[2].name}</Text>
+                                <TouchableOpacity style={Styles.tagEffect}>
+                                    <Text style={Styles.tagTextEffect}>{this.state.effect[2].name}</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={{ flex: 3 }}>
-                                <View style={[Styles.tagType, { backgroundColor: '#BD10E0', width: this.state.effect[0].strength }]}>
-                                    <Text style={Styles.tagTextType}> </Text>
+                                <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: this.state.effect[0].strength }]}>
+                                    <Text style={Styles.tagTextEffect}> </Text>
                                 </View>
-                                <View style={[Styles.tagType, { backgroundColor: '#BD10E0', width: this.state.effect[1].strength }]}>
-                                    <Text style={Styles.tagTextType}> </Text>
+                                <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: this.state.effect[1].strength }]}>
+                                    <Text style={Styles.tagTextEffect}> </Text>
                                 </View>
-                                <View style={[Styles.tagType, { backgroundColor: '#BD10E0', width: this.state.effect[2].strength }]}>
-                                    <Text style={Styles.tagTextType}> </Text>
+                                <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: this.state.effect[2].strength }]}>
+                                    <Text style={Styles.tagTextEffect}> </Text>
                                 </View>
                             </View>
                         </View>
@@ -181,14 +191,14 @@ class ProductScene extends Component {
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Activies</Text>
                         </View>
                         <View style={{ flexDirection: "row" }}>
-                            <TouchableOpacity style={Styles.tagType}>
-                                <Text style={Styles.tagTextType}>{this.state.activity[0]}</Text>
+                            <TouchableOpacity style={Styles.tagActivity}>
+                                <Text style={Styles.tagTextActivity}>{this.state.activity[0]}</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagType}>
-                                <Text style={Styles.tagTextType}>{this.state.activity[1]}</Text>
+                            <TouchableOpacity style={Styles.tagActivity}>
+                                <Text style={Styles.tagTextActivity}>{this.state.activity[1]}</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagType}>
-                                <Text style={Styles.tagTextType}>{this.state.activity[2]}</Text>
+                            <TouchableOpacity style={Styles.tagActivity}>
+                                <Text style={Styles.tagTextActivity}>{this.state.activity[2]}</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -241,18 +251,65 @@ const Styles = StyleSheet.create({
         margin: 4,
         borderRadius: 20,
         borderWidth: 1,
-        borderColor: "#BD10E0",
+        borderColor: "#50E3C2",
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
     },
     tagTextType: {
-        color: "#BD10E0",
+        color: "#50E3C2",
         marginTop: 7,
         marginBottom: 7,
         marginHorizontal: 10,
     },
 
+    tagCategory: {
+        margin: 4,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: "#70D600",
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    tagTextCategory: {
+        color: "#70D600",
+        marginTop: 7,
+        marginBottom: 7,
+        marginHorizontal: 10,
+    },
+
+    tagEffect: {
+        margin: 4,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: "#4A90E2",
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    tagTextEffect: {
+        color: "#4A90E2",
+        marginTop: 7,
+        marginBottom: 7,
+        marginHorizontal: 10,
+    },
+
+    tagActivity: {
+        margin: 4,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: "#BD10E0",
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    tagTextActivity: {
+        color: "#BD10E0",
+        marginTop: 7,
+        marginBottom: 7,
+        marginHorizontal: 10,
+    },
 
     storeItem: {
         flex: 1,
@@ -311,5 +368,3 @@ const Styles = StyleSheet.create({
         textShadowRadius: 2
     },
 })
-
-

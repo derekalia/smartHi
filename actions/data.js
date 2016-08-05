@@ -69,11 +69,11 @@ const TestRetailers = [
 
 const TestProducts = [
 {   id:'0',
-    name:'Forged XLS',
-    description:'Forged XLS excellent quality',
+    name:'FORGED - XJ-13',
+    description:'FORGED Rosin Is our process of extracting oils from cannabis. We use very low temperatures to reduce the terpene evaporation which is critical to the experience of our product.',
     price: 39.99,
     rating: 3.5,
-    ratingCount: 300,
+    ratingCount: 323,
     quality: 3,
     flavor: 4,
     potency:5,
@@ -82,8 +82,8 @@ const TestProducts = [
     thca: 55,
     rid:['0','1','2','3'],
     pid:'0',
-    activity:['mm','mars','pick'],
-    effect:[{name:'yummy',strength:90},{name:'sleep',strength:50},{name:'stamina',strength:60}]},
+    activity:['social','exercise','jam'],
+    effect:[{name:'energetic',strength:90},{name:'giggly',strength:50},{name:'relaxed',strength:60}]},
 
 {   id:'1',
     name:'Forged SML',
@@ -327,7 +327,7 @@ function GetProducerItem(pid){
             return TestProducers[j];
         }
      }
-    return null; 
+    return null;
 }
 
 function GetProductItems(pid) {
