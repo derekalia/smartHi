@@ -9,6 +9,7 @@ import {StyleSheet, View, Text, MapView } from 'react-native';
 import {Connect} from 'react-redux';
 
 class MapTab extends Component {
+
     render() {
         return (
             <View style={[{ backgroundColor: 'white' }]}>

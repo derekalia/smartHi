@@ -65,8 +65,13 @@ var RouteMapper = {
 
 class ReviewTab extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = { selectedTab:ReviewTabId, resetScene: 0 }; 
+    } 
+
     componentWillReceiveProps(nextProps) {
-        if (nextProps.selectedTab == ReviewTabId) {
+        if (this.state.resetScene == nextProps.resetScene) {
             var sceneId = nextProps.sceneId;
             var foundExisting = false;
             // Check existing routes first
@@ -86,6 +91,10 @@ class ReviewTab extends Component {
                      }
                 }
             }
+        }
+        else {
+            this.setState({resetScene: nextProps.resetScene});
+            this.refs.navigator.popToTop();
         }
     }
 

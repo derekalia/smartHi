@@ -308,9 +308,7 @@ const TestProducts = [
 
 function GetRetailerItems(rid){
     var retailers = [];
-    console.log("looking for retailer items now");
     for (var i=0; i < rid.length; i++) {
-         console.log("retailer id is "+rid[i]);
          for (var j=0; j < TestRetailers.length; j++) {
             if (TestRetailers[j].id == rid[i]) {
                 retailers.push(TestRetailers[j]);
