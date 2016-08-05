@@ -34,6 +34,13 @@ const ProfileTabScenes = [
 var TestRouteMapper = {
     LeftButton: function (route, navigator, index, navState) {
         // BatsFix. Styling should be moved to common
+        if(index == 0){
+          return (
+              <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
+                  <Text onPress={navigator.jumpTo(ProfileTabScenes[4])} style={{ fontSize: 18, color: "#007AFF" }}>TestBed</Text>
+              </View>
+          );
+        }
         if(index >0){
             return (
                 <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
@@ -49,6 +56,13 @@ var TestRouteMapper = {
                 return (
                     <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginRight: 13, }}>
                         <Text onPress={navigator.jumpForward} style={{ fontSize: 18, color: "#007AFF" }}> Skipping</Text>
+                    </View>
+                );
+            }
+            if (index == 0) {
+                return (
+                    <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginRight: 13, }}>
+                        <Text onPress={navigator.jumpForward} style={{ fontSize: 18, color: "#007AFF" }}> Settings</Text>
                     </View>
                 );
             }
@@ -127,7 +141,7 @@ class ProfileTab extends Component {
                 navigationBar={
                     <Navigator.NavigationBar
                         routeMapper = {TestRouteMapper}
-                        >
+                        style={{backgroundColor:'#F9F9F9',borderBottomWidth:1,borderColor:'#B2B2B2'}} >
                     </Navigator.NavigationBar>
                 }
                 />

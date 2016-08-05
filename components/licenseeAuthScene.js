@@ -13,7 +13,7 @@ class LicenseeAuthScene extends Component {
     render() {
         return (
           <View>
-            <View style={{backgroundColor:'#EFEFF4',height:600, marginTop:66}}>
+            <View style={{backgroundColor:'#EFEFF4',height:600, marginTop:63}}>
               <View style={{marginTop:30}}>
                 <Text style={{marginLeft:20,marginBottom:10}}>USER INFO</Text>
                 <View style={{backgroundColor:'white',borderTopWidth:1,borderTopColor:'#C8C8CC',borderBottomWidth:1,borderBottomColor:'#C8C8CC'}}>
