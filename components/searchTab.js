@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 
 //get internal components
 import Styles         from './styles.js';
-import {SearchSceneId, ProductSceneId, ProducerSceneId, RetailerSceneId}   from '../common/const.js';
+import {SearchSceneId, ProductSceneId, ProducerSceneId, RetailerSceneId, SearchTabId, }   from '../common/const.js';
 
 import SearchScene    from './searchScene.js';
 import ProductScene   from './productScene.js';
@@ -55,7 +55,7 @@ class SearchTab extends Component {
 
     renderScene(route, navigator) {
         return (
-            <route.component navigator={navigator}/>
+            <route.component tabId={SearchTabId} navigator={navigator}/>
         );
     }
 

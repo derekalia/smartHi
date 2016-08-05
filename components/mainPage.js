@@ -37,6 +37,10 @@ class MainPage extends Component {
         this.setState({selectedTab: tabId});
     }
 
+    _changeTab(tabId) {
+        this.setState({selectedTab: tabId});
+    }
+
     render() {
         return (
             <TabBarIOS
@@ -48,8 +52,8 @@ class MainPage extends Component {
                     title="Home"
                     icon={HomeIcon}
                     selected={this.state.selectedTab == HomeTabId}
-                    onPress={() => { this.setState({ selectedTab: HomeTabId }) } }>
-                    <HomeTab selectedTab = {this.state.selectedTab}/>
+                    onPress={() => { this.setState({ selectedTab: HomeTabId })} }>
+                    <HomeTab selectedTab = {this.state.selectedTab} ref="myhome"/>
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Map"

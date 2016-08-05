@@ -91,7 +91,7 @@ class ReviewTab extends Component {
 
     renderScene(route, navigator) {
         return (
-            <route.component navigator={navigator}/>
+            <route.component tabId={ReviewTabId} navigator={navigator}/>
         );
     }
 

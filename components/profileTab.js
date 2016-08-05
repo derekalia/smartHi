@@ -11,21 +11,24 @@ import React, { Component } from 'react';
 import {StyleSheet, View, Text, Navigator, Image,TouchableHighlight } from 'react-native';
 import {Connect} from 'react-redux';
 
+/// Import const ids.
+import {ReviewTabId,} from '../common/const.js';
+
 // Import internal modules
-import ProfileScene  from './profileScene.js';
-import TestScene     from './testScene.js';
-import SettingScene     from './settingScene.js';
+import ProfileScene      from './profileScene.js';
+import TestScene         from './testScene.js';
+import SettingScene      from './settingScene.js';
 import LicenseeAuthScene from './licenseeAuthScene.js';
-import TestScene2 from './testScene2.js';
+import TestScene2        from './testScene2.js';
 
 // Import const ids.
 
 const ProfileTabScenes = [
-    { title: "Profile",      component: ProfileScene, index: 1 },
-    { title: "SettingScene",    component: SettingScene, index: 2 },
-    { title: "LicenseeAuthScene",    component: LicenseeAuthScene, index: 3 },
-    { title: "TestScene",    component: TestScene,    index: 4 },
-    { title: "TestScene2",    component: TestScene2,    index: 5 },
+    { title: "Profile",           component: ProfileScene,      index: 1 },
+    { title: "SettingScene",      component: SettingScene,      index: 2 },
+    { title: "LicenseeAuthScene", component: LicenseeAuthScene, index: 3 },
+    { title: "TestScene",         component: TestScene,         index: 4 },
+    { title: "TestScene2",        component: TestScene2,        index: 5 },
 ];
 
 var TestRouteMapper = {
@@ -62,7 +65,7 @@ class ProfileTab extends Component {
 
     renderScene(route, navigator) {
         return (
-            <route.component navigator={navigator} title={route.title}/>
+            <route.component tabId={ReviewTabId} navigator={navigator} title={route.title}/>
         );
     }
 

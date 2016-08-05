@@ -32,33 +32,40 @@ const HomeTabScenes = [
 
 class HomeTab extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = { selectedTab:HomeTabId }; 
+    } 
+    test () {
+      console.log("test was called");
+    }
+
     componentWillReceiveProps(nextProps) {
-        if (nextProps.selectedTab == HomeTabId) {
-            var sceneId = nextProps.sceneId;
-            var foundExisting = false;
-            // Check existing routes first
-            var routelist = this.refs.navigator.getCurrentRoutes();
-            for (var i=0; i < routelist.length; i++) {
-                if (routelist[i].index == sceneId) {
-                    this.refs.navigator.jumpTo(routelist[i]);
-                    foundExisting = true;
-                    break;
-                }
+        console.log("prop was received");
+        var sceneId = nextProps.sceneId;
+        var foundExisting = false;
+        // Check existing routes first
+        var routelist = this.refs.navigator.getCurrentRoutes();
+        for (var i=0; i < routelist.length; i++) {
+            if (routelist[i].index == sceneId) {
+                this.refs.navigator.jumpTo(routelist[i]);
+                foundExisting = true;
+                break;
             }
-            // If not found in existing push
-            if (foundExisting == false) {
-                for(var i=0; i < HomeTabScenes.length; i++) {
-                     if (HomeTabScenes[i].index == sceneId) {
-                        this.refs.navigator.push(HomeTabScenes[i]);
-                     }
-                }
+        }
+        // If not found in existing push
+        if (foundExisting == false) {
+            for(var i=0; i < HomeTabScenes.length; i++) {
+                 if (HomeTabScenes[i].index == sceneId) {
+                    this.refs.navigator.push(HomeTabScenes[i]);
+                 }
             }
         }
     }
 
     renderScene(route, navigator) {
         return (
-            <route.component navigator={navigator}/>
+            <route.component tabId={HomeTabId} navigator={navigator}/>
         );
     }
 
