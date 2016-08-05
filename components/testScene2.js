@@ -14,7 +14,7 @@ class TestScene2 extends Component {
         return (
           <ScrollView style={{backgroundColor:'white'}}>
               <View style={{ flex: 1 }}>
-                  <View style={{marginTop:66, height: 180, justifyContent: "center",alignItems:'center',backgroundColor:'lightgrey' }}>
+                  <View style={{marginTop:63, height: 180, justifyContent: "center",alignItems:'center',backgroundColor:'lightgrey' }}>
                   <TouchableHighlight style={{ backgroundColor: "#4A90E2",
                                              borderRadius: 8,
                                              borderWidth: 1,
