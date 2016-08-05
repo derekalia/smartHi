@@ -14,6 +14,7 @@ export const RetailerSceneId = '4';
 export const ProductSceneId  = '5';
 export const HomeSceneId     = '6';
 export const ProducerSceneId = '7';
+export const ActivitySceneId = '8';
 
 export const CameraSceneId     = 'CameraScene';
 export const ProductInfoId     = 'ProductInfo';

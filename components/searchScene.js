@@ -54,29 +54,6 @@ class SearchScene extends Component {
             </View>
         );
     }
-    /*
-    _renderSearchResults() {
-        if (this.props.products.length !== 0) {
-            var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => (r1 != r2), });
-            return (
-                <View>
-                <ListView dataSource = {ds.cloneWithRows(this.props.products) }
-                    enableEmptySections = {true}
-                    renderRow  = {this._renderRow.bind(this) }
-                    />
-                </View>
-            );
-        }
-        else
-            return null;
-    }
-
-    _renderRow(product) {
-        return (
-            <ProductItem goProduct={(t)=> this._goProduct(t)} product={product}/>
-        );
-    }
-    */
 }
 
 //

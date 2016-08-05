@@ -6,25 +6,52 @@
 // Import modules
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, TouchableHighlight } from 'react-native';
+
+//get state management components
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
+import {FiltersActivity} from '../common/filters.js';
+import {GetActivityAction} from '../actions';
 import ActivityItem from './activityItem.js';
 
 class ActivityList extends Component {
+
+    _goActivity(activityType) {
+        console.log("going to activity" + activityType);
+        this.props.GetActivityAction(activityType);
+    }
+
     render() {
         //
         // BatsFix. This needs to be flexible with regard to a device with and height.
         //
+        
+        var count = this.props.count;
+        if (count >= FiltersActivity.length) {
+            count = FiltersActivity.length;
+        }
+        var items = [];
+        for (var i=0; i < count; i++) {
+            items.push(
+                <ActivityItem activity={FiltersActivity[i].name} imageIndex={i} key={FiltersActivity[i].name} goActivity={(n) => this._goActivity(n)}/>
+            );
+        }
+        
         return (
             <View>              
                 {/* Activity Items BatsFix. should be dynamically generated here*/}
                 <View style={{flexDirection:'row',flexWrap:'wrap'}}>
-                    <ActivityItem activity="music"    imageIndex={0} />
-                    <ActivityItem activity="movie"    imageIndex={1} />
-                    <ActivityItem activity="exercise" imageIndex={2} />
-                    <ActivityItem activity="create"   imageIndex={3} />
+                    {items}
                 </View>
             </View>
         );
     }
 }
 
-module.exports = ActivityList;
+//
+// Connect GetActivityAction to props
+//
+function mapActionToProps(dispatch) { return bindActionCreators({  GetActivityAction }, dispatch); }
+module.exports = connect(null,mapActionToProps)(ActivityList);
+

@@ -390,3 +390,14 @@ export function GetProducer(id) {
     }
     return null;
 }
+
+export function GetActivityProducts(activityType) {
+    // BatsFix. use the term later!
+    var products = [];
+    for (var i=0; i < TestProducts.length; i+=2) {
+        products.push(TestProducts[i]);
+    }
+    return products;
+}
+
+
