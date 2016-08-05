@@ -20,7 +20,6 @@ class FilterList extends Component {
 
     componentWillReceiveProps(nextProps) {
         productCount = nextProps.productCount;
-        console.log("product count is "+productCount);
         if (productCount > 0) {
             this.setState({filtersVisible: false});
         }

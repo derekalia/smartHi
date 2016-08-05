@@ -14,5 +14,4 @@
 14. Finish review 2 pages.
 15. Hookup review pages.
 16. Hookup profile pages.
-17. Reset to first scene on tab switch
-
+17. Reset to first scene on tab switch Done.

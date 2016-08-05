@@ -33,23 +33,34 @@ var SearchTabScenes = [
 
 class SearchTab extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = { selectedTab:SearchTabId, resetScene: 0 }; 
+    } 
+
     componentWillReceiveProps(nextProps) {
-        sceneId = nextProps.sceneId;
-        var foundExisting = false;
-        var routelist = this.refs.navigator.getCurrentRoutes();
-        for (var i=0; i < routelist.length; i++) {
-            if (routelist[i].index == sceneId) {
-                this.refs.navigator.jumpTo(routelist[i]);
-                foundExisting = true;
-                break;
+        if (nextProps.resetScene == this.state.resetScene) {
+            sceneId = nextProps.sceneId;
+            var foundExisting = false;
+            var routelist = this.refs.navigator.getCurrentRoutes();
+            for (var i=0; i < routelist.length; i++) {
+                if (routelist[i].index == sceneId) {
+                    this.refs.navigator.jumpTo(routelist[i]);
+                    foundExisting = true;
+                    break;
+                }
+            }
+            if (foundExisting == false) {
+                for (var i=0; i < SearchTabScenes.length; i++) {
+                     if (SearchTabScenes[i].index == sceneId) {
+                        this.refs.navigator.push(SearchTabScenes[i]);
+                     }
+                }
             }
         }
-        if (foundExisting == false) {
-            for (var i=0; i < SearchTabScenes.length; i++) {
-                 if (SearchTabScenes[i].index == sceneId) {
-                    this.refs.navigator.push(SearchTabScenes[i]);
-                 }
-            }
+        else {
+            this.setState({resetScene: nextProps.resetScene});
+            this.refs.navigator.popToTop();
         }
     }
 

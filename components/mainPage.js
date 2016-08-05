@@ -29,16 +29,21 @@ class MainPage extends Component {
         super(props);
         this.state = {
             selectedTab: HomeTabId,
+            resetScene: 0,
         }
     }
 
     componentWillReceiveProps(nextProps) {
-        var tabId = nextProps.tabId;
         this.setState({selectedTab: tabId});
     }
 
     _changeTab(tabId) {
-        this.setState({selectedTab: tabId});
+        // BatsFix. make it so that it resets. This is 
+        // very hacky because resetScene could potentially roll over
+        // but for now too lazy to create resetscene for each tab
+        //
+        var resetScene = this.state.resetScene+1;
+        this.setState({selectedTab: tabId,resetScene: resetScene});
     }
 
     render() {
@@ -52,36 +57,36 @@ class MainPage extends Component {
                     title="Home"
                     icon={HomeIcon}
                     selected={this.state.selectedTab == HomeTabId}
-                    onPress={() => { this.setState({ selectedTab: HomeTabId })} }>
-                    <HomeTab selectedTab = {this.state.selectedTab} ref="myhome"/>
+                    onPress={() => { this._changeTab(HomeTabId) } }>
+                    <HomeTab selectedTab = {this.state.selectedTab} resetScene={this.state.resetScene}/>
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Map"
                     icon={MapIcon}
                     selected={this.state.selectedTab == MapTabId}
                     onPress={() => { this.setState({ selectedTab: MapTabId }) } }>
-                    <MapTab selectedTab = {this.state.selectedTab}/>
+                    <MapTab selectedTab = {this.state.selectedTab} resetScene={this.state.resetScene}/>
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Search"
                     icon={SearchIcon}
                     selected={this.state.selectedTab == SearchTabId}
                     onPress={() => { this.setState({ selectedTab: SearchTabId }) } }>
-                    <SearchTab selectedTab = {this.state.selectedTab}/>
+                    <SearchTab selectedTab = {this.state.selectedTab} resetScene={this.state.resetScene}/>
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Review"
                     icon={ReviewIcon}
                     selected={this.state.selectedTab == ReviewTabId}
                     onPress={() => { this.setState({ selectedTab: ReviewTabId }) } }>
-                    <ReviewTab selectedTab = {this.state.selectedTab}/>
+                    <ReviewTab selectedTab = {this.state.selectedTab} resetScene ={this.state.resetScene}/>
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Profile"
                     icon={ProfileIcon}
                     selected={this.state.selectedTab == ProfileTabId}
                     onPress={() => { this.setState({ selectedTab: ProfileTabId }) } }>
-                    <ProfileTab selectedTab = {this.state.selectedTab}/>
+                    <ProfileTab selectedTab = {this.state.selectedTab} resetScene={this.state.resetScene}/>
                 </TabBarIOS.Item>
             </TabBarIOS>
         );

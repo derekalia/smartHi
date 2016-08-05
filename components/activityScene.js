@@ -14,21 +14,12 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 //get internal components
-import ActivityList     from './activityList.js';
-import ProductItem      from './productItem.js';
-import {GoSearchAction, GetProductAction} from '../actions';
+import ProductList        from './productList.js';
+import {GetProductAction} from '../actions';
 
-class HomeScene extends Component {
+class ActivityScene extends Component {
     constructor(props) {
         super(props);
-        this.state = {activityCount: 4};
-    }
-
-    _goSearch() {
-        //
-        // Go to search scene.
-        //
-        this.props.GoSearchAction();
     }
 
     _goProduct(productId) {
@@ -38,42 +29,11 @@ class HomeScene extends Component {
        this.props.GetProductAction(productId);
     }
 
-    _moreActivity() {
-        var count = this.state.activityCount+2;
-        this.setState({activityCount:count});
-    }
-
     render() {
         return (
             <View style={[{ marginTop: 35, flex: 1 }]}>
                 <ScrollView>
-                    {/* Find Button */}
-                    {/*<TouchableOpacity style={[Styles.FindProductButton]}
-                        onPress={this._goSearch.bind(this) }>
-                        <Text style={{ color: 'white', fontSize: 22, }}>Find Product</Text>
-                    </TouchableOpacity>*/}
-
-                    {/* Activities */}
-                    {/* Section Header */}
-                    <View style={{ alignItems: 'flex-end', marginLeft: 5, height:40,flexDirection:'row',justifyContent: 'flex-start',marginBottom:0 }}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Activity </Text>
-                        <TouchableHighlight onPress={()=>this._moreActivity()}>
-                          <Text style={{ fontSize: 16,color:'blue' }}> more </Text>
-                        </TouchableHighlight>
-                    </View>
-                    <ActivityList count={this.state.activityCount}/>
-
-                    {/* Staff Picks */}
-                    <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 15,marginBottom:5 }]}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Staff Pick </Text>
-                    </View>
-                    <ProductItem product={this.props.staffPick} goProduct={(id) => this._goProduct(id) }/>
-
-                    {/* Trending */}
-                    <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 15,marginBottom:5 }]}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Trending </Text>
-                    </View>
-                    <ProductItem product={this.props.trending} goProduct={(id) => this._goProduct(id) }/>
+                    <ProductList productList={this.props.productList} goProduct={(t)=> this._goProduct(t)}/>
                 </ScrollView>
             </View>
         );
@@ -81,20 +41,19 @@ class HomeScene extends Component {
 }
 
 //
-// Connect state.SearchReducer.activities and state.SearchReducer.effects to props.
+// Connect state.ActivityReducer.productList  to props.
 //
 function mapStateToProps(state) {
     return {
-        staffPick: state.NewsReducer.staffPick,
-        trending:  state.NewsReducer.trending,
+        productList: state.ActivityReducer.products,
     }
 }
 
 //
-// Connect GoSearchAction, GetProductAction to props
+// Connect GetProductAction to props
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GoSearchAction, GetProductAction }, dispatch); }
-module.exports = connect(mapStateToProps,mapActionToProps)(HomeScene);
+function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction }, dispatch); }
+module.exports = connect(mapStateToProps,mapActionToProps)(ActivityScene);
 
 const Styles = StyleSheet.create({
     container: {

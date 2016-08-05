@@ -12,7 +12,7 @@ import {StyleSheet, View, Text, Navigator, Image,TouchableHighlight } from 'reac
 import {Connect} from 'react-redux';
 
 /// Import const ids.
-import {ReviewTabId,} from '../common/const.js';
+import {ProfileTabId,} from '../common/const.js';
 
 // Import internal modules
 import ProfileScene      from './profileScene.js';
@@ -87,9 +87,42 @@ var TestRouteMapper = {
 
 class ProfileTab extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = { selectedTab:ProfileTabId, resetScene: 0 }; 
+    } 
+
+    componentWillReceiveProps(nextProps) {
+        if (this.state.resetScene == nextProps.resetScene) {
+            var sceneId = nextProps.sceneId;
+            var foundExisting = false;
+            // Check existing routes first
+            var routelist = this.refs.navigator.getCurrentRoutes();
+            for (var i=0; i < routelist.length; i++) {
+                if (routelist[i].index == sceneId) {
+                    this.refs.navigator.jumpTo(routelist[i]);
+                    foundExisting = true;
+                    break;
+                }
+            }
+            // If not found in existing push
+            if (foundExisting == false) {
+                for(var i=0; i < ReviewTabScenes.length; i++) {
+                     if (ReviewTabScenes[i].index == sceneId) {
+                        this.refs.navigator.push(ReviewTabScenes[i]);
+                     }
+                }
+            }
+        }
+        else {
+            this.setState({resetScene: nextProps.resetScene});
+            this.refs.navigator.popToTop();
+        }
+    }
+
     renderScene(route, navigator) {
         return (
-            <route.component tabId={ReviewTabId} navigator={navigator} title={route.title}/>
+            <route.component tabId={ProfileTabId} navigator={navigator} title={route.title}/>
         );
     }
 

@@ -48,7 +48,6 @@ class ProductScene extends Component {
     }
 
     _goRetailer(retailerId: string) {
-        console.log("going to retailer ["+retailerId+"]");
         this.props.GetRetailerAction(retailerId);
     }
 

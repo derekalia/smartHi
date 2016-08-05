@@ -308,9 +308,7 @@ const TestProducts = [
 
 function GetRetailerItems(rid){
     var retailers = [];
-    console.log("looking for retailer items now");
     for (var i=0; i < rid.length; i++) {
-         console.log("retailer id is "+rid[i]);
          for (var j=0; j < TestRetailers.length; j++) {
             if (TestRetailers[j].id == rid[i]) {
                 retailers.push(TestRetailers[j]);
@@ -392,3 +390,14 @@ export function GetProducer(id) {
     }
     return null;
 }
+
+export function GetActivityProducts(activityType) {
+    // BatsFix. use the term later!
+    var products = [];
+    for (var i=0; i < TestProducts.length; i+=2) {
+        products.push(TestProducts[i]);
+    }
+    return products;
+}
+
+
