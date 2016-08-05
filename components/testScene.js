@@ -20,12 +20,12 @@ class TestScene extends Component {
                                              borderWidth: 1,
                                              justifyContent: 'flex-end',
                                              borderColor: '#4A90E2',
-                                              }}><Text style={{ fontSize: 18, color: "white", margin: 4 }}>Upload Image</Text></TouchableHighlight>
+                                              }}><Text style={{ fontSize: 18, color: "white", margin: 4 }}> Upload Image </Text></TouchableHighlight>
                   </View>
                   {/*Rating and link to map*/}
                   <View style={{ flexDirection:'row', marginTop: 10, marginHorizontal: 10,alignItems:'center' }}>
                       <View style={{borderWidth:1,borderColor:'lightgrey',flex:1 }}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold',margin:3,}}>Company Name</Text>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold',margin:3,}}> Company Name </Text>
                       </View>
                       <View style={{width:150, alignItems:'center'}}>
                          <TouchableHighlight style={{ backgroundColor: "#4A90E2",
@@ -33,7 +33,7 @@ class TestScene extends Component {
                                                     borderWidth: 1,
                                                     borderColor: '#4A90E2',
                                                      }}>
-                              <Text style={{ fontSize: 18, color: "white", margin: 4 }}>Store Location</Text>
+                              <Text style={{ fontSize: 18, color: "white", margin: 4 }}> Store Location </Text>
                           </TouchableHighlight>
                         </View>
                   </View>

@@ -28,58 +28,85 @@ class TestScene2 extends Component {
                         <Text style={{ fontSize: 18, fontWeight: 'bold',margin:3,}}>Product Name</Text>
                       </View>
                   </View>
-                  <View style={{marginHorizontal: 10, flexDirection:'row', width:150, alignItems:'center',marginTop: 20,}}>
-                     <TouchableHighlight style={{ backgroundColor: "white",
-                                                borderRadius: 20,
-                                                borderWidth: 1,
-                                                borderColor: '#4A90E2',
-                                                marginRight:10
-                                                 }}>
-                          <Text style={{ fontSize: 16, color: "#4A90E2", margin: 6, marginHorizontal:14, textAlign:'center' }}>tag 1</Text>
-                      </TouchableHighlight>
-                      <TouchableHighlight style={{ backgroundColor: "white",
-                                                 borderRadius: 20,
-                                                 borderWidth: 1,
-                                                 borderColor: '#4A90E2',
-                                                  }}>
-                           <Text style={{ fontSize: 16, color: "#4A90E2", margin: 6, marginHorizontal:14, textAlign:'center' }}>tag 2</Text>
-                       </TouchableHighlight>
 
-                    </View>
                   {/*Description*/}
-                  <View style={{ marginHorizontal: 10,marginTop:20 }}>
+                  <View style={{ marginHorizontal: 10,marginTop:10 }}>
                       <View style={{ flex: 1, height: 85, borderWidth:1,borderColor:'lightgrey',marginTop:10 }}>
                           <Text style={{fontSize:16}}> Add Product Description</Text>
                       </View>
                   </View>
 
+
+
+
+
+                    <View style={{ marginHorizontal: 10, marginTop: 20 }}>
+                        <View style={{ height: 30, }}>
+                            <Text style={{ fontSize: 18, fontWeight: 'bold', }}>Effects</Text>
+                        </View>
+                        <View style={{ flexDirection: "row" }}>
+                                <TouchableOpacity style={Styles.tagType}>
+                                    <Text style={Styles.tagTextType}> tag </Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity style={Styles.tagType}>
+                                    <Text style={Styles.tagTextType}> + </Text>
+                                </TouchableOpacity>
+                        </View>
+                    </View>
+
                   <View style={{ marginHorizontal: 10, marginTop: 20 }}>
                       <View style={{ height: 30, }}>
-                          <Text style={{ fontSize: 18, fontWeight: 'bold', }}>Effects</Text>
+                          <Text style={{ fontSize: 18, fontWeight: 'bold', }}>Activity</Text>
                       </View>
                       <View style={{ flexDirection: "row" }}>
-                          <View style={{ flex: 1.5 }}>
                               <TouchableOpacity style={Styles.tagType}>
-                                  <Text style={Styles.tagTextType}>effect tag</Text>
+                                  <Text style={Styles.tagTextType}> tag </Text>
                               </TouchableOpacity>
                               <TouchableOpacity style={Styles.tagType}>
-                                  <Text style={Styles.tagTextType}>effect tag</Text>
+                                  <Text style={Styles.tagTextType}> + </Text>
+                              </TouchableOpacity>
+                      </View>
+                  </View>
+
+                  <View style={{ marginHorizontal: 10, marginTop: 20 }}>
+                      <View style={{ height: 30, }}>
+                          <Text style={{ fontSize: 18, fontWeight: 'bold', }}>Category</Text>
+                      </View>
+                      <View style={{ flexDirection: "row" }}>
+                              <TouchableOpacity style={Styles.tagType}>
+                                  <Text style={Styles.tagTextType}> tag </Text>
                               </TouchableOpacity>
                               <TouchableOpacity style={Styles.tagType}>
-                                  <Text style={Styles.tagTextType}>effect tag</Text>
+                                  <Text style={Styles.tagTextType}> + </Text>
                               </TouchableOpacity>
-                          </View>
-                          <View style={{ flex: 3 }}>
-                              <View style={[Styles.tagType, { backgroundColor: '#BD10E0', width: 100 }]}>
-                                  <Text style={Styles.tagTextType}> </Text>
-                              </View>
-                              <View style={[Styles.tagType, { backgroundColor: '#BD10E0', width: 150 }]}>
-                                  <Text style={Styles.tagTextType}> </Text>
-                              </View>
-                              <View style={[Styles.tagType, { backgroundColor: '#BD10E0', width: 200 }]}>
-                                  <Text style={Styles.tagTextType}> </Text>
-                              </View>
-                          </View>
+                      </View>
+                  </View>
+
+                  <View style={{ marginHorizontal: 10, marginTop: 20 }}>
+                      <View style={{ height: 30, }}>
+                          <Text style={{ fontSize: 18, fontWeight: 'bold', }}>Type</Text>
+                      </View>
+                      <View style={{ flexDirection: "row" }}>
+                              <TouchableOpacity style={Styles.tagType}>
+                                  <Text style={Styles.tagTextType}> tag </Text>
+                              </TouchableOpacity>
+                              <TouchableOpacity style={Styles.tagType}>
+                                  <Text style={Styles.tagTextType}> + </Text>
+                              </TouchableOpacity>
+                      </View>
+                  </View>
+
+                  <View style={{ marginHorizontal: 10, marginTop: 20 }}>
+                      <View style={{ height: 30, }}>
+                          <Text style={{ fontSize: 18, fontWeight: 'bold', }}>Symptoms</Text>
+                      </View>
+                      <View style={{ flexDirection: "row" }}>
+                              <TouchableOpacity style={Styles.tagType}>
+                                  <Text style={Styles.tagTextType}> tag </Text>
+                              </TouchableOpacity>
+                              <TouchableOpacity style={Styles.tagType}>
+                                  <Text style={Styles.tagTextType}> + </Text>
+                              </TouchableOpacity>
                       </View>
                   </View>
 
