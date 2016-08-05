@@ -44,11 +44,21 @@ var TestRouteMapper = {
     },
     RightButton: function (route, navigator, index, navState) {
         if (index < (ProfileTabScenes.length - 1)) {
-            return (
-                <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginRight: 13, }}>
-                    <Text onPress={navigator.jumpForward} style={{ fontSize: 18, color: "#007AFF" }}> Next</Text>
-                </View>
-            );
+            // BatsFix. If at index 1, then go to index 3 not index 2 when going next
+            if (index == 1) {
+                return (
+                    <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginRight: 13, }}>
+                        <Text onPress={navigator.jumpForward} style={{ fontSize: 18, color: "#007AFF" }}> Skipping</Text>
+                    </View>
+                );
+            }
+            else {
+                return (
+                    <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginRight: 13, }}>
+                        <Text onPress={navigator.jumpForward} style={{ fontSize: 18, color: "#007AFF" }}> Next </Text>
+                    </View>
+                );
+            }
         }
     },
 
