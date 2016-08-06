@@ -69,7 +69,7 @@ class ProductScene extends Component {
                         <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
                     </View>
                     <View style={{ marginTop: 5, marginHorizontal: 10,flexDirection: "row" }}>
-                        <View style={{flex:1.2,alignItems: 'flex-start', flexDirection: "row",marginTop:7}}>
+                        <View style={{flex:1.2,alignItems: 'flex-start', flexDirection: "row",marginTop:8}}>
                             <StarRating
                                 disabled={true}
                                 maxStars={5}
@@ -78,7 +78,7 @@ class ProductScene extends Component {
                                 rating={this.props.product.rating}
                                 selectedStar={(rating) => this._onRating(rating) }
                                 />
-                            <Text style={{ fontSize: 19,marginTop:2 }}> ({this.state.ratingCount}) </Text>
+                            <Text style={{ fontSize: 20,marginTop:1 }}> ({this.state.ratingCount}) </Text>
                         </View>
                         <View style={{flex:1,flexDirection: "row",justifyContent:'flex-end' }}>
                           <TouchableOpacity style={Styles.tagCategory}>
@@ -91,27 +91,27 @@ class ProductScene extends Component {
                     </View>
                     {/* Description */}
                     <View style={{ marginHorizontal: 10 }}>
-                        <View style={{ flex: 1, height: 85, justifyContent: 'center' }}>
-                            <Text>
+                        <View style={{ flex: 1,justifyContent: 'center',marginTop:10,marginBottom:5 }}>
+                            <Text style={{fontSize:16}}>
                                 {this.state.description}
                            </Text>
                         </View>
                     </View>
                     {/*Rating breakdown*/}
-                    <View style={{ marginHorizontal: 10 }}>
+                    <View style={{ marginHorizontal: 10,marginTop: 15  }}>
                         <View style={{ height: 40, justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Rating</Text>
                         </View>
                         <View style={{ flexDirection: "row" }}>
                             <View style={{ flex: 1, }}>
                                 <TouchableOpacity style={[Styles.tagType, { borderColor: 'white', alignItems: 'flex-start' }]}>
-                                    <Text style={[{ color: 'black', margin: 7 }]}>Quality</Text>
+                                    <Text style={[{ color: 'black', margin: 5,fontSize:16 }]}>Quality</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={[Styles.tagType, { borderColor: 'white', alignItems: 'flex-start' }]}>
-                                    <Text style={[{ color: 'black', margin: 7 }]}>Flavor</Text>
+                                    <Text style={[{ color: 'black', margin: 5,fontSize:16 }]}>Flavor</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={[Styles.tagType, { borderColor: 'white', alignItems: 'flex-start' }]}>
-                                    <Text style={[{ color: 'black', margin: 7 }]}>Potency</Text>
+                                    <Text style={[{ color: 'black', margin: 5,fontSize:16 }]}>Potency</Text>
                                 </TouchableOpacity>
                             </View>
                             <View style={{ flex: 3 }}>
@@ -149,18 +149,30 @@ class ProductScene extends Component {
                         </View>
                     </View>
                     {/* Test results */}
-                    <View style={{ marginHorizontal: 10, marginTop: 20 }}>
-                        <View style={{ height: 40, justifyContent: 'center' }}>
+                    <View style={{ marginHorizontal: 10, marginTop: 15 }}>
+                        <View style={{ justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Test Results</Text>
-                            <Text style={{}}>THC: {this.state.thc}% CBD: {this.state.cbd}% THCA: {this.state.thca}% TOTAL CANNABNOIDS: 100%</Text>
+                            <View style={{flex:1,flexDirection:'row',justifyContent: 'space-between',height:20,marginTop:20,}}>
+                              <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>THCA</Text>
+                              <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>THC</Text>
+                              <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>CBD</Text>
+                              <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>TOTAL</Text>
+                            </View>
+                            <View style={{flex:1,flexDirection:'row',justifyContent: 'space-between',height:30}}>
+                              <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.thca}%</Text>
+                              <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.thc}%</Text>
+                              <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.cbd}%</Text>
+                              <Text style={{width:60,textAlign:'center',fontSize: 16}}>56%</Text>
+                            </View>
                         </View>
                     </View>
-                    <View style={{ marginHorizontal: 10, marginTop: 20 }}>
+
+                    <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                         <View style={{ height: 40, justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Effects</Text>
                         </View>
                         <View style={{ flexDirection: "row" }}>
-                            <View style={{ flex: 1.3 }}>
+                            <View style={{ flex: 1.4 }}>
                                 <TouchableOpacity style={Styles.tagEffect}>
                                     <Text style={Styles.tagTextEffect}>{this.state.effect[0].name}</Text>
                                 </TouchableOpacity>
@@ -185,7 +197,7 @@ class ProductScene extends Component {
                         </View>
                     </View>
                     {/* Related activities */}
-                    <View style={{ marginHorizontal: 10, marginTop: 20 }}>
+                    <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                         <View style={{ height: 40, justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Activies</Text>
                         </View>
@@ -201,6 +213,24 @@ class ProductScene extends Component {
                             </TouchableOpacity>
                         </View>
                     </View>
+
+                    <View style={{ marginHorizontal: 10, marginTop: 15 }}>
+                        <View style={{ height: 40, justifyContent: 'center' }}>
+                            <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Symptoms</Text>
+                        </View>
+                        <View style={{ flexDirection: "row" }}>
+                            <TouchableOpacity style={Styles.tagSymptom}>
+                                <Text style={Styles.tagTextSymptom}>{this.state.symptom[0]}</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={Styles.tagSymptom}>
+                                <Text style={Styles.tagTextSymptom}>{this.state.symptom[1]}</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={Styles.tagSymptom}>
+                                <Text style={Styles.tagTextSymptom}>{this.state.symptom[2]}</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+
                     {/* Reviews */}
                     <ReviewList/>
                     {/* Retailers */}
@@ -250,33 +280,36 @@ const Styles = StyleSheet.create({
         margin: 4,
         borderRadius: 20,
         borderWidth: 1,
-        borderColor: "#50E3C2",
+        borderColor: "#F7A700",
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
     },
     tagTextType: {
-        color: "#50E3C2",
+        color: "#F7A700",
         marginTop: 7,
         marginBottom: 7,
         marginHorizontal: 10,
+        fontSize:16,
     },
 
     tagCategory: {
         margin: 4,
         borderRadius: 20,
         borderWidth: 1,
-        borderColor: "#70D600",
+        borderColor: "#7BD500",
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
     },
     tagTextCategory: {
-        color: "#70D600",
+        color: "#7BD500",
         marginTop: 7,
         marginBottom: 7,
         marginHorizontal: 10,
+        fontSize:16,
     },
+
 
     tagEffect: {
         margin: 4,
@@ -292,22 +325,41 @@ const Styles = StyleSheet.create({
         marginTop: 7,
         marginBottom: 7,
         marginHorizontal: 10,
+        fontSize:16,
     },
 
     tagActivity: {
         margin: 4,
         borderRadius: 20,
         borderWidth: 1,
-        borderColor: "#BD10E0",
+        borderColor: "#BE00E3",
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
     },
     tagTextActivity: {
-        color: "#BD10E0",
+        color: "#BE00E3",
         marginTop: 7,
         marginBottom: 7,
         marginHorizontal: 10,
+        fontSize:16,
+    },
+
+    tagSymptom: {
+        margin: 4,
+        borderRadius: 20,
+        borderWidth: 1,
+        borderColor: "#D3000D",
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    tagTextSymptom: {
+        color: "#D3000D",
+        marginTop: 7,
+        marginBottom: 7,
+        marginHorizontal: 10,
+        fontSize:16,
     },
 
     storeItem: {

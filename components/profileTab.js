@@ -37,7 +37,7 @@ var TestRouteMapper = {
         if(index == 0){
           return (
               <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginLeft: 13 }}>
-                  <Text onPress={navigator.jumpTo(ProfileTabScenes[4])} style={{ fontSize: 18, color: "#007AFF" }}>TestBed</Text>
+                  <Text onPress={ ()=>navigator.jumpTo(ProfileTabScenes[4])} style={{ fontSize: 18, color: "#007AFF" }}>TestBed</Text>
               </View>
           );
         }
@@ -89,8 +89,8 @@ class ProfileTab extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { selectedTab:ProfileTabId, resetScene: 0 }; 
-    } 
+        this.state = { selectedTab:ProfileTabId, resetScene: 0 };
+    }
 
     componentWillReceiveProps(nextProps) {
         if (this.state.resetScene == nextProps.resetScene) {

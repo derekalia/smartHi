@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import {StyleSheet, Text, View, TouchableHighlight, TouchableOpacity, ListView, } from 'react-native';
 
 // Import filters.
-import {FiltersActivity, FiltersEffect, FiltersType} from '../common/filters.js';
+import {FiltersActivity, FiltersEffect, FiltersType,FiltersCategory,FiltersSymptoms} from '../common/filters.js';
 
 class FilterList extends Component {
     constructor(props) {
@@ -62,9 +62,8 @@ class FilterList extends Component {
                 <View>
                     {this._renderFiltersArray(this.state.currentFilters, true)}
                 </View>
-<View style={{alignItems:'center'}}>
+                <View style={{alignItems:'center'}}>
                 {this._renderFilterButton()}
-
                 </View>
                 {this._renderFilters()}
             </View>
@@ -85,6 +84,16 @@ class FilterList extends Component {
         if (filter.type == 'effect') {
             tagStyle = Styles.tagEffects;
             textStyle = Styles.tagTextEffects;
+        }
+        else
+        if (filter.type == 'symptoms') {
+            tagStyle = Styles.tagSymptoms;
+            textStyle = Styles.tagTextSymptoms;
+        }
+        else
+        if (filter.type == 'category') {
+            tagStyle = Styles.tagCategory;
+            textStyle = Styles.tagTextCategory;
         }
         else
         if (filter.type == 'type') {
@@ -139,8 +148,23 @@ class FilterList extends Component {
                     </View>
                     {this._renderFiltersArray(FiltersType)}
                 </View>
+                <View>
+                    <View style={{ height: 40, justifyContent: 'center', }}>
+                        <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Category </Text>
+                    </View>
+                    {this._renderFiltersArray(FiltersCategory)}
+                </View>
+                <View>
+                    <View style={{ height: 40, justifyContent: 'center', }}>
+                        <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Symptoms </Text>
+                    </View>
+                    {this._renderFiltersArray(FiltersSymptoms)}
+                </View>
                 <View style={{ height: 40, justifyContent: 'center', }}>
                     <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Price </Text>
+                </View>
+                <View style={{ height: 40, justifyContent: 'center', }}>
+                    <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Distance </Text>
                 </View>
             </View>
         );
@@ -286,13 +310,13 @@ const Styles = StyleSheet.create({
         margin: 5,
         borderRadius: 20,
         borderWidth: 1,
-        borderColor: "#F5A623",
+        borderColor: "#BD10E0",
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
     },
     tagTextActivity: {
-        color: "#F5A623",
+        color: "#BD10E0",
         marginTop: 10,
         marginBottom: 10,
         marginHorizontal: 15,
@@ -302,13 +326,13 @@ const Styles = StyleSheet.create({
         margin: 5,
         borderRadius: 20,
         borderWidth: 1,
-        borderColor: "#BD10E0",
+        borderColor: "#F5A623",
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
     },
     tagTextType: {
-        color: "#BD10E0",
+        color: "#F5A623",
         marginTop: 10,
         marginBottom: 10,
         marginHorizontal: 15,
@@ -318,13 +342,13 @@ const Styles = StyleSheet.create({
         margin: 5,
         borderRadius: 20,
         borderWidth: 1,
-        borderColor: "#50E3C2",
+        borderColor: "#D0021B",
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
     },
     tagTextSymptoms: {
-        color: "#50E3C2",
+        color: "#D0021B",
         marginTop: 10,
         marginBottom: 10,
         marginHorizontal: 15,
@@ -334,13 +358,13 @@ const Styles = StyleSheet.create({
         margin: 5,
         borderRadius: 20,
         borderWidth: 1,
-        borderColor: "#70D600",
+        borderColor: "#7ED321",
         backgroundColor: 'white',
         justifyContent: 'center',
         alignItems: 'center',
     },
     tagTextCategory: {
-        color: "#70D600",
+        color: "#7ED321",
         marginTop: 10,
         marginBottom: 10,
         marginHorizontal: 15,

@@ -82,8 +82,10 @@ const TestProducts = [
     thca: 55,
     rid:['0','1','2','3'],
     pid:'0',
-    activity:['social','exercise','jam'],
+    symptom:['cramps','headaches','pain'],
+    activity:['social','exercise','work'],
     effect:[{name:'energetic',strength:90},{name:'giggly',strength:50},{name:'relaxed',strength:60}]},
+
 
 {   id:'1',
     name:'Forged SML',
@@ -399,5 +401,3 @@ export function GetActivityProducts(activityType) {
     }
     return products;
 }
-
-
