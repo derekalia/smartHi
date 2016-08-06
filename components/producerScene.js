@@ -41,7 +41,7 @@ class ProducerScene extends Component {
                     </View>
 
                     <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
-                        <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
+                        <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name} - Issaquah, WA</Text>
                         <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
                             <StarRating
                                 disabled={true}

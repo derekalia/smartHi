@@ -40,30 +40,37 @@ class RetailerScene extends Component {
         return (
             <ScrollView style={{backgroundColor:'white'}}>
                 <View style={{ flex: 1 }}>
-                    <View style={{ height: 248, justifyContent: "flex-end" }}>
-                        <Image source={require('../media/ikes1.png') } style={{ height: 190, width: 380 }}/>
+                    <View style={{ justifyContent: "flex-end",marginTop:62 }}>
+                        <Image source={require('../media/ikes1.png') } style={{ height: 140, width: 380 }}/>
                     </View>
                     {/*Rating and link to map*/}
-                    <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
+                    <View style={{ marginTop: 10, marginHorizontal: 10 }}>
                         <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
                         <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
-                            <StarRating
-                                disabled={true}
-                                maxStars={5}
-                                starSize={30}
-                                starColor={'red'}
-                                rating={this.state.rating}
-                                selectedStar={(rating) => this._onRating(rating) }
-                                />
-                            <Text style={{ fontSize: 19 }}> ({this.state.ratingCount}) </Text>
-                           <TouchableOpacity style={{ backgroundColor: "#4A90E2",
-                                                      borderRadius: 8,
-                                                      borderWidth: 1,
-                                                      justifyContent: 'flex-end',
-                                                      borderColor: '#4A90E2',
-                                                      marginLeft: 74 }}>
-                                <Text style={{ fontSize: 18, color: "white", margin: 4 }}> Show Map </Text>
+
+                          <View style={{flex:1.5,alignItems:'flex-start',flexDirection:'row',marginTop:1}}>
+                              <StarRating
+                                  disabled={true}
+                                  maxStars={5}                                  
+                                  starSize={28}
+                                  starColor={'red'}
+                                  rating={this.state.rating}
+                                  selectedStar={(rating) => this._onRating(rating) }
+                                  />
+                              <Text style={{ fontSize: 18,marginTop:2 }}> ({this.state.ratingCount}) </Text>
+                            </View>
+
+                            <View style={{flex:1,alignItems:'flex-end',justifyContent:'center' }}>
+                               <TouchableOpacity style={{ backgroundColor: "#4A90E2",
+                                                          borderRadius: 8,
+                                                          borderWidth: 4,
+                                                          borderColor: '#4A90E2',
+                                                          alignSelf:'flex-end'
+                                                          }}>
+                                <Text style={{ fontSize: 18, color: "white"}}> Show Map </Text>
                             </TouchableOpacity>
+                            </View>
+
                         </View>
                     </View>
                     {/*Description*/}
