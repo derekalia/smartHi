@@ -7,8 +7,8 @@
   },
   "dependencies": {
     "ghslcb-data-api": "git+https://dnetguru.visualstudio.com/DefaultCollection/Greenhaus%20Mobile/_git/WebAPI.JSClient",
-    "react": "15.1.0",
-    "react-native": "0.28.0",
+    "react": "15.3.0",
+    "react-native": "0.31.0",
     "react-native-accordion": "^1.0.0",
     "react-native-camera": "^0.3.8",
     "react-native-collapsible": "^0.7.0",
