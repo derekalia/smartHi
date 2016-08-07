@@ -15,16 +15,16 @@ class RateProductScene extends Component {
 
     render() {
         return (
-          <ScrollView style={{marginTop:0,backgroundColor:'white'}}>
+          <ScrollView style={{backgroundColor:'white'}}>
               <View style={{ flex: 1 }}>
                   {/*Product Image*/}
-                  <View style={{ height: 248, justifyContent: "flex-end" }}>
+                  <View style={{ height: 228, justifyContent: "flex-end" }}>
                       <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380 }}/>
                   </View>
                   {/* Overall rating */}
                   <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
                       <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Rosin XJ-17</Text>
-                      <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
+                      {/* <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
                           <StarRating
                               disabled={true}
                               maxStars={5}
@@ -34,7 +34,7 @@ class RateProductScene extends Component {
                               selectedStar={(rating) => this._onRating(rating) }
                               />
                           <Text style={{ fontSize: 19 }}>  </Text>
-                      </View>
+                      </View>*/}
                   </View>
                   {/* Description */}
                   <View style={{ marginHorizontal: 10 }}>
@@ -118,7 +118,7 @@ class RateProductScene extends Component {
                                   <Text style={Styles.tagTextType}>tag</Text>
                               </TouchableOpacity>
                           </View>
-                          <View style={{ flex: 3 }}>                              
+                          <View style={{ flex: 3 }}>
                           </View>
                       </View>
                   </View>

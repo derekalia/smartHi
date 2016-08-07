@@ -25,7 +25,7 @@ class SearchBar extends Component {
                         clearButtonMode = 'always'
                         />
                 </View>
-                <View style={[{ flex: 1, borderWidth: 1, borderColor: "#4A90E2", backgroundColor: "#4A90E2", height: 50,borderTopRightRadius:10,borderBottomRightRadius:10 }]}>
+                <View style={[{ flex: 1, borderWidth: 1, borderColor: "#4A90E2", backgroundColor: "#4A90E2", height: 50,borderTopRightRadius:0,borderBottomRightRadius:0 }]}>
                     <TouchableOpacity style={{}} onPress={this.props.startSearch}>
                         <Image style={{ height: 32, width: 32, marginLeft: 13, marginTop: 8 }} source={require("../media/SearchIcon0.png") }/>
                     </TouchableOpacity>
@@ -41,9 +41,9 @@ const Styles={
     input: {
         height: 50,
         fontSize: 20,
-        borderWidth: 2,
+        borderWidth: 1.5,
         borderTopLeftRadius:10,
-        borderBottomLeftRadius:0,
+        borderBottomLeftRadius:10,
         backgroundColor: 'white',
 
         borderColor: "#4A90E2",

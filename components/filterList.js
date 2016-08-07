@@ -285,6 +285,7 @@ const Styles = StyleSheet.create({
     tagEffects: {
         margin: 5,
         borderRadius: 20,
+        height:40,
         borderWidth: 1,
         borderColor: "#4A90E2",
         backgroundColor: 'white',
@@ -308,6 +309,7 @@ const Styles = StyleSheet.create({
 
     tagActivity: {
         margin: 5,
+        height:40,
         borderRadius: 20,
         borderWidth: 1,
         borderColor: "#BD10E0",
@@ -324,6 +326,7 @@ const Styles = StyleSheet.create({
 
     tagType: {
         margin: 5,
+        height:40,
         borderRadius: 20,
         borderWidth: 1,
         borderColor: "#F5A623",
@@ -341,6 +344,7 @@ const Styles = StyleSheet.create({
     tagSymptoms: {
         margin: 5,
         borderRadius: 20,
+        height:40,
         borderWidth: 1,
         borderColor: "#D0021B",
         backgroundColor: 'white',
@@ -358,6 +362,7 @@ const Styles = StyleSheet.create({
         margin: 5,
         borderRadius: 20,
         borderWidth: 1,
+        height:40,
         borderColor: "#7ED321",
         backgroundColor: 'white',
         justifyContent: 'center',

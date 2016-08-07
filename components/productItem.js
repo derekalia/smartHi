@@ -48,15 +48,15 @@ class ProductItem extends Component {
                                 <View style={{  flexDirection: 'row',}}>
                                     <Text style={{flex: 1, fontSize: fB, fontWeight: 'bold', color:'black'}}>{this.state.name}</Text>
                                     <View style={{alignItems:'flex-end'}}>
-                                      <Text style={{flex: 1, fontSize: fB, fontWeight: 'bold', color:'black'}}>${this.state.price}</Text>
+                                      <Text style={{flex: 1, fontSize: fB, color:'black'}}>${this.state.price}</Text>
                                     </View>
                                 </View>
                                 {/*Product rating*/}
-                                <View style={{  flexDirection: 'row',}}>
+                                <View style={{  flexDirection: 'row',marginTop:5}}>
                                     <StarRating disabled={false} maxStars={5} starColor={'red'} starSize={15} rating={this.state.rating} selectedStar={(r)=>this.onStarRating(r)}/>
                                     <Text style={{ fontSize: fS, color: 'black'}}> ({this.state.ratingCount}) </Text>
                                     <View style={{flex: 1,alignItems:'flex-end'}}>
-                                      <Text style={{fontSize: fS,  color:'black'}}>{this.state.name}</Text>
+                                      <Text style={{fontSize: fS,  color:'black'}}>Forged Cannabis</Text>
                                     </View>
                                 </View>
                                 {/*Product attributes */}

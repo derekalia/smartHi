@@ -84,7 +84,7 @@ const TestProducts = [
     pid:'0',
     symptom:['cramps','headaches','pain'],
     activity:['social','exercise','work'],
-    effect:[{name:'energetic',strength:90},{name:'giggly',strength:50},{name:'relaxed',strength:60}]},
+    effect:[{name:'energetic',strength:190},{name:'giggly',strength:50},{name:'relaxed',strength:60}]},
 
 
 {   id:'1',
