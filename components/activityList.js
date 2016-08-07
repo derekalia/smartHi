@@ -5,7 +5,7 @@
 
 // Import modules
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, TouchableHighlight } from 'react-native';
+import {StyleSheet, View, Text, TouchableHighlight,ScrollView } from 'react-native';
 
 //get state management components
 import {bindActionCreators} from 'redux';
@@ -26,7 +26,7 @@ class ActivityList extends Component {
         //
         // BatsFix. This needs to be flexible with regard to a device with and height.
         //
-        
+
         var count = this.props.count;
         if (count >= FiltersActivity.length) {
             count = FiltersActivity.length;
@@ -37,14 +37,17 @@ class ActivityList extends Component {
                 <ActivityItem activity={FiltersActivity[i].name} imageIndex={i} key={FiltersActivity[i].name} goActivity={(n) => this._goActivity(n)}/>
             );
         }
-        
+
         return (
-            <View>              
+            <View>
                 {/* Activity Items BatsFix. should be dynamically generated here*/}
-                <View style={{flexDirection:'row',flexWrap:'wrap'}}>
+                <ScrollView horizontal={1}>
+                <View style={{flexDirection:'row',flexWrap:'wrap',flex:1}}>
                     {items}
                 </View>
+                </ScrollView>
             </View>
+
         );
     }
 }
@@ -54,4 +57,3 @@ class ActivityList extends Component {
 //
 function mapActionToProps(dispatch) { return bindActionCreators({  GetActivityAction }, dispatch); }
 module.exports = connect(null,mapActionToProps)(ActivityList);
-
