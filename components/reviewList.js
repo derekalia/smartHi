@@ -51,13 +51,13 @@ class ReviewList extends Component {
     render() {
         return (
            <View style={{ marginHorizontal: 10, marginTop: 20 }}>
-                <View style={{ height: 40, justifyContent: 'center' }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Reviews</Text>
+                <View style={{ justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Reviews</Text>
                 </View>
                 <View style={Styles.column}>
                     <View style={Styles.row}>
                         <TextInput
-                            style={{ height: 30, width: 345, borderColor: 'gray', borderWidth: 1, margin: 2, borderRadius: 4, fontSize: 15 }}
+                            style={{ height: 30, width: 345, borderColor: 'gray', borderWidth: 1, margin: 2, borderRadius: 4, fontSize: 15,marginTop:10 }}
                             onChangeText={(text) => this.setState({ text }) }
                             value={this.state.text}
                             placeholder={' Say something'}
@@ -66,6 +66,20 @@ class ReviewList extends Component {
                     <ReviewItem/>
                     <ReviewItem/>
                     <ReviewItem/>
+                    <View style={{flex:1}}>
+                    <TouchableOpacity style={{  margin: 4, marginTop:20,
+                      borderRadius: 10,
+                      borderWidth: 1,
+                      borderColor: "#ED3C52",
+                      backgroundColor: '#ED3C52',
+                      justifyContent: 'center',
+                      alignItems: 'center'}}>
+                        <Text style={{color: "white",fontWeight:'bold',fontSize:16,
+                        marginTop: 7,
+                        marginBottom: 7,
+                        marginHorizontal: 10,}}> Show More </Text>
+                    </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         );

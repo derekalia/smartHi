@@ -25,8 +25,8 @@ class RateStoreScene extends Component {
                       <Text style={{ fontSize: 22, }}> - Seattle, WA</Text>
                   </View>
 
-                  <View style={{ marginHorizontal: 10, marginTop: 15 }}>
-                      <View style={{ height: 40, justifyContent: 'center' }}>
+                  <View style={{ marginHorizontal: 10, marginTop: 20 }}>
+                      <View style={{  justifyContent: 'center' }}>
                           <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Rate</Text>
                       </View>
                   <View style={{ justifyContent: "flex-end", marginHorizontal: 0 }}>

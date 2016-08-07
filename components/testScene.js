@@ -24,24 +24,34 @@ class TestScene extends Component {
                   </View>
                   {/*Rating and link to map*/}
                   <View style={{ flexDirection:'row', marginTop: 10, marginHorizontal: 10,alignItems:'center' }}>
-                      <View style={{borderWidth:1,borderColor:'lightgrey',flex:1 }}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold',margin:3,}}> Company Name </Text>
-                      </View>
-                      <View style={{width:150, alignItems:'center'}}>
-                         <TouchableHighlight style={{ backgroundColor: "#4A90E2",
-                                                    borderRadius: 8,
-                                                    borderWidth: 1,
-                                                    borderColor: '#4A90E2',
-                                                     }}>
-                              <Text style={{ fontSize: 18, color: "white", margin: 4 }}> Store Location </Text>
-                          </TouchableHighlight>
-                        </View>
+                    <View style={{flex:1, borderColor: 'gray', borderWidth: 1, margin: 2, borderRadius: 4, }}>
+                      <TextInput
+                          style={{ height: 26,  margin: 4, fontSize: 16, }}
+                          onChangeText={(text) => this.setState({ text }) }
+                          placeholder={'Company Name'}
+                          />
+                    </View>
+                    <View style={{width:150, alignItems:'center'}}>
+                     <TouchableHighlight style={{ backgroundColor: "#4A90E2",
+                                                borderRadius: 8,
+                                                borderWidth: 1,
+                                                borderColor: '#4A90E2',
+                                                 }}>
+                          <Text style={{ fontSize: 18, color: "white", margin: 4 }}> Store Location </Text>
+                      </TouchableHighlight>
+                    </View>
                   </View>
                   {/*Description*/}
-                  <View style={{ marginHorizontal: 10 }}>
-                      <View style={{ flex: 1, height: 85, borderWidth:1,borderColor:'lightgrey',marginTop:10 }}>
-                          <Text style={{fontSize:16}}> Add Store Description</Text>
-                      </View>
+                  <View style={{ marginHorizontal: 10, marginTop:10 }}>
+                  <View style={{flex:1, borderColor: 'gray', borderWidth: 1, margin: 2, borderRadius: 4, }}>
+                    <TextInput
+                        style={{ height: 80,  margin: 4, fontSize: 16, }}
+                        onChangeText={(text) => this.setState({ text }) }
+                        placeholder={'Company Description'}
+                        numberOfLines = {5}
+                        multiline = {true}
+                        />
+                  </View>
                   </View>
 
               </View>

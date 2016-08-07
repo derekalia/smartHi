@@ -101,6 +101,7 @@ const TestProducts = [
     thca: 55,
     rid:['0','1','2','3'],
     pid:'0',
+    symptom:['cramps','headaches','pain'],
     activity:['mm','mars','pick'],
     effect:[{name:'wake',strength:90},{name:'run',strength:80},{name:'stamina',strength:60}]},
 
@@ -118,6 +119,7 @@ const TestProducts = [
     thca: 55,
     rid:['0','1','2','3'],
     pid:'0',
+    symptom:['cramps','headaches','pain'],
     activity:['mm','mars','pick'],
     effect:[{name:'wake',strength:90},{name:'run',strength:80},{name:'stamina',strength:60}]},
 
@@ -134,7 +136,7 @@ const TestProducts = [
     cbd: 35,
     thca: 55,
     rid:['0','1','2','3'],
-    pid:'0',
+    pid:'0',symptom:['cramps','headaches','pain'],
     activity:['mm','mars','pick'],
     effect:[{name:'wake',strength:90},{name:'run',strength:80},{name:'stamina',strength:60}]},
 
@@ -151,7 +153,7 @@ const TestProducts = [
     cbd: 35,
     thca: 55,
     rid:['0','1','2','3'],
-    pid:'1',
+    pid:'1',symptom:['cramps','headaches','pain'],
     activity:['mm','mars','pick'],
     effect:[{name:'grant',strength:90},{name:'wow',strength:80},{name:'jump',strength:60}]},
 
@@ -169,6 +171,7 @@ const TestProducts = [
     thca: 55,
     rid:['0','1','2','3'],
     pid:'1',
+    symptom:['cramps','headaches','pain'],
     activity:['mm','mars','pick'],
     effect:[{name:'grant',strength:90},{name:'wow',strength:80},{name:'jump',strength:60}]},
 
@@ -182,7 +185,7 @@ const TestProducts = [
     flavor: 2,
     potency:4,
     thc: 30,
-    cbd: 35,
+    cbd: 35,symptom:['cramps','headaches','pain'],
     thca: 55,
     rid:['0','1','2','3'],
     pid:'2',
@@ -202,7 +205,7 @@ const TestProducts = [
     cbd: 35,
     thca: 55,
     rid:['0','1','2','3'],
-    pid:'2',
+    pid:'2',symptom:['cramps','headaches','pain'],
     activity:['mm','mars','pick'],
     effect:[{name:'aroma',strength:90},{name:'run',strength:80},{name:'stamina',strength:60}]},
 
@@ -219,7 +222,7 @@ const TestProducts = [
     cbd: 35,
     thca: 55,
     rid:['4','1','2','3'],
-    pid:'2',
+    pid:'2',symptom:['cramps','headaches','pain'],
     activity:['mm','mars','pick'],
     effect:[{name:'aroma',strength:90},{name:'run',strength:80},{name:'stamina',strength:60}]},
 
@@ -236,7 +239,7 @@ const TestProducts = [
     cbd: 35,
     thca: 55,
     rid:['4','1','2','3'],
-    pid:'2',
+    pid:'2',symptom:['cramps','headaches','pain'],
     activity:['mm','mars','pick'],
     effect:[{name:'aroma',strength:90},{name:'run',strength:80},{name:'stamina',strength:60}]},
 
@@ -253,7 +256,7 @@ const TestProducts = [
     cbd: 35,
     thca: 55,
     rid:['4','1','2','3'],
-    pid:'2',
+    pid:'2',symptom:['cramps','headaches','pain'],
     activity:['mm','mars','pick'],effect:[{name:'aroma',strength:90},{name:'run',strength:80},{name:'stamina',strength:60}]},
 
 {   id:'11',
@@ -269,7 +272,7 @@ const TestProducts = [
     cbd: 35,
     thca: 55,
     rid:['4','1','2','3'],
-    pid:'3',
+    pid:'3',symptom:['cramps','headaches','pain'],
     activity:['mm','mars','pick'],
     effect:[{name:'sleep',strength:90},{name:'run',strength:80},{name:'stamina',strength:60}]},
 
@@ -286,7 +289,7 @@ const TestProducts = [
     cbd: 35,
     thca: 55,
     rid:['4','1','2','3'],
-    pid:'3',
+    pid:'3',symptom:['cramps','headaches','pain'],
     activity:['mm','mars','pick'],
     effect:[{name:'sleep',strength:90},{name:'run',strength:80},{name:'stamina',strength:60}]},
 
@@ -303,7 +306,7 @@ const TestProducts = [
     cbd: 35,
     thca: 55,
     rid:['4','1','2','3'],
-    pid:'3',
+    pid:'3',symptom:['cramps','headaches','pain'],
     activity:['mm','mars','pick'],
     effect:[{name:'sleep',strength:90},{name:'run',strength:80},{name:'stamina',strength:60}]},
 ];

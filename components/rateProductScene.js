@@ -97,7 +97,7 @@ class RateProductScene extends Component {
                                   maxStars={5}
                                   starSize={30}
                                   starColor={'#D0021B'}
-                                  rating={this.state.starCount}
+                                    rating={0}
                                   selectedStar={(rating) => this._onFlavor(rating) }
                                   />
                           </View>
