@@ -21,7 +21,7 @@ export function LoginAction(userCredentials) {
         // BatsFix. For test purposes we can use NodeApiLogin instead of LcbApiLogin
         //
         //LcbApiLogin(dispatch, userCredentials.name, userCredentials.password);
-        NodeApiLogin(dispatch, userCredentials.name, userCredentials.password);
+        DevLogin(dispatch, userCredentials.name, userCredentials.password);
 
         // BatsFix. GetLatestNews should be promise function that can be called async.
         var latestNews = GetLatestNews();
@@ -58,8 +58,8 @@ export function RegisterAction(userCredentials) {
             return;
         }
 
-        // 
-        // Fetch data from the server here 
+        //
+        // Fetch data from the server here
         //
         LcbApiRegister(dispatch, userCredentials.name, userCredentials.password);
     }
@@ -71,15 +71,15 @@ function LcbApiLogin(dispatch,email,password) {
     data.push(encodeURIComponent('grant_type')       +'=' +encodeURIComponent('password'));
     data.push(encodeURIComponent('username')         +'=' +encodeURIComponent(email));
     data.push(encodeURIComponent('password')         +'=' +encodeURIComponent(password));
-    var message = data.join("&"); 
+    var message = data.join("&");
 
     // Boilerplate code to post data to the server
-    fetch('http://lcbapi.forged.io/connect/Token', 
-    { 
-        method: 'POST', 
-        headers: { 'cache-control': 'no-cache', 
-                   'content-Type': 'application/x-www-form-urlencoded' 
-        }, 
+    fetch('http://lcbapi.forged.io/connect/Token',
+    {
+        method: 'POST',
+        headers: { 'cache-control': 'no-cache',
+                   'content-Type': 'application/x-www-form-urlencoded'
+        },
         body: message,
     }).
     then((response) => response.json()).
@@ -97,7 +97,7 @@ function LcbApiLogin(dispatch,email,password) {
             var error = responseData.error.join(".");
             dispatch({
                 type: LOGIN_ERROR,
-                message: error, 
+                message: error,
             });
         }
     }).catch((error) => {
@@ -115,15 +115,15 @@ function LcbApiRegister(dispatch,email,password) {
     data.push(encodeURIComponent('email')            +'=' +encodeURIComponent(email));
     data.push(encodeURIComponent('password')         +'=' +encodeURIComponent(password));
     data.push(encodeURIComponent('confirmPassword')  +'=' +encodeURIComponent(password));
-    var message = data.join("&"); 
+    var message = data.join("&");
 
     // Boilerplate code to post data to the server
-    fetch('http://lcbapi.forged.io/api/User/Register', 
-    { 
-        method: 'POST', 
-        headers: { 'cache-control': 'no-cache', 
-                   'content-Type': 'application/x-www-form-urlencoded' 
-        }, 
+    fetch('http://lcbapi.forged.io/api/User/Register',
+    {
+        method: 'POST',
+        headers: { 'cache-control': 'no-cache',
+                   'content-Type': 'application/x-www-form-urlencoded'
+        },
         body: message,
     }).
     then((response) => response.json()).
@@ -140,7 +140,7 @@ function LcbApiRegister(dispatch,email,password) {
             var error = responseData.error.join(".");
             dispatch({
                 type: REGISTER_ERROR,
-                message: error, 
+                message: error,
             });
         }
     }).catch((error) => {
@@ -151,33 +151,12 @@ function LcbApiRegister(dispatch,email,password) {
     }).done();
 }
 
-function NodeApiLogin(dispatch, userName, userPassword) {
+function DevLogin(dispatch, userName, userPassword) {
+  // No need to run an extra script that does nothing!
+  // We'll just assume successfull login no matter what!
 
-    // Contact the server to verify user credentials.
-    var data = JSON.stringify({ 'name': userName, 'password': userPassword });
-
-    // Boilerplate code to post data to the server
-    fetch('http://127.0.0.1:3000/login', { method: 'POST', headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' }, body: data }).
-    then((response) => response.json()).
-    then((responseData) => {
-        if (responseData.status == "success") {
-            dispatch({
-                type: LOGIN_SUCCESS,
-                name: userName,
-                tokenType: "testTokenType",
-                accessToken: "testAccessToken",
-            });
-        }
-        else {
-            dispatch({
-                type: LOGIN_ERROR,
-                message: responseData.message,
-            });
-        }
-    }).catch((error) => {
-        dispatch({
-                type: LOGIN_ERROR,
-                message: "Unable to contact the login server",
-        });
-    }).done();
-}
+  if (userName != "")
+    dispatch({ type: LOGIN_SUCCESS, name: userName, tokenType: "testTokenType", accessToken: "testAccessToken"});
+  else
+    dispatch({ type: LOGIN_ERROR, message: "Enter a username!"});
+  }
