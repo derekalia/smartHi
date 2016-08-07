@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator, TouchableHighlight,} from 'react-native'
 
-import Camera from 'react-native-camera';
+//import Camera from 'react-native-camera';
 
 var Styles = StyleSheet.create({
     container: {
@@ -27,7 +27,7 @@ var Styles = StyleSheet.create({
 class CameraScene extends Component {
     constructor(props) {
         super(props);
-        this.state  = {cameraType: Camera.constants.Type.back}; 
+        this.state  = {cameraType: Camera.constants.Type.back};
         console.log("camera type is "+ this.state.cameraType);
     }
 
@@ -38,7 +38,7 @@ class CameraScene extends Component {
                 style={Styles.container}
                 onBarCodeRead={this._onBarCodeRead}>
                     <View style={{marginTop:440,flexDirection:'row'}}>
-                        <TouchableHighlight onPress={()=> this._takePictureBack()} 
+                        <TouchableHighlight onPress={()=> this._takePictureBack()}
                             style={[{height:32,width:100},Styles.cameraButton]}>
                             <Text style={{fontSize:16,textAlign:'center'}}>Back Pic</Text>
                         </TouchableHighlight>

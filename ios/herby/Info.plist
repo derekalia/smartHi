@@ -51,6 +51,7 @@
     </dict>
     <key>UIAppFonts</key>
     <array>
+      <string>Pacifico.ttf</string>
       <string>Entypo.ttf</string>
       <string>EvilIcons.ttf</string>
       <string>FontAwesome.ttf</string>
