@@ -6,11 +6,10 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
-    "ghslcb-data-api": "git+https://dnetguru.visualstudio.com/DefaultCollection/Greenhaus%20Mobile/_git/WebAPI.JSClient",
     "react": "15.2.1",
     "react-native": "0.31.0",
     "react-native-accordion": "^1.0.0",
-    "react-native-camera": "^0.3.8",
+    "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
     "react-native-collapsible": "^0.7.0",
     "react-native-multi-slider": "^0.3.5",
     "react-native-star-rating": "^1.0.6",

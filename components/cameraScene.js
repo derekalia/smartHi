@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator, TouchableHighlight,} from 'react-native'
 
-//import Camera from 'react-native-camera';
+import Camera from 'react-native-camera';
 
 var Styles = StyleSheet.create({
     container: {
