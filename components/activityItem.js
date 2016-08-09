@@ -23,11 +23,17 @@ class ActivityItem extends Component {
                            require('../media/exerciseTile1.png'),
                            require('../media/createTile1.png'),
                            require('../media/adventureTile1.png'),
-                           require('../media/movieTile1.png'),
-                           require('../media/exerciseTile1.png'),
-                           require('../media/createTile1.png'),
-                           require('../media/adventureTile1.png'),
-                           require('../media/movieTile1.png'),
+                           require('../media/foodTile1.png'),
+                           require('../media/jamTile1.png'),
+                           require('../media/readTile1.png'),
+                           require('../media/sexTile1.png'),
+                           require('../media/sleepTile1.png'),
+                           require('../media/socialTile1.png'),
+                           require('../media/studyTile1.png'),
+                           require('../media/tripTile1.png'),
+                           require('../media/wakeTile1.png'),
+                           require('../media/yogaTile1.png'),
+                           require('../media/workoutTile1.png'),
                          ];
 
         return (
