@@ -18,6 +18,7 @@ export function GetActivityAction(activityType) {
         dispatch({
             type: ACTIVITY_SUCCESS,
             products: products,
+            activity: activityType,
         });
         // then switch scene
         dispatch({

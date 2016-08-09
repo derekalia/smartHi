@@ -234,7 +234,7 @@ class ProductScene extends Component {
                     {/* Reviews */}
                     <ReviewList/>
                     {/* Retailers */}
-                    <View style={{ marginHorizontal: 10, marginTop: 10 }}>
+                    <View style={{ marginHorizontal: 10, marginTop: -10 }}>
                         <View style={{ height: 40, justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Locations</Text>
                         </View>
@@ -249,7 +249,7 @@ class ProductScene extends Component {
                     </View>
 
                     {/* Related Products */}
-                    <View style={{ marginHorizontal: 10, marginTop: 10,marginBottom:55 }}>
+                    <View style={{ marginHorizontal: 10, marginTop: 20,marginBottom:55 }}>
                         <View style={{ height: 40, justifyContent: 'center' }}>
                             <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Related Products</Text>
                         </View>

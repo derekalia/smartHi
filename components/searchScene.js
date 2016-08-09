@@ -20,17 +20,32 @@ class SearchScene extends Component {
     constructor(props) {
         super(props);
         this._searchTerm = "";
-        this.state = {
-            attributes: [],
-        }
+        this._attributes = [];
     }
 
     _startSearch() {
-        this.props.StartSearchAction(this._searchTerm);
+        this.props.StartSearchAction(this._searchTerm, this._attributes);
     }
 
     _setSearchTerm(term) {
         this._searchTerm = term;
+    }
+
+    //
+    // BatsFix. For now keeping filters string only for simplicity
+    //
+    _addFilter(filter) {
+        var index = this._attributes.indexOf(filter);
+        if (index < 0) {
+            this._attributes.push(filter);
+        }
+    }
+
+    _removeFilter(filter) {
+        var index = this._attributes.indexOf(filter);
+        if (index >= 0) {
+            this._attributes.splice(index, 1);
+        }
     }
 
     _goProduct(productId) {
@@ -46,7 +61,7 @@ class SearchScene extends Component {
                 <SearchBar startSearch={()=>this._startSearch()} setSearchTerm={(t)=>this._setSearchTerm(t)}/>
                 <ScrollView style={{marginTop: 0,}}>
                 <View style={{}}>
-                    <FilterList productCount={this.props.products.length}/>
+                    <FilterList productCount={this.props.products.length} addFilter={(t)=>this._addFilter(t)} removeFilter={(t)=>this._removeFilter}/>
                     {/*Search results section*/}
                     <ProductList productList={this.props.products} goProduct={(id)=> this._goProduct(id)}/>
                 </View>

@@ -5,6 +5,7 @@ import {
 
 const initialState = {
     products: [],
+    activity: 'default',
 }
 
 export default function ActivityReducer(state, action) {
@@ -24,6 +25,7 @@ export default function ActivityReducer(state, action) {
             // BatsFix then modify the item needed in the new
             // state. 
             newState.products = action.products;
+            newState.activity = action.activity;
             return newState;
 
         //    

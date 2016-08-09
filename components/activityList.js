@@ -41,7 +41,7 @@ class ActivityList extends Component {
         return (
             <View>
                 {/* Activity Items BatsFix. should be dynamically generated here*/}
-                <ScrollView horizontal={1}>
+                <ScrollView horizontal={true}>
                 <View style={{flexDirection:'row',flexWrap:'wrap',flex:1}}>
                     {items}
                 </View>
