@@ -8,7 +8,7 @@
 
 // Import modules
 import React, { Component } from 'react';
-import {StyleSheet, TabBarIOS, } from 'react-native';
+import {StyleSheet, TabBarIOS, View,} from 'react-native';
 import {connect} from 'react-redux';
 
 // Import const ids.
@@ -23,6 +23,8 @@ import MapTab        from './mapTab.js';
 import ReviewTab     from './reviewTab.js';
 import ProfileTab    from './profileTab.js';
 
+// Import message element
+import NotificationPage from './notificationPage.js';
 
 class MainPage extends Component {
     constructor(props) {
@@ -48,6 +50,7 @@ class MainPage extends Component {
 
     render() {
         return (
+            <View style={{flex:1}}>
             <TabBarIOS
                 unselectedTintColor="grey"
                 tintColor="#4A90E2"
@@ -89,6 +92,8 @@ class MainPage extends Component {
                     <ProfileTab selectedTab = {this.state.selectedTab} resetScene={this.state.resetScene}/>
                 </TabBarIOS.Item>
             </TabBarIOS>
+            <NotificationPage/>
+            </View>
         );
     }
 }
