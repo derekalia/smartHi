@@ -21,7 +21,7 @@ import {GoSearchAction, GetProductAction} from '../actions';
 class HomeScene extends Component {
     constructor(props) {
         super(props);
-        this.state = {activityCount: 4};
+        this.state = {activityCount: 6};
     }
 
     _goSearch() {
@@ -38,11 +38,6 @@ class HomeScene extends Component {
        this.props.GetProductAction(productId);
     }
 
-    _moreActivity() {
-        var count = this.state.activityCount+2;
-        this.setState({activityCount:count});
-    }
-
     render() {
         return (
             <View style={[{ marginTop: 35, flex: 1 }]}>
@@ -57,9 +52,6 @@ class HomeScene extends Component {
                     {/* Section Header */}
                     <View style={{ alignItems: 'flex-end', marginLeft: 5, height:40,flexDirection:'row',justifyContent: 'flex-start',marginBottom:0 }}>
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Activity </Text>
-                        <TouchableHighlight onPress={()=>this._moreActivity()}>
-                          <Text style={{ fontSize: 16,color:'blue' }}> more </Text>
-                        </TouchableHighlight>
                     </View>
                     <ActivityList count={this.state.activityCount}/>
 

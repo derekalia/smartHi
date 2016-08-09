@@ -37,6 +37,7 @@ class FilterList extends Component {
             if (index < 0) {
                 filter.isCurrent = true;
                 current.push(filter);
+                this.props.addFilter(filter.name);
                 this.setState({currentFilters: current});
             }
         }
@@ -45,6 +46,7 @@ class FilterList extends Component {
             var current = this.state.currentFilters;
             var index = current.indexOf(filter);
             if (index >= 0) {
+                this.props.removeFilter(filter.name);
                 current.splice(index, 1);
                 this.setState({currentFilters: current});
             }

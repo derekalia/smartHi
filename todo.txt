@@ -9,7 +9,7 @@
 9. Save app state locally
 10. Cleanup productscene Done
 11. Cleanup retailerscene Done.
-12. Finish activities.
+12. Finish activities. Done.
 13. Finish profile page.
 14. Finish review 2 pages.
 15. Hookup review pages.

@@ -7,7 +7,7 @@
 //
 
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, ScrollView, TouchableOpacity,TouchableHighlight } from 'react-native'
+import {StyleSheet, Text, View, ScrollView, TouchableOpacity,TouchableHighlight, Image } from 'react-native'
 
 //get state management components
 import {bindActionCreators} from 'redux';
@@ -32,6 +32,14 @@ class ActivityScene extends Component {
     render() {
         return (
             <View style={[{ marginTop: 35, flex: 1 }]}>
+                <Image style={{ width: 170, height: 170, justifyContent: 'center', alignItems: 'center', alignSelf: 'center' }} source={require('../media/movieTile1.png')}>
+                    <View style={{ borderWidth: 1.5, borderRadius: 20, borderColor: "white" }}>
+                        <Text style={{ textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 5, textShadowColor: "black", fontSize: 20, color: "white", margin: 8 }}>
+                            {this.props.activity}
+                        </Text>
+                    </View>
+                </Image>
+
                 <ScrollView>
                     <ProductList productList={this.props.productList} goProduct={(t)=> this._goProduct(t)}/>
                 </ScrollView>
@@ -46,6 +54,7 @@ class ActivityScene extends Component {
 function mapStateToProps(state) {
     return {
         productList: state.ActivityReducer.products,
+        activity:    state.ActivityReducer.activity,
     }
 }
 
