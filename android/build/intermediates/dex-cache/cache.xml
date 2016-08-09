@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/dNetGuru/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.4.1/63994437f62bc861bc20c605d12962f7246116d1/okhttp-urlconnection-3.4.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="63994437f62bc861bc20c605d12962f7246116d1">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.4.1-34f4d509c6f4a2e421f0d27fa6b105a305b3de72.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/library-2.4.0-cafb16298a418ca5acec3779293b78b62d209ec7.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/0.11.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1137942adeb03984c1311b662363dd38fc238fd3">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/classes-b60d1198f3d877b30509b71a445519ab878879cf.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/0.11.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3341b66c54367e777a0647e2db96c045329bfeab">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/classes-7e879d9ec0e2d293555da55bff37837ae8bacde9.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/0.11.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="98786c1770b531b9194fb6448b2a2692c64074b6">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/classes-ffcc6c5bfc91ef123fccac6db520dba3e840cf61.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/0.11.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ca63c521b5745ae9a09629d7ca67ff6bc2a967fe">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/classes-172319a5f71da874b96064bcd8a22ce7906fc9ec.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4356e230a981d1bbf047d848b91bc0d9b7c5bacc">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/classes-626ec1b5ff3445ce3f68134aff256bb4f3e53b4d.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/0.11.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d31aadf33187c37a7cd63dc1b769f8c6e33f78c3">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/classes-37c03fa4af6f79e704c4f7c1dad356957875a646.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-ws/3.4.1/8ace66ef7002d98f633377c9e67daeeb196d8c3b/okhttp-ws-3.4.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8ace66ef7002d98f633377c9e67daeeb196d8c3b">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/okhttp-ws-3.4.1-b0318355aa44e3813e8fe4ea4f7b018e056b52fb.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.2.1/support-annotations-23.2.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ccb693bc0774fcb637246f7360de25b4af7df318">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/support-annotations-23.2.1-6de3fb02cf4aa9588043658d8ef77ba91290d9c4.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8505ca79a0abc3ef116f9c197b7d721ee2453066">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/classes-5d502b79d059f2c32b55fbd456c3c31427f0c927.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/exploded-aar/herby/react-native-camera/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="521f31e34ed9874e7dd7e3a3d94d6647aa1acf3f">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/classes-49fbfd65e735c200832697bbedd9a78c4a849662.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.9.0/f824591a0016efbaeddb8300bee54832a1398cfa/okio-1.9.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="f824591a0016efbaeddb8300bee54832a1398cfa">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/okio-1.9.0-966b531ce6688b589641858e2408f028ae904111.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3be474b1b21b31cf2fa93fe6bd641ae108d96452">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/classes-2775c21ed18677f8cfa8f01225784f4c5a128ca4.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/classes-4f4f96363582301ee7bf68c7d7cff67502692207.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.2.1/jars/libs/internal_impl-23.2.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="607a3d0b8013b4ccbfeb0b7cb293351994e021fb">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.2.1-fa6c063b636fa58feb4153f8180ca5e00b693977.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/classes-09285896c8e83366c9b501f0e2db1ee0669d6d89.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.31.0/jars/libs/infer-annotations-1.5.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="841543b0cb82ebcb59e60c73c4514afa57888ca0">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/infer-annotations-1.5-b4861a6de6b2f64cc3f0621490943c793725ff42.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.4.1/c7c4f9e35c2fd5900da24f9872e3971801f08ce0/okhttp-3.4.1.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c7c4f9e35c2fd5900da24f9872e3971801f08ce0">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/okhttp-3.4.1-51ac640b46eb87fa115a5f56b672fe167b0f2459.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.2.3/1a0113da2cab5f4c216b4e5e7c1dbfaa67087e14/jackson-core-2.2.3.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1a0113da2cab5f4c216b4e5e7c1dbfaa67087e14">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/jackson-core-2.2.3-9cb03907abf7bb5c86e9911219d40523619b4d69.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0-29aa380891a9a351941181f8ce15e865ebd5cc1f.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/exploded-aar/herby/react-native-vector-icons/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="bfdff7491a03666f753cdad7821a7fb0927f139b">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/classes-175e292145bc7087c631a6b7f7a918cda7ba04ba.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/0.11.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="2b8a01ad9da5d26d0067894c22e87597bca2c500">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/classes-ff888b2529fef6dcc991bd30acb130bcfa21f9f7.jar" />
+    </item>
+    <item
+        jar="/Users/dNetGuru/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/Users/dNetGuru/Projects/ReactNUI/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0-0f1687d1f30324070368fbe42559d128937044cb.jar" />
+    </item>
+
+</items>

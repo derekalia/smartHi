@@ -1,3 +1,5 @@
+android/app/build/*
+
 # VSCode
 .vscode/
 tsconfig.json
