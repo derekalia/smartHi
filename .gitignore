@@ -1,4 +1,4 @@
-android/app/build/*
+android/app/build/
 
 # VSCode
 .vscode/
