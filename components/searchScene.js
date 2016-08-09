@@ -3,7 +3,7 @@
 //
 
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, ScrollView, ListView } from 'react-native'
+import {StyleSheet, Text, View, ScrollView, ListView, TouchableOpacity } from 'react-native'
 
 //get state management components
 import {bindActionCreators} from 'redux';
@@ -12,6 +12,7 @@ import {connect} from 'react-redux';
 //get internal components
 import ProductItem           from './productItem.js';
 import SearchBar             from './searchBar.js';
+import SearchCategory        from './searchCategory.js';
 import FilterList            from './filterList.js';
 import ProductList           from './productList.js';
 import {StartSearchAction,GetProductAction}   from '../actions';
@@ -59,6 +60,7 @@ class SearchScene extends Component {
         return (
             <View style={[{ marginTop: 50, flex: 1,marginHorizontal:5,}]}>
                 <SearchBar startSearch={()=>this._startSearch()} setSearchTerm={(t)=>this._setSearchTerm(t)}/>
+                <SearchCategory/>
                 <ScrollView style={{marginTop: 0,}}>
                 <View style={{}}>
                     <FilterList productCount={this.props.products.length} addFilter={(t)=>this._addFilter(t)} removeFilter={(t)=>this._removeFilter}/>
