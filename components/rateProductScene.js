@@ -3,221 +3,305 @@
 // Used for testing various UI components
 //
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
+import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator, Dimensions,} from 'react-native'
+
+//get state management components
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 
 import {GetRetailerAction,GetProducerAction,} from '../actions';
 import StarRating from 'react-native-star-rating';
 import ReviewList   from './reviewList.js';
+import FilterItem   from './filterItem.js';
+
+import {FiltersActivity, FiltersEffect, FiltersType,FiltersCategory,FiltersSymptoms} from '../common/filters.js';
+
 
 class RateProductScene extends Component {
-  constructor(props) {
-      super(props);
-      // these should come from the app state.
-      this.state = this.props.product;
-      starCount: 0
-  }
-
-  _onQuality(rating) {
-      this.setState({
-          quality: rating
-      });
-  }
-  _onPotency(rating) {
-      this.setState({
-          potency: rating
-      });
-  }
-  _onFlavor(rating) {
-      this.setState({
-          flavor: rating
-      });
-  }
+    constructor(props) {
+        super(props);
+        // these should come from the app state.
+        this.state = this.props.product;
+        this.state.showSlider = false;
+        this._effect   = FiltersEffect;
+        this._symptom  = FiltersSymptoms;
+        this._activity = FiltersActivity;
+        //
+        // BatsFix. Assuming that no filters were selected. Is that correct?
+        //
+        for (var i=0; i < this._effect.length; i++) { this._effect[i].selected = false };
+        for (var i=0; i < this._symptom.length; i++) { this._symptom[i].selected = false };
+        for (var i=0; i < this._activity.length; i++) { this._activity[i].selected = false };
+    }
 
     render() {
         return (
-          <ScrollView style={{backgroundColor:'white'}}>
-          <View style={{ flex: 1 }}>
-              {/*Product Image*/}
-              <View style={{ height: 228, justifyContent: "flex-end" }}>
-                  <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380 }}/>
-              </View>
-              {/* Overall rating */}
-              <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
-                  <Text style={{ fontSize: 22, fontWeight: 'bold' }}>FORGED Rosin - XJ-13</Text>
-              </View>
-              <View style={{ marginTop: 5, marginHorizontal: 10,flexDirection: "row" }}>
-                  <View style={{flex:1,flexDirection: "row",justifyContent:'flex-end' }}>
-                    <TouchableOpacity style={Styles.tagCategory}>
-                        <Text style={Styles.tagTextCategory}>rosin</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={Styles.tagType}>
-                        <Text style={Styles.tagTextType}>sativa</Text>
-                    </TouchableOpacity>
-                  </View>
-              </View>
-              {/* Description */}
-              <View style={{ marginHorizontal: 10 }}>
-                  <View style={{ flex: 1,justifyContent: 'center',marginTop:10,marginBottom:5 }}>
-                      <Text style={{fontSize:16}}>
-                      FORGED Rosin Is our process of extracting oils from cannabis. We use very low temperatures to reduce the terpene evaporation which is critical to the experience of our product.
-                     </Text>
-                  </View>
-              </View>
-              {/*Rating breakdown*/}
-              <View style={{ marginHorizontal: 10,marginTop: 15  }}>
-                  <View style={{ height: 40, justifyContent: 'center' }}>
-                      <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Rating</Text>
-                  </View>
-                  <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1, }}>
-                          <TouchableOpacity style={[Styles.tagType, { borderColor: 'white', alignItems: 'flex-start' }]}>
-                              <Text style={[{ color: 'black', margin: 5,fontSize:16 }]}>Quality</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity style={[Styles.tagType, { borderColor: 'white', alignItems: 'flex-start' }]}>
-                              <Text style={[{ color: 'black', margin: 5,fontSize:16 }]}>Flavor</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity style={[Styles.tagType, { borderColor: 'white', alignItems: 'flex-start' }]}>
-                              <Text style={[{ color: 'black', margin: 5,fontSize:16 }]}>Potency</Text>
-                          </TouchableOpacity>
-                      </View>
-                      <View style={{ flex: 3 }}>
-                          <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
-                              <StarRating
-                                  disabled={false}
-                                  maxStars={5}
-                                  starSize={30}
-                                  starColor={'#D0021B'}
-                                  rating={0}
-                                  selectedStar={(rating) => this._onQuality(rating)}
-                                  />
-                          </View>
-                          <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
-                              <StarRating
-                                  disabled={false}
-                                  maxStars={5}
-                                  starSize={30}
-                                  starColor={'#D0021B'}
-                                    rating={0}
-                                  selectedStar={(rating) => this._onFlavor(rating) }
-                                  />
-                          </View>
-                          <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
-                              <StarRating
-                                  disabled={false}
-                                  maxStars={5}
-                                  starSize={30}
-                                  starColor={'#D0021B'}
-                                  rating={0}
-                                  selectedStar={(rating) => this._onPotency(rating) }
-                                  />
-                          </View>
-                      </View>
-                  </View>
-              </View>
-              {/* Test results */}
-              <View style={{ marginHorizontal: 10, marginTop: 15 }}>
-                  <View style={{ justifyContent: 'center' }}>
-                      <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Test Results</Text>
-                      <View style={{flex:1,flexDirection:'row',justifyContent: 'space-between',height:20,marginTop:20,marginRight:5}}>
-                        <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>THCA</Text>
-                        <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>THC</Text>
-                        <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>CBD</Text>
-                        <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>TOTAL</Text>
-                      </View>
-                      <View style={{flex:1,flexDirection:'row',justifyContent: 'space-between',height:30,marginRight:5}}>
-                        <Text style={{width:60,textAlign:'center',fontSize: 16}}>12%</Text>
-                        <Text style={{width:60,textAlign:'center',fontSize: 16}}>11%</Text>
-                        <Text style={{width:60,textAlign:'center',fontSize: 16}}>8%</Text>
-                        <Text style={{width:60,textAlign:'center',fontSize: 16}}>56%</Text>
-                      </View>
-                  </View>
-              </View>
+        <ScrollView style={{backgroundColor:'white'}}>
+            <View style={{ flex: 1 }}>
+                <View style={{ height: 228, justifyContent: "flex-end" }}>
+                    <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380 }}/>
+                </View>
 
-              <View style={{ marginHorizontal: 10, marginTop: 15 }}>
-                  <View style={{ height: 40, justifyContent: 'center' }}>
-                      <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Effects</Text>
-                  </View>
-                  <View style={{ flexDirection: "row" }}>
-                      <View style={{ flex: 1.4 }}>
-                          <TouchableOpacity style={Styles.tagEffect}>
-                              <Text style={Styles.tagTextEffect}>effect</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity style={Styles.tagEffect}>
-                              <Text style={Styles.tagTextEffect}>+</Text>
-                          </TouchableOpacity>
-                      </View>
-                      <View style={{ flex: 3 }}>
-                          <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: 40 }]}>
-                              <Text style={Styles.tagTextEffect}> </Text>
-                          </View>
-                          <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: 40 }]}>
-                              <Text style={Styles.tagTextEffect}> </Text>
-                          </View>
-                      </View>
-                  </View>
-              </View>
-              {/* Related activities */}
-              <View style={{ marginHorizontal: 10, marginTop: 15 }}>
-                  <View style={{ height: 40, justifyContent: 'center' }}>
-                      <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Activies</Text>
-                  </View>
-                  <View style={{ flexDirection: "row" }}>
-                      <TouchableOpacity style={Styles.tagActivity}>
-                          <Text style={Styles.tagTextActivity}>activity</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity style={Styles.tagActivity}>
-                          <Text style={Styles.tagTextActivity}> + </Text>
-                      </TouchableOpacity>
+                {this._renderRating()}
 
-                  </View>
-              </View>
+                {this._renderDescription()}
 
-              <View style={{ marginHorizontal: 10, marginTop: 15 }}>
-                  <View style={{ height: 40, justifyContent: 'center' }}>
-                      <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Symptoms</Text>
-                  </View>
-                  <View style={{ flexDirection: "row" }}>
-                      <TouchableOpacity style={Styles.tagSymptom}>
-                          <Text style={Styles.tagTextSymptom}>symptom</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity style={Styles.tagSymptom}>
-                          <Text style={Styles.tagTextSymptom}> + </Text>
-                      </TouchableOpacity>
-                  </View>
-              </View>
+                {this._renderDetailRating()}
 
-              <View style={{ marginHorizontal: 10, marginTop: 15 }}>
-                  <View style={{ height: 40, justifyContent: 'center' }}>
-                      <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Comment</Text>
-                  </View>
-                  <View style={{ flexDirection: "row",borderColor: 'gray', borderWidth: 1, margin: 2, borderRadius: 4, }}>
-                    <TextInput
-                        style={{ height: 60, flex:1, margin: 4, fontSize: 16, }}
-                        onChangeText={(text) => this.setState({ text }) }
-                        placeholder={'Say something'}
-                        numberOfLines = {4}
-                        multiline = {true}
-                        />
-                  </View>
-                  <TouchableOpacity style={{  margin: 4,
-                    borderRadius: 10,
-                    borderWidth: 1,
-                    borderColor: "#ED3C52",
-                    backgroundColor: '#ED3C52',
-                    justifyContent: 'center',
-                    alignItems: 'center',width:80}}>
-                      <Text style={{color: "white",fontWeight:'bold',fontSize:16,
-                      marginTop: 7,
-                      marginBottom: 7,
-                      marginHorizontal: 10,}}> Post </Text>
-                  </TouchableOpacity>
-              </View>
+                {this._renderFilters()}
 
-              </View>
-          </ScrollView>
+                {this._renderTestResults()}
+
+                {this._renderCommentBox()}
+            </View>
+        </ScrollView>
         );
     }
+
+    _onRating(rating) {
+        this.setState({
+            rating: rating
+        });
+    }
+    _onQuality(rating) {
+        this.setState({
+            quality: rating
+        });
+    }
+    _onPotency(rating) {
+        this.setState({
+            potency: rating
+        });
+    }
+    _onFlavor(rating) {
+        this.setState({
+            flavor: rating
+        });
+    }
+
+    _renderRating() {
+        return (
+        <View>
+            <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
+            </View>
+            <View style={{ marginTop: 5, marginHorizontal: 10,flexDirection: "row" }}>
+                <View style={{flex:1.2,alignItems: 'flex-start', flexDirection: "row",marginTop:8}}>
+                    <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'} 
+                        rating={this.state.rating}
+                        selectedStar={(rating) => this._onRating(rating)}/>
+                    <Text style={{ fontSize: 20,marginTop:1 }}> ({this.state.ratingCount}) </Text>
+                </View>
+                <View style={{flex:1,flexDirection: "row",justifyContent:'flex-end' }}>
+                  <TouchableOpacity style={Styles.tagCategory}>
+                      <Text style={Styles.tagTextCategory}>rosin</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={Styles.tagType}>
+                      <Text style={Styles.tagTextType}>sativa</Text>
+                  </TouchableOpacity>
+                </View>
+            </View>
+        </View>
+        );
+    }
+    _renderDescription() {
+        return (
+        <View style={{ marginHorizontal: 10 }}>
+            <View style={{ flex: 1,justifyContent: 'center',marginTop:10,marginBottom:5 }}>
+                  <Text style={{fontSize:16}}>
+                  {this.state.description} 
+                 </Text>
+            </View>
+        </View>
+        );
+    }
+    _renderDetailRating() {
+        return(
+        <View style={{ marginHorizontal: 10,marginTop: 15  }}>
+            <View style={{ height: 40, justifyContent: 'center' }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Rating</Text>
+            </View>
+            <View style={{ flexDirection: "row" }}>
+                <View style={{ flex: 1, }}>
+                    <TouchableOpacity style={[Styles.tagType, { borderColor: 'white', alignItems: 'flex-start' }]}>
+                        <Text style={[{ color: 'black', margin: 5,fontSize:16 }]}>Quality</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[Styles.tagType, { borderColor: 'white', alignItems: 'flex-start' }]}>
+                        <Text style={[{ color: 'black', margin: 5,fontSize:16 }]}>Flavor</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[Styles.tagType, { borderColor: 'white', alignItems: 'flex-start' }]}>
+                        <Text style={[{ color: 'black', margin: 5,fontSize:16 }]}>Potency</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{ flex: 3 }}>
+                    <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
+                        <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'} 
+                            rating={this.state.quality}
+                            selectedStar={(rating) => this._onQuality(rating)}/>
+                    </View>
+                    <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
+                        <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'} 
+                            rating={this.state.flavor}
+                            selectedStar={(rating) => this._onFlavor(rating)}/>
+                   </View>
+                    <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
+                        <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'} 
+                            rating={this.state.potency}
+                            selectedStar={(rating) => this._onPotency(rating)}/>
+                   </View>
+                </View>
+            </View>
+        </View>
+        );
+    }
+    
+    _renderTestResults() {
+        return (
+        <View style={{ marginHorizontal: 10, marginTop: 15 }}>
+            <View style={{ justifyContent: 'center' }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Test Results</Text>
+                <View style={{flex:1,flexDirection:'row',justifyContent: 'space-between',height:20,marginTop:20,}}>
+                  <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>THCA</Text>
+                  <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>THC</Text>
+                  <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>CBD</Text>
+                  <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>TOTAL</Text>
+                </View>
+                <View style={{flex:1,flexDirection:'row',justifyContent: 'space-between',height:30}}>
+                  <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.thca}%</Text>
+                  <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.thc}%</Text>
+                  <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.cbd}%</Text>
+                  <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.cbd}%</Text>
+                </View>
+            </View>
+        </View>
+        );
+    }
+    
+    _renderCommentBox() {
+        return (
+        <View style={{ marginHorizontal: 10, marginTop: 15 }}>
+            <View style={{ height: 40, justifyContent: 'center' }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Comment</Text>
+            </View>
+            <View style={{ flexDirection: "row",borderColor: 'gray', borderWidth: 1, margin: 2, borderRadius: 4, }}>
+                <TextInput
+                    style={{ height: 60, flex:1, margin: 4, fontSize: 16, }}
+                    onChangeText={(text) => this.setState({ text }) }
+                    placeholder={'Say something'}
+                    numberOfLines = {4}
+                    multiline = {true}
+                />
+            </View>
+            <TouchableOpacity style={{  margin: 4,
+                borderRadius: 10,
+                borderWidth: 1,
+                borderColor: "#ED3C52",
+                backgroundColor: '#ED3C52',
+                justifyContent: 'center',
+                alignItems: 'center',width:80}}>
+                <Text style={{color: "white",fontWeight:'bold',fontSize:16,
+                    marginTop: 7,
+                    marginBottom: 7,
+                    marginHorizontal: 10,}}> Post </Text>
+            </TouchableOpacity>
+        </View>
+        );
+    }
+
+    //
+    // BatsFix. This is a lot of code for selecting filters should it be moved to a different file?
+    //
+
+    _renderEffectFilters() {
+        if (this.state.showSlider) {
+            return (
+            <View style={{flexDirection:'row'}}>
+            <Text style={{color:'#4A90E2'}}>{this._effect[this._selectedFilterIndex].name}</Text>
+            <Slider maximumValue={100} minimumValue={10} value={50} style={{flex:1}} onSlidingComplete={(t)=> this._setEffectValue(t)}/>
+            </View>
+            );
+        }
+        else {
+            return (
+            <ScrollView horizontal={true} style={{flex:0}}>
+                {this._renderFiltersArray(this._effect)}
+            </ScrollView>
+            );
+        }
+    }
+
+    _setEffectValue(value) {
+        console.log("setting effect value to "+value);
+        this._effect[this._selectedFilterIndex].strength = value;
+        this.setState({showSlider:false});
+    }
+
+    _onAddRemoveFilter(filter) {
+        if (filter.type == 'effect') {
+            var index = this._effect.indexOf(filter);
+            this._effect[index].selected = filter.selected;
+            if (filter.selected) {
+                // keep in mind this filter.
+                this._selectedFilterIndex = index;
+                // get the effect strength
+                this.setState({showSlider:true});
+            }
+        }
+    }
+
+    _renderFiltersArray(filterArray) {
+        var filters = [];
+        for (var i=0; i  < filterArray.length; i++) {
+            filters.push(<FilterItem filter={filterArray[i]} key={i} onPress={(t) => this._onAddRemoveFilter(t)}/>);
+        }
+        return filters;
+    }
+
+    _renderFilters() {
+        return (
+        <View>
+            <View style={{ marginHorizontal: 10, marginTop: 15 }}>
+                <View style={{ height: 40, justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Select Applicable Effects</Text>
+                </View>
+                {this._renderEffectFilters()}
+            </View>
+            {/* Related activities */}
+            <View style={{ marginHorizontal: 10, marginTop: 15 }}>
+                <View style={{ height: 40, justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Select Applicable Activities</Text>
+                </View>
+                <ScrollView horizontal={true}>
+                {this._renderFiltersArray(this._activity)}
+                </ScrollView>
+            </View>
+            <View style={{ marginHorizontal: 10, marginTop: 15 }}>
+                <View style={{ height: 40, justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Select Applicable Symptoms</Text>
+                </View>
+                <ScrollView horizontal={true}>
+                {this._renderFiltersArray(this._symptom)}
+                </ScrollView>
+            </View>
+        </View>
+        );
+    }
+
 }
+
+// BatsFix. This function is used to convert state to props passed to this component
+function mapStateToProps(state) {
+    return {
+        product: state.ProductReducer.product,
+    }
+}
+// BatsFix. This function is used to convert action to props passed to this component.
+// In this example, there is now prop called GetRetailerAction.
+//
+function mapActionToProps(dispatch) { return bindActionCreators({ GetRetailerAction,GetProducerAction }, dispatch); }
+
+module.exports = connect(mapStateToProps, mapActionToProps)(RateProductScene);
+
 
 const Styles = StyleSheet.create({
     tagType: {
@@ -437,6 +521,3 @@ const Styles = StyleSheet.create({
     },
 
 })
-
-
-module.exports = RateProductScene;

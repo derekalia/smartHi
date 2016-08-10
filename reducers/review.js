@@ -1,6 +1,6 @@
 import {
-    PRODUCT_SUCCESS,
-    PRODUCT_ERROR,
+    RATE_SUCCESS,
+    RATE_ERROR,
 } from '../actions/index.js';
 
 const initialState = {
@@ -9,18 +9,18 @@ const initialState = {
     name:'Initial State',
     description:'Initial State',
     price: 0,
-    rating: 5,
+    rating: 2,
     ratingCount: 0,
-    quality: 5,
-    flavor: 5,
-    potency:5,
+    quality: 2,
+    flavor: 2,
+    potency:2,
     thc:  50,
     cbd:  50,
     thca: 50,
     retailers: [],
     producer: {},
-    symptoms:['state','state','state'],
-    activity:['state','state','state'],
+    activity:[],
+    symptom:[],
     effect:[{name:'state',strength:50},{name:'state',strength:50},{name:'state',strength:50}]
     },
 }
@@ -29,7 +29,7 @@ export default function ProductReducer(state, action) {
 
     switch (action.type) {
 
-        case PRODUCT_SUCCESS:
+        case RATE_SUCCESS:
 
             // BatsFix. this creates a copy of the state object
             // In redux, it uses the reference of an object to decide
