@@ -51,6 +51,8 @@ class RateProductScene extends Component {
                 {this._renderFilters()}
 
                 {this._renderTestResults()}
+
+                {this._renderCommentBox()}
             </View>
         </ScrollView>
         );
