@@ -12,8 +12,8 @@ class ErrorMessage extends Component {
 
     render() {
         return (
-            <TouchableOpacity style={{flex:1,backgroundColor:'transparent','opacity':100,justifyContent:'center',alignItems:'center',}} onPress={()=>this.props.onPress()}>
-                <View style={{height:100,width:this.props.width,alignItems:'center',backgroundColor:'aqua'}}>
+            <TouchableOpacity style={{flex:1,backgroundColor:'transparent',justifyContent:'center',alignItems:'center',}} onPress={()=>this.props.onPress()}>
+                <View style={{height:100,width:this.props.width,alignItems:'center',backgroundColor:'blue'}}>
                     <Text style={{marginTop:30}}>
                         {this.props.messageData}
                     </Text>
