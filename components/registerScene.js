@@ -49,13 +49,13 @@ class LoginScene extends Component {
     render() {
         return (
             <View>
-                <View style={[{ flex: 1, alignItems: 'center', marginTop: 50 }]}>
+                <View style={[{ flex: 1, alignItems: 'center', marginTop: 20 }]}>
                     <Image style={Styles.icon} source={require('../media/Icon.png') }/>
                     <Text style={{ fontFamily: 'Pacifico', fontSize: 38, marginTop: 10 }}>Weedly</Text>
                 </View>
 
 
-                <View style={{flex:1,alignItems: 'center',marginTop:20, }}>
+                <View style={{flex:1,alignItems: 'center',marginTop:10, }}>
 
                 <View style={[{ flexDirection: 'row', width: 300, alignItems: 'center', alignItems: "center", }]}>
                     <TextInput style={[Styles.input, { fontSize: 20, flex: 3 }]}
@@ -72,8 +72,23 @@ class LoginScene extends Component {
 
                 <View style={{ borderWidth: 1, borderColor: "#dddddd", width: 290, alignItems: 'center', alignItems: "center", justifyContent: "center" }}/>
 
+                <View style={[{ flexDirection: 'row', width: 300, alignItems: 'center', alignItems: "center",marginTop:10 }]}>
+                    <TextInput style={[Styles.input, { fontSize: 20, flex: 3 }]}
+                        autoCapitalize  = "none"
+                        autoCorrect     = {false}
+                        placeholder     = "Username"
+                        returnKeyType   = "next"
+                        onChange        = {this._enterUserName.bind(this) }
+                        />
+                    <View style={{ alignItems: 'center', alignItems: "center" }}>
+                        <Image style={{ margin: 9, width: 30, height: 30 }} source={require("../media/mailicon1.png") }/>
+                    </View>
+                </View>
 
-                <View style={[{ flexDirection: 'row', width: 300, alignItems: 'center', alignItems: "center",marginTop: 25 }]}>
+                <View style={{ borderWidth: 1, borderColor: "#dddddd", width: 290, alignItems: 'center', alignItems: "center", justifyContent: "center" }}/>
+
+
+                <View style={[{ flexDirection: 'row', width: 300, alignItems: 'center', alignItems: "center",marginTop: 10 }]}>
                     <TextInput style={[Styles.input, { fontSize: 20, flex: 3 }]}
                         password        = {true}
                         autoCapitalize  = "none"
@@ -90,7 +105,7 @@ class LoginScene extends Component {
 
 
 
-                <View style={[{ flexDirection: 'row', width: 300, alignItems: 'center', alignItems: "center", marginTop: 25 }]}>
+                <View style={[{ flexDirection: 'row', width: 300, alignItems: 'center', alignItems: "center", marginTop: 10 }]}>
                     <TextInput style={[Styles.input, { fontSize: 20, flex: 3 }]}
                         password        = {true}
                         autoCapitalize  = "none"
@@ -137,7 +152,7 @@ const Styles = StyleSheet.create({
     loginButton: {
         height: 60,
         width:290,
-        marginTop:30,
+        marginTop:20,
         borderRadius: 3,
         backgroundColor: '#4A90E2',
         alignItems: 'center',
