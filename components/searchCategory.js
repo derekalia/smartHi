@@ -11,7 +11,6 @@ class SearchCategory extends Component {
         this.props.setSearchCategory(event.nativeEvent.text);
     }
 
-
     render() {
         return (
            <View style={{flexDirection: "row", marginTop: 20, marginBottom: 0, marginHorizontal: 10,justifyContent:'space-around',alignItems:'center',}}>
@@ -29,7 +28,6 @@ module.exports = SearchCategory;
 const Styles={
     category: {
         height: 22,
-        fontSize: 18,
         backgroundColor: 'white',
         borderBottomWidth: 2,
         borderColor: 'orange',
