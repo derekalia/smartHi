@@ -32,13 +32,16 @@ class ActivityScene extends Component {
     render() {
         return (
             <View style={[{ marginTop: 35, flex: 1 }]}>
-                <Image style={{ width: 170, height: 170, justifyContent: 'center', alignItems: 'center', alignSelf: 'center' }} source={require('../media/movieTile1.png')}>
-                    <View style={{ borderWidth: 1.5, borderRadius: 20, borderColor: "white" }}>
-                        <Text style={{ textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 5, textShadowColor: "black", fontSize: 20, color: "white", margin: 8 }}>
+                {/* <Image style={{ width: 170, height: 170, justifyContent: 'center', alignItems: 'center', alignSelf: 'center' }} source={require('../media/movieTile1.png')}> */}
+                <View>
+                <Image style={{ width: 377, height: 200, alignItems: 'flex-start', alignSelf: 'center',justifyContent:'flex-end'  }} source={require('../media/ActivitySceneImages/adventure11.png')}>
+
+                        <Text style={{ textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 5, textShadowColor: "black", fontSize: 24, color: "white", margin: 8}}>
                             {this.props.activity}
                         </Text>
-                    </View>
-                </Image>
+
+                    </Image>
+                </View>
 
                 <ScrollView>
                     <ProductList productList={this.props.productList} goProduct={(t)=> this._goProduct(t)}/>
