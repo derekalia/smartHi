@@ -46,11 +46,12 @@ class RateProductScene extends Component {
 
                 {this._renderDescription()}
 
+                {this._renderTestResults()}
+
                 {this._renderDetailRating()}
 
                 {this._renderFilters()}
 
-                {this._renderTestResults()}
 
                 {this._renderCommentBox()}
             </View>
@@ -87,10 +88,10 @@ class RateProductScene extends Component {
             </View>
             <View style={{ marginTop: 5, marginHorizontal: 10,flexDirection: "row" }}>
                 <View style={{flex:1.2,alignItems: 'flex-start', flexDirection: "row",marginTop:8}}>
-                    <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'} 
+                    <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
                         rating={this.state.rating}
                         selectedStar={(rating) => this._onRating(rating)}/>
-                    <Text style={{ fontSize: 20,marginTop:1 }}> ({this.state.ratingCount}) </Text>
+
                 </View>
                 <View style={{flex:1,flexDirection: "row",justifyContent:'flex-end' }}>
                   <TouchableOpacity style={Styles.tagCategory}>
@@ -109,7 +110,7 @@ class RateProductScene extends Component {
         <View style={{ marginHorizontal: 10 }}>
             <View style={{ flex: 1,justifyContent: 'center',marginTop:10,marginBottom:5 }}>
                   <Text style={{fontSize:16}}>
-                  {this.state.description} 
+                  {this.state.description}
                  </Text>
             </View>
         </View>
@@ -135,17 +136,17 @@ class RateProductScene extends Component {
                 </View>
                 <View style={{ flex: 3 }}>
                     <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
-                        <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'} 
+                        <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
                             rating={this.state.quality}
                             selectedStar={(rating) => this._onQuality(rating)}/>
                     </View>
                     <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
-                        <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'} 
+                        <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
                             rating={this.state.flavor}
                             selectedStar={(rating) => this._onFlavor(rating)}/>
                    </View>
                     <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
-                        <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'} 
+                        <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
                             rating={this.state.potency}
                             selectedStar={(rating) => this._onPotency(rating)}/>
                    </View>
@@ -154,7 +155,7 @@ class RateProductScene extends Component {
         </View>
         );
     }
-    
+
     _renderTestResults() {
         return (
         <View style={{ marginHorizontal: 10, marginTop: 15 }}>
@@ -176,7 +177,7 @@ class RateProductScene extends Component {
         </View>
         );
     }
-    
+
     _renderCommentBox() {
         return (
         <View style={{ marginHorizontal: 10, marginTop: 15 }}>
@@ -216,14 +217,21 @@ class RateProductScene extends Component {
         if (this.state.showSlider) {
             return (
             <View style={{flexDirection:'row'}}>
-            <Text style={{color:'#4A90E2'}}>{this._effect[this._selectedFilterIndex].name}</Text>
-            <Slider maximumValue={100} minimumValue={10} value={50} style={{flex:1}} onSlidingComplete={(t)=> this._setEffectValue(t)}/>
+              <View style={{backgroundColor:"#4A90E2",justifyContent:'center',borderRadius:20,marginRight:10}}>
+                <Text style={{margin:4,marginHorizontal:15,color:'white',fontSize:16}}>{this._effect[this._selectedFilterIndex].name}</Text>
+              </View>
+              <View style={{flex:1}}>
+                <Slider maximumValue={100} minimumValue={10} value={50} style={{flex:1}} onSlidingComplete={(t)=> this._setEffectValue(t)}/>
+              </View>
+              <View style={{justifyContent:'center'}}>
+                <Text style={{color:'black',fontSize:16}}>  very intense</Text>
+              </View>
             </View>
             );
         }
         else {
             return (
-            <ScrollView horizontal={true} style={{flex:0}}>
+            <ScrollView horizontal={true} style={{flex:1}}>
                 {this._renderFiltersArray(this._effect)}
             </ScrollView>
             );
