@@ -61,7 +61,7 @@ class ProductScene extends Component {
             <ScrollView style={{backgroundColor:'white'}}>
                 <View style={{ flex: 1 }}>
                     {/*Product Image*/}
-                    <View style={{ height: 248, justifyContent: "flex-end" }}>
+                    <View style={{justifyContent: "flex-end" }}>
                         <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380 }}/>
                     </View>
                     {/* Overall rating */}

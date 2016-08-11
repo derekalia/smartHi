@@ -40,7 +40,7 @@ class RetailerScene extends Component {
         return (
             <ScrollView style={{backgroundColor:'white'}}>
                 <View style={{ flex: 1 }}>
-                    <View style={{ justifyContent: "flex-end",marginTop:62 }}>
+                    <View style={{ justifyContent: "flex-end"}}>
                         <Image source={require('../media/ikes1.png') } style={{ height: 140, width: 380 }}/>
                     </View>
                     {/*Rating and link to map*/}

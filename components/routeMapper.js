@@ -14,7 +14,7 @@ var RouteMapper = {
         if (index > 0) {
             return (
               <TouchableHighlight onPress={navigator.jumpBack} underlayColor={'#f9f9f9'}>
-                <View style={{ flex: 1, marginTop: 11, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginLeft: 13, }}>
+                <View style={{ marginTop: 11, flexDirection: "row", marginLeft: 13,alignItems:'flex-start', }}>
                     <Image  source={require("../media/BackArrow.png") } style={{ width: 12, height: 19 }} />
                     <Text style={{ fontSize: 18, color: "#007AFF" }}> Back</Text>
                 </View>

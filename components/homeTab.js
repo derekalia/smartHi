@@ -18,7 +18,7 @@ import ProductScene  from './productScene.js';
 import RetailerScene from './retailerScene.js';
 import ProducerScene from './producerScene.js';
 import ActivityScene from './activityScene.js';
-import RouteMapper   from './routeMapper.js';
+import HerbyBar      from './herbyBar.js';
 
 const HomeIndex     = 0;
 const ProductIndex  = 1;
@@ -68,9 +68,19 @@ class HomeTab extends Component {
     }
 
     renderScene(route, navigator) {
-        return (
-            <route.component tabId={HomeTabId} navigator={navigator}/>
-        );
+        if (route.index == HomeSceneId) {
+            return (
+                <route.component tabId={HomeTabId}/>
+            );
+        }
+        else {
+            return (
+                <View style={{flex:1}}>
+                    <HerbyBar navigator={navigator}/>
+                    <route.component tabId={HomeTabId}/>
+                </View>
+            );
+        }
     }
 
     configureScene(route, routeStack) {
@@ -84,12 +94,6 @@ class HomeTab extends Component {
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
                 initialRoute = {HomeTabScenes[HomeIndex]}
-                navigationBar={
-                    <Navigator.NavigationBar
-                        routeMapper = {RouteMapper}
-                        style={{backgroundColor:'#F9F9F9',borderBottomWidth:1,borderColor:'#B2B2B2'}} >
-                    </Navigator.NavigationBar>
-                }
                 />
         );
     }

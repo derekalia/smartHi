@@ -40,7 +40,7 @@ class HomeScene extends Component {
 
     render() {
         return (
-            <View style={[{ marginTop: 35, flex: 1 }]}>
+            <View style={[{flex: 1 }]}>
                 <ScrollView>
                     {/* Find Button */}
                     {/*<TouchableOpacity style={[Styles.FindProductButton]}

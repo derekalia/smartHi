@@ -17,7 +17,7 @@ import RetailerScene  from './retailerScene.js';
 import ProducerScene  from './producerScene.js';
 
 // import navigation route mapper
-import RouteMapper   from './routeMapper.js';
+import HerbyBar   from './herbyBar.js';
 
 const SearchIndex     = 0;
 const ProductIndex    = 1;
@@ -63,11 +63,21 @@ class SearchTab extends Component {
             this.refs.navigator.popToTop();
         }
     }
-
+    
     renderScene(route, navigator) {
-        return (
-            <route.component tabId={SearchTabId} navigator={navigator}/>
-        );
+        if (route.index == SearchSceneId) {
+            return (
+                <route.component tabId={SearchTabId}/>
+            );
+        }
+        else {
+            return (
+                <View style={{flex:1}}>
+                    <HerbyBar navigator={navigator}/>
+                    <route.component tabId={SearchTabId}/>
+                </View>
+            );
+        }
     }
 
     configureScene(route, routeStack) {
@@ -81,12 +91,6 @@ class SearchTab extends Component {
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
                 initialRoute = {SearchTabScenes[0]}
-                navigationBar={
-                    <Navigator.NavigationBar
-                        routeMapper = {RouteMapper}
-                        style={{backgroundColor:'white',borderBottomWidth:1,borderColor:'#B2B2B2'}}
-                    />
-                }
             />
         );
     }
