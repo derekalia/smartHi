@@ -128,9 +128,9 @@ class LoginScene extends Component {
                         <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 20 }}> Register </Text>
                     </TouchableOpacity>
                     </View>
-
-                    <Text>{this.state.showMessage ? this.props.userMessage : ""}</Text>
-
+                </View>
+                <View style={{marginTop:65,alignItems:'center',backgroundColor:'white',height:30,justifyContent:'center',opacity:.7}}>
+                  <Text style={{color:'red',fontWeight:'bold'}}>{this.state.showMessage ? this.props.userMessage : ""}</Text>
                 </View>
             </View>
         );
