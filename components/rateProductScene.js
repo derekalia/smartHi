@@ -215,7 +215,7 @@ class RateProductScene extends Component {
     _renderEffectFilters() {
         if (this.state.showSlider) {
             return (
-            <View style={{flexDirection:'row'}}>
+            <View style={{flexDirection:'row',height:80}}>
             <Text style={{color:'#4A90E2'}}>{this._effect[this._selectedFilterIndex].name}</Text>
             <Slider maximumValue={100} minimumValue={10} value={50} style={{flex:1}} onSlidingComplete={(t)=> this._setEffectValue(t)}/>
             </View>
@@ -223,7 +223,7 @@ class RateProductScene extends Component {
         }
         else {
             return (
-            <ScrollView horizontal={true} style={{flex:0}}>
+            <ScrollView horizontal={true} style={{height:80}}>
                 {this._renderFiltersArray(this._effect)}
             </ScrollView>
             );
