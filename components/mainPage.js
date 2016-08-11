@@ -36,7 +36,9 @@ class MainPage extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({selectedTab: tabId});
+        if (this.state.selectedTab != nextProps.tabId) {
+            this._changeTab(nextProps.tabId);
+        }
     }
 
     _changeTab(tabId) {
@@ -67,28 +69,28 @@ class MainPage extends Component {
                     title="Map"
                     icon={MapIcon}
                     selected={this.state.selectedTab == MapTabId}
-                    onPress={() => { this.setState({ selectedTab: MapTabId }) } }>
+                    onPress={() => { this._changeTab(MapTabId) } }>
                     <MapTab selectedTab = {this.state.selectedTab} resetScene={this.state.resetScene}/>
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Search"
                     icon={SearchIcon}
                     selected={this.state.selectedTab == SearchTabId}
-                    onPress={() => { this.setState({ selectedTab: SearchTabId }) } }>
+                    onPress={() => { this._changeTab(SearchTabId) } }>
                     <SearchTab selectedTab = {this.state.selectedTab} resetScene={this.state.resetScene}/>
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Review"
                     icon={ReviewIcon}
                     selected={this.state.selectedTab == ReviewTabId}
-                    onPress={() => { this.setState({ selectedTab: ReviewTabId }) } }>
+                    onPress={() => { this._changeTab(ReviewTabId) } }>
                     <ReviewTab selectedTab = {this.state.selectedTab} resetScene ={this.state.resetScene}/>
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Profile"
                     icon={ProfileIcon}
                     selected={this.state.selectedTab == ProfileTabId}
-                    onPress={() => { this.setState({ selectedTab: ProfileTabId }) } }>
+                    onPress={() => { this._changeTab(ProfileTabId) } }>
                     <ProfileTab selectedTab = {this.state.selectedTab} resetScene={this.state.resetScene}/>
                 </TabBarIOS.Item>
             </TabBarIOS>
