@@ -216,6 +216,7 @@ class RateProductScene extends Component {
     _renderEffectFilters() {
         if (this.state.showSlider) {
             return (
+<<<<<<< HEAD
             <View style={{flexDirection:'row'}}>
               <View style={{backgroundColor:"#4A90E2",justifyContent:'center',borderRadius:20,marginRight:10}}>
                 <Text style={{margin:4,marginHorizontal:15,color:'white',fontSize:16}}>{this._effect[this._selectedFilterIndex].name}</Text>
@@ -226,12 +227,21 @@ class RateProductScene extends Component {
               <View style={{justifyContent:'center'}}>
                 <Text style={{color:'black',fontSize:16}}>  very intense</Text>
               </View>
+=======
+            <View style={{flexDirection:'row',height:80}}>
+            <Text style={{color:'#4A90E2'}}>{this._effect[this._selectedFilterIndex].name}</Text>
+            <Slider maximumValue={100} minimumValue={10} value={50} style={{flex:1}} onSlidingComplete={(t)=> this._setEffectValue(t)}/>
+>>>>>>> 08b8aeff8b5ac5ade2fc2751aa1e554669a84b3a
             </View>
             );
         }
         else {
             return (
+<<<<<<< HEAD
             <ScrollView horizontal={true} style={{flex:1}}>
+=======
+            <ScrollView horizontal={true} style={{height:80}}>
+>>>>>>> 08b8aeff8b5ac5ade2fc2751aa1e554669a84b3a
                 {this._renderFiltersArray(this._effect)}
             </ScrollView>
             );
