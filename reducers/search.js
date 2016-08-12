@@ -1,3 +1,6 @@
+
+import {ProductFrameId, RetailerFrameId,} from '../common/const.js';
+
 import {
     SEARCH_SUCCESS,
     SEARCH_ERROR,
@@ -31,7 +34,13 @@ export default function SearchReducer(state, action) {
             newState = Object.assign({}, state);
             // BatsFix then modify the item needed in the new
             // state. 
-            newState.products = action.products;
+            if (action.frameId == ProductFrameId) {
+                newState.products = action.products;
+            }
+            else
+            if (action.frameId == RetailerFrameId) {
+                newState.retailers = action.retailers;
+            }
             return newState;
 
         //    

@@ -359,7 +359,7 @@ export function SearchRetailers(searchTerm) {
     // BatsFix. use the term later!
     var retailers = [];
     for (var i=0; i < TestRetailers.length; i++) {
-        products.push(TestRetailers[i]);
+        retailers.push(TestRetailers[i]);
     }
     return retailers;
 }
