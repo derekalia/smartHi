@@ -42,7 +42,7 @@ class NotificationPage extends Component {
 
     // BatsFix. This is a sample call
     componentDidMount() {
-       this._startSequence(); 
+       //this._startSequence(); 
     }
 
     _startSequence() {

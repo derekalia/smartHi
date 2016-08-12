@@ -51,7 +51,7 @@ class LoginScene extends Component {
             <View>
                 <View style={[{ flex: 1, alignItems: 'center', marginTop: 20 }]}>
                     <Image style={Styles.icon} source={require('../media/Icon.png') }/>
-                    <Text style={{ fontFamily: 'Pacifico', fontSize: 38, marginTop: 10 }}>Weedly</Text>
+                    <Text style={{ fontFamily: 'Pacifico', fontSize: 38, marginTop: 10 }}>Hashtag</Text>
                 </View>
 
 

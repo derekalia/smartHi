@@ -346,6 +346,24 @@ function GetProductItems(pid) {
     return productItems;
 }
 
+export function SearchProducers(searchTerm) {
+    // BatsFix. use the term later!
+    var producers = [];
+    for (var i=0; i < TestProducers.length; i++) {
+        products.push(TestProducers[i]);
+    }
+    return producers;
+}
+
+export function SearchRetailers(searchTerm) {
+    // BatsFix. use the term later!
+    var retailers = [];
+    for (var i=0; i < TestRetailers.length; i++) {
+        products.push(TestRetailers[i]);
+    }
+    return retailers;
+}
+
 export function SearchProducts(searchTerm) {
     // BatsFix. use the term later!
     var products = [];

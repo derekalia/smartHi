@@ -31,7 +31,7 @@ class ActivityScene extends Component {
 
     render() {
         return (
-            <View style={[{ marginTop: 35, flex: 1 }]}>
+            <View style={[{ flex: 1 }]}>
                 {/* <Image style={{ width: 170, height: 170, justifyContent: 'center', alignItems: 'center', alignSelf: 'center' }} source={require('../media/movieTile1.png')}> */}
                 <View>
                 <Image style={{ width: 377, height: 200, alignItems: 'flex-start', alignSelf: 'center',justifyContent:'flex-end'  }} source={require('../media/ActivitySceneImages/adventure11.png')}>

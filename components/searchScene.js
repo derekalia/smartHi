@@ -3,88 +3,120 @@
 //
 
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, ScrollView, ListView, TouchableOpacity } from 'react-native'
+import {StyleSheet, Text, View, ScrollView, ListView, TouchableOpacity, Navigator } from 'react-native'
 
 //get state management components
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 //get internal components
-import ProductItem           from './productItem.js';
 import SearchBar             from './searchBar.js';
 import SearchCategory        from './searchCategory.js';
-import FilterList            from './filterList.js';
-import ProductList           from './productList.js';
+
+import ProductFrame          from './productFrame.js';
+import RetailerFrame         from './retailerFrame.js';
+import MapFrame              from './mapFrame.js';
+import UserFrame             from './userFrame.js';
+
+import HerbyBar              from './herbyBar.js';
 import {StartSearchAction,GetProductAction}   from '../actions';
+
+import {ProductFrameId, MapFrameId, UserFrameId, RetailerFrameId, }   from '../common/const.js';
+
+
+const ProductId  = 0;
+const MapId      = 1;
+const UserId     = 2;
+const RetailerId = 3;
+
+const SearchFrames = [
+    //
+    // BatsFix. Not sure what to do with all results frame. Is it going to list all of the items
+    // by products, retailers, producers??
+    {component: ProductFrame,  index: ProductFrameId},
+    {component: MapFrame,      index: MapFrameId},
+    {component: UserFrame,     index: UserFrameId},
+    {component: RetailerFrame, index: RetailerFrameId},
+];
+
 
 class SearchScene extends Component {
     constructor(props) {
         super(props);
         this._searchTerm = "";
         this._attributes = [];
+        this._frameId = ProductFrameId;
+    }
+
+    renderScene(route, navigator) {
+        // BatsFix.
+        // to pass a prop to the component, that prop
+        // first needs to be passed to the navigator object.
+        return (
+            <View style={{flex:1,marginTop:120}}>
+            <route.component addRemoveFilter={navigator.props.addRemoveFilter}/>
+            </View>
+        );
+    }
+        
+    configureScene(route, routeStack) {
+        return Navigator.SceneConfigs.PushFromRight;
+    }
+
+    _setFrame(frameId) {
+        this._frameId = frameId;
+        if (frameId == ProductFrameId) {
+            this.refs.navigator.jumpTo(SearchFrames[ProductId]);
+        }
+        else
+        if (frameId == MapFrameId) {
+            this.refs.navigator.jumpTo(SearchFrames[MapId]);
+        }
+        else
+        if (frameId == UserFrameId) {
+            this.refs.navigator.jumpTo(SearchFrames[UserId]);
+        }
+        else
+        if (frameId == RetailerFrameId) {
+            this.refs.navigator.jumpTo(SearchFrames[RetailerId]);
+        }
     }
 
     _startSearch() {
-        this.props.StartSearchAction(this._searchTerm, this._attributes);
+        this.props.StartSearchAction(this._searchTerm, this._attributes, this._frameId);
     }
 
     _setSearchTerm(term) {
         this._searchTerm = term;
     }
-
     //
-    // BatsFix. For now keeping filters string only for simplicity
+    // BatsFix. This is very hacky!!! it is only needed for products yet we
+    // pass this prop to everyone.
     //
-    _addFilter(filter) {
-        var index = this._attributes.indexOf(filter);
-        if (index < 0) {
-            this._attributes.push(filter);
-        }
-    }
-
-    _removeFilter(filter) {
-        var index = this._attributes.indexOf(filter);
-        if (index >= 0) {
-            this._attributes.splice(index, 1);
-        }
-    }
-
-    _goProduct(productId) {
-        //
-        // Go to product page
-        //
-       this.props.GetProductAction(productId);
+    _addRemoveFilter(filter) {
+        console.log("filter added removed"+filter);
     }
 
     render() {
         return (
             <View style={[{flex: 1,marginHorizontal:5,}]}>
-                <SearchBar startSearch={()=>this._startSearch()} setSearchTerm={(t)=>this._setSearchTerm(t)}/>
-                <SearchCategory/>
-                <ScrollView style={{marginTop: 0,}}>
-                <View style={{}}>
-                    <FilterList productCount={this.props.products.length} addFilter={(t)=>this._addFilter(t)} removeFilter={(t)=>this._removeFilter}/>
-                    {/*Search results section*/}
-                    <ProductList productList={this.props.products} goProduct={(id)=> this._goProduct(id)}/>
-                </View>
-                </ScrollView>
+                <Navigator
+                    ref="navigator"
+                    configureScene={this.configureScene}
+                    renderScene={this.renderScene}
+                    initialRoute = {SearchFrames[0]}
+                    initialRouteStack = {SearchFrames}
+                    navigationBar={<SearchBar setSearchTerm={(t)=>this._setSearchTerm(t)} startSearch={()=>this._startSearch()} setFrame={(t)=>this._setFrame(t)}/>}
+                    addRemoveFilter={(t)=>this._addRemoveFilter(t)}
+                />
             </View>
         );
     }
 }
 
 //
-// Connect state.SearchReducer.products  to props
-//
-function mapStateToProps(state) {
-    return {
-        products: state.SearchReducer.products,
-    }
-}
-
-//
 // Connect StartSearchAction to props
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ StartSearchAction,GetProductAction }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ StartSearchAction }, dispatch); }
 
-module.exports = connect(mapStateToProps,mapActionToProps)(SearchScene);
+module.exports = connect(null,mapActionToProps)(SearchScene);

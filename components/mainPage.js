@@ -12,14 +12,13 @@ import {StyleSheet, TabBarIOS, View,} from 'react-native';
 import {connect} from 'react-redux';
 
 // Import const ids.
-import {HomeTabId,SearchTabId,ReviewTabId,MapTabId,ProfileTabId} from '../common/const.js';
+import {HomeTabId,SearchTabId,ReviewTabId,ProfileTabId} from '../common/const.js';
 // Import icons
 import {HomeIcon,SearchIcon,ProfileIcon,MapIcon,ReviewIcon}        from '../common/icons.js';
 
 // Import tab elements
 import HomeTab       from './homeTab.js';
 import SearchTab     from './searchTab.js';
-import MapTab        from './mapTab.js';
 import ReviewTab     from './reviewTab.js';
 import ProfileTab    from './profileTab.js';
 
@@ -64,13 +63,6 @@ class MainPage extends Component {
                     selected={this.state.selectedTab == HomeTabId}
                     onPress={() => { this._changeTab(HomeTabId) } }>
                     <HomeTab selectedTab = {this.state.selectedTab} resetScene={this.state.resetScene}/>
-                </TabBarIOS.Item>
-                <TabBarIOS.Item
-                    title="Map"
-                    icon={MapIcon}
-                    selected={this.state.selectedTab == MapTabId}
-                    onPress={() => { this._changeTab(MapTabId) } }>
-                    <MapTab selectedTab = {this.state.selectedTab} resetScene={this.state.resetScene}/>
                 </TabBarIOS.Item>
                 <TabBarIOS.Item
                     title="Search"

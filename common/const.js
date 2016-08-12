@@ -22,7 +22,11 @@ export const ProductInfoId     = 'ProductInfo';
 export const RateProductId     = 'RateProduct';
 export const RateStoreId       = 'RateStore';
 
-
+// Id for search view categories
+export const MapFrameId        = 'MapFrameId';
+export const ProductFrameId    = 'ProductFrameId';
+export const RetailerFrameId   = 'RetailerFrameId';
+export const UserFrameId       = 'UserFrameId';
 
 export const FilterActivity   = 'Activity';
 export const FilterEffect     = 'Effect';

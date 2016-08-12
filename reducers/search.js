@@ -11,6 +11,8 @@ const initialState = {
     category: ['sativa', 'indica', 'hybrid'],
     symptoms: ['cramps', 'depression', 'fatigue', 'glycoma', 'insomnia', 'headaches', 'inflammation', 'appetite', 'spams', 'nausea', 'pain', 'seizures', 'stress'],
     products: [],
+    producers: [],
+    retailers: [],
 }
 
 export default function SearchReducer(state, action) {

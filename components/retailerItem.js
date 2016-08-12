@@ -62,7 +62,7 @@ class RetailerItem extends Component {
                             marginTop: 3,
                             }}>
                             <StarRating
-                                disabled={false}
+                                disabled={true}
                                 maxStars={5}
                                 starSize={24}
                                 starColor={'red'}
