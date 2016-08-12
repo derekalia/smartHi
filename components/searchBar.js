@@ -30,6 +30,14 @@ class SearchBar extends Component {
         return this[frameId];
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (this.state.frameId != nextProps.frameId) {
+            this._setFrame(frameId);
+        }
+    }
+
+   
+
     _setFrame(frameId) {
         //
         // Change previous frameId to normal style
