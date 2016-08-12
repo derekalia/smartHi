@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 
 import StarRating from 'react-native-star-rating';
 //get internal components
-import {GetProductAction} from '../actions';
+import {GetProductAction,ShowMapAction} from '../actions';
 import ReviewList         from './reviewList.js';
 import ProductList        from './productList.js';
 
@@ -30,6 +30,10 @@ class RetailerScene extends Component {
         // Go to product page
         //
        this.props.GetProductAction(productId);
+    }
+
+    _showMap() {
+        this.props.ShowMapAction();        
     }
 
     //
@@ -66,7 +70,8 @@ class RetailerScene extends Component {
                                                           borderWidth: 4,
                                                           borderColor: '#4A90E2',
                                                           alignSelf:'flex-end'
-                                                          }}>
+                                                          }}
+                                                          onPress={()=>this._showMap()}>
                                 <Text style={{ fontSize: 18, color: "white"}}> Show Map </Text>
                             </TouchableOpacity>
                             </View>
@@ -102,7 +107,7 @@ function mapStateToProps(state) {
 // BatsFix. This function is used to convert action to props passed to this component.
 // In this example, there is now prop called GetProductAction.
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction, }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,ShowMapAction }, dispatch); }
 
 module.exports = connect(mapStateToProps, mapActionToProps)(RetailerScene);
 

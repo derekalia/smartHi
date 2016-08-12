@@ -24,13 +24,6 @@ class HomeScene extends Component {
         this.state = {activityCount: 6};
     }
 
-    _goSearch() {
-        //
-        // Go to search scene.
-        //
-        this.props.GoSearchAction();
-    }
-
     _goProduct(productId) {
         //
         // Go to product page
@@ -42,11 +35,6 @@ class HomeScene extends Component {
         return (
             <View style={[{flex: 1 }]}>
                 <ScrollView>
-                    {/* Find Button */}
-                    {/*<TouchableOpacity style={[Styles.FindProductButton]}
-                        onPress={this._goSearch.bind(this) }>
-                        <Text style={{ color: 'white', fontSize: 22, }}>Find Product</Text>
-                    </TouchableOpacity>*/}
 
                     {/* Activities */}
                     {/* Section Header */}

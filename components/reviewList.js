@@ -33,8 +33,12 @@ class ReviewItem extends Component {
                 </Text>
                 <View style={Styles.row}>
                     <Text style={{ fontSize: 13, marginTop: 8 }}>2 </Text>
-                    <TouchableHighlight><Image style={{ width: 20, height: 10, alignSelf: 'center', marginTop: 8, marginLeft: 15 }}source={require('../media/up1.png') }/></TouchableHighlight>
-                    <TouchableHighlight><Image style={{ width: 20, height: 10, alignSelf: 'center', marginTop: 8, marginLeft: 20, marginRight: 15 }}source={require('../media/down1.png') }/></TouchableHighlight>
+                    <TouchableHighlight>
+                        <Image style={{ width: 20, height: 10, alignSelf: 'center', marginTop: 8, marginLeft: 15 }}source={require('../media/up1.png') }/>
+                    </TouchableHighlight>
+                    <TouchableHighlight>
+                        <Image style={{ width: 20, height: 10, alignSelf: 'center', marginTop: 8, marginLeft: 20, marginRight: 15 }}source={require('../media/down1.png') }/>
+                    </TouchableHighlight>
                     <TouchableHighlight><Text style={{ fontSize: 13, marginTop: 6, fontWeight: 'bold' }}> Reply </Text></TouchableHighlight>
                 </View>
             </View>

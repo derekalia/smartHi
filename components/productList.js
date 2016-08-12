@@ -25,10 +25,28 @@ class ProductList extends Component {
 
     _renderProductItem(product) {
         return (
-            <ProductItem goProduct={(productId) => this.props.goProduct(productId)} product={product}/>
+            <ProductItem goProduct={(productId) => this.props.goProduct(productId)} product={product} key={product.id}/>
         )
     }
 
+    /*    
+    //
+    // BatsFix. On frame switch for some reason list does not render
+    // Use this code if the device test shows the same bug in react-native
+    //
+    _renderProducts() {
+        var products = [];
+        for (var i=0; i < this.props.productList.length; i++) {
+            products.push(this._renderProductItem(this.props.productList[i]));
+        }
+        return (
+            <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
+                {products}
+            </View>
+        );
+    }
+    */ 
+    
     _renderProducts() {
         if (this.props.productList.size !== 0) {
             var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => (r1 != r2), });

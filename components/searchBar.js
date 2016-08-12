@@ -5,17 +5,25 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, TextInput, View, TouchableOpacity, Image } from 'react-native'
 
+//get state management components
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
+
 import {ProductFrameId, MapFrameId, UserFrameId, RetailerFrameId, }   from '../common/const.js';
+import {SwitchFrameAction}   from '../actions';
+
 
 class SearchBar extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {frameId:ProductFrameId};
-        this.ProductFrameId = Styles.category2;
+        this.state = {frameId:this.props.frameId};
+        this.ProductFrameId = Styles.category;
         this.MapFrameId = Styles.category;
         this.UserFrameId = Styles.category;
         this.RetailerFrameId = Styles.category;
+        this[this.props.frameId] = Styles.category2;
     }
 
     _frameStyle(frameId) {
@@ -34,7 +42,7 @@ class SearchBar extends Component {
         this[frameId] = Styles.category2;
 
         this.setState({frameId: frameId});
-        this.props.setFrame(frameId);
+        this.props.SwitchFrameAction(frameId);
     }
 
      _onChange(event) {
@@ -88,7 +96,12 @@ class SearchBar extends Component {
     }
 }
 
-module.exports = SearchBar;
+//
+// Connect SwitchFrameAction to props
+//
+function mapActionToProps(dispatch) { return bindActionCreators({ SwitchFrameAction }, dispatch); }
+
+module.exports = connect(null,mapActionToProps)(SearchBar);
 
 const Styles={
     input: {
@@ -107,5 +120,4 @@ const Styles={
         backgroundColor: 'white',
         borderBottomWidth: 1,
     },
-
 }

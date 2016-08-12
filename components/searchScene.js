@@ -45,7 +45,23 @@ class SearchScene extends Component {
         super(props);
         this._searchTerm = "";
         this._attributes = [];
-        this._frameId = ProductFrameId;
+        this.state = {frameId:this.props.frameId};
+        //
+        // BatsFix. Fix this so any frame can be set here.
+        //
+        if (this.props.frameId == MapFrameId) {
+            this._initialFrame = MapId;
+        }
+        else {
+            this._initialFrame = ProductId;
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        frameId = nextProps.frameId;
+        if (frameId != this.state.frameId) {
+            this._setFrame(frameId);
+        }
     }
 
     renderScene(route, navigator) {
@@ -64,7 +80,7 @@ class SearchScene extends Component {
     }
 
     _setFrame(frameId) {
-        this._frameId = frameId;
+        this.setState({frameId:frameId});
         if (frameId == ProductFrameId) {
             this.refs.navigator.jumpTo(SearchFrames[ProductId]);
         }
@@ -83,7 +99,7 @@ class SearchScene extends Component {
     }
 
     _startSearch() {
-        this.props.StartSearchAction(this._searchTerm, this._attributes, this._frameId);
+        this.props.StartSearchAction(this._searchTerm, this._attributes, this.state.frameId);
     }
 
     _setSearchTerm(term) {
@@ -104,9 +120,13 @@ class SearchScene extends Component {
                     ref="navigator"
                     configureScene={this.configureScene}
                     renderScene={this.renderScene}
-                    initialRoute = {SearchFrames[0]}
+                    initialRoute = {SearchFrames[this._initialFrame]}
                     initialRouteStack = {SearchFrames}
-                    navigationBar={<SearchBar setSearchTerm={(t)=>this._setSearchTerm(t)} startSearch={()=>this._startSearch()} setFrame={(t)=>this._setFrame(t)}/>}
+                    navigationBar={
+                        <SearchBar frameId={this.state.frameId} 
+                            setSearchTerm={(t)=>this._setSearchTerm(t)} 
+                            startSearch={()=>this._startSearch()} />
+                    }
                     addRemoveFilter={(t)=>this._addRemoveFilter(t)}
                 />
             </View>
@@ -115,8 +135,13 @@ class SearchScene extends Component {
 }
 
 //
+// Connect state.NavigationReducer.sceneId and state.NavigationReducer.switchScene to props
+//
+function mapStateToProps(state) { return { frameId: state.NavigationReducer.frameId } }
+
+//
 // Connect StartSearchAction to props
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ StartSearchAction }, dispatch); }
 
-module.exports = connect(null,mapActionToProps)(SearchScene);
+module.exports = connect(mapStateToProps,mapActionToProps)(SearchScene);

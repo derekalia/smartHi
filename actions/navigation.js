@@ -1,5 +1,6 @@
 export const SWITCH_TAB       = 'SWITCH_TAB';
 export const SWITCH_SCENE     = 'SWITCH_SCENE';
+export const SWITCH_FRAME     = 'SWITCH_FRAME';
 export const SWITCH_TAB_SCENE = 'SWITCH_TAB_SCENE';
 
 export function SwitchTabAction(tabId) {
@@ -14,6 +15,14 @@ export function SwitchSceneAction(sceneId) {
         sceneId: sceneId,
     });
 }
+
+export function SwitchFrameAction(frameId) {
+    return({
+        type: SWITCH_FRAME,
+        frameId: frameId,
+    });
+}
+
 export function SwitchTabSceneAction(tabId, sceneId) {
     return({
         type: SWITCH_TAB_SCENE,

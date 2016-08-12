@@ -104,26 +104,26 @@ class FilterList extends Component {
 
         }
         return (
-            <TouchableOpacity style={tagStyle} onPress={() => this._addRemoveFilter(filter) }>
+            <TouchableOpacity style={tagStyle} onPress={() => this._addRemoveFilter(filter) } key={filter.name}>
                 <Text style={textStyle}>{filter.name}</Text>
             </TouchableOpacity>
         );
     }
 
+    //
+    // BatsFix. For some reason using lists makes the list item not update
+    // on frame switch.
+    //
     _renderFiltersArray(filterArray) {
-        if (filterArray.length > 0) {
-            var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => (r1 != r2), });
-            return (
-                <ListView dataSource = {ds.cloneWithRows(filterArray) }
-                    enableEmptySections = {true}
-                    renderRow  = {this._renderFilter.bind(this)}
-                    contentContainerStyle={{ flexDirection: 'row', flexWrap: 'wrap' }}
-                    />
-            );
+        var filters = [];
+        for (var i=0; i < filterArray.length; i++) {
+            filters.push(this._renderFilter(filterArray[i]));
         }
-        else {
-            return null;
-        }
+        return (
+            <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
+                {filters}
+            </View>
+        );
     }
 
     _renderFilters() {

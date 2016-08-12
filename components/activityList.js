@@ -18,7 +18,6 @@ import ActivityItem from './activityItem.js';
 class ActivityList extends Component {
 
     _goActivity(activityType) {
-        console.log("going to activity" + activityType);
         this.props.GetActivityAction(activityType);
     }
 
@@ -47,7 +46,6 @@ class ActivityList extends Component {
                 </View>
                 </ScrollView>
             </View>
-
         );
     }
 }

@@ -6,6 +6,7 @@ const retailerActions   = require('./retailer.js');
 const producerActions   = require('./producer.js');
 const newsActions       = require('./news.js');
 const activityActions   = require('./activity.js');
+const mapActions        = require('./map.js');
 
 module.exports = {
   ...loginActions,
@@ -16,4 +17,5 @@ module.exports = {
   ...producerActions,
   ...newsActions,
   ...activityActions,
+  ...mapActions,
 };
