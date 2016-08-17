@@ -422,3 +422,15 @@ export function GetActivityProducts(activityType) {
     }
     return products;
 }
+//
+// BatsFix. Following are for review tab
+//
+export function UploadProductImage() {
+    return ({productInfo:TestProducts[0],storeInfo:TestRetailers[1]});
+}
+export function UploadProductRating() {
+
+}
+export function UploadStoreRating() {
+
+}

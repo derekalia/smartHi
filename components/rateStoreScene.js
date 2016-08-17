@@ -6,10 +6,31 @@ import React, { Component } from 'react';
 import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
 
 import StarRating from 'react-native-star-rating';2
+//get state management components
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
+import {RateStoreAction,} from '../actions';
 
 class RateStoreScene extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            name:'Uncle Ikes',
+            address:'Seattle, WA',
+        }
+    }
+
+    _onComment(text) {
+        this._comment = text;
+    }
+
+    _onRating(rating) {
+        this._rating = rating;
+    }
+    
+    _onPost() {
+        this.props.RateStoreAction(this.props.id,this._comment,this._rating);
     }
 
     render() {
@@ -21,8 +42,8 @@ class RateStoreScene extends Component {
                   </View>
                   {/*Rating and link to map*/}
                   <View style={{ marginTop: 10, marginHorizontal: 10,flexDirection:'row' }}>
-                      <Text style={{ fontSize: 22, fontWeight: 'bold' }}>Uncle Ike's</Text>
-                      <Text style={{ fontSize: 22, }}> - Seattle, WA</Text>
+                      <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
+                      <Text style={{ fontSize: 22, }}> {this.state.address}</Text>
                   </View>
 
                   <View style={{ marginHorizontal: 10, marginTop: 20 }}>
@@ -50,7 +71,7 @@ class RateStoreScene extends Component {
                           <View style={{ flexDirection: "row",borderColor: 'gray', borderWidth: 1, margin: 2, borderRadius: 4, }}>
                             <TextInput
                                 style={{ height: 60, flex:1, margin: 4, fontSize: 16, }}
-                                onChangeText={(text) => this.setState({ text }) }
+                                onChangeText={(t) => this._setComment(t) }
                                 placeholder={'Say something'}
                                 numberOfLines = {4}
                                 multiline = {true}
@@ -66,7 +87,9 @@ class RateStoreScene extends Component {
                               <Text style={{color: "white",fontWeight:'bold',fontSize:16,
                               marginTop: 7,
                               marginBottom: 7,
-                              marginHorizontal: 10,}}> Post </Text>
+                              marginHorizontal: 10,}}
+                              onPress={()=> this._onPost()}
+                              > Post </Text>
                           </TouchableOpacity>
                       </View>
 
@@ -75,5 +98,21 @@ class RateStoreScene extends Component {
         );
     }
 }
+
+//
+// BatsFix. Not sure if we should tie this to review reducer store.
+//
+function mapStateToProps(state) {
+    return {
+        retailer: state.ReviewReducer.retailer,
+    }
+}
+//
+// connect to RateStoreAction 
+//
+function mapActionToProps(dispatch) { return bindActionCreators({ RateStoreAction, }, dispatch); }
+
+module.exports = connect(mapStateToProps, mapActionToProps)(RateStoreScene);
+
 
 module.exports = RateStoreScene;

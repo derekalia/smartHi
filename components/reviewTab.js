@@ -16,6 +16,7 @@ import CameraScene        from './cameraScene.js';
 import ProductInfoScene   from './productInfoScene.js';
 import RateProductScene   from './rateProductScene.js';
 import RateStoreScene     from './rateStoreScene.js';
+import HerbyBar           from './herbyBar.js';
 
 const CameraIndex       = 0;
 const ProductInfoIndex  = 1;
@@ -28,40 +29,6 @@ const ReviewTabScenes = [
     { title: "Rate Product", component: RateProductScene,  index: RateProductSceneId },
     { title: "Rate Store",   component: RateStoreScene,    index: RateStoreSceneId },
 ];
-
-var RouteMapper = {
-    LeftButton: function (route, navigator, index, navState) {
-        // BatsFix. Styling should be moved to common
-        if (index > 0) {
-            return (
-                <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginLeft: 13, }}>
-                    <Image source={require("../media/BackArrow.png") } style={{ width: 12, height: 19 }} />
-                    <Text onPress={navigator.jumpBack} style={{ fontSize: 18, color: "#007AFF" }}> Back</Text>
-                </View>
-            );
-        }
-    },
-    RightButton: function (route, navigator, index, navState) {
-        if (index < (ReviewTabScenes.length - 1)) {
-            // BatsFix. Add a check here if the next scene is enabled.
-            return (
-                <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginRight: 13, }}>
-                    <Text onPress={navigator.jumpForward} style={{ fontSize: 18, color: "#007AFF" }}> Next</Text>
-                </View>
-            );
-        }
-    },
-    
-
-    Title: function (route, navigator, index, navState) {
-        return (
-            <Text style={{ fontSize: 18, marginTop: 11, fontWeight: 'bold' }}>
-                {route.title}
-            </Text>
-        );
-    }
-}
-
 
 class ReviewTab extends Component {
 
@@ -93,9 +60,19 @@ class ReviewTab extends Component {
     }
 
     renderScene(route, navigator) {
-        return (
-            <route.component tabId={ReviewTabId} navigator={navigator}/>
-        );
+        if (route.index == CameraSceneId) {
+            return (
+                <route.component tabId={ReviewTabId}/>
+            );
+        }
+        else {
+            return (
+                <View style={{flex:1}}>
+                    <HerbyBar navigator={navigator}/>
+                    <route.component tabId={ReviewTabId}/>
+                </View>
+            );
+        }
     }
 
     configureScene(route, routeStack) {
@@ -109,13 +86,6 @@ class ReviewTab extends Component {
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
                 initialRoute = {ReviewTabScenes[CameraIndex]}
-                initialRouteStack = {ReviewTabScenes}
-                navigationBar={
-                    <Navigator.NavigationBar
-                        routeMapper = {RouteMapper}
-                        style={{backgroundColor:'#F9F9F9',borderBottomWidth:1,borderColor:'#B2B2B2'}} >
-                    </Navigator.NavigationBar>
-                }
             />
         );
     }

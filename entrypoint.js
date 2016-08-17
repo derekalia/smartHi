@@ -19,6 +19,7 @@ import NavigationReducer from './reducers/navigation.js';
 import NewsReducer       from './reducers/news.js';
 import ActivityReducer   from './reducers/activity.js';
 import MapReducer        from './reducers/map.js';
+import ReviewReducer     from './reducers/review.js';
 
 // Combine reducers
 let store = createStore(combineReducers(
@@ -30,6 +31,7 @@ let store = createStore(combineReducers(
      NavigationReducer,
      NewsReducer,
      MapReducer,
+     ReviewReducer,
      ActivityReducer,}),applyMiddleware(thunk));
 
 // This object is the Entrypoint for the app on both android and ios

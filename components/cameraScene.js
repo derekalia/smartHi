@@ -4,8 +4,13 @@
 //
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator, TouchableHighlight,} from 'react-native'
-
+//get state management components
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
 import Camera from 'react-native-camera';
+
+import {UploadProductImageAction} from '../actions';
+
 
 var Styles = StyleSheet.create({
     container: {
@@ -28,7 +33,8 @@ class CameraScene extends Component {
     constructor(props) {
         super(props);
         this.state  = {cameraType: Camera.constants.Type.back};
-        console.log("camera type is "+ this.state.cameraType);
+        this._isFrontTaken = false;
+        this._isBackTaken  = false;
     }
 
     render() {
@@ -54,20 +60,37 @@ class CameraScene extends Component {
         console.log(e);
     }
 
-    _submit() {
+    _onComplete() {
+        // upload the pictures
+        this._isFrontTaken = false;
+        this._isBackTaken  = false;
+        // upload Action.
+        this.props.UploadProductImageAction();
     }
-
+    //BatsFix. on real device cam.capture should be used!
     _takePictureFront() {
-        this.refs.cam.capture(function(err, data) {
-            console.log(err, data);
-        });
+        //this.refs.cam.capture(function(err, data) {
+            this._isFrontTaken = true;
+            if (this._isFrontTaken == true && this._isBackTaken == true) {
+                //BatsFix go to next step.
+                this._onComplete();
+            }
+        //});
     }
 
     _takePictureBack() {
-        this.refs.cam.capture(function(err, data) {
-            console.log(err, data);
-        });
+        //this.refs.cam.capture(function(err, data) {
+            this._isBackTaken = true;
+            if (this._isFrontTaken == true  && this._isBackTaken == true) {
+                //BatsFix go to next step
+                this._onComplete();
+            }
+        //});
     }
 }
 
-module.exports = CameraScene;
+//
+// Connect UploadProductImageAction
+//
+function mapActionToProps(dispatch) { return bindActionCreators({ UploadProductImageAction }, dispatch); }
+module.exports = connect(null,mapActionToProps)(CameraScene);
