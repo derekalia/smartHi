@@ -45,6 +45,7 @@ export default function NavigationReducer(state, action) {
             // state. 
             newState.sceneId = action.sceneId;
 
+            newState.switchScene = newState.switchScene == 0 ? 1: 0;
             return newState;
 
         case SWITCH_FRAME:
@@ -69,8 +70,8 @@ export default function NavigationReducer(state, action) {
             newState.sceneId  = action.sceneId;
 
             newState.tabId  = action.tabId;
-            // This flips the switch so that tab update happens
-            newState.switchTab = newState.switchTab == 0 ? 1: 0;
+
+            newState.switchScene = newState.switchScene == 0 ? 1: 0;
             return newState;
         default:
             return state ? state : initialState;

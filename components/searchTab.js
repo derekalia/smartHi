@@ -95,5 +95,5 @@ class SearchTab extends Component {
 //
 // Connect state.NavigationReducer.sceneId to props
 //
-function mapStateToProps(state) { return { sceneId: state.NavigationReducer.sceneId } }
+function mapStateToProps(state) { return { sceneId: state.NavigationReducer.sceneId, switchScene: state.NavigationReducer.switchScene } }
 module.exports = connect(mapStateToProps)(SearchTab);
