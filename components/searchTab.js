@@ -35,35 +35,31 @@ class SearchTab extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { selectedTab:SearchTabId, resetScene: 0 }; 
     } 
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.resetScene == this.state.resetScene) {
-            sceneId = nextProps.sceneId;
-            var foundExisting = false;
-            var routelist = this.refs.navigator.getCurrentRoutes();
-            for (var i=0; i < routelist.length; i++) {
-                if (routelist[i].index == sceneId) {
-                    this.refs.navigator.jumpTo(routelist[i]);
-                    foundExisting = true;
-                    break;
-                }
-            }
-            if (foundExisting == false) {
-                for (var i=0; i < SearchTabScenes.length; i++) {
-                     if (SearchTabScenes[i].index == sceneId) {
-                        this.refs.navigator.push(SearchTabScenes[i]);
-                     }
-                }
+        var sceneId = nextProps.sceneId;
+        var foundExisting = false;
+        // Check existing routes first
+        var routelist = this.refs.navigator.getCurrentRoutes();
+        for (var i=0; i < routelist.length; i++) {
+            if (routelist[i].index == sceneId) {
+                this.refs.navigator.jumpTo(routelist[i]);
+                foundExisting = true;
+                break;
             }
         }
-        else {
-            this.setState({resetScene: nextProps.resetScene});
-            this.refs.navigator.popToTop();
+        // If not found in existing push
+        if (foundExisting == false) {
+            for(var i=0; i < SearchTabScenes.length; i++) {
+                 if (SearchTabScenes[i].index == sceneId) {
+                    this.refs.navigator.push(SearchTabScenes[i]);
+                    break;
+                 }
+            }
         }
     }
-    
+
     renderScene(route, navigator) {
         if (route.index == SearchSceneId) {
             return (
@@ -97,7 +93,7 @@ class SearchTab extends Component {
 }
 
 //
-// Connect state.NavigationReducer.sceneId and state.NavigationReducer.switchScene to props
+// Connect state.NavigationReducer.sceneId to props
 //
-function mapStateToProps(state) { return { sceneId: state.NavigationReducer.sceneId, switchScene: state.NavigationReducer.switchScene } }
+function mapStateToProps(state) { return { sceneId: state.NavigationReducer.sceneId } }
 module.exports = connect(mapStateToProps)(SearchTab);

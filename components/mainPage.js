@@ -10,11 +10,14 @@
 import React, { Component } from 'react';
 import {StyleSheet, TabBarIOS, View,} from 'react-native';
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
 // Import const ids.
 import {HomeTabId,SearchTabId,ReviewTabId,ProfileTabId} from '../common/const.js';
 // Import icons
 import {HomeIcon,SearchIcon,ProfileIcon,MapIcon,ReviewIcon}        from '../common/icons.js';
+
+import {SwitchTabAction,} from '../actions';
 
 // Import tab elements
 import HomeTab       from './homeTab.js';
@@ -36,17 +39,12 @@ class MainPage extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.state.selectedTab != nextProps.tabId) {
-            this._changeTab(nextProps.tabId);
+            this.setState({selectedTab: nextProps.tabId});
         }
     }
 
     _changeTab(tabId) {
-        // BatsFix. make it so that it resets. This is 
-        // very hacky because resetScene could potentially roll over
-        // but for now too lazy to create resetscene for each tab
-        //
-        var resetScene = this.state.resetScene+1;
-        this.setState({selectedTab: tabId,resetScene: resetScene});
+        this.props.SwitchTabAction(tabId);
     }
 
     render() {
@@ -95,5 +93,13 @@ class MainPage extends Component {
 // Connect state.NavigationReducer.tabId to tabId prop. Used to selected tab.
 // Connect state.NavigationReducer.switchTab to switchTab prop. Used to initiate tab switch if changed.
 //
-function mapStateToProps(state) { return { tabId: state.NavigationReducer.tabId, switchTab: state.NavigationReducer.switchTab } }
-module.exports = connect(mapStateToProps)(MainPage);
+function mapStateToProps(state) { return { tabId: state.NavigationReducer.tabId } }
+
+//
+// BatsFix. Giving up on a hacky optimization to keep tab and scene switching locally. From now on
+// all tab, scene and frame switch happen via navigation state.
+//
+
+function mapActionToProps(dispatch) { return bindActionCreators({ SwitchTabAction }, dispatch); }
+
+module.exports = connect(mapStateToProps, mapActionToProps)(MainPage);

@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import {StyleSheet, View, Text, ScrollView, Image, TouchableHighlight, Navigator } from 'react-native';
 import {connect} from 'react-redux';
 // Import const ids.
-import {CameraSceneId, ProductInfoId, RateProductId, RateStoreId, ReviewTabId,} from '../common/const.js';
+import {CameraSceneId, ProductInfoSceneId, RateProductSceneId, RateStoreSceneId, ReviewTabId,} from '../common/const.js';
 
 // Import internal modules
 import CameraScene        from './cameraScene.js';
@@ -24,9 +24,9 @@ const RateStoreIndex    = 3;
 
 const ReviewTabScenes = [
     { title: "Camera",       component: CameraScene,       index: CameraSceneId },
-    { title: "Product Info", component: ProductInfoScene,  index: ProductInfoId },
-    { title: "Rate Product", component: RateProductScene,  index: RateProductId },
-    { title: "Rate Store",   component: RateStoreScene,    index: RateStoreId },
+    { title: "Product Info", component: ProductInfoScene,  index: ProductInfoSceneId },
+    { title: "Rate Product", component: RateProductScene,  index: RateProductSceneId },
+    { title: "Rate Store",   component: RateStoreScene,    index: RateStoreSceneId },
 ];
 
 var RouteMapper = {
@@ -67,34 +67,28 @@ class ReviewTab extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { selectedTab:ReviewTabId, resetScene: 0 }; 
     } 
 
     componentWillReceiveProps(nextProps) {
-        if (this.state.resetScene == nextProps.resetScene) {
-            var sceneId = nextProps.sceneId;
-            var foundExisting = false;
-            // Check existing routes first
-            var routelist = this.refs.navigator.getCurrentRoutes();
-            for (var i=0; i < routelist.length; i++) {
-                if (routelist[i].index == sceneId) {
-                    this.refs.navigator.jumpTo(routelist[i]);
-                    foundExisting = true;
-                    break;
-                }
-            }
-            // If not found in existing push
-            if (foundExisting == false) {
-                for(var i=0; i < ReviewTabScenes.length; i++) {
-                     if (ReviewTabScenes[i].index == sceneId) {
-                        this.refs.navigator.push(ReviewTabScenes[i]);
-                     }
-                }
+        var sceneId = nextProps.sceneId;
+        var foundExisting = false;
+        // Check existing routes first
+        var routelist = this.refs.navigator.getCurrentRoutes();
+        for (var i=0; i < routelist.length; i++) {
+            if (routelist[i].index == sceneId) {
+                this.refs.navigator.jumpTo(routelist[i]);
+                foundExisting = true;
+                break;
             }
         }
-        else {
-            this.setState({resetScene: nextProps.resetScene});
-            this.refs.navigator.popToTop();
+        // If not found in existing push
+        if (foundExisting == false) {
+            for(var i=0; i < ReviewTabScenes.length; i++) {
+                 if (ReviewTabScenes[i].index == sceneId) {
+                    this.refs.navigator.push(ReviewTabScenes[i]);
+                    break;
+                 }
+            }
         }
     }
 
@@ -127,5 +121,5 @@ class ReviewTab extends Component {
     }
 }
 
-function mapStateToProps(state) { return { sceneId: state.NavigationReducer.sceneId, switchScene: state.NavigationReducer.switchScene } }
+function mapStateToProps(state) { return { sceneId: state.NavigationReducer.sceneId } }
 module.exports = connect(mapStateToProps)(ReviewTab);

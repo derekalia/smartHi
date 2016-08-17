@@ -2,6 +2,7 @@ import {
     SWITCH_TAB,
     SWITCH_FRAME,
     SWITCH_SCENE,
+    SWITCH_TAB_SCENE,
 } from './navigation.js';
 
 import {SearchTabId, MapFrameId, SearchSceneId} from '../common/const.js';
@@ -21,13 +22,9 @@ export function ShowMapAction(mapItem) {
 
         // Then dispatch map screen switch
         dispatch({
-			type: SWITCH_TAB,
+			type: SWITCH_TAB_SCENE,
 			tabId: SearchTabId,
-		});
-        // Then dispatch map screen switch
-        dispatch({
-			type: SWITCH_SCENE,
-			tabId: SearchSceneId,
+			sceneId: SearchSceneId,
 		});
 
         dispatch({

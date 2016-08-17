@@ -63,8 +63,11 @@ class MapFrame extends Component {
                  longitude:retailer.longitude,
                  tintColor:'blue',
                  title:' ',
-                 rightCalloutView: (<MapRetailerItem mapItem={retailer}/>),
+                 rightCalloutView: (<MapRetailerItem mapItem={retailer} goRetailer={(t)=>this._goRetailer(t)}/>),
         });
+    }
+    _goRetailer(retailerId) {
+        this.props.GetRetailerAction(retailerId);
     }
     render() {
         return(
