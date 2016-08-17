@@ -18,7 +18,7 @@ export function SwitchTabAction(tabId) {
     }
     else
     if (tabId == ReviewTabId) {
-        sceneId == CameraSceneId;
+        sceneId = CameraSceneId;
     }
     else
     if (tabId == ProfileTabId) {
