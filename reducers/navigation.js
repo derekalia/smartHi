@@ -11,9 +11,6 @@ const initialState = {
     tabId    : HomeTabId, 
     sceneId  : HomeSceneId,
     frameId  : ProductFrameId,
-    switchFrame: 0,
-    switchScene: 0,
-    switchTab: 0,
 }
 
 export default function NavigationReducer(state, action) {
@@ -48,8 +45,6 @@ export default function NavigationReducer(state, action) {
             // state. 
             newState.sceneId = action.sceneId;
 
-            // This flips the switch so that update happens
-            newState.switchScene = newState.switchScene == 0 ? 1: 0;
             return newState;
 
         case SWITCH_FRAME:
@@ -57,8 +52,6 @@ export default function NavigationReducer(state, action) {
             newState = Object.assign({}, state);
             newState.frameId = action.frameId;
 
-            // This flips the switch so that update happens
-            newState.switchFrame = newState.switchFrame == 0 ? 1: 0;
             return newState;
 
 
@@ -74,8 +67,6 @@ export default function NavigationReducer(state, action) {
             // BatsFix then modify the item needed in the new
             // state. 
             newState.sceneId  = action.sceneId;
-            // This flips the switch so that scene update happens
-            newState.switchScene = newState.switchScene == 0 ? 1: 0;
 
             newState.tabId  = action.tabId;
             // This flips the switch so that tab update happens

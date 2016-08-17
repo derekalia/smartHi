@@ -24,6 +24,10 @@ export function SwitchTabAction(tabId) {
     if (tabId == ProfileTabId) {
         sceneId = ProfileSceneId;
     }
+    else {
+        console.log("unrecognized tab" + tabId);
+    }
+    
 
     return({
         type: SWITCH_TAB_SCENE,

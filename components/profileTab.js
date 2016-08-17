@@ -89,34 +89,28 @@ class ProfileTab extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { selectedTab:ProfileTabId, resetScene: 0 };
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.state.resetScene == nextProps.resetScene) {
-            var sceneId = nextProps.sceneId;
-            var foundExisting = false;
-            // Check existing routes first
-            var routelist = this.refs.navigator.getCurrentRoutes();
-            for (var i=0; i < routelist.length; i++) {
-                if (routelist[i].index == sceneId) {
-                    this.refs.navigator.jumpTo(routelist[i]);
-                    foundExisting = true;
-                    break;
-                }
-            }
-            // If not found in existing push
-            if (foundExisting == false) {
-                for(var i=0; i < ReviewTabScenes.length; i++) {
-                     if (ReviewTabScenes[i].index == sceneId) {
-                        this.refs.navigator.push(ReviewTabScenes[i]);
-                     }
-                }
+        var sceneId = nextProps.sceneId;
+        var foundExisting = false;
+        // Check existing routes first
+        var routelist = this.refs.navigator.getCurrentRoutes();
+        for (var i=0; i < routelist.length; i++) {
+            if (routelist[i].index == sceneId) {
+                this.refs.navigator.jumpTo(routelist[i]);
+                foundExisting = true;
+                break;
             }
         }
-        else {
-            this.setState({resetScene: nextProps.resetScene});
-            this.refs.navigator.popToTop();
+        // If not found in existing push
+        if (foundExisting == false) {
+            for(var i=0; i < ProfileTabScenes.length; i++) {
+                 if (ProfileTabScenes[i].index == sceneId) {
+                    this.refs.navigator.push(ProfileTabScenes[i]);
+                    break;
+                 }
+            }
         }
     }
 
