@@ -1,5 +1,5 @@
 //
-// Description: testscene.js
+// Description: settingScene.js
 // Used for testing various UI components
 //
 import React, { Component } from 'react';
@@ -9,57 +9,63 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import {SwitchSceneAction, GetProductAction} from '../actions';
+import {LicenseeSceneId,} from '../common/const.js';
 import HerbyButton from './herbyButton.js';
+
+class HerbyHeader extends Component {
+    render() {
+        return(
+        <Text style={{marginLeft:20,paddingTop:10,paddingBottom:10}}>{this.props.name}</Text>
+        );
+    }
+}
+class HerbyInput extends Component {
+    _onChange(e) {
+    }
+
+    render() {
+        return(
+        <View style={{
+            height:36,
+            paddingLeft:20,
+            paddingTop:10,
+            paddingBottom:10,
+            marginRight:20,
+            flexDirection:'row',
+            alignItems:'center',
+            backgroundColor:'white',
+            borderBottomWidth:1,
+            borderBottomColor:'#C8C8CC'}}>
+          <Text style={{flex:1,alignSelf:'flex-start'}}>{this.props.name}</Text>
+          <TextInput style={{flex:1,alignSelf:'flex-end'}} placeholder = {this.props.value}/> 
+        </View>
+        );
+    }
+}
 
 class SettingsScene extends Component {
     constructor(props) {
         super(props);
+        this._userName="Type user name here";
+        this._email ="Type email here";
+    }
+
+    _goLicensee() {
+        this.props.SwitchSceneAction(LicenseeSceneId);
+    }
+
+    _goResetPassword() {
     }
 
     render() {
         return (
-          <View>
-            <View style={{backgroundColor:'#EFEFF4',height:600,}}>
-
-
-            <View style={{marginTop:30}}>
-              <Text style={{marginLeft:20,paddingBottom:10}}>GENERAL</Text>
-              <View style={{backgroundColor:'white',borderTopWidth:1,borderTopColor:'#C8C8CC',borderBottomWidth:1,borderBottomColor:'#C8C8CC'}}>
-
-                <View style={{marginLeft:20,marginTop:10,marginBottom:10,flexDirection:'row',height:26,alignItems:'center'}}>
-                  <TouchableHighlight><Text>Username</Text></TouchableHighlight>
-                  <View style={{flexDirection:'row', alignItems:'flex-end',flex:1,marginRight:20, justifyContent:'flex-end',alignSelf:'center'}}>
-                    <Text style={{color:'#C8C8CC',}}>{this.props.user.name}</Text>
-                    {/* <Image source={require('../media/ForwardArrow2.png') } style={{ width: 8, height: 14,alignItems:'flex-end' }}/> */}
-                  </View>
-                </View>
-                <View style={{alignSelf:'flex-end',width:1,width:356,borderTopWidth:1,borderTopColor:'#C8C8CC'}}></View>
-
-                <View style={{marginLeft:20,marginTop:10,marginBottom:10,flexDirection:'row',height:26,alignItems:'center'}}>
-                  <TouchableHighlight><Text>Email</Text></TouchableHighlight>
-                  <View style={{flexDirection:'row', alignItems:'flex-end',flex:1,marginRight:20, justifyContent:'flex-end',alignSelf:'center'}}>
-                    <Text style={{color:'#C8C8CC',}}>derek@me.com </Text>
-                  </View>
-                </View>
-                <View style={{alignSelf:'flex-end',width:1,width:356,borderTopWidth:1,borderTopColor:'#C8C8CC'}}></View>
-
-                {/*
-                <View style={{marginLeft:20,marginTop:10,marginBottom:10,flexDirection:'row',height:26,alignItems:'center'}}>
-                  <TouchableHighlight><Text>Reset Password</Text></TouchableHighlight>
-                  <View style={{alignItems:'flex-end',flex:1,marginRight:20}}>
-                    <Image source={require('../media/ForwardArrow2.png') } style={{ width: 8, height: 14,alignItems:'flex-end' }}/>
-                  </View>
-                </View>
-                */}
-                <HerbyButton name="Reset Password"/>
-              </View>
-            </View>
-
-              <View style={{marginTop:30}}>
-                <Text style={{marginLeft:20,paddingBottom:10}}>AUTHENTICATION</Text>
-                <HerbyButton name="Licensee Login"/>
-              </View>
-            </View>
+            <View style={{backgroundColor:'#EFEFF4',flex:1,}}>
+            <HerbyHeader name="GENERAL"/>
+            <HerbyInput  name="UserName" value={this._userName}/>
+            <HerbyInput  name="Email" value={this._email}/>
+            <HerbyButton name="Reset Password" onPress={()=> this._goResetPassword()}/>
+            <HerbyHeader name="AUTHENTICATION"/>
+            <HerbyButton name="Licensee Login" onPress={()=> this._goLicensee()}/>
             </View>
         );
     }
