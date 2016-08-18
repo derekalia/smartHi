@@ -4,7 +4,7 @@ import {
     SWITCH_TAB_SCENE,
 } from './navigation.js';
 
-import {ProductInfoSceneId,RateProductSceneId,RateStoreSceneId,} from '../common/const.js';
+import {CameraSceneId,ProductInfoSceneId,RateProductSceneId,RateStoreSceneId,} from '../common/const.js';
 import {UploadProductImage,UploadProductRating,UploadStoreRating,} from './data.js';
 
 export const IMAGE_SUCCESS        = 'IMAGE_SUCCESS';
@@ -70,6 +70,10 @@ export function RateStoreAction() {
         var result = UploadStoreRating();        
         dispatch({
             type: RATE_STORE_SUCCESS,
+        });
+        dispatch({
+            type:SWITCH_SCENE,
+            sceneId:CameraSceneId,
         });
     }
 }

@@ -3,7 +3,7 @@
 // Used for testing various UI components
 //
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
+import {Alert,StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
 
 import StarRating from 'react-native-star-rating';2
 //get state management components
@@ -30,6 +30,7 @@ class RateStoreScene extends Component {
     }
     
     _onPost() {
+        Alert.alert("Thank you!","Really awesome feedback", [{text:'OK', onPress:()=> console.log('Ok')}]);
         this.props.RateStoreAction(this.props.id,this._comment,this._rating);
     }
 
