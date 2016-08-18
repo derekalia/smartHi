@@ -24,7 +24,7 @@ const HomeIndex     = 0;
 const ProductIndex  = 1;
 const RetailerIndex = 2;
 
-const HomeTabScenes = [
+const TabScenes = [
     { title: "Herby",    component: HomeScene,     index: HomeSceneId },
     { title: "Product",  component: ProductScene,  index: ProductSceneId },
     { title: "Retailer", component: RetailerScene, index: RetailerSceneId },
@@ -52,9 +52,9 @@ class HomeTab extends Component {
         }
         // If not found in existing push
         if (foundExisting == false) {
-            for(var i=0; i < HomeTabScenes.length; i++) {
-                 if (HomeTabScenes[i].index == sceneId) {
-                    this.refs.navigator.push(HomeTabScenes[i]);
+            for(var i=0; i < TabScenes.length; i++) {
+                 if (TabScenes[i].index == sceneId) {
+                    this.refs.navigator.push(TabScenes[i]);
                     break;
                  }
             }
@@ -87,7 +87,7 @@ class HomeTab extends Component {
                 ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
-                initialRoute = {HomeTabScenes[HomeIndex]}
+                initialRoute = {TabScenes[HomeIndex]}
                 />
         );
     }

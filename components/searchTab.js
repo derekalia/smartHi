@@ -24,7 +24,7 @@ const ProductIndex    = 1;
 const RetailerIndex   = 2;
 const ProducerIndex   = 3;
 
-var SearchTabScenes = [
+var TabScenes = [
     {title: "Search",        component: SearchScene,   index: SearchSceneId},
     {title: "Product",       component: ProductScene,  index: ProductSceneId},
     {title: "Retailer",      component: RetailerScene, index: RetailerSceneId},
@@ -37,27 +37,19 @@ class SearchTab extends Component {
         super(props);
     } 
 
+    _getCurrentRoute(sceneId) {
+        for (var i=0; i < TabScenes.length; i++) {
+            if (TabScenes[i].index == sceneId) {
+                return TabScenes[i];
+            }
+        }
+        return TabScenes[0];
+    }
+
     componentWillReceiveProps(nextProps) {
         var sceneId = nextProps.sceneId;
-        var foundExisting = false;
-        // Check existing routes first
-        var routelist = this.refs.navigator.getCurrentRoutes();
-        for (var i=0; i < routelist.length; i++) {
-            if (routelist[i].index == sceneId) {
-                this.refs.navigator.jumpTo(routelist[i]);
-                foundExisting = true;
-                break;
-            }
-        }
-        // If not found in existing push
-        if (foundExisting == false) {
-            for(var i=0; i < SearchTabScenes.length; i++) {
-                 if (SearchTabScenes[i].index == sceneId) {
-                    this.refs.navigator.push(SearchTabScenes[i]);
-                    break;
-                 }
-            }
-        }
+        var currentRoute = this._getCurrentRoute(sceneId);
+        this.refs.navigator.jumpTo(currentRoute);
     }
 
     renderScene(route, navigator) {
@@ -86,7 +78,8 @@ class SearchTab extends Component {
                 ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
-                initialRoute = {SearchTabScenes[0]}
+                initialRoute = {this._getCurrentRoute(this.props.sceneId)}
+                initialRouteStack = {TabScenes}
             />
         );
     }

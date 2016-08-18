@@ -48,7 +48,7 @@ class ProductList extends Component {
     */ 
     
     _renderProducts() {
-        if (this.props.productList.size !== 0) {
+        if (this.props.productList != null && this.props.productList.length !== 0) {
             var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => (r1 != r2), });
             return (
                 <ListView dataSource = {ds.cloneWithRows(this.props.productList) }

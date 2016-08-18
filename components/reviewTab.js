@@ -23,7 +23,7 @@ const ProductInfoIndex  = 1;
 const RateProductIndex  = 2;
 const RateStoreIndex    = 3;
 
-const ReviewTabScenes = [
+const TabScenes = [
     { title: "Camera",       component: CameraScene,       index: CameraSceneId },
     { title: "Product Info", component: ProductInfoScene,  index: ProductInfoSceneId },
     { title: "Rate Product", component: RateProductScene,  index: RateProductSceneId },
@@ -50,9 +50,9 @@ class ReviewTab extends Component {
         }
         // If not found in existing push
         if (foundExisting == false) {
-            for(var i=0; i < ReviewTabScenes.length; i++) {
-                 if (ReviewTabScenes[i].index == sceneId) {
-                    this.refs.navigator.push(ReviewTabScenes[i]);
+            for(var i=0; i < TabScenes.length; i++) {
+                 if (TabScenes[i].index == sceneId) {
+                    this.refs.navigator.push(TabScenes[i]);
                     break;
                  }
             }
@@ -85,7 +85,7 @@ class ReviewTab extends Component {
                 ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
-                initialRoute = {ReviewTabScenes[CameraIndex]}
+                initialRoute = {TabScenes[CameraIndex]}
             />
         );
     }

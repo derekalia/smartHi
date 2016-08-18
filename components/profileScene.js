@@ -5,7 +5,7 @@
 
 // Import modules
 import React, { Component } from 'react';
-import {StyleSheet, View, Text, ScrollView, Image, TouchableHighlight } from 'react-native';
+import {StyleSheet, View, Text, ScrollView, Image, TouchableHighlight, TouchableOpacity } from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -13,7 +13,8 @@ import StarRating from 'react-native-star-rating';
 
 
 // Import internals
-import {GetProductAction,} from '../actions';
+import {GetProductAction,SwitchSceneAction,} from '../actions';
+import {SettingsSceneId,} from '../common/const.js';
 import ProductItem from './productItem.js';
 
 class ProfileScene extends Component {
@@ -31,13 +32,24 @@ class ProfileScene extends Component {
     _goProduct(productId) {
         //
         // BatsFix. Change this after deciding whether product should be on a specific tab.
-        //this.props.GetProductAction(productId);
+        this.props.GetProductAction(productId, true);
+    }
+
+    _goSettings() {
+        this.props.SwitchSceneAction(SettingsSceneId);
     }
 
     render() {
         // BatsFix. nothing below should be hardcoded!
         return (
-                    <ScrollView style={{marginTop:50}}>
+                <View style={{flex:1}}>
+                    <TouchableOpacity style={{height:60,paddingTop:20,backgroundColor:'#F9F9F9',borderBottomWidth:1,borderColor:'#B2B2B2'}} 
+                       onPress={()=>this._goSettings()}>
+                        <View style={{ flex: 1, marginTop: 11,marginBottom: 5, flexDirection: "row", justifyContent: 'flex-end', alignItems: 'flex-end', marginRight: 13, }}>
+                            <Text style={{ fontSize: 18, color: "#007AFF" }}> Settings</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <ScrollView style={{marginTop:0}}>
                         {/*Image and Location*/}
                         <View style={{alignItems: 'center',}}>
                             <Image source={require('../media/headshot1.png') } style={{ width: 100, height: 100 }}/>
@@ -83,6 +95,7 @@ class ProfileScene extends Component {
                             <ProductItem product={this.props.favorite} goProduct={(id) => this._goProduct(id) }/>
                         </View>
                     </ScrollView>
+            </View>
         );
     }
 }
@@ -96,6 +109,6 @@ function mapStateToProps(state) {
 }
 //  This function is used to convert action to props passed to this component.
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,SwitchSceneAction, }, dispatch); }
 
 module.exports = connect(mapStateToProps, mapActionToProps)(ProfileScene);

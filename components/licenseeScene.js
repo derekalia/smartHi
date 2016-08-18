@@ -5,7 +5,7 @@
 import React, { Component } from 'react';
 import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableHighlight, Navigator} from 'react-native'
 
-class LicenseeAuthScene extends Component {
+class LicenseeScene extends Component {
     constructor(props) {
         super(props);
     }
@@ -74,4 +74,4 @@ class LicenseeAuthScene extends Component {
     }
 }
 
-module.exports = LicenseeAuthScene;
+module.exports = LicenseeScene;

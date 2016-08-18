@@ -113,6 +113,3 @@ function mapStateToProps(state) {
 function mapActionToProps(dispatch) { return bindActionCreators({ RateStoreAction, }, dispatch); }
 
 module.exports = connect(mapStateToProps, mapActionToProps)(RateStoreScene);
-
-
-module.exports = RateStoreScene;
