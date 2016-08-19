@@ -7,6 +7,7 @@ const producerActions   = require('./producer.js');
 const newsActions       = require('./news.js');
 const activityActions   = require('./activity.js');
 const mapActions        = require('./map.js');
+const reviewActions     = require('./review.js');
 
 module.exports = {
   ...loginActions,
@@ -18,4 +19,5 @@ module.exports = {
   ...newsActions,
   ...activityActions,
   ...mapActions,
+  ...reviewActions,
 };

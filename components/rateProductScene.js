@@ -9,7 +9,7 @@ import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {GetRetailerAction,GetProducerAction,} from '../actions';
+import {GetRetailerAction,GetProducerAction,RateProductAction,} from '../actions';
 import StarRating from 'react-native-star-rating';
 import ReviewList   from './reviewList.js';
 import FilterItem   from './filterItem.js';
@@ -42,21 +42,27 @@ class RateProductScene extends Component {
                     <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380 }}/>
                 </View>
 
+                {this._renderCommentBox()}
+
+                {this._renderFilters()}
+
                 {this._renderRating()}
+
+                {this._renderDetailRating()}
 
                 {this._renderDescription()}
 
                 {this._renderTestResults()}
 
-                {this._renderDetailRating()}
-
-                {this._renderFilters()}
 
 
-                {this._renderCommentBox()}
             </View>
         </ScrollView>
         );
+    }
+
+    _submitRating() {
+        this.props.RateProductAction();
     }
 
     _onRating(rating) {
@@ -204,7 +210,9 @@ class RateProductScene extends Component {
                 borderColor: "#ED3C52",
                 backgroundColor: '#ED3C52',
                 justifyContent: 'center',
-                alignItems: 'center',width:80}}>
+                alignItems: 'center',width:80}}
+                onPress={(e)=>this._submitRating(e)}
+                >
                 <Text style={{color: "white",fontWeight:'bold',fontSize:16,
                     marginTop: 7,
                     marginBottom: 7,
@@ -244,7 +252,6 @@ class RateProductScene extends Component {
     }
 
     _setEffectValue(value) {
-        console.log("setting effect value to "+value);
         this._effect[this._selectedFilterIndex].strength = value;
         this.setState({showSlider:false});
     }
@@ -305,13 +312,13 @@ class RateProductScene extends Component {
 // BatsFix. This function is used to convert state to props passed to this component
 function mapStateToProps(state) {
     return {
-        product: state.ProductReducer.product,
+        product: state.ReviewReducer.product,
     }
 }
 // BatsFix. This function is used to convert action to props passed to this component.
 // In this example, there is now prop called GetRetailerAction.
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetRetailerAction,GetProducerAction }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ GetRetailerAction,GetProducerAction,RateProductAction, }, dispatch); }
 
 module.exports = connect(mapStateToProps, mapActionToProps)(RateProductScene);
 

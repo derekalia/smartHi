@@ -19,7 +19,7 @@ const initialState = {
     thca: 50,
     retailers: [],
     producer: {},
-    symptoms:['state','state','state'],
+    symptom:['state','state','state'],
     activity:['state','state','state'],
     effect:[{name:'state',strength:50},{name:'state',strength:50},{name:'state',strength:50}]
     },

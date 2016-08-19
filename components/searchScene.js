@@ -136,7 +136,7 @@ class SearchScene extends Component {
 }
 
 //
-// Connect state.NavigationReducer.sceneId and state.NavigationReducer.switchScene to props
+// Connect state.NavigationReducer.frameId props
 //
 function mapStateToProps(state) { return { frameId: state.NavigationReducer.frameId } }
 

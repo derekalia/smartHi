@@ -4,29 +4,76 @@ import {
     SWITCH_TAB_SCENE,
 } from './navigation.js';
 
-import {RateProductSceneId} from '../common/const.js';
-import {GetProduct} from './data.js';
+import {CameraSceneId,ProductInfoSceneId,RateProductSceneId,RateStoreSceneId,} from '../common/const.js';
+import {UploadProductImage,UploadProductRating,UploadStoreRating,} from './data.js';
 
-export const RATE_SUCCESS = 'RATE_SUCCESS';
-export const RATE_ERROR   = 'RATE_ERROR';
+export const IMAGE_SUCCESS        = 'IMAGE_SUCCESS';
+export const IMAGE_RESET          = 'IMAGE_RESET';
+export const RATE_PRODUCT_SUCCESS = 'RATE_PRODUCT_SUCCESS';
+export const RATE_STORE_SUCCESS   = 'RATE_STORE_SUCCESS';
 
-//
-// BatsFix. If the product is not found in the database
-// this should be doing something else!
-//
-export function RateProductAction(productId) {
+export function UploadProductImageAction() {
     return function (dispatch, getState) {
-        // BatsFix. Fetch product data first.
-        product =  GetProduct(productId);
-        dispatch({
-            type: RATE_SUCCESS,
-            product: product,
-		});
+        var result = UploadProductImage();        
+        // BatsFix. If image upload and analysis was successfull do
+        if (result != null) {
+            // Then dispatch productInfo data
+            dispatch({
+                type: IMAGE_SUCCESS,
+                productInfo: result.productInfo,
+                storeInfo: result.storeInfo,
+            });
 
-        // Then show product data scene 
+            // Then show product data scene 
+            dispatch({
+                type: SWITCH_SCENE,
+                sceneId: ProductInfoSceneId,
+            });
+        }
+        else {
+            // If there was an error analyzing image go directly
+            // to rating the product
+            dispatch({
+                type: IMAGE_RESET,
+            });
+
+            dispatch({
+                type: SWITCH_SCENE,
+                sceneId: RateProductSceneId,
+            });
+        }
+    }
+}
+
+export function ConfirmProductInfoAction() {
+    return({
+        type: SWITCH_SCENE,
+        sceneId: RateProductSceneId,
+    });
+}
+
+export function RateProductAction() {
+     return function (dispatch, getState) {
+        var result = UploadProductRating();        
         dispatch({
-			type: SWITCH_SCENE,
-			sceneId: RateProductSceneId,
-		});
+            type: RATE_PRODUCT_SUCCESS,
+        });
+        dispatch({
+            type: SWITCH_SCENE,
+            sceneId: RateStoreSceneId,
+        });
+    }
+}
+
+export function RateStoreAction() {
+     return function (dispatch, getState) {
+        var result = UploadStoreRating();        
+        dispatch({
+            type: RATE_STORE_SUCCESS,
+        });
+        dispatch({
+            type:SWITCH_SCENE,
+            sceneId:CameraSceneId,
+        });
     }
 }

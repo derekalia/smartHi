@@ -6,21 +6,26 @@ export const MapTabId     = 'MapTabId';
 export const ProfileTabId = 'ProfileTabId';
 
 
-export const AboutSceneId    = '0';
-export const LaunchSceneId   = '1';
-export const LoginSceneId    = '2';
-export const RegisterSceneId = '3';
-export const RetailerSceneId = '4';
-export const ProductSceneId  = '5';
-export const HomeSceneId     = '6';
-export const ProducerSceneId = '7';
-export const ActivitySceneId = '8';
-export const RateProductSceneId = '9';
 
-export const CameraSceneId     = 'CameraScene';
-export const ProductInfoId     = 'ProductInfo';
-export const RateProductId     = 'RateProduct';
-export const RateStoreId       = 'RateStore';
+export const AboutSceneId           = 'AboutScene';
+export const ActivitySceneId        = 'ActivityScene';
+export const CameraSceneId          = 'CameraScene';
+export const HomeSceneId            = 'HomeScene';
+export const LaunchSceneId          = 'LaunchScene';
+export const LicenseeSceneId        = 'LicenseeScene';
+export const LicenseeStoreSceneId   = 'LicenseeStore';
+export const LicenseeProductSceneId = 'LicenseeProduct';
+export const LoginSceneId           = 'LoginScene';
+export const ProducerSceneId        = 'ProducerScene';
+export const ProductSceneId         = 'ProductScene';
+export const ProductInfoSceneId     = 'ProductInfoScene';
+export const ProfileSceneId         = 'ProfileScene';
+export const RegisterSceneId        = 'RegisterScene';
+export const RateProductSceneId     = 'RateProductScene';
+export const RateStoreSceneId       = 'RateStoreScene';
+export const RetailerSceneId        = 'RetailerScene';
+export const SearchSceneId          = 'SearchScene';
+export const SettingsSceneId        = 'SettingsScene';
 
 // Id for search view categories
 export const MapFrameId        = 'MapFrameId';

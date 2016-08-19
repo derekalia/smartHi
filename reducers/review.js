@@ -1,13 +1,13 @@
 import {
-    RATE_SUCCESS,
-    RATE_ERROR,
+    IMAGE_SUCCESS,
+    IMAGE_RESET,
 } from '../actions/index.js';
 
 const initialState = {
     product: {
     id:'0',
     name:'Initial State',
-    description:'Initial State',
+    description:'Initial Description',
     price: 0,
     rating: 2,
     ratingCount: 0,
@@ -23,13 +23,21 @@ const initialState = {
     symptom:[],
     effect:[{name:'state',strength:50},{name:'state',strength:50},{name:'state',strength:50}]
     },
+    retailer: {
+    id:'0',
+    name:'Initial State',
+    description:'Initial State',
+    rating: 5,
+    ratingCount: 555,
+    description: 'Initial State',
+    },
 }
 
-export default function ProductReducer(state, action) {
+export default function ReviewReducer(state, action) {
 
     switch (action.type) {
 
-        case RATE_SUCCESS:
+        case IMAGE_SUCCESS:
 
             // BatsFix. this creates a copy of the state object
             // In redux, it uses the reference of an object to decide
@@ -41,13 +49,20 @@ export default function ProductReducer(state, action) {
             newState = Object.assign({}, state);
             // BatsFix then modify the item needed in the new
             // state. 
-            newState.product = action.product;
+            newState.product  = action.productInfo;
+            newState.retailer = action.storeInfo;
+            return newState;
+
+        case IMAGE_RESET:
+            newState = Object.assign({}, state);
+            newState.product = initialState.product;
+            newState.retailer = initialState.retailer;
             return newState;
 
         //    
         // BatsFix. Add actions later 
         //
         default:
-            return state ? state : initialState;
+            return state != null ? state : initialState;
     }
 }

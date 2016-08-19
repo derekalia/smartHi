@@ -9,99 +9,70 @@ import React, { Component } from 'react';
 import {StyleSheet, View, Text, ScrollView, Image, TouchableHighlight, Navigator } from 'react-native';
 import {connect} from 'react-redux';
 // Import const ids.
-import {CameraSceneId, ProductInfoId, RateProductId, RateStoreId, ReviewTabId,} from '../common/const.js';
+import {CameraSceneId, ProductInfoSceneId, RateProductSceneId, RateStoreSceneId, ReviewTabId,} from '../common/const.js';
 
 // Import internal modules
 import CameraScene        from './cameraScene.js';
 import ProductInfoScene   from './productInfoScene.js';
 import RateProductScene   from './rateProductScene.js';
 import RateStoreScene     from './rateStoreScene.js';
+import HerbyBar           from './herbyBar.js';
 
 const CameraIndex       = 0;
 const ProductInfoIndex  = 1;
 const RateProductIndex  = 2;
 const RateStoreIndex    = 3;
 
-const ReviewTabScenes = [
+const TabScenes = [
     { title: "Camera",       component: CameraScene,       index: CameraSceneId },
-    { title: "Product Info", component: ProductInfoScene,  index: ProductInfoId },
-    { title: "Rate Product", component: RateProductScene,  index: RateProductId },
-    { title: "Rate Store",   component: RateStoreScene,    index: RateStoreId },
+    { title: "Product Info", component: ProductInfoScene,  index: ProductInfoSceneId },
+    { title: "Rate Product", component: RateProductScene,  index: RateProductSceneId },
+    { title: "Rate Store",   component: RateStoreScene,    index: RateStoreSceneId },
 ];
-
-var RouteMapper = {
-    LeftButton: function (route, navigator, index, navState) {
-        // BatsFix. Styling should be moved to common
-        if (index > 0) {
-            return (
-                <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginLeft: 13, }}>
-                    <Image source={require("../media/BackArrow.png") } style={{ width: 12, height: 19 }} />
-                    <Text onPress={navigator.jumpBack} style={{ fontSize: 18, color: "#007AFF" }}> Back</Text>
-                </View>
-            );
-        }
-    },
-    RightButton: function (route, navigator, index, navState) {
-        if (index < (ReviewTabScenes.length - 1)) {
-            // BatsFix. Add a check here if the next scene is enabled.
-            return (
-                <View style={{ flex: 1, marginTop: 0, flexDirection: "row", justifyContent: 'center', alignItems: 'center', marginRight: 13, }}>
-                    <Text onPress={navigator.jumpForward} style={{ fontSize: 18, color: "#007AFF" }}> Next</Text>
-                </View>
-            );
-        }
-    },
-    
-
-    Title: function (route, navigator, index, navState) {
-        return (
-            <Text style={{ fontSize: 18, marginTop: 11, fontWeight: 'bold' }}>
-                {route.title}
-            </Text>
-        );
-    }
-}
-
 
 class ReviewTab extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { selectedTab:ReviewTabId, resetScene: 0 }; 
     } 
 
     componentWillReceiveProps(nextProps) {
-        if (this.state.resetScene == nextProps.resetScene) {
-            var sceneId = nextProps.sceneId;
-            var foundExisting = false;
-            // Check existing routes first
-            var routelist = this.refs.navigator.getCurrentRoutes();
-            for (var i=0; i < routelist.length; i++) {
-                if (routelist[i].index == sceneId) {
-                    this.refs.navigator.jumpTo(routelist[i]);
-                    foundExisting = true;
-                    break;
-                }
-            }
-            // If not found in existing push
-            if (foundExisting == false) {
-                for(var i=0; i < ReviewTabScenes.length; i++) {
-                     if (ReviewTabScenes[i].index == sceneId) {
-                        this.refs.navigator.push(ReviewTabScenes[i]);
-                     }
-                }
+        var sceneId = nextProps.sceneId;
+        var foundExisting = false;
+        // Check existing routes first
+        var routelist = this.refs.navigator.getCurrentRoutes();
+        for (var i=0; i < routelist.length; i++) {
+            if (routelist[i].index == sceneId) {
+                this.refs.navigator.jumpTo(routelist[i]);
+                foundExisting = true;
+                break;
             }
         }
-        else {
-            this.setState({resetScene: nextProps.resetScene});
-            this.refs.navigator.popToTop();
+        // If not found in existing push
+        if (foundExisting == false) {
+            for(var i=0; i < TabScenes.length; i++) {
+                 if (TabScenes[i].index == sceneId) {
+                    this.refs.navigator.push(TabScenes[i]);
+                    break;
+                 }
+            }
         }
     }
 
     renderScene(route, navigator) {
-        return (
-            <route.component tabId={ReviewTabId} navigator={navigator}/>
-        );
+        if (route.index == CameraSceneId) {
+            return (
+                <route.component tabId={ReviewTabId}/>
+            );
+        }
+        else {
+            return (
+                <View style={{flex:1}}>
+                    <HerbyBar navigator={navigator}/>
+                    <route.component tabId={ReviewTabId}/>
+                </View>
+            );
+        }
     }
 
     configureScene(route, routeStack) {
@@ -114,14 +85,7 @@ class ReviewTab extends Component {
                 ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
-                initialRoute = {ReviewTabScenes[CameraIndex]}
-                initialRouteStack = {ReviewTabScenes}
-                navigationBar={
-                    <Navigator.NavigationBar
-                        routeMapper = {RouteMapper}
-                        style={{backgroundColor:'#F9F9F9',borderBottomWidth:1,borderColor:'#B2B2B2'}} >
-                    </Navigator.NavigationBar>
-                }
+                initialRoute = {TabScenes[CameraIndex]}
             />
         );
     }
