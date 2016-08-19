@@ -35,8 +35,8 @@ class SearchTab extends Component {
 
     constructor(props) {
         super(props);
-        this.state = { selectedTab:SearchTabId, resetScene: 0 }; 
-    } 
+        this.state = { selectedTab:SearchTabId, resetScene: 0 };
+    }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.resetScene == this.state.resetScene) {
@@ -63,7 +63,7 @@ class SearchTab extends Component {
             this.refs.navigator.popToTop();
         }
     }
-    
+
     renderScene(route, navigator) {
         if (route.index == SearchSceneId) {
             return (

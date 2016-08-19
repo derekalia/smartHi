@@ -74,7 +74,7 @@ class SearchScene extends Component {
             </View>
         );
     }
-        
+
     configureScene(route, routeStack) {
         return Navigator.SceneConfigs.PushFromRight;
     }
@@ -115,7 +115,7 @@ class SearchScene extends Component {
 
     render() {
         return (
-            <View style={[{flex: 1,marginHorizontal:5,}]}>
+            <View style={[{flex:1}]}>
                 <Navigator
                     ref="navigator"
                     configureScene={this.configureScene}
@@ -123,12 +123,13 @@ class SearchScene extends Component {
                     initialRoute = {SearchFrames[this._initialFrame]}
                     initialRouteStack = {SearchFrames}
                     navigationBar={
-                        <SearchBar frameId={this.state.frameId} 
-                            setSearchTerm={(t)=>this._setSearchTerm(t)} 
+                        <SearchBar frameId={this.state.frameId}
+                            setSearchTerm={(t)=>this._setSearchTerm(t)}
                             startSearch={()=>this._startSearch()} />
                     }
                     addRemoveFilter={(t)=>this._addRemoveFilter(t)}
                 />
+
             </View>
         );
     }

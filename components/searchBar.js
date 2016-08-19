@@ -36,7 +36,7 @@ class SearchBar extends Component {
         }
     }
 
-   
+
 
     _setFrame(frameId) {
         //
@@ -59,11 +59,14 @@ class SearchBar extends Component {
 
     render() {
         return (
-             <View style={{position:'absolute',top:20,left:0,right:0}}>
-                 <View style={{flexDirection: "row", marginTop: 0, marginBottom: 0, marginHorizontal: 10,}}>
+             <View style={{top:-555,width:340,justifyContent:'center',left:18}}>
+                 <View style={{flexDirection: "row"}}>
                     <View style={[{ flex: 5,}]}>
-                    <View style={{height: 50,borderWidth:1,borderColor:'#4A90E2',borderTopLeftRadius:6,borderBottomLeftRadius:6,}}>
-                        <TextInput style={[Styles.input]}
+                      <View style={{height: 34,borderWidth:3,borderColor:'#ECECEC',borderRadius:8,backgroundColor: '#ECECEC',}}>
+                        <TextInput style={{marginHorizontal:10,
+                          height:28,
+                        fontSize: 20,
+                        backgroundColor: '#ECECEC',}}
                             autoCapitalize  = "none"
                             autoCorrect     = {false}
                             placeholder     = "Keyword"
@@ -73,31 +76,34 @@ class SearchBar extends Component {
                             />
                             </View>
                     </View>
-                    <View style={[{ flex: 1, borderWidth: 1, borderColor: "#4A90E2", backgroundColor: "#4A90E2", height: 50,borderTopRightRadius:6,borderBottomRightRadius:6 }]}>
+                    <View style={{flex:.1}}></View>
+                    <View style={[{ flex: .6, borderWidth: 1,justifyContent:'center',borderColor: "#4A90E2", backgroundColor: "#4A90E2", height: 34,borderRadius:8}]}>
                         <TouchableOpacity style={{}} onPress={this.props.startSearch}>
-                            <Image style={{ height: 32, width: 32, marginLeft: 13, marginTop: 8 }} source={require("../media/SearchIcon0.png") }/>
+                            <Image style={{ height: 20, width: 20,alignSelf:'center', }} source={require("../media/SearchIcon0.png") }/>
                         </TouchableOpacity>
                     </View>
                 </View>
-               <View style={{flexDirection: "row", 
-                             marginTop: 20, 
-                             marginBottom: 0, 
-                             marginHorizontal: 10,
+               <View style={{flexDirection: "row",
+                             marginTop: 15,
+                             marginBottom: 0,
+                             marginHorizontal: -20,
                              justifyContent:'space-around',
                              alignItems:'center',
                             }}>
                    <TouchableOpacity style={this._frameStyle(ProductFrameId)} onPress={()=>this._setFrame(ProductFrameId)}>
-                        <Text>Products</Text>
+                        <Text>PRODUCTS</Text>
                    </TouchableOpacity>
                    <TouchableOpacity style={this._frameStyle(RetailerFrameId)} onPress={()=>this._setFrame(RetailerFrameId)}>
-                        <Text>Stores</Text>
+                        <Text>STORES</Text>
                    </TouchableOpacity>
                    <TouchableOpacity style={this._frameStyle(MapFrameId)} onPress={()=>this._setFrame(MapFrameId)}>
-                        <Text>Map</Text>
+                        <Text>MAP</Text>
                    </TouchableOpacity>
                    <TouchableOpacity style={this._frameStyle(UserFrameId)} onPress={()=>this._setFrame(UserFrameId)}>
-                        <Text>Users</Text>
+                        <Text>USERS</Text>
                    </TouchableOpacity>
+               </View>
+               <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:-40}}>
                </View>
            </View>
         );
@@ -113,7 +119,7 @@ module.exports = connect(null,mapActionToProps)(SearchBar);
 
 const Styles={
     input: {
-        height: 45,
+        height: 40,
         marginLeft:7,
         fontSize: 20,
         backgroundColor: 'white',

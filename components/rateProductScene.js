@@ -83,8 +83,13 @@ class RateProductScene extends Component {
     _renderRating() {
         return (
         <View>
-            <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
+            <View style={{flexDirection:'row', marginTop: 10, marginHorizontal: 10 }}>
+            <View style={{justifyContent: "flex-start"}}>
                 <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
+            </View>
+            <View style={{justifyContent: "flex-end"}}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold' }}>$40</Text>
+            </View>
             </View>
             <View style={{ marginTop: 5, marginHorizontal: 10,flexDirection: "row" }}>
                 <View style={{flex:1.2,alignItems: 'flex-start', flexDirection: "row",marginTop:8}}>
