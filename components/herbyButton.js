@@ -15,10 +15,10 @@ class HerbyButton extends Component {
     }
     render() {
         return(
-        <TouchableOpacity style={{paddingTop:10,paddingBottom:10,backgroundColor:'white',}}
+        <TouchableOpacity style={{paddingLeft:20,paddingTop:10,paddingBottom:10,backgroundColor:'white',}}
             onPress={()=>this._onPress()}>
-            <View style={{marginLeft:20,flexDirection:'row',height:26,alignItems:'center'}}>
-                <TouchableHighlight><Text>{this.props.name}</Text></TouchableHighlight>
+            <View style={{marginLeft:0,flexDirection:'row',height:26,alignItems:'stretch'}}>
+                <TouchableHighlight style={{marginLeft:0,alignItems:'flex-start'}}><Text>{this.props.name}</Text></TouchableHighlight>
                 <View style={{alignItems:'flex-end',flex:1,marginRight:20}}>
                     <Image source={require('../media/ForwardArrow2.png') } style={{ width: 8, height: 14,alignItems:'flex-end' }}/>
                 </View>
