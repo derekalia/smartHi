@@ -36,8 +36,31 @@ class ProducerScene extends Component {
         return (
             <ScrollView style={{backgroundColor:'white'}}>
                 <View style={{ flex: 1 }}>
-                    <View style={{ height: 248, justifyContent: "flex-end" }}>
-                        <Image source={require('../media/forged1.png') } style={{ height: 190, width: 380 }}/>
+                    <View style={{ justifyContent: "flex-end" }}>
+                        <Image source={require('../media/forged1.png') } style={{ height: 100, width: 377 }}/>
+                    </View>
+
+                    {/* Tabs */}
+                    <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:42}}>
+
+                      <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }}>
+                          <TouchableOpacity  style={{flexDirection: "row",alignItems:'center'}}>
+                              <Text style={{ fontSize: 14, color: "#9B9B9B" }}> INFO</Text>
+                          </TouchableOpacity>
+                      </View>
+                      <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }}>
+                          <TouchableOpacity style={{alignItems:'center'}}>
+                              <Text style={{ fontSize: 14, color: "#9B9B9B"}}>PRODUCTS</Text>
+                          </TouchableOpacity>
+                      </View>
+                      <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }}>
+                          <TouchableOpacity >
+                              <Text style={{ fontSize: 14, color: "#9B9B9B" }}> LOCATIONS </Text>
+                          </TouchableOpacity>
+                      </View>
+                    </View>
+
+                    <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:-40}}>
                     </View>
 
                     <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>

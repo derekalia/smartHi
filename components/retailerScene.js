@@ -12,12 +12,55 @@ import {GetProductAction,ShowMapAction} from '../actions';
 import ReviewList         from './reviewList.js';
 import ProductList        from './productList.js';
 
+import {ProductFrameId, MapFrameId, UserFrameId, RetailerFrameId, }   from '../common/const.js';
+import {SwitchFrameAction}   from '../actions';
+
+
 class RetailerScene extends Component {
 
     constructor(props) {
         super(props);
         // these should come from the app state.
         this.state = this.props.retailer;
+
+        this.state = {frameId:this.props.frameId};
+        this.ProductFrameId = Styles.category;
+        this.MapFrameId = Styles.category;
+        this.UserFrameId = Styles.category;
+        this.RetailerFrameId = Styles.category;
+        this[this.props.frameId] = Styles.category2;
+    }
+
+    _frameStyle(frameId) {
+        return this[frameId];
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.state.frameId != nextProps.frameId) {
+            this._setFrame(frameId);
+        }
+    }
+
+
+
+    _setFrame(frameId) {
+        //
+        // Change previous frameId to normal style
+        //
+        this[this.state.frameId] = Styles.category;
+
+        //
+        // Set new frameId to highlight
+        //
+        this[frameId] = Styles.category2;
+
+        this.setState({frameId: frameId});
+        this.props.SwitchFrameAction(frameId);
+    }
+
+     _onChange(event) {
+        this.props.setSearchTerm(event.nativeEvent.text);
+
     }
 
     componentWillReceiveProps(nextProps) {
@@ -33,7 +76,7 @@ class RetailerScene extends Component {
     }
 
     _showMap() {
-        this.props.ShowMapAction();        
+        this.props.ShowMapAction();
     }
 
     //
@@ -47,6 +90,89 @@ class RetailerScene extends Component {
                     <View style={{ justifyContent: "flex-end"}}>
                         <Image source={require('../media/ikes1.png') } style={{ height: 140, width: 380 }}/>
                     </View>
+
+                    <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:38}}>
+
+                      <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }}>
+                          <TouchableOpacity  style={{flexDirection: "row",alignItems:'center'}}>
+                              <Text style={{ fontSize: 14, color: "#9B9B9B" }}> INFO</Text>
+                          </TouchableOpacity>
+                      </View>
+                      <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }}>
+                          <TouchableOpacity style={{alignItems:'center'}}>
+                              <Text style={{ fontSize: 14, color: "#9B9B9B"}}>MENU</Text>
+                          </TouchableOpacity>
+                      </View>
+                      <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }}>
+                          <TouchableOpacity >
+                              <Text style={{ fontSize: 14, color: "#9B9B9B" }}> SOCIAL </Text>
+                          </TouchableOpacity>
+                      </View>
+                    </View>
+
+                    <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:-40,shadowColor:'black',shadowRadius:.1,shadowOpacity:.2,shadowOffset: {height: -1,width: 0}}}/>
+
+                  <View style={{}}>
+                                 <View style={{flexDirection: "row",marginTop:10,marginHorizontal:10}}>
+                                    <View style={[{ flex: 5,}]}>
+                                      <View style={{height: 34,borderWidth:3,borderColor:'#ECECEC',borderRadius:6,backgroundColor: '#ECECEC',}}>
+                                        <TextInput style={{marginHorizontal:10,
+                                          height:28,
+                                          fontSize: 20,
+                                          backgroundColor: '#ECECEC',}}
+                                            autoCapitalize  = "none"
+                                            autoCorrect     = {false}
+                                            placeholder     = "Search"
+                                            returnKeyType   = "next"
+
+                                            clearButtonMode = 'always'
+                                            />
+                                            </View>
+                                    </View>
+                                    <View style={{flex:.1}}></View>
+                                    <View style={[{ flex: .7,justifyContent:'center',height: 34,}]}>
+                                        <TouchableOpacity style={{}} onPress={this.props.startSearch}>
+                                            <Image style={{ height: 33, width: 33,alignSelf:'center', }} source={require("../media/plusButton11.png") }/>
+                                        </TouchableOpacity>
+                                    </View>
+                                </View>
+
+
+                                <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:40}}>
+                                  <ScrollView horizontal='true'>
+                                  <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center',marginHorizontal:20 }}>
+                                      <TouchableOpacity  style={{flexDirection: "row",alignItems:'center'}}>
+                                          <Text style={{ fontSize: 14, color: "#9B9B9B" }}> ALL</Text>
+                                      </TouchableOpacity>
+                                  </View>
+                                  <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center',marginHorizontal:20 }}>
+                                      <TouchableOpacity style={{alignItems:'center'}}>
+                                          <Text style={{ fontSize: 14, color: "#9B9B9B"}}>FLOWER</Text>
+                                      </TouchableOpacity>
+                                  </View>
+                                  <View style={{ flex: 1, alignItems: 'center',flexDirection: "row",justifyContent:'center',marginHorizontal:30 }}>
+                                      <TouchableOpacity >
+                                          <Text style={{ fontSize: 14, color: "#9B9B9B" }}> CONCENTRATE </Text>
+                                      </TouchableOpacity>
+                                  </View>
+                                  <View style={{ flex: 1, alignItems: 'center',justifyContent:'center',marginHorizontal:20}}>
+                                      <TouchableOpacity >
+                                          <Text style={{ fontSize: 14, color: "#9B9B9B" }}> INFUSED </Text>
+                                      </TouchableOpacity>
+                                  </View>
+                                  <View style={{ flex: 1, alignItems: 'center',justifyContent:'center',marginHorizontal:20 }}>
+                                      <TouchableOpacity >
+                                          <Text style={{ fontSize: 14, color: "#9B9B9B" }}> EDIBLE </Text>
+                                      </TouchableOpacity>
+                                  </View>
+
+                                </ScrollView>
+
+                                  </View>
+
+<View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:-40,shadowColor:'black',shadowRadius:.1,shadowOpacity:.2,shadowOffset: {height: -1,width: 0}}}/>
+</View>
+
                     {/*Rating and link to map*/}
                     <View style={{ marginTop: 10, marginHorizontal: 10 }}>
                         <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
@@ -55,7 +181,7 @@ class RetailerScene extends Component {
                           <View style={{flex:1.5,alignItems:'flex-start',flexDirection:'row',marginTop:1}}>
                               <StarRating
                                   disabled={true}
-                                  maxStars={5}                                  
+                                  maxStars={5}
                                   starSize={28}
                                   starColor={'red'}
                                   rating={this.state.rating}
@@ -109,7 +235,14 @@ function mapStateToProps(state) {
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,ShowMapAction }, dispatch); }
 
+//
+// Connect SwitchFrameAction to props
+//
+function mapActionToProps(dispatch) { return bindActionCreators({ SwitchFrameAction }, dispatch); }
+
+
 module.exports = connect(mapStateToProps, mapActionToProps)(RetailerScene);
+
 
 const Styles = StyleSheet.create({
     container: {

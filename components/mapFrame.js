@@ -1,6 +1,6 @@
 //
 // Description: productFrame.js
-// Used for searching and listing products 
+// Used for searching and listing products
 //
 import React, { Component } from 'react';
 import {Alert,MapView, StyleSheet, Text, View, Image, TextInput,TouchableOpacity,} from 'react-native'
@@ -19,7 +19,7 @@ class MapRetailerItem extends Component {
     _onPress() {
         this.props.goRetailer(this.props.mapItem.id);
     }
-    
+
     render() {
         return (
              <TouchableOpacity onPress={()=>this._onPress()} style={{width:200}}>
@@ -45,7 +45,7 @@ class MapFrame extends Component {
     constructor(props) {
         super(props);
         //
-        // BatsFix. retailer should be populated dynamically. 
+        // BatsFix. retailer should be populated dynamically.
         //
         var retailers = [{latitude: 47.597713,longitude: -122.321777,title:'Uncle Ike Here',rating:3.5,ratingCount:201,id:0}];
         var mapItems = this._populateMap(retailers);
@@ -73,7 +73,7 @@ class MapFrame extends Component {
         return(
             <View style={[{ backgroundColor: 'white' }]}>
                 <MapView
-                    style={{ height: 620, width: 377 }}
+                    style={{ height: 480, width: 377 }}
                     showsUserLocation={true}
                     region={{ latitude: 47.597713, longitude: -122.321777, latitudeDelta: 0.5, longitudeDelta: 0.5, }}
                     showsCompass = {true}
@@ -84,7 +84,7 @@ class MapFrame extends Component {
     }
 }
 
-// Connect state mapItems 
+// Connect state mapItems
 function mapStateToProps(state) {
     return {
         mapItems: state.MapReducer.mapItems,

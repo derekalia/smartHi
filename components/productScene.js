@@ -15,11 +15,21 @@ import ProducerItem from './producerItem.js';
 import ReviewList   from './reviewList.js';
 import RetailerList from './retailerList.js';
 
+import { MapFrameId, ReviewTabId, }   from '../common/const.js';
+import {SwitchFrameAction}   from '../actions';
+
+
 class ProductScene extends Component {
     constructor(props) {
         super(props);
         // these should come from the app state.
         this.state = this.props.product;
+
+        
+        this.MapFrameId = Styles.category;
+        this.ReviewTabId = Styles.category;
+        this[this.props.frameId] = Styles.category2;
+
     }
     componentWillReceiveProps(nextProps) {
         this.setState(nextProps.product);
@@ -64,6 +74,29 @@ class ProductScene extends Component {
                     <View style={{justifyContent: "flex-end" }}>
                         <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380 }}/>
                     </View>
+                    {/* Tabs */}
+                    <View style={{flexDirection: "row",
+                                  marginTop: 15,
+                                  marginBottom: 10,
+                                  justifyContent:'space-around',
+                                  alignItems:'center',
+                                 }}>
+                        <TouchableOpacity>
+                             <Text style={{color:"#9B9B9B"}}>INFO</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                             <Text style={{color:"#9B9B9B"}}>REVIEWS</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                             <Text style={{color:"#9B9B9B"}}>LOCATIONS</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                             <Text style={{color:"#9B9B9B"}}>RELATED</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:-40}}>
+                    </View>
+
                     {/* Overall rating */}
                     <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
                         <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
@@ -417,5 +450,23 @@ const Styles = StyleSheet.create({
         textShadowOffset: { width: 1.2, height: 1.2 },
         textShadowColor: 'black',
         textShadowRadius: 2
+    },
+    input: {
+        height: 40,
+        marginLeft:7,
+        fontSize: 20,
+        backgroundColor: 'white',
+    },
+    category: {
+        height: 23,
+        backgroundColor: 'white',
+        borderBottomWidth: 0,
+    },
+    category2: {
+        color:"#468EE5",
+        height: 23,
+        backgroundColor: 'white',
+        borderBottomWidth: 1,
+        borderColor:"#468EE5",
     },
 })

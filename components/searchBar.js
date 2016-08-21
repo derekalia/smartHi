@@ -65,11 +65,11 @@ class SearchBar extends Component {
                       <View style={{height: 34,borderWidth:3,borderColor:'#ECECEC',borderRadius:8,backgroundColor: '#ECECEC',}}>
                         <TextInput style={{marginHorizontal:10,
                           height:28,
-                        fontSize: 20,
-                        backgroundColor: '#ECECEC',}}
+                          fontSize: 20,
+                          backgroundColor: '#ECECEC',}}
                             autoCapitalize  = "none"
                             autoCorrect     = {false}
-                            placeholder     = "Keyword"
+                            placeholder     = "Search"
                             returnKeyType   = "next"
                             onChange        = {(e) => this._onChange(e)}
                             clearButtonMode = 'always'
@@ -85,22 +85,23 @@ class SearchBar extends Component {
                 </View>
                <View style={{flexDirection: "row",
                              marginTop: 15,
-                             marginBottom: 0,
+                             marginBottom: 2,
                              marginHorizontal: -20,
                              justifyContent:'space-around',
                              alignItems:'center',
+                             height:20
                             }}>
-                   <TouchableOpacity style={this._frameStyle(ProductFrameId)} onPress={()=>this._setFrame(ProductFrameId)}>
-                        <Text>PRODUCTS</Text>
+                   <TouchableOpacity style={[this._frameStyle(ProductFrameId),{height: 23}]} onPress={()=>this._setFrame(ProductFrameId)}>
+                        <Text style={this._frameStyle(ProductFrameId)}>PRODUCTS</Text>
                    </TouchableOpacity>
-                   <TouchableOpacity style={this._frameStyle(RetailerFrameId)} onPress={()=>this._setFrame(RetailerFrameId)}>
-                        <Text>STORES</Text>
+                   <TouchableOpacity style={[this._frameStyle(RetailerFrameId),{height: 23}]} onPress={()=>this._setFrame(RetailerFrameId)}>
+                        <Text style={this._frameStyle(RetailerFrameId)}>STORES</Text>
                    </TouchableOpacity>
-                   <TouchableOpacity style={this._frameStyle(MapFrameId)} onPress={()=>this._setFrame(MapFrameId)}>
-                        <Text>MAP</Text>
+                   <TouchableOpacity style={[this._frameStyle(MapFrameId),{height: 23}]} onPress={()=>this._setFrame(MapFrameId)}>
+                        <Text style={this._frameStyle(MapFrameId)}>MAP</Text>
                    </TouchableOpacity>
-                   <TouchableOpacity style={this._frameStyle(UserFrameId)} onPress={()=>this._setFrame(UserFrameId)}>
-                        <Text>USERS</Text>
+                   <TouchableOpacity style={[this._frameStyle(UserFrameId),,{height: 23}]} onPress={()=>this._setFrame(UserFrameId)}>
+                        <Text style={this._frameStyle(UserFrameId)}>USERS</Text>
                    </TouchableOpacity>
                </View>
                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:-40}}>
@@ -125,13 +126,15 @@ const Styles={
         backgroundColor: 'white',
     },
     category: {
-        height: 23,
+        color:"#9B9B9B",
         backgroundColor: 'white',
         borderBottomWidth: 0,
     },
     category2: {
-        height: 23,
+        color:"#468EE5",
+
         backgroundColor: 'white',
         borderBottomWidth: 1,
+        borderColor:"#468EE5",
     },
 }

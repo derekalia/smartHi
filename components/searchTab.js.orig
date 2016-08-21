@@ -35,7 +35,12 @@ class SearchTab extends Component {
 
     constructor(props) {
         super(props);
-	}
+<<<<<<< HEAD
+        this.state = { selectedTab:SearchTabId, resetScene: 0 };
+    }
+=======
+    } 
+>>>>>>> 9c8ed75a7328bd31840a6795ab73cc3b166b018e
 
     _getCurrentRoute(sceneId) {
         for (var i=0; i < TabScenes.length; i++) {
@@ -46,12 +51,15 @@ class SearchTab extends Component {
         return TabScenes[0];
     }
 
+<<<<<<< HEAD
+=======
     componentWillReceiveProps(nextProps) {
         var sceneId = nextProps.sceneId;
         var currentRoute = this._getCurrentRoute(sceneId);
         this.refs.navigator.jumpTo(currentRoute);
     }
 
+>>>>>>> 9c8ed75a7328bd31840a6795ab73cc3b166b018e
     renderScene(route, navigator) {
         if (route.index == SearchSceneId) {
             return (
@@ -74,7 +82,7 @@ class SearchTab extends Component {
 
     render() {
         return (
-            <Navigator style={{}}
+            <Navigator
                 ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}

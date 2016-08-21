@@ -69,8 +69,8 @@ class SearchScene extends Component {
         // to pass a prop to the component, that prop
         // first needs to be passed to the navigator object.
         return (
-            <View style={{flex:1,marginTop:120}}>
-            <route.component addRemoveFilter={navigator.props.addRemoveFilter}/>
+            <View style={{marginTop:110,}}>
+              <route.component addRemoveFilter={navigator.props.addRemoveFilter}/>
             </View>
         );
     }
@@ -115,7 +115,7 @@ class SearchScene extends Component {
 
     render() {
         return (
-            <View style={[{flex:1}]}>
+            <View style={[{flex:1,}]}>
                 <Navigator
                     ref="navigator"
                     configureScene={this.configureScene}
