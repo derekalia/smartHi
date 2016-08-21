@@ -15,7 +15,7 @@ import ProducerItem from './producerItem.js';
 import ReviewList   from './reviewList.js';
 import RetailerList from './retailerList.js';
 
-import { MapFrameId, ReviewTabId, }   from '../common/const.js';
+import { MapFrameId, ReviewsFrameId, }   from '../common/const.js';
 import {SwitchFrameAction}   from '../actions';
 
 
@@ -25,15 +25,45 @@ class ProductScene extends Component {
         // these should come from the app state.
         this.state = this.props.product;
 
-        
+        // this.state = {frameId:this.props.frameId};
         this.MapFrameId = Styles.category;
         this.ReviewTabId = Styles.category;
         this[this.props.frameId] = Styles.category2;
 
     }
-    componentWillReceiveProps(nextProps) {
-        this.setState(nextProps.product);
+
+    _frameStyle(frameId) {
+        return this[frameId];
     }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.state.frameId != nextProps.frameId) {
+            this._setFrame(frameId);
+        }
+    }
+
+
+
+    _setFrame(frameId) {
+        //
+        // Change previous frameId to normal style
+        //
+        this[this.state.frameId] = Styles.category;
+
+        //
+        // Set new frameId to highlight
+        //
+        this[frameId] = Styles.category2;
+
+        this.setState({frameId: frameId});
+        this.props.SwitchFrameAction(frameId);
+    }
+
+
+         _onChange(event) {
+            this.props.setSearchTerm(event.nativeEvent.text);
+        }
+
 
 
     _onRatingPress(rating) {
@@ -82,10 +112,13 @@ class ProductScene extends Component {
                                   alignItems:'center',
                                  }}>
                         <TouchableOpacity>
-                             <Text style={{color:"#9B9B9B"}}>INFO</Text>
+                             <Text>PRODUCTS</Text>
                         </TouchableOpacity>
                         <TouchableOpacity>
-                             <Text style={{color:"#9B9B9B"}}>REVIEWS</Text>
+                             <Text style={{color:"#9B9B9B"}}>INFO</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={[this._frameStyle(ReviewsFrameId),{height: 23}]} onPress={()=>this._setFrame(ReviewsFrameId)}>
+                             <Text style={this._frameStyle(ReviewsFrameId)}>REVIEWS</Text>
                         </TouchableOpacity>
                         <TouchableOpacity>
                              <Text style={{color:"#9B9B9B"}}>LOCATIONS</Text>
@@ -304,9 +337,10 @@ function mapStateToProps(state) {
 // BatsFix. This function is used to convert action to props passed to this component.
 // In this example, there is now prop called GetRetailerAction.
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetRetailerAction,GetProducerAction }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ GetRetailerAction,GetProducerAction,SwitchFrameAction }, dispatch); }
 
 module.exports = connect(mapStateToProps, mapActionToProps)(ProductScene);
+
 
 const Styles = StyleSheet.create({
     tagType: {
