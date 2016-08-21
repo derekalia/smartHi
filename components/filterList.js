@@ -4,7 +4,7 @@
 //
 
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, TouchableHighlight, TouchableOpacity, ListView, } from 'react-native';
+import {StyleSheet, Text, View, TouchableHighlight,ScrollView, TouchableOpacity, ListView, } from 'react-native';
 
 // Import filters.
 import {FiltersActivity, FiltersEffect, FiltersType,FiltersCategory,FiltersSymptoms} from '../common/filters.js';
@@ -121,7 +121,9 @@ class FilterList extends Component {
         }
         return (
             <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
+            <ScrollView horizontal='true'>
                 {filters}
+            </ScrollView>
             </View>
         );
     }
@@ -183,12 +185,12 @@ class FilterList extends Component {
                 margin:10,
                 width:340,
                 backgroundColor: 'white',
-                borderColor: 'black',
+                borderColor: '#9b9b9b',
                 borderWidth: 1,
                 borderRadius: 22,
                 justifyContent: 'center',}}>
                   <Text style={{fontSize: 14,
-                  color: 'black',
+                  color: '#9b9b9b',
                   alignSelf: 'center',}}>
                   {filterButtonText}
                 </Text>
