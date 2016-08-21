@@ -12,7 +12,7 @@ import {FiltersActivity, FiltersEffect, FiltersType,FiltersCategory,FiltersSympt
 class FilterItem extends Component {
     constructor(props) {
         super(props);
-        var filter = this.props.filter;        
+        var filter = this.props.filter;
         var tagStye = Styles.tagActivity;
         var textStyle = Styles.tagTextActivity;
 
@@ -63,10 +63,17 @@ class FilterItem extends Component {
     _onPress() {
         var current = !this.state.filterSelected;
         if (current) {
-            this._borderWidth = 3;
+            this._borderWidth = 0;
+
+            //this._tagColor = this.style.borderColor;
+            this._tagColor = "#4A90E2";
+            this._tagFontColor = "white";
+
         }
         else {
             this._borderWidth = 1;
+            this._tagColor = "white";
+            this._tagFontColor = "#4A90E2";
         }
         this._filter.selected = current;
 
@@ -79,7 +86,7 @@ class FilterItem extends Component {
 
     render() {
         return (
-            <TouchableOpacity style={[this._tagStyle,{borderWidth:this._borderWidth}]} onPress={() => this._onPress()}>
+            <TouchableOpacity style={[this._tagStyle,{borderWidth:this._borderWidth,backgroundColor:this._tagColor}]} onPress={() => this._onPress()}>
                 <Text style={this._textStyle}>{this._filter.name}</Text>
             </TouchableOpacity>
         );

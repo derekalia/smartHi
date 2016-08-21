@@ -38,13 +38,10 @@ class RateProductScene extends Component {
         return (
         <ScrollView style={{backgroundColor:'white'}}>
             <View style={{ flex: 1 }}>
-                <View style={{ height: 228, justifyContent: "flex-end" }}>
+                <View style={{ justifyContent: "flex-start" }}>
                     <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380 }}/>
                 </View>
 
-                {this._renderCommentBox()}
-
-                {this._renderFilters()}
 
                 {this._renderRating()}
 
@@ -54,6 +51,11 @@ class RateProductScene extends Component {
 
                 {this._renderTestResults()}
 
+                {this._renderFilters()}
+
+
+
+                  {this._renderCommentBox()}
 
 
             </View>

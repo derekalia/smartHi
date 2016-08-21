@@ -111,9 +111,7 @@ class ProductScene extends Component {
                                   justifyContent:'space-around',
                                   alignItems:'center',
                                  }}>
-                        <TouchableOpacity>
-                             <Text>PRODUCTS</Text>
-                        </TouchableOpacity>
+
                         <TouchableOpacity>
                              <Text style={{color:"#9B9B9B"}}>INFO</Text>
                         </TouchableOpacity>
@@ -492,13 +490,12 @@ const Styles = StyleSheet.create({
         backgroundColor: 'white',
     },
     category: {
-        height: 23,
+        color:"#9B9B9B",
         backgroundColor: 'white',
         borderBottomWidth: 0,
     },
     category2: {
         color:"#468EE5",
-        height: 23,
         backgroundColor: 'white',
         borderBottomWidth: 1,
         borderColor:"#468EE5",

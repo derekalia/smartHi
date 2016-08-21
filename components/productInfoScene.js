@@ -14,7 +14,7 @@ import {ConfirmProductInfoAction,} from '../actions';
 class ProductInfoScene extends Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             lotNumber:'500 600 990 0193',
             retailer:'Uncle Ikes',
@@ -29,7 +29,7 @@ class ProductInfoScene extends Component {
     render() {
         return (
         <View>
-        <View style={{backgroundColor:'#EFEFF4',height:600, marginTop:64}}>
+        <View style={{backgroundColor:'#EFEFF4',height:600}}>
             <View style={{marginTop:30}}>
                 <Text style={{marginLeft:20,marginBottom:10}}>Product Info</Text>
                 <View style={{backgroundColor:'white',borderTopWidth:1,borderTopColor:'#C8C8CC',borderBottomWidth:1,borderBottomColor:'#C8C8CC'}}>
