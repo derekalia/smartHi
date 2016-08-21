@@ -3,51 +3,21 @@
 // Used for testing various UI components
 //
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableHighlight, Navigator} from 'react-native'
+import {Animated, Dimensions, StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableHighlight, Navigator} from 'react-native'
 //get state management components
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import {SwitchSceneAction, GetProductAction} from '../actions';
 import {LicenseeSceneId,} from '../common/const.js';
-import HerbyButton from './herbyButton.js';
-
-class HerbyHeader extends Component {
-    render() {
-        return(
-        <Text style={{marginLeft:20,paddingTop:10,paddingBottom:10}}>{this.props.name}</Text>
-        );
-    }
-}
-class HerbyInput extends Component {
-    _onChange(e) {
-    }
-
-    render() {
-        return(
-        <View style={{
-            height:36,
-            paddingLeft:20,
-            paddingTop:10,
-            paddingBottom:10,
-            marginRight:20,
-            flexDirection:'row',
-            alignItems:'center',
-            backgroundColor:'white',
-            borderBottomWidth:1,
-            borderBottomColor:'#C8C8CC'}}>
-          <Text style={{flex:1,alignSelf:'flex-start'}}>{this.props.name}</Text>
-          <TextInput style={{flex:1,alignSelf:'flex-end'}} placeholder = {this.props.value}/> 
-        </View>
-        );
-    }
-}
+import {HerbyButton,HerbyHeader,HerbyInput,HerbyAlert} from '../common/controls.js';
 
 class SettingsScene extends Component {
     constructor(props) {
         super(props);
         this._userName="Type user name here";
         this._email ="Type email here";
+        this.state = {showAlert:false}
     }
 
     _goLicensee() {
@@ -55,17 +25,32 @@ class SettingsScene extends Component {
     }
 
     _goResetPassword() {
+        current = this.state.showAlert;
+        this.setState({showAlert:!current});
     }
 
     render() {
         return (
-            <View style={{backgroundColor:'#EFEFF4',flex:1,}}>
-            <HerbyHeader name="GENERAL"/>
-            <HerbyInput  name="UserName" value={this._userName}/>
-            <HerbyInput  name="Email" value={this._email}/>
-            <HerbyButton name="Reset Password" onPress={()=> this._goResetPassword()}/>
-            <HerbyHeader name="AUTHENTICATION"/>
-            <HerbyButton name="Licensee Login" onPress={()=> this._goLicensee()}/>
+            <View style={{flex:1}}>
+                {/*Popup settings area*/}
+             
+                {/*Main settings area*/}
+                <View style={{backgroundColor:'#EFEFF4',flex:1,}}>
+                <HerbyHeader name="GENERAL"/>
+                <HerbyInput  name="UserName" value={this._userName}/>
+                <HerbyInput  name="Email" value={this._email}/>
+                <HerbyButton name="Reset Password" onPress={()=> this._goResetPassword()}/>
+                <HerbyHeader name="AUTHENTICATION"/>
+                <HerbyButton name="Licensee Login" onPress={()=> this._goLicensee()}/>
+                </View>
+                 <HerbyAlert show={this.state.showAlert} height={136}>
+                    <View style={{backgroundColor:'white',marginLeft:20,marginRight:20,}}>
+                    <HerbyInput  value="Type password"/>
+                    <HerbyInput  value="Type password again"/>
+                    <HerbyButton name="Done" onPress={()=>this._goResetPassword()}/>
+                    </View>
+                </HerbyAlert>
+ 
             </View>
         );
     }
