@@ -32,9 +32,7 @@ class FilterItem extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        if (nextProps.filter.selected != null) {
-            this.setState({selected:nextProps.filter.selected});
-        }
+        this.setState({selected:nextProps.filter.selected});
     }
 
     _onPress() {

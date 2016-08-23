@@ -16,20 +16,20 @@ class FilterList extends Component {
         this.state = {
             currentFilters: [],
             filtersVisible: true,
-        };
-        this._filters = {
+            filters: {
             activity: FiltersActivity,
             effect:   FiltersEffect,
             type:     FiltersType,
             category: FiltersCategory,
             symptoms: FiltersSymptoms,
+            },
         }
         this._initializeFilters();
     }
 
     _initializeFilters() {
-        for (key in this._filters) {
-            var filterArray = this._filters[key];
+        for (key in this.state.filters) {
+            var filterArray = this.state.filters[key];
             for (var i=0; i < filterArray.length; i++) {
                 filterArray[i].selected = false;
             }
@@ -78,7 +78,7 @@ class FilterList extends Component {
     }
 
     _cleanFilter(filter) {
-        var filterArray = this._filters[filter.type];
+        var filterArray = this.state.filters[filter.type];
         var index = this._getFilterIndex(filter,filterArray);
         filterArray[index].selected = false;
        
@@ -111,6 +111,7 @@ class FilterList extends Component {
     // an index number!!!!! Bad Bad Bug! May be we should be using a list instead
     // of iterating over the array
     //
+    
     _renderFiltersArray(filterArray,isCurrent) {
         var filters = [];
         if (isCurrent) {
@@ -143,31 +144,31 @@ class FilterList extends Component {
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Activity </Text>
                     </View>
-                    {this._renderFiltersArray(this._filters['activity'],false)}
+                    {this._renderFiltersArray(this.state.filters['activity'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Effects </Text>
                     </View>
-                    {this._renderFiltersArray(this._filters['effect'],false)}
+                    {this._renderFiltersArray(this.state.filters['effect'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Type </Text>
                     </View>
-                    {this._renderFiltersArray(this._filters['type'],false)}
+                    {this._renderFiltersArray(this.state.filters['type'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Category </Text>
                     </View>
-                    {this._renderFiltersArray(this._filters['category'],false)}
+                    {this._renderFiltersArray(this.state.filters['category'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Symptoms </Text>
                     </View>
-                    {this._renderFiltersArray(this._filters['symptoms'],false)}
+                    {this._renderFiltersArray(this.state.filters['symptoms'],false)}
                 </View>
                 <View style={{ height: 40, justifyContent: 'center', }}>
                     <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Price </Text>
