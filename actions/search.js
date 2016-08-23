@@ -4,7 +4,7 @@ import {
     SWITCH_TAB_SCENE,
 } from './navigation.js';
 
-import {SearchTabId, SearchSceneId, ProductFrameId, RetailerFrameId,} from '../common/const.js';
+import {SearchTabId, SearchSceneId, ProductFrameId, RetailerFrameId, MapFrameId, UserFrameId,} from '../common/const.js';
 import {SearchProducts,SearchRetailers} from './data.js';
 
 export const SEARCH_START = 'SEARCH_START';
@@ -27,6 +27,24 @@ export function StartSearchAction(searchTerm,filters,frameId) {
         return {
             type: SEARCH_SUCCESS,
             retailers: retailers,
+            frameId: frameId,
+        };
+    }
+    else
+    if (frameId == MapFrameId) {
+        var retailers = SearchRetailers(searchTerm);
+        return {
+            type: SEARCH_SUCCESS,
+            retailers: retailers,
+            frameId: frameId,
+        };
+    }
+    else
+    if (frameId == UserFrameId) {
+        var user = SearchUsers(searchTerm);
+        return {
+            type: SEARCH_SUCCESS,
+            users: users,
             frameId: frameId,
         };
     }
