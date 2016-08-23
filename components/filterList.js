@@ -8,6 +8,7 @@ import {StyleSheet, Text, View, TouchableHighlight,ScrollView, TouchableOpacity,
 
 // Import filters.
 import {FiltersActivity, FiltersEffect, FiltersType,FiltersCategory,FiltersSymptoms} from '../common/filters.js';
+import FilterItem   from './filterItem.js';
 
 class FilterList extends Component {
     constructor(props) {
@@ -72,44 +73,6 @@ class FilterList extends Component {
         );
     }
 
-    _renderFilter(filter) {
-        // BatsFix. find a better way to select styling.
-        // Or should styling be tied to each filter individually?
-        var tagStye = Styles.tagActivity;
-        var textStyle = Styles.tagTextActivity;
-
-        if (filter.type == 'activity') {
-            tagStyle = Styles.tagActivity;
-            textStyle = Styles.tagTextActivity;
-        }
-        else
-        if (filter.type == 'effect') {
-            tagStyle = Styles.tagEffects;
-            textStyle = Styles.tagTextEffects;
-        }
-        else
-        if (filter.type == 'symptoms') {
-            tagStyle = Styles.tagSymptoms;
-            textStyle = Styles.tagTextSymptoms;
-        }
-        else
-        if (filter.type == 'category') {
-            tagStyle = Styles.tagCategory;
-            textStyle = Styles.tagTextCategory;
-        }
-        else
-        if (filter.type == 'type') {
-            tagStyle = Styles.tagType;
-            textStyle = Styles.tagTextType;
-
-        }
-        return (
-            <TouchableOpacity style={tagStyle} onPress={() => this._addRemoveFilter(filter) } key={filter.name}>
-                <Text style={textStyle}>{filter.name}</Text>
-            </TouchableOpacity>
-        );
-    }
-
     //
     // BatsFix. For some reason using lists makes the list item not update
     // on frame switch.
@@ -117,7 +80,7 @@ class FilterList extends Component {
     _renderFiltersArray(filterArray) {
         var filters = [];
         for (var i=0; i < filterArray.length; i++) {
-            filters.push(this._renderFilter(filterArray[i]));
+            filters.push(<FilterItem filter={filterArray[i]} key={i} onPress={(t) => this._addRemoveFilter(t)}/>);
         }
         return (
             <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
@@ -286,16 +249,6 @@ const Styles = StyleSheet.create({
     inactive: {
         backgroundColor: 'white',
     },
-    tagEffects: {
-        margin: 5,
-        borderRadius: 20,
-        height:40,
-        borderWidth: 1,
-        borderColor: "#4A90E2",
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     thumb: {
         width: 100,
         height: 100,
@@ -303,95 +256,5 @@ const Styles = StyleSheet.create({
         borderRadius: 5,
         // borderTopLeftRadius: 60,
         // borderTopRightRadius: 0,
-    },
-    tagTextEffects: {
-        color: "#4A90E2",
-        marginTop: 10,
-        marginBottom: 10,
-        marginHorizontal: 15,
-    },
-
-    tagActivity: {
-        margin: 5,
-        height:40,
-        borderRadius: 20,
-        borderWidth: 1,
-        borderColor: "#BD10E0",
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    tagTextActivity: {
-        color: "#BD10E0",
-        marginTop: 10,
-        marginBottom: 10,
-        marginHorizontal: 15,
-    },
-
-    tagType: {
-        margin: 5,
-        height:40,
-        borderRadius: 20,
-        borderWidth: 1,
-        borderColor: "#F5A623",
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    tagTextType: {
-        color: "#F5A623",
-        marginTop: 10,
-        marginBottom: 10,
-        marginHorizontal: 15,
-    },
-
-    tagSymptoms: {
-        margin: 5,
-        borderRadius: 20,
-        height:40,
-        borderWidth: 1,
-        borderColor: "#D0021B",
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    tagTextSymptoms: {
-        color: "#D0021B",
-        marginTop: 10,
-        marginBottom: 10,
-        marginHorizontal: 15,
-    },
-
-    tagCategory: {
-        margin: 5,
-        borderRadius: 20,
-        borderWidth: 1,
-        height:40,
-        borderColor: "#7ED321",
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    tagTextCategory: {
-        color: "#7ED321",
-        marginTop: 10,
-        marginBottom: 10,
-        marginHorizontal: 15,
-    },
-
-    tag: {
-        margin: 5,
-        borderRadius: 20,
-        borderWidth: 1,
-        borderColor: "#4A90E2",
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    tagText: {
-        color: "#4A90E2",
-        marginTop: 10,
-        marginBottom: 10,
-        marginHorizontal: 15,
     },
 });
