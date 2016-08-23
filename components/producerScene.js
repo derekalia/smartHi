@@ -35,6 +35,7 @@ class ProducerScene extends Component {
     render() {
         return (
             <ScrollView style={{backgroundColor:'white'}}>
+            
                 <View style={{ flex: 1 }}>
                     <View style={{ justifyContent: "flex-end" }}>
                         <Image source={require('../media/forged1.png') } style={{ height: 100, width: 377 }}/>
