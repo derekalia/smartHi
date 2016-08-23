@@ -17,6 +17,23 @@ class FilterList extends Component {
             currentFilters: [],
             filtersVisible: true,
         };
+        this._filters = {
+            activity: FiltersActivity,
+            effect:   FiltersEffect,
+            type:     FiltersType,
+            category: FiltersCategory,
+            symptoms: FiltersSymptoms,
+        }
+        this._initializeFilters();
+    }
+
+    _initializeFilters() {
+        for (key in this._filters) {
+            var filterArray = this._filters[key];
+            for (var i=0; i < filterArray.length; i++) {
+                filterArray[i].selected = false;
+            }
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -31,27 +48,41 @@ class FilterList extends Component {
     // add to the current list. If it is in the current filters
     // list, remove it from the current list
     //
+    _getFilterIndex(filter,filterArray) {
+        for (var i=0; i < filterArray.length; i++) {
+            if (filterArray[i].name == filter.name) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     _addRemoveFilter(filter) {
         var current = this.state.currentFilters;
-        if (filter.isCurrent == null) {
-            var index = current.indexOf(filter);
+        if (filter.selected == true) {
+            var index = this._getFilterIndex(filter,current);
             if (index < 0) {
-                filter.isCurrent = true;
-                current.push(filter);
+                current.push({name:filter.name,type:filter.type,selected:true});
                 this.props.addRemoveFilter(filter.name);
                 this.setState({currentFilters: current});
             }
         }
         else {
-            filter.isCurrent = null;
-            var current = this.state.currentFilters;
-            var index = current.indexOf(filter);
+            var index = this._getFilterIndex(filter,current); 
             if (index >= 0) {
                 this.props.addRemoveFilter(filter.name);
                 current.splice(index, 1);
                 this.setState({currentFilters: current});
             }
         }
+    }
+
+    _cleanFilter(filter) {
+        var filterArray = this._filters[filter.type];
+        var index = this._getFilterIndex(filter,filterArray);
+        filterArray[index].selected = false;
+       
+        this._addRemoveFilter(filter);
     }
 
     _switchFiltering() {
@@ -75,13 +106,24 @@ class FilterList extends Component {
 
     //
     // BatsFix. For some reason using lists makes the list item not update
-    // on frame switch.
+    // on frame switch. Another mysterious bug in react-native,
+    // iterating over the array does not work properly if the key item is just 
+    // an index number!!!!! Bad Bad Bug! May be we should be using a list instead
+    // of iterating over the array
     //
-    _renderFiltersArray(filterArray) {
+    _renderFiltersArray(filterArray,isCurrent) {
         var filters = [];
-        for (var i=0; i < filterArray.length; i++) {
-            filters.push(<FilterItem filter={filterArray[i]} key={i} onPress={(t) => this._addRemoveFilter(t)}/>);
+        if (isCurrent) {
+            for (var i=0; i < filterArray.length; i++) {
+                filters.push(<FilterItem filter={filterArray[i]} key={filterArray[i].name} onPress={(t) => this._cleanFilter(t)}/>);
+            }
         }
+        else {
+            for (var i=0; i < filterArray.length; i++) {
+                filters.push(<FilterItem filter={filterArray[i]} key={filterArray[i].name} onPress={(t) => this._addRemoveFilter(t)}/>);
+            }
+        }
+
         return (
             <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
             <ScrollView horizontal='true'>
@@ -101,31 +143,31 @@ class FilterList extends Component {
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Activity </Text>
                     </View>
-                    {this._renderFiltersArray(FiltersActivity)}
+                    {this._renderFiltersArray(this._filters['activity'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Effects </Text>
                     </View>
-                    {this._renderFiltersArray(FiltersEffect)}
+                    {this._renderFiltersArray(this._filters['effect'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Type </Text>
                     </View>
-                    {this._renderFiltersArray(FiltersType)}
+                    {this._renderFiltersArray(this._filters['type'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Category </Text>
                     </View>
-                    {this._renderFiltersArray(FiltersCategory)}
+                    {this._renderFiltersArray(this._filters['category'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Symptoms </Text>
                     </View>
-                    {this._renderFiltersArray(FiltersSymptoms)}
+                    {this._renderFiltersArray(this._filters['symptoms'],false)}
                 </View>
                 <View style={{ height: 40, justifyContent: 'center', }}>
                     <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Price </Text>

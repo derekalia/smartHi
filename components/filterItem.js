@@ -20,53 +20,41 @@ const tagColor = {
 class FilterItem extends Component {
     constructor(props) {
         super(props);
-        var filter = this.props.filter;
+        var selected = false;
+        this._filter      = this.props.filter;
+        this._filterColor = tagColor[this._filter.type];
 
-        this._filterColor = tagColor[filter.type];
-
-        if (this.props.filter.selected) {
-            this._textColor = 'white';
-            this._tagColor  = this._filterColor;
-        }
-        else {
-            this._textColor = this._filterColor;
-            this._tagColor  = 'white' 
-        }
- 
-        this._filter    = filter;
-
+        selected = this._filter.selected;
         // Only changeable attributes should be in state.
         this.state = {
-            filterSelected: this.props.filter.selected,
+            selected: selected,
         };
     }
 
     componentWillReceiveProps(nextProps) {
+        if (nextProps.filter.selected != null) {
+            this.setState({selected:nextProps.filter.selected});
+        }
     }
 
     _onPress() {
-        var current = !this.state.filterSelected;
-        if (current) {
-            this._textColor = 'white';
-            this._tagColor  = this._filterColor;
-        }
-        else {
-            this._textColor = this._filterColor;
-            this._tagColor  = 'white' 
-        }
+        var current = !this.state.selected;
+        this.setState({selected: current});
+
+        // Notify container about the current state.
         this._filter.selected = current;
-
-        this.setState({filterSelected: current});
-
         if (this.props.onPress) {
             this.props.onPress(this._filter);
         }
     }
 
     render() {
+        var selected = this.state.selected;
+        var bgColor = selected?this._filterColor:'white';
+        var fgColor = selected?'white':this._filterColor;
         return (
-            <TouchableOpacity style={[Styles.tagStyle,{backgroundColor:this._tagColor,borderColor:this._textColor,}]} onPress={() => this._onPress()}>
-                <Text style={[Styles.tagText,{color:this._textColor}]}>{this._filter.name}</Text>
+            <TouchableOpacity style={[Styles.tagStyle,{backgroundColor:bgColor,borderColor:fgColor,}]} onPress={() => this._onPress()}>
+                <Text style={[Styles.tagText,{color:fgColor}]}>{this._filter.name}</Text>
             </TouchableOpacity>
         );
     }
