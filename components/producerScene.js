@@ -35,7 +35,7 @@ class ProducerScene extends Component {
     render() {
         return (
             <ScrollView style={{backgroundColor:'white'}}>
-            
+
                 <View style={{ flex: 1 }}>
                     <View style={{ justifyContent: "flex-end" }}>
                         <Image source={require('../media/forged1.png') } style={{ height: 100, width: 377 }}/>
@@ -61,8 +61,8 @@ class ProducerScene extends Component {
                       </View>
                     </View>
 
-                    <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:-40}}>
-                    </View>
+                    <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:-40}}/>
+
 
                     <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
                         <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name} - Issaquah, WA</Text>
