@@ -8,6 +8,7 @@ import {StyleSheet, Text, View, TouchableHighlight,ScrollView, TouchableOpacity,
 
 // Import filters.
 import {FiltersActivity, FiltersEffect, FiltersType,FiltersCategory,FiltersSymptoms} from '../common/filters.js';
+import FilterItem   from './filterItem.js';
 
 class FilterList extends Component {
     constructor(props) {
@@ -15,7 +16,24 @@ class FilterList extends Component {
         this.state = {
             currentFilters: [],
             filtersVisible: true,
-        };
+            filters: {
+            activity: FiltersActivity,
+            effect:   FiltersEffect,
+            type:     FiltersType,
+            category: FiltersCategory,
+            symptoms: FiltersSymptoms,
+            },
+        }
+        this._initializeFilters();
+    }
+
+    _initializeFilters() {
+        for (key in this.state.filters) {
+            var filterArray = this.state.filters[key];
+            for (var i=0; i < filterArray.length; i++) {
+                filterArray[i].selected = false;
+            }
+        }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -30,27 +48,41 @@ class FilterList extends Component {
     // add to the current list. If it is in the current filters
     // list, remove it from the current list
     //
+    _getFilterIndex(filter,filterArray) {
+        for (var i=0; i < filterArray.length; i++) {
+            if (filterArray[i].name == filter.name) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
     _addRemoveFilter(filter) {
         var current = this.state.currentFilters;
-        if (filter.isCurrent == null) {
-            var index = current.indexOf(filter);
+        if (filter.selected == true) {
+            var index = this._getFilterIndex(filter,current);
             if (index < 0) {
-                filter.isCurrent = true;
-                current.push(filter);
+                current.push({name:filter.name,type:filter.type,selected:true});
                 this.props.addRemoveFilter(filter.name);
                 this.setState({currentFilters: current});
             }
         }
         else {
-            filter.isCurrent = null;
-            var current = this.state.currentFilters;
-            var index = current.indexOf(filter);
+            var index = this._getFilterIndex(filter,current); 
             if (index >= 0) {
                 this.props.addRemoveFilter(filter.name);
                 current.splice(index, 1);
                 this.setState({currentFilters: current});
             }
         }
+    }
+
+    _cleanFilter(filter) {
+        var filterArray = this.state.filters[filter.type];
+        var index = this._getFilterIndex(filter,filterArray);
+        filterArray[index].selected = false;
+       
+        this._addRemoveFilter(filter);
     }
 
     _switchFiltering() {
@@ -72,53 +104,27 @@ class FilterList extends Component {
         );
     }
 
-    _renderFilter(filter) {
-        // BatsFix. find a better way to select styling.
-        // Or should styling be tied to each filter individually?
-        var tagStye = Styles.tagActivity;
-        var textStyle = Styles.tagTextActivity;
-
-        if (filter.type == 'activity') {
-            tagStyle = Styles.tagActivity;
-            textStyle = Styles.tagTextActivity;
-        }
-        else
-        if (filter.type == 'effect') {
-            tagStyle = Styles.tagEffects;
-            textStyle = Styles.tagTextEffects;
-        }
-        else
-        if (filter.type == 'symptoms') {
-            tagStyle = Styles.tagSymptoms;
-            textStyle = Styles.tagTextSymptoms;
-        }
-        else
-        if (filter.type == 'category') {
-            tagStyle = Styles.tagCategory;
-            textStyle = Styles.tagTextCategory;
-        }
-        else
-        if (filter.type == 'type') {
-            tagStyle = Styles.tagType;
-            textStyle = Styles.tagTextType;
-
-        }
-        return (
-            <TouchableOpacity style={tagStyle} onPress={() => this._addRemoveFilter(filter) } key={filter.name}>
-                <Text style={textStyle}>{filter.name}</Text>
-            </TouchableOpacity>
-        );
-    }
-
     //
     // BatsFix. For some reason using lists makes the list item not update
-    // on frame switch.
+    // on frame switch. Another mysterious bug in react-native,
+    // iterating over the array does not work properly if the key item is just 
+    // an index number!!!!! Bad Bad Bug! May be we should be using a list instead
+    // of iterating over the array
     //
-    _renderFiltersArray(filterArray) {
+    
+    _renderFiltersArray(filterArray,isCurrent) {
         var filters = [];
-        for (var i=0; i < filterArray.length; i++) {
-            filters.push(this._renderFilter(filterArray[i]));
+        if (isCurrent) {
+            for (var i=0; i < filterArray.length; i++) {
+                filters.push(<FilterItem filter={filterArray[i]} key={filterArray[i].name} onPress={(t) => this._cleanFilter(t)}/>);
+            }
         }
+        else {
+            for (var i=0; i < filterArray.length; i++) {
+                filters.push(<FilterItem filter={filterArray[i]} key={filterArray[i].name} onPress={(t) => this._addRemoveFilter(t)}/>);
+            }
+        }
+
         return (
             <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
             <ScrollView horizontal='true'>
@@ -138,31 +144,31 @@ class FilterList extends Component {
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Activity </Text>
                     </View>
-                    {this._renderFiltersArray(FiltersActivity)}
+                    {this._renderFiltersArray(this.state.filters['activity'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Effects </Text>
                     </View>
-                    {this._renderFiltersArray(FiltersEffect)}
+                    {this._renderFiltersArray(this.state.filters['effect'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Type </Text>
                     </View>
-                    {this._renderFiltersArray(FiltersType)}
+                    {this._renderFiltersArray(this.state.filters['type'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Category </Text>
                     </View>
-                    {this._renderFiltersArray(FiltersCategory)}
+                    {this._renderFiltersArray(this.state.filters['category'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
                         <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Symptoms </Text>
                     </View>
-                    {this._renderFiltersArray(FiltersSymptoms)}
+                    {this._renderFiltersArray(this.state.filters['symptoms'],false)}
                 </View>
                 <View style={{ height: 40, justifyContent: 'center', }}>
                     <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Price </Text>
@@ -286,16 +292,6 @@ const Styles = StyleSheet.create({
     inactive: {
         backgroundColor: 'white',
     },
-    tagEffects: {
-        margin: 5,
-        borderRadius: 20,
-        height:40,
-        borderWidth: 1,
-        borderColor: "#4A90E2",
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
     thumb: {
         width: 100,
         height: 100,
@@ -303,95 +299,5 @@ const Styles = StyleSheet.create({
         borderRadius: 5,
         // borderTopLeftRadius: 60,
         // borderTopRightRadius: 0,
-    },
-    tagTextEffects: {
-        color: "#4A90E2",
-        marginTop: 10,
-        marginBottom: 10,
-        marginHorizontal: 15,
-    },
-
-    tagActivity: {
-        margin: 5,
-        height:40,
-        borderRadius: 20,
-        borderWidth: 1,
-        borderColor: "#BD10E0",
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    tagTextActivity: {
-        color: "#BD10E0",
-        marginTop: 10,
-        marginBottom: 10,
-        marginHorizontal: 15,
-    },
-
-    tagType: {
-        margin: 5,
-        height:40,
-        borderRadius: 20,
-        borderWidth: 1,
-        borderColor: "#F5A623",
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    tagTextType: {
-        color: "#F5A623",
-        marginTop: 10,
-        marginBottom: 10,
-        marginHorizontal: 15,
-    },
-
-    tagSymptoms: {
-        margin: 5,
-        borderRadius: 20,
-        height:40,
-        borderWidth: 1,
-        borderColor: "#D0021B",
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    tagTextSymptoms: {
-        color: "#D0021B",
-        marginTop: 10,
-        marginBottom: 10,
-        marginHorizontal: 15,
-    },
-
-    tagCategory: {
-        margin: 5,
-        borderRadius: 20,
-        borderWidth: 1,
-        height:40,
-        borderColor: "#7ED321",
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    tagTextCategory: {
-        color: "#7ED321",
-        marginTop: 10,
-        marginBottom: 10,
-        marginHorizontal: 15,
-    },
-
-    tag: {
-        margin: 5,
-        borderRadius: 20,
-        borderWidth: 1,
-        borderColor: "#4A90E2",
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    tagText: {
-        color: "#4A90E2",
-        marginTop: 10,
-        marginBottom: 10,
-        marginHorizontal: 15,
     },
 });
