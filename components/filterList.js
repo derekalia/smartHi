@@ -77,7 +77,7 @@ class FilterList extends Component {
         }
     }
 
-    _cleanFilter(filter) {
+    _removeFilter(filter) {
         var filterArray = this.state.filters[filter.type];
         var index = this._getFilterIndex(filter,filterArray);
         filterArray[index].selected = false;
@@ -94,7 +94,7 @@ class FilterList extends Component {
         return (
             <View >
                 <View>
-                    {this._renderFiltersArray(this.state.currentFilters, true)}
+                    {this._renderSelectedFilters(this.state.currentFilters)}
                 </View>
                 <View style={{alignItems:'center'}}>
                 {this._renderFilterButton()}
@@ -111,20 +111,26 @@ class FilterList extends Component {
     // an index number!!!!! Bad Bad Bug! May be we should be using a list instead
     // of iterating over the array
     //
-    
+     _renderSelectedFilters(filterArray) {
+        var filters = [];
+        for (var i=0; i < filterArray.length; i++) {
+            filters.push(<FilterItem filter={filterArray[i]} key={filterArray[i].name} onPress={(t) => this._removeFilter(t)}/>);
+        }
+        return (
+            <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
+            <ScrollView horizontal='true'>
+                {filters}
+            </ScrollView>
+            </View>
+        );
+    }
+
+   
     _renderFiltersArray(filterArray,isCurrent) {
         var filters = [];
-        if (isCurrent) {
-            for (var i=0; i < filterArray.length; i++) {
-                filters.push(<FilterItem filter={filterArray[i]} key={filterArray[i].name} onPress={(t) => this._cleanFilter(t)}/>);
-            }
+        for (var i=0; i < filterArray.length; i++) {
+            filters.push(<FilterItem filter={filterArray[i]} key={filterArray[i].name} onPress={(t) => this._addRemoveFilter(t)}/>);
         }
-        else {
-            for (var i=0; i < filterArray.length; i++) {
-                filters.push(<FilterItem filter={filterArray[i]} key={filterArray[i].name} onPress={(t) => this._addRemoveFilter(t)}/>);
-            }
-        }
-
         return (
             <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
             <ScrollView horizontal='true'>
