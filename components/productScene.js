@@ -126,7 +126,7 @@ class ProductScene extends Component {
         }
         else {
             return (
-                <HerbyBar name={this.props.product.name} navigator={this.props.navigator} />
+                <HerbyBar name={this.props.product.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
             );
         }
         return null;
