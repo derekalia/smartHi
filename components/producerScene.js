@@ -11,88 +11,131 @@ import StarRating from 'react-native-star-rating';
 import {GetProductAction} from '../actions';
 import ReviewList         from './reviewList.js';
 import ProductList        from './productList.js';
+import {HerbyFrameBar}    from '../common/controls.js';
+
+
+class ProducerInfo extends Component {
+    render() {
+        return (
+        <View>
+            <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
+                <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.props.producer.name} - Issaquah, WA</Text>
+                <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
+                    <StarRating
+                        disabled={true}
+                        maxStars={5}
+                        starSize={30}
+                        starColor={'red'}
+                        rating={this.props.producer.rating}
+                        selectedStar={(rating) => this._onRating(rating) }
+                        />
+                    <Text style={{ fontSize: 19 }}> ({this.props.producer.ratingCount}) </Text>
+                </View>
+            </View>
+
+            <View style={{ marginHorizontal: 10 }}>
+                <View style={{ flex: 1, height: 85, justifyContent: 'center' }}>
+                    <Text>{this.props.producer.description}</Text>
+                </View>
+            </View>
+        </View>
+        );
+    }
+    _onRating(rating) {
+    }
+}
+
+class ProducerMenu extends Component {
+    render() {
+        return (
+        <View style={{ marginHorizontal: 10 }}>
+            <ProductList productList={this.props.producer.products} goProduct={(id)=>this.props.goProduct(id)}/>
+        </View>
+        );
+    };
+}
+class ProducerReview extends Component {
+    render() {
+        return (
+            <ReviewList/>
+        );
+    }
+}
+
+const InfoFrameId    = 0;
+const MenuFrameId    = 1;
+const ReviewFrameId  = 2;
+
+const ProducerFrames = [
+    {title: "info",     component: ProducerInfo,     index: InfoFrameId},
+    {title: "menu",     component: ProducerMenu,     index: MenuFrameId},
+    {title: "review",   component: ProducerReview,   index: ReviewFrameId},
+];
 
 
 class ProducerScene extends Component {
-
     constructor(props) {
         super(props);
-        // these should come from the app state.
-        this.state = this.props.producer;
+        this.state={showImage:true};
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState(nextProps.producer);
+    _setFrame(frameId) {
+        this.refs.navigator.jumpTo(ProducerFrames[frameId]);
+        this.setState({frameId: frameId});
     }
 
-    _goProduct(productId) {
-        //
-        // Go to product page
-        //
-       this.props.GetProductAction(productId);
+    renderScene(route, navigator) {
+        // BatsFix.
+        // to pass a prop to the component, that prop
+        // first needs to be passed to the navigator object.
+        return (
+                <route.component 
+                    producer={navigator.props.producer} 
+                    goProduct={navigator.props.goProduct}/>
+        );
+    }
+
+    configureScene(route, routeStack) {
+        return Navigator.SceneConfigs.PushFromRight;
+    }
+
+    _handleScroll(offset) {
+       if (offset > 4 && this.state.showImage== true) {
+           this.setState({showImage:false});
+       }
+       else 
+       if (offset < -1 && this.state.showImage == false) {
+           this.setState({showImage:true});
+       }
+       
+    }
+
+    _getHeader() {
+        // BatsFix. This should probably be a control...
+        if (this.state.showImage) {
+            return (
+                <Image source={require('../media/forged1.png') } style={{ height: 190, width: 380 }}/>
+            );
+        }
+        return null;
     }
 
     render() {
         return (
-            <ScrollView style={{backgroundColor:'white'}}>
-
-                <View style={{ flex: 1 }}>
-                    <View style={{ justifyContent: "flex-end" }}>
-                        <Image source={require('../media/forged1.png') } style={{ height: 100, width: 377 }}/>
-                    </View>
-
-                    {/* Tabs */}
-                    <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:42}}>
-
-                      <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }}>
-                          <TouchableOpacity  style={{flexDirection: "row",alignItems:'center'}}>
-                              <Text style={{ fontSize: 14, color: "#9B9B9B" }}> INFO</Text>
-                          </TouchableOpacity>
-                      </View>
-                      <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }}>
-                          <TouchableOpacity style={{alignItems:'center'}}>
-                              <Text style={{ fontSize: 14, color: "#9B9B9B"}}>PRODUCTS</Text>
-                          </TouchableOpacity>
-                      </View>
-                      <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }}>
-                          <TouchableOpacity >
-                              <Text style={{ fontSize: 14, color: "#9B9B9B" }}> LOCATIONS </Text>
-                          </TouchableOpacity>
-                      </View>
-                    </View>
-
-                    <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:-40}}/>
-
-
-                    <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
-                        <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name} - Issaquah, WA</Text>
-                        <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
-                            <StarRating
-                                disabled={true}
-                                maxStars={5}
-                                starSize={30}
-                                starColor={'red'}
-                                rating={this.state.rating}
-                                selectedStar={(rating) => this._onRating(rating) }
-                                />
-                            <Text style={{ fontSize: 19 }}> ({this.state.ratingCount}) </Text>
-                        </View>
-                    </View>
-
-                    <View style={{ marginHorizontal: 10 }}>
-                        <View style={{ flex: 1, height: 85, justifyContent: 'center' }}>
-                            <Text>{this.state.description}</Text>
-                        </View>
-                    </View>
-                    <View style={{ marginHorizontal: 10 }}>
-                        <View style={{ height: 40, justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Menu</Text>
-                        </View>
-                        <ProductList productList={this.state.products} goProduct={(id)=>this._goProduct(id)}/>
-                    </View>
-                    <ReviewList/>
-                </View>
-            </ScrollView>
+        <ScrollView style={{flex:1}} onScroll={(e) => this._handleScroll(e.nativeEvent.contentOffset.y)}>
+            {this._getHeader()}
+            <HerbyFrameBar entries={['Info','Menu','Reviews',]} setFrame={(t)=>this._setFrame(t)}/>
+            <Navigator
+                style={{height:500,backgroundColor:'transparent',justifyContent: 'flex-start'}}
+                ref="navigator"
+                configureScene={this.configureScene}
+                renderScene={this.renderScene}
+                initialRoute = {ProducerFrames[InfoFrameId]}
+                initialRouteStack = {ProducerFrames}
+                producer={this.props.producer}
+                goProduct={(t)=>this.props.GetProductAction(t)}
+            />
+        </ScrollView>
         );
     }
 }
