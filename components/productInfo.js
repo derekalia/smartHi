@@ -7,18 +7,18 @@ import {connect} from 'react-redux';
 import StarRating from 'react-native-star-rating';
 
 //get internal components
+import ProducerItem from './producerItem.js';
 
 class ProductInfo extends Component {
     constructor(props) {
         super(props);
-        this.state = this.props.product;
     }
     render() {
         return (
             <ScrollView>
                 {/* Overall rating */}
                 <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
-                    <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
+                    <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.props.product.name}</Text>
                 </View>
                 <View style={{ marginTop: 5, marginHorizontal: 10,flexDirection: "row" }}>
                     <View style={{flex:1.2,alignItems: 'flex-start', flexDirection: "row",marginTop:8}}>
@@ -30,7 +30,7 @@ class ProductInfo extends Component {
                             rating={this.props.product.rating}
                             selectedStar={(rating) => this._onRating(rating) }
                             />
-                        <Text style={{ fontSize: 20,marginTop:1 }}> ({this.state.ratingCount}) </Text>
+                        <Text style={{ fontSize: 20,marginTop:1 }}> ({this.props.product.ratingCount}) </Text>
                     </View>
                     <View style={{flex:1,flexDirection: "row",justifyContent:'flex-end' }}>
                       <TouchableOpacity style={Styles.tagCategory}>
@@ -45,10 +45,11 @@ class ProductInfo extends Component {
                 <View style={{ marginHorizontal: 10 }}>
                     <View style={{ flex: 1,justifyContent: 'center',marginTop:10,marginBottom:5 }}>
                         <Text style={{fontSize:16}}>
-                            {this.state.description}
+                            {this.props.product.description}
                        </Text>
                     </View>
                 </View>
+                <ProducerItem producer={this.props.product.producer} goProducer={(t) => this.props.goProducer(t)}/>
                 {/*Rating breakdown*/}
                 <View style={{ marginHorizontal: 10,marginTop: 15  }}>
                     <View style={{ height: 40, justifyContent: 'center' }}>
@@ -73,7 +74,7 @@ class ProductInfo extends Component {
                                     maxStars={5}
                                     starSize={30}
                                     starColor={'#D0021B'}
-                                    rating={this.state.quality}
+                                    rating={this.props.product.quality}
                                     selectedStar={(rating) => this._onQuality(rating)}
                                     />
                             </View>
@@ -83,7 +84,7 @@ class ProductInfo extends Component {
                                     maxStars={5}
                                     starSize={30}
                                     starColor={'#D0021B'}
-                                    rating={this.state.flavor}
+                                    rating={this.props.product.flavor}
                                     selectedStar={(rating) => this._onFlavor(rating) }
                                     />
                             </View>
@@ -93,7 +94,7 @@ class ProductInfo extends Component {
                                     maxStars={5}
                                     starSize={30}
                                     starColor={'#D0021B'}
-                                    rating={this.state.potency}
+                                    rating={this.props.product.potency}
                                     selectedStar={(rating) => this._onPotency(rating) }
                                     />
                             </View>
@@ -111,9 +112,9 @@ class ProductInfo extends Component {
                           <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>TOTAL</Text>
                         </View>
                         <View style={{flex:1,flexDirection:'row',justifyContent: 'space-between',height:30}}>
-                          <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.thca}%</Text>
-                          <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.thc}%</Text>
-                          <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.cbd}%</Text>
+                          <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.props.product.thca}%</Text>
+                          <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.props.product.thc}%</Text>
+                          <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.props.product.cbd}%</Text>
                           <Text style={{width:60,textAlign:'center',fontSize: 16}}>56%</Text>
                         </View>
                     </View>
@@ -126,23 +127,23 @@ class ProductInfo extends Component {
                     <View style={{ flexDirection: "row" }}>
                         <View style={{ flex: 1.4 }}>
                             <TouchableOpacity style={Styles.tagEffect}>
-                                <Text style={Styles.tagTextEffect}>{this.state.effect[0].name}</Text>
+                                <Text style={Styles.tagTextEffect}>{this.props.product.effect[0].name}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={Styles.tagEffect}>
-                                <Text style={Styles.tagTextEffect}>{this.state.effect[1].name}</Text>
+                                <Text style={Styles.tagTextEffect}>{this.props.product.effect[1].name}</Text>
                             </TouchableOpacity>
                             <TouchableOpacity style={Styles.tagEffect}>
-                                <Text style={Styles.tagTextEffect}>{this.state.effect[2].name}</Text>
+                                <Text style={Styles.tagTextEffect}>{this.props.product.effect[2].name}</Text>
                             </TouchableOpacity>
                         </View>
                         <View style={{ flex: 3 }}>
-                            <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: this.state.effect[0].strength }]}>
+                            <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: this.props.product.effect[0].strength }]}>
                                 <Text style={Styles.tagTextEffect}> </Text>
                             </View>
-                            <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: this.state.effect[1].strength }]}>
+                            <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: this.props.product.effect[1].strength }]}>
                                 <Text style={Styles.tagTextEffect}> </Text>
                             </View>
-                            <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: this.state.effect[2].strength }]}>
+                            <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: this.props.product.effect[2].strength }]}>
                                 <Text style={Styles.tagTextEffect}> </Text>
                             </View>
                         </View>
@@ -155,13 +156,13 @@ class ProductInfo extends Component {
                     </View>
                     <View style={{ flexDirection: "row" }}>
                         <TouchableOpacity style={Styles.tagActivity}>
-                            <Text style={Styles.tagTextActivity}>{this.state.activity[0]}</Text>
+                            <Text style={Styles.tagTextActivity}>{this.props.product.activity[0]}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={Styles.tagActivity}>
-                            <Text style={Styles.tagTextActivity}>{this.state.activity[1]}</Text>
+                            <Text style={Styles.tagTextActivity}>{this.props.product.activity[1]}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={Styles.tagActivity}>
-                            <Text style={Styles.tagTextActivity}>{this.state.activity[2]}</Text>
+                            <Text style={Styles.tagTextActivity}>{this.props.product.activity[2]}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -172,13 +173,13 @@ class ProductInfo extends Component {
                     </View>
                     <View style={{ flexDirection: "row" }}>
                         <TouchableOpacity style={Styles.tagSymptom}>
-                            <Text style={Styles.tagTextSymptom}>{this.state.symptom[0]}</Text>
+                            <Text style={Styles.tagTextSymptom}>{this.props.product.symptom[0]}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={Styles.tagSymptom}>
-                            <Text style={Styles.tagTextSymptom}>{this.state.symptom[1]}</Text>
+                            <Text style={Styles.tagTextSymptom}>{this.props.product.symptom[1]}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={Styles.tagSymptom}>
-                            <Text style={Styles.tagTextSymptom}>{this.state.symptom[2]}</Text>
+                            <Text style={Styles.tagTextSymptom}>{this.props.product.symptom[2]}</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

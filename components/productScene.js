@@ -78,14 +78,6 @@ class ProductScene extends Component {
         this.setState({frameId: frameId});
     }
 
-    _goRetailer(retailerId: string) {
-        this.props.GetRetailerAction(retailerId);
-    }
-
-    _goProducer(producerId: string) {
-        this.props.GetProducerAction(producerId);
-    }
-
     renderScene(route, navigator) {
         // BatsFix.
         // to pass a prop to the component, that prop
@@ -94,7 +86,8 @@ class ProductScene extends Component {
                 <route.component 
                     product={navigator.props.product} 
                     goProduct={navigator.props.goProduct} 
-                    goRetailer={navigator.props.goRetailer}/>
+                    goRetailer={navigator.props.goRetailer}
+                    goProducer={navigator.props.goProducer}/>
         );
     }
 
@@ -139,6 +132,7 @@ class ProductScene extends Component {
                 product={this.props.product}
                 goProduct={(t)=>this.props.GetProductAction(t)}
                 goRetailer={(t)=>this.props.GetRetailerAction(t)}
+                goProducer={(t)=>this.props.GetProducerAction(t)}
             />
         </ScrollView>
         );
