@@ -9,64 +9,93 @@ import {connect} from 'react-redux';
 import StarRating from 'react-native-star-rating';
 //get internal components
 import {GetProductAction,ShowMapAction} from '../actions';
+import {HerbyFrameBar} from '../common/controls.js';
+
 import ReviewList         from './reviewList.js';
 import ProductList        from './productList.js';
+import RetailerInfo       from './retailerInfo.js';
 
-import {ProductFrameId, MapFrameId, UserFrameId, RetailerFrameId, }   from '../common/const.js';
-import {SwitchFrameAction}   from '../actions';
+class RetailerMenu extends Component {
+    render() {
+        return (
+        <View style={{ marginHorizontal: 10 }}>
+            <View style={{ height: 40, justifyContent: 'center' }}>
+                <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Menu</Text>
+            </View>
+            <ProductList productList={this.props.retailer.products} goProduct={(id)=>this.props.goProduct(id)}/>
+        </View>
+        );
+    };
+}
+class RetailerReview extends Component {
+    render() {
+        return (
+            <ReviewList/>
+        );
+    }
+}
 
+const InfoFrameId    = 0;
+const MenuFrameId    = 1;
+const ReviewFrameId  = 2;
+const SocialFrameId  = 3;
+
+const RetailerFrames = [
+    {title: "info",     component: RetailerInfo,     index: InfoFrameId},
+    {title: "menu",     component: RetailerMenu,     index: MenuFrameId},
+    {title: "review",   component: RetailerReview,   index: SocialFrameId},
+];
 
 class RetailerScene extends Component {
-
     constructor(props) {
         super(props);
-        // these should come from the app state.
-        this.state = this.props.retailer;
-
-        this.state = {frameId:this.props.frameId};
-        this.ProductFrameId = Styles.category;
-        this.MapFrameId = Styles.category;
-        this.UserFrameId = Styles.category;
-        this.RetailerFrameId = Styles.category;
-        this[this.props.frameId] = Styles.category2;
+        this.state={showImage:true};
     }
-
-    _frameStyle(frameId) {
-        return this[frameId];
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (this.state.frameId != nextProps.frameId) {
-            this._setFrame(frameId);
-        }
-    }
-
-
 
     _setFrame(frameId) {
-        //
-        // Change previous frameId to normal style
-        //
-        this[this.state.frameId] = Styles.category;
-
-        //
-        // Set new frameId to highlight
-        //
-        this[frameId] = Styles.category2;
-
+        this.refs.navigator.jumpTo(RetailerFrames[frameId]);
         this.setState({frameId: frameId});
-        this.props.SwitchFrameAction(frameId);
     }
 
-     _onChange(event) {
-        this.props.setSearchTerm(event.nativeEvent.text);
-
+    _goProduct(product: string) {
+        this.props.GetProductAction(producerId);
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState(nextProps.retailer);
+    renderScene(route, navigator) {
+        // BatsFix.
+        // to pass a prop to the component, that prop
+        // first needs to be passed to the navigator object.
+        return (
+                <route.component 
+                    retailer={navigator.props.retailer} 
+                    goProduct={navigator.props.goProduct}/>
+        );
     }
 
+    configureScene(route, routeStack) {
+        return Navigator.SceneConfigs.PushFromRight;
+    }
+
+    _handleScroll(offset) {
+       if (offset > 4 && this.state.showImage== true) {
+           this.setState({showImage:false});
+       }
+       else 
+       if (offset < -1 && this.state.showImage == false) {
+           this.setState({showImage:true});
+       }
+       
+    }
+
+    _getHeader() {
+        // BatsFix. This should probably be a control...
+        if (this.state.showImage) {
+            return (
+                <Image source={require('../media/ikes1.png') } style={{ height: 190, width: 380 }}/>
+            );
+        }
+        return null;
+    }
 
     _goProduct(productId) {
         //
@@ -85,141 +114,21 @@ class RetailerScene extends Component {
     //
     render() {
         return (
-            <ScrollView style={{backgroundColor:'white'}}>
-                <View style={{ flex: 1 }}>
-                    <View style={{ justifyContent: "flex-end"}}>
-                        <Image source={require('../media/ikes1.png') } style={{ height: 140, width: 380 }}/>
-                    </View>
-
-                    <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:38}}>
-
-                      <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }}>
-                          <TouchableOpacity  style={{flexDirection: "row",alignItems:'center'}}>
-                              <Text style={{ fontSize: 14, color: "#9B9B9B" }}> INFO</Text>
-                          </TouchableOpacity>
-                      </View>
-                      <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }}>
-                          <TouchableOpacity style={{alignItems:'center'}}>
-                              <Text style={{ fontSize: 14, color: "#9B9B9B"}}>MENU</Text>
-                          </TouchableOpacity>
-                      </View>
-                      <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }}>
-                          <TouchableOpacity >
-                              <Text style={{ fontSize: 14, color: "#9B9B9B" }}> SOCIAL </Text>
-                          </TouchableOpacity>
-                      </View>
-                    </View>
-
-                    <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:-40,shadowColor:'black',shadowRadius:.1,shadowOpacity:.2,shadowOffset: {height: -1,width: 0}}}/>
-
-                  <View style={{}}>
-                                 <View style={{flexDirection: "row",marginTop:10,marginHorizontal:10}}>
-                                    <View style={[{ flex: 5,}]}>
-                                      <View style={{height: 34,borderWidth:3,borderColor:'#ECECEC',borderRadius:6,backgroundColor: '#ECECEC',}}>
-                                        <TextInput style={{marginHorizontal:10,
-                                          height:28,
-                                          fontSize: 20,
-                                          backgroundColor: '#ECECEC',}}
-                                            autoCapitalize  = "none"
-                                            autoCorrect     = {false}
-                                            placeholder     = "Search"
-                                            returnKeyType   = "next"
-
-                                            clearButtonMode = 'always'
-                                            />
-                                            </View>
-                                    </View>
-                                    <View style={{flex:.1}}></View>
-                                    <View style={[{ flex: .7,justifyContent:'center',height: 34,}]}>
-                                        <TouchableOpacity style={{}} onPress={this.props.startSearch}>
-                                            <Image style={{ height: 33, width: 33,alignSelf:'center', }} source={require("../media/plusButton11.png") }/>
-                                        </TouchableOpacity>
-                                    </View>
-                                </View>
-
-
-                                <View style={{flex:1,flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:40}}>
-                                  <ScrollView horizontal='true'>
-                                  <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center',marginHorizontal:20 }}>
-                                      <TouchableOpacity  style={{flexDirection: "row",alignItems:'center'}}>
-                                          <Text style={{ fontSize: 14, color: "#9B9B9B" }}> ALL</Text>
-                                      </TouchableOpacity>
-                                  </View>
-                                  <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center',marginHorizontal:20 }}>
-                                      <TouchableOpacity style={{alignItems:'center'}}>
-                                          <Text style={{ fontSize: 14, color: "#9B9B9B"}}>FLOWER</Text>
-                                      </TouchableOpacity>
-                                  </View>
-                                  <View style={{ flex: 1, alignItems: 'center',flexDirection: "row",justifyContent:'center',marginHorizontal:30 }}>
-                                      <TouchableOpacity >
-                                          <Text style={{ fontSize: 14, color: "#9B9B9B" }}> CONCENTRATE </Text>
-                                      </TouchableOpacity>
-                                  </View>
-                                  <View style={{ flex: 1, alignItems: 'center',justifyContent:'center',marginHorizontal:20}}>
-                                      <TouchableOpacity >
-                                          <Text style={{ fontSize: 14, color: "#9B9B9B" }}> INFUSED </Text>
-                                      </TouchableOpacity>
-                                  </View>
-                                  <View style={{ flex: 1, alignItems: 'center',justifyContent:'center',marginHorizontal:20 }}>
-                                      <TouchableOpacity >
-                                          <Text style={{ fontSize: 14, color: "#9B9B9B" }}> EDIBLE </Text>
-                                      </TouchableOpacity>
-                                  </View>
-
-                                </ScrollView>
-
-                                  </View>
-
-<View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:-40,shadowColor:'black',shadowRadius:.1,shadowOpacity:.2,shadowOffset: {height: -1,width: 0}}}/>
-</View>
-
-                    {/*Rating and link to map*/}
-                    <View style={{ marginTop: 10, marginHorizontal: 10 }}>
-                        <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
-                        <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
-
-                          <View style={{flex:1.5,alignItems:'flex-start',flexDirection:'row',marginTop:1}}>
-                              <StarRating
-                                  disabled={true}
-                                  maxStars={5}
-                                  starSize={28}
-                                  starColor={'red'}
-                                  rating={this.state.rating}
-                                  selectedStar={(rating) => this._onRating(rating) }
-                                  />
-                              <Text style={{ fontSize: 18,marginTop:2 }}> ({this.state.ratingCount}) </Text>
-                            </View>
-
-                            <View style={{flex:1,alignItems:'flex-end',justifyContent:'center' }}>
-                               <TouchableOpacity style={{ backgroundColor: "#4A90E2",
-                                                          borderRadius: 8,
-                                                          borderWidth: 4,
-                                                          borderColor: '#4A90E2',
-                                                          alignSelf:'flex-end'
-                                                          }}
-                                                          onPress={()=>this._showMap()}>
-                                <Text style={{ fontSize: 18, color: "white"}}> Show Map </Text>
-                            </TouchableOpacity>
-                            </View>
-
-                        </View>
-                    </View>
-                    {/*Description*/}
-                    <View style={{ marginHorizontal: 10 }}>
-                        <View style={{ flex: 1, height: 85, justifyContent: 'center' }}>
-                            <Text>{this.state.description}</Text>
-                        </View>
-                    </View>
-                    {/*Products*/}
-                    <View style={{ marginHorizontal: 10 }}>
-                        <View style={{ height: 40, justifyContent: 'center' }}>
-                            <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Menu</Text>
-                        </View>
-                        <ProductList productList={this.state.products} goProduct={(id)=>this._goProduct(id)}/>
-                    </View>
-                </View>
-                <ReviewList/>
-            </ScrollView>
+        <ScrollView style={{flex:1}} onScroll={(e) => this._handleScroll(e.nativeEvent.contentOffset.y)}>
+            {this._getHeader()}
+            <HerbyFrameBar entries={['Info','Menu','Reviews',]} setFrame={(t)=>this._setFrame(t)}/>
+            <Navigator
+                style={{height:500,backgroundColor:'transparent',justifyContent: 'flex-start'}}
+                ref="navigator"
+                configureScene={this.configureScene}
+                renderScene={this.renderScene}
+                initialRoute = {RetailerFrames[InfoFrameId]}
+                initialRouteStack = {RetailerFrames}
+                retailer={this.props.retailer}
+                goProduct={(t)=>this.props.GetProductAction(t)}
+                showMap = {()=>this._showMap()}
+            />
+        </ScrollView>
         );
     }
 }
@@ -234,12 +143,6 @@ function mapStateToProps(state) {
 // In this example, there is now prop called GetProductAction.
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,ShowMapAction }, dispatch); }
-
-//
-// Connect SwitchFrameAction to props
-//
-function mapActionToProps(dispatch) { return bindActionCreators({ SwitchFrameAction }, dispatch); }
-
 
 module.exports = connect(mapStateToProps, mapActionToProps)(RetailerScene);
 
