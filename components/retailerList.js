@@ -20,6 +20,21 @@ class RetailerList extends Component {
         );
     }
 
+    _renderRetailers() {
+        // 
+        //BatsFix. List view for some reason does not show on first render...
+        //so using explicit render
+        var retailers=[];
+        for (var i=0; i < this.props.retailers.length; i++) {
+             var retailerId = this.props.retailers[i].id;
+             var retailer   = this.props.retailers[i];
+             retailers.push(
+                <RetailerItem key={retailerId} goRetailer={(retailerId) => this.props.goRetailer(retailerId)} retailer={retailer}/>
+             );
+        }
+        return retailers;
+    }
+    /*
     _renderRetailer(rowData) {
         return (
             <RetailerItem goRetailer={(retailerId) => this.props.goRetailer(retailerId)} retailer={rowData}/>
@@ -27,8 +42,9 @@ class RetailerList extends Component {
     }
 
     _renderRetailers() {
-        if (this.props.retailers.size !== 0) {
-            var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => (r1 != r2), });
+        //BatsFix. List view for some reason does not show on first render...
+        if (this.props.retailers.length !== 0) {
+            var ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => (r1!=r2), });
             return (
                 <ListView dataSource = {ds.cloneWithRows(this.props.retailers) }
                     enableEmptySections = {true}
@@ -38,6 +54,7 @@ class RetailerList extends Component {
         }
         return null;
     }
+    */
 }
 
 module.exports = RetailerList;

@@ -39,7 +39,7 @@ class ProductItem extends Component {
         var iS = 'Rosin2.png';
         return (
                 <TouchableHighlight onPress={() => this.props.goProduct(this.state.id)} underlayColor={'white'}>
-                    <View style={{flex: 1, flexDirection: 'row', margin: 5,borderWidth: 1, borderColor: 'black', borderRadius: bR,marginHorizontal:10}}>
+                    <View style={{flex: 1, flexDirection: 'row', margin: 5,borderWidth:1,borderColor:'#ECECEC', borderRadius: bR,marginHorizontal:10}}>
                           <View style={{  width: iW,height: iH,borderRadius:10,}}>
                             <Image style={{  width: iW,height: iH, marginRight: bM}} source={require('../media/Rosin2.png')}/>
                             </View>

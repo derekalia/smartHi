@@ -4,6 +4,67 @@ import {Animated, Dimensions, StyleSheet, Text, View, Slider, Image, TextInput, 
 //
 // BatsFix. All of these controls need to be styled correctly to fit different screen size/resolutions.
 //
+export class HerbyFrameBar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {frameId: 0};
+    }
+
+    _setFrame(frameId) {
+        this.setState({frameId:frameId});
+        this.props.setFrame(frameId);
+    }
+
+    render() {
+        var menuItems = [];
+        for (var i=0; i < this.props.entries.length; i++) {
+            menuItems.push(this._getMenu(i));
+        }
+        return (
+           <View style={{flexDirection: "row",
+                         justifyContent:'space-around',
+                         alignItems:'center',
+                         height:40,
+                         borderBottomWidth: 5,
+                         borderColor:'#ECECEC',
+                        }}>
+            {menuItems} 
+          </View>
+        );
+    }
+
+    _getMenu(index) {
+        var styles={
+            normal: {
+                backgroundColor: 'white',
+                borderBottomWidth: 0,
+            },
+            normalText: {
+                color:"#9B9B9B",
+            },
+            selected: {
+                backgroundColor: 'white',
+                borderBottomWidth: 1,
+                borderColor:"#468EE5",
+            },
+            selectedText: {
+                color:"#468EE5",
+            },
+        }
+
+        var entryStyle = this.state.frameId == index? styles.selected: styles.normal;
+        var entryTextStyle  = this.state.frameId == index? styles.selectedText: styles.normalText;
+        var entryText = this.props.entries[index];
+        return (
+            <TouchableOpacity 
+                key={index} 
+                style={[entryStyle ,{height: 23}]} 
+                onPress={()=>this._setFrame(index)}>
+                <Text style={entryTextStyle}>{entryText}</Text>
+           </TouchableOpacity>
+        );
+    }
+}
 
 export class HerbyButton extends Component {
     constructor(props) {

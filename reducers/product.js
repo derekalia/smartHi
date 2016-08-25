@@ -18,6 +18,7 @@ const initialState = {
     cbd:  50,
     thca: 50,
     retailers: [],
+    related: [],
     producer: {},
     symptom:['state','state','state'],
     activity:['state','state','state'],

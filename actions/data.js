@@ -311,6 +311,19 @@ const TestProducts = [
     effect:[{name:'sleep',strength:90},{name:'run',strength:80},{name:'stamina',strength:60}]},
 ];
 
+function GetRelatedProducts(id){
+    var products = [];
+    var count = 0;
+    for (var j=0; j < TestProducts.length && count < 8; j++) {
+       if (TestProducts[j].id != id) {
+           products.push(TestProducts[j]);
+           count++;
+       }
+    }
+    return products;
+}
+
+
 function GetRetailerItems(rid){
     var retailers = [];
     for (var i=0; i < rid.length; i++) {
@@ -384,6 +397,7 @@ export function GetProduct(id) {
             product = TestProducts[i];
             product.retailers = GetRetailerItems(product.rid);
             product.producer  = GetProducerItem(product.pid);
+            product.related   = GetRelatedProducts(product.pid);
             return product;
         }
     }
