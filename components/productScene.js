@@ -217,9 +217,9 @@ class ProductRetailer extends Component {
     }
     render() {
         return (
-            <View>
+            <ScrollView>
                 <RetailerList retailers={this.props.product.retailers} goRetailer={(id) => this._goRetailer(id)}/>
-            </View>
+            </ScrollView>
         );
     }
 }
@@ -247,7 +247,7 @@ const ProductFrames = [
 class ProductScene extends Component {
     constructor(props) {
         super(props);
-        this.state={imageHeight:190};
+        this.state={showImage:true};
     }
 
     _setFrame(frameId) {
@@ -270,6 +270,7 @@ class ProductScene extends Component {
         return (
                 <route.component 
                     frameId = {navigator.props.frameId}
+                    handleScroll={navigator.props.handleScroll}
                     product={navigator.props.product} 
                     goProduct={navigator.props.goProduct} 
                     goRetailer={navigator.props.goRetailer}/>
@@ -279,23 +280,35 @@ class ProductScene extends Component {
     configureScene(route, routeStack) {
         return Navigator.SceneConfigs.PushFromRight;
     }
-    _handleScroll() {
-        if (this.state.imageHeight > 100) {
-            this.setState({imageHeight:30});
+
+    _handleScroll(offset) {
+       if (offset > 4 && this.state.showImage== true) {
+           this.setState({showImage:false});
+       }
+       else 
+       if (offset < -1 && this.state.showImage == false) {
+           this.setState({showImage:true});
+       }
+       
+    }
+
+    _getHeader() {
+        if (this.state.showImage) {
+            return (
+                <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380 }}/>
+            );
         }
-        else {
-            this.setState({imageHeight:190});
-        }
+        return null;
     }
 
     // BatsFix. There should be no hardcode items in render!
     render() {
         return (
-        <View style={{flex:1,backgroundColor:'white',}}>
-            <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380 }}/>
+        <ScrollView style={{flex:1}} onScroll={(e) => this._handleScroll(e.nativeEvent.contentOffset.y)}>
+            {this._getHeader()}
             <HerbyFrameBar entries={['Info','Reviews','Location','Related']} setFrame={(t)=>this._setFrame(t)}/>
             <Navigator
-                style={{backgroundColor:'transparent',justifyContent: 'flex-start'}}
+                style={{height:500,backgroundColor:'transparent',justifyContent: 'flex-start'}}
                 ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
@@ -306,7 +319,7 @@ class ProductScene extends Component {
                 goRetailer={(t)=>this.props.GetRetailerAction(t)}
                 frameId = {this.state.frameId}
             />
-        </View>
+        </ScrollView>
         );
     }
 }
