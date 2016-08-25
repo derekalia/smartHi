@@ -68,6 +68,7 @@ class RetailerScene extends Component {
         return (
                 <route.component 
                     retailer={navigator.props.retailer} 
+                    showMap={navigator.props.showMap}
                     goProduct={navigator.props.goProduct}/>
         );
     }
