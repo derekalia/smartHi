@@ -1,6 +1,40 @@
 import React, { Component } from 'react';
 import {Animated, Dimensions, StyleSheet, Text, View, Slider, Image, TextInput, TouchableHighlight, TouchableOpacity,} from 'react-native'
 
+export class HerbyBar extends Component {
+    constructor(props) {
+        super(props);
+    }
+    _getHeart() {
+        if (this.props.onLike != null) {
+            return (
+            <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'flex-end' }}>
+                <TouchableOpacity onPress={this.props.onLike()}>
+                    <Image  source={require("../media/emptyHeart11.png") } style={{ width: 21+3, height: 19+3 }} />
+                </TouchableOpacity>
+            </View>
+            );
+        }
+        return null; 
+    }
+    render() {
+        return (
+        <View style={{height:60,backgroundColor:'#F9F9F9',borderBottomWidth:1,borderColor:'#B2B2B2',flexDirection:'row',alignItems:'center'}}>
+            <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'flex-start' }}>
+                <TouchableOpacity onPress={()=>this.props.navigator.jumpBack()} style={{flexDirection: "row",alignItems:'center'}}>
+                    <Image  source={require("../media/BackArrow.png") } style={{ width: 12, height: 19 }} />
+                    <Text style={{ fontSize: 18, color: "#007AFF" }}> Back</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }}>
+                    <Text style={{ fontSize: 18, fontWeight:'bold',alignSelf:'center' }}>{this.props.name}</Text>
+            </View>
+            {this._getHeart()}
+        </View>
+        );
+    }
+}
+
 //
 // BatsFix. All of these controls need to be styled correctly to fit different screen size/resolutions.
 //

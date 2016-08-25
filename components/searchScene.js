@@ -18,7 +18,6 @@ import RetailerFrame         from './retailerFrame.js';
 import MapFrame              from './mapFrame.js';
 import UserFrame             from './userFrame.js';
 
-import HerbyBar              from './herbyBar.js';
 import {StartSearchAction,GetProductAction}   from '../actions';
 
 import {ProductFrameId, MapFrameId, UserFrameId, RetailerFrameId, }   from '../common/const.js';

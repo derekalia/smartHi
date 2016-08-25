@@ -16,7 +16,6 @@ import CameraScene        from './cameraScene.js';
 import ProductInfoScene   from './productInfoScene.js';
 import RateProductScene   from './rateProductScene.js';
 import RateStoreScene     from './rateStoreScene.js';
-import HerbyBar           from './herbyBar.js';
 
 const CameraIndex       = 0;
 const ProductInfoIndex  = 1;
@@ -68,7 +67,6 @@ class ReviewTab extends Component {
         else {
             return (
                 <View style={{flex:1}}>
-                    <HerbyBar navigator={navigator}/>
                     <route.component tabId={ReviewTabId}/>
                 </View>
             );

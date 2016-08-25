@@ -16,8 +16,6 @@ import ProductScene   from './productScene.js';
 import RetailerScene  from './retailerScene.js';
 import ProducerScene  from './producerScene.js';
 
-// import navigation route mapper
-import HerbyBar   from './herbyBar.js';
 
 const SearchIndex     = 0;
 const ProductIndex    = 1;
@@ -61,7 +59,6 @@ class SearchTab extends Component {
         else {
             return (
                 <View style={{flex:1}}>
-                    <HerbyBar navigator={navigator}/>
                     <route.component tabId={SearchTabId}/>
                 </View>
             );

@@ -13,7 +13,6 @@ import {connect} from 'react-redux';
 import {ProfileTabId,ProfileSceneId,SettingsSceneId,LicenseeSceneId,LicenseeStoreSceneId,LicenseeProductSceneId,} from '../common/const.js';
 
 // Import internal modules
-import HerbyBar             from './herbyBar.js';
 import ProfileScene         from './profileScene.js';
 import SettingsScene        from './settingsScene.js';
 import LicenseeScene        from './licenseeScene.js';
@@ -71,7 +70,6 @@ class ProfileTab extends Component {
         else {
             return (
                 <View style={{flex:1}}>
-                    <HerbyBar navigator={navigator}/>
                     <route.component tabId={ProfileTabId}/>
                 </View>
             );

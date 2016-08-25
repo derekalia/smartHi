@@ -18,7 +18,6 @@ import ProductScene  from './productScene.js';
 import RetailerScene from './retailerScene.js';
 import ProducerScene from './producerScene.js';
 import ActivityScene from './activityScene.js';
-import HerbyBar      from './herbyBar.js';
 
 const HomeIndex     = 0;
 const ProductIndex  = 1;
@@ -62,19 +61,11 @@ class HomeTab extends Component {
     }
 
     renderScene(route, navigator) {
-        if (route.index == HomeSceneId) {
-            return (
-                <route.component tabId={HomeTabId}/>
-            );
-        }
-        else {
-            return (
-                <View style={{flex:1}}>
-                    <HerbyBar navigator={navigator}/>
-                    <route.component tabId={HomeTabId}/>
-                </View>
-            );
-        }
+        return (
+            <View style={{flex:1}}>
+                <route.component tabId={HomeTabId} navigator={navigator}/>
+            </View>
+        );
     }
 
     configureScene(route, routeStack) {

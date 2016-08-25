@@ -12,7 +12,7 @@ import StarRating from 'react-native-star-rating';
 //get internal components
 // import Styles from './styles.js';
 import {GetProductAction,GetRetailerAction,GetProducerAction,} from '../actions';
-import {HerbyFrameBar} from '../common/controls.js';
+import {HerbyBar,HerbyFrameBar} from '../common/controls.js';
 
 import ReviewList     from './reviewList.js';
 import RetailerList   from './retailerList.js';
@@ -106,11 +106,27 @@ class ProductScene extends Component {
        
     }
 
+    _onLike() {
+        // BatsFix. Implement like action for this product.
+        console.log("Derek likes this product");
+    }
+
+                //<HerbyBar name={this.props.product.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
     _getHeader() {
         // BatsFix. This should probably be a control...
         if (this.state.showImage) {
             return (
-                <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380 }}/>
+                <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center' }}>
+                    <Text style={{alignSelf:'center',color:'white',fontSize:20,}}>{this.props.product.name}</Text>
+                    <TouchableOpacity style={{alignSelf:'flex-end',marginRight:30}} onPress={()=>this._onLike()}>
+                        <Image  source={require("../media/emptyHeart11.png") } style={{ width: 21+3, height: 19+3 }} />
+                    </TouchableOpacity>
+                </Image>
+            );
+        }
+        else {
+            return (
+                <HerbyBar name={this.props.product.name} navigator={this.props.navigator} />
             );
         }
         return null;
