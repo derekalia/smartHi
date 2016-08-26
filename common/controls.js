@@ -15,7 +15,7 @@ export class HerbyBar extends Component {
             </View>
             );
         }
-        return null; 
+        return null;
     }
     render() {
         return (
@@ -55,14 +55,11 @@ export class HerbyFrameBar extends Component {
             menuItems.push(this._getMenu(i));
         }
         return (
-           <View style={{flexDirection: "row",
-                         justifyContent:'space-around',
-                         alignItems:'center',
-                         height:40,
-                         borderBottomWidth: 5,
-                         borderColor:'#ECECEC',
-                        }}>
-            {menuItems} 
+          <View>
+          <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:42}}>
+            {menuItems}
+          </View>
+          <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
           </View>
         );
     }
@@ -74,6 +71,7 @@ export class HerbyFrameBar extends Component {
                 borderBottomWidth: 0,
             },
             normalText: {
+              marginBottom:16,
                 color:"#9B9B9B",
             },
             selected: {
@@ -82,6 +80,7 @@ export class HerbyFrameBar extends Component {
                 borderColor:"#468EE5",
             },
             selectedText: {
+              marginBottom:16,
                 color:"#468EE5",
             },
         }
@@ -90,12 +89,14 @@ export class HerbyFrameBar extends Component {
         var entryTextStyle  = this.state.frameId == index? styles.selectedText: styles.normalText;
         var entryText = this.props.entries[index];
         return (
-            <TouchableOpacity 
-                key={index} 
-                style={[entryStyle ,{height: 23}]} 
+
+            <TouchableOpacity
+                key={index}
+                style={[entryStyle ,{height: 23,flexDirection: "row",alignItems:'center',flex: 1,alignSelf: 'flex-end',justifyContent:'center'}]}
                 onPress={()=>this._setFrame(index)}>
                 <Text style={entryTextStyle}>{entryText}</Text>
            </TouchableOpacity>
+
         );
     }
 }
@@ -158,7 +159,7 @@ export class HerbyInput extends Component {
             borderBottomWidth:1,
             borderBottomColor:'#C8C8CC'}}>
             {this._renderName()}
-          <TextInput style={{width:320,alignItems:'stretch'}} placeholder = {this.props.value}/> 
+          <TextInput style={{width:320,alignItems:'stretch'}} placeholder = {this.props.value}/>
         </View>
         );
     }
@@ -200,7 +201,7 @@ export class HerbyAlert extends Component {
      _dismiss() {
         Animated.timing(this.state.anim,{toValue:0,duration:1000}).start();
     }
-  
+
     render() {
         const styleSlideDown = {
             transform: [
