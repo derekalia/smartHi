@@ -4,16 +4,38 @@ import {Animated, Dimensions, StyleSheet, Text, View, Slider, Image, TextInput, 
 export class HerbyBar extends Component {
     constructor(props) {
         super(props);
+        var showFullHeart = false;
+        if (this.props.showFullHeart != null && this.props.showFullHeart == true) {
+            showFullHeart = true;
+        }
+        this.state = {showFullHeart:showFullHeart};
+    }
+    _onLike() {
+        if (this.state.showFullHeart == false) {
+            this.setState({showFullHeart:true});
+        } 
+        this.props.onLike();
     }
     _getHeart() {
         if (this.props.onLike != null) {
-            return (
-            <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'flex-end' }}>
-                <TouchableOpacity onPress={this.props.onLike()}>
-                    <Image  source={require("../media/emptyHeart11.png") } style={{ width: 21+3, height: 19+3 }} />
-                </TouchableOpacity>
-            </View>
-            );
+            if (this.state.showFullHeart) {
+                return (
+                <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'flex-end' }}>
+                    <TouchableOpacity onPress={()=> this._onLike()}>
+                        <Image  source={require("../media/fullHeart.png") } style={{ width: 21+3, height: 19+3 }} />
+                    </TouchableOpacity>
+                </View>
+                );
+            }
+            else {
+                return (
+                <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'flex-end' }}>
+                    <TouchableOpacity onPress={()=> this._onLike()}>
+                        <Image  source={require("../media/emptyHeart11.png") } style={{ width: 21+3, height: 19+3 }} />
+                    </TouchableOpacity>
+                </View>
+                );
+            }
         }
         return null;
     }
@@ -58,7 +80,7 @@ export class HerbyFrameBar extends Component {
         }
         return (
           <View>
-          <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:42}}>
+          <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:42,backgroundColor:'white'}}>
             {menuItems}
           </View>
           <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>

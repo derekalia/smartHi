@@ -2,7 +2,7 @@
 // productScene.js
 //
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
+import {Dimensions,StyleSheet, Text, View, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
 
 //get state management components
 import {bindActionCreators} from 'redux';
@@ -70,7 +70,8 @@ const ProductFrames = [
 class ProductScene extends Component {
     constructor(props) {
         super(props);
-        this.state={showImage:true};
+        var {width,height} = Dimensions.get('window');
+        this._height = height;
     }
 
     _setFrame(frameId) {
@@ -95,51 +96,22 @@ class ProductScene extends Component {
         return Navigator.SceneConfigs.PushFromRight;
     }
 
-    _handleScroll(offset) {
-       if (offset > 4 && this.state.showImage== true) {
-           this.setState({showImage:false});
-       }
-       else 
-       if (offset < -1 && this.state.showImage == false) {
-           this.setState({showImage:true});
-       }
-       
-    }
-
     _onLike() {
         // BatsFix. Implement like action for this product.
-        console.log("Derek likes this product");
     }
 
-                //<HerbyBar name={this.props.product.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
-    _getHeader() {
-        // BatsFix. This should probably be a control...
-        if (this.state.showImage) {
-            return (
-                <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center' }}>
-                    <Text style={{alignSelf:'center',color:'white',fontSize:20,}}>{this.props.product.name}</Text>
-                    <TouchableOpacity style={{alignSelf:'flex-end',marginRight:30}} onPress={()=>this._onLike()}>
-                        <Image  source={require("../media/emptyHeart11.png") } style={{ width: 21+3, height: 19+3 }} />
-                    </TouchableOpacity>
-                </Image>
-            );
-        }
-        else {
-            return (
-                <HerbyBar name={this.props.product.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
-            );
-        }
-        return null;
-    }
-
-    // BatsFix. There should be no hardcode items in render!
     render() {
+        var scrollerHeight = this._height;
         return (
-        <ScrollView style={{flex:1}} onScroll={(e) => this._handleScroll(e.nativeEvent.contentOffset.y)}>
-            {this._getHeader()}
+        <View>
+        <HerbyBar name={this.props.product.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+        <ScrollView 
+            style={{flex:1,marginTop:0,height:this._height,backgroundColor:'white'}} 
+            stickyHeaderIndices={[1]}>
+            <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
             <HerbyFrameBar entries={['Info','Reviews','Location','Related']} setFrame={(t)=>this._setFrame(t)}/>
             <Navigator
-                style={{height:500,backgroundColor:'transparent',justifyContent: 'flex-start'}}
+                style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
                 ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
@@ -151,6 +123,7 @@ class ProductScene extends Component {
                 goProducer={(t)=>this.props.GetProducerAction(t)}
             />
         </ScrollView>
+        </View>
         );
     }
 }
