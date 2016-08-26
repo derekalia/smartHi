@@ -106,7 +106,7 @@ class ProductScene extends Component {
         <View>
         <HerbyBar name={this.props.product.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
         <ScrollView 
-            style={{flex:1,marginTop:0,height:this._height,backgroundColor:'white'}} 
+            style={{marginTop:0,height:this._height,backgroundColor:'white'}} 
             stickyHeaderIndices={[1]}>
             <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
             <HerbyFrameBar entries={['Info','Reviews','Location','Related']} setFrame={(t)=>this._setFrame(t)}/>

@@ -1,6 +1,6 @@
 //components/loginpage.js
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, ScrollView, Image, TextInput, TouchableOpacity, TouchableHighlight, Navigator} from 'react-native';
+import {Dimensions,StyleSheet, Text, View, ScrollView, Image, TextInput, TouchableOpacity, TouchableHighlight, Navigator} from 'react-native';
 
 //get internal components
 import {bindActionCreators} from 'redux';
@@ -11,7 +11,7 @@ import StarRating from 'react-native-star-rating';
 import {GetProductAction} from '../actions';
 import ReviewList         from './reviewList.js';
 import ProductList        from './productList.js';
-import {HerbyFrameBar}    from '../common/controls.js';
+import {HerbyBar,HerbyFrameBar}    from '../common/controls.js';
 
 
 class ProducerInfo extends Component {
@@ -76,12 +76,21 @@ const ProducerFrames = [
 class ProducerScene extends Component {
     constructor(props) {
         super(props);
-        this.state={showImage:true};
+        var {width,height} = Dimensions.get('window');
+        this._height = height;
     }
 
     _setFrame(frameId) {
         this.refs.navigator.jumpTo(ProducerFrames[frameId]);
         this.setState({frameId: frameId});
+    }
+
+    _onLike() {
+        // BatsFix. Implement like action for this product.
+    }
+
+    configureScene(route, routeStack) {
+        return Navigator.SceneConfigs.PushFromRight;
     }
 
     renderScene(route, navigator) {
@@ -95,38 +104,17 @@ class ProducerScene extends Component {
         );
     }
 
-    configureScene(route, routeStack) {
-        return Navigator.SceneConfigs.PushFromRight;
-    }
-
-    _handleScroll(offset) {
-       if (offset > 4 && this.state.showImage== true) {
-           this.setState({showImage:false});
-       }
-       else 
-       if (offset < -1 && this.state.showImage == false) {
-           this.setState({showImage:true});
-       }
-       
-    }
-
-    _getHeader() {
-        // BatsFix. This should probably be a control...
-        if (this.state.showImage) {
-            return (
-                <Image source={require('../media/forged1.png') } style={{ height: 190, width: 380 }}/>
-            );
-        }
-        return null;
-    }
-
     render() {
         return (
-        <ScrollView style={{flex:1}} onScroll={(e) => this._handleScroll(e.nativeEvent.contentOffset.y)}>
-            {this._getHeader()}
+        <View style={{flex:1}}>
+        <HerbyBar name={this.props.producer.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+        <ScrollView 
+            style={{marginTop:0,height:this._height,backgroundColor:'white'}} 
+            stickyHeaderIndices={[1]}>
+            <Image source={require('../media/forged1.png') } style={{ height: 190, width: 380 }}/>
             <HerbyFrameBar entries={['Info','Menu','Reviews',]} setFrame={(t)=>this._setFrame(t)}/>
             <Navigator
-                style={{height:500,backgroundColor:'transparent',justifyContent: 'flex-start'}}
+                style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
                 ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
@@ -136,6 +124,7 @@ class ProducerScene extends Component {
                 goProduct={(t)=>this.props.GetProductAction(t)}
             />
         </ScrollView>
+        </View>
         );
     }
 }

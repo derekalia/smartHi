@@ -1,6 +1,6 @@
 //components/loginpage.js
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, ScrollView, Image, TextInput, TouchableOpacity, TouchableHighlight, Navigator} from 'react-native';
+import {Dimensions,StyleSheet, Text, View, ScrollView, Image, TextInput, TouchableOpacity, TouchableHighlight, Navigator} from 'react-native';
 
 //get internal components
 import {bindActionCreators} from 'redux';
@@ -9,7 +9,7 @@ import {connect} from 'react-redux';
 import StarRating from 'react-native-star-rating';
 //get internal components
 import {GetProductAction,ShowMapAction} from '../actions';
-import {HerbyFrameBar} from '../common/controls.js';
+import {HerbyBar,HerbyFrameBar} from '../common/controls.js';
 
 import ReviewList         from './reviewList.js';
 import ProductList        from './productList.js';
@@ -49,7 +49,8 @@ const RetailerFrames = [
 class RetailerScene extends Component {
     constructor(props) {
         super(props);
-        this.state={showImage:true};
+        var {width,height} = Dimensions.get('window');
+        this._height = height;
     }
 
     _setFrame(frameId) {
@@ -59,6 +60,18 @@ class RetailerScene extends Component {
 
     _goProduct(product: string) {
         this.props.GetProductAction(producerId);
+    }
+
+    _onLike() {
+        // BatsFix. Implement like action for this product.
+    }
+
+    _showMap() {
+        this.props.ShowMapAction();
+    }
+
+    configureScene(route, routeStack) {
+        return Navigator.SceneConfigs.PushFromRight;
     }
 
     renderScene(route, navigator) {
@@ -73,53 +86,21 @@ class RetailerScene extends Component {
         );
     }
 
-    configureScene(route, routeStack) {
-        return Navigator.SceneConfigs.PushFromRight;
-    }
-
-    _handleScroll(offset) {
-       if (offset > 4 && this.state.showImage== true) {
-           this.setState({showImage:false});
-       }
-       else 
-       if (offset < -1 && this.state.showImage == false) {
-           this.setState({showImage:true});
-       }
-       
-    }
-
-    _getHeader() {
-        // BatsFix. This should probably be a control...
-        if (this.state.showImage) {
-            return (
-                <Image source={require('../media/ikes1.png') } style={{ height: 190, width: 380 }}/>
-            );
-        }
-        return null;
-    }
-
-    _goProduct(productId) {
-        //
-        // Go to product page
-        //
-       this.props.GetProductAction(productId);
-    }
-
-    _showMap() {
-        this.props.ShowMapAction();
-    }
-
     //
     // BatsFix. Nothing should be hardcoded in this function. All retailer info should come
     // from state or props
     //
     render() {
         return (
-        <ScrollView style={{flex:1}} onScroll={(e) => this._handleScroll(e.nativeEvent.contentOffset.y)}>
-            {this._getHeader()}
+        <View>
+        <HerbyBar name={this.props.retailer.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+        <ScrollView 
+            style={{flex:1,marginTop:0,height:this._height,backgroundColor:'white'}} 
+            stickyHeaderIndices={[1]}>
+            <Image source={require('../media/ikes1.png') } style={{ height: 190, width: 380 }}/>
             <HerbyFrameBar entries={['Info','Menu','Reviews',]} setFrame={(t)=>this._setFrame(t)}/>
             <Navigator
-                style={{height:500,backgroundColor:'transparent',justifyContent: 'flex-start'}}
+                style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
                 ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
@@ -130,6 +111,7 @@ class RetailerScene extends Component {
                 showMap = {()=>this._showMap()}
             />
         </ScrollView>
+        </View>
         );
     }
 }
