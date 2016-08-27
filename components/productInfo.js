@@ -49,7 +49,7 @@ class ProductInfo extends Component {
                        </Text>
                     </View>
                 </View>
-                <ProducerItem producer={this.props.product.producer} goProducer={(t) => this.props.goProducer(t)}/>
+
                 {/*Rating breakdown*/}
                 <View style={{ marginHorizontal: 10,marginTop: 15  }}>
                     <View style={{ height: 40, justifyContent: 'center' }}>
@@ -183,6 +183,23 @@ class ProductInfo extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
+
+                <View style={{ marginHorizontal: 10, marginTop: 15 }}>
+                    <View style={{ height: 40, justifyContent: 'center' }}>
+                        <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Producer</Text>
+                    </View>
+                    <View style={{}}>
+                      <ProducerItem producer={this.props.product.producer} goProducer={(t) => this.props.goProducer(t)}/>
+                    </View>
+                </View>
+
+
+
+                    <View style={{ height: 120, justifyContent: 'center' }}/>
+
+
+
+
             </ScrollView>
         );
     }

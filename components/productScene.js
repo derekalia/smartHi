@@ -21,7 +21,7 @@ import ProductInfo    from './productInfo.js';
 class ProductReview extends Component {
     render() {
         return (
-            <ScrollView>
+            <ScrollView style={{backgroundColor:'white'}}>
                 <ReviewList/>
             </ScrollView>
         );
@@ -34,7 +34,13 @@ class ProductRetailer extends Component {
     }
     render() {
         return (
-            <ScrollView>
+            <ScrollView style={{backgroundColor:'white'}}>
+            <View style={{ marginHorizontal: 10, marginTop: 5,marginBottom:5 }}>
+                <View style={{ height: 40, justifyContent: 'center' }}>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Retail Locations</Text>
+                </View>
+            </View>
+
                 <RetailerList retailers={this.props.product.retailers} goRetailer={(id) => this._goRetailer(id)}/>
             </ScrollView>
         );
@@ -47,7 +53,13 @@ class ProductRelated extends Component {
     }
     render() {
         return (
-            <ScrollView>
+
+            <ScrollView style={{backgroundColor:'white'}}>
+              <View style={{ marginHorizontal: 10, marginTop: 5,marginBottom:5 }}>
+                  <View style={{ height: 40, justifyContent: 'center' }}>
+                      <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Related Products</Text>
+                  </View>
+              </View>
                 <ProductList productList={this.props.product.related} goProduct={(id)=>this._goProduct(id)}/>
             </ScrollView>
         );
@@ -83,9 +95,9 @@ class ProductScene extends Component {
         // to pass a prop to the component, that prop
         // first needs to be passed to the navigator object.
         return (
-                <route.component 
-                    product={navigator.props.product} 
-                    goProduct={navigator.props.goProduct} 
+                <route.component
+                    product={navigator.props.product}
+                    goProduct={navigator.props.goProduct}
                     goRetailer={navigator.props.goRetailer}
                     goProducer={navigator.props.goProducer}/>
         );
@@ -104,24 +116,24 @@ class ProductScene extends Component {
         return (
         <View>
         <HerbyBar name={this.props.product.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
-        <ScrollView 
-            style={{marginTop:0,height:this._height,backgroundColor:'white'}} 
-            stickyHeaderIndices={[1]}>
-            <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
-            <HerbyFrameBar entries={['Info','Reviews','Location','Related']} setFrame={(t)=>this._setFrame(t)}/>
-            <Navigator
-                style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
-                ref="navigator"
-                configureScene={this.configureScene}
-                renderScene={this.renderScene}
-                initialRoute = {ProductFrames[ProductFrameId]}
-                initialRouteStack = {ProductFrames}
-                product={this.props.product}
-                goProduct={(t)=>this.props.GetProductAction(t)}
-                goRetailer={(t)=>this.props.GetRetailerAction(t)}
-                goProducer={(t)=>this.props.GetProducerAction(t)}
-            />
-        </ScrollView>
+          <ScrollView
+              style={{marginTop:0,height:this._height,backgroundColor:'white'}}
+              stickyHeaderIndices={[1]}>
+              <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
+              <HerbyFrameBar entries={['Info','Reviews','Location','Related']} setFrame={(t)=>this._setFrame(t)}/>
+              <Navigator
+                  style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
+                  ref="navigator"
+                  configureScene={this.configureScene}
+                  renderScene={this.renderScene}
+                  initialRoute = {ProductFrames[ProductFrameId]}
+                  initialRouteStack = {ProductFrames}
+                  product={this.props.product}
+                  goProduct={(t)=>this.props.GetProductAction(t)}
+                  goRetailer={(t)=>this.props.GetRetailerAction(t)}
+                  goProducer={(t)=>this.props.GetProducerAction(t)}
+              />
+          </ScrollView>
         </View>
         );
     }
