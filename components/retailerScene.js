@@ -18,7 +18,7 @@ import RetailerInfo       from './retailerInfo.js';
 class RetailerMenu extends Component {
     render() {
         return (
-        <View style={{ marginHorizontal: 10 }}>
+        <View style={{ marginHorizontal: 10, backgroundColor:'white'}}>
             <View style={{ height: 40, justifyContent: 'center' }}>
                 <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Menu</Text>
             </View>
@@ -30,7 +30,9 @@ class RetailerMenu extends Component {
 class RetailerReview extends Component {
     render() {
         return (
+<ScrollView style={{backgroundColor:'white'}}>
             <ReviewList/>
+</ScrollView>
         );
     }
 }
@@ -79,8 +81,8 @@ class RetailerScene extends Component {
         // to pass a prop to the component, that prop
         // first needs to be passed to the navigator object.
         return (
-                <route.component 
-                    retailer={navigator.props.retailer} 
+                <route.component
+                    retailer={navigator.props.retailer}
                     showMap={navigator.props.showMap}
                     goProduct={navigator.props.goProduct}/>
         );
@@ -94,8 +96,8 @@ class RetailerScene extends Component {
         return (
         <View>
         <HerbyBar name={this.props.retailer.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
-        <ScrollView 
-            style={{flex:1,marginTop:0,height:this._height,backgroundColor:'white'}} 
+        <ScrollView
+            style={{flex:1,marginTop:0,height:this._height,backgroundColor:'white'}}
             stickyHeaderIndices={[1]}>
             <Image source={require('../media/ikes1.png') } style={{ height: 190, width: 380 }}/>
             <HerbyFrameBar entries={['Info','Menu','Reviews',]} setFrame={(t)=>this._setFrame(t)}/>

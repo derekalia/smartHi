@@ -27,6 +27,7 @@ class RetailerItem extends Component {
         // BatsFix. There shouldn't be any hardcoded data in this function.
         return (
             <TouchableOpacity  style={{
+                justifyContent:'center',
                 flexDirection: 'row',
                 height:100,
                 marginBottom: 10,
@@ -39,7 +40,7 @@ class RetailerItem extends Component {
                     <View style={{flex:2,justifyContent:'flex-end',alignItems:"flex-end",alignSelf:"flex-end"}}>
                         <Text style={{
                           alignSelf:"flex-start",
-                            color: 'white',                            
+                            color: 'white',
                             fontSize: 22,
                             textShadowOffset: { width: 1.5, height: 1.5 },
                             textShadowColor: 'black',
@@ -55,8 +56,6 @@ class RetailerItem extends Component {
                             textShadowRadius: 4}}>$43.99</Text>
                             </View>
                     </View>
-
-
                         <View style={{
                             flexDirection: 'row',
                             marginTop: 3,
