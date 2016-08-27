@@ -17,38 +17,30 @@ import {SwitchFrameAction}   from '../actions';
 class SearchBar extends Component {
     constructor(props) {
         super(props);
-
         this.state = {frameId:this.props.frameId};
-        this.ProductFrameId = Styles.category;
-        this.MapFrameId = Styles.category;
-        this.UserFrameId = Styles.category;
-        this.RetailerFrameId = Styles.category;
-        this[this.props.frameId] = Styles.category2;
-    }
-
-    _frameStyle(frameId) {
-        return this[frameId];
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.state.frameId != nextProps.frameId) {
-            this._setFrame(frameId);
+            this.setState({frameId:nextProps.frameId});
         }
     }
 
+    _frameStyle(frameId) {
+        if (frameId == this.state.frameId) {
+            return Styles.selectedFrame;
+        }
+        return Styles.normalFrame; 
+    }
 
+    _textStyle(frameId) {
+        if (frameId == this.state.frameId) {
+            return Styles.selectedText;
+        }
+        return Styles.normalText;
+    }
 
     _setFrame(frameId) {
-        //
-        // Change previous frameId to normal style
-        //
-        this[this.state.frameId] = Styles.category;
-
-        //
-        // Set new frameId to highlight
-        //
-        this[frameId] = Styles.category2;
-
         this.setState({frameId: frameId});
         this.props.SwitchFrameAction(frameId);
     }
@@ -94,16 +86,16 @@ class SearchBar extends Component {
                              height:20
                             }}>
                    <TouchableOpacity style={[this._frameStyle(ProductFrameId),{height: 23}]} onPress={()=>this._setFrame(ProductFrameId)}>
-                        <Text style={this._frameStyle(ProductFrameId)}>PRODUCTS</Text>
+                        <Text style={this._textStyle(ProductFrameId)}>PRODUCTS</Text>
                    </TouchableOpacity>
                    <TouchableOpacity style={[this._frameStyle(RetailerFrameId),{height: 23}]} onPress={()=>this._setFrame(RetailerFrameId)}>
-                        <Text style={this._frameStyle(RetailerFrameId)}>STORES</Text>
+                        <Text style={this._textStyle(RetailerFrameId)}>STORES</Text>
                    </TouchableOpacity>
                    <TouchableOpacity style={[this._frameStyle(MapFrameId),{height: 23}]} onPress={()=>this._setFrame(MapFrameId)}>
-                        <Text style={this._frameStyle(MapFrameId)}>MAP</Text>
+                        <Text style={this._textStyle(MapFrameId)}>MAP</Text>
                    </TouchableOpacity>
                    <TouchableOpacity style={[this._frameStyle(UserFrameId),,{height: 23}]} onPress={()=>this._setFrame(UserFrameId)}>
-                        <Text style={this._frameStyle(UserFrameId)}>USERS</Text>
+                        <Text style={this._textStyle(UserFrameId)}>USERS</Text>
                    </TouchableOpacity>
                </View>
                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:-40}}>
@@ -127,14 +119,17 @@ const Styles={
         fontSize: 20,
         backgroundColor: 'white',
     },
-    category: {
+    normalText: {
         color:"#9B9B9B",
+    },
+    selectedText: {
+        color:"#468EE5",
+    },
+    normalFrame: {
         backgroundColor: 'white',
         borderBottomWidth: 0,
     },
-    category2: {
-        color:"#468EE5",
-
+    selectedFrame: {
         backgroundColor: 'white',
         borderBottomWidth: 1,
         borderColor:"#468EE5",

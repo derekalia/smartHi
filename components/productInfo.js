@@ -207,7 +207,6 @@ const Styles = StyleSheet.create({
         marginHorizontal: 10,
         fontSize:16,
     },
-
     tagCategory: {
         margin: 4,
         borderRadius: 20,
@@ -224,8 +223,6 @@ const Styles = StyleSheet.create({
         marginHorizontal: 10,
         fontSize:16,
     },
-
-
     tagEffect: {
         margin: 4,
         borderRadius: 20,
@@ -259,7 +256,6 @@ const Styles = StyleSheet.create({
         marginHorizontal: 10,
         fontSize:16,
     },
-
     tagSymptom: {
         margin: 4,
         borderRadius: 20,
@@ -275,79 +271,5 @@ const Styles = StyleSheet.create({
         marginBottom: 7,
         marginHorizontal: 10,
         fontSize:16,
-    },
-
-    storeItem: {
-        flex: 1,
-        flexDirection: 'row',
-        height: 100,
-        margin: 5,
-
-    },
-    column: {
-        flexDirection: 'column'
-    },
-    row: {
-        flexDirection: 'row'
-    },
-    bg: {
-        position: 'absolute',
-        width: 355,
-        height: 100,
-        borderTopLeftRadius: 60,
-        borderRadius: 6
-    },
-    storeName: {
-        margin: 3,
-        marginTop: 5,
-        marginLeft: 7,
-        color: 'white',
-        fontSize: 26,
-        textShadowOffset: { width: 1.2, height: 1.2 },
-        textShadowColor: 'black',
-        textShadowRadius: 2
-    },
-    rowContainerStars: {
-      flexDirection: 'row',
-      marginTop: 8,
-      marginRight: 3,
-    },
-    storePrice1: {
-        margin: 3,
-        flex: 1,
-        marginTop: 5,
-        marginLeft: 7,
-        color: 'white',
-        fontSize: 26,
-        textAlign: 'right',
-        width: 210,
-        textShadowOffset: { width: 1.5, height: 1.5 },
-        textShadowColor: 'black',
-        textShadowRadius: 2
-
-    }, storeLocation: {
-        marginLeft: 7,
-        color: 'white',
-        fontSize: 15,
-        textShadowOffset: { width: 1.2, height: 1.2 },
-        textShadowColor: 'black',
-        textShadowRadius: 2
-    },
-    input: {
-        height: 40,
-        marginLeft:7,
-        fontSize: 20,
-        backgroundColor: 'white',
-    },
-    category: {
-        color:"#9B9B9B",
-        backgroundColor: 'white',
-        borderBottomWidth: 0,
-    },
-    category2: {
-        color:"#468EE5",
-        backgroundColor: 'white',
-        borderBottomWidth: 1,
-        borderColor:"#468EE5",
     },
 })

@@ -16,6 +16,7 @@ import {connect} from 'react-redux';
 //get internal components
 import ProductList        from './productList.js';
 import {GetProductAction} from '../actions';
+import {HerbyBar}         from '../common/controls.js';
 
 class ActivityScene extends Component {
     constructor(props) {
@@ -32,6 +33,9 @@ class ActivityScene extends Component {
     render() {
         return (
             <View style={[{ flex: 1 }]}>
+            <HerbyBar name=""  navigator={this.props.navigator}/>
+            <View style={{flex:1}}>
+            
                 {/* <Image style={{ width: 170, height: 170, justifyContent: 'center', alignItems: 'center', alignSelf: 'center' }} source={require('../media/movieTile1.png')}> */}
                 <View>
                 <Image style={{ width: 377, height: 200, alignItems: 'flex-start', alignSelf: 'center',justifyContent:'flex-end'  }} source={require('../media/ActivitySceneImages/adventure11.png')}>
@@ -43,9 +47,10 @@ class ActivityScene extends Component {
                     </Image>
                 </View>
 
-                <ScrollView>
+                <ScrollView style={{flex:1}}>
                     <ProductList productList={this.props.productList} goProduct={(t)=> this._goProduct(t)}/>
                 </ScrollView>
+            </View>
             </View>
         );
     }

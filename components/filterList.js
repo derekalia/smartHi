@@ -117,8 +117,8 @@ class FilterList extends Component {
             filters.push(<FilterItem filter={filterArray[i]} key={filterArray[i].name} onPress={(t) => this._removeFilter(t)}/>);
         }
         return (
-            <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
-            <ScrollView horizontal='true'>
+            <View style={{flexWrap: 'wrap'}}>
+            <ScrollView horizontal={true}>
                 {filters}
             </ScrollView>
             </View>
@@ -132,8 +132,8 @@ class FilterList extends Component {
             filters.push(<FilterItem filter={filterArray[i]} key={filterArray[i].name} onPress={(t) => this._addRemoveFilter(t)}/>);
         }
         return (
-            <View style={{flexDirection:'row', flexWrap: 'wrap'}}>
-            <ScrollView horizontal='true'>
+            <View style={{flexWrap: 'wrap'}}>
+            <ScrollView horizontal={true}>
                 {filters}
             </ScrollView>
             </View>
