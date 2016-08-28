@@ -2,7 +2,9 @@
 // Description: reviewsection.js
 //
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource,TouchableHighlight, ScrollView, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
+import {StyleSheet, Text, View, Slider,ListView, ListViewDataSource,TouchableHighlight, ScrollView, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
+
+import StarRating from 'react-native-star-rating';
 
 class ReviewItem extends Component {
     constructor(props) {
@@ -20,12 +22,22 @@ class ReviewItem extends Component {
                 <View style={Styles.row}>
                     <View style={{ height: 30, width: 30, borderWidth: 15, borderColor: 'lightblue', marginRight: 10 }}></View>
                     <View style={Styles.column}>
-                        <Text style={{ fontSize: 14, fontWeight: 'bold', marginTop: -2 }}>
+                      <View style={Styles.row}>
+                        <Text style={{ fontSize: 14, fontWeight: 'bold', marginTop: -2,marginRight:10 }}>
                             {this.state.userName}
                         </Text>
+                        <StarRating
+                            disabled={true}
+                            maxStars={5}
+                            starSize={15}
+                            starColor={'red'}
+                            rating={4}
+                            />
+                            </View>
                         <Text style={{ fontSize: 13 }}>
                             {this.state.time}
                         </Text>
+
                     </View>
                 </View>
                 <Text style={{ fontSize: 14, marginTop: 8 }}>
@@ -54,7 +66,21 @@ class ReviewList extends Component {
 
     render() {
         return (
-           <View style={{ marginHorizontal: 10, marginTop: 20 }}>
+           <View style={{ marginHorizontal: 10, marginTop: 0}}>
+           <View style={{flex:1,marginBottom:10 }}>
+           <TouchableOpacity style={{  margin: 4, marginTop:20,
+             borderRadius: 10,
+             borderWidth: 1,
+             borderColor: "#ED3C52",
+             backgroundColor: '#ED3C52',
+             justifyContent: 'center',
+             alignItems: 'center'}}>
+               <Text style={{color: "white",fontWeight:'bold',fontSize:16,
+               marginTop: 7,
+               marginBottom: 7,
+               marginHorizontal: 10,}}> Rate Item </Text>
+           </TouchableOpacity>
+           </View>
                 <View style={{ justifyContent: 'center' }}>
                     <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Reviews</Text>
                 </View>
@@ -70,7 +96,7 @@ class ReviewList extends Component {
                     <ReviewItem/>
                     <ReviewItem/>
                     <ReviewItem/>
-                    <View style={{flex:1}}>
+                    {/* <View style={{flex:1}}>
                     <TouchableOpacity style={{  margin: 4, marginTop:20,
                       borderRadius: 10,
                       borderWidth: 1,
@@ -83,7 +109,7 @@ class ReviewList extends Component {
                         marginBottom: 7,
                         marginHorizontal: 10,}}> Show More </Text>
                     </TouchableOpacity>
-                    </View>
+                    </View> */}
                 </View>
             </View>
         );

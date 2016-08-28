@@ -18,7 +18,8 @@ import RetailerInfo       from './retailerInfo.js';
 class RetailerMenu extends Component {
     render() {
         return (
-        <View style={{ marginHorizontal: 10, backgroundColor:'white'}}>
+        <View style={{ marginHorizontal:0, backgroundColor:'white'}}>
+                    <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
             <View style={{ height: 40, justifyContent: 'center' }}>
                 <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Menu</Text>
             </View>
@@ -31,6 +32,7 @@ class RetailerReview extends Component {
     render() {
         return (
 <ScrollView style={{backgroundColor:'white'}}>
+            <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
             <ReviewList/>
 </ScrollView>
         );
@@ -43,9 +45,9 @@ const ReviewFrameId  = 2;
 const SocialFrameId  = 3;
 
 const RetailerFrames = [
-    {title: "info",     component: RetailerInfo,     index: InfoFrameId},
-    {title: "menu",     component: RetailerMenu,     index: MenuFrameId},
-    {title: "review",   component: RetailerReview,   index: SocialFrameId},
+    {title: "INFO",     component: RetailerInfo,     index: InfoFrameId},
+    {title: "MENU",     component: RetailerMenu,     index: MenuFrameId},
+    {title: "REVIEW",   component: RetailerReview,   index: SocialFrameId},
 ];
 
 class RetailerScene extends Component {
@@ -100,7 +102,8 @@ class RetailerScene extends Component {
             style={{flex:1,marginTop:0,height:this._height,backgroundColor:'white'}}
             stickyHeaderIndices={[1]}>
             <Image source={require('../media/ikes1.png') } style={{ height: 190, width: 380 }}/>
-            <HerbyFrameBar entries={['Info','Menu','Reviews',]} setFrame={(t)=>this._setFrame(t)}/>
+            <HerbyFrameBar entries={['INFO','MENU','REVIEWS',]} setFrame={(t)=>this._setFrame(t)}/>
+                        <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
             <Navigator
                 style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
                 ref="navigator"
