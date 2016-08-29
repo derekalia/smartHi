@@ -112,9 +112,9 @@ class ProducerScene extends Component {
     render() {
         return (
         <View style={{flex:1}}>
-        <HerbyBar name={this.props.producer.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
-        <ScrollView
-            style={{marginTop:0,height:this._height,backgroundColor:'white'}}
+        <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+        <ScrollView 
+            style={{marginTop:0,height:this._height,backgroundColor:'white'}} 
             stickyHeaderIndices={[1]}>
             <Image source={require('../media/forged1.png') } style={{ height: 190, width: 380 }}/>
             <HerbyFrameBar entries={['INFO','PRODUCTS','REVIEWS',]} setFrame={(t)=>this._setFrame(t)}/>
@@ -125,7 +125,7 @@ class ProducerScene extends Component {
                 renderScene={this.renderScene}
                 initialRoute = {ProducerFrames[InfoFrameId]}
                 initialRouteStack = {ProducerFrames}
-                producer={this.props.producer}
+                producer={this.props.item}
                 goProduct={(t)=>this.props.GetProductAction(t)}
             />
         </ScrollView>

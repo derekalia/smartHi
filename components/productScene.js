@@ -86,8 +86,12 @@ class ProductScene extends Component {
         super(props);
         var {width,height} = Dimensions.get('window');
         this._height = height;
+        console.log("tabid1 is"+this.props.tabId);
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log("tabid is"+nextProps.tabId);
+    } 
     _setFrame(frameId) {
         this.refs.navigator.jumpTo(ProductFrames[frameId]);
         this.setState({frameId: frameId});
@@ -116,9 +120,10 @@ class ProductScene extends Component {
 
     render() {
         var scrollerHeight = this._height;
+        console.log("in productScene render item is " + this.props.item);
         return (
         <View>
-        <HerbyBar name={this.props.product.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+        <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
           <ScrollView
               style={{marginTop:0,height:this._height,backgroundColor:'white'}}
               stickyHeaderIndices={[1]}>
@@ -131,7 +136,7 @@ class ProductScene extends Component {
                   renderScene={this.renderScene}
                   initialRoute = {ProductFrames[ProductFrameId]}
                   initialRouteStack = {ProductFrames}
-                  product={this.props.product}
+                  product={this.props.item}
                   goProduct={(t)=>this.props.GetProductAction(t)}
                   goRetailer={(t)=>this.props.GetRetailerAction(t)}
                   goProducer={(t)=>this.props.GetProducerAction(t)}

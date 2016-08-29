@@ -26,6 +26,7 @@ export function GetProducerAction(producerId) {
         dispatch({
 			type: SWITCH_SCENE,
 			sceneId: ProducerSceneId,
+            item: producer,
 		});
     }
 }

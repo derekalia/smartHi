@@ -32,7 +32,8 @@ export function SwitchTabAction(tabId) {
     return({
         type: SWITCH_TAB_SCENE,
         tabId: tabId,
-        sceneId: sceneId
+        sceneId: sceneId,
+        item: null,
     });
 }
 
@@ -40,6 +41,7 @@ export function SwitchSceneAction(sceneId) {
     return({
         type: SWITCH_SCENE,
         sceneId: sceneId,
+        item: null,
     });
 }
 
@@ -55,5 +57,6 @@ export function SwitchTabSceneAction(tabId, sceneId) {
         type: SWITCH_TAB_SCENE,
         sceneId: sceneId,
         tabId: tabId,
+        item: null,
     });
 }
