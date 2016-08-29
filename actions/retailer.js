@@ -26,6 +26,7 @@ export function GetRetailerAction(retailerId) {
         dispatch({
 			type: SWITCH_SCENE,
 			sceneId: RetailerSceneId,
+            item: retailer,
 		});
     }
 }

@@ -95,7 +95,7 @@ class RetailerScene extends Component {
     render() {
         return (
         <View>
-        <HerbyBar name={this.props.retailer.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+        <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
         <ScrollView
             style={{flex:1,marginTop:0,height:this._height,backgroundColor:'white'}}
             stickyHeaderIndices={[1]}>
@@ -108,7 +108,7 @@ class RetailerScene extends Component {
                 renderScene={this.renderScene}
                 initialRoute = {RetailerFrames[InfoFrameId]}
                 initialRouteStack = {RetailerFrames}
-                retailer={this.props.retailer}
+                retailer={this.props.item}
                 goProduct={(t)=>this.props.GetProductAction(t)}
                 showMap = {()=>this._showMap()}
             />

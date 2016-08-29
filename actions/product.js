@@ -24,6 +24,7 @@ export function GetProductAction(productId, switchTab) {
                 type:SWITCH_TAB_SCENE,
                 tabId: SearchTabId,
                 sceneId: ProductSceneId,
+                item: product,
            });
         }
         else
@@ -31,6 +32,7 @@ export function GetProductAction(productId, switchTab) {
         dispatch({
 			type: SWITCH_SCENE,
 			sceneId: ProductSceneId,
+            item: product 
 		});
     }
 }

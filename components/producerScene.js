@@ -107,7 +107,7 @@ class ProducerScene extends Component {
     render() {
         return (
         <View style={{flex:1}}>
-        <HerbyBar name={this.props.producer.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+        <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
         <ScrollView 
             style={{marginTop:0,height:this._height,backgroundColor:'white'}} 
             stickyHeaderIndices={[1]}>
@@ -120,7 +120,7 @@ class ProducerScene extends Component {
                 renderScene={this.renderScene}
                 initialRoute = {ProducerFrames[InfoFrameId]}
                 initialRouteStack = {ProducerFrames}
-                producer={this.props.producer}
+                producer={this.props.item}
                 goProduct={(t)=>this.props.GetProductAction(t)}
             />
         </ScrollView>

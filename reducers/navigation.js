@@ -11,6 +11,7 @@ const initialState = {
     tabId    : HomeTabId, 
     sceneId  : HomeSceneId,
     frameId  : ProductFrameId,
+    item     : null,
 }
 
 export default function NavigationReducer(state, action) {
@@ -44,6 +45,7 @@ export default function NavigationReducer(state, action) {
             // BatsFix then modify the item needed in the new
             // state. 
             newState.sceneId = action.sceneId;
+            newState.item    = action.item;
 
             newState.switchScene = newState.switchScene == 0 ? 1: 0;
             return newState;
@@ -68,8 +70,8 @@ export default function NavigationReducer(state, action) {
             // BatsFix then modify the item needed in the new
             // state. 
             newState.sceneId  = action.sceneId;
-
-            newState.tabId  = action.tabId;
+            newState.item     = action.item;
+            newState.tabId    = action.tabId;
 
             newState.switchScene = newState.switchScene == 0 ? 1: 0;
             return newState;

@@ -39,31 +39,23 @@ class HomeTab extends Component {
 
     componentWillReceiveProps(nextProps) {
         var sceneId = nextProps.sceneId;
-        var foundExisting = false;
-        // Check existing routes first
-        var routelist = this.refs.navigator.getCurrentRoutes();
-        for (var i=0; i < routelist.length; i++) {
-            if (routelist[i].index == sceneId) {
-                this.refs.navigator.jumpTo(routelist[i]);
-                foundExisting = true;
-                break;
-            }
-        }
         // If not found in existing push
-        if (foundExisting == false) {
-            for(var i=0; i < TabScenes.length; i++) {
-                 if (TabScenes[i].index == sceneId) {
-                    this.refs.navigator.push(TabScenes[i]);
-                    break;
-                 }
-            }
+        for(var i=0; i < TabScenes.length; i++) {
+             if (TabScenes[i].index == sceneId) {
+                // BatsFix. Currently push scenes as they come along
+                // Later probably need to throttle that
+                var currentScene = Object.assign({}, TabScenes[i]);
+                currentScene.item = nextProps.item;
+                this.refs.navigator.push(currentScene);
+                break;
+             }
         }
     }
 
     renderScene(route, navigator) {
         return (
             <View style={{flex:1}}>
-                <route.component tabId={HomeTabId} navigator={navigator}/>
+                <route.component tabId={HomeTabId} navigator={navigator} item={route.item}/>
             </View>
         );
     }
@@ -79,10 +71,11 @@ class HomeTab extends Component {
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
                 initialRoute = {TabScenes[HomeIndex]}
+                item={this.props.item}
                 />
         );
     }
 }
 
-function mapStateToProps(state) { return { sceneId: state.NavigationReducer.sceneId, switchScene: state.NavigationReducer.switchScene } }
+function mapStateToProps(state) { return { sceneId: state.NavigationReducer.sceneId, switchScene: state.NavigationReducer.switchScene, item:state.NavigationReducer.item } }
 module.exports = connect(mapStateToProps)(HomeTab);
