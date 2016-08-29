@@ -16,6 +16,8 @@ class ProductInfo extends Component {
     render() {
         return (
             <ScrollView>
+            <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+
                 {/* Overall rating */}
                 <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
                     <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.props.product.name}</Text>

@@ -18,6 +18,7 @@ class ProducerInfo extends Component {
     render() {
         return (
         <View>
+                    <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
             <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
                 <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.props.producer.name} - Issaquah, WA</Text>
                 <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
@@ -48,8 +49,9 @@ class ProducerInfo extends Component {
 class ProducerMenu extends Component {
     render() {
         return (
-        <View style={{ marginHorizontal: 10 }}>
-            <ProductList productList={this.props.producer.products} goProduct={(id)=>this.props.goProduct(id)}/>
+        <View>
+                    <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+            <ProductList style={{ marginHorizontal: 10 }} productList={this.props.producer.products} goProduct={(id)=>this.props.goProduct(id)}/>
         </View>
         );
     };
@@ -57,7 +59,10 @@ class ProducerMenu extends Component {
 class ProducerReview extends Component {
     render() {
         return (
+          <View>                
+          <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
             <ReviewList/>
+            </View>
         );
     }
 }
@@ -98,8 +103,8 @@ class ProducerScene extends Component {
         // to pass a prop to the component, that prop
         // first needs to be passed to the navigator object.
         return (
-                <route.component 
-                    producer={navigator.props.producer} 
+                <route.component
+                    producer={navigator.props.producer}
                     goProduct={navigator.props.goProduct}/>
         );
     }

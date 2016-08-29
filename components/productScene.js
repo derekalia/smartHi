@@ -22,6 +22,7 @@ class ProductReview extends Component {
     render() {
         return (
             <ScrollView style={{backgroundColor:'white'}}>
+                        <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
                 <ReviewList/>
             </ScrollView>
         );
@@ -35,6 +36,7 @@ class ProductRetailer extends Component {
     render() {
         return (
             <ScrollView style={{backgroundColor:'white'}}>
+                        <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
             <View style={{ marginHorizontal: 10, marginTop: 5,marginBottom:5 }}>
                 <View style={{ height: 40, justifyContent: 'center' }}>
                     <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Retail Locations</Text>
@@ -55,6 +57,7 @@ class ProductRelated extends Component {
         return (
 
             <ScrollView style={{backgroundColor:'white'}}>
+                        <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
               <View style={{ marginHorizontal: 10, marginTop: 5,marginBottom:5 }}>
                   <View style={{ height: 40, justifyContent: 'center' }}>
                       <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Related Products</Text>
@@ -125,7 +128,7 @@ class ProductScene extends Component {
               style={{marginTop:0,height:this._height,backgroundColor:'white'}}
               stickyHeaderIndices={[1]}>
               <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
-              <HerbyFrameBar entries={['Info','Reviews','Location','Related']} setFrame={(t)=>this._setFrame(t)}/>
+              <HerbyFrameBar entries={['INFO','REVIEWS','LOCATIONS','RELATED']} setFrame={(t)=>this._setFrame(t)}/>
               <Navigator
                   style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
                   ref="navigator"

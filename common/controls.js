@@ -13,7 +13,7 @@ export class HerbyBar extends Component {
     _onLike() {
         if (this.state.showFullHeart == false) {
             this.setState({showFullHeart:true});
-        } 
+        }
         this.props.onLike();
     }
     _getHeart() {
@@ -80,10 +80,18 @@ export class HerbyFrameBar extends Component {
         }
         return (
           <View>
-          <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:42,backgroundColor:'white'}}>
+          <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:42,backgroundColor:'white',
+
+    shadowColor: "#000000",
+    shadowOpacity: 0.3,
+    shadowRadius: 2,
+    shadowOffset: {
+      height: 2,
+      width: 0
+    }
+        }}>
             {menuItems}
           </View>
-          <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
           </View>
         );
     }
