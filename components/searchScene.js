@@ -70,6 +70,12 @@ class SearchScene extends Component {
         return (
             <View style={{marginTop:110,}}>
               <route.component addRemoveFilter={navigator.props.addRemoveFilter}/>
+
+              <Text>Price</Text>
+              <Text>Distance</Text>
+              <Text>Rating at least</Text>
+              <Text>Hours</Text>
+
             </View>
         );
     }
@@ -128,7 +134,6 @@ class SearchScene extends Component {
                     }
                     addRemoveFilter={(t)=>this._addRemoveFilter(t)}
                 />
-
             </View>
         );
     }

@@ -11,6 +11,7 @@
     "react-native-accordion": "^1.0.0",
     "react-native-camera": "git+https://github.com/lwansbrough/react-native-camera.git",
     "react-native-collapsible": "^0.7.0",
+    "react-native-dropdown": "0.0.6",
     "react-native-multi-slider": "^0.3.5",
     "react-native-star-rating": "^1.0.6",
     "react-native-vector-icons": "^2.0.3",

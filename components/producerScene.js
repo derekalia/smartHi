@@ -59,7 +59,7 @@ class ProducerMenu extends Component {
 class ProducerReview extends Component {
     render() {
         return (
-          <View>                
+          <View>
           <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
             <ReviewList/>
             </View>
@@ -117,7 +117,7 @@ class ProducerScene extends Component {
             style={{marginTop:0,height:this._height,backgroundColor:'white'}}
             stickyHeaderIndices={[1]}>
             <Image source={require('../media/forged1.png') } style={{ height: 190, width: 380 }}/>
-            <HerbyFrameBar entries={['Info','Menu','Reviews',]} setFrame={(t)=>this._setFrame(t)}/>
+            <HerbyFrameBar entries={['INFO','PRODUCTS','REVIEWS',]} setFrame={(t)=>this._setFrame(t)}/>
             <Navigator
                 style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
                 ref="navigator"

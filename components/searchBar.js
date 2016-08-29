@@ -30,7 +30,7 @@ class SearchBar extends Component {
         if (frameId == this.state.frameId) {
             return Styles.selectedFrame;
         }
-        return Styles.normalFrame; 
+        return Styles.normalFrame;
     }
 
     _textStyle(frameId) {
@@ -85,20 +85,18 @@ class SearchBar extends Component {
                              alignItems:'center',
                              height:20
                             }}>
-                   <TouchableOpacity style={[this._frameStyle(ProductFrameId),{height: 23}]} onPress={()=>this._setFrame(ProductFrameId)}>
+                   <TouchableOpacity style={[this._frameStyle(ProductFrameId),{height: 20}]} onPress={()=>this._setFrame(ProductFrameId)}>
                         <Text style={this._textStyle(ProductFrameId)}>PRODUCTS</Text>
                    </TouchableOpacity>
-                   <TouchableOpacity style={[this._frameStyle(RetailerFrameId),{height: 23}]} onPress={()=>this._setFrame(RetailerFrameId)}>
+                   <TouchableOpacity style={[this._frameStyle(RetailerFrameId),{height: 20}]} onPress={()=>this._setFrame(RetailerFrameId)}>
                         <Text style={this._textStyle(RetailerFrameId)}>STORES</Text>
                    </TouchableOpacity>
-                   <TouchableOpacity style={[this._frameStyle(MapFrameId),{height: 23}]} onPress={()=>this._setFrame(MapFrameId)}>
+                   <TouchableOpacity style={[this._frameStyle(MapFrameId),{height: 20}]} onPress={()=>this._setFrame(MapFrameId)}>
                         <Text style={this._textStyle(MapFrameId)}>MAP</Text>
                    </TouchableOpacity>
-                   <TouchableOpacity style={[this._frameStyle(UserFrameId),,{height: 23}]} onPress={()=>this._setFrame(UserFrameId)}>
+                   <TouchableOpacity style={[this._frameStyle(UserFrameId),,{height: 20}]} onPress={()=>this._setFrame(UserFrameId)}>
                         <Text style={this._textStyle(UserFrameId)}>USERS</Text>
                    </TouchableOpacity>
-               </View>
-               <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:-40}}>
                </View>
            </View>
         );
