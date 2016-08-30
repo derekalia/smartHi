@@ -21,7 +21,7 @@ class LaunchScene extends Component {
             <View style={Styles.container}>
                 <View style={[{ flex: 4, alignItems: 'center' }]}>
                     <Image style={Styles.icon} source={require('../media/Icon.png') }/>
-                    <Text style={{ fontFamily: 'Pacifico', fontSize: 52, marginTop: 10 }}>Hashtag</Text>
+                    <Text style={{ fontFamily: 'Pacifico', fontSize: 52, marginTop: 10 }}>hashtag</Text>
                 </View>
                 <View style={[Styles.container, { flex: 2 }]}>
                     <TouchableOpacity style={Styles.loginButton} onPress={this._onToLogin.bind(this) }>

@@ -68,7 +68,7 @@ class FilterList extends Component {
             }
         }
         else {
-            var index = this._getFilterIndex(filter,current); 
+            var index = this._getFilterIndex(filter,current);
             if (index >= 0) {
                 this.props.addRemoveFilter(filter.name);
                 current.splice(index, 1);
@@ -81,7 +81,7 @@ class FilterList extends Component {
         var filterArray = this.state.filters[filter.type];
         var index = this._getFilterIndex(filter,filterArray);
         filterArray[index].selected = false;
-       
+
         this._addRemoveFilter(filter);
     }
 
@@ -93,6 +93,7 @@ class FilterList extends Component {
     render() {
         return (
             <View >
+            <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
                 <View>
                     {this._renderSelectedFilters(this.state.currentFilters)}
                 </View>
@@ -107,7 +108,7 @@ class FilterList extends Component {
     //
     // BatsFix. For some reason using lists makes the list item not update
     // on frame switch. Another mysterious bug in react-native,
-    // iterating over the array does not work properly if the key item is just 
+    // iterating over the array does not work properly if the key item is just
     // an index number!!!!! Bad Bad Bug! May be we should be using a list instead
     // of iterating over the array
     //
@@ -125,7 +126,7 @@ class FilterList extends Component {
         );
     }
 
-   
+
     _renderFiltersArray(filterArray,isCurrent) {
         var filters = [];
         for (var i=0; i < filterArray.length; i++) {
