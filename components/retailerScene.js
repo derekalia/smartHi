@@ -121,18 +121,12 @@ class RetailerScene extends Component {
     }
 }
 
-// BatsFix. This function is used to convert state to props passed to this component
-function mapStateToProps(state) {
-    return {
-        retailer: state.RetailerReducer.retailer,
-    }
-}
 // BatsFix. This function is used to convert action to props passed to this component.
 // In this example, there is now prop called GetProductAction.
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,ShowMapAction }, dispatch); }
 
-module.exports = connect(mapStateToProps, mapActionToProps)(RetailerScene);
+module.exports = connect(null, mapActionToProps)(RetailerScene);
 
 
 const Styles = StyleSheet.create({

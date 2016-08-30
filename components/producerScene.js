@@ -134,18 +134,12 @@ class ProducerScene extends Component {
     }
 }
 
-// BatsFix. This function is used to convert state to props passed to this component
-function mapStateToProps(state) {
-    return {
-        producer: state.ProducerReducer.producer,
-    }
-}
 // BatsFix. This function is used to convert action to props passed to this component.
 // In this example, there is now prop called GetProductAction.
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction, }, dispatch); }
 
-module.exports = connect(mapStateToProps, mapActionToProps)(ProducerScene);
+module.exports = connect(null, mapActionToProps)(ProducerScene);
 
 const Styles = StyleSheet.create({
     container: {

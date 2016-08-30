@@ -86,11 +86,10 @@ class ProductScene extends Component {
         super(props);
         var {width,height} = Dimensions.get('window');
         this._height = height;
-        console.log("tabid1 is"+this.props.tabId);
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log("tabid is"+nextProps.tabId);
+        
     } 
     _setFrame(frameId) {
         this.refs.navigator.jumpTo(ProductFrames[frameId]);
@@ -148,15 +147,9 @@ class ProductScene extends Component {
 }
 
 
-// BatsFix. This function is used to convert state to props passed to this component
-function mapStateToProps(state) {
-    return {
-        product: state.ProductReducer.product,
-    }
-}
 // BatsFix. This function is used to convert action to props passed to this component.
 // In this example, there is now prop called GetRetailerAction.
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,GetRetailerAction,GetProducerAction,}, dispatch); }
 
-module.exports = connect(mapStateToProps, mapActionToProps)(ProductScene);
+module.exports = connect(null, mapActionToProps)(ProductScene);

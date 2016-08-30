@@ -4,7 +4,7 @@ import {
     SWITCH_TAB_SCENE,
 } from './navigation.js';
 
-import {ProductSceneId,SearchTabId,} from '../common/const.js';
+import {ProductSceneId,HomeTabId,} from '../common/const.js';
 import {GetProduct} from './data.js';
 
 export const PRODUCT_SUCCESS = 'PRODUCT_SUCCESS';
@@ -20,9 +20,13 @@ export function GetProductAction(productId, switchTab) {
 		});
 
         if (switchTab) {
+            // This should come only from 
+            // profile scene. In that case
+            // this goes to the home tab because 
+            // that is the only tab that is already
             dispatch({
                 type:SWITCH_TAB_SCENE,
-                tabId: SearchTabId,
+                tabId: HomeTabId,
                 sceneId: ProductSceneId,
                 item: product,
            });

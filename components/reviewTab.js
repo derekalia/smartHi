@@ -33,12 +33,29 @@ class ReviewTab extends Component {
 
     constructor(props) {
         super(props);
-    } 
+    }
+
+    shouldComponentUpdate(nextProps,nextState) {
+        if (nextProps.tabId != ReviewTabId) {
+            return false;
+        }
+        return true;
+    }
 
     componentWillReceiveProps(nextProps) {
         var sceneId = nextProps.sceneId;
+
+        // Check if need to reset tab.
+        if (sceneId != CameraSceneId) {
+            // reset scenes.
+            this.refs.navigator.popToTop();
+            return;
+        }
+
+        // Otherwise it is a scene change.
+        // Check existing routes first. BatsFix is this the right approach?
+
         var foundExisting = false;
-        // Check existing routes first
         var routelist = this.refs.navigator.getCurrentRoutes();
         for (var i=0; i < routelist.length; i++) {
             if (routelist[i].index == sceneId) {

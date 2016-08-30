@@ -44,7 +44,7 @@ export class HerbyBar extends Component {
         <View style={{height:60,backgroundColor:'#F9F9F9',borderBottomWidth:1,borderColor:'#B2B2B2',alignItems:'center',justifyContent:'center'}}>
         <View style={{flexDirection:'row',marginTop:20,marginHorizontal:10}}>
             <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'flex-start' }}>
-                <TouchableOpacity onPress={()=>this.props.navigator.jumpBack()} style={{flexDirection: "row",alignItems:'center'}}>
+                <TouchableOpacity onPress={()=>this.props.navigator.pop()} style={{flexDirection: "row",alignItems:'center'}}>
                     <Image  source={require("../media/BackArrow.png") } style={{ width: 12, height: 19 }} />
                     <Text style={{ fontSize: 18, color: "#007AFF" }}> Back</Text>
                 </TouchableOpacity>

@@ -35,9 +35,23 @@ class SearchTab extends Component {
         super(props);
 	}
 
+    shouldComponentUpdate(nextProps,nextState) {
+        if (nextProps.tabId != SearchTabId) {
+            return false;
+        }
+        return true;
+    }
+
     componentWillReceiveProps(nextProps) {
         var sceneId = nextProps.sceneId;
-        // If not found in existing push
+        if (SearchSceneId == sceneId) {
+            // reset scenes.
+            this.refs.navigator.popToTop();
+            return;
+        }
+        // Otherwise it is a scene change.
+        var sceneId = nextProps.sceneId;
+
         for(var i=0; i < TabScenes.length; i++) {
              if (TabScenes[i].index == sceneId) {
                 // BatsFix. Currently push scenes as they come along

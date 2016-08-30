@@ -15,6 +15,9 @@ class ReviewItem extends Component {
             comment: 'This is a comment. Dont give Farzad cookies. Cookie monster is dangerous!'
         }
     }
+    _onRating(t) {
+    }
+
     render () {
         // BatsFix. there should be no hard coded content here.
         return (
@@ -32,6 +35,7 @@ class ReviewItem extends Component {
                             starSize={15}
                             starColor={'red'}
                             rating={4}
+                            selectedStar={(t)=>this._onRating(t)}
                             />
                             </View>
                         <Text style={{ fontSize: 13 }}>

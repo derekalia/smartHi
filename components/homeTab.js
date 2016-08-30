@@ -35,10 +35,25 @@ class HomeTab extends Component {
 
     constructor(props) {
         super(props);
-    } 
+    }
+
+    shouldComponentUpdate(nextProps,nextState) {
+        if (nextProps.tabId != HomeTabId) {
+            return false;
+        }
+        return true;
+    }
 
     componentWillReceiveProps(nextProps) {
         var sceneId = nextProps.sceneId;
+        // Check if need to reset tab.
+        if (sceneId == HomeSceneId) {
+            // reset scenes because going to first scene
+            this.refs.navigator.popToTop();
+            return;
+        }
+        // Otherwise it is a scene change.
+
         // If not found in existing push
         for(var i=0; i < TabScenes.length; i++) {
              if (TabScenes[i].index == sceneId) {
