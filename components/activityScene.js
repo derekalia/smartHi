@@ -31,14 +31,20 @@ class ActivityScene extends Component {
     }
 
     render() {
+        var name = this.props.activity;
+        name = name[0].toUpperCase() + name.slice(1);
         return (
             <View style={[{ flex: 1 }]}>
-            <HerbyBar name=""  navigator={this.props.navigator}/>
-            <View style={{flex:1}}>
+            <HerbyBar name={name}  navigator={this.props.navigator}/>
+            <ScrollView style={{flex:1}}>
             
-                {/* <Image style={{ width: 170, height: 170, justifyContent: 'center', alignItems: 'center', alignSelf: 'center' }} source={require('../media/movieTile1.png')}> */}
                 <View>
-                <Image style={{ width: 377, height: 200, alignItems: 'flex-start', alignSelf: 'center',justifyContent:'flex-end'  }} source={require('../media/ActivitySceneImages/adventure11.png')}>
+                <Image style={{ width: 377, 
+                                height: 200, 
+                                alignItems: 'flex-start', 
+                                alignSelf: 'center',
+                                justifyContent:'flex-end'  }} 
+                                source={require('../media/ActivitySceneImages/adventure11.png')}>
 
                         <Text style={{ textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 5, textShadowColor: "black", fontSize: 24, color: "white", margin: 8}}>
                             {this.props.activity}
@@ -50,7 +56,7 @@ class ActivityScene extends Component {
                 <ScrollView style={{flex:1}}>
                     <ProductList productList={this.props.productList} goProduct={(t)=> this._goProduct(t)}/>
                 </ScrollView>
-            </View>
+            </ScrollView>
             </View>
         );
     }

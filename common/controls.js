@@ -14,30 +14,23 @@ export class HerbyBar extends Component {
         if (this.state.showFullHeart == false) {
             this.setState({showFullHeart:true});
         }
+        else {
+            this.setState({showFullHeart:false});
+        }
         this.props.onLike();
     }
     _getHeart() {
         if (this.props.onLike != null) {
-            if (this.state.showFullHeart) {
-                return (
-                <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'flex-end' }}>
-                    <TouchableOpacity onPress={()=> this._onLike()}>
-                        <Image  source={require("../media/fullHeart.png") } style={{ width: 21+3, height: 19+3 }} />
-                    </TouchableOpacity>
-                </View>
-                );
-            }
-            else {
-                return (
-                <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'flex-end' }}>
-                    <TouchableOpacity onPress={()=> this._onLike()}>
-                        <Image  source={require("../media/emptyHeart11.png") } style={{ width: 21+3, height: 19+3 }} />
-                    </TouchableOpacity>
-                </View>
-                );
-            }
+            return (
+            <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'flex-end' }}>
+                <TouchableOpacity onPress={()=> this._onLike()}>
+                    <Image  source={this.state.showFullHeart?require("../media/fullHeart.png"):require("../media/emptyHeart11.png") } 
+                    style={{ width: 21+3, height: 19+3 }} />
+                </TouchableOpacity>
+            </View>
+            );
         }
-        return null;
+        return (<View style={{flex:1}}/>); 
     }
     render() {
         return (
