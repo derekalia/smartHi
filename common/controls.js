@@ -24,13 +24,13 @@ export class HerbyBar extends Component {
             return (
             <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'flex-end' }}>
                 <TouchableOpacity onPress={()=> this._onLike()}>
-                    <Image  source={this.state.showFullHeart?require("../media/fullHeart.png"):require("../media/emptyHeart11.png") } 
+                    <Image  source={this.state.showFullHeart?require("../media/fullHeart.png"):require("../media/emptyHeart11.png") }
                     style={{ width: 21+3, height: 19+3 }} />
                 </TouchableOpacity>
             </View>
             );
         }
-        return (<View style={{flex:1}}/>); 
+        return (<View style={{flex:1}}/>);
     }
     render() {
         return (
@@ -74,7 +74,6 @@ export class HerbyFrameBar extends Component {
         return (
           <View>
           <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:42,backgroundColor:'white',
-
     shadowColor: "#000000",
     shadowOpacity: 0.3,
     shadowRadius: 2,

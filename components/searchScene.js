@@ -120,7 +120,7 @@ class SearchScene extends Component {
 
     render() {
         return (
-            <View style={[{flex:1,}]}>
+            <View style={[{flex:2,}]}>
                 <Navigator
                     ref="navigator"
                     configureScene={this.configureScene}
