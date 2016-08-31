@@ -1,5 +1,86 @@
 import React, { Component } from 'react';
-import {Animated, Dimensions, StyleSheet, Text, View, Slider, Image, TextInput, TouchableHighlight, TouchableOpacity,} from 'react-native'
+import {ScrollView, Animated, Dimensions, StyleSheet, Text, View, Slider, Image, TextInput, TouchableHighlight, TouchableOpacity,} from 'react-native'
+
+//
+// Helper class for HerbySearchBar
+//
+class HerbySearchBarItem extends Component {
+    _onPress() {
+        this.props.onPress(this.props.name);
+    }
+    render () {
+        var selected= (this.props.selected == this.props.name);
+        return(
+        <TouchableOpacity onPress={()=>this._onPress()} style={{marginLeft:10,marginRight:10,borderBottomWidth:selected?2:0,borderColor:'blue',}}>
+           <Text style={{marginBottom:16,color:selected?'blue':'#ECECEC',}}>{this.props.name}</Text> 
+        </TouchableOpacity>
+        );
+    }
+}
+
+export class HerbySearchBar extends Component {
+    constructor(props) {
+        super(props);
+        this._searchText = "";
+        if (this.props.entries.length > 0) {
+            this.state = {selected:this.props.entries[0]};
+        }
+    }
+    _onChange(event) {
+        this._searchText = event.nativeEvent.text;
+    }
+    _onSearch() {
+        if (this.props.startSearch != null) {
+            this.props.startSearch(this._searchText);
+        }
+    }
+    _selectMenu(entry) {
+        console.log("selected entry" + entry);
+        this.setState({selected:entry});
+    }
+    _getMenu() {
+        var menuItems = [];
+        for (var i=0; i < this.props.entries.length; i++) {
+            var name = this.props.entries[i];
+            menuItems.push(
+                <HerbySearchBarItem key={i} name={name} onPress={(t)=>this._selectMenu(t)} selected={this.state.selected}/>
+            );
+        }
+        return menuItems;
+    }
+    render() {
+        return(
+        <View>
+         <View style={{flexDirection: "row",marginTop:20,marginLeft:10,marginRight:10,}}>
+            <View style={[{ flex: 5,}]}>
+              <View style={{height: 34,borderWidth:3,borderColor:'#ECECEC',borderRadius:8,backgroundColor: '#ECECEC',}}>
+                <TextInput style={{marginHorizontal:10,
+                  height:28,
+                  fontSize: 20,
+                  backgroundColor: '#ECECEC',}}
+                    autoCapitalize  = "none"
+                    autoCorrect     = {false}
+                    placeholder     = "Search"
+                    returnKeyType   = "next"
+                    onChange        = {(e) => this._onChange(e)}
+                    clearButtonMode = 'always'
+                    />
+                    </View>
+            </View>
+            <View style={{flex:.1}}></View>
+            <TouchableOpacity style={{flex: .6,marginRight:10,}} onPress={this._startSearch}>
+                <View style={[{  borderWidth: 1,justifyContent:'center',alignItems:'center',borderColor: "#4A90E2", backgroundColor: "#4A90E2", height: 34,borderRadius:8}]}>
+                    <Text>+</Text>
+                </View>
+            </TouchableOpacity>
+        </View>
+        <ScrollView horizontal={true} style={{height:42, marginTop:10,marginBottom:16,borderBottomWidth:3,borderColor:'#ECECEC'}}>
+            {this._getMenu()}
+        </ScrollView>
+        </View>
+        );
+    }
+}
 
 export class HerbyBar extends Component {
     constructor(props) {
@@ -46,7 +127,7 @@ export class HerbyBar extends Component {
                     <Text style={{ fontSize: 18, fontWeight:'bold',alignSelf:'center' }}>{this.props.name}</Text>
             </View>
             {this._getHeart()}
-            </View>
+        </View>
         </View>
         );
     }
