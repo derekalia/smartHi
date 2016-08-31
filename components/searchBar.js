@@ -51,8 +51,8 @@ class SearchBar extends Component {
 
     render() {
         return (
-             <View style={{top:-555,width:340,justifyContent:'center',left:18}}>
-                 <View style={{flexDirection: "row"}}>
+             <View style={{top:-555,width:370,alignSelf:"center"}}>
+                 <View style={{flexDirection: "row",marginHorizontal:8}}>
                     <View style={[{ flex: 5,}]}>
                       <View style={{height: 34,borderWidth:3,borderColor:'#ECECEC',borderRadius:8,backgroundColor: '#ECECEC',}}>
                         <TextInput style={{marginHorizontal:10,
@@ -75,28 +75,38 @@ class SearchBar extends Component {
                             <Image style={{ height: 20, width: 20,alignSelf:'center', }} source={require("../media/SearchIcon0.png") }/>
                         </View>
                         </TouchableOpacity>
-
                 </View>
-               <View style={{flexDirection: "row",
-                             marginTop: 15,
-                             marginBottom: 2,
-                             marginHorizontal: -20,
-                             justifyContent:'space-around',
-                             alignItems:'center',
-                             height:20
-                            }}>
-                   <TouchableOpacity style={[this._frameStyle(ProductFrameId),{height: 20}]} onPress={()=>this._setFrame(ProductFrameId)}>
-                        <Text style={this._textStyle(ProductFrameId)}>PRODUCTS</Text>
-                   </TouchableOpacity>
-                   <TouchableOpacity style={[this._frameStyle(RetailerFrameId),{height: 20}]} onPress={()=>this._setFrame(RetailerFrameId)}>
-                        <Text style={this._textStyle(RetailerFrameId)}>STORES</Text>
-                   </TouchableOpacity>
-                   <TouchableOpacity style={[this._frameStyle(MapFrameId),{height: 20}]} onPress={()=>this._setFrame(MapFrameId)}>
-                        <Text style={this._textStyle(MapFrameId)}>MAP</Text>
-                   </TouchableOpacity>
-                   <TouchableOpacity style={[this._frameStyle(UserFrameId),,{height: 20}]} onPress={()=>this._setFrame(UserFrameId)}>
-                        <Text style={this._textStyle(UserFrameId)}>USERS</Text>
-                   </TouchableOpacity>
+
+                 <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:-3,height:42,shadowColor: "#000000",
+                 shadowOpacity: 0.3,
+                 shadowRadius: 2,
+                 shadowOffset: {
+                   height: 3,
+                   width: 0}}}>
+
+                 <View style={[this._frameStyle(ProductFrameId),{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }]}>
+                     <TouchableOpacity style={[{flexDirection: "row",alignItems:'center'}]} onPress={()=>this._setFrame(ProductFrameId)}>
+                          <Text style={[this._textStyle(ProductFrameId)]}>PRODUCTS</Text>
+                     </TouchableOpacity>
+                 </View>
+
+                 <View style={[this._frameStyle(RetailerFrameId),{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }]}>
+                     <TouchableOpacity style={[{flexDirection: "row",alignItems:'center'}]} onPress={()=>this._setFrame(RetailerFrameId)}>
+                         <Text style={[this._textStyle(RetailerFrameId)]}>STORES</Text>
+                     </TouchableOpacity>
+                 </View>
+
+                 <View style={[this._frameStyle(MapFrameId),{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }]}>
+                     <TouchableOpacity style={[{flexDirection: "row",alignItems:'center'}]} onPress={()=>this._setFrame(MapFrameId)}>
+                         <Text style={[this._textStyle(MapFrameId)]}>MAP</Text>
+                     </TouchableOpacity>
+                 </View>
+
+                 <View style={[this._frameStyle(UserFrameId),{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'center' }]}>
+                     <TouchableOpacity style={[{flexDirection: "row",alignItems:'center'}]} onPress={()=>this._setFrame(UserFrameId)}>
+                         <Text style={[this._textStyle(UserFrameId)]}>USERS</Text>
+                     </TouchableOpacity>
+                 </View>
                </View>
            </View>
         );
@@ -118,16 +128,20 @@ const Styles={
         backgroundColor: 'white',
     },
     normalText: {
+      fontSize:14,
         color:"#9B9B9B",
     },
     selectedText: {
+      fontSize:14,
         color:"#468EE5",
     },
     normalFrame: {
+
         backgroundColor: 'white',
         borderBottomWidth: 0,
     },
     selectedFrame: {
+        fontSize:14,
         backgroundColor: 'white',
         borderBottomWidth: 1,
         borderColor:"#468EE5",
