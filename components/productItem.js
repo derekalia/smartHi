@@ -21,6 +21,10 @@ class ProductItem extends Component {
         this.setState(this.props.product);
     }
 
+    _onStarRating(r) {
+        //Doesnt do anything but StarRating requires this.
+    }
+
     render() {
         //
         // BatsFix. This needs to be flexible with regard to a device with and height.

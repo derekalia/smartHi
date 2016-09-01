@@ -11,6 +11,7 @@ import StarRating from 'react-native-star-rating';
 import {GetProductAction} from '../actions';
 import ReviewList         from './reviewList.js';
 import ProductList        from './productList.js';
+import ProducerMenu       from './producerMenu.js';
 import {HerbyBar,HerbyFrameBar}    from '../common/controls.js';
 
 
@@ -46,16 +47,6 @@ class ProducerInfo extends Component {
     }
 }
 
-class ProducerMenu extends Component {
-    render() {
-        return (
-        <View>
-                    <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
-            <ProductList style={{ marginHorizontal: 10 }} productList={this.props.producer.products} goProduct={(id)=>this.props.goProduct(id)}/>
-        </View>
-        );
-    };
-}
 class ProducerReview extends Component {
     render() {
         return (
