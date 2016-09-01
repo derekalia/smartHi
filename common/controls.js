@@ -75,6 +75,16 @@ export class HerbySearchBar extends Component {
         <ScrollView horizontal={true} style={{height:42, marginTop:10,marginBottom:16,borderBottomWidth:3,borderColor:'#ECECEC'}}>
             {this._getMenu()}
         </ScrollView>
+
+        <View style={{flexDirection:"row",alignSelf:'flex-end',alignItems:'center',marginHorizontal:14,marginTop:-12}}>
+          <Text>Sort By: </Text>
+          <View style={{backgroundColor:'#ECECEC',flexDirection:"row",alignItems:'center',width:66}}>
+            <Text style={{color:'black',margin:5}}>
+              Price
+            </Text>
+            <Image style={{width:14,height:8}} source={require("../media/Triangle1.png")} />
+          </View>
+        </View>
         </View>
         );
     }

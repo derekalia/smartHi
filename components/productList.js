@@ -17,19 +17,19 @@ class ProductList extends Component {
     // BatsFix. minHeight is needed to ensure product is visible
     render() {
         return (
-            <View style={{minHeight:100}}>
+              <View style={{minHeight:100,}}>              
                 {this._renderProducts()}
             </View>
         );
     }
 
-        
+
     //
-    // BatsFix. ListView is not painting on first entry. React-native bug? 
+    // BatsFix. ListView is not painting on first entry. React-native bug?
     //
     _renderProducts() {
         var products = [];
-        if (this.props.productList != null) {         
+        if (this.props.productList != null) {
             for (var i=0; i < this.props.productList.length; i++) {
                 var productId = this.props.productList[i].id;
                 var product   = this.props.productList[i];
@@ -37,11 +37,11 @@ class ProductList extends Component {
                     <ProductItem goProduct={(productId) => this.props.goProduct(productId)} product={product} key={productId}/>
                 );
             }
-        } 
+        }
         return products;
     }
-     
-    /*    
+
+    /*
     _renderProductItem(product) {
         return (
             <ProductItem goProduct={(productId) => this.props.goProduct(productId)} product={product} key={product.id}/>

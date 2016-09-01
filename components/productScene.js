@@ -63,7 +63,9 @@ class ProductRelated extends Component {
                       <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Related Products</Text>
                   </View>
               </View>
+              <ScrollView>
                 <ProductList productList={this.props.product.related} goProduct={(id)=>this._goProduct(id)}/>
+                </ScrollView>
             </ScrollView>
         );
     }
@@ -89,8 +91,8 @@ class ProductScene extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        
-    } 
+
+    }
     _setFrame(frameId) {
         this.refs.navigator.jumpTo(ProductFrames[frameId]);
         this.setState({frameId: frameId});

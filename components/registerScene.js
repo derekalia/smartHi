@@ -81,7 +81,7 @@ class LoginScene extends Component {
                         onChange        = {this._enterUserName.bind(this) }
                         />
                     <View style={{ alignItems: 'center', alignItems: "center" }}>
-                        <Image style={{ margin: 9, width: 30, height: 30 }} source={require("../media/mailicon1.png") }/>
+                        <Image style={{ margin: 9, width: 25+2, height: 33+2 }} source={require("../media/userName.png") }/>
                     </View>
                 </View>
 
