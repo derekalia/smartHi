@@ -9,10 +9,10 @@ class HerbySearchBarItem extends Component {
         this.props.onPress(this.props.name);
     }
     render () {
-        var selected= (this.props.selected == this.props.name);
+        var selected = (this.props.selected == this.props.name);
         return(
-        <TouchableOpacity onPress={()=>this._onPress()} style={{marginLeft:10,marginRight:10,borderBottomWidth:selected?2:0,borderColor:'blue',}}>
-           <Text style={{marginBottom:16,color:selected?'blue':'#ECECEC',}}>{this.props.name}</Text> 
+        <TouchableOpacity onPress={()=>this._onPress()} style={{marginHorizontal:10,marginTop:7,borderBottomWidth:selected?1:0,borderColor:'#468EE5',}}>
+           <Text style={{marginBottom:16,color:selected?'#468EE5':'#9B9B9B',}}>{this.props.name}</Text>
         </TouchableOpacity>
         );
     }
@@ -68,10 +68,8 @@ export class HerbySearchBar extends Component {
                     </View>
             </View>
             <View style={{flex:.1}}></View>
-            <TouchableOpacity style={{flex: .6,marginRight:10,}} onPress={this._startSearch}>
-                <View style={[{  borderWidth: 1,justifyContent:'center',alignItems:'center',borderColor: "#4A90E2", backgroundColor: "#4A90E2", height: 34,borderRadius:8}]}>
-                    <Text>+</Text>
-                </View>
+            <TouchableOpacity style={{flex: .6,marginRight:0,}} onPress={this._startSearch}>
+                <Image style={{width:34,height:34}} source={require("../media/plusButton11.png")}/>
             </TouchableOpacity>
         </View>
         <ScrollView horizontal={true} style={{height:42, marginTop:10,marginBottom:16,borderBottomWidth:3,borderColor:'#ECECEC'}}>
