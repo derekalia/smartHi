@@ -51,7 +51,7 @@ class SearchBar extends Component {
 
     render() {
         return (
-             <View style={{top:-555,width:370,alignSelf:"center"}}>
+             <View style={{top:-900,justifyContent:'flex-start',alignSelf:'flex-start',alignItems:'flex-start',backgroundColor:'white'}}>
                  <View style={{flexDirection: "row",marginHorizontal:8}}>
                     <View style={[{ flex: 5,}]}>
                       <View style={{height: 34,borderWidth:3,borderColor:'#ECECEC',borderRadius:8,backgroundColor: '#ECECEC',}}>

@@ -18,24 +18,24 @@ import RetailerFrame         from './retailerFrame.js';
 import MapFrame              from './mapFrame.js';
 import UserFrame             from './userFrame.js';
 
-import {StartSearchAction,GetProductAction}   from '../actions';
+import {StartSearchAction, GetProductAction}   from '../actions';
 
 import {ProductFrameId, MapFrameId, UserFrameId, RetailerFrameId, }   from '../common/const.js';
 
 
-const ProductId  = 0;
-const MapId      = 1;
-const UserId     = 2;
+const ProductId = 0;
+const MapId = 1;
+const UserId = 2;
 const RetailerId = 3;
 
 const SearchFrames = [
     //
     // BatsFix. Not sure what to do with all results frame. Is it going to list all of the items
     // by products, retailers, producers??
-    {component: ProductFrame,  index: ProductFrameId},
-    {component: MapFrame,      index: MapFrameId},
-    {component: UserFrame,     index: UserFrameId},
-    {component: RetailerFrame, index: RetailerFrameId},
+    { component: ProductFrame, index: ProductFrameId },
+    { component: MapFrame, index: MapFrameId },
+    { component: UserFrame, index: UserFrameId },
+    { component: RetailerFrame, index: RetailerFrameId },
 ];
 
 
@@ -44,7 +44,7 @@ class SearchScene extends Component {
         super(props);
         this._searchTerm = "";
         this._attributes = [];
-        this.state = {frameId:this.props.frameId};
+        this.state = { frameId: this.props.frameId };
         //
         // BatsFix. Fix this so any frame can be set here.
         //
@@ -68,15 +68,165 @@ class SearchScene extends Component {
         // to pass a prop to the component, that prop
         // first needs to be passed to the navigator object.
         return (
-            <View style={{marginTop:110,}}>
-              <route.component addRemoveFilter={navigator.props.addRemoveFilter}/>
+            <ScrollView>
+                <View style={{ marginTop: 110, }}>
+                    <route.component addRemoveFilter={navigator.props.addRemoveFilter}/>
 
-              <Text>Price</Text>
-              <Text>Distance</Text>
-              <Text>Rating at least</Text>
-              <Text>Hours</Text>
+                    <View style={{ marginHorizontal: 10 }}>
 
-            </View>
+                        <View style={[{ flex: 1, alignItems: 'flex-start',marginBottom:10,marginTop:10}]}>
+                                <Text style={{fontWeight:'bold',fontSize:16}}>Price</Text>
+                        </View>
+
+                        <View style={{ flexDirection: 'row', marginHorizontal: 0 }}>
+
+                        <View style={{flex:1}}>
+                            <TouchableOpacity style={[{borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                <Text style={{margin: 6}}>Any</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{flex:1,left:-1}}>
+                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                  <Text style={{margin: 6}}>$</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{flex:1,left:-3}}>
+                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                <Text style={{ margin: 6}}>$$</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{flex:1,left:-4}}>
+                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                <Text style={{ margin: 6}}>$$$</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{flex:1,left:-5}}>
+                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                <Text style={{ margin: 6}}>$$$$</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{flex:1}}>
+                        </View>
+                            </View>
+
+                      <View style={{backgroundColor:'#ECECEC',height:1,marginTop:25,marginBottom:0}}/>
+
+
+                        <View style={[{ flex: 1, alignItems: 'flex-start',marginBottom:10,marginTop:20}]}>
+                                <Text style={{fontWeight:'bold',fontSize:16}}>Distance</Text>
+                        </View>
+
+                        <View style={{ flexDirection: 'row', marginHorizontal: 0 }}>
+
+                        <View style={{flex:1}}>
+                            <TouchableOpacity style={[{borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                <Text style={{margin: 6}}>Any</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{flex:1,left:-1}}>
+                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                  <Text style={{margin: 6}}>0.5 mi</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{flex:1,left:-3}}>
+                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                <Text style={{ margin: 6}}>1 mi</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{flex:1,left:-4}}>
+                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                <Text style={{ margin: 6}}>5 mi</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{flex:1,left:-5}}>
+                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                <Text style={{ margin: 6}}>10 mi</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{flex:1}}>
+                        </View>
+                      </View>
+
+                      <View style={{backgroundColor:'#ECECEC',height:1,marginTop:25,marginBottom:0}}/>
+
+
+                                              <View style={[{ flex: 1, alignItems: 'flex-start',marginBottom:10,marginTop:20}]}>
+                                                      <Text style={{fontWeight:'bold',fontSize:16}}>Rating at least</Text>
+                                              </View>
+
+                                              <View style={{ flexDirection: 'row', marginHorizontal: 0 }}>
+
+                                              <View style={{flex:1}}>
+                                                  <TouchableOpacity style={[{borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                                      <Text style={{margin: 6}}>Any</Text>
+                                                  </TouchableOpacity>
+                                              </View>
+
+                                              <View style={{flex:1,left:-1}}>
+                                                  <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                                          <Text style={{margin: 6}}>1 star</Text>
+                                                  </TouchableOpacity>
+                                              </View>
+
+                                              <View style={{flex:1,left:-3}}>
+                                                  <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                                      <Text style={{ margin: 6}}>2 star</Text>
+                                                  </TouchableOpacity>
+                                              </View>
+
+                                              <View style={{flex:1,left:-4}}>
+                                                  <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                                      <Text style={{ margin: 6}}>3 star</Text>
+                                                  </TouchableOpacity>
+                                              </View>
+
+                                              <View style={{flex:1,left:-5}}>
+                                                  <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                                      <Text style={{ margin: 6}}>4 star</Text>
+                                                  </TouchableOpacity>
+                                              </View>
+
+                                              <View style={{flex:1}}>
+                                              </View>
+                                            </View>
+
+                                            <View style={{backgroundColor:'#ECECEC',height:1,marginTop:25,marginBottom:0}}/>
+
+
+                                                                    <View style={[{ flex: 1, alignItems: 'flex-start',marginBottom:10,marginTop:20}]}>
+                                                                            <Text style={{fontWeight:'bold',fontSize:16}}>Hours</Text>
+                                                                    </View>
+
+                                                                    <View style={{ flexDirection: 'row', marginHorizontal: 0 }}>
+
+                                                                    <View style={{flex:1}}>
+                                                                        <TouchableOpacity style={[{borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                                                            <Text style={{margin: 6}}>Any</Text>
+                                                                        </TouchableOpacity>
+                                                                    </View>
+
+                                                                    <View style={{flex:1,left:-1}}>
+                                                                        <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
+                                                                              <Text style={{margin: 6}}>Open Now</Text>
+                                                                        </TouchableOpacity>
+                                                                    </View>
+                                                                    <View style={{flex:2 }}>
+                                                                    </View>
+                                                                  </View>
+
+  </View>
+  </View>
+            </ScrollView>
         );
     }
 
@@ -85,22 +235,22 @@ class SearchScene extends Component {
     }
 
     _setFrame(frameId) {
-        this.setState({frameId:frameId});
+        this.setState({ frameId: frameId });
         if (frameId == ProductFrameId) {
             this.refs.navigator.jumpTo(SearchFrames[ProductId]);
         }
         else
-        if (frameId == MapFrameId) {
-            this.refs.navigator.jumpTo(SearchFrames[MapId]);
-        }
-        else
-        if (frameId == UserFrameId) {
-            this.refs.navigator.jumpTo(SearchFrames[UserId]);
-        }
-        else
-        if (frameId == RetailerFrameId) {
-            this.refs.navigator.jumpTo(SearchFrames[RetailerId]);
-        }
+            if (frameId == MapFrameId) {
+                this.refs.navigator.jumpTo(SearchFrames[MapId]);
+            }
+            else
+                if (frameId == UserFrameId) {
+                    this.refs.navigator.jumpTo(SearchFrames[UserId]);
+                }
+                else
+                    if (frameId == RetailerFrameId) {
+                        this.refs.navigator.jumpTo(SearchFrames[RetailerId]);
+                    }
     }
 
     _startSearch() {
@@ -115,25 +265,26 @@ class SearchScene extends Component {
     // pass this prop to everyone.
     //
     _addRemoveFilter(filter) {
-        console.log("filter added removed"+filter);
+        console.log("filter added removed" + filter);
     }
 
     render() {
         return (
-            <View style={[{flex:2,}]}>
+            <View style={[{height:1000,justifyContent:'flex-start'}]}>
                 <Navigator
                     ref="navigator"
+                    navigationBar={
+                        <SearchBar frameId={this.state.frameId}
+                            setSearchTerm={(t) => this._setSearchTerm(t) }
+                            startSearch={() => this._startSearch() } />
+                    }
                     configureScene={this.configureScene}
                     renderScene={this.renderScene}
                     initialRoute = {SearchFrames[this._initialFrame]}
                     initialRouteStack = {SearchFrames}
-                    navigationBar={
-                        <SearchBar frameId={this.state.frameId}
-                            setSearchTerm={(t)=>this._setSearchTerm(t)}
-                            startSearch={()=>this._startSearch()} />
-                    }
-                    addRemoveFilter={(t)=>this._addRemoveFilter(t)}
-                />
+
+                    addRemoveFilter={(t) => this._addRemoveFilter(t) }
+                    />
             </View>
         );
     }
@@ -149,4 +300,4 @@ function mapStateToProps(state) { return { frameId: state.NavigationReducer.fram
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ StartSearchAction }, dispatch); }
 
-module.exports = connect(mapStateToProps,mapActionToProps)(SearchScene);
+module.exports = connect(mapStateToProps, mapActionToProps)(SearchScene);

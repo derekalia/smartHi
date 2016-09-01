@@ -93,8 +93,8 @@ class FilterList extends Component {
     render() {
         return (
             <View >
-            <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
-                <View>
+            {/* <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/> */}
+                <View style={{}}>
                     {this._renderSelectedFilters(this.state.currentFilters)}
                 </View>
                 <View style={{alignItems:'center'}}>
@@ -133,10 +133,8 @@ class FilterList extends Component {
             filters.push(<FilterItem filter={filterArray[i]} key={filterArray[i].name} onPress={(t) => this._addRemoveFilter(t)}/>);
         }
         return (
-            <View style={{flexWrap: 'wrap'}}>
-            <ScrollView horizontal={true}>
+            <View style={{flexWrap: 'wrap',flexDirection:'row'}}>
                 {filters}
-            </ScrollView>
             </View>
         );
     }
