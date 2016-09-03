@@ -68,8 +68,8 @@ class SearchScene extends Component {
         // to pass a prop to the component, that prop
         // first needs to be passed to the navigator object.
         return (
-            <ScrollView>
-                <View style={{ marginTop: 110, }}>
+            <ScrollView style={{marginTop:110,}}>
+                <View>
                     <route.component addRemoveFilter={navigator.props.addRemoveFilter}/>
 
                     <View style={{ marginHorizontal: 10 }}>

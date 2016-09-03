@@ -133,7 +133,7 @@ const Styles={
     },
     selectedText: {
       fontSize:14,
-        color:"#468EE5",
+      color:"#468EE5",
     },
     normalFrame: {
 
@@ -141,9 +141,8 @@ const Styles={
         borderBottomWidth: 0,
     },
     selectedFrame: {
-        fontSize:14,
         backgroundColor: 'white',
-        borderBottomWidth: 1,
+        borderBottomWidth: 2,
         borderColor:"#468EE5",
     },
 }
