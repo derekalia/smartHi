@@ -4,8 +4,8 @@ import {Dimensions,StyleSheet, Text, View, ScrollView, Image, TextInput, Touchab
 
 
 //get internal components
-import {HerbySearchBar,HerbyFrameBar} from '../common/controls.js';
 import ProductList        from './productList.js';
+import HerbySearchBar     from './herbySearchBar.js';
 
 class ProducerMenu extends Component {
     _setFrame(t) {

@@ -10,6 +10,7 @@ import StarRating from 'react-native-star-rating';
 //get internal components
 import {GetProductAction,ShowMapAction} from '../actions';
 import {HerbyBar,HerbyFrameBar} from '../common/controls.js';
+import HerbySearchBar from './herbySearchBar.js';
 
 import ReviewList         from './reviewList.js';
 import ProductList        from './productList.js';
@@ -18,13 +19,12 @@ import RetailerInfo       from './retailerInfo.js';
 class RetailerMenu extends Component {
     render() {
         return (
-        <View style={{ marginHorizontal:0, backgroundColor:'white'}}>
-                    <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
-            <View style={{ height: 40, justifyContent: 'center' }}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Menu</Text>
-            </View>
-            <ProductList productList={this.props.retailer.products} goProduct={(id)=>this.props.goProduct(id)}/>
+        <View>
+            <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+            <HerbySearchBar entries={['ALL','FLOWER','CONCENTRATE','INFUSED','ONE','TWO','THREE']}/>
+            <ProductList style={{ marginHorizontal: 10 }} productList={this.props.retailer.products} goProduct={(id)=>this.props.goProduct(id)}/>
         </View>
+
         );
     };
 }
