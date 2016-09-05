@@ -57,7 +57,7 @@ class ProductRelated extends Component {
         return (
 
             <ScrollView style={{backgroundColor:'white'}}>
-                        <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+              <View style={{backgroundColor:'#ECECEC',height:10,marginHorizontal:0}}/>
               <View style={{ marginHorizontal: 10, marginTop: 5,marginBottom:5 }}>
                   <View style={{ height: 40, justifyContent: 'center' }}>
                       <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Related Products</Text>
