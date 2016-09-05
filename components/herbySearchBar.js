@@ -72,29 +72,29 @@ export class HerbySearchBar extends Component {
         return(
         <View>
         <Modal
-            animationType={'slide'}
+            animationType={'fade'}
             transparent={true}
             visible={this.state.showFilters}
             onRequestClose={() => {this._showFilters(false)}}>
-            <View style={{flex:1,backgroundColor:'transparent',marginBottom:10,}}>
-            <View style={{marginTop:50,
+            <View style={{flex:1}}>
+              <View style={{marginTop:66,
                           alignSelf:'center',
                           width:modalWidth,
                           height: modalHeight,
-                          borderRadius:20,
-                          backgroundColor:'white', 
+                          borderRadius:10,
+                          backgroundColor:'white',
                           justifyContent:'center',
                           alignItems:'center'}}>
-                <View style={{width:300,alignItems:'center',marginTop:10,paddingBottom:10,borderBottomWidth:1, borderColor:'#DEDEDE',}}> 
-                   <Text style={{fontSize:20,fontWeight:'bold',color:'black'}}>Select Tags</Text> 
+                <View style={{width:300,alignItems:'center',marginTop:10,paddingBottom:10,borderBottomWidth:0, borderColor:'#DEDEDE',}}>
+                   <Text style={{fontSize:20,fontWeight:'bold',color:'black'}}>Select Tags</Text>
                 </View>
-                <View style={{marginTop:10,padding:10,marginBottom:10,flex:3}}>
+                <View style={{marginTop:0,padding:5,marginBottom:0,flex:3}}>
                     <FilterList style={{flex:1}} productCount={1} addRemoveFilter={(t)=>this._addRemoveFilter(t)} noButton={true}/>
                 </View>
-                <View style={{marginTop:10,
+                <View style={{marginTop:5,
                               width:300,
-                              paddingTop:10,
-                              alignItems:'center',flexDirection:'row',justifyContent:'space-around',borderTopWidth:1, borderColor:'#DEDEDE'}}> 
+                              marginBottom:10,
+                              alignItems:'center',flexDirection:'row',justifyContent:'space-around',borderTopWidth:0, borderColor:'#DEDEDE'}}>
                    <HerbyButton2 name='Done' onPress={()=>this._showFilters(false)}/>
                    <HerbyButton2 name='Cancel' onPress={()=>this._showFilters(false)}/>
                 </View>
@@ -111,7 +111,7 @@ export class HerbySearchBar extends Component {
                     autoCapitalize  = "none"
                     autoCorrect     = {false}
                     placeholder     = "Search"
-                    returnKeyType   = "next"
+                    returnKeyType   = "search"
                     onChange        = {(e) => this._onChange(e)}
                     clearButtonMode = 'always'
                     />
@@ -122,7 +122,7 @@ export class HerbySearchBar extends Component {
                 <Image style={{width:34,height:34}} source={require("../media/plusButton11.png")}/>
             </TouchableOpacity>
         </View>
-        <ScrollView horizontal={true} style={{height:42, marginTop:10,marginBottom:16,borderBottomWidth:3,borderColor:'#ECECEC'}}>
+        <ScrollView horizontal={true} style={{height:42, marginTop:10,marginBottom:20,borderBottomWidth:10,borderColor:'#ECECEC'}}>
             {this._getMenu()}
         </ScrollView>
 
