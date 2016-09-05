@@ -76,7 +76,7 @@ export class HerbySearchBar extends Component {
             transparent={true}
             visible={this.state.showFilters}
             onRequestClose={() => {this._showFilters(false)}}>
-            <View style={{flex:1,backgroundColor:'#DEDEDE',marginBottom:10,}}>
+            <View style={{flex:1,backgroundColor:'transparent',marginBottom:10,}}>
             <View style={{marginTop:50,
                           alignSelf:'center',
                           width:modalWidth,
@@ -88,9 +88,9 @@ export class HerbySearchBar extends Component {
                 <View style={{width:300,alignItems:'center',marginTop:10,paddingBottom:10,borderBottomWidth:1, borderColor:'#DEDEDE',}}> 
                    <Text style={{fontSize:20,fontWeight:'bold',color:'black'}}>Select Tags</Text> 
                 </View>
-                <ScrollView style={{marginTop:10,padding:10,marginBottom:10,}}>
-                    <FilterList productCount={1} addRemoveFilter={(t)=>this._addRemoveFilter(t)} noButton={true}/>
-                </ScrollView>
+                <View style={{marginTop:10,padding:10,marginBottom:10,flex:3}}>
+                    <FilterList style={{flex:1}} productCount={1} addRemoveFilter={(t)=>this._addRemoveFilter(t)} noButton={true}/>
+                </View>
                 <View style={{marginTop:10,
                               width:300,
                               paddingTop:10,

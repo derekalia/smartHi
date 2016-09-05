@@ -92,15 +92,15 @@ class FilterList extends Component {
 
     render() {
         return (
-            <View style={{flex:1}}>
-                <View>
+            <ScrollView style={{flex:1,}} stickyHeaderIndices={[0]}>
+                <View style={{backgroundColor:'white',marginBottom:10,borderBottomWidth:1,borderColor:'#DEDEDE'}}>
                     {this._renderSelectedFilters(this.state.currentFilters)}
                 </View>
                 <View style={{alignItems:'center'}}>
                 {this._renderFilterButton()}
                 </View>
                 {this._renderFilters()}
-            </View>
+            </ScrollView>
         );
     }
 
@@ -188,9 +188,7 @@ class FilterList extends Component {
         var filterButtonText = "Show Filtering Options";
         // BatsFix. How do we get width here???
         if (this.props.noButton != null) {
-            return (
-            <View style={{borderTopWidth:1,width:300,height:1,borderColor:'#DEDEDE',}}/> 
-            );
+            return null;
         }
         if (this.state.filtersVisible) {
             filterButtonText = "Hide Filtering Options";
