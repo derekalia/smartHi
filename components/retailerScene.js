@@ -20,7 +20,6 @@ class RetailerMenu extends Component {
     render() {
         return (
         <View>
-            <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
             <HerbySearchBar entries={['ALL','FLOWER','CONCENTRATE','INFUSED','ONE','TWO','THREE']}/>
             <ProductList style={{ marginHorizontal: 10 }} productList={this.props.retailer.products} goProduct={(id)=>this.props.goProduct(id)}/>
         </View>
@@ -32,7 +31,6 @@ class RetailerReview extends Component {
     render() {
         return (
 <ScrollView style={{backgroundColor:'white'}}>
-            <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
             <ReviewList/>
 </ScrollView>
         );

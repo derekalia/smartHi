@@ -152,19 +152,19 @@ export class HerbyButton extends Component {
 const HerbyButton2Styles = StyleSheet.create({
     button: {
         margin: 5,
-        borderRadius: 20,
+        borderRadius: 10,
         height:40,
-        borderWidth: 1,
+        borderWidth: 0,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'white',
-        borderColor: 'blue',
+        backgroundColor: '#468EE5',
     },
     buttonText: {
         marginTop: 10,
         marginBottom: 10,
-        marginHorizontal: 15,
-        color: 'blue',
+        marginHorizontal: 20,
+        color: 'white',
+        backgroundColor:'#468EE5'
     },
 });
 

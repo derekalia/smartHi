@@ -93,7 +93,7 @@ class FilterList extends Component {
     render() {
         return (
             <ScrollView style={{flex:1,}} stickyHeaderIndices={[0]}>
-                <View style={{backgroundColor:'white',marginBottom:10,borderBottomWidth:1,borderColor:'#DEDEDE'}}>
+                <View style={{backgroundColor:'white',marginBottom:5,borderBottomWidth:1,borderColor:'white'}}>
                     {this._renderSelectedFilters(this.state.currentFilters)}
                 </View>
                 <View style={{alignItems:'center'}}>
