@@ -19,6 +19,7 @@ import LicenseeScene        from './licenseeScene.js';
 import LicenseeStoreScene   from './licenseeStoreScene.js';
 import LicenseeProductScene from './licenseeProductScene.js';
 
+import {HerbyBar}           from '../common/controls.js';
 
 // Import const ids.
 
@@ -85,6 +86,7 @@ class ProfileTab extends Component {
         else {
             return (
                 <View style={{flex:1}}>
+                    <HerbyBar navigator={navigator}/>
                     <route.component tabId={ProfileTabId}/>
                 </View>
             );

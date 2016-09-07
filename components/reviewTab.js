@@ -17,6 +17,8 @@ import ProductInfoScene   from './productInfoScene.js';
 import RateProductScene   from './rateProductScene.js';
 import RateStoreScene     from './rateStoreScene.js';
 
+import {HerbyBar}         from '../common/controls.js';
+
 const CameraIndex       = 0;
 const ProductInfoIndex  = 1;
 const RateProductIndex  = 2;
@@ -46,7 +48,7 @@ class ReviewTab extends Component {
         var sceneId = nextProps.sceneId;
 
         // Check if need to reset tab.
-        if (sceneId != CameraSceneId) {
+        if (sceneId == CameraSceneId) {
             // reset scenes.
             this.refs.navigator.popToTop();
             return;
@@ -84,6 +86,7 @@ class ReviewTab extends Component {
         else {
             return (
                 <View style={{flex:1}}>
+                    <HerbyBar navigator={navigator}/>
                     <route.component tabId={ReviewTabId}/>
                 </View>
             );
