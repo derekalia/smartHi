@@ -1,6 +1,60 @@
 import React, { Component } from 'react';
-import {Modal,ScrollView, Animated, Dimensions, StyleSheet, Text, View, Slider, Image, TextInput, TouchableHighlight, TouchableOpacity,} from 'react-native'
+import {Picker,Modal,ScrollView, Animated, Dimensions, StyleSheet, Text, View, Slider, Image, TextInput, TouchableHighlight, TouchableOpacity,} from 'react-native'
 
+export class HerbyPicker extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            selectedValue:this.props.options[0],
+            showPicker:false,
+        }
+    }
+    _onValueChange(value) {
+        this.setState({selectedValue:value});
+        this._showPicker();
+    }
+    _showPicker() {
+        var current = this.state.showPicker;
+        if (!current) {
+            this.setState({showPicker:true});
+        }
+        else {
+            this.setState({showPicker:false});
+        }
+    }
+    _getItems() {
+        var items = [];
+        for (var i=0; i < this.props.options.length; i++) {
+            var value = this.props.options[i]; 
+            items.push(
+                <Picker.Item label={value} value={value} key={value}/>
+            );
+        }
+        return items;
+    }
+    render() {
+        return (
+        <View style={{zIndex:999}}>
+            <TouchableOpacity style={{height:this.props.style.height}} onPress={()=>this._showPicker()}>
+                <Text style={{fontSize:this.props.fontSize}}>{this.state.selectedValue}</Text>
+            </TouchableOpacity>
+            <Picker selectedValue={this.state.selectedValue} onValueChange={(t)=>this._onValueChange(t)} 
+                style={{
+                    left:20,
+                    top:0,
+                    backgroundColor:'white',
+                    borderWidth:1,
+                    borderColor:'#CCCCCC',
+                    position:'absolute',
+                    width:100,
+                    zIndex:this.state.showPicker?999:-999,
+                    opacity:this.state.showPicker?100:0}}>
+                {this._getItems()}
+            </Picker>
+        </View>
+        );
+    }
+}
 export class HerbyBar extends Component {
     constructor(props) {
         super(props);
@@ -100,7 +154,7 @@ export class HerbyFrameBar extends Component {
             },
             selected: {
                 backgroundColor: 'white',
-                borderBottomWidth: 1,
+                borderBottomWidth: 2,
                 borderColor:"#468EE5",
             },
             selectedText: {
