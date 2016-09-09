@@ -76,7 +76,7 @@ export class HerbySearchBar extends Component {
             transparent={true}
             visible={this.state.showFilters}
             onRequestClose={() => {this._showFilters(false)}}>
-            <View style={{flex:1}}>
+            <View style={{flex:1,backgroundColor:'lightgray',opacity:1}}>
               <View style={{marginTop:66,
                           alignSelf:'center',
                           width:modalWidth,
