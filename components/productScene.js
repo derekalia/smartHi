@@ -11,7 +11,7 @@ import StarRating from 'react-native-star-rating';
 
 //get internal components
 import {GetProductAction,GetRetailerAction,GetProducerAction,} from '../actions';
-import {HerbyBar,HerbyFrameBar} from '../common/controls.js';
+import {HerbyPicker,HerbyBar,HerbyFrameBar} from '../common/controls.js';
 
 import ReviewList     from './reviewList.js';
 import RetailerList   from './retailerList.js';
@@ -30,20 +30,27 @@ class ProductReview extends Component {
 }
 
 class ProductRetailer extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {selectedValue:'Distance',showPicker:false,pickerHeight:20};
+    }
+
     _goRetailer(id) {
         this.props.goRetailer(id);
     }
+
     render() {
         return (
             <ScrollView style={{backgroundColor:'white'}}>
-                        <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+            <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+            <HerbyPicker style={{height:20,fontSize:20}} options={['Distance','Price','Rating']}/>
             <View style={{ marginHorizontal: 10, marginTop: 5,marginBottom:5 }}>
                 <View style={{ height: 40, justifyContent: 'center' }}>
                     <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Retail Locations</Text>
                 </View>
             </View>
-
-                <RetailerList retailers={this.props.product.retailers} goRetailer={(id) => this._goRetailer(id)}/>
+            <RetailerList retailers={this.props.product.retailers} goRetailer={(id) => this._goRetailer(id)}/>
             </ScrollView>
         );
     }
@@ -129,7 +136,7 @@ class ProductScene extends Component {
               style={{marginTop:0,height:this._height,backgroundColor:'white'}}
               stickyHeaderIndices={[1]}>
               <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
-              <HerbyFrameBar entries={['INFO','REVIEWS','LOCATIONS','RELATED']} setFrame={(t)=>this._setFrame(t)}/>
+              <HerbyFrameBar entries={['INFO','REVIEWS','RETAILERS','RELATED']} setFrame={(t)=>this._setFrame(t)}/>
               <Navigator
                   style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
                   ref="navigator"
