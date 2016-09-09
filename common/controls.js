@@ -100,7 +100,7 @@ export class HerbyFrameBar extends Component {
             },
             selected: {
                 backgroundColor: 'white',
-                borderBottomWidth: 1,
+                borderBottomWidth: 2,
                 borderColor:"#468EE5",
             },
             selectedText: {
