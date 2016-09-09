@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Modal,ScrollView, Animated, Dimensions, StyleSheet, Text, View, Slider, Image, TextInput, TouchableHighlight, TouchableOpacity,} from 'react-native'
 import FilterList         from './filterList.js';
-import {HerbyButton2}     from '../common/controls.js';
+import {HerbyPicker,HerbyButton2}     from '../common/controls.js';
 //
 // Helper class for HerbySearchBar
 //
@@ -70,7 +70,7 @@ export class HerbySearchBar extends Component {
         var modalWidth  = this.maxWidth*0.9;
         console.log("width is " + modalWidth + " " + this.maxWidth);
         return(
-        <View>
+        <View style={{zIndex:999}}>
         <Modal
             animationType={'fade'}
             transparent={true}
@@ -125,13 +125,10 @@ export class HerbySearchBar extends Component {
         <ScrollView horizontal={true} style={{height:42, marginTop:10,marginBottom:20,borderBottomWidth:10,borderColor:'#ECECEC'}}>
             {this._getMenu()}
         </ScrollView>
-
-        <View style={{flexDirection:"row",alignSelf:'flex-end',alignItems:'center',marginHorizontal:14,marginTop:-12}}>
+        <View style={{flexDirection:"row",alignSelf:'flex-start',alignItems:'center',marginHorizontal:14,marginTop:10,zIndex:999}}>
           <Text>Sort By: </Text>
           <View style={{backgroundColor:'#ECECEC',flexDirection:"row",alignItems:'center',width:66}}>
-            <Text style={{color:'black',margin:5}}>
-              Price
-            </Text>
+            <HerbyPicker options={['Price','Distance','Rating']} style={{height:20}}/>
             <Image style={{width:14,height:8}} source={require("../media/Triangle1.png")} />
           </View>
         </View>

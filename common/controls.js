@@ -43,6 +43,8 @@ export class HerbyPicker extends Component {
                     left:20,
                     top:0,
                     backgroundColor:'white',
+                    borderWidth:1,
+                    borderColor:'#CCCCCC',
                     position:'absolute',
                     width:100,
                     zIndex:this.state.showPicker?999:-999,
