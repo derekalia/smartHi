@@ -73,7 +73,7 @@ class MapFrame extends Component {
         return(
             <View style={[{ backgroundColor: 'white' }]}>
                 <MapView
-                    style={{ height: 520, width: 375,top:-10 }}
+                    style={{ height: 520, width: 375 }}
                     showsUserLocation={true}
                     region={{ latitude: 47.597713, longitude: -122.321777, latitudeDelta: 0.5, longitudeDelta: 0.5, }}
                     showsCompass = {true}
