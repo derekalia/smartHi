@@ -59,10 +59,7 @@ const Styles = StyleSheet.create({
 
     loginButton: {
         flex: 1,
-        height: 52,
         marginHorizontal: 30,
-        marginTop: 10,
-        marginBottom: 10,
         borderRadius: 3,
         backgroundColor: '#4A90E2',
         justifyContent: 'center',
@@ -72,10 +69,7 @@ const Styles = StyleSheet.create({
 
     signUpButton: {
         flex: 1,
-        height: 52,
         marginHorizontal: 30,
-        marginTop: 10,
-        marginBottom: 10,
         borderRadius: 3,
         backgroundColor: '#50E3C2',
         justifyContent: 'center',
@@ -99,8 +93,6 @@ const Styles = StyleSheet.create({
         backgroundColor: '#999999',
     },
     backgroundImage: {
-        flex: 1,
-        width: null,
-        height: null,
+        flex: 1,        
     },
 });
