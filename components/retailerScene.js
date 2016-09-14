@@ -19,10 +19,10 @@ import RetailerInfo       from './retailerInfo.js';
 class RetailerMenu extends Component {
     render() {
         return (
-        <View>
+        <ScrollView>
             <HerbySearchBar entries={['ALL','FLOWER','CONCENTRATE','INFUSED','ONE','TWO','THREE']}/>
             <ProductList style={{ marginHorizontal: 10 }} productList={this.props.retailer.products} goProduct={(id)=>this.props.goProduct(id)}/>
-        </View>
+        </ScrollView>
 
         );
     };
