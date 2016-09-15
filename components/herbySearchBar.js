@@ -126,8 +126,8 @@ export class HerbySearchBar extends Component {
             {this._getMenu()}
         </ScrollView>
         <View style={{flexDirection:"row",alignSelf:'flex-start',justifyContent:'center',alignItems:'center',marginLeft:10,zIndex:999,flex:1,height:25,top:-5}}>
-          <Text style={{fontWeight:'bold',fontSize:16}}>Sort By: </Text>    
-          <View style={{backgroundColor:'#ECECEC',flexDirection:"row",alignItems:'center',justifyContent:'flex-start',alignSelf:'center',height:20,width:80,borderRadius:4,height:25}}>
+          <Text style={{fontWeight:'bold',fontSize:16}}>Sort By: </Text>
+          <View style={{backgroundColor:'#ECECEC',flexDirection:"row",alignItems:'center',justifyContent:'center',alignSelf:'center',height:20,width:80,borderRadius:4,height:25}}>
             <HerbyPicker options={['Price ','Distance ','Rating ']} style={{fontSize:16}} />
             <Image style={{width:14,height:8,marginRight:3,alignItems:'flex-end'}} source={require("../media/Triangle1.png")} />
           </View>
