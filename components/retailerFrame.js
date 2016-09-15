@@ -10,6 +10,7 @@ import {connect} from 'react-redux';
 
 import RetailerList   from './retailerList.js';
 import {GetRetailerAction}   from '../actions';
+import {HerbyMulti} from '../common/controls.js';
 
 
 class RetailerFrame extends Component {
@@ -27,12 +28,17 @@ class RetailerFrame extends Component {
 
     render() {
         return(
-        <ScrollView style={{marginTop: 0,}}>
-            <View style={{}}>
-                {/*Search results section*/}
-                <RetailerList retailers={this.props.retailerList} goRetailer={(id)=> this._goRetailer(id)}/>
-            </View>
-        </ScrollView>
+        <View style={{backgroundColor:'white',flex:1,flex:1}}>
+            <HerbyMulti items={['Any','$','$$','$$$','$$$$']} label='Price'/>
+            <View style={{flex:1,margin:5,borderBottomColor:'#DEDEDE',borderBottomWidth:2}}/>
+            <HerbyMulti items={['Any','0.5 mi','1 mi','5 mi','10 mi']} label='Distance'/>
+            <View style={{flex:1,margin:5,borderBottomColor:'#DEDEDE',borderBottomWidth:2}}/>
+            <HerbyMulti items={['Any','1 star','2 stars','3 stars','4 stars']} label='Rating at least'/>
+            <View style={{flex:1,margin:5,borderBottomColor:'#DEDEDE',borderBottomWidth:2}}/>
+            <HerbyMulti items={['Any','Open Now']} label='Hours'/>
+            {/*Search results section*/}
+            <RetailerList retailers={this.props.retailerList} goRetailer={(id)=> this._goRetailer(id)}/>
+        </View>
         );
     }
 }

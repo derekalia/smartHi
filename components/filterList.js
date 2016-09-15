@@ -9,6 +9,7 @@ import {StyleSheet, Text, View, TouchableHighlight,ScrollView, TouchableOpacity,
 // Import filters.
 import {FiltersActivity, FiltersEffect, FiltersType,FiltersCategory,FiltersSymptoms} from '../common/filters.js';
 import FilterItem   from './filterItem.js';
+import {HerbySlider} from '../common/controls.js';
 
 class FilterList extends Component {
     constructor(props) {
@@ -174,12 +175,8 @@ class FilterList extends Component {
                     </View>
                     {this._renderFiltersArray(this.state.filters['symptoms'],false)}
                 </View>
-                <View style={{ height: 40, justifyContent: 'center', }}>
-                    <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Price </Text>
-                </View>
-                <View style={{ height: 40, justifyContent: 'center', }}>
-                    <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Distance </Text>
-                </View>
+                <HerbySlider min={0} max={200} minLabel={'$0'} maxLabel={'$200'} label='Price'/>
+                <HerbySlider min={0} max={10} minLabel={''} maxLabel={'10 miles'} label='Distance from current location'/>
             </View>
         );
     }

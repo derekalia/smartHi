@@ -1,6 +1,84 @@
 import React, { Component } from 'react';
 import {Picker,Modal,ScrollView, Animated, Dimensions, StyleSheet, Text, View, Slider, Image, TextInput, TouchableHighlight, TouchableOpacity,} from 'react-native'
 
+class HerbyMultiItem extends Component {
+    render() {
+        var borderColor = '#DEDEDE';
+        var borderWidth = 1;
+        if (this.props.selected == this.props.id) {
+            borderColor = 'blue';
+            borderWidth = 2;
+        }
+        return(
+            <TouchableOpacity 
+             onPress={() => this.props.onPress(this.props.id)} 
+             style={{borderBottomWidth:borderWidth,borderBottomColor:borderColor,borderColor:'#DEDEDE',flex:1,borderWidth:1,justifyContent:'center',alignItems:'center'}}>
+                <Text style={{fontWeight:'bold',fontSize:16,margin:6}}>{this.props.name}</Text>
+            </TouchableOpacity>
+        )
+    }
+}
+
+export class HerbyMulti extends Component {
+    constructor(props) {
+        super(props);
+        this.state= {selected: 0 };
+    }
+    _onPress(value) {
+        this.setState({selected:value});
+    }
+    _getItems() {
+        var items = [];
+        for (var i=0; i < this.props.items.length; i++) {
+            value = this.props.items[i];
+            items.push(
+                <HerbyMultiItem id={i} name={value} selected={this.state.selected} onPress={(t)=>this._onPress(t)} key={i}/>
+            );
+        }
+        return items;
+    }
+    render() {
+        return (
+            <View style={{flex:1,margin:10}}>
+            <Text style={{justifyContent:'flex-start',fontSize:16, fontWeight:'bold',marginTop:10,marginBottom:10}}>{this.props.label}</Text>
+            <View style={{right:0,justifyContent:'flex-start',flexDirection:'row',}}>
+                {this._getItems()}
+            </View>
+            </View>
+        );
+    }
+}
+
+export class HerbySlider extends Component {
+    constructor(props) {
+        super(props);
+        this.styles = StyleSheet.create({
+            label: {
+                fontSize:18,
+                fontWeight:'bold',
+                marginLeft:10,
+            },
+        });
+    }
+    _onValueChange(value) {
+        if (this.props.onValueChange) {
+            this.props.onValueChange(value)
+        }
+    }
+    render() {
+        return (
+            <View style={{margin:10}}>
+                <Text style={this.styles.label}>{this.props.label}</Text>
+                <View style={{flexDirection:'row'}}>
+                    <Text style={this.styles.label}>{this.props.minLabel}</Text>
+                    <Slider minimumValue={this.props.min} maximumValue={this.props.max} onSlidingComplete={(t)=>this._onValueChange(t)} style={{flex:1,marginLeft:10}}/>
+                    <Text style={this.styles.label}>{this.props.maxLabel}</Text>
+                </View>
+            </View>
+        )
+    }
+}
+ 
 export class HerbyPicker extends Component {
     constructor(props) {
         super(props);
@@ -236,7 +314,6 @@ export class HerbyButton2 extends Component {
         );
     }
 }
-
 
 export class HerbyHeader extends Component {
     render() {

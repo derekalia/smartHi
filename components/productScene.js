@@ -22,7 +22,7 @@ class ProductReview extends Component {
     render() {
         return (
             <ScrollView style={{backgroundColor:'white'}}>
-                        <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
                 <ReviewList/>
             </ScrollView>
         );

@@ -36,6 +36,8 @@ class ProductFrame extends Component {
             <FilterList productCount={this.props.products.length} addRemoveFilter={this.props.addRemoveFilter}/>
             {/*Search results section*/}
             <ProductList productList={this.props.products} goProduct={(id)=> this._goProduct(id)}/>
+            {/*Without trailing space scroll view is blocking some of the filters.*/}
+            <View style={{height:200}}/>
         </View>
         </ScrollView>
         </View>

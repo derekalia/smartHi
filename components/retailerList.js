@@ -14,7 +14,7 @@ class RetailerList extends Component {
 
     render() {
         return (
-            <View>
+            <View style={{marginTop:10}}>
                 {this._renderRetailers()}
             </View>
         );

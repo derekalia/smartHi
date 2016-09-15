@@ -69,163 +69,7 @@ class SearchScene extends Component {
         // first needs to be passed to the navigator object.
         return (
             <ScrollView style={{marginTop:100,}}>
-                <View>
-                    <route.component addRemoveFilter={navigator.props.addRemoveFilter}/>
-
-                    <View style={{ marginHorizontal: 10 }}>
-
-                        <View style={[{ flex: 1, alignItems: 'flex-start',marginBottom:10,marginTop:10}]}>
-                                <Text style={{fontWeight:'bold',fontSize:16}}>Price</Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', marginHorizontal: 0 }}>
-
-                        <View style={{flex:1}}>
-                            <TouchableOpacity style={[{borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                <Text style={{margin: 6}}>Any</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={{flex:1,left:-1}}>
-                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                  <Text style={{margin: 6}}>$</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={{flex:1,left:-3}}>
-                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                <Text style={{ margin: 6}}>$$</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={{flex:1,left:-4}}>
-                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                <Text style={{ margin: 6}}>$$$</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={{flex:1,left:-5}}>
-                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                <Text style={{ margin: 6}}>$$$$</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={{flex:1}}>
-                        </View>
-                            </View>
-
-                      <View style={{backgroundColor:'#ECECEC',height:1,marginTop:25,marginBottom:0}}/>
-
-
-                        <View style={[{ flex: 1, alignItems: 'flex-start',marginBottom:10,marginTop:20}]}>
-                                <Text style={{fontWeight:'bold',fontSize:16}}>Distance</Text>
-                        </View>
-
-                        <View style={{ flexDirection: 'row', marginHorizontal: 0 }}>
-
-                        <View style={{flex:1}}>
-                            <TouchableOpacity style={[{borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                <Text style={{margin: 6}}>Any</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={{flex:1,left:-1}}>
-                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                  <Text style={{margin: 6}}>0.5 mi</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={{flex:1,left:-3}}>
-                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                <Text style={{ margin: 6}}>1 mi</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={{flex:1,left:-4}}>
-                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                <Text style={{ margin: 6}}>5 mi</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={{flex:1,left:-5}}>
-                            <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                <Text style={{ margin: 6}}>10 mi</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        <View style={{flex:1}}>
-                        </View>
-                      </View>
-
-                      <View style={{backgroundColor:'#ECECEC',height:1,marginTop:25,marginBottom:0}}/>
-
-
-                                              <View style={[{ flex: 1, alignItems: 'flex-start',marginBottom:10,marginTop:20}]}>
-                                                      <Text style={{fontWeight:'bold',fontSize:16}}>Rating at least</Text>
-                                              </View>
-
-                                              <View style={{ flexDirection: 'row', marginHorizontal: 0 }}>
-
-                                              <View style={{flex:1}}>
-                                                  <TouchableOpacity style={[{borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                                      <Text style={{margin: 6}}>Any</Text>
-                                                  </TouchableOpacity>
-                                              </View>
-
-                                              <View style={{flex:1,left:-1}}>
-                                                  <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                                          <Text style={{margin: 6}}>1 star</Text>
-                                                  </TouchableOpacity>
-                                              </View>
-
-                                              <View style={{flex:1,left:-3}}>
-                                                  <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                                      <Text style={{ margin: 6}}>2 star</Text>
-                                                  </TouchableOpacity>
-                                              </View>
-
-                                              <View style={{flex:1,left:-4}}>
-                                                  <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                                      <Text style={{ margin: 6}}>3 star</Text>
-                                                  </TouchableOpacity>
-                                              </View>
-
-                                              <View style={{flex:1,left:-5}}>
-                                                  <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                                      <Text style={{ margin: 6}}>4 star</Text>
-                                                  </TouchableOpacity>
-                                              </View>
-
-                                              <View style={{flex:1}}>
-                                              </View>
-                                            </View>
-
-                                            <View style={{backgroundColor:'#ECECEC',height:1,marginTop:25,marginBottom:0}}/>
-
-
-                                                                    <View style={[{ flex: 1, alignItems: 'flex-start',marginBottom:10,marginTop:20}]}>
-                                                                            <Text style={{fontWeight:'bold',fontSize:16}}>Hours</Text>
-                                                                    </View>
-
-                                                                    <View style={{ flexDirection: 'row', marginHorizontal: 0 }}>
-
-                                                                    <View style={{flex:1}}>
-                                                                        <TouchableOpacity style={[{borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                                                            <Text style={{margin: 6}}>Any</Text>
-                                                                        </TouchableOpacity>
-                                                                    </View>
-
-                                                                    <View style={{flex:1,left:-1}}>
-                                                                        <TouchableOpacity style={[{ borderWidth:1,borderColor:'black', flexDirection: "row", alignItems: 'center',justifyContent:'center',}]}>
-                                                                              <Text style={{margin: 6}}>Open Now</Text>
-                                                                        </TouchableOpacity>
-                                                                    </View>
-                                                                    <View style={{flex:2 }}>
-                                                                    </View>
-                                                                  </View>
-
-  </View>
-  </View>
+                <route.component addRemoveFilter={navigator.props.addRemoveFilter}/>
             </ScrollView>
         );
     }
@@ -240,17 +84,17 @@ class SearchScene extends Component {
             this.refs.navigator.jumpTo(SearchFrames[ProductId]);
         }
         else
-            if (frameId == MapFrameId) {
-                this.refs.navigator.jumpTo(SearchFrames[MapId]);
-            }
-            else
-                if (frameId == UserFrameId) {
-                    this.refs.navigator.jumpTo(SearchFrames[UserId]);
-                }
-                else
-                    if (frameId == RetailerFrameId) {
-                        this.refs.navigator.jumpTo(SearchFrames[RetailerId]);
-                    }
+        if (frameId == MapFrameId) {
+            this.refs.navigator.jumpTo(SearchFrames[MapId]);
+        }
+        else
+        if (frameId == UserFrameId) {
+            this.refs.navigator.jumpTo(SearchFrames[UserId]);
+        }
+        else
+        if (frameId == RetailerFrameId) {
+            this.refs.navigator.jumpTo(SearchFrames[RetailerId]);
+        }
     }
 
     _startSearch() {
