@@ -97,9 +97,6 @@ class ProductScene extends Component {
         this._height = height;
     }
 
-    componentWillReceiveProps(nextProps) {
-
-    }
     _setFrame(frameId) {
         this.refs.navigator.jumpTo(ProductFrames[frameId]);
         this.setState({frameId: frameId});
