@@ -205,17 +205,16 @@ export class HerbyFrameBar extends Component {
         }
         return (
           <View>
-          <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:42,backgroundColor:'white',
-    shadowColor: "#000000",
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-    shadowOffset: {
-      height: 2,
-      width: 0
-    }
-        }}>
-            {menuItems}
-          </View>
+              <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:42,backgroundColor:'white',
+                    shadowColor: "#000000",
+                    shadowOpacity: 0.3,
+                    shadowRadius: 2,
+                    shadowOffset: {
+                      height: 2,
+                      width: 0
+                    }}}>
+                {menuItems}
+              </View>
           </View>
         );
     }

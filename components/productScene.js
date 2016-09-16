@@ -128,7 +128,7 @@ class ProductScene extends Component {
         console.log("in productScene render item is " + this.props.item);
         return (
         <View>
-        <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+          <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
           <ScrollView
               style={{marginTop:0,height:this._height,backgroundColor:'white'}}
               stickyHeaderIndices={[1]}>
