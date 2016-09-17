@@ -5,7 +5,7 @@ import {
 } from './navigation.js';
 
 import {SearchTabId, SearchSceneId, ProductFrameId, RetailerFrameId, MapFrameId, UserFrameId,} from '../common/const.js';
-import {SearchProducts,SearchRetailers} from './data.js';
+import {SearchProducts,SearchRetailers,SearchUsers} from './data.js';
 
 export const SEARCH_START = 'SEARCH_START';
 export const SEARCH_SUCCESS = 'SEARCH_SUCCESS';
@@ -41,7 +41,7 @@ export function StartSearchAction(searchTerm,filters,frameId) {
     }
     else
     if (frameId == UserFrameId) {
-        var user = SearchUsers(searchTerm);
+        var users = SearchUsers(searchTerm);
         return {
             type: SEARCH_SUCCESS,
             users: users,

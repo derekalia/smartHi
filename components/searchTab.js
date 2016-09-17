@@ -12,21 +12,11 @@ import Styles         from './styles.js';
 import {SearchSceneId, ProductSceneId, ProducerSceneId, RetailerSceneId, SearchTabId, }   from '../common/const.js';
 
 import SearchScene    from './searchScene.js';
-import ProductScene   from './productScene.js';
-import RetailerScene  from './retailerScene.js';
-import ProducerScene  from './producerScene.js';
-
 
 const SearchIndex     = 0;
-const ProductIndex    = 1;
-const RetailerIndex   = 2;
-const ProducerIndex   = 3;
 
 var TabScenes = [
     {title: "Search",        component: SearchScene,   index: SearchSceneId},
-    {title: "Product",       component: ProductScene,  index: ProductSceneId},
-    {title: "Retailer",      component: RetailerScene, index: RetailerSceneId},
-    {title: "Producer",      component: ProducerScene, index: ProducerSceneId},
 ];
 
 class SearchTab extends Component {

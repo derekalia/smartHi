@@ -8,6 +8,7 @@ const newsActions       = require('./news.js');
 const activityActions   = require('./activity.js');
 const mapActions        = require('./map.js');
 const reviewActions     = require('./review.js');
+const profileActions    = require('./profile.js');
 
 module.exports = {
   ...loginActions,
@@ -20,4 +21,5 @@ module.exports = {
   ...activityActions,
   ...mapActions,
   ...reviewActions,
+  ...profileActions,
 };

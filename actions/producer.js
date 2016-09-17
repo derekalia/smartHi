@@ -4,7 +4,7 @@ import {
     SWITCH_TAB_SCENE,
 } from './navigation.js';
 
-import {ProducerSceneId} from '../common/const.js';
+import {ProducerSceneId,HomeTabId} from '../common/const.js';
 import {GetProducer} from './data.js';
 
 export const PRODUCER_SUCCESS = 'PRODUCER_SUCCESS';
@@ -16,17 +16,11 @@ export function GetProducerAction(producerId) {
         // BatsFix. Fetch producer data first using retailerId
         var producer = GetProducer(producerId);        
 
-        // Then dispatch retailer data
         dispatch({
-            type: PRODUCER_SUCCESS,
-            producer: producer,
-		});
-
-        // Then show product data scene 
-        dispatch({
-			type: SWITCH_SCENE,
-			sceneId: ProducerSceneId,
+            type:SWITCH_TAB_SCENE,
+            tabId: HomeTabId,
+            sceneId: ProducerSceneId,
             item: producer,
-		});
+        });
     }
 }

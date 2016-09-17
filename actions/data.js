@@ -1,3 +1,52 @@
+const TestUsers = [
+{   id:'0',
+    name:'Hash Tag',
+    address:'Seattle, WA',
+    score:'100000',
+    followers:['1','2','3','4'],
+    following:['2','3'],
+    fpid:['4','5'],
+    pid:['0','1'],
+},
+{   id:'1',
+    name:'Cookie Monster',
+    address:'Seattle, WA',
+    score:'100000',
+    followers:['2','3','4'],
+    following:['2','3'],
+    fpid:['4','0'],
+    pid:['2','1'],
+},
+{   id:'2',
+    name:'VW Bug',
+    address:'Redmond, WA',
+    score:'100000',
+    followers:['1','3','4'],
+    following:['1','3'],
+    fpid:['0','1'],
+    pid:['1','4'],
+},
+{   id:'3',
+    name:'330 BMW',
+    address:'Redmond, WA',
+    score:'100000',
+    followers:['2','3'],
+    following:['2','3'],
+    fpid:['3','4','5','6'],
+    pid:['2','4'],
+},
+{   id:'4',
+    name:'X5 BMW',
+    address:'Issaquah, WA',
+    score:'100000',
+    followers:['3','4'],
+    following:['3','4'],
+    fpid:['0','1','5','6'],
+    pid:['2','3'],
+},
+];
+
+
 const TestProducers = [
 {   id:'0',
     name:'Forged Reason',
@@ -346,6 +395,20 @@ function GetProducerItem(pid){
     return null;
 }
 
+function GetProducerItems(pid) {
+    var producerItems = [];
+    for (var i=0; i < pid.length; i++) {
+        for (var j=0; j < TestProducers.length; j++) {
+            if (TestProducers[j].id == pid[i]) {
+                producerItems.push(TestProducers[j]);
+                break;
+            }
+        }
+    }
+    return producerItems;
+}
+
+
 function GetProductItems(pid) {
     var productItems = [];
     for (var i=0; i < pid.length; i++) {
@@ -358,6 +421,28 @@ function GetProductItems(pid) {
     }
     return productItems;
 }
+
+function GetUserItems(pid) {
+    var userItems = [];
+    for (var i=0; i < pid.length; i++) {
+        for (var j=0; j < TestUsers.length; j++) {
+            if (TestUsers[j].id == pid[i]) {
+                userItems.push(TestUsers[j]);
+                break;
+            }
+        }
+    }
+    return userItems;
+}
+
+export function SearchUsers(searchTerm) {
+    var users = [];
+    for (var i=0; i < TestUsers.length; i++) {
+         users.push(TestUsers[i]);
+    }
+    return users;
+}
+
 
 export function SearchProducers(searchTerm) {
     // BatsFix. use the term later!
@@ -423,6 +508,22 @@ export function GetProducer(id) {
             producer = TestProducers[i];
             producer.products = GetProductItems(producer.pid);
             return producer;
+        }
+    }
+    return null;
+}
+
+export function GetUserProfile(id) {
+    var user = null;
+    for (var i=0; i < TestUsers.length; i++) {
+        if (TestUsers[i].id == id) {
+            user = TestUsers[i];
+            user.products  = GetProductItems(user.fpid);
+            user.producers = GetProducerItems(user.pid);
+            user.retailers = GetRetailerItems(user.rid);
+            user.following = GetUserItems(user.following);
+            user.follower  = GetUserItems(user.follower);
+            return user;
         }
     }
     return null;

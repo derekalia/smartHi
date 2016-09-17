@@ -284,7 +284,7 @@ const HerbyButton2Styles = StyleSheet.create({
     button: {
         margin: 5,
         borderRadius: 10,
-        height:40,
+        height:30,
         borderWidth: 0,
         justifyContent: 'center',
         alignItems: 'center',

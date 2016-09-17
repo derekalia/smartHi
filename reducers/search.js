@@ -1,5 +1,5 @@
 
-import {ProductFrameId, RetailerFrameId,} from '../common/const.js';
+import {ProductFrameId, RetailerFrameId,UserFrameId,} from '../common/const.js';
 
 import {
     SEARCH_SUCCESS,
@@ -16,6 +16,7 @@ const initialState = {
     products: [],
     producers: [],
     retailers: [],
+    users: [],
 }
 
 export default function SearchReducer(state, action) {
@@ -40,6 +41,10 @@ export default function SearchReducer(state, action) {
             else
             if (action.frameId == RetailerFrameId) {
                 newState.retailers = action.retailers;
+            }
+            else
+            if (action.frameId == UserFrameId) {
+                newState.users = action.users;
             }
             return newState;
 

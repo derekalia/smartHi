@@ -37,7 +37,7 @@ export default function UserReducer(state, action) {
             // BatsFix. Following need to be returned with logon token etc.
             newState.user.ratingCount   = 224;
             newState.user.followerCount = 120;
-            newState.user.points        = 789;
+            newState.user.score         = 789;
             newState.user.address       = 'Seattle, WA';
             newState.user.instagram     = 'Derek @ Instagram';
             return newState;

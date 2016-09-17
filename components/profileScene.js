@@ -49,6 +49,22 @@ class UserSocial extends Component {
         );
     }
 }
+class UserHeader extends Component {
+    render() {
+        return(
+        <View>
+              <View style={{flexDirection:'row'}}>
+              <Image source={require('../media/headshot1.png') } style={{ width: 100, height: 100, alignSelf:'flex-start' }}/>
+              <View style={{alignItems:'center',flex:1}}>
+              <Text style={{ fontSize: 22, margin: 8, fontWeight: "bold" }}>{this.props.name}</Text>
+              <Text style={{ fontSize: 16, marginTop: 1 }}>{this.props.address}</Text>
+              <Text style={{ fontSize: 16, marginTop: 1 }}>{this.props.score}</Text>
+              </View>
+              </View>
+        </View>
+        );
+    }
+}
 
 const ReviewsFrameId     = 0;
 const FavoritesFrameId   = 1;
@@ -113,10 +129,10 @@ class ProfileScene extends Component {
                 </View>
             </TouchableOpacity>
              <ScrollView
-                  style={{height:this._height,backgroundColor:'transparent',marginTop:-20,}}
+                  style={{height:this._height,backgroundColor:'transparent'}}
                   contentContainerStyle={{margin:0,padding:0}}
                   stickyHeaderIndices={[1]}>
-                  <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380,}}/>
+                  <UserHeader name={this.props.user.name} address={this.props.user.address} score={this.props.user.score}/>
                   <HerbyFrameBar entries={['FAVORITES','REVIEWS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
                   <Navigator
                       style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
