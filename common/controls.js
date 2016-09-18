@@ -210,7 +210,7 @@ export class HerbyFrameBar extends Component {
             menuItems.push(this._getMenu(i));
         }
         return (
-          <View>
+          
               <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:42,backgroundColor:'white',
                     shadowColor: "#000000",
                     shadowOpacity: 0.3,
@@ -221,7 +221,7 @@ export class HerbyFrameBar extends Component {
                     }}}>
                 {menuItems}
               </View>
-          </View>
+
         );
     }
 

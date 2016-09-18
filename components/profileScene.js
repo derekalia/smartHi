@@ -175,7 +175,7 @@ class ProfileScene extends Component {
                 </View>
             </TouchableOpacity>
              <ScrollView
-                  style={{height:this._height,backgroundColor:'transparent'}}
+                  style={{height:this._height,backgroundColor:'transparent',marginTop:-20}}
                   contentContainerStyle={{margin:0,padding:0}}
                   stickyHeaderIndices={[1]}>
                   <UserHeader name={this.props.user.name} address={this.props.user.address} score={this.props.user.score}/>
