@@ -47,6 +47,10 @@ class ProfileTab extends Component {
     componentWillReceiveProps(nextProps) {
         var sceneId = nextProps.sceneId;
 
+        if (nextProps.tabId != ProfileTabId) {
+            return;
+        }
+      
         // Check if need to reset tab.
         if (sceneId == ProfileSceneId) {
             // reset scenes.
@@ -80,7 +84,7 @@ class ProfileTab extends Component {
     renderScene(route, navigator) {
         if (route.index == ProfileSceneId) {
             return (
-                <route.component tabId={ProfileTabId}/>
+                <route.component tabId={ProfileTabId} user={navigator.props.user}/>
             );
         }
         else {
@@ -104,9 +108,19 @@ class ProfileTab extends Component {
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
                 initialRoute = {TabScenes[0]}
+                user={this.props.user}
                 />
         );
     }
 }
-function mapStateToProps(state) { return { sceneId: state.NavigationReducer.sceneId, switchScene: state.NavigationReducer.switchScene } }
+
+function mapStateToProps(state) { 
+    return { 
+        tabId: state.NavigationReducer.tabId, 
+        sceneId: state.NavigationReducer.sceneId, 
+        switchScene: state.NavigationReducer.switchScene, 
+        user: state.UserReducer.profile 
+    }
+} 
+
 module.exports = connect(mapStateToProps)(ProfileTab);

@@ -18,6 +18,10 @@ import {SettingsSceneId,} from '../common/const.js';
 import {HerbyFrameBar,HerbyBar,}   from '../common/controls.js';
 import ProductItem from './productItem.js';
 import ReviewList  from './reviewList.js';
+import ProductList from './productList.js';
+import RetailerList from './retailerList.js';
+import UserList from './userList.js';
+import {HerbyButton2,} from '../common/controls.js';
 
 class UserReviews extends Component {
     render() {
@@ -29,22 +33,65 @@ class UserReviews extends Component {
         );
     }
 }
+class ProducerList extends Component {
+    //BatsFix placeholder for producer list
+    render() {
+        return null;
+    }
+}
 class UserFavorites extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { frameId: 0 };
+    }
+    _setFrame(frameId) {
+        this.setState({frameId:frameId});
+    }
+
+    _getFavorites() {
+        if (this.state.frameId == 0) {
+            return (
+                <ProductList productList={this.props.user.products}/>
+            )
+        }
+        else
+        if (this.state.frameId == 1) {
+            return (
+                <RetailerList retailerList={this.props.user.retailers}/>
+            )
+        }
+        else
+        if (this.state.frameId == 2) {
+            return (
+                <ProducerList producerList={this.props.user.producers}/>
+            )
+        }
+    }
     render() {
         return (
-            <ScrollView style={{backgroundColor:'green',}}>
+            <ScrollView style={{backgroundColor:'transparent',}}>
                 <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
-                <Text>Placeholder for user favorites</Text>
+                <HerbyFrameBar entries={['PRODUCTS','STORES','PRODUCERS']} setFrame={(t)=>this._setFrame(t)}/>
+                {this._getFavorites()}
             </ScrollView>
         );
     }
 }
+
 class UserSocial extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {frameId:0};
+    }
+    _setFrame(frameId) {
+        this.setState({frameId:frameId});
+    }
     render() {
         return (
-            <ScrollView style={{backgroundColor:'yellow'}}>
+            <ScrollView style={{backgroundColor:'transparent'}}>
                 <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
-                <Text>Placeholder for user social</Text>
+                <HerbyFrameBar entries={['FOLLOWER','FOLLOWING']} setFrame={(t)=>this._setFrame(t)}/>
+                <UserList userList={this.state.frameId == 0?this.props.user.following:this.props.user.follower}/>
             </ScrollView>
         );
     }
@@ -66,8 +113,8 @@ class UserHeader extends Component {
     }
 }
 
-const ReviewsFrameId     = 0;
-const FavoritesFrameId   = 1;
+const FavoritesFrameId   = 0;
+const ReviewsFrameId     = 1;
 const SocialFrameId      = 2;
 
 const ProfileFrames = [
@@ -83,9 +130,8 @@ class ProfileScene extends Component {
         super(props);
         var {width,height} = Dimensions.get('window');
         this._height = height;
-
         // these should come from the app state.
-        this.state = {user:this.props.user};
+        this.state = {user:this.props.user,frameId:FavoritesFrameId};
     }
 
     componentWillReceiveProps(nextProps) {
@@ -150,14 +196,8 @@ class ProfileScene extends Component {
     }
 }
 
-// This function is used to convert state to props passed to this component
-function mapStateToProps(state) {
-    return {
-        user: state.UserReducer.user,
-    }
-}
 //  This function is used to convert action to props passed to this component.
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,SwitchSceneAction, }, dispatch); }
 
-module.exports = connect(mapStateToProps, mapActionToProps)(ProfileScene);
+module.exports = connect(null, mapActionToProps)(ProfileScene);

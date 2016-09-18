@@ -50,7 +50,7 @@ class ProductRetailer extends Component {
                     <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Retail Locations</Text>
                 </View>
             </View>
-            <RetailerList retailers={this.props.product.retailers} goRetailer={(id) => this._goRetailer(id)}/>
+            <RetailerList retailerList={this.props.product.retailers} goRetailer={(id) => this._goRetailer(id)}/>
             </ScrollView>
         );
     }
@@ -125,7 +125,6 @@ class ProductScene extends Component {
 
     render() {
         var scrollerHeight = this._height;
-        console.log("in productScene render item is " + this.props.item);
         return (
         <View>
           <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>

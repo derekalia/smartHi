@@ -47,6 +47,10 @@ class ReviewTab extends Component {
     componentWillReceiveProps(nextProps) {
         var sceneId = nextProps.sceneId;
 
+        if (nextProps.tabId != ReviewTabId) {
+            return;
+        }
+
         // Check if need to reset tab.
         if (sceneId == CameraSceneId) {
             // reset scenes.
@@ -109,5 +113,10 @@ class ReviewTab extends Component {
     }
 }
 
-function mapStateToProps(state) { return { sceneId: state.NavigationReducer.sceneId, switchScene: state.NavigationReducer.switchScene } }
+function mapStateToProps(state) { 
+    return { 
+        sceneId: state.NavigationReducer.sceneId, 
+        switchScene: state.NavigationReducer.switchScene 
+    }
+} 
 module.exports = connect(mapStateToProps)(ReviewTab);

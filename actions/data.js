@@ -3,46 +3,51 @@ const TestUsers = [
     name:'Hash Tag',
     address:'Seattle, WA',
     score:'100000',
-    followers:['1','2','3','4'],
+    follower:['1','2','3','4'],
     following:['2','3'],
     fpid:['4','5'],
     pid:['0','1'],
+    rid:['1','2'],
 },
 {   id:'1',
     name:'Cookie Monster',
     address:'Seattle, WA',
     score:'100000',
-    followers:['2','3','4'],
+    follower:['2','3','4'],
     following:['2','3'],
     fpid:['4','0'],
     pid:['2','1'],
+    rid:['3','4'],
 },
 {   id:'2',
     name:'VW Bug',
     address:'Redmond, WA',
     score:'100000',
-    followers:['1','3','4'],
+    follower:['1','3','4'],
     following:['1','3'],
     fpid:['0','1'],
     pid:['1','4'],
+    rid:['0','1','2'],
 },
 {   id:'3',
     name:'330 BMW',
     address:'Redmond, WA',
     score:'100000',
-    followers:['2','3'],
+    follower:['2','3'],
     following:['2','3'],
     fpid:['3','4','5','6'],
     pid:['2','4'],
+    rid:[],
 },
 {   id:'4',
     name:'X5 BMW',
     address:'Issaquah, WA',
     score:'100000',
-    followers:['3','4'],
+    follower:['3','4'],
     following:['3','4'],
     fpid:['0','1','5','6'],
     pid:['2','3'],
+    rid:[],
 },
 ];
 
@@ -514,16 +519,21 @@ export function GetProducer(id) {
 }
 
 export function GetUserProfile(id) {
-    var user = null;
+    var profile = {};
     for (var i=0; i < TestUsers.length; i++) {
         if (TestUsers[i].id == id) {
-            user = TestUsers[i];
-            user.products  = GetProductItems(user.fpid);
-            user.producers = GetProducerItems(user.pid);
-            user.retailers = GetRetailerItems(user.rid);
-            user.following = GetUserItems(user.following);
-            user.follower  = GetUserItems(user.follower);
-            return user;
+            var user  = TestUsers[i];
+
+            profile.id = user.id;
+            profile.name = user.name;
+            profile.address = user.address;
+            profile.score = user.score;
+            profile.products  = GetProductItems(user.fpid);
+            profile.producers = GetProducerItems(user.pid);
+            profile.retailers = GetRetailerItems(user.rid);
+            profile.following = GetUserItems(user.following);
+            profile.follower  = GetUserItems(user.follower);
+            return profile;
         }
     }
     return null;

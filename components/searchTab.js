@@ -34,6 +34,11 @@ class SearchTab extends Component {
 
     componentWillReceiveProps(nextProps) {
         var sceneId = nextProps.sceneId;
+
+        if (nextProps.tabId != SearchTabId) {
+            return;
+        }
+
         if (SearchSceneId == sceneId) {
             // reset scenes.
             this.refs.navigator.popToTop();
@@ -82,5 +87,12 @@ class SearchTab extends Component {
 //
 // Connect state.NavigationReducer.sceneId to props
 //
-function mapStateToProps(state) { return { sceneId: state.NavigationReducer.sceneId, switchScene: state.NavigationReducer.switchScene, item: state.NavigationReducer.item } }
+function mapStateToProps(state) { 
+    return { 
+        sceneId: state.NavigationReducer.sceneId, 
+        switchScene: state.NavigationReducer.switchScene, 
+        item: state.NavigationReducer.item 
+    } 
+}
+
 module.exports = connect(mapStateToProps)(SearchTab);

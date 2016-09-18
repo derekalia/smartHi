@@ -25,9 +25,9 @@ class RetailerList extends Component {
         //BatsFix. List view for some reason does not show on first render...
         //so using explicit render
         var retailers=[];
-        for (var i=0; i < this.props.retailers.length; i++) {
-             var retailerId = this.props.retailers[i].id;
-             var retailer   = this.props.retailers[i];
+        for (var i=0; i < this.props.retailerList.length; i++) {
+             var retailerId = this.props.retailerList[i].id;
+             var retailer   = this.props.retailerList[i];
              retailers.push(
                 <RetailerItem key={retailerId} goRetailer={(retailerId) => this.props.goRetailer(retailerId)} retailer={retailer}/>
              );

@@ -7,7 +7,8 @@ export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_ERROR   = 'REGISTER_ERROR';
 
 import {NEWS_SUCCESS}  from './news.js';
-import {GetLatestNews} from './data.js';
+import {PROFILE_SUCCESS}  from './profile.js';
+import {GetLatestNews,GetUserProfile} from './data.js';
 
 export function LoginAction(userCredentials) {
     return function (dispatch, getState) {
@@ -22,6 +23,13 @@ export function LoginAction(userCredentials) {
         //
         //LcbApiLogin(dispatch, userCredentials.name, userCredentials.password);
         DevLogin(dispatch, userCredentials.name, userCredentials.password);
+
+        // Get user profile here.
+        var profile = GetUserProfile(0);
+        dispatch({
+            type: PROFILE_SUCCESS,
+            profile: profile,
+        });
 
         // BatsFix. GetLatestNews should be promise function that can be called async.
         var latestNews = GetLatestNews();

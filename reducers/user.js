@@ -1,4 +1,5 @@
 import {
+    PROFILE_SUCCESS,
     LOGIN_SUCCESS,
     LOGIN_ERROR,
     LOGIN_PROCESS,
@@ -13,11 +14,27 @@ const initialState = {
             tokenType: "",
             accessToken: "",
     },
+    profile : {
+        id:'9999',
+        name:'Unknown',
+        address:'Bed Bath and Beyond',
+        score:'0',
+        products:[], 
+        producers: [],
+        retailers: [],
+        following: [],
+        follower: [],
+    } 
 }
 
 export default function UserReducer(state, action) {
 
     switch (action.type) {
+        case PROFILE_SUCCESS:
+            newState = Object.assign({}, state);
+            newState.profile = action.profile;
+            return newState;
+
         case LOGIN_SUCCESS:
             //
             // In redux, it uses the reference of an object to decide
@@ -35,11 +52,6 @@ export default function UserReducer(state, action) {
             newState.user.tokenType   = action.tokenType;
 
             // BatsFix. Following need to be returned with logon token etc.
-            newState.user.ratingCount   = 224;
-            newState.user.followerCount = 120;
-            newState.user.score         = 789;
-            newState.user.address       = 'Seattle, WA';
-            newState.user.instagram     = 'Derek @ Instagram';
             return newState;
 
         case LOGIN_ERROR:

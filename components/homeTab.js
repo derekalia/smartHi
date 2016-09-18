@@ -48,6 +48,9 @@ class HomeTab extends Component {
 
     componentWillReceiveProps(nextProps) {
         var sceneId = nextProps.sceneId;
+        if (nextProps.tabId != HomeTabId) {
+            return;
+        }
         // Check if need to reset tab.
         if (sceneId == HomeSceneId) {
             // reset scenes because going to first scene
@@ -94,5 +97,10 @@ class HomeTab extends Component {
     }
 }
 
-function mapStateToProps(state) { return { sceneId: state.NavigationReducer.sceneId, switchScene: state.NavigationReducer.switchScene, item:state.NavigationReducer.item } }
+function mapStateToProps(state) { 
+    return { 
+        tabId: state.NavigationReducer.tabId,
+        sceneId: state.NavigationReducer.sceneId, 
+        switchScene: state.NavigationReducer.switchScene, 
+        item:state.NavigationReducer.item } }
 module.exports = connect(mapStateToProps)(HomeTab);

@@ -42,7 +42,6 @@ export class HerbySearchBar extends Component {
         this.setState({showFilters:value});
     }
     _selectMenu(entry) {
-        console.log("selected entry" + entry);
         this.setState({selected:entry});
     }
     _getMenu() {
@@ -57,18 +56,15 @@ export class HerbySearchBar extends Component {
     }
 
     _addRemoveFilter(filter) {
-        console.log("added or removed filter" + filter);
     }
 
     render() {
         var {width,height} = Dimensions.get('window');
         this.maxWidth = width;
         this.maxHeight = height;
-        console.log("window width " + width);
 
         var modalHeight = this.maxHeight*0.8;
         var modalWidth  = this.maxWidth*0.9;
-        console.log("width is " + modalWidth + " " + this.maxWidth);
         return(
         <View style={{zIndex:999}}>
         <Modal

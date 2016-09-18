@@ -56,7 +56,7 @@ class RetailerFrame extends Component {
             </TouchableOpacity>
             {this._renderFilters()}
             {/*Search results section*/}
-            <RetailerList retailers={this.props.retailerList} goRetailer={(id)=> this._goRetailer(id)}/>
+            <RetailerList retailerList={this.props.retailerList} goRetailer={(id)=> this._goRetailer(id)}/>
         </View>
         );
     }
