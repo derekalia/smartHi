@@ -44,10 +44,18 @@ class ProductRetailer extends Component {
         return (
             <ScrollView style={{backgroundColor:'white'}}>
             <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
-            <HerbyPicker style={{height:20,fontSize:20}} options={['Distance','Price','Rating']}/>
+
             <View style={{ marginHorizontal: 10, marginTop: 5,marginBottom:5 }}>
-                <View style={{ height: 40, justifyContent: 'center' }}>
+                <View style={{ height: 40}}>
                     <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Retail Locations</Text>
+
+                <View style={{flexDirection:"row",alignSelf:'flex-start',justifyContent:'center',alignItems:'center',marginLeft:0,zIndex:999,flex:1,height:25,marginTop:0}}>
+                  <Text style={{fontWeight:'bold',fontSize:16}}>Sort By: </Text>
+                  <View style={{backgroundColor:'#ECECEC',flexDirection:"row",alignItems:'center',justifyContent:'center',alignSelf:'center',height:20,width:80,borderRadius:4,height:25}}>
+                    <HerbyPicker options={['Price ','Distance ','Rating ']} style={{fontSize:16}} />
+                    <Image style={{width:14,height:8,marginRight:3,alignItems:'flex-end'}} source={require("../media/Triangle1.png")} />
+                  </View>
+                </View>
                 </View>
             </View>
             <RetailerList retailers={this.props.product.retailers} goRetailer={(id) => this._goRetailer(id)}/>

@@ -19,7 +19,7 @@ class HerbyMultiItem extends Component {
             <TouchableOpacity
              onPress={() => this.props.onPress(this.props.id)}
              style={{backgroundColor:bgColor,borderColor:borderColor,flex:1,borderWidth:1,justifyContent:'center',alignItems:'center'}}>
-                <Text style={{fontSize:16,margin:6,color:textColor}}>{this.props.name}</Text>
+                <Text style={{fontSize:14,margin:6,color:textColor}}>{this.props.name}</Text>
             </TouchableOpacity>
         )
     }
@@ -46,7 +46,7 @@ export class HerbyMulti extends Component {
     render() {
         return (
             <View style={{flex:1,margin:10}}>
-            <Text style={{justifyContent:'flex-start',fontSize:16, fontWeight:'bold',marginTop:10,marginBottom:10}}>{this.props.label}</Text>
+            <Text style={{justifyContent:'flex-start',fontSize:14, fontWeight:'bold',marginTop:10,marginBottom:10}}>{this.props.label}</Text>
             <View style={{right:0,justifyContent:'flex-start',flexDirection:'row',}}>
                 {this._getItems()}
             </View>
