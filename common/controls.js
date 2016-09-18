@@ -5,15 +5,21 @@ class HerbyMultiItem extends Component {
     render() {
         var borderColor = '#DEDEDE';
         var borderWidth = 1;
+        var textColor = 'black';
+        var bgColor = 'white'
         if (this.props.selected == this.props.id) {
-            borderColor = 'blue';
+            borderColor = '#468EE5';
             borderWidth = 2;
+            textColor = 'white';
+            bgColor = '#468EE5';
+            borderWidth = 1;
+
         }
         return(
-            <TouchableOpacity 
-             onPress={() => this.props.onPress(this.props.id)} 
-             style={{borderBottomWidth:borderWidth,borderBottomColor:borderColor,borderColor:'#DEDEDE',flex:1,borderWidth:1,justifyContent:'center',alignItems:'center'}}>
-                <Text style={{fontWeight:'bold',fontSize:16,margin:6}}>{this.props.name}</Text>
+            <TouchableOpacity
+             onPress={() => this.props.onPress(this.props.id)}
+             style={{backgroundColor:bgColor,borderColor:borderColor,flex:1,borderWidth:1,justifyContent:'center',alignItems:'center'}}>
+                <Text style={{fontSize:14,margin:6,color:textColor}}>{this.props.name}</Text>
             </TouchableOpacity>
         )
     }
@@ -40,7 +46,7 @@ export class HerbyMulti extends Component {
     render() {
         return (
             <View style={{flex:1,margin:10}}>
-            <Text style={{justifyContent:'flex-start',fontSize:16, fontWeight:'bold',marginTop:10,marginBottom:10}}>{this.props.label}</Text>
+            <Text style={{justifyContent:'flex-start',fontSize:14, fontWeight:'bold',marginTop:10,marginBottom:10}}>{this.props.label}</Text>
             <View style={{right:0,justifyContent:'flex-start',flexDirection:'row',}}>
                 {this._getItems()}
             </View>
@@ -78,7 +84,7 @@ export class HerbySlider extends Component {
         )
     }
 }
- 
+
 export class HerbyPicker extends Component {
     constructor(props) {
         super(props);
@@ -103,7 +109,7 @@ export class HerbyPicker extends Component {
     _getItems() {
         var items = [];
         for (var i=0; i < this.props.options.length; i++) {
-            var value = this.props.options[i]; 
+            var value = this.props.options[i];
             items.push(
                 <Picker.Item label={value} value={value} key={value}/>
             );
@@ -116,7 +122,7 @@ export class HerbyPicker extends Component {
             <TouchableOpacity style={{height:this.props.style.height}} onPress={()=>this._showPicker()}>
                 <Text style={{fontSize:this.props.fontSize}}>{this.state.selectedValue}</Text>
             </TouchableOpacity>
-            <Picker selectedValue={this.state.selectedValue} onValueChange={(t)=>this._onValueChange(t)} 
+            <Picker selectedValue={this.state.selectedValue} onValueChange={(t)=>this._onValueChange(t)}
                 style={{
                     left:20,
                     top:0,
