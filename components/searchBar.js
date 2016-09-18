@@ -144,5 +144,6 @@ const Styles={
         backgroundColor: 'white',
         borderBottomWidth: 2,
         borderColor:"#468EE5",
+        top:1
     },
 }
