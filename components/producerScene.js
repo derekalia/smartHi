@@ -19,7 +19,7 @@ class ProducerInfo extends Component {
     render() {
         return (
         <View>
-                    <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+            <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
             <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
                 <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.props.producer.name} - Issaquah, WA</Text>
                 <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>

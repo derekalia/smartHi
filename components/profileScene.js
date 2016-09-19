@@ -29,7 +29,7 @@ class UserReviews extends Component {
         return (
             <ScrollView style={{backgroundColor:'transparent'}}>
                 <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
-                <ReviewList/>
+                <ProductList productList={this.props.user.reviewProducts} goProduct={this.props.goReview}/>
             </ScrollView>
         );
     }
@@ -172,6 +172,7 @@ class ProfileScene extends Component {
         return (
                 <route.component
                     user={navigator.props.user}
+                    goReview={navigator.props.goReview}
                     goRetailer={navigator.props.goRetailer}
                     goProducer={navigator.props.goProducer}
                     goProduct={navigator.props.goProduct}/>
@@ -200,6 +201,9 @@ class ProfileScene extends Component {
             </TouchableOpacity>
         );
     }
+    _goReview(t) {
+        console.log("Going to review by this user of product" + t);
+    }
     render() {
         // BatsFix. nothing below should be hardcoded!
         return (
@@ -218,6 +222,7 @@ class ProfileScene extends Component {
                       initialRoute = {ProfileFrames[FavoritesFrameId]}
                       initialRouteStack = {ProfileFrames}
                       user={this.props.item}
+                      goReview={(t)=> this._goReview()}
                       goProduct={(t)=>this.props.GetProductAction(t)}
                       goProducer={(t)=>this.props.GetProducerAction(t)}
                       goRetailer={(t)=>this.props.GetRetailerAction(t)}

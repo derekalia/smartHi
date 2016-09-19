@@ -24,6 +24,7 @@ const initialState = {
         retailers: [],
         following: [],
         follower: [],
+        reviewsProducts: [],
     } 
 }
 

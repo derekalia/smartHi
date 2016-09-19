@@ -8,6 +8,7 @@ const TestUsers = [
     fpid:['4','5'],
     pid:['0','1'],
     rid:['1','2'],
+    rpid:['1','2','3'],
 },
 {   id:'1',
     name:'Cookie Monster',
@@ -18,6 +19,7 @@ const TestUsers = [
     fpid:['4','0'],
     pid:['2','1'],
     rid:['3','4'],
+    rpid:['3','4','5'],
 },
 {   id:'2',
     name:'VW Bug',
@@ -28,6 +30,7 @@ const TestUsers = [
     fpid:['0','1'],
     pid:['1','4'],
     rid:['0','1','2'],
+    rpid:['2','4','5'],
 },
 {   id:'3',
     name:'330 BMW',
@@ -38,6 +41,7 @@ const TestUsers = [
     fpid:['3','4','5','6'],
     pid:['2','4'],
     rid:[],
+    rpid:['0','1','5'],
 },
 {   id:'4',
     name:'X5 BMW',
@@ -48,6 +52,7 @@ const TestUsers = [
     fpid:['0','1','5','6'],
     pid:['2','3'],
     rid:[],
+    rpid:['0','2','4'],
 },
 ];
 
@@ -533,6 +538,7 @@ export function GetUserProfile(id) {
             profile.retailers = GetRetailerItems(user.rid);
             profile.following = GetUserItems(user.following);
             profile.follower  = GetUserItems(user.follower);
+            profile.reviewProducts = GetProductItems(user.rpid);
             return profile;
         }
     }

@@ -46,7 +46,6 @@ class ReviewTab extends Component {
 
     componentWillReceiveProps(nextProps) {
         var sceneId = nextProps.sceneId;
-
         if (nextProps.tabId != ReviewTabId) {
             return;
         }
@@ -115,6 +114,7 @@ class ReviewTab extends Component {
 
 function mapStateToProps(state) { 
     return { 
+        tabId: state.NavigationReducer.tabId,
         sceneId: state.NavigationReducer.sceneId, 
         switchScene: state.NavigationReducer.switchScene 
     }
