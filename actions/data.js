@@ -418,6 +418,29 @@ function GetProducerItems(pid) {
     return producerItems;
 }
 
+export function GetProductItem(pid) {
+    var productItem = null;
+    for (var i=0; i < TestProducts.length; i++) {
+        if (TestProducts[i].id == pid) {
+            return TestProducts[i];
+        }
+    }
+    return null;
+}
+
+export function GetProductReview(pid,userId) {
+    // returns a review item...
+    return ({
+        rating: 4,
+        quality: 3,
+        potency: 5,
+        flavor:4,
+        symptom:['cramps','headaches','pain'],
+        activity:['social','exercise','work'],
+        effect:[{name:'energetic',strength:190},{name:'giggly',strength:50},{name:'relaxed',strength:60}],
+        comment:'Total synergy in a little bag',
+    });
+}
 
 function GetProductItems(pid) {
     var productItems = [];

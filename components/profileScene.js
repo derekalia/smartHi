@@ -13,7 +13,7 @@ import StarRating from 'react-native-star-rating';
 
 
 // Import internals
-import {GetProductAction,GetRetailerAction,GetProducerAction,SwitchSceneAction,} from '../actions';
+import {GetProductReviewAction,GetProductAction,GetRetailerAction,GetProducerAction,SwitchSceneAction,} from '../actions';
 import {SettingsSceneId,ProfileTabId,} from '../common/const.js';
 import {HerbyFrameBar,HerbyBar,}   from '../common/controls.js';
 import ProducerItem from './producerItem.js';
@@ -203,6 +203,8 @@ class ProfileScene extends Component {
     }
     _goReview(t) {
         console.log("Going to review by this user of product" + t);
+        //This gets a review of product identified by 't' by user this.props.id.
+        this.props.GetProductReviewAction(t,this.props.id);
     }
     render() {
         // BatsFix. nothing below should be hardcoded!
@@ -222,7 +224,7 @@ class ProfileScene extends Component {
                       initialRoute = {ProfileFrames[FavoritesFrameId]}
                       initialRouteStack = {ProfileFrames}
                       user={this.props.item}
-                      goReview={(t)=> this._goReview()}
+                      goReview={(t)=> this._goReview(t)}
                       goProduct={(t)=>this.props.GetProductAction(t)}
                       goProducer={(t)=>this.props.GetProducerAction(t)}
                       goRetailer={(t)=>this.props.GetRetailerAction(t)}
@@ -235,6 +237,14 @@ class ProfileScene extends Component {
 
 //  This function is used to convert action to props passed to this component.
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,GetProducerAction,GetRetailerAction,SwitchSceneAction, }, dispatch); }
+function mapActionToProps(dispatch) { 
+    return bindActionCreators({ 
+        GetProductReviewAction,
+        GetProductAction,
+        GetProducerAction,
+        GetRetailerAction,
+        SwitchSceneAction, }, 
+        dispatch); 
+}
 
 module.exports = connect(null, mapActionToProps)(ProfileScene);

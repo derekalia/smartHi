@@ -4,8 +4,8 @@ import {
     SWITCH_TAB_SCENE,
 } from './navigation.js';
 
-import {CameraSceneId,ProductInfoSceneId,RateProductSceneId,RateStoreSceneId,} from '../common/const.js';
-import {UploadProductImage,UploadProductRating,UploadStoreRating,} from './data.js';
+import {CameraSceneId,ProductInfoSceneId,RateProductSceneId,RateStoreSceneId,ProductReviewSceneId,} from '../common/const.js';
+import {UploadProductImage,UploadProductRating,UploadStoreRating,GetProductItem,GetProductReview} from './data.js';
 
 export const IMAGE_SUCCESS        = 'IMAGE_SUCCESS';
 export const IMAGE_RESET          = 'IMAGE_RESET';
@@ -42,6 +42,22 @@ export function UploadProductImageAction() {
                 sceneId: RateProductSceneId,
             });
         }
+    }
+}
+
+export function GetProductReviewAction(pid,userId) {
+    // Product item and its review by a particular user
+    // are separate objects
+    return function(dispatch,getState) {
+        console.log("looking for product " + pid);
+        var product = GetProductItem(pid);
+        console.log("and got for product " + product);
+        var review  = GetProductReview(pid,userId);
+        dispatch({
+            type: SWITCH_SCENE,
+            item: {product:product,review:review},
+            sceneId: ProductReviewSceneId,
+        });
     }
 }
 

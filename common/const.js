@@ -26,6 +26,7 @@ export const RateStoreSceneId       = 'RateStoreScene';
 export const RetailerSceneId        = 'RetailerScene';
 export const SearchSceneId          = 'SearchScene';
 export const SettingsSceneId        = 'SettingsScene';
+export const ProductReviewSceneId   = 'ProductReview';
 
 // Id for search view categories
 export const MapFrameId        = 'MapFrameId';

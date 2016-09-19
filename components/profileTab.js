@@ -10,7 +10,7 @@ import {StyleSheet, View, Text, Navigator, Image,TouchableHighlight } from 'reac
 import {connect} from 'react-redux';
 
 /// Import const ids.
-import {ProfileTabId,ProfileSceneId,SettingsSceneId,LicenseeSceneId,LicenseeStoreSceneId,LicenseeProductSceneId,} from '../common/const.js';
+import {ProfileTabId,ProfileSceneId,SettingsSceneId,LicenseeSceneId,LicenseeStoreSceneId,LicenseeProductSceneId,ProductReviewSceneId,} from '../common/const.js';
 
 // Import internal modules
 import ProfileScene         from './profileScene.js';
@@ -18,6 +18,7 @@ import SettingsScene        from './settingsScene.js';
 import LicenseeScene        from './licenseeScene.js';
 import LicenseeStoreScene   from './licenseeStoreScene.js';
 import LicenseeProductScene from './licenseeProductScene.js';
+import ProductReviewScene   from './productReviewScene.js';
 
 import {HerbyBar}           from '../common/controls.js';
 
@@ -29,6 +30,7 @@ const TabScenes = [
     { title: "Licensee",       component: LicenseeScene,        index: LicenseeSceneId },
     { title: "Store Info",     component: LicenseeStoreScene,   index: LicenseeStoreSceneId },
     { title: "Product Info",   component: LicenseeProductScene, index: LicenseeProductSceneId },
+    { title: "Product Review", component: ProductReviewScene,   index: ProductReviewSceneId },
 ];
 
 class ProfileTab extends Component {
@@ -91,7 +93,7 @@ class ProfileTab extends Component {
             return (
                 <View style={{flex:1}}>
                     <HerbyBar navigator={navigator}/>
-                    <route.component tabId={ProfileTabId}/>
+                    <route.component tabId={ProfileTabId} item={navigator.props.item}/>
                 </View>
             );
         }
@@ -109,6 +111,7 @@ class ProfileTab extends Component {
                 renderScene={this.renderScene}
                 initialRoute = {TabScenes[0]}
                 user={this.props.user}
+                item={this.props.item}
                 />
         );
     }
@@ -119,6 +122,7 @@ function mapStateToProps(state) {
         tabId: state.NavigationReducer.tabId, 
         sceneId: state.NavigationReducer.sceneId, 
         switchScene: state.NavigationReducer.switchScene, 
+        item: state.NavigationReducer.item, 
         user: state.UserReducer.profile 
     }
 } 
