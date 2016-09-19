@@ -12,7 +12,7 @@ import {GetUserProfile} from './data.js';
 
 export function GetProfileAction(userId) {
     return function(dispatch, getState) {
-        var user = GetUserProfile();
+        var user = GetUserProfile(userId);
         dispatch({
             type:SWITCH_TAB_SCENE,
             tabId: HomeTabId,

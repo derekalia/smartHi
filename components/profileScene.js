@@ -14,7 +14,7 @@ import StarRating from 'react-native-star-rating';
 
 // Import internals
 import {GetProductAction,SwitchSceneAction,} from '../actions';
-import {SettingsSceneId,} from '../common/const.js';
+import {SettingsSceneId,ProfileTabId,} from '../common/const.js';
 import {HerbyFrameBar,HerbyBar,}   from '../common/controls.js';
 import ProductItem from './productItem.js';
 import ReviewList  from './reviewList.js';
@@ -51,7 +51,7 @@ class UserFavorites extends Component {
     _getFavorites() {
         if (this.state.frameId == 0) {
             return (
-                <ProductList productList={this.props.user.products}/>
+                <ProductList productList={this.props.user.products} goProduct={this.props.goProduct}/>
             )
         }
         else
@@ -162,23 +162,34 @@ class ProfileScene extends Component {
     configureScene(route, routeStack) {
         return Navigator.SceneConfigs.PushFromRight;
     }
+    _onLike() {
+      //BatsFix. Should call like user action here.
+    }
 
-
-    render() {
-        // BatsFix. nothing below should be hardcoded!
+    _getNavBar() {
+        if (this.props.tabId != ProfileTabId) {
+            return (
+              <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+            );
+        }
         return (
-        <View>
-            <TouchableOpacity style={{height:60,paddingTop:20,marginTop:0,backgroundColor:'#F9F9F9',borderBottomWidth:1,borderColor:'#B2B2B2',zIndex:200,}}
+            <TouchableOpacity style={{height:60,marginTop:0,backgroundColor:'#F9F9F9',borderBottomWidth:1,borderColor:'#B2B2B2',zIndex:200,}}
                onPress={()=>this._goSettings()}>
                 <View style={{ flex: 1, marginTop: 11,marginBottom: 5, flexDirection: "row", justifyContent: 'flex-end', alignItems: 'flex-end', marginRight: 13, }}>
                     <Text style={{ fontSize: 18, color: "#007AFF" }}> Settings</Text>
                 </View>
             </TouchableOpacity>
+        );
+    }
+    render() {
+        // BatsFix. nothing below should be hardcoded!
+        return (
+        <View>
              <ScrollView
-                  style={{height:this._height,backgroundColor:'transparent',marginTop:-20}}
-                  contentContainerStyle={{margin:0,padding:0}}
+                  style={{marginTop:0,height:this._height,backgroundColor:'transparent',}}
                   stickyHeaderIndices={[1]}>
-                  <UserHeader name={this.props.user.name} address={this.props.user.address} score={this.props.user.score}/>
+                  {this._getNavBar()}
+                  <UserHeader name={this.props.item.name} address={this.props.item.address} score={this.props.item.score}/>
                   <HerbyFrameBar entries={['FAVORITES','REVIEWS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
                   <Navigator
                       style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
@@ -187,7 +198,7 @@ class ProfileScene extends Component {
                       renderScene={this.renderScene}
                       initialRoute = {ProfileFrames[FavoritesFrameId]}
                       initialRouteStack = {ProfileFrames}
-                      user={this.props.user}
+                      user={this.props.item}
                       goProduct={(t)=>this.props.GetProductAction(t)}
                   />
              </ScrollView>

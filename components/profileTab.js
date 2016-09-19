@@ -84,7 +84,7 @@ class ProfileTab extends Component {
     renderScene(route, navigator) {
         if (route.index == ProfileSceneId) {
             return (
-                <route.component tabId={ProfileTabId} user={navigator.props.user}/>
+                <route.component tabId={ProfileTabId} item={navigator.props.user}/>
             );
         }
         else {
