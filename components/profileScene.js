@@ -13,9 +13,10 @@ import StarRating from 'react-native-star-rating';
 
 
 // Import internals
-import {GetProductAction,SwitchSceneAction,} from '../actions';
+import {GetProductAction,GetRetailerAction,GetProducerAction,SwitchSceneAction,} from '../actions';
 import {SettingsSceneId,ProfileTabId,} from '../common/const.js';
 import {HerbyFrameBar,HerbyBar,}   from '../common/controls.js';
+import ProducerItem from './producerItem.js';
 import ProductItem from './productItem.js';
 import ReviewList  from './reviewList.js';
 import ProductList from './productList.js';
@@ -34,10 +35,26 @@ class UserReviews extends Component {
     }
 }
 class ProducerList extends Component {
-    //BatsFix placeholder for producer list
     render() {
-        return null;
+        return (
+            <View style={{marginTop:10}}>
+                {this._renderProducers()}
+            </View>
+        );
     }
+
+    _renderProducers() {
+        var producers=[];
+        for (var i=0; i < this.props.producerList.length; i++) {
+             var producerId = this.props.producerList[i].id;
+             var producer   = this.props.producerList[i];
+             producers.push(
+                <ProducerItem key={producerId} goProducer={(producerId) => this.props.goProducer(producerId)} producer={producer}/>
+             );
+        }
+        return producers;
+    }
+
 }
 class UserFavorites extends Component {
     constructor(props) {
@@ -57,13 +74,13 @@ class UserFavorites extends Component {
         else
         if (this.state.frameId == 1) {
             return (
-                <RetailerList retailerList={this.props.user.retailers}/>
+                <RetailerList retailerList={this.props.user.retailers} goRetailer={this.props.goRetailer}/>
             )
         }
         else
         if (this.state.frameId == 2) {
             return (
-                <ProducerList producerList={this.props.user.producers}/>
+                <ProducerList producerList={this.props.user.producers} goProducer={this.props.goProducer}/>
             )
         }
     }
@@ -155,6 +172,8 @@ class ProfileScene extends Component {
         return (
                 <route.component
                     user={navigator.props.user}
+                    goRetailer={navigator.props.goRetailer}
+                    goProducer={navigator.props.goProducer}
                     goProduct={navigator.props.goProduct}/>
         );
     }
@@ -200,6 +219,8 @@ class ProfileScene extends Component {
                       initialRouteStack = {ProfileFrames}
                       user={this.props.item}
                       goProduct={(t)=>this.props.GetProductAction(t)}
+                      goProducer={(t)=>this.props.GetProducerAction(t)}
+                      goRetailer={(t)=>this.props.GetRetailerAction(t)}
                   />
              </ScrollView>
         </View>
@@ -209,6 +230,6 @@ class ProfileScene extends Component {
 
 //  This function is used to convert action to props passed to this component.
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,SwitchSceneAction, }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,GetProducerAction,GetRetailerAction,SwitchSceneAction, }, dispatch); }
 
 module.exports = connect(null, mapActionToProps)(ProfileScene);
