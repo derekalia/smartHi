@@ -116,7 +116,7 @@ class UserSocial extends Component {
 class UserHeader extends Component {
     render() {
         return(
-        <View>
+        <View style={{marginTop:20}}>
               <View style={{flexDirection:'row'}}>
               <Image source={require('../media/headshot1.png') } style={{ width: 100, height: 100, alignSelf:'flex-start' }}/>
               <View style={{alignItems:'center',flex:1}}>
@@ -208,12 +208,17 @@ class ProfileScene extends Component {
     }
     render() {
         // BatsFix. nothing below should be hardcoded!
+        // BatsFix. workaround weird margin issue.
+        var hackMargin = 0;
+        if (this.props.tabId == ProfileTabId) {
+            hackMargin = -20;
+        }
         return (
         <View>
+             {this._getNavBar()}
              <ScrollView
-                  style={{marginTop:0,height:this._height,backgroundColor:'transparent',}}
+                  style={{marginTop:hackMargin,height:this._height,backgroundColor:'transparent',}}
                   stickyHeaderIndices={[1]}>
-                  {this._getNavBar()}
                   <UserHeader name={this.props.item.name} address={this.props.item.address} score={this.props.item.score}/>
                   <HerbyFrameBar entries={['FAVORITES','REVIEWS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
                   <Navigator
