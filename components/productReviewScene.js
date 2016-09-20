@@ -20,35 +20,25 @@ class ProductReviewScene extends Component {
     constructor(props) {
         super(props);
         this.state = {product:this.props.item.product,review:this.props.item.review};
-        this._effect   = FiltersEffect;
-        this._symptom  = FiltersSymptoms;
-        this._activity = FiltersActivity;
-        var review = this.props.item.review;
-        //
-        // BatsFix. Assuming that no filters were selected. Is that correct?
-        //
-        for (var i=0; i < this._effect.length; i++) { 
-            this._effect[i].selected = false;
-            for (var j=0; j < review.effect.length; j++) {
-                if (review.effect[j].name == this._effect[i].name) {
-                    this._effect[i].selected = true;
-                }
-            }
-        };
-
-        for (var i=0; i < this._symptom.length; i++) { 
-            this._symptom[i].selected = false; 
-            if (review.symptom.indexOf(this._symptom[i].name) != -1) {
-                this._symptom[i].selected = true;
-            }
-        };
-
-        for (var i=0; i < this._activity.length; i++) { 
-            this._activity[i].selected = false; 
-            if (review.activity.indexOf(this._activity[i].name) != -1) {
-                this._activity[i].selected = true;
-            }
-        };
+        this._effect = [];
+        this._symptom = [];
+        this._activity = [];
+        var filters = this.state.review.effect;
+        //BatsFix. Should really have a constructor for filter...
+        for (var i=0; i < filters.length; i++) {
+            var filter = filters[i];
+            this._effect.push({name:filter.name,strength:filter.strength,type:'effect',selected:true});
+        }
+        filters = this.state.review.symptom;
+        for (var i=0; i < filters.length; i++) {
+            var name = filters[i];
+            this._symptom.push({name:name,type:'symptoms',selected:true});
+        }
+        filters = this.state.review.activity;
+        for (var i=0; i < filters.length; i++) {
+            var name = filters[i];
+            this._activity.push({name:name,type:'activity',selected:true});
+        }
     }
 
     render() {
@@ -88,15 +78,6 @@ class ProductReviewScene extends Component {
                     <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
                         rating={this.state.review.rating}
                         selectedStar={(rating) => this._onRating(rating)}/>
-
-                </View>
-                <View style={{flex:1,flexDirection: "row",justifyContent:'flex-end' }}>
-                  <TouchableOpacity style={Styles.tagCategory}>
-                      <Text style={Styles.tagTextCategory}>rosin</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity style={Styles.tagType}>
-                      <Text style={Styles.tagTextType}>sativa</Text>
-                  </TouchableOpacity>
                 </View>
             </View>
         </View>
@@ -145,18 +126,12 @@ class ProductReviewScene extends Component {
 
     _renderCommentBox() {
         return (
-        <View style={{ marginHorizontal: 10, marginTop: 15, marginBottom:10, }}>
-            <View style={{ height: 40, justifyContent: 'center' }}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Comment</Text>
-            </View>
-            <View style={{ flexDirection: "row",borderColor: 'gray', borderWidth: 1, margin: 2, borderRadius: 4, }}>
-                <TextInput
-                    style={{ height: 60, flex:1, margin: 4, fontSize: 16, }}
-                    onChangeText={(text) => this.setState({ text }) }
-                    placeholder={this.state.review.comment}
-                    numberOfLines = {4}
-                    multiline = {true}
-                />
+        <View style={{ marginHorizontal: 10, marginTop: 15, marginBottom:10,flexDirection:'row' }}>
+            <TouchableOpacity style={{flex:.25}} onPress={()=>this.props.getUser(this.props.user.id)}>
+                <Image style={{height:60,width:60}} source={require('../media/headshot1.png') }/>
+            </TouchableOpacity>
+            <View style={{ borderWidth: 0, margin: 2,flex:1,backgroundColor:'transparent'}}>
+                <Text>{this.state.review.comment}</Text>
             </View>
         </View>
         );
@@ -175,7 +150,7 @@ class ProductReviewScene extends Component {
         <View>
             <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                 <View style={{ height: 40, justifyContent: 'center' }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Applicable Effects</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Effects</Text>
                 </View>
                 <View style={{flex:1}}>
                 {this._renderFiltersArray(this._effect)}
@@ -183,13 +158,13 @@ class ProductReviewScene extends Component {
             </View>
             <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                 <View style={{ height: 40, justifyContent: 'center' }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Applicable Activities</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Activities</Text>
                 </View>
                 {this._renderFiltersArray(this._activity)}
             </View>
             <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                 <View style={{ height: 40, justifyContent: 'center' }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Applicable Symptoms</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Symptoms</Text>
                 </View>
                 {this._renderFiltersArray(this._symptom)}
             </View>

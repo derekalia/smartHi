@@ -437,8 +437,8 @@ export function GetProductReview(pid,userId) {
         flavor:4,
         symptom:['cramps','headaches','pain'],
         activity:['social','exercise','work'],
-        effect:[{name:'energetic',strength:190},{name:'giggly',strength:50},{name:'relaxed',strength:60}],
-        comment:'Total synergy in a little bag',
+        effect:[{name:'energetic',strength:90},{name:'giggly',strength:50},{name:'relaxed',strength:60}],
+        comment:'I felt like it had strong effect and enjoyed the overall experience',
     });
 }
 
