@@ -43,7 +43,7 @@ class ProductReviewScene extends Component {
 
     render() {
         return (
-        <ScrollView style={{flex:1, backgroundColor:'white'}}>
+        <ScrollView style={{flex:1, backgroundColor:'white',marginBottom:50}}>
             <View style={{ flex: 1 }}>
                 <ProductItem product = {this.props.item.product}/>
 
@@ -145,6 +145,24 @@ class ProductReviewScene extends Component {
         return filters;
     }
 
+    _renderFiltersStrength(filterArray) {
+        var filters = [];
+        for (var i=0; i  < filterArray.length; i++) {
+            var entry = filterArray[i];
+            var ratio = entry.strength*2; 
+            filters.push(
+            <TouchableOpacity 
+                style ={{width:ratio,margin: 5, borderRadius: 20, height: 40, borderWidth: 1, justifyContent: 'center', alignItems:'center',backgroundColor:'blue'}}
+                key={i}
+                >
+                <Text style={{marginTop:10,marginBottom:10,marginHorizontal:15,color:'white'}}>
+                </Text>
+            </TouchableOpacity>
+            );
+        }
+        return filters;
+    }
+
     _renderFilters() {
         return (
         <View>
@@ -152,21 +170,30 @@ class ProductReviewScene extends Component {
                 <View style={{ height: 40, justifyContent: 'center' }}>
                     <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Effects</Text>
                 </View>
-                <View style={{flex:1}}>
-                {this._renderFiltersArray(this._effect)}
+                <View style={{flex:1,flexDirection:'row'}}>
+                    <View style={{borderRightWidth:2, borderColor:'blue',paddingRight:10,marginRight:10}}>
+                        {this._renderFiltersArray(this._effect)}
+                    </View>
+                    <View style={{flex:1}}>
+                        {this._renderFiltersStrength(this._effect)}
+                    </View>
                 </View>
             </View>
             <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                 <View style={{ height: 40, justifyContent: 'center' }}>
                     <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Activities</Text>
                 </View>
+                <View style={{flex:1,flexDirection:'row'}}>
                 {this._renderFiltersArray(this._activity)}
+                </View>
             </View>
             <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                 <View style={{ height: 40, justifyContent: 'center' }}>
                     <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Symptoms</Text>
                 </View>
+                <View style={{flex:1,flexDirection:'row'}}>
                 {this._renderFiltersArray(this._symptom)}
+                </View>
             </View>
         </View>
         );
