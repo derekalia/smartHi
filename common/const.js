@@ -26,14 +26,16 @@ export const RateStoreSceneId       = 'RateStoreScene';
 export const RetailerSceneId        = 'RetailerScene';
 export const SearchSceneId          = 'SearchScene';
 export const SettingsSceneId        = 'SettingsScene';
-export const ProductReviewSceneId   = 'ProductReview';
+export const ProductReviewSceneId   = 'ProductReviewScene';
+export const ReviewStartSceneId     = 'ReviewStartScene';
+export const RateQueueSceneId       = 'RateQueueScene';
 
 // Id for search view categories
 export const MapFrameId        = 'MapFrameId';
 export const ProductFrameId    = 'ProductFrameId';
 export const RetailerFrameId   = 'RetailerFrameId';
 export const UserFrameId       = 'UserFrameId';
-export const ReviewsFrameId       = 'ReviewsFrameId';
+export const ReviewsFrameId    = 'ReviewsFrameId';
 export const InfoFrameId       = 'InfoFrameId';
 
 

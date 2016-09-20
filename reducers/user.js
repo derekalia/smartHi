@@ -6,6 +6,7 @@ import {
     REGISTER_PROCESS,
     REGISTER_SUCCESS,
     REGISTER_ERROR,
+    RATE_QUEUE_SUCCESS,
 } from '../actions/index.js';
 
 const initialState = {
@@ -25,12 +26,22 @@ const initialState = {
         following: [],
         follower: [],
         reviewsProducts: [],
-    } 
+    },
+    rateQueue: [],
 }
 
 export default function UserReducer(state, action) {
 
     switch (action.type) {
+        // Rate queue should have products user has queued
+        // for rating. Is this supposed to work for offline scenario?
+        // BatsFix.
+        //
+        case RATE_QUEUE_SUCCESS:
+            newState = Object.assign({}, state);
+            newState.rateQueue = action.rateQueue;
+            return newState;
+
         case PROFILE_SUCCESS:
             newState = Object.assign({}, state);
             newState.profile = action.profile;

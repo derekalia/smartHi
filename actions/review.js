@@ -4,13 +4,39 @@ import {
     SWITCH_TAB_SCENE,
 } from './navigation.js';
 
-import {CameraSceneId,ProductInfoSceneId,RateProductSceneId,RateStoreSceneId,ProductReviewSceneId,} from '../common/const.js';
-import {UploadProductImage,UploadProductRating,UploadStoreRating,GetProductItem,GetProductReview} from './data.js';
+import {RateQueueSceneId,CameraSceneId,ProductInfoSceneId,RateProductSceneId,RateStoreSceneId,ProductReviewSceneId,} from '../common/const.js';
+import {GetRateQueue,UploadProductImage,UploadProductRating,UploadStoreRating,GetProductItem,GetProductReview} from './data.js';
 
 export const IMAGE_SUCCESS        = 'IMAGE_SUCCESS';
 export const IMAGE_RESET          = 'IMAGE_RESET';
 export const RATE_PRODUCT_SUCCESS = 'RATE_PRODUCT_SUCCESS';
 export const RATE_STORE_SUCCESS   = 'RATE_STORE_SUCCESS';
+export const RATE_QUEUE_SUCCESS   = 'RATE_QUEUE_SUCCESS';
+
+export function GetCameraAction() {
+    return ({
+        type: SWITCH_SCENE,
+        sceneId: CameraSceneId,
+    });
+}
+
+
+export function GetRateQueueAction() {
+    return function (dispatch, getState) {
+        // Get current user queue.
+        var result = GetRateQueue();
+        // This updates the rate queue in user reducer.
+        dispatch({
+            type:RATE_QUEUE_SUCCESS,
+            rateQueue: result,
+        });
+        // Then switch to rate queue scene
+        dispatch({
+            type:SWITCH_SCENE,
+            sceneId:RateQueueSceneId,
+        });
+    }
+}
 
 export function UploadProductImageAction() {
     return function (dispatch, getState) {
@@ -61,11 +87,18 @@ export function GetProductReviewAction(pid,userId) {
     }
 }
 
-export function ConfirmProductInfoAction() {
-    return({
-        type: SWITCH_SCENE,
-        sceneId: RateProductSceneId,
-    });
+//
+// Go to product rating page with the specified item
+//
+export function ConfirmProductInfoAction(pid) {
+    return function(dispatch,getState) {
+        var productItem = GetProductItem(pid);
+        dispatch({
+            type: SWITCH_SCENE,
+            sceneId: RateProductSceneId,
+            item: productItem,
+        });
+    }
 }
 
 export function RateProductAction() {

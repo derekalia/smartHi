@@ -9,26 +9,32 @@ import React, { Component } from 'react';
 import {StyleSheet, View, Text, ScrollView, Image, TouchableHighlight, Navigator } from 'react-native';
 import {connect} from 'react-redux';
 // Import const ids.
-import {CameraSceneId, ProductInfoSceneId, RateProductSceneId, RateStoreSceneId, ReviewTabId,} from '../common/const.js';
+import {RateQueueSceneId,CameraSceneId, ProductInfoSceneId, RateProductSceneId, RateStoreSceneId, ReviewTabId,ReviewStartSceneId} from '../common/const.js';
 
 // Import internal modules
+import ReviewStartScene   from './reviewStartScene.js';
 import CameraScene        from './cameraScene.js';
 import ProductInfoScene   from './productInfoScene.js';
 import RateProductScene   from './rateProductScene.js';
 import RateStoreScene     from './rateStoreScene.js';
+import RateQueueScene     from './rateQueueScene.js';
 
 import {HerbyBar}         from '../common/controls.js';
 
-const CameraIndex       = 0;
-const ProductInfoIndex  = 1;
-const RateProductIndex  = 2;
-const RateStoreIndex    = 3;
+const ReviewStartIndex  = 0;
+const CameraIndex       = 1;
+const ProductInfoIndex  = 2;
+const RateProductIndex  = 4;
+const RateStoreIndex    = 4;
+const RateQueueIndex    = 5;
 
 const TabScenes = [
+    { title: "Review",       component: ReviewStartScene,  index: ReviewStartSceneId },
     { title: "Camera",       component: CameraScene,       index: CameraSceneId },
     { title: "Product Info", component: ProductInfoScene,  index: ProductInfoSceneId },
     { title: "Rate Product", component: RateProductScene,  index: RateProductSceneId },
     { title: "Rate Store",   component: RateStoreScene,    index: RateStoreSceneId },
+    { title: "Rate Queue",   component: RateQueueScene,    index: RateQueueSceneId },
 ];
 
 class ReviewTab extends Component {
@@ -51,7 +57,7 @@ class ReviewTab extends Component {
         }
 
         // Check if need to reset tab.
-        if (sceneId == CameraSceneId) {
+        if (sceneId == ReviewStartSceneId) {
             // reset scenes.
             this.refs.navigator.popToTop();
             return;
@@ -81,7 +87,7 @@ class ReviewTab extends Component {
     }
 
     renderScene(route, navigator) {
-        if (route.index == CameraSceneId) {
+        if (route.index == ReviewStartSceneId) {
             return (
                 <route.component tabId={ReviewTabId}/>
             );
@@ -89,7 +95,7 @@ class ReviewTab extends Component {
         else {
             return (
                 <View style={{flex:1}}>
-                    <HerbyBar navigator={navigator}/>
+                    <HerbyBar navigator={navigator} name={route.title}/>
                     <route.component tabId={ReviewTabId}/>
                 </View>
             );
@@ -106,7 +112,7 @@ class ReviewTab extends Component {
                 ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
-                initialRoute = {TabScenes[CameraIndex]}
+                initialRoute = {TabScenes[ReviewStartIndex]}
             />
         );
     }

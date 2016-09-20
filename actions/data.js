@@ -442,6 +442,16 @@ export function GetProductReview(pid,userId) {
     });
 }
 
+export function GetRateQueue() {
+    // returns the queue for the current user.
+    // for test purposes push all test products
+    var productItems = [];
+    for (var i=0; i < TestProducts.length; i++) {
+        productItems.push(TestProducts[i]);
+    }
+    return productItems;
+}
+
 function GetProductItems(pid) {
     var productItems = [];
     for (var i=0; i < pid.length; i++) {

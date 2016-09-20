@@ -5,7 +5,7 @@ export const SWITCH_TAB_SCENE = 'SWITCH_TAB_SCENE';
 
 // Import const ids.
 import {HomeTabId,SearchTabId,ReviewTabId,ProfileTabId} from '../common/const.js';
-import {HomeSceneId,SearchSceneId,CameraSceneId,ProfileSceneId} from '../common/const.js';
+import {HomeSceneId,SearchSceneId,ReviewStartSceneId,ProfileSceneId} from '../common/const.js';
 
 export function SwitchTabAction(tabId) {
     // Set the appropriate scene for each tab on tab switch
@@ -18,7 +18,7 @@ export function SwitchTabAction(tabId) {
     }
     else
     if (tabId == ReviewTabId) {
-        sceneId = CameraSceneId;
+        sceneId = ReviewStartSceneId;
     }
     else
     if (tabId == ProfileTabId) {

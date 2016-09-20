@@ -188,19 +188,16 @@ class ProfileScene extends Component {
 
     _getNavBar() {
         if (this.props.tabId != ProfileTabId) {
+            // Allow heart action if the profile scene is not in the profile tab. BatsFix. Is that correct?
             return (
               <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
             );
         }
         return (
-            <TouchableOpacity style={{height:60,marginTop:0,backgroundColor:'#F9F9F9',borderBottomWidth:1,borderColor:'#B2B2B2',zIndex:200,}}
-               onPress={()=>this._goSettings()}>
-                <View style={{ flex: 1, marginTop: 11,marginBottom: 5, flexDirection: "row", justifyContent: 'flex-end', alignItems: 'flex-end', marginRight: 13, }}>
-                    <Text style={{ fontSize: 18, color: "#007AFF" }}> Settings</Text>
-                </View>
-            </TouchableOpacity>
+            <HerbyBar name={this.props.item.name} navigator={this.props.navigator} forwardCallback={()=>this._goSettings()} forward='Settings'/>
         );
     }
+
     _goReview(t) {
         console.log("Going to review by this user of product" + t);
         //This gets a review of product identified by 't' by user this.props.id.
