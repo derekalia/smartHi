@@ -144,34 +144,34 @@ class FilterList extends Component {
             return null;
         }
         return (
-            <View>
+            <View style={{marginHorizontal:12}}>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
-                        <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Activity </Text>
+                        <Text style={{ fontSize: 18, }}> Activity </Text>
                     </View>
                     {this._renderFiltersArray(this.state.filters['activity'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
-                        <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Effects </Text>
+                        <Text style={{ fontSize: 18, }}> Effects </Text>
                     </View>
                     {this._renderFiltersArray(this.state.filters['effect'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
-                        <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Type </Text>
+                        <Text style={{ fontSize: 18, }}> Type </Text>
                     </View>
                     {this._renderFiltersArray(this.state.filters['type'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
-                        <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Category </Text>
+                        <Text style={{ fontSize: 18, }}> Category </Text>
                     </View>
                     {this._renderFiltersArray(this.state.filters['category'],false)}
                 </View>
                 <View>
                     <View style={{ height: 40, justifyContent: 'center', }}>
-                        <Text style={{ fontSize: 18, fontFamily: "Avenir Next" }}> Symptoms </Text>
+                        <Text style={{ fontSize: 18, }}> Symptoms </Text>
                     </View>
                     {this._renderFiltersArray(this.state.filters['symptoms'],false)}
                 </View>

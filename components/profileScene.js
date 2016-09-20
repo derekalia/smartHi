@@ -117,14 +117,22 @@ class UserHeader extends Component {
     render() {
         return(
         <View style={{marginTop:20}}>
-              <View style={{flexDirection:'row'}}>
-              <Image source={require('../media/headshot1.png') } style={{ width: 100, height: 100, alignSelf:'flex-start' }}/>
+          <View style={{justifyContent:'center',alignSelf:'center'}}>
+            <Image source={require('../media/headshot1.png') } style={{ width: 100, height: 100, alignSelf:'flex-start' }}/>
+          </View>
+
+          <View style={{flexDirection:'row',marginBottom:10}}>
               <View style={{alignItems:'center',flex:1}}>
-              <Text style={{ fontSize: 22, margin: 8, fontWeight: "bold" }}>{this.props.name}</Text>
-              <Text style={{ fontSize: 16, marginTop: 1 }}>{this.props.address}</Text>
-              <Text style={{ fontSize: 16, marginTop: 1 }}>{this.props.score}</Text>
+                <Text style={{ fontSize: 22, margin: 8, fontWeight: "bold" }}>{this.props.name}</Text>
+                <Text style={{ fontSize: 16, marginTop: 1 }}>{this.props.address}</Text>
+                <View style={{flexDirection:'row',marginBottom:20,justifyContent:'center',alignItems:'center',marginTop:5}}>
+                  <Text style={{ fontSize: 16, marginTop: 1 }}> {this.props.score} </Text>
+                  <Image style={{height:20,width:20}} source={require('../media/Oval129.png')}/>
+                  <Text style={{fontWeight:'bold'}}> Karma</Text>
+                </View>
               </View>
-              </View>
+          </View>
+
         </View>
         );
     }
@@ -242,14 +250,14 @@ class ProfileScene extends Component {
 
 //  This function is used to convert action to props passed to this component.
 //
-function mapActionToProps(dispatch) { 
-    return bindActionCreators({ 
+function mapActionToProps(dispatch) {
+    return bindActionCreators({
         GetProductReviewAction,
         GetProductAction,
         GetProducerAction,
         GetRetailerAction,
-        SwitchSceneAction, }, 
-        dispatch); 
+        SwitchSceneAction, },
+        dispatch);
 }
 
 module.exports = connect(null, mapActionToProps)(ProfileScene);

@@ -71,9 +71,7 @@ class SearchBar extends Component {
                     <View style={{flex:.1}}></View>
 
                         <TouchableOpacity style={{flex: .6,}} onPress={this.props.startSearch}>
-                        <View style={[{  borderWidth: 1,justifyContent:'center',borderColor: "#4A90E2", backgroundColor: "#4A90E2", height: 34,borderRadius:8}]}>
-                            <Image style={{ height: 20, width: 20,alignSelf:'center', }} source={require("../media/SearchIcon0.png") }/>
-                        </View>
+                            <Image style={{ height: 32, width: 32,alignSelf:'center', }} source={require("../media/plusButton11.png") }/>
                         </TouchableOpacity>
                 </View>
 
