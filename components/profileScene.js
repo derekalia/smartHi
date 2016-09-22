@@ -22,6 +22,7 @@ import ReviewList  from './reviewList.js';
 import ProductList from './productList.js';
 import RetailerList from './retailerList.js';
 import UserList from './userList.js';
+import ProducerList from './producerList.js';
 import {HerbyButton2,} from '../common/controls.js';
 
 class UserReviews extends Component {
@@ -33,28 +34,6 @@ class UserReviews extends Component {
             </ScrollView>
         );
     }
-}
-class ProducerList extends Component {
-    render() {
-        return (
-            <View style={{marginTop:10}}>
-                {this._renderProducers()}
-            </View>
-        );
-    }
-
-    _renderProducers() {
-        var producers=[];
-        for (var i=0; i < this.props.producerList.length; i++) {
-             var producerId = this.props.producerList[i].id;
-             var producer   = this.props.producerList[i];
-             producers.push(
-                <ProducerItem key={producerId} goProducer={(producerId) => this.props.goProducer(producerId)} producer={producer}/>
-             );
-        }
-        return producers;
-    }
-
 }
 class UserFavorites extends Component {
     constructor(props) {

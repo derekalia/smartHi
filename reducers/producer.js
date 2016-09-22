@@ -4,13 +4,7 @@ import {
 } from '../actions/index.js';
 
 const initialState = {
-    producer:
-    {   id:'0',
-        name:'Initial State',
-        description:'Initial State',
-        rating: 5,
-        products: [],
-    }
+    producer: null
 }
 
 export default function ProducerReducer(state, action) {
@@ -30,6 +24,7 @@ export default function ProducerReducer(state, action) {
             // BatsFix then modify the item needed in the new
             // state. 
             newState.producer = action.producer;
+
             return newState;
 
         //    

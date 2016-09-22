@@ -63,6 +63,9 @@ const TestProducers = [
     description:'Forged for sure',
     rating: 4,
     ratingCount: 100,
+    rid:['0','1','4','5'], //Producer 0 is a special case and used to test producer login
+    follower:['0','1','2'],
+    following:['0','3','4'],
     pid:['0','1','2','3'],},
 
 {   id:'1',
@@ -544,12 +547,17 @@ export function GetRetailer(id) {
     return null;
 }
 
-export function GetProducer(id) {
+export function GetProducer(id,fullInfo) {
     var producer = null;
     for (var i=0; i < TestProducers.length; i++) {
         if (TestProducers[i].id == id) {
             producer = TestProducers[i];
             producer.products = GetProductItems(producer.pid);
+            if (fullInfo) {
+                producer.retailers = GetRetailerItems(producer.rid);
+                producer.following = GetUserItems(producer.following);
+                producer.follower  = GetUserItems(producer.follower);
+            }
             return producer;
         }
     }
