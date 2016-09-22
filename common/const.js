@@ -29,6 +29,7 @@ export const SettingsSceneId        = 'SettingsScene';
 export const ProductReviewSceneId   = 'ProductReviewScene';
 export const ReviewStartSceneId     = 'ReviewStartScene';
 export const RateQueueSceneId       = 'RateQueueScene';
+export const ProcessorSceneId       = 'ProcessorScene';
 
 // Id for search view categories
 export const MapFrameId        = 'MapFrameId';

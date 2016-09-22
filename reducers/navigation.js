@@ -3,6 +3,9 @@ import {
     SWITCH_SCENE,
     SWITCH_TAB_SCENE,
     SWITCH_FRAME,
+    MODAL_SUCCESS,
+    MODAL_ERROR,
+    MODAL_RESET,
 } from '../actions/index.js';
 
 import {HomeSceneId,HomeTabId,ProductFrameId} from '../common/const.js';
@@ -13,6 +16,8 @@ const initialState = {
     frameId  : ProductFrameId,
     item     : null,
     switchScene: 0,
+    switchModal: 0,
+    messageModal: null,
 }
 
 export default function NavigationReducer(state, action) {
@@ -73,6 +78,19 @@ export default function NavigationReducer(state, action) {
             newState.tabId    = action.tabId;
 
             newState.switchScene = newState.switchScene + 1;
+            return newState;
+
+        case MODAL_SUCCESS:
+            newState = Object.assign({}, state);
+            newState.switchModal = true;
+            return newState;
+        case MODAL_RESET:
+            newState = Object.assign({}, state);
+            newState.switchModal = false;
+            return newState;
+        case MODAL_ERROR:
+            newState = Object.assign({}, state);
+            newState.messageModal = action.message;
             return newState;
         default:
             return state ? state : initialState;

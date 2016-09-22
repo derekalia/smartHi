@@ -2,9 +2,10 @@ import {
     SWITCH_TAB,
     SWITCH_SCENE,
     SWITCH_TAB_SCENE,
+    MODAL_SUCCESS,
 } from './navigation.js';
 
-import {RetailerSceneId,HomeTabId,} from '../common/const.js';
+import {LicenseeSceneId,RetailerSceneId,HomeTabId,} from '../common/const.js';
 import {GetRetailer} from './data.js';
 
 export const RETAILER_SUCCESS = 'RETAILER_SUCCESS';
@@ -22,4 +23,29 @@ export function GetRetailerAction(retailerId) {
             item: retailer,
         });
     }
+}
+
+export function LicenseeLoginAction(name,password) {
+    return function(dispatch, getState) {
+        //BatsFix. For now assume producer login always succeeds
+        var retailerId = '0';
+
+        // Indicate dialog success.
+        dispatch({
+            type: MODAL_SUCCESS,
+        });
+        
+        // Pass true to get full info on a retailer.
+        var retailer = GetRetailer(retailerId,true);
+        dispatch({
+            type:RETAILER_SUCCESS,
+            retailer: retailer,
+        });
+
+        // Finally switch screen
+        dispatch({
+            type:SWITCH_SCENE,
+            sceneId: LicenseeSceneId,
+        });
+   }
 }

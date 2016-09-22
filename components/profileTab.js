@@ -10,7 +10,7 @@ import {StyleSheet, View, Text, Navigator, Image,TouchableHighlight } from 'reac
 import {connect} from 'react-redux';
 
 /// Import const ids.
-import {ProfileTabId,ProfileSceneId,SettingsSceneId,LicenseeSceneId,LicenseeStoreSceneId,LicenseeProductSceneId,ProductReviewSceneId,} from '../common/const.js';
+import {ProcessorSceneId,ProfileTabId,ProfileSceneId,SettingsSceneId,LicenseeSceneId,LicenseeStoreSceneId,LicenseeProductSceneId,ProductReviewSceneId,} from '../common/const.js';
 
 // Import internal modules
 import ProfileScene         from './profileScene.js';
@@ -19,6 +19,7 @@ import LicenseeScene        from './licenseeScene.js';
 import LicenseeStoreScene   from './licenseeStoreScene.js';
 import LicenseeProductScene from './licenseeProductScene.js';
 import ProductReviewScene   from './productReviewScene.js';
+import ProcessorScene       from './processorScene.js';
 
 import {HerbyBar}           from '../common/controls.js';
 
@@ -31,6 +32,7 @@ const TabScenes = [
     { title: "Store Info",     component: LicenseeStoreScene,   index: LicenseeStoreSceneId },
     { title: "Product Info",   component: LicenseeProductScene, index: LicenseeProductSceneId },
     { title: "Product Review", component: ProductReviewScene,   index: ProductReviewSceneId },
+    { title: "Processor",      component: ProcessorScene,       index: ProcessorSceneId },
 ];
 
 class ProfileTab extends Component {
