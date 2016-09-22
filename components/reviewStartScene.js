@@ -32,7 +32,7 @@ class ReviewStartScene extends Component {
                     <Text style={{fontWeight:'bold',fontSize:18,color:'black',}}>Take a picture of the receipt</Text>
                     </View>
                     <View style={{flex:1,alignItems:'center',justifyContent:'center',}}>
-                        <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
+                        <Image source={require('../media/receipt1.png') } style={{ height: 340-50, width: 245-50,justifyContent:'center',}}/>
                     </View>
                     <View style={{flex:1,alignItems:'center',justifyContent:'center',}}>
                     <HerbyButton2 name='Take a picture' onPress={()=>this._goCamera()}/>
