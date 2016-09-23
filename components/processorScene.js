@@ -1,10 +1,9 @@
 //
 // Description: processorScene.js
 //
-
 // Import modules
 import React, { Component } from 'react';
-import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity, Platform } from 'react-native';
+import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity, Platform, TouchableHighlight } from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -83,8 +82,17 @@ class ProcessorHeader extends Component {
     render() {
         return(
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
+      <TouchableHighlight>
+        <View style={{flexDirection:'row',borderWidth: 1.7, borderColor:'#4A90E2',width:350,borderRadius:20}}>
+          <View style={{marginLeft:10, marginTop:10,marginBottom:10,marginRight:20}}>
+            <Image source={require('../media/bluePlus1.png')} style={{ height: 75, width: 75}}/>
+          </View>
+          <View style={{alignSelf:'center',justifyContent:'center'}}>
+            <Text style={{color:'#4A90E2', fontSize:16,fontWeight:'bold'}}>Create Company Page</Text>
+          </View>
+        </View>
+      </TouchableHighlight>
 
-            <Image source={this.state.imageSource} style={{ height: 190, width: 380,justifyContent:'center',}}/>
             <Text>{this.state.title}</Text>
             <Text>{this.state.description}</Text>
             <HerbyButton2 name='Update Producer Info' onPress={()=>this._showUpdateInfo(true)}/>
