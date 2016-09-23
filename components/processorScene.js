@@ -4,7 +4,7 @@
 
 // Import modules
 import React, { Component } from 'react';
-import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity } from 'react-native';
+import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity, Platform } from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -17,7 +17,8 @@ import {HerbyFrameBar,HerbyBar,}   from '../common/controls.js';
 import ProductList from './productList.js';
 import RetailerList from './retailerList.js';
 import UserList from './userList.js';
-import {HerbyButton2,} from '../common/controls.js';
+import UpdateInfoModal from './updateInfoModal.js';
+import {HerbyButton2,HerbyInput} from '../common/controls.js';
 
 class ProcessorProducts extends Component {
     //BatsFix. should there be a product categorization and breakdown here? what about
@@ -43,7 +44,6 @@ class ProcessorRetailers extends Component {
     }
 }
 
-
 class ProcessorSocial extends Component {
     constructor(props) {
         super(props);
@@ -66,13 +66,33 @@ class ProcessorSocial extends Component {
 class ProcessorHeader extends Component {
     constructor(props) {
         super(props);
-        this.state = {show:false};
+        this.state = {showUpdateInfo:false,imageSource:require('../media/RosinXJ.png'),title:'Title',description:'Description'};
     }
+    _showUpdateInfo(value) {
+       this.setState({showUpdateInfo:value}); 
+    }
+    _updateInfo(title,description,imageSource) {
+        if (imageSource != null) {
+            this.setState({title:title,description:description,imageSource:imageSource});
+        }
+        else {
+            this.setState({title:title,description:description});
+        }
+    }
+
     render() {
         return(
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
-            <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
-            <HerbyButton2 name='Update Producer Info' onPress={()=>this._showUpdateInfo()}/>
+            <Image source={this.state.imageSource} style={{ height: 190, width: 380,justifyContent:'center',}}/>
+            <Text>{this.state.title}</Text>
+            <Text>{this.state.description}</Text>
+            <HerbyButton2 name='Update Producer Info' onPress={()=>this._showUpdateInfo(true)}/>
+            <UpdateInfoModal
+                title={this.state.title}
+                description={this.state.description}
+                show={this.state.showUpdateInfo} 
+                onClose={()=>this._showUpdateInfo(false)} 
+                onUpdate={(t,d,i)=>this._updateInfo(t,d,i)}/>
         </View>
         );
     }

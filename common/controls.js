@@ -376,7 +376,11 @@ export class HerbyInput extends Component {
         }
         return null;
     }
-
+    _onChange(event) {
+        if (this.props.onChange) {
+            this.props.onChange(event.nativeEvent.text);
+        }
+    }
     render() {
         return(
         <View style={{
@@ -391,7 +395,8 @@ export class HerbyInput extends Component {
             borderBottomWidth:1,
             borderBottomColor:'#C8C8CC'}}>
             {this._renderName()}
-          <TextInput style={{width:320,alignItems:'stretch'}} placeholder = {this.props.value}/>
+          <TextInput style={{width:320,alignItems:'stretch'}} placeholder = {this.props.value} onChange = {this._onChange.bind(this)}
+          />
         </View>
         );
     }
