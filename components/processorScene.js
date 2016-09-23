@@ -4,7 +4,11 @@
 
 // Import modules
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity,TouchableHighlight } from 'react-native';
+=======
+import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity, Platform } from 'react-native';
+>>>>>>> 4c5f23f468f98426184d0ee5e9c840238a09a4f6
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -17,7 +21,8 @@ import {HerbyFrameBar,HerbyBar,}   from '../common/controls.js';
 import ProductList from './productList.js';
 import RetailerList from './retailerList.js';
 import UserList from './userList.js';
-import {HerbyButton2,} from '../common/controls.js';
+import UpdateInfoModal from './updateInfoModal.js';
+import {HerbyButton2,HerbyInput} from '../common/controls.js';
 
 class ProcessorProducts extends Component {
     //BatsFix. should there be a product categorization and breakdown here? what about
@@ -43,7 +48,6 @@ class ProcessorRetailers extends Component {
     }
 }
 
-
 class ProcessorSocial extends Component {
     constructor(props) {
         super(props);
@@ -66,24 +70,34 @@ class ProcessorSocial extends Component {
 class ProcessorHeader extends Component {
     constructor(props) {
         super(props);
-        this.state = {show:false};
+        this.state = {showUpdateInfo:false,imageSource:require('../media/RosinXJ.png'),title:'Title',description:'Description'};
     }
+    _showUpdateInfo(value) {
+       this.setState({showUpdateInfo:value});
+    }
+    _updateInfo(title,description,imageSource) {
+        if (imageSource != null) {
+            this.setState({title:title,description:description,imageSource:imageSource});
+        }
+        else {
+            this.setState({title:title,description:description});
+        }
+    }
+
     render() {
         return(
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
 
-        <TouchableHighlight>
-          <View style={{flexDirection:'row',borderWidth: 1.7, borderColor:'#4A90E2',width:350,borderRadius:20}}>
-            <View style={{marginLeft:10, marginTop:10,marginBottom:10,marginRight:20}}>
-              <Image source={require('../media/bluePlus1.png')} style={{ height: 75, width: 75}}/>
-            </View>
-            <View style={{alignSelf:'center',justifyContent:'center'}}>
-              <Text style={{color:'#4A90E2', fontSize:16,fontWeight:'bold'}}>Create Company Page</Text>
-            </View>
-          </View>
-        </TouchableHighlight>
-
-          <HerbyButton2 name='Update Producer Info' onPress={()=>this._showUpdateInfo()}/>
+            <Image source={this.state.imageSource} style={{ height: 190, width: 380,justifyContent:'center',}}/>
+            <Text>{this.state.title}</Text>
+            <Text>{this.state.description}</Text>
+            <HerbyButton2 name='Update Producer Info' onPress={()=>this._showUpdateInfo(true)}/>
+            <UpdateInfoModal
+                title={this.state.title}
+                description={this.state.description}
+                show={this.state.showUpdateInfo}
+                onClose={()=>this._showUpdateInfo(false)}
+                onUpdate={(t,d,i)=>this._updateInfo(t,d,i)}/>
         </View>
         );
     }
