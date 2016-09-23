@@ -4,7 +4,7 @@
 
 // Import modules
 import React, { Component } from 'react';
-import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity } from 'react-native';
+import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity,TouchableHighlight } from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -71,8 +71,19 @@ class ProcessorHeader extends Component {
     render() {
         return(
         <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
-            <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
-            <HerbyButton2 name='Update Producer Info' onPress={()=>this._showUpdateInfo()}/>
+
+        <TouchableHighlight>
+          <View style={{flexDirection:'row',borderWidth: 1.7, borderColor:'#4A90E2',width:350,borderRadius:20}}>
+            <View style={{marginLeft:10, marginTop:10,marginBottom:10,marginRight:20}}>
+              <Image source={require('../media/bluePlus1.png')} style={{ height: 75, width: 75}}/>
+            </View>
+            <View style={{alignSelf:'center',justifyContent:'center'}}>
+              <Text style={{color:'#4A90E2', fontSize:16,fontWeight:'bold'}}>Create Company Page</Text>
+            </View>
+          </View>
+        </TouchableHighlight>
+
+          <HerbyButton2 name='Update Producer Info' onPress={()=>this._showUpdateInfo()}/>
         </View>
         );
     }
@@ -157,10 +168,10 @@ class ProcessorScene extends Component {
 //
 // Connect to producer state
 //
-function mapStateToProps(state) { 
-    return { 
-        producer: state.ProducerReducer.producer, 
-    } 
+function mapStateToProps(state) {
+    return {
+        producer: state.ProducerReducer.producer,
+    }
 }
 
 //
