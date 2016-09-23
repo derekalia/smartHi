@@ -4,11 +4,7 @@
 
 // Import modules
 import React, { Component } from 'react';
-<<<<<<< HEAD
-import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity,TouchableHighlight } from 'react-native';
-=======
 import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity, Platform } from 'react-native';
->>>>>>> 4c5f23f468f98426184d0ee5e9c840238a09a4f6
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
