@@ -26,6 +26,16 @@ class ProcessorProducts extends Component {
         var products = this.props.producer.products;
         return (
             <ScrollView style={{flex:1}}>
+            <View style={{flexDirection:'row',marginTop:15, alignItems:'center',marginBottom:10}}>
+              <Text>Products: </Text>
+              <View style={{}}>
+              <TouchableHighlight style={{backgroundColor:'#468EE5',borderRadius:10,height:25,alignItems:
+            'center',justifyContent:'center'}}>
+                <Text style={{color:'white',marginHorizontal:10,alignItems:
+              'center',justifyContent:'center',alignSelf:'center'}}>Add New</Text>
+              </TouchableHighlight>
+              </View>
+            </View>
                 <ProductList productList={this.props.producer.products} goProduct={this.props.goProduct}/>
             </ScrollView>
         );
