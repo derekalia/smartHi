@@ -1,10 +1,9 @@
 //
 // Description: processorScene.js
 //
-
 // Import modules
 import React, { Component } from 'react';
-import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity } from 'react-native';
+import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity, Platform, TouchableHighlight } from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -26,9 +25,16 @@ class ProcessorProducts extends Component {
         var products = this.props.producer.products;
         return (
             <ScrollView style={{flex:1}}>
-                <View stule={{flexDirection:'row'}}>
-                    <HerbyButton2 name='Add Product'  onPress={()=>this.props.goProduct(-1)}/>
-                </View>
+            <View style={{flexDirection:'row',marginTop:15, alignItems:'center',marginBottom:10}}>
+              <Text>Products: </Text>
+              <View style={{}}>
+              <TouchableHighlight style={{backgroundColor:'#468EE5',borderRadius:10,height:25,alignItems:
+            'center',justifyContent:'center'}} onPress={()=>this.props.goProduct(-1)}>
+                <Text style={{color:'white',marginHorizontal:10,alignItems:
+              'center',justifyContent:'center',alignSelf:'center'}}>Add New</Text>
+              </TouchableHighlight>
+              </View>
+            </View>
                 <ProductList productList={this.props.producer.products} goProduct={this.props.goProduct}/>
             </ScrollView>
         );
@@ -163,10 +169,10 @@ class ProcessorScene extends Component {
 //
 // Connect to producer state
 //
-function mapStateToProps(state) { 
-    return { 
-        producer: state.ProducerReducer.producer, 
-    } 
+function mapStateToProps(state) {
+    return {
+        producer: state.ProducerReducer.producer,
+    }
 }
 
 //
