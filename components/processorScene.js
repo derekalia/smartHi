@@ -4,21 +4,20 @@
 
 // Import modules
 import React, { Component } from 'react';
-import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity, Platform } from 'react-native';
+import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity } from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import StarRating from 'react-native-star-rating';
 
 // Import internals
-import {UpdateProducerAction,GetProductAction,GetRetailerAction,SwitchSceneAction,} from '../actions';
-import {SettingsSceneId,ProfileTabId,} from '../common/const.js';
+import {GoUpdateProductAction,GetRetailerAction,SwitchSceneAction,} from '../actions';
+import {UpdateProductSceneId,UpdateProcessorSceneId,SettingsSceneId,ProfileTabId,} from '../common/const.js';
 import {HerbyFrameBar,HerbyBar,}   from '../common/controls.js';
 import ProductList from './productList.js';
 import RetailerList from './retailerList.js';
 import UserList from './userList.js';
-import UpdateInfoModal from './updateInfoModal.js';
-import {HerbyButton2,HerbyInput} from '../common/controls.js';
+import {HerbyButton2,} from '../common/controls.js';
 
 class ProcessorProducts extends Component {
     //BatsFix. should there be a product categorization and breakdown here? what about
@@ -27,6 +26,9 @@ class ProcessorProducts extends Component {
         var products = this.props.producer.products;
         return (
             <ScrollView style={{flex:1}}>
+                <View stule={{flexDirection:'row'}}>
+                    <HerbyButton2 name='Add Product'  onPress={()=>this.props.goProduct(-1)}/>
+                </View>
                 <ProductList productList={this.props.producer.products} goProduct={this.props.goProduct}/>
             </ScrollView>
         );
@@ -43,6 +45,7 @@ class ProcessorRetailers extends Component {
         );
     }
 }
+
 
 class ProcessorSocial extends Component {
     constructor(props) {
@@ -66,33 +69,16 @@ class ProcessorSocial extends Component {
 class ProcessorHeader extends Component {
     constructor(props) {
         super(props);
-        this.state = {showUpdateInfo:false,imageSource:require('../media/RosinXJ.png'),title:'Title',description:'Description'};
     }
-    _showUpdateInfo(value) {
-       this.setState({showUpdateInfo:value}); 
-    }
-    _updateInfo(title,description,imageSource) {
-        if (imageSource != null) {
-            this.setState({title:title,description:description,imageSource:imageSource});
-        }
-        else {
-            this.setState({title:title,description:description});
-        }
-    }
-
     render() {
         return(
-        <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
-            <Image source={this.state.imageSource} style={{ height: 190, width: 380,justifyContent:'center',}}/>
-            <Text>{this.state.title}</Text>
-            <Text>{this.state.description}</Text>
-            <HerbyButton2 name='Update Producer Info' onPress={()=>this._showUpdateInfo(true)}/>
-            <UpdateInfoModal
-                title={this.state.title}
-                description={this.state.description}
-                show={this.state.showUpdateInfo} 
-                onClose={()=>this._showUpdateInfo(false)} 
-                onUpdate={(t,d,i)=>this._updateInfo(t,d,i)}/>
+        <View style={{marginTop:20,}}>
+            <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
+            <Text style={{fontSize:18,fontWeight:'bold'}}>{this.props.producer.name}</Text>
+            <Text style={{fontSize:15}}>{this.props.producer.description}</Text>
+            <View style={{flexDirection:'row'}}>
+            <HerbyButton2 name='Update Producer Info' onPress={()=>this.props.goUpdate()}/>
+            </View>
         </View>
         );
     }
@@ -119,8 +105,8 @@ class ProcessorScene extends Component {
         this._height = height;
     }
 
-    _goSettings() {
-        this.props.SwitchSceneAction(SettingsSceneId);
+    _goUpdate() {
+        this.props.SwitchSceneAction(UpdateProcessorSceneId);
     }
 
     _setFrame(frameId) {
@@ -154,7 +140,7 @@ class ProcessorScene extends Component {
              <ScrollView
                   style={{marginTop:0,height:this._height,backgroundColor:'transparent',}}
                   stickyHeaderIndices={[1]}>
-                  <ProcessorHeader producer={this.props.producer} update={(t)=>this.props.UpdateProducerAction(t)}/>
+                  <ProcessorHeader producer={this.props.producer} goUpdate={(t)=>this._goUpdate(t)}/>
                   <HerbyFrameBar entries={['PRODUCTS','RETAILERS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
                   <Navigator
                       style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
@@ -164,7 +150,7 @@ class ProcessorScene extends Component {
                       initialRoute = {ProcessorFrames[ProductsFrameId]}
                       initialRouteStack = {ProcessorFrames}
                       producer={this.props.producer}
-                      goProduct={(t)=>this.props.GetProductAction(t)}
+                      goProduct={(t)=>this.props.GoUpdateProductAction(t)}
                       goRetailer={(t)=>this.props.GetRetailerAction(t)}
                   />
              </ScrollView>
@@ -184,13 +170,12 @@ function mapStateToProps(state) {
 }
 
 //
-// Connect to GetProductAction,GetRetailerAction,SwitchSceneAction
+// Connect to GoUpdateProductAction,GetRetailerAction,SwitchSceneAction
 //
 function mapActionToProps(dispatch) {
     return bindActionCreators({
-        GetProductAction,
+        GoUpdateProductAction,
         GetRetailerAction,
-        UpdateProducerAction,
         SwitchSceneAction, },
         dispatch);
 }

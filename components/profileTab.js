@@ -10,7 +10,18 @@ import {StyleSheet, View, Text, Navigator, Image,TouchableHighlight } from 'reac
 import {connect} from 'react-redux';
 
 /// Import const ids.
-import {ProcessorSceneId,ProfileTabId,ProfileSceneId,SettingsSceneId,LicenseeSceneId,LicenseeStoreSceneId,LicenseeProductSceneId,ProductReviewSceneId,} from '../common/const.js';
+import {
+    UpdateProductSceneId,
+    UpdateProcessorSceneId,
+    ProcessorSceneId,
+    ProfileTabId,
+    ProfileSceneId,
+    SettingsSceneId,
+    LicenseeSceneId,
+    LicenseeStoreSceneId,
+    LicenseeProductSceneId,
+    ProductReviewSceneId,} 
+    from '../common/const.js';
 
 // Import internal modules
 import ProfileScene         from './profileScene.js';
@@ -20,19 +31,23 @@ import LicenseeStoreScene   from './licenseeStoreScene.js';
 import LicenseeProductScene from './licenseeProductScene.js';
 import ProductReviewScene   from './productReviewScene.js';
 import ProcessorScene       from './processorScene.js';
+import UpdateProcessorScene from './updateProcessorScene.js';
+import UpdateProductScene   from './updateProductScene.js';
 
 import {HerbyBar}           from '../common/controls.js';
 
 // Import const ids.
 
 const TabScenes = [
-    { title: "Profile",        component: ProfileScene,         index: ProfileSceneId },
-    { title: "Settings",       component: SettingsScene,        index: SettingsSceneId },
-    { title: "Licensee",       component: LicenseeScene,        index: LicenseeSceneId },
-    { title: "Store Info",     component: LicenseeStoreScene,   index: LicenseeStoreSceneId },
-    { title: "Product Info",   component: LicenseeProductScene, index: LicenseeProductSceneId },
-    { title: "Product Review", component: ProductReviewScene,   index: ProductReviewSceneId },
-    { title: "Processor",      component: ProcessorScene,       index: ProcessorSceneId },
+    { title: "Profile",          item:null, component: ProfileScene,         index: ProfileSceneId },
+    { title: "Settings",         item:null, component: SettingsScene,        index: SettingsSceneId },
+    { title: "Licensee",         item:null, component: LicenseeScene,        index: LicenseeSceneId },
+    { title: "Store Info",       item:null, component: LicenseeStoreScene,   index: LicenseeStoreSceneId },
+    { title: "Product Info",     item:null, component: LicenseeProductScene, index: LicenseeProductSceneId },
+    { title: "Product Review",   item:null, component: ProductReviewScene,   index: ProductReviewSceneId },
+    { title: "Processor",        item:null, component: ProcessorScene,       index: ProcessorSceneId },
+    { title: "Update Product",   item:null, component: UpdateProductScene,   index: UpdateProductSceneId },
+    { title: "Update Processor", item:null, component: UpdateProcessorScene,index: UpdateProcessorSceneId },
 ];
 
 class ProfileTab extends Component {
@@ -69,15 +84,18 @@ class ProfileTab extends Component {
         var routelist = this.refs.navigator.getCurrentRoutes();
         for (var i=0; i < routelist.length; i++) {
             if (routelist[i].index == sceneId) {
+                routelist[i].item = nextProps.item;
                 this.refs.navigator.jumpTo(routelist[i]);
                 foundExisting = true;
                 break;
             }
         }
+        
         // If not found in existing push
         if (foundExisting == false) {
             for(var i=0; i < TabScenes.length; i++) {
                  if (TabScenes[i].index == sceneId) {
+                    TabScenes[i].item = nextProps.item;
                     this.refs.navigator.push(TabScenes[i]);
                     break;
                  }
@@ -95,7 +113,7 @@ class ProfileTab extends Component {
             return (
                 <View style={{flex:1}}>
                     <HerbyBar navigator={navigator}/>
-                    <route.component tabId={ProfileTabId} item={navigator.props.item}/>
+                    <route.component tabId={ProfileTabId} item={route.item}/>
                 </View>
             );
         }

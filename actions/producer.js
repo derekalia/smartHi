@@ -26,6 +26,15 @@ export function GetProducerAction(producerId) {
     }
 }
 
+export function UpdateProducerAction(producerId) {
+    return function (dispatch, getState) {
+        //Call update producer action here.
+        //Then notify the user that the producer data was
+        //updated.
+        return 'Info Updated Successfully';
+    }
+}
+
 export function ProducerLoginAction(name,password) {
     return function(dispatch, getState) {
         //BatsFix. For now assume producer login always succeeds
