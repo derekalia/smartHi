@@ -32,6 +32,7 @@ export const RateQueueSceneId       = 'RateQueueScene';
 export const ProcessorSceneId       = 'ProcessorScene';
 export const UpdateProcessorSceneId = 'UpdateProcessorScene';
 export const UpdateProductSceneId   = 'UpdateProductScene';
+export const UpdateRetailerSceneId  = 'UpdateRetailer';
 
 // Id for search view categories
 export const MapFrameId        = 'MapFrameId';

@@ -49,3 +49,12 @@ export function LicenseeLoginAction(name,password) {
         });
    }
 }
+
+export function UpdateRetailerAction(retailerId,name,description,image) {
+    return function (dispatch, getState) {
+        //Call update producer action here.
+        //Then notify the user that the producer data was
+        //updated.
+        return 'Info Updated Successfully';
+    }
+}

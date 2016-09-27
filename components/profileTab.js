@@ -11,6 +11,7 @@ import {connect} from 'react-redux';
 
 /// Import const ids.
 import {
+    UpdateRetailerSceneId,
     UpdateProductSceneId,
     UpdateProcessorSceneId,
     ProcessorSceneId,
@@ -33,6 +34,7 @@ import ProductReviewScene   from './productReviewScene.js';
 import ProcessorScene       from './processorScene.js';
 import UpdateProcessorScene from './updateProcessorScene.js';
 import UpdateProductScene   from './updateProductScene.js';
+import UpdateLicenseeScene  from './updateLicenseeScene.js';
 
 import {HerbyBar}           from '../common/controls.js';
 
@@ -47,7 +49,8 @@ const TabScenes = [
     { title: "Product Review",   item:null, component: ProductReviewScene,   index: ProductReviewSceneId },
     { title: "Processor",        item:null, component: ProcessorScene,       index: ProcessorSceneId },
     { title: "Update Product",   item:null, component: UpdateProductScene,   index: UpdateProductSceneId },
-    { title: "Update Processor", item:null, component: UpdateProcessorScene,index: UpdateProcessorSceneId },
+    { title: "Update Processor", item:null, component: UpdateProcessorScene, index: UpdateProcessorSceneId },
+    { title: "Update Retailer",  item:null, component: UpdateLicenseeScene,  index: UpdateRetailerSceneId },
 ];
 
 class ProfileTab extends Component {

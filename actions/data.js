@@ -97,6 +97,8 @@ const TestRetailers = [
     rating: 4,
     ratingCount: 703,
     description:'Forged Bellevue is excellent',
+    follower:['0','1','2'],
+    following:['0','3','4'],
     pid:['0','1','2','3','4','5','6','7'],},
 {   id:'1',
     name:'Tully Issaquah',
@@ -104,6 +106,8 @@ const TestRetailers = [
     rating: 5,
     ratingCount: 103,
     description:'Tully Issaquah has excellent taste.',
+    follower:['0','1','2'],
+    following:['0','3','4'],
     pid:['0','1','2','3','4','5','6','7','8','9','10','11','12','13'],},
 {   id:'2',
     name:'Starbucks Gillman',
@@ -111,6 +115,8 @@ const TestRetailers = [
     rating: 2,
     ratingCount: 203,
     description:'Starbucks Gillman is the best',
+    follower:['0','1','2'],
+    following:['0','3','4'],
     pid:['0','1','2','3','4','5','6','7','8','9','10','11','12','13'],},
 {   id:'3',
     name:'Petes Seattle',
@@ -118,6 +124,8 @@ const TestRetailers = [
     rating: 5,
     ratingCount: 403,
     description:'Petes Seattle is excellent',
+    follower:['0','1','2'],
+    following:['0','3','4'],
     pid:['0','1','2','3','4','5','6','7','8','9','10','11','12','13'],},
 {   id:'4',
     name:'Magnolia Rio',
@@ -125,6 +133,8 @@ const TestRetailers = [
     rating: 4,
     ratingCount: 545,
     description:'Magnolia Rio is excellent',
+    follower:['0','1','2'],
+    following:['0','3','4'],
     pid:['8','9','10','11','12','13'],},
 ];
 
@@ -540,7 +550,9 @@ export function GetRetailer(id) {
     for (var i=0; i < TestRetailers.length; i++) {
         if (TestRetailers[i].id == id) {
            retailer = TestRetailers[i];
-           retailer.products = GetProductItems(retailer.pid);
+           retailer.products  = GetProductItems(retailer.pid);
+           retailer.follower  = GetUserItems(retailer.follower);
+           retailer.following = GetUserItems(retailer.following);
            return retailer;
         }
     }
