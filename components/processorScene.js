@@ -26,12 +26,11 @@ class ProcessorProducts extends Component {
         return (
             <ScrollView style={{flex:1}}>
             <View style={{flexDirection:'row',marginTop:15, alignItems:'center',marginBottom:10}}>
-              <Text>Products: </Text>
-              <View style={{}}>
-              <TouchableHighlight style={{backgroundColor:'#468EE5',borderRadius:10,height:25,alignItems:
+              <View style={{marginLeft:8}}>
+              <TouchableHighlight style={{backgroundColor:'#468EE5',borderRadius:8,height:30,alignItems:
             'center',justifyContent:'center'}} onPress={()=>this.props.goProduct(-1)}>
                 <Text style={{color:'white',marginHorizontal:10,alignItems:
-              'center',justifyContent:'center',alignSelf:'center'}}>Add New</Text>
+              'center',justifyContent:'center',alignSelf:'center'}}>Add New Product</Text>
               </TouchableHighlight>
               </View>
             </View>
