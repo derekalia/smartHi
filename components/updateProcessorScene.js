@@ -4,7 +4,7 @@
 
 // Import modules
 import React, { Component } from 'react';
-import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity, Platform } from 'react-native';
+import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity, Platform,TouchableHighlight } from 'react-native';
 
 import ImagePicker from 'react-native-image-picker';
 
@@ -26,7 +26,7 @@ class UpdateProcessorScene extends Component {
     }
 
     _updateProcessor() {
-        var sourceImage = null; 
+        var sourceImage = null;
         if (this.state.imageSource != this._defaultImage ) {
             sourceImage = this.state.imageSource;
         }
@@ -55,7 +55,7 @@ class UpdateProcessorScene extends Component {
             console.log('response was' + response);
             if (response.didCancel) {
             }
-            else 
+            else
             if (response.error) {
             }
             else {
@@ -72,20 +72,30 @@ class UpdateProcessorScene extends Component {
 
     render() {
         return(
-        <View style={{flex:1}}>
-            <View style={{backgroundColor:'white',marginTop:0,margin:10,}}>
-                <Image source={this.state.imageSource} style={{ height: 190, width: 380,justifyContent:'center',alignItems:'center'}}/>
-                <View style={{flexDirection:'row',marginTop:20,}}>
-                    <Text>Title:</Text>
-                    <TextInput style={{flex:1,backgroundColor:'#EDEDED'}} placeholder={this._title} onChangeText={(t)=>this._setTitle(t)}/>
+        <View>
+            <View style={{backgroundColor:'white',margin:10,marginTop:0}}>
+                <Image source={this.state.imageSource} style={{ height: 190, width: 380,justifyContent:'center',alignItems:'center',alignSelf:'center'}}/>
+                <TouchableHighlight onPress={()=>this._showImagePicker()} style={{marginTop:5,backgroundColor:'#468ee5',marginTop:10,height:30,width:150,borderRadius:8,justifyContent:'center',alignSelf:'center'}}>
+                  <Text style={{color:'white',alignSelf:'center'}}>
+                    Choose Image
+                  </Text>
+                </TouchableHighlight>
+
+                <View style={{flexDirection:'row',marginTop:20,alignItems:'center'}}>
+                    <Text style={{fontSize:16,fontWeight:'bold'}}>Title</Text>
                 </View>
-                <View style={{marginTop:20}}>
-                    <Text>Description:</Text>
-                    <TextInput style={{flex:1,height:200,backgroundColor:'#DEDEDE'}} placeholder={this._title} onChangeText={(t)=>this._setDescription(t)} multiline={true}/>
+                <View style={{flexDirection:'row',marginTop:10,alignItems:'center'}}>
+                    <TextInput style={{color:"black",marginLeft:0,height:35,borderRadius:3,flex:1,backgroundColor:'white',borderWidth:1,borderColor:'lightgray'}} placeholder={"Enter title here"} onChangeText={(t)=>this._setTitle(t)}/>
+                </View>
+                <View style={{flexDirection:'row',marginTop:20,alignItems:'center'}}>
+                    <Text style={{fontSize:16,fontWeight:'bold'}}>Description</Text>
+                </View>
+                <View style={{flexDirection:'row',marginTop:10,alignItems:'center'}}>
+                    <TextInput style={{color:"black",marginLeft:0,height:35,borderRadius:3,flex:1,backgroundColor:'white',borderWidth:1,borderColor:'lightgray',height:100}} placeholder={"Enter description here"} onChangeText={(t)=>this._setDescription(t)} multiline={true}/>
                 </View>
                 <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
-                    <HerbyButton2 name="Pick Image" onPress={()=>this._showImagePicker()}/>
-                    <HerbyButton2 name="Update" onPress={()=>this._updateProcessor()}/>
+
+                    {/* <HerbyButton2 name="Update" onPress={()=>this._updateProcessor()}/> */}
                 </View>
             </View>
         </View>
@@ -93,10 +103,10 @@ class UpdateProcessorScene extends Component {
     }
 }
 
-function mapStateToProps(state) { 
-    return { 
-        producer: state.ProducerReducer.producer, 
-    } 
+function mapStateToProps(state) {
+    return {
+        producer: state.ProducerReducer.producer,
+    }
 }
 
 

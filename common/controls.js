@@ -178,7 +178,7 @@ export class HerbyBar extends Component {
         if (this.props.forward == null || this.props.back != null) {
             var backText = 'Back';
             if (this.props.back != null) {
-                backText = this.props.back; 
+                backText = this.props.back;
             }
             return(
             <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'flex-start' }}>
@@ -247,13 +247,13 @@ export class HerbyFrameBar extends Component {
             menuItems.push(this._getMenu(i));
         }
         return (
-          
+
               <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:0,height:42,backgroundColor:'white',
                     shadowColor: "#000000",
                     shadowOpacity: 0.3,
                     shadowRadius: 2,
                     shadowOffset: {
-                      height: 2,
+                      height: 3,
                       width: 0
                     }}}>
                 {menuItems}

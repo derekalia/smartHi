@@ -78,13 +78,22 @@ class ProcessorHeader extends Component {
     }
     render() {
         return(
-        <View style={{marginTop:20,}}>
-            <Image source={require('../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
-            <Text style={{fontSize:18,fontWeight:'bold'}}>{this.props.producer.name}</Text>
-            <Text style={{fontSize:15}}>{this.props.producer.description}</Text>
-            <View style={{flexDirection:'row'}}>
-            <HerbyButton2 name='Update Producer Info' onPress={()=>this.props.goUpdate()}/>
-            </View>
+        <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
+        <TouchableHighlight style={{backgroundColor:'white'}} onPress={()=>this.props.goUpdate()}>
+        <View style={{flexDirection:'row',borderWidth: 1.7, borderColor:'#4A90E2',width:350,borderRadius:10}}>
+          <View style={{marginLeft:10, marginTop:10,marginBottom:10,marginRight:20}}>
+            <Image source={require('../media/bluePlus1.png')} style={{ height: 75, width: 75}}/>
+          </View>
+          <View style={{alignSelf:'center',justifyContent:'center'}}>
+            <Text style={{color:'#4A90E2', fontSize:16,fontWeight:'bold'}}>Create Company Page</Text>
+          </View>
+        </View>
+      </TouchableHighlight>
+            {/* <Text style={{fontSize:18,fontWeight:'bold'}}>{this.props.producer.name}</Text> */}
+            {/* <Text style={{fontSize:15}}>{this.props.producer.description}</Text> */}
+                {/* <View style={{flexDirection:'row'}}>
+                <HerbyButton2 name='Update Producer Info'/>
+                </View> */}
         </View>
         );
     }

@@ -65,8 +65,8 @@ class UserFavorites extends Component {
     }
     render() {
         return (
-            <ScrollView style={{backgroundColor:'transparent',}}>
-                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+            <ScrollView style={{}}>
+                <View style={{backgroundColor:'#ECECEC',flex:1,height:8,marginHorizontal:0}}/>
                 <HerbyFrameBar entries={['PRODUCTS','STORES','PRODUCERS']} setFrame={(t)=>this._setFrame(t)}/>
                 {this._getFavorites()}
             </ScrollView>
