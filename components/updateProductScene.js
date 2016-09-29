@@ -3,7 +3,7 @@
 // Used for testing various UI components
 //
 import React, { Component } from 'react';
-import {Platform,Alert,StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator, Dimensions,} from 'react-native'
+import {Platform,Alert,StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity,TouchableHighlight, Navigator, Dimensions,} from 'react-native'
 
 import ImagePicker from 'react-native-image-picker';
 //get state management components
@@ -22,7 +22,7 @@ class UpdateProductScene extends Component {
     constructor(props) {
         super(props);
         // these should come from the app state.
-        this._defaultImage = require('../media/RosinXJ.png');
+        this._defaultImage = require('../media/GreyBox11.png');
         this._effect   = FiltersEffect;
         this._symptom  = FiltersSymptoms;
         this._activity = FiltersActivity;
@@ -30,7 +30,7 @@ class UpdateProductScene extends Component {
         var product = this.props.item;
         product.showSlider = false;
         product.imageSource = this._defaultImage;
- 
+
         this.state = product;
 
         //
@@ -48,17 +48,39 @@ class UpdateProductScene extends Component {
                 <View style={{ justifyContent: "flex-start" }}>
                     <Image source={this.state.imageSource} style={{ height: 190, width: 380 }}/>
                 </View>
-                <HerbyButton2 name="Update Product Image" onPress={()=>this._showImagePicker()}/>
+                <TouchableHighlight onPress={()=>this._showImagePicker()} style={{marginTop:5,backgroundColor:'#468ee5',marginTop:10,height:30,width:150,borderRadius:8,justifyContent:'center',alignSelf:'center'}}>
+                  <Text style={{color:'white',alignSelf:'center'}}>
+                    Choose Image
+                  </Text>
+                </TouchableHighlight>
 
                 {this._renderRating()}
 
+                {this._renderDescription()}
+                <View style={{ marginTop: 5, marginHorizontal: 10 }}>
+                  <View><Text>Scan Barcode</Text>
+                  <TouchableHighlight onPress={()=>this._showImagePicker()} style={{marginTop:5,backgroundColor:'#468ee5',marginTop:10,height:30,width:150,borderRadius:8,justifyContent:'center',alignSelf:'flex-start'}}>
+                    <Text style={{color:'white',alignSelf:'center'}}>
+                      Enter Lot Number
+                      </Text>
+                      </TouchableHighlight>
+                      <TouchableHighlight onPress={()=>this._showImagePicker()} style={{marginTop:5,backgroundColor:'#468ee5',marginTop:10,height:30,width:150,borderRadius:8,justifyContent:'center',alignSelf:'flex-start'}}>
+                        <Text style={{color:'white',alignSelf:'center'}}>
+                          Scan Bardcode(s)
+                          </Text>
+                          </TouchableHighlight>
+                      <View style={{flexDirection:'row'}}>
+                      <Text>6000 0000 0000 0001</Text><Text> Edit</Text><Text> Remove</Text>
+                      </View>
+                      </View>
+                      </View>
                 {this._renderDetailRating()}
 
                 {this._renderTestResults()}
 
                 {this._renderFilters()}
 
-                {this._renderDescription()}
+
 
             </View>
         </ScrollView>
@@ -80,7 +102,7 @@ class UpdateProductScene extends Component {
             var source = '';
             if (response.didCancel) {
             }
-            else 
+            else
             if (response.error) {
             }
             else {
@@ -97,7 +119,7 @@ class UpdateProductScene extends Component {
 
     _updateProduct() {
         result = this.props.UpdateProductAction(this.state.product);
-        Alert.alert("",result); 
+        Alert.alert("",result);
     }
 
     _onRating(rating) {
@@ -133,23 +155,16 @@ class UpdateProductScene extends Component {
     _renderRating() {
         return (
         <View>
-            <View style={{ marginTop: 10, marginHorizontal: 10 }}>
-            <View style={{flexDirection:'row',marginTop:20}}>
-                <Text>Name:</Text>
-                <TextInput style={{flex:1,backgroundColor:'#EDEDED'}} placeholder={this.state.name} onChangeText={(t)=>this._setName(t)}/>
-            </View>
-            <View style={{flexDirection:'row',marginTop:20}}>
-                    <Text>Price:</Text>
-                    <TextInput style={{flex:1,backgroundColor:'#EDEDED'}} placeholder={'0'} onChangeText={(t)=>this._setPrice(t)}/>
-            </View>
-            </View>
-            <View style={{ marginTop: 5, marginHorizontal: 10,flexDirection: "row" }}>
-                <View style={{flex:1.2,alignItems: 'flex-start', flexDirection: "row",marginTop:8}}>
-                    <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
-                        rating={this.state.rating}
-                        selectedStar={(rating) => this._onRating(rating)}/>
+            <View style={{ marginTop: 5, marginHorizontal: 10 }}>
 
-                </View>
+              <View style={{flexDirection:'row',marginTop:20,alignItems:'center'}}>
+                  <Text style={{fontSize:16,fontWeight:'bold'}}>Product Name</Text>
+              </View>
+
+              <View style={{flexDirection:'row',marginTop:10,alignItems:'center'}}>
+                  <TextInput style={{color:"black",marginLeft:0,height:35,borderRadius:3,flex:1,backgroundColor:'white',borderWidth:1,borderColor:'lightgray'}} placeholder={"Enter product name here"} onChangeText={(t)=>this._setName(t)}/>
+              </View>
+
             </View>
         </View>
         );
@@ -157,75 +172,23 @@ class UpdateProductScene extends Component {
 
     _renderDetailRating() {
         return(
-        <View style={{ marginHorizontal: 10,marginTop: 15  }}>
-            <View style={{ height: 40, justifyContent: 'center' }}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Rating</Text>
-            </View>
-            <View style={{ flexDirection: "row" }}>
-                <View style={{ flex: 1, }}>
-                    <TouchableOpacity style={[Styles.tagType, { borderColor: 'white', alignItems: 'flex-start' }]}>
-                        <Text style={[{ color: 'black', margin: 5,fontSize:16 }]}>Quality</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[Styles.tagType, { borderColor: 'white', alignItems: 'flex-start' }]}>
-                        <Text style={[{ color: 'black', margin: 5,fontSize:16 }]}>Flavor</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[Styles.tagType, { borderColor: 'white', alignItems: 'flex-start' }]}>
-                        <Text style={[{ color: 'black', margin: 5,fontSize:16 }]}>Potency</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={{ flex: 3 }}>
-                    <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
-                        <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
-                            rating={this.state.quality}
-                            selectedStar={(rating) => this._onQuality(rating)}/>
-                    </View>
-                    <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
-                        <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
-                            rating={this.state.flavor}
-                            selectedStar={(rating) => this._onFlavor(rating)}/>
-                   </View>
-                    <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
-                        <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
-                            rating={this.state.potency}
-                            selectedStar={(rating) => this._onPotency(rating)}/>
-                   </View>
-                </View>
-            </View>
+        <View style={{ marginHorizontal: 10,marginTop: 0  }}>
         </View>
         );
     }
-  
+
     _renderTestResults() {
         return (
-        <View style={{ marginHorizontal: 10, marginTop: 15 }}>
-            <View style={{ justifyContent: 'center' }}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Test Results</Text>
-                <View style={{flex:1,flexDirection:'row',justifyContent: 'space-between',height:20,marginTop:20,}}>
-                  <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>THCA</Text>
-                  <TextInput style={{flex:1,backgroundColor:'#EDEDED'}} placeholder={'0'} onChangeText={(t)=>this._thca = t}/>
-                </View> 
-                <View style={{flex:1,flexDirection:'row',justifyContent: 'space-between',height:20,marginTop:20,}}>
-                  <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>THC</Text>
-                  <TextInput style={{flex:1,backgroundColor:'#EDEDED'}} placeholder={'0'} onChangeText={(t)=>this._thc = t}/>
-                </View>
-                <View style={{flex:1,flexDirection:'row',justifyContent: 'space-between',height:20,marginTop:20,}}>
-                  <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>CBD</Text>
-                  <TextInput style={{flex:1,backgroundColor:'#EDEDED'}} placeholder={'0'} onChangeText={(t)=>this._cbd = t}/>
-                </View>
-                <View style={{flex:1,flexDirection:'row',justifyContent: 'space-between',height:20,marginTop:20,}}>
-                  <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>TOTAL</Text>
-                  <TextInput style={{flex:1,backgroundColor:'#EDEDED'}} placeholder={'0'} onChangeText={(t)=>this._cba = t}/>
-                </View>
-            </View>
+        <View style={{ marginHorizontal: 10, marginTop: 0 }}>
         </View>
         );
     }
 
     _renderDescription() {
         return (
-        <View style={{ marginHorizontal: 10, marginTop: 15, marginBottom:200, }}>
+        <View style={{ marginHorizontal: 10, marginTop: 15, marginBottom:10, }}>
             <View style={{ height: 40, justifyContent: 'center' }}>
-                <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Description</Text>
+                <Text style={{ fontSize: 16, fontWeight: 'bold', }}>Description</Text>
             </View>
             <View style={{ flexDirection: "row",borderColor: 'gray', borderWidth: 1, margin: 2, borderRadius: 4, }}>
                 <TextInput
@@ -236,20 +199,6 @@ class UpdateProductScene extends Component {
                     multiline = {true}
                 />
             </View>
-            <TouchableOpacity style={{  margin: 4,
-                borderRadius: 10,
-                borderWidth: 1,
-                borderColor: "#ED3C52",
-                backgroundColor: '#ED3C52',
-                justifyContent: 'center',
-                alignItems: 'center',}}
-                onPress={()=>this._updateProduct()}
-                >
-                <Text style={{color: "white",fontWeight:'bold',fontSize:16,
-                    marginTop: 7,
-                    marginBottom: 7,
-                    marginHorizontal: 10,}}> Update Product </Text>
-            </TouchableOpacity>
         </View>
         );
     }
@@ -314,14 +263,14 @@ class UpdateProductScene extends Component {
         <View>
             <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                 <View style={{ height: 40, justifyContent: 'center' }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Select Applicable Effects</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Add Effects</Text>
                 </View>
                 {this._renderEffectFilters()}
             </View>
             {/* Related activities */}
             <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                 <View style={{ height: 40, justifyContent: 'center' }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Select Applicable Activities</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Add Activities</Text>
                 </View>
                 <ScrollView horizontal={true}>
                 {this._renderFiltersArray(this._activity)}
@@ -329,7 +278,7 @@ class UpdateProductScene extends Component {
             </View>
             <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                 <View style={{ height: 40, justifyContent: 'center' }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Select Applicable Symptoms</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Add Symptoms</Text>
                 </View>
                 <ScrollView horizontal={true}>
                 {this._renderFiltersArray(this._symptom)}
