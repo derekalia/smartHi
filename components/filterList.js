@@ -175,8 +175,8 @@ class FilterList extends Component {
                     </View>
                     {this._renderFiltersArray(this.state.filters['symptoms'],false)}
                 </View>
-                <HerbySlider min={0} max={200} minLabel={'$0'} maxLabel={'$200'} label='Price'/>
-                <HerbySlider min={0} max={10} minLabel={''} maxLabel={'10 miles'} label='Distance from current location'/>
+                {/* <HerbySlider min={0} max={200} minLabel={'$0'} maxLabel={'$200'} label='Price'/>
+                <HerbySlider min={0} max={10} minLabel={''} maxLabel={'10 miles'} label='Distance from current location'/> */}
             </View>
         );
     }
