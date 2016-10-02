@@ -20,7 +20,7 @@ class RetailerMenu extends Component {
     render() {
         return (
         <ScrollView>
-            <HerbySearchBar entries={['ALL','FLOWER','CONCENTRATE','INFUSED','ONE','TWO','THREE']}/>
+            <HerbySearchBar entries={['ALL','FLOWER','CONCENTRATE','INFUSED',]}/>
             <ProductList style={{ marginHorizontal: 10}} productList={this.props.retailer.products} goProduct={(id)=>this.props.goProduct(id)}/>
             <View style={{width:300,height:110}}></View>
         </ScrollView>
