@@ -25,16 +25,13 @@ import {
     from '../common/const.js';
 
 // Import internal modules
-import ProfileScene         from './profileScene.js';
-import SettingsScene        from './settingsScene.js';
-import LicenseeScene        from './licenseeScene.js';
-import LicenseeStoreScene   from './licenseeStoreScene.js';
-import LicenseeProductScene from './licenseeProductScene.js';
-import ProductReviewScene   from './productReviewScene.js';
-import ProcessorScene       from './processorScene.js';
-import UpdateProcessorScene from './updateProcessorScene.js';
-import UpdateProductScene   from './updateProductScene.js';
-import UpdateLicenseeScene  from './updateLicenseeScene.js';
+import ProfileScene         from './scenes/profile/profileScene.js';
+import SettingsScene        from './scenes/settings/settingsScene.js';
+import LicenseeScene        from './scenes/licensee/licenseeScene.js';
+import ProcessorScene       from './scenes/processor/processorScene.js';
+import UpdateProcessorScene from './scenes/updateProcessor/updateProcessorScene.js';
+import UpdateProductScene   from './scenes/updateProduct/updateProductScene.js';
+import UpdateLicenseeScene  from './scenes/updateLicensee/updateLicenseeScene.js';
 
 import {HerbyBar}           from '../common/controls.js';
 
@@ -44,9 +41,6 @@ const TabScenes = [
     { title: "Profile",          item:null, component: ProfileScene,         index: ProfileSceneId },
     { title: "Settings",         item:null, component: SettingsScene,        index: SettingsSceneId },
     { title: "Licensee",         item:null, component: LicenseeScene,        index: LicenseeSceneId },
-    { title: "Store Info",       item:null, component: LicenseeStoreScene,   index: LicenseeStoreSceneId },
-    { title: "Product Info",     item:null, component: LicenseeProductScene, index: LicenseeProductSceneId },
-    { title: "Product Review",   item:null, component: ProductReviewScene,   index: ProductReviewSceneId },
     { title: "Processor",        item:null, component: ProcessorScene,       index: ProcessorSceneId },
     { title: "Update Product",   item:null, component: UpdateProductScene,   index: UpdateProductSceneId },
     { title: "Update Processor", item:null, component: UpdateProcessorScene, index: UpdateProcessorSceneId },

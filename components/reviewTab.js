@@ -12,12 +12,12 @@ import {connect} from 'react-redux';
 import {RateQueueSceneId,CameraSceneId, ProductInfoSceneId, RateProductSceneId, RateStoreSceneId, ReviewTabId,ReviewStartSceneId} from '../common/const.js';
 
 // Import internal modules
-import ReviewStartScene   from './reviewStartScene.js';
-import CameraScene        from './cameraScene.js';
-import ProductInfoScene   from './productInfoScene.js';
-import RateProductScene   from './rateProductScene.js';
-import RateStoreScene     from './rateStoreScene.js';
-import RateQueueScene     from './rateQueueScene.js';
+import ReviewStartScene   from './scenes/review/reviewStartScene.js';
+import CameraScene        from './scenes/camera/cameraScene.js';
+import ProductInfoScene   from './scenes/productInfo/productInfoScene.js';
+import RateProductScene   from './scenes/rateProduct/rateProductScene.js';
+import RateStoreScene     from './scenes/rateStore/rateStoreScene.js';
+import RateQueueScene     from './scenes/rateQueue/rateQueueScene.js';
 
 import {HerbyBar}         from '../common/controls.js';
 

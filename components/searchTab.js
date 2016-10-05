@@ -8,10 +8,9 @@ import {StyleSheet,Text,View,ScrollView,Image,TextInput,TouchableOpacity,Navigat
 import {connect} from 'react-redux';
 
 //get internal components
-import Styles         from './styles.js';
 import {SearchSceneId, ProductSceneId, ProducerSceneId, RetailerSceneId, SearchTabId, }   from '../common/const.js';
 
-import SearchScene    from './searchScene.js';
+import SearchScene    from './scenes/search/searchScene.js';
 
 const SearchIndex     = 0;
 
