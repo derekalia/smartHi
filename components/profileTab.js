@@ -109,7 +109,7 @@ class ProfileTab extends Component {
         else {
             return (
                 <View style={{flex:1}}>
-                    <HerbyBar navigator={navigator}/>
+                    <HerbyBar navigator={navigator} name={route.title}/>
                     <route.component tabId={ProfileTabId} item={route.item}/>
                 </View>
             );
