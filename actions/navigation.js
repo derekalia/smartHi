@@ -18,32 +18,9 @@ import {HomeTabId,SearchTabId,ReviewTabId,ProfileTabId} from '../common/const.js
 import {HomeSceneId,SearchSceneId,ReviewStartSceneId,ProfileSceneId} from '../common/const.js';
 
 export function SwitchTabAction(tabId) {
-    // Set the appropriate scene for each tab on tab switch
-    if (tabId == HomeTabId) {
-        sceneId = HomeSceneId;
-    }
-    else 
-    if (tabId == SearchTabId) {
-        sceneId = SearchSceneId;
-    }
-    else
-    if (tabId == ReviewTabId) {
-        sceneId = ReviewStartSceneId;
-    }
-    else
-    if (tabId == ProfileTabId) {
-        sceneId = ProfileSceneId;
-    }
-    else {
-        console.log("unrecognized tab" + tabId);
-    }
-    
-
     return({
-        type: SWITCH_TAB_SCENE,
+        type: SWITCH_TAB,
         tabId: tabId,
-        sceneId: sceneId,
-        item: null,
     });
 }
 
@@ -51,7 +28,6 @@ export function SwitchSceneAction(sceneId) {
     return({
         type: SWITCH_SCENE,
         sceneId: sceneId,
-        item: null,
     });
 }
 
@@ -67,6 +43,5 @@ export function SwitchTabSceneAction(tabId, sceneId) {
         type: SWITCH_TAB_SCENE,
         sceneId: sceneId,
         tabId: tabId,
-        item: null,
     });
 }

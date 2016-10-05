@@ -137,9 +137,8 @@ class ProfileTab extends Component {
 function mapStateToProps(state) { 
     return { 
         tabId: state.NavigationReducer.tabId, 
-        sceneId: state.NavigationReducer.sceneId, 
-        switchScene: state.NavigationReducer.switchScene, 
-        item: state.NavigationReducer.item, 
+        sceneId: state.NavigationReducer.profileTab.sceneId, 
+        item: state.NavigationReducer.profileTab.item, 
         user: state.UserReducer.profile 
     }
 } 

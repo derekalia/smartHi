@@ -31,7 +31,7 @@ class ActivityScene extends Component {
     }
 
     render() {
-        var name = this.props.activity;
+        var name = this.props.item.activity;
         name = name[0].toUpperCase() + name.slice(1);
         return (
             <View style={[{ flex: 1 }]}>
@@ -47,14 +47,14 @@ class ActivityScene extends Component {
                                 source={require('../../../media/ActivitySceneImages/adventure11.png')}>
 
                         <Text style={{ textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 5, textShadowColor: "black", fontSize: 24, color: "white", margin: 8}}>
-                            {this.props.activity}
+                            {this.props.item.activity}
                         </Text>
 
                     </Image>
                 </View>
 
                 <ScrollView style={{flex:1}}>
-                    <ProductList productList={this.props.productList} goProduct={(t)=> this._goProduct(t)}/>
+                    <ProductList productList={this.props.item.productList} goProduct={(t)=> this._goProduct(t)}/>
                 </ScrollView>
             </ScrollView>
             </View>
@@ -62,21 +62,12 @@ class ActivityScene extends Component {
     }
 }
 
-//
-// Connect state.ActivityReducer.productList  to props.
-//
-function mapStateToProps(state) {
-    return {
-        productList: state.ActivityReducer.products,
-        activity:    state.ActivityReducer.activity,
-    }
-}
 
 //
 // Connect GetProductAction to props
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction }, dispatch); }
-module.exports = connect(mapStateToProps,mapActionToProps)(ActivityScene);
+module.exports = connect(null,mapActionToProps)(ActivityScene);
 
 const Styles = StyleSheet.create({
     container: {

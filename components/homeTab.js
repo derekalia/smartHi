@@ -40,6 +40,7 @@ class HomeTab extends Component {
     }
 
     shouldComponentUpdate(nextProps,nextState) {
+        //BatsFix. This doesn't seem to work...
         if (nextProps.tabId != HomeTabId) {
             return false;
         }
@@ -100,7 +101,8 @@ class HomeTab extends Component {
 function mapStateToProps(state) { 
     return { 
         tabId: state.NavigationReducer.tabId,
-        sceneId: state.NavigationReducer.sceneId, 
-        switchScene: state.NavigationReducer.switchScene, 
-        item:state.NavigationReducer.item } }
+        sceneId: state.NavigationReducer.homeTab.sceneId, 
+        item: state.NavigationReducer.homeTab.item 
+    } 
+}
 module.exports = connect(mapStateToProps)(HomeTab);

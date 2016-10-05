@@ -1,9 +1,8 @@
 // Tab ids
-export const HomeTabId    = 'HomeTabId';
-export const SearchTabId  = 'SearchTabId';
-export const ReviewTabId  = 'ReviewTabId';
-export const MapTabId     = 'MapTabId';
-export const ProfileTabId = 'ProfileTabId';
+export const HomeTabId    = 'homeTab';
+export const SearchTabId  = 'searchTab';
+export const ReviewTabId  = 'reviewTab';
+export const ProfileTabId = 'profileTab';
 
 
 

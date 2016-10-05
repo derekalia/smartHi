@@ -88,9 +88,8 @@ class SearchTab extends Component {
 //
 function mapStateToProps(state) { 
     return { 
-        sceneId: state.NavigationReducer.sceneId, 
-        switchScene: state.NavigationReducer.switchScene, 
-        item: state.NavigationReducer.item 
+        sceneId: state.NavigationReducer.searchTab.sceneId, 
+        item: state.NavigationReducer.searchTab.item 
     } 
 }
 
