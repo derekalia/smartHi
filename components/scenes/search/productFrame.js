@@ -29,9 +29,11 @@ class ProductFrame extends Component {
         //
        this.props.GetProductAction(productId);
     }
+
     _switchFiltering() {
         this.setState({showFilters:!this.state.showFilters});
     }
+
     render() {
         return(
         <View style={{backgroundColor:'#ECECEC',flex:1,}}>
@@ -88,13 +90,9 @@ class ProductFrame extends Component {
         </View>
         </View>
         <View style={{flex:1,margin:5,borderBottomColor:'#DEDEDE',borderBottomWidth:1,marginHorizontal:10}}/>
-
-
             {/* <FilterList productCount={this.props.products.length} addRemoveFilter={this.props.addRemoveFilter}/> */}
             {/*Search results section*/}
             <ProductList productList={this.props.products} goProduct={(id)=> this._goProduct(id)}/>
-            {/*Without trailing space scroll view is blocking some of the filters.*/}
-
         <View style={{height:200}}/>
         </View>
         </ScrollView>

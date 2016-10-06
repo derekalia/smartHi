@@ -33,14 +33,6 @@ export const UpdateProcessorSceneId = 'UpdateProcessorScene';
 export const UpdateProductSceneId   = 'UpdateProductScene';
 export const UpdateRetailerSceneId  = 'UpdateRetailer';
 
-// Id for search view categories
-export const MapFrameId        = 'MapFrameId';
-export const ProductFrameId    = 'ProductFrameId';
-export const RetailerFrameId   = 'RetailerFrameId';
-export const UserFrameId       = 'UserFrameId';
-export const ReviewsFrameId    = 'ReviewsFrameId';
-export const InfoFrameId       = 'InfoFrameId';
-
 
 export const FilterActivity   = 'Activity';
 export const FilterEffect     = 'Effect';
