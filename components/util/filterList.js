@@ -9,14 +9,12 @@ import {StyleSheet, Text, View, TouchableHighlight,ScrollView, TouchableOpacity,
 // Import filters.
 import {FiltersActivity, FiltersEffect, FiltersType,FiltersCategory,FiltersSymptoms} from '../../common/filters.js';
 import FilterItem   from './filterItem.js';
-import {HerbySlider} from '../../common/controls.js';
 
 class FilterList extends Component {
     constructor(props) {
         super(props);
         this.state = {
             currentFilters: [],
-            filtersVisible: true,
             filters: {
             activity: FiltersActivity,
             effect:   FiltersEffect,
@@ -34,13 +32,6 @@ class FilterList extends Component {
             for (var i=0; i < filterArray.length; i++) {
                 filterArray[i].selected = false;
             }
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        productCount = nextProps.productCount;
-        if (productCount > 0) {
-            this.setState({filtersVisible: false});
         }
     }
 
@@ -78,54 +69,13 @@ class FilterList extends Component {
         }
     }
 
-    _removeFilter(filter) {
-        var filterArray = this.state.filters[filter.type];
-        var index = this._getFilterIndex(filter,filterArray);
-        filterArray[index].selected = false;
-
-        this._addRemoveFilter(filter);
-    }
-
-    _switchFiltering() {
-        var current = this.state.filtersVisible;
-        this.setState({filtersVisible: !current});
-    }
-
     render() {
         return (
-            <ScrollView style={{flex:1,}} stickyHeaderIndices={[0]}>
-                <View style={{backgroundColor:'white',marginBottom:5,borderBottomWidth:1,borderColor:'white'}}>
-                    {this._renderSelectedFilters(this.state.currentFilters)}
-                </View>
-                <View style={{alignItems:'center'}}>
-                {this._renderFilterButton()}
-                </View>
+            <ScrollView style={{flex:1,}}>
                 {this._renderFilters()}
             </ScrollView>
         );
     }
-
-    //
-    // BatsFix. For some reason using lists makes the list item not update
-    // on frame switch. Another mysterious bug in react-native,
-    // iterating over the array does not work properly if the key item is just
-    // an index number!!!!! Bad Bad Bug! May be we should be using a list instead
-    // of iterating over the array
-    //
-     _renderSelectedFilters(filterArray) {
-        var filters = [];
-        for (var i=0; i < filterArray.length; i++) {
-            filters.push(<FilterItem filter={filterArray[i]} key={filterArray[i].name} onPress={(t) => this._removeFilter(t)}/>);
-        }
-        return (
-            <View style={{flexWrap: 'wrap'}}>
-            <ScrollView horizontal={true}>
-                {filters}
-            </ScrollView>
-            </View>
-        );
-    }
-
 
     _renderFiltersArray(filterArray,isCurrent) {
         var filters = [];
@@ -140,9 +90,6 @@ class FilterList extends Component {
     }
 
     _renderFilters() {
-        if (this.state.filtersVisible == false) {
-            return null;
-        }
         return (
             <View style={{marginHorizontal:12}}>
                 <View>
@@ -175,38 +122,7 @@ class FilterList extends Component {
                     </View>
                     {this._renderFiltersArray(this.state.filters['symptoms'],false)}
                 </View>
-                {/* <HerbySlider min={0} max={200} minLabel={'$0'} maxLabel={'$200'} label='Price'/>
-                <HerbySlider min={0} max={10} minLabel={''} maxLabel={'10 miles'} label='Distance from current location'/> */}
             </View>
-        );
-    }
-
-    _renderFilterButton() {
-        var filterButtonText = "Show Filtering Options";
-        // BatsFix. How do we get width here???
-        if (this.props.noButton != null) {
-            return null;
-        }
-        if (this.state.filtersVisible) {
-            filterButtonText = "Hide Filtering Options";
-        }
-        return (
-            <TouchableHighlight onPress = {()=> this._switchFiltering()} underlayColor={'white'} style={{  }}>
-              <View style={{  height: 40,
-                margin:10,
-                width:340,
-                backgroundColor: 'white',
-                borderColor: '#9b9b9b',
-                borderWidth: 1,
-                borderRadius: 22,
-                justifyContent: 'center',}}>
-                  <Text style={{fontSize: 14,
-                  color: '#9b9b9b',
-                  alignSelf: 'center',}}>
-                  {filterButtonText}
-                </Text>
-              </View>
-            </TouchableHighlight>
         );
     }
 }

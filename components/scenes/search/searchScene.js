@@ -3,14 +3,15 @@
 //
 
 import React, { Component } from 'react';
-import {TextInput,Image,StyleSheet, Text, View, ScrollView, ListView, TouchableOpacity, Navigator } from 'react-native'
+import {Modal,TextInput,Image,StyleSheet, Text, View, ScrollView, ListView, TouchableOpacity, Navigator } from 'react-native'
 
 //get state management components
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 //get internal components
-import {HerbyBar,HerbyFrameBar} from '../../../common/controls.js';
+import {HerbyBar,HerbyFrameBar,HerbyButton2,} from '../../../common/controls.js';
+import FilterList from '../../util/filterList.js';
 
 import ProductFrame          from './productFrame.js';
 import RetailerFrame         from './retailerFrame.js';
@@ -43,7 +44,7 @@ class SearchScene extends Component {
         super(props);
         this._searchTerm = "";
         this._attributes = [];
-        this.state = { frameId: ProductId };
+        this.state = { frameId: ProductId,showFiltersModal:false };
     }
 
     renderScene(route, navigator) {
@@ -75,6 +76,10 @@ class SearchScene extends Component {
         console.log("filter added removed" + filter);
     }
 
+    _showFiltersModal(value) {
+        this.setState({showFiltersModal:value});
+    }
+
     render() {
         return (
             <View style={[{flex:1,marginTop:20,justifyContent:'flex-start'}]}>
@@ -85,7 +90,7 @@ class SearchScene extends Component {
                                    autoCorrect={false} placeholder='Search' returnKeyType='next' onChangeText={(t)=> this._setSearchTerm(t)} clearButtonMode='always'/>
                       </View>
                     </View>
-                    <TouchableOpacity style={{flex: .6,}} onPress={this.props.startSearch}>
+                    <TouchableOpacity style={{flex: .6,}} onPress={()=>this._showFiltersModal(true)}>
                          <Image style={{ height: 32, width: 32,alignSelf:'center', }} source={require("../../../media/plusButton11.png") }/>
                     </TouchableOpacity>
                 </View>
@@ -98,6 +103,12 @@ class SearchScene extends Component {
                     initialRouteStack = {SearchFrames}
                     addRemoveFilter={(t) => this._addRemoveFilter(t) }
                     />
+                <Modal animationType={'slide'} transparent={true} visible={this.state.showFiltersModal}>
+                    <View style={{flex:1,backgroundColor:'#FEFEFE',marginTop:20}}>
+                        <HerbyButton2 name="Done" onPress={()=>this._showFiltersModal(false)}/>
+                        <FilterList addRemoveFilter={(t)=>this._addRemoveFilter(t)}/>
+                    </View>
+                </Modal>
             </View>
         );
     }
