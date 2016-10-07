@@ -26,6 +26,7 @@ import ReviewTab     from './reviewTab.js';
 import ProfileTab    from './profileTab.js';
 
 // Import message element
+import HerbyNotification from './util/herbyNotification.js';
 
 class MainPage extends Component {
     constructor(props) {
@@ -80,6 +81,7 @@ class MainPage extends Component {
                     <ProfileTab selectedTab = {this.state.selectedTab}/>
                 </TabBarIOS.Item>
             </TabBarIOS>
+            <HerbyNotification/>
             </View>
         );
     }

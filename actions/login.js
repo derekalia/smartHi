@@ -9,14 +9,13 @@ export const REGISTER_ERROR   = 'REGISTER_ERROR';
 import {NEWS_SUCCESS}  from './news.js';
 import {PROFILE_SUCCESS}  from './profile.js';
 import {GetLatestNews,GetUserProfile} from './data.js';
+import {NotifyBusy,NotifyDone,} from './navigation.js';
 
 export function LoginAction(userCredentials) {
     return function (dispatch, getState) {
         // Notify that login is in process
-        dispatch({
-			type: LOGIN_PROCESS,
-			message: "logging on ....",
-		});
+        NotifyBusy(dispatch);
+
         //
         // Fetch data from the server
         // BatsFix. For test purposes we can use NodeApiLogin instead of LcbApiLogin
@@ -39,6 +38,7 @@ export function LoginAction(userCredentials) {
                 staffPick: latestNews.staffPick,
                 trending: latestNews.trending,
             });
+            NotifyDone(dispatch,"Logged On");
         }).done();
     }
 }

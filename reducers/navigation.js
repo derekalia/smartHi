@@ -2,6 +2,8 @@ import {
     SWITCH_TAB,
     SWITCH_SCENE,
     SWITCH_TAB_SCENE,
+    NOTIFY_BUSY,
+    NOTIFY_DONE,
 } from '../actions/index.js';
 
 import {HomeSceneId,HomeTabId,
@@ -28,6 +30,12 @@ const initialState = {
         item: null,
     },
     tabId: HomeTabId, // current tab id.
+    // 
+    // Following are used for notification
+    //
+    showMessage: false, 
+    showBusy:    false,
+    message:     'no message',
 }
 
 export default function NavigationReducer(state, action) {
@@ -70,6 +78,24 @@ export default function NavigationReducer(state, action) {
             newState = Object.assign({}, state);
             newState.tabId    = action.tabId;
             newState[newState.tabId] = {sceneId: action.sceneId, item: action.item};
+            return newState;
+
+        case NOTIFY_BUSY:
+            newState = Object.assign({}, state);
+            newState.showBusy = true;
+            return newState;
+
+        case NOTIFY_DONE:
+            newState = Object.assign({}, state);
+            newState.showBusy = false;
+            if (action.message != null) {
+                newState.message = action.message;
+                newState.showMessage = true;
+            }
+            else {
+                newState.message = null;
+                newState.showMessage = false;
+            }
             return newState;
 
         default:
