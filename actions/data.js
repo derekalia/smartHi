@@ -491,6 +491,28 @@ function GetUserItems(pid) {
     return userItems;
 }
 
+function FetchData(queryValue) {
+    var queryString = JSON.stringify({query:queryValue})
+    var result = fetch("https://lcbapi.forged.io/api/GQLCi", {
+                    method: 'post',
+                    headers: {
+                    'Accept':'application/json',
+                    'Content-Type': 'application/json',
+                    }, 
+                    body: queryString,
+                    credentials:'include',
+                 }).then((response) => { 
+                    if (response.status != 200) {
+                        throw -1;
+                    }
+                    return JSON.parse(response._bodyText);
+                 }).then((responseData)=> {
+                    return responseData.data;
+                 });
+    return result;
+}
+
+
 export function SearchUsers(searchTerm) {
     var users = [];
     for (var i=0; i < TestUsers.length; i++) {
@@ -528,7 +550,12 @@ export function SearchProducts(searchTerm) {
 }
 
 export function GetLatestNews() {
-    return {staffPick:TestProducts[0],trending:TestProducts[1]};
+    var queryValue = "{Products{UID,Title}}";
+    var result = FetchData(queryValue).then((data)=>{
+        //first 2 objects are the latest news.
+        return {staffPick:data.Products[0],trending:data.Products[1]};
+    });
+    return result;
 }
 
 export function GetProduct(id) {

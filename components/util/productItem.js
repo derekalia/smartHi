@@ -14,11 +14,6 @@ import StarRating from 'react-native-star-rating';
 class ProductItem extends Component {
     constructor(props) {
         super(props);
-        this.state = this.props.product;
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState(this.props.product);
     }
 
     _onStarRating(r) {
@@ -42,7 +37,7 @@ class ProductItem extends Component {
         // BatsFix. this should come from the product
         var iS = 'Rosin2.png';
         return (
-                <TouchableHighlight onPress={() => this.props.goProduct(this.state.id)} underlayColor={'white'}>
+                <TouchableHighlight onPress={() => this.props.goProduct(this.props.product.id)} underlayColor={'white'}>
                     <View style={{flex: 1, flexDirection: 'row', margin: 5,borderWidth:1,borderColor:'#ECECEC', borderRadius: bR,marginHorizontal:10}}>
                           <View style={{  width: iW,height: iH,borderRadius:10,}}>
                             <Image style={{  width: iW,height: iH, marginRight: bM}} source={require('../../media/Rosin2.png')}/>
@@ -50,29 +45,29 @@ class ProductItem extends Component {
                             <View style={{flex: 1, flexDirection: 'column', padding:5,}}>
                                 {/*Product pricing*/}
                                 <View style={{  flexDirection: 'row',}}>
-                                    <Text style={{flex: 1, fontSize: fB, fontWeight: 'bold', color:'black'}}>{this.state.name}</Text>
+                                    <Text style={{flex: 1, fontSize: fB, fontWeight: 'bold', color:'black'}}>{this.props.product.name}</Text>
                                     <View style={{alignItems:'flex-end'}}>
-                                      <Text style={{flex: 1, fontSize: fB, color:'black'}}>${this.state.price}</Text>
+                                      <Text style={{flex: 1, fontSize: fB, color:'black'}}>${this.props.product.price}</Text>
                                     </View>
                                 </View>
                                 {/*Product rating*/}
                                 <View style={{  flexDirection: 'row',marginTop:5}}>
-                                    <StarRating disabled={false} maxStars={5} starColor={'red'} starSize={15} rating={this.state.rating} selectedStar={(r)=>this.onStarRating(r)}/>
-                                    <Text style={{ fontSize: fS, color: 'black'}}> ({this.state.ratingCount}) </Text>
+                                    <StarRating disabled={false} maxStars={5} starColor={'red'} starSize={15} rating={this.props.product.rating} selectedStar={(r)=>this.onStarRating(r)}/>
+                                    <Text style={{ fontSize: fS, color: 'black'}}> ({this.props.product.ratingCount}) </Text>
                                     <View style={{flex: 1,alignItems:'flex-end'}}>
-                                      <Text style={{fontSize: fS,  color:'black'}}>{this.state.name}</Text>
+                                      <Text style={{fontSize: fS,  color:'black'}}>{this.props.product.name}</Text>
                                     </View>
                                 </View>
                                 {/*Product attributes */}
                                 <View style={{flexDirection: 'row',marginTop:5}}>
                                     <TouchableHighlight style={{flex:1, borderColor:aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}}>
-                                        <Text style={{fontSize:fS, color: aC, alignSelf: 'center'}}>{this.state.activity[0]}</Text>
+                                        <Text style={{fontSize:fS, color: aC, alignSelf: 'center'}}>{this.props.product.activity[0]}</Text>
                                     </TouchableHighlight>
                                     <TouchableHighlight style={{flex:1,borderColor: aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}}>
-                                        <Text style={{fontSize:fS, color: aC, alignSelf:'center'}}>{this.state.activity[1]}</Text>
+                                        <Text style={{fontSize:fS, color: aC, alignSelf:'center'}}>{this.props.product.activity[1]}</Text>
                                     </TouchableHighlight>
                                     <TouchableHighlight style={{flex:1, borderColor:aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}}>
-                                        <Text style={{fontSize:fS, color: aC, alignSelf:'center'}}>{this.state.activity[2]}</Text>
+                                        <Text style={{fontSize:fS, color: aC, alignSelf:'center'}}>{this.props.product.activity[2]}</Text>
                                     </TouchableHighlight>
                                 </View>
                             </View>

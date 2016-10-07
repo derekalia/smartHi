@@ -31,13 +31,15 @@ export function LoginAction(userCredentials) {
             profile: profile,
         });
 
-        // BatsFix. GetLatestNews should be promise function that can be called async.
-        var latestNews = GetLatestNews();
-        dispatch({
-            type: NEWS_SUCCESS,
-            staffPick: latestNews.staffPick,
-            trending: latestNews.trending,
-        });
+        // BatsFix. GetLatestNews should be chained with login and user profile
+        // functions later on.
+        GetLatestNews().then((latestNews)=>{
+            dispatch({
+                type: NEWS_SUCCESS,
+                staffPick: latestNews.staffPick,
+                trending: latestNews.trending,
+            });
+        }).done();
     }
 }
 
