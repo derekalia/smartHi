@@ -490,10 +490,9 @@ function GetUserItems(pid) {
     }
     return userItems;
 }
-
-function FetchData(queryValue) {
+async function FetchData(queryValue) {
     var queryString = JSON.stringify({query:queryValue})
-    var result = fetch("https://lcbapi.forged.io/api/GQLCi", {
+    var response =  await fetch("https://lcbapi.forged.io/api/GQLCi", {
                     method: 'post',
                     headers: {
                     'Accept':'application/json',
@@ -501,17 +500,18 @@ function FetchData(queryValue) {
                     }, 
                     body: queryString,
                     credentials:'include',
-                 }).then((response) => { 
-                    if (response.status != 200) {
-                        throw -1;
-                    }
-                    return JSON.parse(response._bodyText);
-                 }).then((responseData)=> {
-                    return responseData.data;
                  });
-    return result;
-}
 
+     // Make sure to catch bad response.
+     if (response.status != 200) {
+         console.log("FetchData:" + response.status);
+         throw "FetchData:" + response.status;
+     }
+
+     var response= JSON.parse(response._bodyText);
+
+     return response.data;
+}
 
 export function SearchUsers(searchTerm) {
     var users = [];
@@ -520,7 +520,6 @@ export function SearchUsers(searchTerm) {
     }
     return users;
 }
-
 
 export function SearchProducers(searchTerm) {
     // BatsFix. use the term later!
@@ -549,13 +548,11 @@ export function SearchProducts(searchTerm) {
     return products;
 }
 
-export function GetLatestNews() {
+export  async function GetLatestNews() {
     var queryValue = "{Products{UID,Title}}";
-    var result = FetchData(queryValue).then((data)=>{
-        //first 2 objects are the latest news.
-        return {staffPick:data.Products[0],trending:data.Products[1]};
-    });
-    return result;
+    var data =  await FetchData(queryValue);
+
+    return {staffPick:data.Products[0],trending:data.Products[1]};
 }
 
 export function GetProduct(id) {

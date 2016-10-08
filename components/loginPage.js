@@ -6,10 +6,12 @@
 
 // Import modules
 import React, { Component } from 'react';
-import {Navigator, } from 'react-native';
+import {Navigator,View } from 'react-native';
 
 // Import const ids. 
 import {LoginSceneId,RegisterSceneId,LaunchSceneId} from '../common/const.js';
+
+import HerbyNotification from './util/herbyNotification.js';
 
 //get internal components
 import LaunchScene   from './scenes/launch/launchScene.js';
@@ -52,6 +54,7 @@ class LoginPage extends Component {
     render() {
         
         return (
+            <View style={{flex:1}}>
             <Navigator
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
@@ -62,6 +65,8 @@ class LoginPage extends Component {
                         />
                 }
                 />
+            <HerbyNotification/>
+            </View>
         );
     }
 }

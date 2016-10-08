@@ -11,16 +11,12 @@ import {PROFILE_SUCCESS}  from './profile.js';
 import {GetLatestNews,GetUserProfile} from './data.js';
 import {NotifyBusy,NotifyDone,} from './navigation.js';
 
-export function LoginAction(userCredentials) {
-    return function (dispatch, getState) {
-        // Notify that login is in process
-        NotifyBusy(dispatch);
-
-        //
-        // Fetch data from the server
-        // BatsFix. For test purposes we can use NodeApiLogin instead of LcbApiLogin
-        //
-        //LcbApiLogin(dispatch, userCredentials.name, userCredentials.password);
+async function LoginActionWorker(dispatch,userCredentials) {
+    // Notify busy
+    NotifyBusy(dispatch);
+    var message = "Logged on";
+    try {
+        // Login
         DevLogin(dispatch, userCredentials.name, userCredentials.password);
 
         // Get user profile here.
@@ -30,16 +26,27 @@ export function LoginAction(userCredentials) {
             profile: profile,
         });
 
-        // BatsFix. GetLatestNews should be chained with login and user profile
-        // functions later on.
-        GetLatestNews().then((latestNews)=>{
-            dispatch({
-                type: NEWS_SUCCESS,
-                staffPick: latestNews.staffPick,
-                trending: latestNews.trending,
-            });
-            NotifyDone(dispatch,"Logged On");
-        }).done();
+        // Get latest news async
+        var latestNews = await GetLatestNews();
+        dispatch({
+            type: NEWS_SUCCESS,
+            staffPick: latestNews.staffPick,
+            trending: latestNews.trending,
+        });
+        message = "Logged on";
+    } 
+    catch(error) {
+        console.log("LoginActionWorker:" + error);
+        message = "Error logging on";
+    };
+    // Notify done
+    NotifyDone(dispatch,message);
+}
+
+
+export function LoginAction(userCredentials) {
+    return function (dispatch, getState) {
+        LoginActionWorker(dispatch, userCredentials);
     }
 }
 
@@ -50,32 +57,36 @@ export function LogoffAction() {
     }
 }
 
-export function RegisterAction(userCredentials) {
+async function RegisterActionWorker(dispatch,userCredentials) {
+    // Notify that login is in process
+    NotifyBusy(dispatch);
 
-    return function (dispatch, getState) {
-        // Notify that login is in process
-        dispatch({
-			type: REGISTER_PROCESS,
-			message: "register on ....",
-		});
+    // Sanitize data before sending to server.
+    if (userCredentials.password != userCredentials.password2) {
+        NotifyDone(dispatch,"User passwords not matching");
+        return;
+    }
 
-        // Sanitize data before sending to server.
-        if (userCredentials.password != userCredentials.password2) {
-            dispatch({
-                type: REGISTER_ERROR,
-                message: "user passwords not matching",
-            });
-            return;
-        }
-
+    try {
         //
         // Fetch data from the server here
         //
-        LcbApiRegister(dispatch, userCredentials.name, userCredentials.password);
+        await LcbApiRegister(dispatch, userCredentials.name, userCredentials.password);
+    }
+    catch(error) {
+        // Always log an internal error
+        console.log("LcbApiRegister:" + error);
+        NotifyDone(dispatch,"Error registering");
     }
 }
 
-function LcbApiLogin(dispatch,email,password) {
+export function RegisterAction(userCredentials) {
+    return function (dispatch, getState) {
+        RegisterActionWorker(dispatch,userCredentials);
+    }
+}
+
+async function LcbApiLogin(dispatch,email,password) {
     // First encodeURI data
     var data = [];
     data.push(encodeURIComponent('grant_type')       +'=' +encodeURIComponent('password'));
@@ -84,41 +95,32 @@ function LcbApiLogin(dispatch,email,password) {
     var message = data.join("&");
 
     // Boilerplate code to post data to the server
-    fetch('http://lcbapi.forged.io/connect/Token',
+    var response = await fetch('http://lcbapi.forged.io/connect/Token',
     {
         method: 'POST',
         headers: { 'cache-control': 'no-cache',
                    'content-Type': 'application/x-www-form-urlencoded'
         },
         body: message,
-    }).
-    then((response) => response.json()).
-    then((responseData) => {
-        //console.log("accessToken:"+responseData.access_token);
-        if (responseData.error == null) {
-            dispatch({
-                    type: LOGIN_SUCCESS,
-                    name: email,
-                    tokenType: responseData.token_type,
-                    accessToken: responseData.access_token,
-            });
-        }
-        else {
-            var error = responseData.error.join(".");
-            dispatch({
-                type: LOGIN_ERROR,
-                message: error,
-            });
-        }
-    }).catch((error) => {
-        dispatch({
-                type: LOGIN_ERROR,
-                message: "Unable to contact the login server",
-        });
-    }).done();
+    });
+
+    var responseData = JSON.parse(response);
+    
+    // Check if server returned an error
+    if (responseData.error != null) {
+        throw ("Login error "+responseData.error);
+    }
+
+    // Notify that login was successfull.
+    dispatch({
+            type: LOGIN_SUCCESS,
+            name: email,
+            tokenType: responseData.token_type,
+            accessToken: responseData.access_token,
+    });
 }
 
-function LcbApiRegister(dispatch,email,password) {
+async function LcbApiRegister(dispatch,email,password) {
     // First encodeURI data
     var data = [];
     data.push(encodeURIComponent('grant_type')       +'=' +encodeURIComponent('password'));
@@ -128,37 +130,32 @@ function LcbApiRegister(dispatch,email,password) {
     var message = data.join("&");
 
     // Boilerplate code to post data to the server
-    fetch('http://lcbapi.forged.io/api/User/Register',
+    var response = await fetch('http://lcbapi.forged.io/api/User/Register',
     {
         method: 'POST',
         headers: { 'cache-control': 'no-cache',
                    'content-Type': 'application/x-www-form-urlencoded'
         },
         body: message,
-    }).
-    then((response) => response.json()).
-    then((responseData) => {
-        if (responseData.error == null) {
-            dispatch({
-                    type: REGISTER_SUCCESS,
-                    name: email,
-            });
-            // BatsFix. Still need to get the access token.
-            LcbApiLogin(dispatch, email, password);
-        }
-        else {
-            var error = responseData.error.join(".");
-            dispatch({
-                type: REGISTER_ERROR,
-                message: error,
-            });
-        }
-    }).catch((error) => {
+    });
+    var responseData = JSON.parse(response._bodyText);
+
+    // Check if server returned an error
+    if (responseData.error != null) {
+        var error = responseData.error.join(".");
+        throw ("Register error "+error);
+    }
+
+    // Notify registration was a success
+    if (responseData.error == null) {
         dispatch({
-                type: REGISTER_ERROR,
-                message: "Unable to contact the login server",
+                type: REGISTER_SUCCESS,
+                name: email,
         });
-    }).done();
+    }
+
+    // Still need to get the access token.
+    await LcbApiLogin(dispatch, email, password);
 }
 
 function DevLogin(dispatch, userName, userPassword) {
