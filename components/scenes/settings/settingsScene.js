@@ -21,6 +21,15 @@ class SettingsScene extends Component {
         this._password="";
         this.state = {showResetPassword:false,showProducerLogin:false,showLicenseeLogin:false}
     }
+    //
+    componentWillUpdate(nextProps) {
+        if (nextProps.producer != null && this.state.showProducerLogin) {
+            this.setState({showProducerLogin:false});
+        }
+        if (nextProps.retailer != null && this.state.showLicenseeLogin) {
+            this.setState({showLicenseeLogin:false});
+        }
+    }
 
     // Reset password dialog
     _showResetPassword(value) {
@@ -82,9 +91,11 @@ class SettingsScene extends Component {
                     <HerbyButton2 name="Continue" onPress={()=>this._resetPassword()}/>
                     <HerbyButton2 name="Cancel" onPress={()=>this._showResetPassword(false)}/>
                 </HerbyModal>
-                <HerbyModal show={this.state.showProducerLogin} onClose={()=>this._showProducerLogin(false)}>
-                    <View style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'#DEDEDE',borderRadius:30,borderWidth:1,}}>
-                        <HerbyInput name="User Name" value=''/>
+                <HerbyModal show={this.state.showProducerLogin}>
+                    <View style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'#DEDEDE',}}>
+                        <HerbyInput name="State" value=''/>
+                        <HerbyInput name="Email" value=''/>
+                        <HerbyInput name="UBI" value=''/>
                         <HerbyInput name="Password"  value=''/>
                         <View style={{flexDirection:'row'}}>
                             <HerbyButton2 name="Continue" onPress={()=>this._producerLogin()}/>
@@ -92,14 +103,16 @@ class SettingsScene extends Component {
                         </View>
                     </View>
                 </HerbyModal>
-                <HerbyModal show={this.state.showLicenseeLogin} onClose={()=>this._showLicenseeLogin(false)}>
-                    <View style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'#DEDEDE',borderRadius:30,borderWidth:1,}}>
-                    <HerbyInput name="User Name" value=''/>
-                    <HerbyInput name="Password"  value=''/>
-                    <View style={{flexDirection:'row'}}>
-                        <HerbyButton2 name="Continue" onPress={()=>this._licenseeLogin()}/>
-                        <HerbyButton2 name="Cancel" onPress={()=>this._showLicenseeLogin(false)}/>
-                    </View>
+                <HerbyModal show={this.state.showLicenseeLogin}>
+                    <View style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'#DEDEDE',}}>
+                        <HerbyInput name="State" value=''/>
+                        <HerbyInput name="Email" value=''/>
+                        <HerbyInput name="UBI" value=''/>
+                        <HerbyInput name="Password"  value=''/>
+                        <View style={{flexDirection:'row'}}>
+                            <HerbyButton2 name="Continue" onPress={()=>this._licenseeLogin()}/>
+                            <HerbyButton2 name="Cancel" onPress={()=>this._showLicenseeLogin(false)}/>
+                        </View>
                     </View>
                 </HerbyModal>
             </View>
@@ -112,6 +125,7 @@ function mapStateToProps(state) {
     return {
         user: state.UserReducer.user,
         producer: state.ProducerReducer.producer,
+        retailer: state.RetailerReducer.retailer,
     }
 }
 //  This function is used to convert action to props passed to this component.

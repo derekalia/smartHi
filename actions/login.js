@@ -14,7 +14,6 @@ import {NotifyBusy,NotifyDone,} from './navigation.js';
 async function LoginActionWorker(dispatch,userCredentials) {
     // Notify busy
     NotifyBusy(dispatch);
-    var message = "Logged on";
     try {
         // Login
         DevLogin(dispatch, userCredentials.name, userCredentials.password);
@@ -33,14 +32,13 @@ async function LoginActionWorker(dispatch,userCredentials) {
             staffPick: latestNews.staffPick,
             trending: latestNews.trending,
         });
-        message = "Logged on";
+        NotifyDone(dispatch,"Logged on");
     } 
     catch(error) {
         console.log("LoginActionWorker:" + error);
         message = "Error logging on";
+        NotifyDone(dispatch,"Error logging on");
     };
-    // Notify done
-    NotifyDone(dispatch,message);
 }
 
 

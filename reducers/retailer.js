@@ -4,14 +4,7 @@ import {
 } from '../actions/index.js';
 
 const initialState = {
-    retailer: {
-    id:'0',
-    name:'Initial State',
-    description:'Initial State',
-    rating: 5,
-    ratingCount: 555,
-    description: 'Initial State',
-    },
+    retailer: null,
 }
 
 export default function RetailerReducer(state, action) {

@@ -2,7 +2,6 @@ import {
     SWITCH_TAB,
     SWITCH_SCENE,
     SWITCH_TAB_SCENE,
-    MODAL_SUCCESS,
 } from './navigation.js';
 
 import {LicenseeSceneId,RetailerSceneId,HomeTabId,} from '../common/const.js';
@@ -35,27 +34,28 @@ export function GetRetailerAction(retailerId) {
 }
 
 export function LicenseeLoginAction(name,password) {
-    return function(dispatch, getState) {
-        //BatsFix. For now assume producer login always succeeds
-        var retailerId = '0';
-
-        // Indicate dialog success.
-        dispatch({
-            type: MODAL_SUCCESS,
-        });
-        
-        // Pass true to get full info on a retailer.
-        var retailer = GetRetailer(retailerId,true);
-        dispatch({
-            type:RETAILER_SUCCESS,
-            retailer: retailer,
-        });
-
-        // Finally switch screen
-        dispatch({
-            type:SWITCH_SCENE,
-            sceneId: LicenseeSceneId,
-        });
+    return async function(dispatch, getState) {
+        NotifyBusy(dispatch);
+        try {
+            //BatsFix. For now assume producer login always succeeds
+            var retailerId = '0';
+           
+            // Pass true to get full info on a retailer.
+            var retailer = await GetRetailer(retailerId,true);
+            dispatch({
+                type:RETAILER_SUCCESS,
+                retailer: retailer,
+            });
+            // Finally switch screen
+            dispatch({
+                type:SWITCH_SCENE,
+                sceneId: LicenseeSceneId,
+            });
+            NotifyDone(dispatch, null);
+        }
+        catch(error) {
+            NotifyDone(dispatch,"LicenseeLogin failed");
+        }
    }
 }
 
@@ -64,6 +64,7 @@ export function UpdateRetailerAction(retailerId,name,description,image) {
         //Call update producer action here.
         //Then notify the user that the producer data was
         //updated.
-        return 'Info Updated Successfully';
+        NotifyBusy(dispatch);
+        NotifyDone(dispatch,"Updated retailer successfully");
     }
 }

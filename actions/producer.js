@@ -40,31 +40,36 @@ export function UpdateProducerAction(producerId) {
         //Call update producer action here.
         //Then notify the user that the producer data was
         //updated.
-        return 'Info Updated Successfully';
+        NotifyBusy(dispatch);
+        NotifyDone(dispatch,"Updated successfully");
     }
 }
 
 export function ProducerLoginAction(name,password) {
-    return function(dispatch, getState) {
-        //BatsFix. For now assume producer login always succeeds
-        var producerId ='0';
+    return async function(dispatch, getState) {
 
-        // Indicate dialog success
-        dispatch({
-            type: MODAL_SUCCESS,
-        });
+        NotifyBusy(dispatch);
+        try {
+            //BatsFix. For now assume producer login always succeeds
+            var producerId ='0';
 
-        // Pass true to get full info on a producer.
-        var producer = GetProducer(producerId,true);
-        dispatch({
-            type:PRODUCER_SUCCESS,
-            producer:producer,
-        });
+            // Pass true to get full info on a producer.
+            var producer = await GetProducer(producerId,true);
+            dispatch({
+                type:PRODUCER_SUCCESS,
+                producer:producer,
+            });
 
-        // Finally switch screen
-        dispatch({
-            type:SWITCH_SCENE,
-            sceneId: ProcessorSceneId,
-        });
+            // Finally switch screen
+            dispatch({
+                type:SWITCH_SCENE,
+                sceneId: ProcessorSceneId,
+            });
+            NotifyDone(dispatch,null);
+        }
+        catch(error) {
+            console.log("ProducerLoginAction:"+error);
+            NotifyDone(dispatch,"Producer Login Error");
+        }
    }
 }
