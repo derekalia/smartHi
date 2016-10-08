@@ -570,7 +570,8 @@ export async function GetProduct(id) {
             product.retailers = GetRetailerItems(product.rid);
             product.producer  = GetProducerItem(product.pid);
             product.related   = GetRelatedProducts(product.pid);
-            return product;
+            var item = {...product};
+            return item;
         }
     }
     return null;
@@ -591,7 +592,8 @@ export async function GetRetailer(id) {
            retailer.products  = GetProductItems(retailer.pid);
            retailer.follower  = GetUserItems(retailer.follower);
            retailer.following = GetUserItems(retailer.following);
-           return retailer;
+           var item = {...retailer};
+           return item;
         }
     }
     return null;
@@ -615,7 +617,8 @@ export async function GetProducer(id,fullInfo) {
                 producer.following = GetUserItems(producer.following);
                 producer.follower  = GetUserItems(producer.follower);
             }
-            return producer;
+            var item = {...producer};
+            return item;
         }
     }
     return null;
