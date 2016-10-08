@@ -72,6 +72,7 @@ async function RegisterActionWorker(dispatch,userCredentials) {
         // Fetch data from the server here
         //
         await LcbApiRegister(dispatch, userCredentials.name, userCredentials.password);
+        NotifyDone(dispatch,null);
     }
     catch(error) {
         // Always log an internal error

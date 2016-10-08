@@ -7,21 +7,30 @@ import {
 
 import {LicenseeSceneId,RetailerSceneId,HomeTabId,} from '../common/const.js';
 import {GetRetailer} from './data.js';
+import {NotifyBusy,NotifyDone} from './navigation.js';
 
 export const RETAILER_SUCCESS = 'RETAILER_SUCCESS';
 export const RETAILER_ERROR   = 'RETAILER_ERROR';
 
 export function GetRetailerAction(retailerId) {
 
-    return function (dispatch, getState) {
-        var retailer = GetRetailer(retailerId);
-
-        dispatch({
-            type:SWITCH_TAB_SCENE,
-            tabId: HomeTabId,
-            sceneId: RetailerSceneId,
-            item: retailer,
-        });
+    return async function (dispatch, getState) {
+        NotifyBusy(dispatch);
+        try {
+            var retailer =  await GetRetailer(retailerId);
+            var item = {...retailer}
+            dispatch({
+                type:SWITCH_TAB_SCENE,
+                tabId: HomeTabId,
+                sceneId: RetailerSceneId,
+                item: item,
+            });
+            NotifyDone(dispatch,null);
+        }
+        catch(error) {
+            console.log("GetRetailerAction:"+error);
+            NotifyDone(dispatch,"GetRetailer failed");
+        }
     }
 }
 

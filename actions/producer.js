@@ -7,22 +7,31 @@ import {
 
 import {ProcessorSceneId,ProducerSceneId,HomeTabId} from '../common/const.js';
 import {GetProducer} from './data.js';
+import {NotifyBusy,NotifyDone,} from './navigation.js';
 
 export const PRODUCER_SUCCESS = 'PRODUCER_SUCCESS';
 export const PRODUCER_ERROR   = 'PRODUCER_ERROR';
 
 export function GetProducerAction(producerId) {
 
-    return function (dispatch, getState) {
-        // BatsFix. Fetch producer data first using retailerId
-        var producer = GetProducer(producerId);        
-
-        dispatch({
-            type:SWITCH_TAB_SCENE,
-            tabId: HomeTabId,
-            sceneId: ProducerSceneId,
-            item: producer,
-        });
+    return async function (dispatch, getState) {
+        NotifyBusy(dispatch);
+        try {
+            // BatsFix. Fetch producer data first using retailerId
+            var producer = await GetProducer(producerId);        
+            var item = {...producer};
+            dispatch({
+                type:SWITCH_TAB_SCENE,
+                tabId: HomeTabId,
+                sceneId: ProducerSceneId,
+                item: item,
+            });
+            NotifyDone(dispatch,null);
+        }
+        catch(error) {
+            console.log("GetProducerAction:"+error);
+            NotifyDone(dispatch,"Error getting producer");
+        }
     }
 }
 

@@ -555,8 +555,15 @@ export  async function GetLatestNews() {
     return {staffPick:data.Products[0],trending:data.Products[1]};
 }
 
-export function GetProduct(id) {
+export async function GetProduct(id) {
     var product = null;
+    //BatsFix. For now faking this 
+    fakeId = 1;
+    var queryProduct = `{Products(id:${fakeId}){UID,Title,ImageURL,ProductType,DominantSpecies,Description,Producer{UID}}}`; 
+    var data =  await FetchData(queryProduct);
+
+    console.log("product" + data.Products[0].Title);
+
     for (var i=0; i < TestProducts.length; i++) {
         if (TestProducts[i].id == id) {
             product = TestProducts[i];
@@ -569,8 +576,15 @@ export function GetProduct(id) {
     return null;
 }
 
-export function GetRetailer(id) {
+export async function GetRetailer(id) {
     var retailer = null;
+    //BatsFix. For now faking this
+    fakeId=1;
+    var queryRetailer = `{RetailStores(id:${fakeId}){UID,Title}}`;
+    var data = await FetchData(queryRetailer);
+
+    console.log("retailer" + data.RetailStores[0].Title);
+
     for (var i=0; i < TestRetailers.length; i++) {
         if (TestRetailers[i].id == id) {
            retailer = TestRetailers[i];
@@ -583,8 +597,15 @@ export function GetRetailer(id) {
     return null;
 }
 
-export function GetProducer(id,fullInfo) {
+export async function GetProducer(id,fullInfo) {
     var producer = null;
+    //BatsFix. For now faking this
+    fakeId = 1;
+    //Producers dont have title!!!!BatsFix
+    var queryProducer = `{Producers(id:${fakeId}){UID,BannerURL,}}`;
+    var data = await FetchData(queryProducer);
+    console.log("producer"+data.Producers[0].BannerURL);
+
     for (var i=0; i < TestProducers.length; i++) {
         if (TestProducers[i].id == id) {
             producer = TestProducers[i];

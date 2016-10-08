@@ -7,21 +7,32 @@ import {
 import {UpdateProductSceneId,ProductSceneId,HomeTabId,} from '../common/const.js';
 import {GetProduct} from './data.js';
 
+import {NotifyBusy,NotifyDone,} from './navigation.js';
+
 export const PRODUCT_SUCCESS = 'PRODUCT_SUCCESS';
 export const PRODUCT_ERROR = 'PRODUCT_ERROR';
 
 export function GetProductAction(productId, switchTab) {
-    return function (dispatch, getState) {
-        // BatsFix. Fetch product data first.
-        product =  GetProduct(productId);
-        dispatch({
-            type:SWITCH_TAB_SCENE,
-            tabId: HomeTabId,
-            sceneId: ProductSceneId,
-            item: product,
-       });
+    return async function (dispatch,getState){
+        NotifyBusy(dispatch);
+        try {
+            var product = await GetProduct(productId);
+            var item = {...product};
+            dispatch({
+                type:SWITCH_TAB_SCENE,
+                tabId: HomeTabId,
+                sceneId: ProductSceneId,
+                item: item,
+            });
+            NotifyDone(dispatch,null);
+        } 
+        catch(error) {
+            console.log("GetProductActionWorker:"+error);
+            NotifyDone(dispatch,"Error getting product");
+        }
     }
 }
+
 export function UpdateProductAction(productId) {
     return function(dispatch,getState) {
         //Update product.
