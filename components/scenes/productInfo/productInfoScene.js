@@ -9,6 +9,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 //get internal components
+import {HerbyBar}         from '../../../common/controls.js';
 import {ConfirmProductInfoAction,} from '../../../actions';
 
 class ProductInfoScene extends Component {
@@ -29,6 +30,7 @@ class ProductInfoScene extends Component {
     render() {
         return (
         <View>
+        <HerbyBar navigator={this.props.navigator} name="ProductInfo"/>
         <View style={{backgroundColor:'#EFEFF4',height:600}}>
             <View style={{marginTop:30}}>
                 <Text style={{marginLeft:20,marginBottom:10}}>Product Info</Text>

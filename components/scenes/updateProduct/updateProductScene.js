@@ -43,6 +43,8 @@ class UpdateProductScene extends Component {
 
     render() {
         return (
+        <View style={{flex:1}}>
+        <HerbyBar navigator={this.props.navigator} name="Update Processor"/>
         <ScrollView style={{flex:1, backgroundColor:'white'}}>
             <View style={{ flex: 1 }}>
                 <View style={{ justifyContent: "flex-start" }}>
@@ -84,6 +86,7 @@ class UpdateProductScene extends Component {
 
             </View>
         </ScrollView>
+        </View>
         );
     }
 

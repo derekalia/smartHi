@@ -12,7 +12,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import {UpdateRetailerAction,SwitchSceneAction,} from '../../../actions';
-import {HerbyButton2,} from '../../../common/controls.js';
+import {HerbyButton2,HerbyBar,} from '../../../common/controls.js';
 
 class UpdateLicenseeScene extends Component {
     constructor(props) {
@@ -72,6 +72,7 @@ class UpdateLicenseeScene extends Component {
     render() {
         return(
         <View style={{flex:1}}>
+            <HerbyBar navigator={this.props.navigator} name="Update Store"/>
             <View style={{backgroundColor:'white',marginTop:0,margin:10,}}>
                 <Image source={this.state.imageSource} style={{ height: 190, width: 380,justifyContent:'center',alignItems:'center'}}/>
                 <View style={{flexDirection:'row',marginTop:20,}}>

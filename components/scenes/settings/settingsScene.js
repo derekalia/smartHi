@@ -10,7 +10,7 @@ import {connect} from 'react-redux';
 
 import {SwitchSceneAction, GetProductAction, ResetPasswordAction,ProducerLoginAction,LicenseeLoginAction,} from '../../../actions';
 import {LicenseeSceneId,ProcessorSceneId} from '../../../common/const.js';
-import {HerbyButton,HerbyButton2,HerbyHeader,HerbyInput,HerbyAlert} from '../../../common/controls.js';
+import {HerbyBar,HerbyButton,HerbyButton2,HerbyHeader,HerbyInput,HerbyAlert} from '../../../common/controls.js';
 import HerbyModal from '../../util/herbyModal.js';
 
 class SettingsScene extends Component {
@@ -75,6 +75,8 @@ class SettingsScene extends Component {
     render() {
         return (
             <View style={{flex:1}}>
+                <HerbyBar navigator={this.props.navigator} name="Settings"/>
+
                 {/*Popup settings area*/}
              
                 {/*Main settings area*/}

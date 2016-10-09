@@ -73,45 +73,25 @@ class ProfileTab extends Component {
             this.refs.navigator.popToTop();
             return;
         }
-
-        // Otherwise it is a scene change 
-        // Check existing routes first
-        var foundExisting = false;
-
-        var routelist = this.refs.navigator.getCurrentRoutes();
-        for (var i=0; i < routelist.length; i++) {
-            if (routelist[i].index == sceneId) {
-                routelist[i].item = nextProps.item;
-                this.refs.navigator.jumpTo(routelist[i]);
-                foundExisting = true;
+        for(var i=0; i < TabScenes.length; i++) {
+             if (TabScenes[i].index == sceneId) {
+                var currentScene = Object.assign({}, TabScenes[i]);
+                currentScene.item = nextProps.item;
+                this.refs.navigator.push(currentScene);
                 break;
-            }
-        }
-        
-        // If not found in existing push
-        if (foundExisting == false) {
-            for(var i=0; i < TabScenes.length; i++) {
-                 if (TabScenes[i].index == sceneId) {
-                    TabScenes[i].item = nextProps.item;
-                    this.refs.navigator.push(TabScenes[i]);
-                    break;
-                 }
-            }
+             }
         }
     }
 
     renderScene(route, navigator) {
         if (route.index == ProfileSceneId) {
             return (
-                <route.component tabId={ProfileTabId} item={navigator.props.user}/>
+                <route.component tabId={ProfileTabId} navigator={navigator} item={navigator.props.user}/>
             );
         }
         else {
             return (
-                <View style={{flex:1}}>
-                    <HerbyBar navigator={navigator} name={route.title}/>
-                    <route.component tabId={ProfileTabId} item={route.item}/>
-                </View>
+                <route.component tabId={ProfileTabId} navigator={navigator} item={route.item}/>
             );
         }
     }
@@ -128,7 +108,6 @@ class ProfileTab extends Component {
                 renderScene={this.renderScene}
                 initialRoute = {TabScenes[0]}
                 user={this.props.user}
-                item={this.props.item}
                 />
         );
     }

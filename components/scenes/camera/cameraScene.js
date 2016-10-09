@@ -9,6 +9,8 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Camera from 'react-native-camera';
 
+
+import {HerbyBar}         from '../../../common/controls.js';
 import {UploadProductImageAction} from '../../../actions';
 
 
@@ -39,6 +41,8 @@ class CameraScene extends Component {
 
     render() {
         return (
+        <View style={{flex:1}}>
+            <HerbyBar navigator={this.props.navigator} name="Camera"/>
             <Camera
                 ref="cam"
                 style={Styles.container}
@@ -53,6 +57,7 @@ class CameraScene extends Component {
                         </TouchableHighlight>
                     </View>
             </Camera>
+        </View>
         );
     }
 

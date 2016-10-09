@@ -9,6 +9,8 @@ import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
+import {HerbyBar}         from '../../../common/controls.js';
+
 import {GetRetailerAction,GetProducerAction,RateProductAction,} from '../../../actions';
 import StarRating from 'react-native-star-rating';
 import ReviewList   from '../../util/reviewList.js';
@@ -36,27 +38,29 @@ class RateProductScene extends Component {
 
     render() {
         return (
-        <ScrollView style={{flex:1, backgroundColor:'white'}}>
-            <View style={{ flex: 1 }}>
-                <View style={{ justifyContent: "flex-start" }}>
-                    <Image source={require('../../../media/RosinXJ.png') } style={{ height: 190, width: 380 }}/>
+        <View style={{flex:1}}>
+            <HerbyBar navigator={this.props.navigator} name="RateProduct"/>
+            <ScrollView style={{flex:1, backgroundColor:'white'}}>
+                <View style={{ flex: 1 }}>
+                    <View style={{ justifyContent: "flex-start" }}>
+                        <Image source={require('../../../media/RosinXJ.png') } style={{ height: 190, width: 380 }}/>
+                    </View>
+
+                    {this._renderRating()}
+
+                    {this._renderDetailRating()}
+
+                    {this._renderDescription()}
+
+                    {this._renderTestResults()}
+
+                    {this._renderFilters()}
+
+                    {this._renderCommentBox()}
+
                 </View>
-
-
-                {this._renderRating()}
-
-                {this._renderDetailRating()}
-
-                {this._renderDescription()}
-
-                {this._renderTestResults()}
-
-                {this._renderFilters()}
-
-                {this._renderCommentBox()}
-
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </View>
         );
     }
 

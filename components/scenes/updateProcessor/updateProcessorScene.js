@@ -12,7 +12,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import {UpdateProducerAction,SwitchSceneAction,} from '../../../actions';
-import {HerbyButton2,} from '../../../common/controls.js';
+import {HerbyButton2,HerbyBar,} from '../../../common/controls.js';
 
 class UpdateProcessorScene extends Component {
     constructor(props) {
@@ -73,6 +73,7 @@ class UpdateProcessorScene extends Component {
     render() {
         return(
         <View>
+             <HerbyBar navigator={this.props.navigator} name="Update Processor"/>
             <View style={{backgroundColor:'white',margin:10,marginTop:0}}>
                 <Image source={this.state.imageSource} style={{ height: 190, width: 380,justifyContent:'center',alignItems:'center',alignSelf:'center'}}/>
                 <TouchableHighlight onPress={()=>this._showImagePicker()} style={{marginTop:5,backgroundColor:'#468ee5',marginTop:10,height:30,width:150,borderRadius:8,justifyContent:'center',alignSelf:'center'}}>

@@ -151,6 +151,7 @@ class ProcessorScene extends Component {
 
         return (
         <View>
+             <HerbyBar navigator={this.props.navigator} name="Processor"/>
              <ScrollView
                   style={{marginTop:0,height:this._height,backgroundColor:'transparent',}}
                   stickyHeaderIndices={[1]}>

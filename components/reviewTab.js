@@ -87,19 +87,9 @@ class ReviewTab extends Component {
     }
 
     renderScene(route, navigator) {
-        if (route.index == ReviewStartSceneId) {
-            return (
-                <route.component tabId={ReviewTabId}/>
-            );
-        }
-        else {
-            return (
-                <View style={{flex:1}}>
-                    <HerbyBar navigator={navigator} name={route.title}/>
-                    <route.component tabId={ReviewTabId}/>
-                </View>
-            );
-        }
+        return (
+                <route.component tabId={ReviewTabId} navigator={navigator}/>
+        );
     }
 
     configureScene(route, routeStack) {

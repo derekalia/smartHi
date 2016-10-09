@@ -10,6 +10,7 @@ import StarRating from 'react-native-star-rating';2
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
+import {HerbyBar,} from '../../../common/controls.js';
 import {RateStoreAction,} from '../../../actions';
 
 class RateStoreScene extends Component {
@@ -36,6 +37,8 @@ class RateStoreScene extends Component {
 
     render() {
         return (
+          <View style={{flex:1}}>
+          <HerbyBar navigator={navigator} name="Rate Store"/>
           <ScrollView style={{backgroundColor:'white',}}>
               <View style={{ flex: 1 }}>
                   <View style={{ height: 238, justifyContent: "flex-end" }}>
@@ -96,6 +99,7 @@ class RateStoreScene extends Component {
 
                   </View>
           </ScrollView>
+          </View>
         );
     }
 }

@@ -24,6 +24,7 @@ class RateQueueScene extends Component {
     render() {
         return (
             <View style={{flex:1}}>
+                <HerbyBar navigator={this.props.navigator} name="Rate Queue"/>
                 <ProductList productList={this.props.products} goProduct={(t)=>this._rateProduct(t)}/>
             </View>
         );
