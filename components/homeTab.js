@@ -10,7 +10,7 @@ import {StyleSheet, View, Text, ScrollView, Image, TouchableHighlight, Navigator
 import {connect} from 'react-redux';
 
 // Import const ids.
-import {HomeSceneId, ProductSceneId, ProfileSceneId, RetailerSceneId, HomeTabId, ProducerSceneId,ActivitySceneId,} from '../common/const.js';
+import {HomeSceneId, ProductSceneId, ProfileSceneId, RetailerSceneId, HomeTabId, ProducerSceneId,ActivitySceneId,MapSceneId,} from '../common/const.js';
 
 // Import internal modules
 import HomeScene     from './scenes/home/homeScene.js';
@@ -19,10 +19,9 @@ import RetailerScene from './scenes/retailer/retailerScene.js';
 import ProducerScene from './scenes/producer/producerScene.js';
 import ActivityScene from './scenes/activity/activityScene.js';
 import ProfileScene  from './scenes/profile/profileScene.js';
+import MapScene      from './scenes/map/mapScene.js';
 
 const HomeIndex     = 0;
-const ProductIndex  = 1;
-const RetailerIndex = 2;
 
 const TabScenes = [
     { title: "Herby",    component: HomeScene,     index: HomeSceneId },
@@ -30,7 +29,8 @@ const TabScenes = [
     { title: "Retailer", component: RetailerScene, index: RetailerSceneId },
     { title: "Producer", component: ProducerScene, index: ProducerSceneId },
     { title: "Activity", component: ActivityScene, index: ActivitySceneId },
-    { title: "Profile",  component: ProfileScene, index: ProfileSceneId },
+    { title: "Profile",  component: ProfileScene,  index: ProfileSceneId },
+    { title: "Map",      component: MapScene,      index: MapSceneId },
 ];
 
 class HomeTab extends Component {

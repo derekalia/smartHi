@@ -15,6 +15,7 @@ export const LicenseeSceneId        = 'LicenseeScene';
 export const LicenseeStoreSceneId   = 'LicenseeStore';
 export const LicenseeProductSceneId = 'LicenseeProduct';
 export const LoginSceneId           = 'LoginScene';
+export const MapSceneId             = 'MapScene';
 export const ProducerSceneId        = 'ProducerScene';
 export const ProductSceneId         = 'ProductScene';
 export const ProductInfoSceneId     = 'ProductInfoScene';
