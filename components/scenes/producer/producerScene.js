@@ -13,7 +13,7 @@ import ReviewList         from '../../util/reviewList.js';
 import ProductList        from '../../util//productList.js';
 import ProducerMenu       from './producerMenu.js';
 import {HerbyBar,HerbyFrameBar}    from '../../../common/controls.js';
-
+import HerbySearchBar from '../../util/herbySearchBar.js';
 
 class ProducerInfo extends Component {
     render() {
@@ -74,6 +74,7 @@ class ProducerScene extends Component {
         super(props);
         var {width,height} = Dimensions.get('window');
         this._height = height;
+        this.state={frameId:InfoFrameId};
     }
 
     _setFrame(frameId) {
@@ -83,6 +84,15 @@ class ProducerScene extends Component {
 
     _onLike() {
         // BatsFix. Implement like action for this product.
+    }
+
+    _getSearchBar() {
+        if (this.state.frameId == MenuFrameId) {
+            return (
+                <HerbySearchBar entries={['ALL','FLOWER','CONCENTRATE','INFUSED',]}/>
+            );
+        }
+        return null;
     }
 
     configureScene(route, routeStack) {
@@ -108,7 +118,11 @@ class ProducerScene extends Component {
             style={{marginTop:0,height:this._height,backgroundColor:'white'}} 
             stickyHeaderIndices={[1]}>
             <Image source={require('../../../media/forged1.png') } style={{ height: 190, width: 380 }}/>
-            <HerbyFrameBar entries={['INFO','PRODUCTS','REVIEWS',]} setFrame={(t)=>this._setFrame(t)}/>
+            <View>
+                <HerbyFrameBar entries={['INFO','PRODUCTS','REVIEWS',]} setFrame={(t)=>this._setFrame(t)}/>
+                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+                {this._getSearchBar()}
+            </View>
             <Navigator
                 style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
                 ref="navigator"

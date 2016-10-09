@@ -14,9 +14,7 @@ class ProducerMenu extends Component {
     render() {
         return (
         <View>
-            <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
-            <HerbySearchBar entries={['ALL','FLOWER','CONCENTRATE','INFUSED','ONE','TWO','THREE']}/>
-            <ProductList style={{ marginHorizontal: 10 }} productList={this.props.producer.products} goProduct={(id)=>this.props.goProduct(id)}/>
+           <ProductList style={{ marginHorizontal: 10 }} productList={this.props.producer.products} goProduct={(id)=>this.props.goProduct(id)}/>
         </View>
         );
     };
