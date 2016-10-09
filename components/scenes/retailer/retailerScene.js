@@ -20,7 +20,6 @@ class RetailerMenu extends Component {
     render() {
         return (
         <ScrollView>
-            <HerbySearchBar entries={['ALL','FLOWER','CONCENTRATE','INFUSED',]}/>
             <ProductList style={{ marginHorizontal: 10}} productList={this.props.retailer.products} goProduct={(id)=>this.props.goProduct(id)}/>
             <View style={{width:300,height:110}}></View>
         </ScrollView>
@@ -54,6 +53,7 @@ class RetailerScene extends Component {
         super(props);
         var {width,height} = Dimensions.get('window');
         this._height = height;
+        this.state={frameId:InfoFrameId};
     }
 
     _setFrame(frameId) {
@@ -71,6 +71,15 @@ class RetailerScene extends Component {
 
     _showMap() {
         this.props.ShowMapAction();
+    }
+
+    _getSearchBar() {
+        if (this.state.frameId == MenuFrameId) {
+            return (
+                <HerbySearchBar entries={['ALL','FLOWER','CONCENTRATE','INFUSED',]}/>
+            );
+        }
+        return null;
     }
 
     configureScene(route, routeStack) {
@@ -101,8 +110,11 @@ class RetailerScene extends Component {
             style={{flex:1,marginTop:0,height:this._height,backgroundColor:'white'}}
             stickyHeaderIndices={[1]}>
             <Image source={require('../../../media/ikes1.png') } style={{ height: 190, width: 380 }}/>
-            <HerbyFrameBar entries={['INFO','MENU','REVIEWS',]} setFrame={(t)=>this._setFrame(t)}/>
-                        <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+            <View>
+                <HerbyFrameBar entries={['INFO','MENU','REVIEWS',]} setFrame={(t)=>this._setFrame(t)}/>
+                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+                {this._getSearchBar()}
+            </View>
             <Navigator
                 style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
                 ref="navigator"

@@ -66,7 +66,7 @@ export class HerbySearchBar extends Component {
         var modalHeight = this.maxHeight*0.8;
         var modalWidth  = this.maxWidth*0.9;
         return(
-        <View style={{zIndex:999}}>
+        <View style={{zIndex:999,backgroundColor:'white'}}>
         <Modal
             animationType={'fade'}
             transparent={true}
