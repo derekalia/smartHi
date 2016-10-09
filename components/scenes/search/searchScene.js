@@ -87,7 +87,7 @@ class SearchScene extends Component {
                     <View style={[{ flex: 5,}]}>
                       <View style={{height: 34,borderWidth:3,borderColor:'#ECECEC',borderRadius:8,backgroundColor: '#ECECEC',}}>
                         <TextInput style={{marginHorizontal:10,height:28, fontSize:20, backgroundColor: '#ECECEC',}}
-                                   autoCorrect={false} placeholder='Search' returnKeyType='next' onChangeText={(t)=> this._setSearchTerm(t)} clearButtonMode='always'/>
+                                   autoCorrect={false} placeholder='Search' returnKeyType='search' onChangeText={(t)=> this._setSearchTerm(t)} clearButtonMode='always'/>
                       </View>
                     </View>
                     <TouchableOpacity style={{flex: .6,}} onPress={()=>this._showFiltersModal(true)}>
