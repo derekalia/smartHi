@@ -54,10 +54,10 @@ export default function NavigationReducer(state, action) {
                 // intends to reset the tab.
                 //
                 switch(action.tabId) {
-                    case HomeTabId: newState.homeTab.sceneId = HomeSceneId; break;
-                    case SearchTabId: newState.homeTab.sceneId = SearchSceneId; break;
-                    case ReviewTabId: newState.homeTab.sceneId = ReviewStartSceneId; break;
-                    case ProfileTabId: newState.homeTab.sceneId = ProfileSceneId; break;
+                    case HomeTabId: newState.homeTab = {sceneId:HomeSceneId,item: null}; break;
+                    case SearchTabId: newState.homeTab = {sceneId:SearchSceneId,item:null}; break;
+                    case ReviewTabId: newState.reviewTab = {sceneId:ReviewStartSceneId, item:null}; break;
+                    case ProfileTabId: newState.profileTab = {sceneId:ProfileSceneId, item: null}; break;
                 }
             }
             return newState;
