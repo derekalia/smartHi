@@ -37,7 +37,7 @@ export function UpdateProductAction(productId) {
         //Update product.
         //Notify user that update was successful.
         NotifyBusy(dispatch);
-        NotifyBusy(dispatch,"Updated product");
+        NotifyDone(dispatch,"Updated product");
     }
 }
 export function GoUpdateProductAction(productId,producerId) {
@@ -45,7 +45,7 @@ export function GoUpdateProductAction(productId,producerId) {
         NotifyBusy(dispatch);
         try {
             var product = 
-                 {   id:'-11',
+                 {   id:'-1',
                     name:'Product Name',
                     description:'Product Description',
                     price: 0.0,
@@ -71,9 +71,10 @@ export function GoUpdateProductAction(productId,producerId) {
                 sceneId: UpdateProductSceneId,
                 item: product,
            });
-           NotifyAction(dispatch,null);
+           NotifyDone(dispatch,null);
         }
         catch(error) {
+            console.log("GoUpdateProductAction:"+error);
             NotifyDone(dispatch,"UpdateProductAction failed");
         }
     }
