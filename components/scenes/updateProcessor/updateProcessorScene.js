@@ -30,8 +30,7 @@ class UpdateProcessorScene extends Component {
         if (this.state.imageSource != this._defaultImage ) {
             sourceImage = this.state.imageSource;
         }
-        var result = this.props.UpdateProducerAction(this._title,this._description, sourceImage);
-        Alert.alert("",result);
+        this.props.UpdateProducerAction(this._title,this._description, sourceImage);
     }
     _setDescription(t) {
         this._description = t;
@@ -70,10 +69,11 @@ class UpdateProcessorScene extends Component {
         });
     }
 
+    //<HerbyBar navigator={this.props.navigator} name="Update Processor" forward="Done" forwardCallBack={()=>this._updateProcessor()}/>
     render() {
         return(
         <View>
-             <HerbyBar navigator={this.props.navigator} name="Update Processor"/>
+            <HerbyBar navigator={this.props.navigator} name="Update Processor"/>
             <View style={{backgroundColor:'white',margin:10,marginTop:0}}>
                 <Image source={this.state.imageSource} style={{ height: 190, width: 380,justifyContent:'center',alignItems:'center',alignSelf:'center'}}/>
                 <TouchableHighlight onPress={()=>this._showImagePicker()} style={{marginTop:5,backgroundColor:'#468ee5',marginTop:10,height:30,width:150,borderRadius:8,justifyContent:'center',alignSelf:'center'}}>
@@ -96,7 +96,6 @@ class UpdateProcessorScene extends Component {
                 </View>
                 <View style={{flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
 
-                    {/* <HerbyButton2 name="Update" onPress={()=>this._updateProcessor()}/> */}
                 </View>
             </View>
         </View>

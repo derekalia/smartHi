@@ -61,7 +61,7 @@ class ProfileTab extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        var sceneId = nextProps.sceneId;
+        var sceneId = nextProps.scene.sceneId;
 
         if (nextProps.tabId != ProfileTabId) {
             return;
@@ -116,7 +116,7 @@ class ProfileTab extends Component {
 function mapStateToProps(state) { 
     return { 
         tabId: state.NavigationReducer.tabId, 
-        sceneId: state.NavigationReducer.profileTab.sceneId, 
+        scene: state.NavigationReducer.profileTab, 
         item: state.NavigationReducer.profileTab.item, 
         user: state.UserReducer.profile 
     }

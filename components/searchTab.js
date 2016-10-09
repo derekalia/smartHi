@@ -32,7 +32,7 @@ class SearchTab extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        var sceneId = nextProps.sceneId;
+        var sceneId = nextProps.scene.sceneId;
 
         if (nextProps.tabId != SearchTabId) {
             return;
@@ -88,7 +88,7 @@ class SearchTab extends Component {
 //
 function mapStateToProps(state) { 
     return { 
-        sceneId: state.NavigationReducer.searchTab.sceneId, 
+        sceneId: state.NavigationReducer.searchTab, 
         item: state.NavigationReducer.searchTab.item 
     } 
 }

@@ -48,7 +48,7 @@ class HomeTab extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        var sceneId = nextProps.sceneId;
+        var sceneId = nextProps.scene.sceneId;
         if (nextProps.tabId != HomeTabId) {
             return;
         }
@@ -101,7 +101,7 @@ class HomeTab extends Component {
 function mapStateToProps(state) { 
     return { 
         tabId: state.NavigationReducer.tabId,
-        sceneId: state.NavigationReducer.homeTab.sceneId, 
+        scene: state.NavigationReducer.homeTab,
         item: state.NavigationReducer.homeTab.item 
     } 
 }
