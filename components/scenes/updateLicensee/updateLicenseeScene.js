@@ -72,7 +72,7 @@ class UpdateLicenseeScene extends Component {
     render() {
         return(
         <View style={{flex:1}}>
-            <HerbyBar navigator={this.props.navigator} name="Update Store"/>
+            <HerbyBar navigator={this.props.navigator} name="Update Store" back="Back" forward="Done" forwardCallback={()=>this._updateLicensee()}/>
             <View style={{backgroundColor:'white',marginTop:0,margin:10,}}>
                 <Image source={this.state.imageSource} style={{ height: 190, width: 380,justifyContent:'center',alignItems:'center'}}/>
                 <View style={{flexDirection:'row',marginTop:20,}}>

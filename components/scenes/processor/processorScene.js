@@ -128,6 +128,10 @@ class ProcessorScene extends Component {
         this.setState({frameId: frameId});
     }
 
+    _goSettings() {
+        this.props.SwitchSceneAction(SettingsSceneId);
+    }
+
     renderScene(route, navigator) {
         return (
                 <route.component
@@ -151,7 +155,7 @@ class ProcessorScene extends Component {
 
         return (
         <View>
-             <HerbyBar navigator={this.props.navigator} name="Processor"/>
+             <HerbyBar navigator={this.props.navigator} name="Processor" forward="Settings" forwardCallback={()=>this._goSettings()}/>
              <ScrollView
                   style={{marginTop:0,height:this._height,backgroundColor:'transparent',}}
                   stickyHeaderIndices={[1]}>

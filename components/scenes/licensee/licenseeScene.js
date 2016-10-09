@@ -11,7 +11,7 @@ import StarRating from 'react-native-star-rating';
 
 // Import internals
 import {GetProductAction,SwitchSceneAction,} from '../../../actions';
-import {UpdateRetailerSceneId,ProfileTabId,} from '../../../common/const.js';
+import {UpdateRetailerSceneId,SettingsSceneId,ProfileTabId,} from '../../../common/const.js';
 import {HerbyFrameBar,HerbyBar,}   from '../../../common/controls.js';
 import ProductList from '../../util/productList.js';
 import UserList from '../../util/userList.js';
@@ -98,6 +98,10 @@ class LicenseeScene extends Component {
         this.setState({frameId: frameId});
     }
 
+    _goSettings() {
+        this.props.SwitchSceneAction(SettingsSceneId);
+    }
+
     renderScene(route, navigator) {
         return (
                 <route.component
@@ -120,7 +124,7 @@ class LicenseeScene extends Component {
 
         return (
         <View>
-             <HerbyBar navigator={this.props.navigator} name="Retailer"/>
+             <HerbyBar navigator={this.props.navigator} name="Retailer" forward="Settings" forwardCallback={()=>this._goSettings()}/>
              <ScrollView
                   style={{marginTop:0,height:this._height,backgroundColor:'transparent',}}
                   stickyHeaderIndices={[1]}>

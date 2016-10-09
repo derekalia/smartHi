@@ -15,7 +15,7 @@ import StarRating from 'react-native-star-rating';
 import ReviewList   from '../../util/reviewList.js';
 import FilterItem   from '../../util/filterItem.js';
 
-import {HerbyButton2,} from '../../../common/controls.js';
+import {HerbyButton2,HerbyBar,} from '../../../common/controls.js';
 import {FiltersActivity, FiltersEffect, FiltersType,FiltersCategory,FiltersSymptoms} from '../../../common/filters.js';
 
 class UpdateProductScene extends Component {
@@ -44,7 +44,7 @@ class UpdateProductScene extends Component {
     render() {
         return (
         <View style={{flex:1}}>
-        <HerbyBar navigator={this.props.navigator} name="Update Processor"/>
+        <HerbyBar navigator={this.props.navigator} name="Update Product" back="Back" forward="Done" forwardCallback={()=>this._updateProduct()}/>
         <ScrollView style={{flex:1, backgroundColor:'white'}}>
             <View style={{ flex: 1 }}>
                 <View style={{ justifyContent: "flex-start" }}>
@@ -121,8 +121,7 @@ class UpdateProductScene extends Component {
     }
 
     _updateProduct() {
-        result = this.props.UpdateProductAction(this.state.product);
-        Alert.alert("",result);
+        this.props.UpdateProductAction(this.state.product);
     }
 
     _onRating(rating) {
