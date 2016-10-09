@@ -6,6 +6,13 @@ import {StyleSheet, Text, View, Slider,ListView, ListViewDataSource,TouchableHig
 
 import StarRating from 'react-native-star-rating';
 
+//get state management components
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+
+import {ReviewTabId} from '../../common/const.js';
+import {SwitchTabAction} from '../../actions';
+
 class ReviewItem extends Component {
     constructor(props) {
         super(props);
@@ -67,6 +74,11 @@ class ReviewList extends Component {
         super(props);
         this.state = {text:' Say something here'};
     }
+    _goRate() {
+        //BatsFix. This should go to rate tab???
+        //What happens with producers, retailers?
+        this.props.SwitchTabAction(ReviewTabId);
+    }
 
     render() {
         return (
@@ -78,7 +90,9 @@ class ReviewList extends Component {
              borderColor: "#ED3C52",
              backgroundColor: '#ED3C52',
              justifyContent: 'center',
-             alignItems: 'center'}}>
+             alignItems: 'center'}}
+             onPress={()=>this._goRate()}
+             >
                <Text style={{color: "white",fontWeight:'bold',fontSize:16,
                marginTop: 7,
                marginBottom: 7,
@@ -120,7 +134,12 @@ class ReviewList extends Component {
     }
 }
 
-module.exports = ReviewList;
+//
+// Connect SwitchTabAction to props
+//
+function mapActionToProps(dispatch) { return bindActionCreators({ SwitchTabAction }, dispatch); }
+
+module.exports = connect(null,mapActionToProps)(ReviewList);
 
 const Styles = StyleSheet.create({
     tagType: {
