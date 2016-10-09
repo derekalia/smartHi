@@ -21,8 +21,14 @@ import {
     LicenseeSceneId,
     LicenseeStoreSceneId,
     LicenseeProductSceneId,
-    ProductReviewSceneId,} 
-    from '../common/const.js';
+    ProductReviewSceneId,
+    // Following are common scenes for all tabs. 
+    ProductSceneId, 
+    RetailerSceneId, 
+    ProducerSceneId,
+    MapSceneId,
+} 
+from '../common/const.js';
 
 // Import internal modules
 import ProfileScene         from './scenes/profile/profileScene.js';
@@ -33,18 +39,28 @@ import UpdateProcessorScene from './scenes/updateProcessor/updateProcessorScene.
 import UpdateProductScene   from './scenes/updateProduct/updateProductScene.js';
 import UpdateLicenseeScene  from './scenes/updateLicensee/updateLicenseeScene.js';
 
+import ProductScene  from './scenes/product/productScene.js';
+import RetailerScene from './scenes/retailer/retailerScene.js';
+import ProducerScene from './scenes/producer/producerScene.js';
+import MapScene      from './scenes/map/mapScene.js';
+
+
 import {HerbyBar}           from '../common/controls.js';
 
 // Import const ids.
 
 const TabScenes = [
-    { title: "Profile",          item:null, component: ProfileScene,         index: ProfileSceneId },
-    { title: "Settings",         item:null, component: SettingsScene,        index: SettingsSceneId },
-    { title: "Licensee",         item:null, component: LicenseeScene,        index: LicenseeSceneId },
-    { title: "Processor",        item:null, component: ProcessorScene,       index: ProcessorSceneId },
-    { title: "Update Product",   item:null, component: UpdateProductScene,   index: UpdateProductSceneId },
-    { title: "Update Processor", item:null, component: UpdateProcessorScene, index: UpdateProcessorSceneId },
-    { title: "Update Retailer",  item:null, component: UpdateLicenseeScene,  index: UpdateRetailerSceneId },
+    { title: "Profile",          component: ProfileScene,         index: ProfileSceneId },
+    { title: "Settings",         component: SettingsScene,        index: SettingsSceneId },
+    { title: "Licensee",         component: LicenseeScene,        index: LicenseeSceneId },
+    { title: "Processor",        component: ProcessorScene,       index: ProcessorSceneId },
+    { title: "Update Product",   component: UpdateProductScene,   index: UpdateProductSceneId },
+    { title: "Update Processor", component: UpdateProcessorScene, index: UpdateProcessorSceneId },
+    { title: "Update Retailer",  component: UpdateLicenseeScene,  index: UpdateRetailerSceneId },
+    { title: "Product",          component: ProductScene,         index: ProductSceneId },
+    { title: "Retailer",         component: RetailerScene,        index: RetailerSceneId },
+    { title: "Producer",         component: ProducerScene,        index: ProducerSceneId },
+    { title: "Map",              component: MapScene,             index: MapSceneId },
 ];
 
 class ProfileTab extends Component {

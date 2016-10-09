@@ -18,8 +18,7 @@ export function GetProductAction(productId, switchTab) {
         try {
             var product = await GetProduct(productId);
             dispatch({
-                type:SWITCH_TAB_SCENE,
-                tabId: HomeTabId,
+                type:SWITCH_SCENE,
                 sceneId: ProductSceneId,
                 item: product,
             });

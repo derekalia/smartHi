@@ -15,8 +15,7 @@ export function GetProfileAction(userId) {
     return function(dispatch, getState) {
         var user = GetUserProfile(userId);
         dispatch({
-            type:SWITCH_TAB_SCENE,
-            tabId: HomeTabId,
+            type:SWITCH_SCENE,
             sceneId: ProfileSceneId,
             item: user,
         });

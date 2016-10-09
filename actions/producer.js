@@ -19,10 +19,9 @@ export function GetProducerAction(producerId) {
         try {
             // BatsFix. Fetch producer data first using retailerId
             var producer = await GetProducer(producerId);        
-            var item = {...producer};
+
             dispatch({
-                type:SWITCH_TAB_SCENE,
-                tabId: HomeTabId,
+                type:SWITCH_SCENE,
                 sceneId: ProducerSceneId,
                 item: item,
             });

@@ -17,12 +17,10 @@ export function GetRetailerAction(retailerId) {
         NotifyBusy(dispatch);
         try {
             var retailer =  await GetRetailer(retailerId);
-            var item = {...retailer}
             dispatch({
-                type:SWITCH_TAB_SCENE,
-                tabId: HomeTabId,
+                type:SWITCH_SCENE,
                 sceneId: RetailerSceneId,
-                item: item,
+                item: retailer,
             });
             NotifyDone(dispatch,null);
         }
