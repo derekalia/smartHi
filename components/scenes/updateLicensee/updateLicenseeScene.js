@@ -30,8 +30,7 @@ class UpdateLicenseeScene extends Component {
         if (this.state.imageSource != this._defaultImage ) {
             sourceImage = this.state.imageSource;
         }
-        var result = this.props.UpdateRetailerAction(this.id,this._name,this._description, sourceImage);
-        Alert.alert("",result);
+        this.props.UpdateRetailerAction(this.id,this._name,this._description, sourceImage);
     }
     _setLocation() {
         //BatsFix. Not sure what to do here
