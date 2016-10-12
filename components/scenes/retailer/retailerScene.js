@@ -14,6 +14,7 @@ import HerbySearchBar from '../../util/herbySearchBar.js';
 
 import ReviewList         from '../../util/reviewList.js';
 import ProductList        from '../../util/productList.js';
+import UserList           from '../../util/userList.js';
 import RetailerInfo       from './retailerInfo.js';
 
 class RetailerMenu extends Component {
@@ -30,9 +31,28 @@ class RetailerMenu extends Component {
 class RetailerReview extends Component {
     render() {
         return (
-<ScrollView style={{backgroundColor:'white'}}>
-            <ReviewList/>
-</ScrollView>
+            <ScrollView style={{backgroundColor:'white'}}>
+                <ReviewList/>
+            </ScrollView>
+        );
+    }
+}
+
+class RetailerSocial extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {frameId:0};
+    }
+    _setFrame(frameId) {
+        this.setState({frameId:frameId});
+    }
+    render() {
+        return (
+            <ScrollView style={{backgroundColor:'transparent'}}>
+                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+                <HerbyFrameBar entries={['FOLLOWER','FOLLOWING']} setFrame={(t)=>this._setFrame(t)}/>
+                <UserList userList={this.state.frameId == 0?this.props.retailer.following:this.props.retailer.follower}/>
+            </ScrollView>
         );
     }
 }
@@ -45,7 +65,8 @@ const SocialFrameId  = 3;
 const RetailerFrames = [
     {title: "INFO",     component: RetailerInfo,     index: InfoFrameId},
     {title: "MENU",     component: RetailerMenu,     index: MenuFrameId},
-    {title: "REVIEW",   component: RetailerReview,   index: SocialFrameId},
+    {title: "REVIEW",   component: RetailerReview,   index: ReviewFrameId},
+    {title: "SOCIAL",   component: RetailerSocial,   index: SocialFrameId},
 ];
 
 class RetailerScene extends Component {
@@ -111,7 +132,7 @@ class RetailerScene extends Component {
             stickyHeaderIndices={[1]}>
             <Image source={require('../../../media/ikes1.png') } style={{ height: 190, width: 380 }}/>
             <View>
-                <HerbyFrameBar entries={['INFO','MENU','REVIEWS',]} setFrame={(t)=>this._setFrame(t)}/>
+                <HerbyFrameBar entries={['INFO','MENU','REVIEWS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
                 <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
                 {this._getSearchBar()}
             </View>

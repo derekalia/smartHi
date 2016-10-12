@@ -551,7 +551,9 @@ export function SearchProducts(searchTerm) {
 export  async function GetLatestNews() {
     var queryValue = "{Products{UID,Title}}";
     var data =  await FetchData(queryValue);
-
+    for(var key in data) {
+        console.log("key " + key);
+    }
     return {staffPick:data.Products[0],trending:data.Products[1]};
 }
 
@@ -559,11 +561,7 @@ export async function GetProduct(id) {
     var product = null;
     //BatsFix. For now faking this 
     fakeId = 1;
-    var queryProduct = `{Products(id:${fakeId}){UID,Title,ImageURL,ProductType,DominantSpecies,Description,Producer{UID}}}`; 
-    var data =  await FetchData(queryProduct);
-
-    console.log("product" + data.Products[0].Title);
-
+    var queryProduct = `{Products(id:${fakeId}){UID,Title,ImageURLs,ProductType,Description}}`; 
     for (var i=0; i < TestProducts.length; i++) {
         if (TestProducts[i].id == id) {
             product = TestProducts[i];
@@ -582,6 +580,7 @@ export async function GetRetailer(id) {
     //BatsFix. For now faking this
     fakeId=1;
     var queryRetailer = `{RetailStores(id:${fakeId}){UID,Title}}`;
+
     var data = await FetchData(queryRetailer);
 
     console.log("retailer" + data.RetailStores[0].Title);
