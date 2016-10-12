@@ -10,10 +10,31 @@ import StarRating from 'react-native-star-rating';
 //get internal components
 import {GetProductAction} from '../../../actions';
 import ReviewList         from '../../util/reviewList.js';
-import ProductList        from '../../util//productList.js';
+import ProductList        from '../../util/productList.js';
+import UserList           from '../../util/userList.js';
 import ProducerMenu       from './producerMenu.js';
 import {HerbyBar,HerbyFrameBar}    from '../../../common/controls.js';
 import HerbySearchBar from '../../util/herbySearchBar.js';
+
+class ProducerSocial extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {frameId:0};
+    }
+    _setFrame(frameId) {
+        this.setState({frameId:frameId});
+    }
+    render() {
+        return (
+            <ScrollView style={{backgroundColor:'transparent'}}>
+                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+                <HerbyFrameBar entries={['FOLLOWER','FOLLOWING']} setFrame={(t)=>this._setFrame(t)}/>
+                <UserList userList={this.state.frameId == 0?this.props.producer.following:this.props.producer.follower}/>
+            </ScrollView>
+        );
+    }
+}
+
 
 class ProducerInfo extends Component {
     render() {
@@ -61,11 +82,13 @@ class ProducerReview extends Component {
 const InfoFrameId    = 0;
 const MenuFrameId    = 1;
 const ReviewFrameId  = 2;
+const SocialFrameId  = 3;
 
 const ProducerFrames = [
     {title: "info",     component: ProducerInfo,     index: InfoFrameId},
     {title: "menu",     component: ProducerMenu,     index: MenuFrameId},
     {title: "review",   component: ProducerReview,   index: ReviewFrameId},
+    {title: "social",   component: ProducerSocial,   index: SocialFrameId},
 ];
 
 
@@ -119,7 +142,7 @@ class ProducerScene extends Component {
             stickyHeaderIndices={[1]}>
             <Image source={require('../../../media/forged1.png') } style={{ height: 190, width: 380 }}/>
             <View>
-                <HerbyFrameBar entries={['INFO','PRODUCTS','REVIEWS',]} setFrame={(t)=>this._setFrame(t)}/>
+                <HerbyFrameBar entries={['INFO','PRODUCTS','REVIEWS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
                 <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
                 {this._getSearchBar()}
             </View>

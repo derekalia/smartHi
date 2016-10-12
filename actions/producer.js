@@ -18,12 +18,12 @@ export function GetProducerAction(producerId) {
         NotifyBusy(dispatch);
         try {
             // BatsFix. Fetch producer data first using retailerId
-            var producer = await GetProducer(producerId);        
+            var producer = await GetProducer(producerId,true);        
 
             dispatch({
                 type:SWITCH_SCENE,
                 sceneId: ProducerSceneId,
-                item: item,
+                item: producer,
             });
             NotifyDone(dispatch,null);
         }

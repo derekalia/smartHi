@@ -73,6 +73,8 @@ const TestProducers = [
     description:'Wide wide world',
     rating: 4,
     ratingCount: 200,
+    follower:['0','1','2'],
+    following:['0','3','4'],
     pid:['4','5'],},
 
 {   id:'2',
@@ -80,6 +82,8 @@ const TestProducers = [
     description:'All around best producer',
     rating: 2,
     ratingCount: 300,
+    follower:['0','1','2'],
+    following:['0','3','4'],
     pid:['6','7','8','9','10'],},
 
 {   id:'3',
@@ -87,6 +91,8 @@ const TestProducers = [
     ratingCount: 400,
     description:'South Beach one of a kind',
     name:'South Beach',
+    follower:['0','1','2'],
+    following:['0','3','4'],
     pid:['11','12','13'],},
 ];
 
@@ -603,9 +609,9 @@ export async function GetProducer(id,fullInfo) {
     //BatsFix. For now faking this
     fakeId = 1;
     //Producers dont have title!!!!BatsFix
-    var queryProducer = `{Producers(id:${fakeId}){UID,BannerURL,}}`;
+    var queryProducer = `{Producers(id:${fakeId}){UID,Title,Description,ImageURLs}}`;
     var data = await FetchData(queryProducer);
-    console.log("producer"+data.Producers[0].BannerURL);
+    console.log("producer"+data.Producers[0].ImageURLs);
 
     for (var i=0; i < TestProducers.length; i++) {
         if (TestProducers[i].id == id) {
