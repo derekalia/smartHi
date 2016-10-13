@@ -8,7 +8,7 @@ import {StyleSheet,Text,View,ScrollView,Image,TextInput,TouchableOpacity,Navigat
 import {connect} from 'react-redux';
 
 //get internal components
-import {SearchSceneId, ProductSceneId, ProfileSceneId, RetailerSceneId, ProducerSceneId,MapSceneId,SearchTabId} from '../common/const.js';
+import {SearchSceneId, ProductSceneId, ProfileSceneId, RetailerSceneId, ProducerSceneId,MapSceneId,SearchTabId,ProductReviewSceneId,} from '../common/const.js';
 
 import SearchScene    from './scenes/search/searchScene.js';
 import ProductScene   from './scenes/product/productScene.js';
@@ -16,16 +16,18 @@ import RetailerScene  from './scenes/retailer/retailerScene.js';
 import ProducerScene  from './scenes/producer/producerScene.js';
 import ProfileScene   from './scenes/profile/profileScene.js';
 import MapScene       from './scenes/map/mapScene.js';
+import ProductReviewScene from './scenes/productReview/productReviewScene.js';
 
 const SearchIndex     = 0;
 
 const TabScenes = [
-    { title: "Search",   component: SearchScene,   index: SearchSceneId },
-    { title: "Product",  component: ProductScene,  index: ProductSceneId },
-    { title: "Retailer", component: RetailerScene, index: RetailerSceneId },
-    { title: "Producer", component: ProducerScene, index: ProducerSceneId },
-    { title: "Profile",  component: ProfileScene,  index: ProfileSceneId },
-    { title: "Map",      component: MapScene,      index: MapSceneId },
+    { title: "Search",   component: SearchScene,        index: SearchSceneId },
+    { title: "Product",  component: ProductScene,       index: ProductSceneId },
+    { title: "Retailer", component: RetailerScene,      index: RetailerSceneId },
+    { title: "Producer", component: ProducerScene,      index: ProducerSceneId },
+    { title: "Profile",  component: ProfileScene,       index: ProfileSceneId },
+    { title: "Map",      component: MapScene,           index: MapSceneId },
+    { title: "Review",   component: ProductReviewScene, index: ProductReviewSceneId },
 ];
 
 class SearchTab extends Component {
