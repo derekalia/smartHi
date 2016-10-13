@@ -214,7 +214,7 @@ class ProductInfo extends Component {
                     <View style={{flex:1}}/>
                     <View style={{flex:1,backgroundColor:'white'}}>
                         <Text style={{fontSize:18,flex:5, margin:10,}}>{this.state.infoMessage}</Text>
-                        <HerbyButton2 style={{width:100,alignSelf:'center'}} name="Ok" onPress={()=>this._hideInfo()}/>
+                        <HerbyButton2 style={{width:100,alignSelf:'center'}} name="Dismiss" onPress={()=>this._hideInfo()}/>
                     </View>
                     <View style={{flex:1}}/>
                 </View>
