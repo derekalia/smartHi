@@ -31,7 +31,6 @@ class ProductInfo extends Component {
 
     render() {
         return (
-            <View>
             <ScrollView>
                 <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
                 {/* Overall rating */}
@@ -208,18 +207,17 @@ class ProductInfo extends Component {
                     </View>
                 </View>
                 <View style={{ height: 120, justifyContent: 'center' }}/>
-            </ScrollView>
-            <HerbyModal show={this.state.showInfo}>
-                <View style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}> 
-                    <View style={{flex:1}}/>
-                    <View style={{flex:1,backgroundColor:'white'}}>
-                        <Text style={{fontSize:18,flex:5, margin:10,}}>{this.state.infoMessage}</Text>
-                        <HerbyButton2 style={{width:100,alignSelf:'center'}} name="Dismiss" onPress={()=>this._hideInfo()}/>
+                <HerbyModal show={this.state.showInfo}>
+                    <View style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}> 
+                        <View style={{flex:1}}/>
+                        <View style={{flex:1,backgroundColor:'white'}}>
+                            <Text style={{fontSize:18,flex:5, margin:10,}}>{this.state.infoMessage}</Text>
+                            <HerbyButton2 style={{width:100,alignSelf:'center'}} name="Dismiss" onPress={()=>this._hideInfo()}/>
+                        </View>
+                        <View style={{flex:1}}/>
                     </View>
-                    <View style={{flex:1}}/>
-                </View>
-             </HerbyModal>
-            </View>
+                 </HerbyModal>
+            </ScrollView>
         );
     }
 }
