@@ -10,7 +10,7 @@ class HerbyModal extends Component {
     render() {
         return (
         <Modal
-            animationType={'slide'}
+            animationType={'fade'}
             transparent={true}
             visible={this.props.show}>
             {this.props.children}
