@@ -39,10 +39,12 @@ import UpdateProcessorScene from './scenes/updateProcessor/updateProcessorScene.
 import UpdateProductScene   from './scenes/updateProduct/updateProductScene.js';
 import UpdateLicenseeScene  from './scenes/updateLicensee/updateLicenseeScene.js';
 
+// Common scenes
 import ProductScene  from './scenes/product/productScene.js';
 import RetailerScene from './scenes/retailer/retailerScene.js';
 import ProducerScene from './scenes/producer/producerScene.js';
 import MapScene      from './scenes/map/mapScene.js';
+import ProductReviewScene from './scenes/productReview/productReviewScene.js';
 
 
 import {HerbyBar}           from '../common/controls.js';
@@ -61,6 +63,7 @@ const TabScenes = [
     { title: "Retailer",         component: RetailerScene,        index: RetailerSceneId },
     { title: "Producer",         component: ProducerScene,        index: ProducerSceneId },
     { title: "Map",              component: MapScene,             index: MapSceneId },
+    { title: "Review",           component: ProductReviewScene,   index: ProductReviewSceneId },
 ];
 
 class ProfileTab extends Component {
