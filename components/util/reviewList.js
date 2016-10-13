@@ -11,7 +11,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import {ReviewTabId} from '../../common/const.js';
-import {SwitchTabAction} from '../../actions';
+import {SwitchTabAction,GetProductReviewAction} from '../../actions';
 
 class ReviewItem extends Component {
     constructor(props) {
@@ -51,9 +51,11 @@ class ReviewItem extends Component {
 
                     </View>
                 </View>
+                <TouchableOpacity onPress={()=>this.props.goReview()}>
                 <Text style={{ fontSize: 14, marginTop: 8 }}>
                     {this.state.comment}
                 </Text>
+                </TouchableOpacity>
                 <View style={Styles.row}>
                     <Text style={{ fontSize: 13, marginTop: 8 }}>2 </Text>
                     <TouchableHighlight>
@@ -79,7 +81,9 @@ class ReviewList extends Component {
         //What happens with producers, retailers?
         this.props.SwitchTabAction(ReviewTabId);
     }
-
+    _goReview() {
+        this.props.GetProductReviewAction(1);
+    }
     render() {
         return (
            <View style={{ marginHorizontal: 10, marginTop: 0}}>
@@ -111,9 +115,9 @@ class ReviewList extends Component {
                             placeholder={' Say something'}
                             />
                     </View>
-                    <ReviewItem/>
-                    <ReviewItem/>
-                    <ReviewItem/>
+                    <ReviewItem goReview={()=>this._goReview()}/>
+                    <ReviewItem goReview={()=>this._goReview()}/>
+                    <ReviewItem goReview={()=>this._goReview()}/>
                     {/* <View style={{flex:1}}>
                     <TouchableOpacity style={{  margin: 4, marginTop:20,
                       borderRadius: 10,
@@ -135,9 +139,9 @@ class ReviewList extends Component {
 }
 
 //
-// Connect SwitchTabAction to props
+// Connect SwitchTabAction,GetProductReviewAction to props
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ SwitchTabAction }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ SwitchTabAction,GetProductReviewAction, }, dispatch); }
 
 module.exports = connect(null,mapActionToProps)(ReviewList);
 

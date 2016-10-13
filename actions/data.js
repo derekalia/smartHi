@@ -447,17 +447,23 @@ export function GetProductItem(pid) {
     return null;
 }
 
-export function GetProductReview(pid,userId) {
+export function GetProductReview(reviewId) {
     // returns a review item...
-    return ({
-        rating: 4,
-        quality: 3,
-        potency: 5,
-        flavor:4,
-        symptom:['cramps','headaches','pain'],
-        activity:['social','exercise','work'],
-        effect:[{name:'energetic',strength:90},{name:'giggly',strength:50},{name:'relaxed',strength:60}],
-        comment:'I felt like it had strong effect and enjoyed the overall experience',
+    return (
+    {
+        // This is the full review
+        review: {
+            rating: 4,
+            quality: 3,
+            potency: 5,
+            flavor:4,
+            symptom:['cramps','headaches','pain'],
+            activity:['social','exercise','work'],
+            effect:[{name:'energetic',strength:90},{name:'giggly',strength:50},{name:'relaxed',strength:60}],
+            comment:'I felt like it had strong effect and enjoyed the overall experience',
+        },
+        product: TestProducts[0],
+        user: TestUsers[0],
     });
 }
 

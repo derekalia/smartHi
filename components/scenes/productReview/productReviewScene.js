@@ -9,12 +9,13 @@ import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {RateProductAction,} from '../actions';
+import {RateProductAction,GetProductAction,GetProfileAction,} from '../../../actions';
 import StarRating from 'react-native-star-rating';
 
-import FilterItem   from './filterItem.js';
-import ProductItem   from './productItem.js';
-import {FiltersActivity, FiltersEffect, FiltersType,FiltersCategory,FiltersSymptoms} from '../common/filters.js';
+import FilterItem   from '../../util/filterItem.js';
+import ProductItem   from '../../util/productItem.js';
+import {HerbyBar} from '../../../common/controls.js';
+import {FiltersActivity, FiltersEffect, FiltersType,FiltersCategory,FiltersSymptoms} from '../../../common/filters.js';
 
 class ProductReviewScene extends Component {
     constructor(props) {
@@ -40,12 +41,17 @@ class ProductReviewScene extends Component {
             this._activity.push({name:name,type:'activity',selected:true});
         }
     }
-
+    _getUser() {
+        //BatsFix. add call to GetUserActionProfile here
+        this.props.GetProfileAction(1);
+    }
     render() {
         return (
+        <View style={{flex:1}}>
+        <HerbyBar name="Review Details"  navigator={this.props.navigator}/>
         <ScrollView style={{flex:1, backgroundColor:'white',marginBottom:50}}>
             <View style={{ flex: 1 }}>
-                <ProductItem product = {this.props.item.product}/>
+                <ProductItem product = {this.props.item.product} goProduct={(t)=>this.props.GetProductAction(t)}/>
 
                 {this._renderCommentBox()}
 
@@ -57,6 +63,7 @@ class ProductReviewScene extends Component {
 
             </View>
         </ScrollView>
+        </View>
         );
     }
 
@@ -127,8 +134,8 @@ class ProductReviewScene extends Component {
     _renderCommentBox() {
         return (
         <View style={{ marginHorizontal: 10, marginTop: 15, marginBottom:10,flexDirection:'row' }}>
-            <TouchableOpacity style={{flex:.25}} onPress={()=>this.props.getUser(this.props.user.id)}>
-                <Image style={{height:60,width:60}} source={require('../media/headshot1.png') }/>
+            <TouchableOpacity style={{flex:.25}} onPress={()=>this._getUser()}>
+                <Image style={{height:60,width:60}} source={require('../../../media/headshot1.png') }/>
             </TouchableOpacity>
             <View style={{ borderWidth: 0, margin: 2,flex:1,backgroundColor:'transparent'}}>
                 <Text>{this.state.review.comment}</Text>
@@ -204,7 +211,7 @@ class ProductReviewScene extends Component {
 
 // Connect to RateProductAction.
 
-function mapActionToProps(dispatch) { return bindActionCreators({ RateProductAction, }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ RateProductAction,GetProductAction,GetProfileAction, }, dispatch); }
 
 module.exports = connect(null, mapActionToProps)(ProductReviewScene);
 
