@@ -8,16 +8,32 @@ import StarRating from 'react-native-star-rating';
 
 //get internal components
 import ProducerItem from '../../util/producerItem.js';
+import {HerbyButton2,} from '../../../common/controls.js';
+import HerbyModal from '../../util/herbyModal.js';
 
 class ProductInfo extends Component {
     constructor(props) {
         super(props);
+        this.state = {showInfo: false,infoMessage:""};
     }
+    _showInfo(itemName) {
+        var infoMessage = "no info";
+        switch(itemName) {
+            case 'rosin':  infoMessage = "rosin is something i have no idea of"; break;
+            case 'sativa': infoMessage = "sorry, the same here, no information whatsoever"; break;
+        }
+        console.log("showing info now");
+        this.setState({showInfo:true,infoMessage:infoMessage});
+    }
+    _hideInfo() {
+        this.setState({showInfo:false,infoMessage:""});
+    }
+
     render() {
         return (
+            <View>
             <ScrollView>
-            <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
-
+                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
                 {/* Overall rating */}
                 <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
                     <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.props.product.name}</Text>
@@ -35,10 +51,10 @@ class ProductInfo extends Component {
                         <Text style={{ fontSize: 20,marginTop:1 }}> ({this.props.product.ratingCount}) </Text>
                     </View>
                     <View style={{flex:1,flexDirection: "row",justifyContent:'flex-end' }}>
-                      <TouchableOpacity style={Styles.tagCategory}>
+                      <TouchableOpacity style={Styles.tagCategory} onPress={()=>this._showInfo('rosin')}>
                           <Text style={Styles.tagTextCategory}>rosin</Text>
                       </TouchableOpacity>
-                      <TouchableOpacity style={Styles.tagType}>
+                      <TouchableOpacity style={Styles.tagType} onPress={()=>this._showInfo('sativa')}>
                           <Text style={Styles.tagTextType}>sativa</Text>
                       </TouchableOpacity>
                     </View>
@@ -121,7 +137,6 @@ class ProductInfo extends Component {
                         </View>
                     </View>
                 </View>
-
                 <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                     <View style={{ height: 40, justifyContent: 'center' }}>
                         <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Effects</Text>
@@ -168,7 +183,6 @@ class ProductInfo extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-
                 <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                     <View style={{ height: 40, justifyContent: 'center' }}>
                         <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Symptoms</Text>
@@ -185,7 +199,6 @@ class ProductInfo extends Component {
                         </TouchableOpacity>
                     </View>
                 </View>
-
                 <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                     <View style={{ height: 40, justifyContent: 'center' }}>
                         <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Producer</Text>
@@ -194,15 +207,19 @@ class ProductInfo extends Component {
                       <ProducerItem producer={this.props.product.producer} goProducer={(t) => this.props.goProducer(t)}/>
                     </View>
                 </View>
-
-
-
-                    <View style={{ height: 120, justifyContent: 'center' }}/>
-
-
-
-
+                <View style={{ height: 120, justifyContent: 'center' }}/>
             </ScrollView>
+            <HerbyModal show={this.state.showInfo}>
+                <View style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}> 
+                    <View style={{flex:1}}/>
+                    <View style={{flex:1,backgroundColor:'white'}}>
+                        <Text style={{fontSize:18,flex:5, margin:10,}}>{this.state.infoMessage}</Text>
+                        <HerbyButton2 style={{width:100,alignSelf:'center'}} name="Ok" onPress={()=>this._hideInfo()}/>
+                    </View>
+                    <View style={{flex:1}}/>
+                </View>
+             </HerbyModal>
+            </View>
         );
     }
 }

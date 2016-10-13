@@ -350,7 +350,7 @@ export class HerbyButton2 extends Component {
     }
     render() {
         return(
-            <TouchableOpacity style={HerbyButton2Styles.button} onPress={() => this._onPress()}>
+            <TouchableOpacity style={[HerbyButton2Styles.button,this.props.style]} onPress={() => this._onPress()}>
                 <Text style={HerbyButton2Styles.buttonText}>{this.props.name}</Text>
             </TouchableOpacity>
         );
