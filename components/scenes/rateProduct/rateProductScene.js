@@ -9,13 +9,14 @@ import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {HerbyBar}         from '../../../common/controls.js';
+import {HerbyBar,HerbyButton2,}         from '../../../common/controls.js';
 
 import {GetRetailerAction,GetProducerAction,RateProductAction,} from '../../../actions';
 import StarRating from 'react-native-star-rating';
 import ReviewList   from '../../util/reviewList.js';
 import FilterItem   from '../../util/filterItem.js';
 
+import HerbyModal from '../../util/herbyModal.js';
 import {FiltersActivity, FiltersEffect, FiltersType,FiltersCategory,FiltersSymptoms} from '../../../common/filters.js';
 
 
@@ -25,6 +26,7 @@ class RateProductScene extends Component {
         // these should come from the app state.
         this.state = this.props.product;
         this.state.showSlider = false;
+        this._selectedFilterIndex = 0;
         this._effect   = FiltersEffect;
         this._symptom  = FiltersSymptoms;
         this._activity = FiltersActivity;
@@ -60,6 +62,20 @@ class RateProductScene extends Component {
 
                 </View>
             </ScrollView>
+            <HerbyModal show={this.state.showSlider}>
+                <View style={{flex:1,backgroundColor:'rgba(100,100,100,0.5)',}}>
+                    <View style={{flex:2}}/>
+                    <View style={{flex:1,backgroundColor:'rgba(255,255,255,1.0)',margin:15}}>
+                        <HerbyButton2 name={this._effect[this._selectedFilterIndex].name}/>
+                        <View style={{flexDirection:'row',}}>
+                            <Text style={{color:'black',fontSize:12,fontWeight:'bold',position:'absolute',left:10,}} >Low</Text>
+                            <Text style={{color:'black',fontSize:12,fontWeight:'bold',position:'absolute',right:10,}}>High</Text>
+                        </View>
+                        <Slider maximumValue={100} minimumValue={10} value={50} style={{flex:1}} onSlidingComplete={(t)=> this._setEffectValue(t)}/>
+                    </View>
+                    <View style={{flex:2}}/>
+                </View>
+            </HerbyModal>
         </View>
         );
     }
@@ -230,22 +246,7 @@ class RateProductScene extends Component {
     //
 
     _renderEffectFilters() {
-        if (this.state.showSlider) {
-            return (
-            <View style={{flexDirection:'row'}}>
-              <View style={{backgroundColor:"#4A90E2",justifyContent:'center',borderRadius:20,marginRight:10}}>
-                <Text style={{margin:4,marginHorizontal:15,color:'white',fontSize:16}}>{this._effect[this._selectedFilterIndex].name}</Text>
-              </View>
-              <View style={{flex:1}}>
-                <Slider maximumValue={100} minimumValue={10} value={50} style={{flex:1}} onSlidingComplete={(t)=> this._setEffectValue(t)}/>
-              </View>
-              <View style={{justifyContent:'center'}}>
-                <Text style={{color:'black',fontSize:16}}>  very intense</Text>
-              </View>
-            </View>
-            );
-        }
-        else {
+        {
             return (
             <ScrollView horizontal={true} style={{flex:1}}>
                 {this._renderFiltersArray(this._effect)}
