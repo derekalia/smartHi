@@ -59,7 +59,9 @@ class UserFavorites extends Component {
         else
         if (this.state.frameId == 2) {
             return (
+              <View style={{marginTop:10}}>
                 <ProducerList producerList={this.props.user.producers} goProducer={this.props.goProducer}/>
+              </View>
             )
         }
     }
