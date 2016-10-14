@@ -19,7 +19,7 @@ class ProductInfo extends Component {
     _showInfo(itemName) {
         var infoMessage = "no info";
         switch(itemName) {
-            case 'rosin':  infoMessage = "rosin is something i have no idea of"; break;
+            case 'rosin':  infoMessage = "Rosin is a solventless extraction method using heat an pressure. Rosin offers full spectrum of flavor and potiency from plant material."; break;
             case 'sativa': infoMessage = "sorry, the same here, no information whatsoever"; break;
         }
         console.log("showing info now");
@@ -207,16 +207,35 @@ class ProductInfo extends Component {
                     </View>
                 </View>
                 <View style={{ height: 120, justifyContent: 'center' }}/>
-                <HerbyModal show={this.state.showInfo}>
-                    <View style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'transparent'}}> 
+
+                <View style={{marginTop:20}}>
+                <HerbyModal  show={this.state.showInfo}>
+                    <View style={{flex:1,alignItems:'center',backgroundColor:'rgba(0, 0, 0, 0.5)'}}>
                         <View style={{flex:1}}/>
-                        <View style={{flex:1,backgroundColor:'white'}}>
-                            <Text style={{fontSize:18,flex:5, margin:10,}}>{this.state.infoMessage}</Text>
-                            <HerbyButton2 style={{width:100,alignSelf:'center'}} name="Dismiss" onPress={()=>this._hideInfo()}/>
+                        <View style={{flex:1.2,backgroundColor:'white',borderRadius:10,width:320}}>
+
+                            <View style={{flex:.8,marginTop:20}}><TouchableOpacity style={[Styles.tagCategory,{width:100,alignSelf:'center'}]}>
+                              <Text style={Styles.tagTextCategory}>rosin</Text>
+                            </TouchableOpacity>
+                            </View>
+                            <View style={{flex:1,width:300,marginTop:10,alignSelf:'center'}}>
+                              <Text style={{alignSelf:'center',fontSize:16,}}>{this.state.infoMessage}</Text>
+                            </View>
+
+                            <View style={{flex:1,flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:10}}>
+                              <TouchableOpacity style={{width:100,alignSelf:'center',borderRadius:4,width:100,height:42,backgroundColor:'white',borderColor:'black',borderWidth:1,justifyContent:'center'}} onPress={()=>this._hideInfo()}>
+                                <Text style={{fontSize:16,justifyContent:'center',alignSelf:'center'}}>Done</Text>
+                              </TouchableOpacity>
+                              <TouchableOpacity style={{marginLeft:30,width:100,alignSelf:'center',borderRadius:4,width:100,height:42,backgroundColor:'white',borderColor:'#4A90E2',borderWidth:1,justifyContent:'center',backgroundColor:'#4A90E2'}} onPress={()=>this._hideInfo()}>
+                                <Text style={{fontSize:16,justifyContent:'center',alignSelf:'center',color:'white'}}>Search</Text>
+                              </TouchableOpacity>
+                            </View>
                         </View>
                         <View style={{flex:1}}/>
                     </View>
                  </HerbyModal>
+                 </View>
+
             </ScrollView>
         );
     }
