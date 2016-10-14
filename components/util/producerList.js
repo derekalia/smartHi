@@ -16,7 +16,7 @@ import ProducerItem from './producerItem.js';
 class ProducerList extends Component {
     render() {
         return (
-            <View style={{marginTop:10}}>
+            <View style={{marginTop:10,justifyContent:'center'}}>
                 {this._renderProducers()}
             </View>
         );

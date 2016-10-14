@@ -2,8 +2,8 @@
 // Description: testscene.js
 // Used for testing various UI components
 //
-import React, { Component } from 'react';
-import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator, TouchableHighlight,} from 'react-native'
+import React, { Component, PropTypes } from 'react';
+import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableOpacity, Navigator, TouchableHighlight,requireNativeComponent, NativeModules, DeviceEventEmitter} from 'react-native'
 //get state management components
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';

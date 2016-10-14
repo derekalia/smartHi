@@ -1,3 +1,7 @@
+# OSX
+#
+.DS_Store
+
 # Xcode
 #
 build/
@@ -35,25 +39,3 @@ buck-out/
 \.buckd/
 android/app/libs
 android/keystores/debug.keystore
-
-#Android
-android/app/build/
-
-# VSCode
-.vscode/
-tsconfig.json
-
-# iOS Build files
-ios/build/
-
-# Node.js modules
-node_modules/
-
-
-# Macintosh bullshit files
-.DS_Store
-*/.DS_Store
-
-# Xcode files
-ios/*.xcodeproj/project.xcworkspace/
-ios/*.xcodeproj/xcuserdata/
