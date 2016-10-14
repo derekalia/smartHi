@@ -56,10 +56,8 @@ export default function NewsReducer(state, action) {
             // BatsFix. Because server data fields mismatch, only update the name
             // for now.
             newState = Object.assign({}, state);
-            newState.staffPick = Object.assign({}, newState.staffPick);
-            newState.staffPick.name = action.staffPick.Title;
-            newState.trending = Object.assign({}, newState.trending);
-            newState.trending.name = action.trending.Title;
+            newState.staffPick = Object.assign({}, action.staffPick);
+            newState.trending = Object.assign({}, action.trending);
 
             return newState;
 

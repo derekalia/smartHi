@@ -73,6 +73,7 @@ const TestProducers = [
     description:'Wide wide world',
     rating: 4,
     ratingCount: 200,
+    rid:['0','1','4','5'], //Producer 0 is a special case and used to test producer login
     follower:['0','1','2'],
     following:['0','3','4'],
     pid:['4','5'],},
@@ -82,6 +83,7 @@ const TestProducers = [
     description:'All around best producer',
     rating: 2,
     ratingCount: 300,
+    rid:['0','1','4','5'], //Producer 0 is a special case and used to test producer login
     follower:['0','1','2'],
     following:['0','3','4'],
     pid:['6','7','8','9','10'],},
@@ -91,6 +93,7 @@ const TestProducers = [
     ratingCount: 400,
     description:'South Beach one of a kind',
     name:'South Beach',
+    rid:['0','1','4','5'], //Producer 0 is a special case and used to test producer login
     follower:['0','1','2'],
     following:['0','3','4'],
     pid:['11','12','13'],},
@@ -560,64 +563,186 @@ export function SearchProducts(searchTerm) {
     return products;
 }
 
+/*
+UID: Int
+Title: String
+ProductType: ProductType
+DominantSpecies: ProductSpecies
+Description: String
+Strain: String
+InventoryIDs: [Int]
+ImageURLs: [String]
+PriceEntries: [PriceObject]
+    UID: Int
+    Product: Product
+    RetailStore: RetailStore
+        UID: Int
+        Title: String
+        PriceEntries: [PriceObject]
+    Price: Float
+    Unit: UnitType
+Producer: Producer
+    UID: Int
+    Title: String
+    Description: String
+    ImageURLs: [String]
+    Products: [Product]
+*/
+
+function CreateProducerItem(data) {
+    var producer = {...TestProducers[0]};
+    producer.id =  data.UID;
+    producer.name = data.Title;
+    producer.description = data.Description;
+    producer.images = data.ImageURLs;
+    return producer;
+}
+/*
+const TestProducts = [
+{   id:'0',
+    name:'FORGED - XJ-13',
+    description:'FORGED Rosin Is our process of extracting oils from cannabis. We use very low temperatures to reduce the terpene evaporation which is critical to the experience of our product.',
+    price: 39.99,
+    rating: 3.5,
+    ratingCount: 323,
+    quality: 3,
+    flavor: 4,
+    potency:5,
+    thc: 30,
+    cbd: 35,
+    thca: 55,
+    rid:['0','1','2','3'],
+    pid:'0',
+    symptom:['cramps','headaches','pain'],
+    activity:['social','exercise','work'],
+    effect:[{name:'energetic',strength:190},{name:'giggly',strength:50},{name:'relaxed',strength:60}]},
+*/
+
+function CreateRetailerItems(priceEntries) {
+    // BatsFix. Missing items are
+    // 1. retail store image.
+    // 2. retail store rating
+    // 3. retail store ratingCount
+    // 4. retail store address
+    var retailerItems = [];
+    if (priceEntries != null) {
+        for (var i=0; i < priceEntries.length; i++) {
+             var retailer = {...TestRetailers[0]};
+             retailer.id   = priceEntries[i].RetailStore.UID;
+             retailer.name = priceEntries[i].RetailStore.Title;
+             retailer.price = priceEntries[i].Price;
+             retailerItems.push(retailer);
+        }
+    }
+    return retailerItems;
+}
+
+function CreateRetailer(data) {
+    //BatsFix. Missing items are
+    // 1. retail store image.
+    // 2. retail store description
+    // 3. retail store rating
+    // 4. retail store ratingCount
+    // 5. retail store address
+    var retailer = {...TestRetailers[0]};
+    retailer.id   = data.UID;
+    retailer.name = data.Title;
+    return retailer; 
+}
+
+function CreateProduct(data) {
+    // BatsFix. Missing items are
+    // 1. rating
+    // 2. ratingCount
+    // 3. quality
+    // 4. flavor
+    // 5. potency
+    // 6. thc, cbd, thca
+    // 7. symptom, activity, effect
+    var product = {...TestProducts[0]};
+    console.log("UID of product is " + data.UID);
+    product.id =  data.UID;
+    product.name = data.Title;
+    product.strain = data.Strain;
+    product.productType = data.ProductType;
+    product.dominantSpecies = data.DominantSpecies;
+    product.description = data.Description;
+    product.images = data.ImageURLs;
+    return product;
+}
+
+function CreateRelatedProducts(data) {
+    var products = [];
+    for (var i=0; i < data.length; i++) {
+         var product = CreateProduct(data[i]);
+         products.push(product);
+    }
+    return products;
+}
+
 export  async function GetLatestNews() {
     var queryValue = "{Products{UID,Title}}";
     var data =  await FetchData(queryValue);
-    for(var key in data) {
-        console.log("key " + key);
-    }
-    return {staffPick:data.Products[0],trending:data.Products[1]};
+
+    var staffPick = CreateProduct(data.Products[0]);
+    var trending  = CreateProduct(data.Products[1]);
+    return {staffPick:staffPick,trending:trending};
 }
 
 export async function GetProduct(id) {
     var product = null;
-    //BatsFix. For now faking this 
-    fakeId = 1;
-    var queryProduct = `{Products(id:${fakeId}){UID,Title,ImageURLs,ProductType,Description}}`; 
-    for (var i=0; i < TestProducts.length; i++) {
-        if (TestProducts[i].id == id) {
-            product = TestProducts[i];
-            product.retailers = GetRetailerItems(product.rid);
-            product.producer  = GetProducerItem(product.pid);
-            product.related   = GetRelatedProducts(product.pid);
-            var item = {...product};
-            return item;
-        }
-    }
-    return null;
+    var queryProduct = 
+    `{Products(id:${id}){UID,Title,ImageURLs,Strain,Description,PriceEntries{UID,Price,RetailStore{UID,Title}},Producer{UID,Title,Description,ImageURLs}}}`;
+    // Fetch data from server
+    var data = await FetchData(queryProduct);
+
+    var productData = data.Products[0];
+    var product       = CreateProduct(productData);
+    product.retailers = CreateRetailerItems(productData.PriceEntries);
+    product.producer  = CreateProducerItem(productData.Producer);
+
+    //
+    // BatsFix. Related products not present on server yet. so
+    // use all products.
+    //
+    var queryRelatedProducts = 
+    '{Products{UID,Title,ImageURLs,Strain,Description}}';
+    data = await FetchData(queryRelatedProducts);
+    product.related   = CreateRelatedProducts(data.Products);
+    
+    //product.related = GetRelatedProducts(product.id);
+    return product;
 }
 
 export async function GetRetailer(id) {
-    var retailer = null;
-    //BatsFix. For now faking this
-    fakeId=1;
-    var queryRetailer = `{RetailStores(id:${fakeId}){UID,Title}}`;
+    // BatsFix. It is missing
+    // 1. PriceEntries are missing product information. It only returns UID and Price.
+    // 2. PriceEntries query does not work
+    // 3. Address attribute missing
+    // 4. rating
+    // 5. ratingCount
+    // 6. description
+    // 7. follower,
+    // 8. following
+    var queryRetailer = `{RetailStores(id:${id},count:1){UID,Title,PriceEntries{UID,Price}}}`;
 
     var data = await FetchData(queryRetailer);
+   
+    var retailer = CreateRetailer(data.RetailStores[0]);
 
-    console.log("retailer" + data.RetailStores[0].Title);
-
-    for (var i=0; i < TestRetailers.length; i++) {
-        if (TestRetailers[i].id == id) {
-           retailer = TestRetailers[i];
-           retailer.products  = GetProductItems(retailer.pid);
-           retailer.follower  = GetUserItems(retailer.follower);
-           retailer.following = GetUserItems(retailer.following);
-           var item = {...retailer};
-           return item;
-        }
-    }
-    return null;
+    retailer.products  = GetProductItems(retailer.pid);
+    retailer.follower  = GetUserItems(retailer.follower);
+    retailer.following = GetUserItems(retailer.following);
+    return retailer;
 }
 
 export async function GetProducer(id,fullInfo) {
     var producer = null;
-    //BatsFix. For now faking this
-    fakeId = 1;
     //Producers dont have title!!!!BatsFix
     var queryProducer = `{Producers(id:${fakeId}){UID,Title,Description,ImageURLs}}`;
     var data = await FetchData(queryProducer);
     console.log("producer"+data.Producers[0].ImageURLs);
+    console.log("producer id ["+id + "]");
 
     for (var i=0; i < TestProducers.length; i++) {
         if (TestProducers[i].id == id) {
