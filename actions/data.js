@@ -528,7 +528,7 @@ async function FetchData(queryValue) {
      return response.data;
 }
 
-export function SearchUsers(searchTerm) {
+export async function SearchUsers(searchTerm) {
     var users = [];
     for (var i=0; i < TestUsers.length; i++) {
          users.push(TestUsers[i]);
@@ -536,7 +536,7 @@ export function SearchUsers(searchTerm) {
     return users;
 }
 
-export function SearchProducers(searchTerm) {
+export async function SearchProducers(searchTerm) {
     // BatsFix. use the term later!
     var producers = [];
     for (var i=0; i < TestProducers.length; i++) {
@@ -545,7 +545,7 @@ export function SearchProducers(searchTerm) {
     return producers;
 }
 
-export function SearchRetailers(searchTerm) {
+export async function SearchRetailers(searchTerm) {
     // BatsFix. use the term later!
     var retailers = [];
     for (var i=0; i < TestRetailers.length; i++) {
@@ -554,7 +554,8 @@ export function SearchRetailers(searchTerm) {
     return retailers;
 }
 
-export function SearchProducts(searchTerm) {
+/*
+export async function SearchProducts(searchTerm) {
     // BatsFix. use the term later!
     var products = [];
     for (var i=0; i < TestProducts.length; i++) {
@@ -562,32 +563,19 @@ export function SearchProducts(searchTerm) {
     }
     return products;
 }
-
-/*
-UID: Int
-Title: String
-ProductType: ProductType
-DominantSpecies: ProductSpecies
-Description: String
-Strain: String
-InventoryIDs: [Int]
-ImageURLs: [String]
-PriceEntries: [PriceObject]
-    UID: Int
-    Product: Product
-    RetailStore: RetailStore
-        UID: Int
-        Title: String
-        PriceEntries: [PriceObject]
-    Price: Float
-    Unit: UnitType
-Producer: Producer
-    UID: Int
-    Title: String
-    Description: String
-    ImageURLs: [String]
-    Products: [Product]
 */
+
+export async function SearchProducts(searchTerm) {
+    // BatsFix. use the term later!
+    var queryProduct = '{Products{UID,Title,ImageURLs,ProductType,DominantSpecies}}';
+    var data =  await FetchData(queryProduct);
+    var products = [];
+    for (var i=0; i < data.Products.length; i++) {
+        var product = CreateProductItem(data.Products[i]);
+        products.push(product);
+    }
+    return products;
+}
 
 function CreateProducerItem(data) {
     var producer = {...TestProducers[0]};
@@ -597,26 +585,6 @@ function CreateProducerItem(data) {
     producer.images = data.ImageURLs;
     return producer;
 }
-/*
-const TestProducts = [
-{   id:'0',
-    name:'FORGED - XJ-13',
-    description:'FORGED Rosin Is our process of extracting oils from cannabis. We use very low temperatures to reduce the terpene evaporation which is critical to the experience of our product.',
-    price: 39.99,
-    rating: 3.5,
-    ratingCount: 323,
-    quality: 3,
-    flavor: 4,
-    potency:5,
-    thc: 30,
-    cbd: 35,
-    thca: 55,
-    rid:['0','1','2','3'],
-    pid:'0',
-    symptom:['cramps','headaches','pain'],
-    activity:['social','exercise','work'],
-    effect:[{name:'energetic',strength:190},{name:'giggly',strength:50},{name:'relaxed',strength:60}]},
-*/
 
 function CreateRetailerItems(priceEntries) {
     // BatsFix. Missing items are
@@ -648,6 +616,18 @@ function CreateRetailer(data) {
     retailer.id   = data.UID;
     retailer.name = data.Title;
     return retailer; 
+}
+
+function CreateProductItem(data) {
+    // BatsFix. Missing items are
+    // 1. rating
+    // 2. ratingCount
+    var product = {...TestProducts[0]};
+    console.log("UID of product is " + data.UID);
+    product.id =  data.UID;
+    product.name = data.Title;
+    product.images = data.ImageURLs;
+    return product;
 }
 
 function CreateProduct(data) {
