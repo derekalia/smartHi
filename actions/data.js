@@ -691,6 +691,8 @@ export  async function GetLatestNews() {
 
 export async function GetProduct(id) {
     var product = null;
+    // BatsFix. Temporary workaround the problem where productlist is out of sync
+    if (id == 0) {id = 1;}
     var queryProduct = 
     `{Products(id:${id}){UID,Title,ImageURLs,Strain,Description,PriceEntries{UID,Price,RetailStore{UID,Title}},Producer{UID,Title,Description,ImageURLs}}}`;
     // Fetch data from server
