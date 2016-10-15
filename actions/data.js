@@ -739,6 +739,7 @@ export async function GetRetailer(id) {
 export async function GetProducer(id,fullInfo) {
     var producer = null;
     //Producers dont have title!!!!BatsFix
+    var fakeId = 1;
     var queryProducer = `{Producers(id:${fakeId}){UID,Title,Description,ImageURLs}}`;
     var data = await FetchData(queryProducer);
     console.log("producer"+data.Producers[0].ImageURLs);

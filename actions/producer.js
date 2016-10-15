@@ -50,7 +50,7 @@ export function ProducerLoginAction(name,password) {
         NotifyBusy(dispatch);
         try {
             //BatsFix. For now assume producer login always succeeds
-            var producerId ='0';
+            var producerId ='1';
 
             // Pass true to get full info on a producer.
             var producer = await GetProducer(producerId,true);

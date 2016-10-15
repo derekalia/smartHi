@@ -12,6 +12,7 @@ import {SwitchSceneAction, GetProductAction, ResetPasswordAction,ProducerLoginAc
 import {LicenseeSceneId,ProcessorSceneId} from '../../../common/const.js';
 import {HerbyBar,HerbyButton,HerbyButton2,HerbyHeader,HerbyInput,HerbyAlert} from '../../../common/controls.js';
 import HerbyModal from '../../util/herbyModal.js';
+import HerbyNotification from '../../util/herbyNotification.js';
 
 class SettingsScene extends Component {
     constructor(props) {
@@ -103,6 +104,7 @@ class SettingsScene extends Component {
                             <HerbyButton2 name="Continue" onPress={()=>this._producerLogin()}/>
                             <HerbyButton2 name="Cancel" onPress={()=>this._showProducerLogin(false)}/>
                         </View>
+                        <HerbyNotification/>
                     </View>
                 </HerbyModal>
                 <HerbyModal show={this.state.showLicenseeLogin}>
@@ -115,6 +117,7 @@ class SettingsScene extends Component {
                             <HerbyButton2 name="Continue" onPress={()=>this._licenseeLogin()}/>
                             <HerbyButton2 name="Cancel" onPress={()=>this._showLicenseeLogin(false)}/>
                         </View>
+                        <HerbyNotification/>
                     </View>
                 </HerbyModal>
             </View>

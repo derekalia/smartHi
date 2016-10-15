@@ -36,7 +36,7 @@ export function LicenseeLoginAction(name,password) {
         NotifyBusy(dispatch);
         try {
             //BatsFix. For now assume producer login always succeeds
-            var retailerId = '0';
+            var retailerId = '1';
            
             // Pass true to get full info on a retailer.
             var retailer = await GetRetailer(retailerId,true);
