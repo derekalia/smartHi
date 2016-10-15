@@ -18,7 +18,11 @@ class RetailerFrame extends Component {
         super(props);
         this.state = {showFilters:true};
     }
-
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.hideFilters == true) {
+            this.setState({showFilters:false});
+        }
+    }
     _goRetailer(retailerId) {
         //
         // Go to product page
@@ -65,6 +69,7 @@ class RetailerFrame extends Component {
             </View>
             {this._renderFilters()}
             {/*Search results section*/}
+            <View style={{marginBottom:30}}/>
             <RetailerList retailerList={this.props.retailerList} goRetailer={(id)=> this._goRetailer(id)}/>
         </View>
         );

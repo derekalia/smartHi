@@ -40,3 +40,8 @@ export const FilterEffect     = 'Effect';
 export const FilterCategory   = 'Category';
 export const FilterSymptom    = 'Symptom';
 export const FilterType       = 'Type';
+
+export const ProductFrameId   = 'Products';
+export const MapFrameId       = 'Maps';
+export const RetailerFrameId  = 'Retailers';
+export const UserFrameId      = 'Users';

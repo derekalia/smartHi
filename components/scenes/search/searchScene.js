@@ -10,6 +10,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 //get internal components
+import {ProductFrameId,RetailerFrameId,MapFrameId,UserFrameId} from '../../../common/const.js';
 import {HerbyBar,HerbyFrameBar,HerbyButton2,} from '../../../common/controls.js';
 import FilterList from '../../util/filterList.js';
 
@@ -32,10 +33,10 @@ const UserId      = 2;
 const RetailerId  = 3;
 
 const SearchFrames = [
-    { component: ProductFrame,  type: ProductSearch,  },
-    { component: RetailerFrame, type: RetailerSearch  },
-    { component: MapFrame,      type: MapSearch,      },
-    { component: UserFrame,     type: UserSearch,     },
+    { component: ProductFrame,  type: ProductFrameId,  },
+    { component: RetailerFrame, type: RetailerFrameId, },
+    { component: MapFrame,      type: MapFrameId,      },
+    { component: UserFrame,     type: UserFrameId,     },
 ];
 
 
@@ -44,13 +45,13 @@ class SearchScene extends Component {
         super(props);
         this._searchTerm = "";
         this._attributes = [];
-        this.state = { frameId: ProductId,showFiltersModal:false };
+        this.state = { frameId: ProductId,showFiltersModal:false, showFilters:true };
     }
 
     renderScene(route, navigator) {
         return (
             <ScrollView style={{flex:1,}}>
-                <route.component addRemoveFilter={navigator.props.addRemoveFilter}/>
+                <route.component addRemoveFilter={navigator.props.addRemoveFilter} showFilters={navigator.showFilters}/>
             </ScrollView>
         );
     }
@@ -65,6 +66,7 @@ class SearchScene extends Component {
     }
 
     _startSearch() {
+        this.setState({showFilters:false});
         this.props.StartSearchAction(this._searchTerm, this._attributes, SearchFrames[this.state.frameId].type );
     }
 
@@ -87,6 +89,7 @@ class SearchScene extends Component {
                     <View style={[{ flex: 5,}]}>
                       <View style={{height: 34,borderWidth:3,borderColor:'#ECECEC',borderRadius:8,backgroundColor: '#ECECEC',}}>
                         <TextInput style={{marginHorizontal:10,height:28, fontSize:20, backgroundColor: '#ECECEC',}}
+                                   onEndEditing={()=>this._startSearch()}
                                    autoCorrect={false} placeholder='Search' returnKeyType='search' onChangeText={(t)=> this._setSearchTerm(t)} clearButtonMode='always'/>
                       </View>
                     </View>
@@ -101,6 +104,7 @@ class SearchScene extends Component {
                     renderScene={this.renderScene}
                     initialRoute = {SearchFrames[ProductId]}
                     initialRouteStack = {SearchFrames}
+                    showFilters = {this.state.showFilters}
                     addRemoveFilter={(t) => this._addRemoveFilter(t) }
                     />
                 <Modal animationType={'slide'} transparent={true} visible={this.state.showFiltersModal}>

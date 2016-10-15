@@ -1,6 +1,24 @@
 import React, { Component } from 'react';
 import {Picker,Modal,ScrollView, Animated, Dimensions, StyleSheet, Text, View, Slider, Image, TextInput, TouchableHighlight, TouchableOpacity,} from 'react-native'
 
+export class HerbyRange extends Component {
+    render() {
+        return (
+            <View style={{margin:10}}>
+                <Text style={{justifyContent:'flex-start',fontSize:14, fontWeight:'bold',marginTop:10,marginBottom:10}}>{this.props.label}</Text>
+                <View style={{right:0,justifyContent:'flex-start',flexDirection:'row',alignItems:'center'}}>
+                    <View style={{borderWidth:1,borderColor:'lightgray',width:60,height:30,borderRadius:0}}>
+                        <TextInput style={{flex:1,marginLeft:3}}/>
+                    </View>
+                    <Text style={{marginHorizontal:10,fontSize:16}}> to </Text>
+                    <View style={{borderWidth:1,borderColor:'lightgray',width:60,height:30,borderRadius:0}}>
+                        <TextInput style={{flex:1,marginLeft:3}}/>
+                    </View>
+                </View>
+            </View>
+        );
+    }
+}
 class HerbyMultiItem extends Component {
     render() {
         var borderColor = '#DEDEDE';
