@@ -55,9 +55,8 @@ class SearchTab extends Component {
             this.refs.navigator.popToTop();
             return;
         }
-        // Otherwise it is a scene change.
-        var sceneId = nextProps.sceneId;
 
+        // Otherwise it is a scene change.
         for(var i=0; i < TabScenes.length; i++) {
              if (TabScenes[i].index == sceneId) {
                 // BatsFix. Currently push scenes as they come along
@@ -100,6 +99,7 @@ class SearchTab extends Component {
 //
 function mapStateToProps(state) { 
     return { 
+        tabId: state.NavigationReducer.tabId, 
         scene: state.NavigationReducer.searchTab, 
         item: state.NavigationReducer.searchTab.item 
     } 
