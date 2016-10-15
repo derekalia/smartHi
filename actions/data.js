@@ -548,22 +548,15 @@ export async function SearchProducers(searchTerm) {
 export async function SearchRetailers(searchTerm) {
     // BatsFix. use the term later!
     var retailers = [];
-    for (var i=0; i < TestRetailers.length; i++) {
-        retailers.push(TestRetailers[i]);
+    var queryRetailer = '{RetailStores{UID,Title}}';
+    var data = await FetchData(queryRetailer);
+    
+    for (var i=0; i < data.RetailStores.length; i++) {
+        var retailer = CreateRetailerItem(data.RetailStores[i]);
+        retailers.push(retailer);
     }
     return retailers;
 }
-
-/*
-export async function SearchProducts(searchTerm) {
-    // BatsFix. use the term later!
-    var products = [];
-    for (var i=0; i < TestProducts.length; i++) {
-        products.push(TestProducts[i]);
-    }
-    return products;
-}
-*/
 
 export async function SearchProducts(searchTerm) {
     // BatsFix. use the term later!
@@ -586,6 +579,19 @@ function CreateProducerItem(data) {
     return producer;
 }
 
+function CreateRetailerItem(data,price) {
+    // BatsFix. Missing items are
+    // 1. retail store image
+    // 2. retail store rating
+    // 3. retail store ratingCount;
+    // 4. retail store address
+    var retailer = {...TestRetailers[0]};
+    retailer.id = data.UID;
+    retailer.name = data.Title;
+    retailer.price = price;
+    return retailer;
+}
+
 function CreateRetailerItems(priceEntries) {
     // BatsFix. Missing items are
     // 1. retail store image.
@@ -595,10 +601,7 @@ function CreateRetailerItems(priceEntries) {
     var retailerItems = [];
     if (priceEntries != null) {
         for (var i=0; i < priceEntries.length; i++) {
-             var retailer = {...TestRetailers[0]};
-             retailer.id   = priceEntries[i].RetailStore.UID;
-             retailer.name = priceEntries[i].RetailStore.Title;
-             retailer.price = priceEntries[i].Price;
+             var retailer = CreateRetailerItem(priceEntries[i].RetailStore, priceEntries[i].Price); 
              retailerItems.push(retailer);
         }
     }
