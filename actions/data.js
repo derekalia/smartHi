@@ -536,15 +536,6 @@ export async function SearchUsers(searchTerm) {
     return users;
 }
 
-export async function SearchProducers(searchTerm) {
-    // BatsFix. use the term later!
-    var producers = [];
-    for (var i=0; i < TestProducers.length; i++) {
-        products.push(TestProducers[i]);
-    }
-    return producers;
-}
-
 export async function SearchRetailers(searchTerm) {
     // BatsFix. use the term later!
     var retailers = [];
