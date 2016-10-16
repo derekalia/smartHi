@@ -31,7 +31,7 @@ class ProducerItem extends Component {
             <TouchableOpacity style={{
                 flexDirection: 'row',
                 height:90,
-                marginBottom: 10,backgroundColor:'transparent'
+                marginBottom: 10,marginTop:10,backgroundColor:'transparent'
             }} onPress={()=> this.props.goProducer(this.state.id)}>
                 <Image style={Styles.bg} source={require('../../media/forged1.png') } />
                 <View style={{ flexDirection: 'column', margin: 4,marginHorizontal:6 }}>

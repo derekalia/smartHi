@@ -62,20 +62,39 @@ class RateProductScene extends Component {
 
                 </View>
             </ScrollView>
-            <HerbyModal show={this.state.showSlider}>
-                <View style={{flex:1,backgroundColor:'rgba(100,100,100,0.5)',}}>
-                    <View style={{flex:2}}/>
-                    <View style={{flex:1,backgroundColor:'rgba(255,255,255,1.0)',margin:15}}>
-                        <HerbyButton2 name={this._effect[this._selectedFilterIndex].name}/>
-                        <View style={{flexDirection:'row',}}>
-                            <Text style={{color:'black',fontSize:12,fontWeight:'bold',position:'absolute',left:10,}} >Low</Text>
-                            <Text style={{color:'black',fontSize:12,fontWeight:'bold',position:'absolute',right:10,}}>High</Text>
-                        </View>
-                        <Slider maximumValue={100} minimumValue={10} value={50} style={{flex:1}} onSlidingComplete={(t)=> this._setEffectValue(t)}/>
-                    </View>
-                    <View style={{flex:2}}/>
-                </View>
-            </HerbyModal>
+
+                <View style={{marginTop:20}}>
+                            <HerbyModal  show={this.state.showSlider}>
+                                <View style={{flex:1,alignItems:'center',backgroundColor:'rgba(0, 0, 0, 0.5)'}}>
+                                    <View style={{flex:1}}/>
+                                    <View style={{flex:1.2,backgroundColor:'white',borderRadius:10,width:320}}>
+
+                                        <View style={{flex:.8,marginTop:20}}>
+                                          <View style={{flexDirection:'row',flex:1,justifyContent:'center'}}>
+                                            <HerbyButton2 name={this._effect[this._selectedFilterIndex].name}/>
+                                          </View>
+                                        </View>
+                                        <View style={{flex:1,width:300,marginTop:10,alignSelf:'center'}}>
+                                        <View style={{flexDirection:'row',}}>
+                                            <Text style={{color:'black',fontSize:12,fontWeight:'bold',position:'absolute',left:10,}} >Low</Text>
+                                            <Text style={{color:'black',fontSize:12,fontWeight:'bold',position:'absolute',right:10,}}>High</Text>
+                                        </View>
+                                        <Slider maximumValue={100} minimumValue={10} value={50} style={{flex:1}} onSlidingComplete={(t)=> this._setEffectValue(t)}/>
+                                          <Text style={{alignSelf:'center',fontSize:16,}}>Here is some info about the effect</Text>
+                                        </View>
+
+                                        <View style={{flex:1,flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:10}}>
+                                          <TouchableOpacity style={{width:100,alignSelf:'center',borderRadius:4,width:100,height:42,backgroundColor:'white',borderColor:'black',borderWidth:1,justifyContent:'center'}} onPress={()=>this._hideInfo()}>
+                                            <Text style={{fontSize:16,justifyContent:'center',alignSelf:'center'}}>Cancel</Text>
+                                          </TouchableOpacity>
+
+                                        </View>
+                                    </View>
+                                    <View style={{flex:1}}/>
+                                </View>
+                             </HerbyModal>
+                             </View>
+
         </View>
         );
     }
