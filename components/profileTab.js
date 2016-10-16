@@ -49,8 +49,6 @@ import ProductReviewScene from './scenes/productReview/productReviewScene.js';
 
 import {HerbyBar}           from '../common/controls.js';
 
-// Import const ids.
-
 const TabScenes = [
     { title: "Profile",          component: ProfileScene,         index: ProfileSceneId },
     { title: "Settings",         component: SettingsScene,        index: SettingsSceneId },
@@ -92,11 +90,17 @@ class ProfileTab extends Component {
             this.refs.navigator.popToTop();
             return;
         }
+      
         for(var i=0; i < TabScenes.length; i++) {
              if (TabScenes[i].index == sceneId) {
                 var currentScene = Object.assign({}, TabScenes[i]);
                 currentScene.item = nextProps.item;
-                this.refs.navigator.push(currentScene);
+                if (sceneId == LicenseeSceneId || sceneId == ProcessorSceneId) {
+                    this.refs.navigator.resetTo(currentScene);
+                }
+                else {
+                    this.refs.navigator.push(currentScene);
+                }
                 break;
              }
         }
