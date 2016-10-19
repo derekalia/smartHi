@@ -8,8 +8,8 @@ import {Animated, Dimensions, StyleSheet, Text, View, Slider, ListView, ListView
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {SwitchSceneAction, GetProductAction, ResetPasswordAction,ProducerLoginAction,LicenseeLoginAction,} from '../../../actions';
-import {LicenseeSceneId,ProcessorSceneId} from '../../../common/const.js';
+import {SwitchSceneAction, GetProductAction, ResetPasswordAction,} from '../../../actions';
+import {LicenseeSceneId,LicenseeLoginSceneId,ProcessorSceneId,ProcessorLoginSceneId,} from '../../../common/const.js';
 import {HerbyBar,HerbyButton,HerbyButton2,HerbyHeader,HerbyInput,HerbyAlert} from '../../../common/controls.js';
 import HerbyModal from '../../util/herbyModal.js';
 import HerbyNotification from '../../util/herbyNotification.js';
@@ -46,14 +46,8 @@ class SettingsScene extends Component {
             this.props.SwitchSceneAction(LicenseeSceneId);
         }
         else {
-            this._showLicenseeLogin(true);
+            this.props.SwitchSceneAction(LicenseeLoginSceneId);
         }
-    }
-    _showLicenseeLogin(value) {
-        this.setState({showLicenseeLogin:value});
-    }
-    _licenseeLogin() {
-        this.props.LicenseeLoginAction("name","password");
     }
 
 
@@ -63,14 +57,8 @@ class SettingsScene extends Component {
             this.props.SwitchSceneAction(ProcessorSceneId);
         }
         else {
-            this._showProducerLogin(true);
+            this.props.SwitchSceneAction(ProcessorLoginSceneId);
         }
-    }
-    _showProducerLogin(value) {
-        this.setState({showProducerLogin:value});
-    }
-    _producerLogin() {
-        this.props.ProducerLoginAction("name","password");
     }
 
     render() {
@@ -94,32 +82,6 @@ class SettingsScene extends Component {
                     <HerbyButton2 name="Continue" onPress={()=>this._resetPassword()}/>
                     <HerbyButton2 name="Cancel" onPress={()=>this._showResetPassword(false)}/>
                 </HerbyModal>
-                <HerbyModal show={this.state.showProducerLogin}>
-                    <View style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'#DEDEDE',}}>
-                        <HerbyInput name="State" value=''/>
-                        <HerbyInput name="Email" value=''/>
-                        <HerbyInput name="UBI" value=''/>
-                        <HerbyInput name="Password"  value=''/>
-                        <View style={{flexDirection:'row'}}>
-                            <HerbyButton2 name="Continue" onPress={()=>this._producerLogin()}/>
-                            <HerbyButton2 name="Cancel" onPress={()=>this._showProducerLogin(false)}/>
-                        </View>
-                        <HerbyNotification/>
-                    </View>
-                </HerbyModal>
-                <HerbyModal show={this.state.showLicenseeLogin}>
-                    <View style={{flex:1,alignItems:'center',justifyContent:'center',backgroundColor:'#DEDEDE',}}>
-                        <HerbyInput name="State" value=''/>
-                        <HerbyInput name="Email" value=''/>
-                        <HerbyInput name="UBI" value=''/>
-                        <HerbyInput name="Password"  value=''/>
-                        <View style={{flexDirection:'row'}}>
-                            <HerbyButton2 name="Continue" onPress={()=>this._licenseeLogin()}/>
-                            <HerbyButton2 name="Cancel" onPress={()=>this._showLicenseeLogin(false)}/>
-                        </View>
-                        <HerbyNotification/>
-                    </View>
-                </HerbyModal>
             </View>
         );
     }
@@ -135,6 +97,6 @@ function mapStateToProps(state) {
 }
 //  This function is used to convert action to props passed to this component.
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,SwitchSceneAction,ResetPasswordAction,ProducerLoginAction,LicenseeLoginAction, }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,SwitchSceneAction,ResetPasswordAction,}, dispatch); }
 
 module.exports = connect(mapStateToProps, mapActionToProps)(SettingsScene);

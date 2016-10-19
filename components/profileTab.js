@@ -15,12 +15,12 @@ import {
     UpdateProductSceneId,
     UpdateProcessorSceneId,
     ProcessorSceneId,
+    ProcessorLoginSceneId,
     ProfileTabId,
     ProfileSceneId,
     SettingsSceneId,
     LicenseeSceneId,
-    LicenseeStoreSceneId,
-    LicenseeProductSceneId,
+    LicenseeLoginSceneId,
     ProductReviewSceneId,
     // Following are common scenes for all tabs. 
     ProductSceneId, 
@@ -34,7 +34,9 @@ from '../common/const.js';
 import ProfileScene         from './scenes/profile/profileScene.js';
 import SettingsScene        from './scenes/settings/settingsScene.js';
 import LicenseeScene        from './scenes/licensee/licenseeScene.js';
+import LicenseeLoginScene   from './scenes/licenseeLogin/licenseeLoginScene.js';
 import ProcessorScene       from './scenes/processor/processorScene.js';
+import ProcessorLoginScene  from './scenes/processorLogin/processorLoginScene.js';
 import UpdateProcessorScene from './scenes/updateProcessor/updateProcessorScene.js';
 import UpdateProductScene   from './scenes/updateProduct/updateProductScene.js';
 import UpdateLicenseeScene  from './scenes/updateLicensee/updateLicenseeScene.js';
@@ -53,7 +55,9 @@ const TabScenes = [
     { title: "Profile",          component: ProfileScene,         index: ProfileSceneId },
     { title: "Settings",         component: SettingsScene,        index: SettingsSceneId },
     { title: "Licensee",         component: LicenseeScene,        index: LicenseeSceneId },
+    { title: "LicenseeLogin",    component: LicenseeLoginScene,   index: LicenseeLoginSceneId },
     { title: "Processor",        component: ProcessorScene,       index: ProcessorSceneId },
+    { title: "ProcessorLogin",   component: ProcessorLoginScene,  index: ProcessorLoginSceneId },
     { title: "Update Product",   component: UpdateProductScene,   index: UpdateProductSceneId },
     { title: "Update Processor", component: UpdateProcessorScene, index: UpdateProcessorSceneId },
     { title: "Update Retailer",  component: UpdateLicenseeScene,  index: UpdateRetailerSceneId },
