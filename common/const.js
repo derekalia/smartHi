@@ -45,3 +45,8 @@ export const ProductFrameId   = 'Products';
 export const MapFrameId       = 'Maps';
 export const RetailerFrameId  = 'Retailers';
 export const UserFrameId      = 'Users';
+
+//Help start scenes
+
+export const onBordingOneId      = 'onBordingOne';
+export const onBordingTwoId      = 'onBordingTwo';

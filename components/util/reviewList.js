@@ -19,7 +19,7 @@ class ReviewItem extends Component {
         this.state={
             userName: 'Sue',
             time: '2 hours ago',
-            comment: 'This is a comment. Dont give Farzad cookies. Cookie monster is dangerous!'
+            comment: 'This is a comment.'
         }
     }
     _onRating(t) {
@@ -29,10 +29,12 @@ class ReviewItem extends Component {
         // BatsFix. there should be no hard coded content here.
         return (
             <View style={Styles.row} style={{ margin: 2, marginTop: 15, flex: 1 }}>
+            <TouchableOpacity onPress={()=>this.props.goReview()}>
                 <View style={Styles.row}>
                     <View style={{ height: 30, width: 30, borderWidth: 15, borderColor: 'lightblue', marginRight: 10 }}></View>
                     <View style={Styles.column}>
                       <View style={Styles.row}>
+
                         <Text style={{ fontSize: 14, fontWeight: 'bold', marginTop: -2,marginRight:10 }}>
                             {this.state.userName}
                         </Text>
@@ -51,7 +53,7 @@ class ReviewItem extends Component {
 
                     </View>
                 </View>
-                <TouchableOpacity onPress={()=>this.props.goReview()}>
+
                 <Text style={{ fontSize: 14, marginTop: 8 }}>
                     {this.state.comment}
                 </Text>

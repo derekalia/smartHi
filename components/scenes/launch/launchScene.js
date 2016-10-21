@@ -16,12 +16,17 @@ class LaunchScene extends Component {
         this.props.navigator.push(this.props.loginScene);
     }
 
+    _onToOnBord() {
+        // should call navigator here to move to login page
+        this.props.navigator.push(this.props.onBordingOne);
+    }
+
     render() {
         return (
             <View style={Styles.container}>
                 <View style={[{ flex: 4, alignItems: 'center' }]}>
                     <Image style={Styles.icon} source={require('../../../media/Icon.png') }/>
-                    <Text style={{ fontFamily: 'Pacifico', fontSize: 52, marginTop: 10 }}>hashtag</Text>
+                    <Text style={{ fontFamily: 'Pacifico', fontSize: 52, marginTop: 10 }}>smartHi</Text>
                 </View>
                 <View style={[Styles.container, { flex: 2 }]}>
                     <TouchableOpacity style={Styles.loginButton} onPress={this._onToLogin.bind(this) }>
@@ -33,6 +38,9 @@ class LaunchScene extends Component {
                     </TouchableOpacity>
                 </View>
                 <View style={[Styles.container, { flex: 1 }]}>
+                <TouchableOpacity style={Styles.signUpButton} onPress={this._onToOnBord.bind(this) }>
+                    <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 20 }}> test </Text>
+                </TouchableOpacity>
                 </View>
             </View>
         );
@@ -93,6 +101,6 @@ const Styles = StyleSheet.create({
         backgroundColor: '#999999',
     },
     backgroundImage: {
-        flex: 1,        
+        flex: 1,
     },
 });
