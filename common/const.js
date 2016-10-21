@@ -48,5 +48,6 @@ export const UserFrameId      = 'Users';
 
 //Help start scenes
 
-export const onBordingOneId      = 'onBordingOne';
-export const onBordingTwoId      = 'onBordingTwo';
+export const onBoardingOneId      = 'onBoardingOne';
+export const onBoardingTwoId      = 'onBoardingTwo';
+export const onBoardingThreeId      = 'onBoardingThree';

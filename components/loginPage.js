@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import {Navigator,View } from 'react-native';
 
 // Import const ids.
-import {LoginSceneId,RegisterSceneId,LaunchSceneId, onBordingOneId,onBordingTwoId} from '../common/const.js';
+import {LoginSceneId,RegisterSceneId,LaunchSceneId, onBoardingOneId,onBoardingTwoId,onBoardingThreeId} from '../common/const.js';
 
 import HerbyNotification from './util/herbyNotification.js';
 
@@ -17,8 +17,9 @@ import HerbyNotification from './util/herbyNotification.js';
 import LaunchScene   from './scenes/launch/launchScene.js';
 import LoginScene    from './scenes/login/loginScene.js';
 import RegisterScene from './scenes/register/registerScene.js';
-import onBordingOne from './scenes/onBording/onBordingOne.js';
-import onBordingTwo from './scenes/onBording/onBordingTwo.js';
+import onBoardingOne from './scenes/onBording/onBoardingOne.js';
+import onBoardingTwo from './scenes/onBording/onBoardingTwo.js';
+import onBoardingThree from './scenes/onBording/onBoardingThree.js';
 import RouteMapper   from './util/routeMapper.js';
 
 //
@@ -28,35 +29,36 @@ import RouteMapper   from './util/routeMapper.js';
 const LaunchIndex   = 0;
 const LoginIndex    = 1;
 const RegisterIndex = 2;
-const onBordingOneIndex  = 3;
-const onBordingTwoIndex  = 4;
+const onBoardingOneIndex  = 3;
+const onBoardingTwoIndex  = 4;
+const onBoardingThreeIndex  = 5;
 
 const LoginPageScenes = [
       { title: "Herby", component: LaunchScene,   index: LaunchSceneId },
       { title: "Herby", component: LoginScene,    index: LoginSceneId },
       { title: "Herby", component: RegisterScene, index: RegisterSceneId },
-      { title: "Herby", component: onBordingOne, index: onBordingOneId },
-      { title: "Herby", component: onBordingTwo, index: onBordingTwoId },
+      { title: "Herby", component: onBoardingOne, index: onBoardingOneId },
+      { title: "Herby", component: onBoardingTwo, index: onBoardingTwoId },
+      { title: "Herby", component: onBoardingThree, index: onBoardingThreeId },
 
 ];
 
 class LoginPage extends Component {
 
     renderScene(route, navigator) {
-        if (route.index != LaunchSceneId) {
-            return (
-                <route.component navigator={navigator}/>
+                return (
+                <route.component navigator={navigator}
+                  loginScene = {LoginPageScenes[LoginIndex]}
+                  launchScene = {LoginPageScenes[LaunchIndex]}
+                  registerScene = {LoginPageScenes[RegisterIndex]}
+                  onBoardingOne = {LoginPageScenes[onBoardingOneIndex]}
+                  onBoardingTwo = {LoginPageScenes[onBoardingTwoIndex]}
+                  onBoardingThree = {LoginPageScenes[onBoardingThreeIndex]}/>
             );
-        }
-        else {
-            return (
-                <route.component navigator={navigator} loginScene = {LoginPageScenes[LoginIndex]} registerScene = {LoginPageScenes[RegisterIndex]} onBordingOne = {LoginPageScenes[onBordingOneIndex]}/>
-            );
-        }
     }
 
     configureScene(route, routeStack) {
-        return Navigator.SceneConfigs.FloatFromBottom;
+        return Navigator.SceneConfigs.FloatFromRight;
     }
     render() {
 
@@ -65,7 +67,7 @@ class LoginPage extends Component {
             <Navigator
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
-                initialRoute = {LoginPageScenes[LaunchIndex]}
+                initialRoute = {LoginPageScenes[onBoardingOneIndex]}
                 navigationBar={
                     <Navigator.NavigationBar
                         routeMapper = {RouteMapper}

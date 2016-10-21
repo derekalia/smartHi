@@ -25,6 +25,7 @@
 		42F5709FD17147809574AF0C /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E93A99B909740CEA10FE6BD /* libRCTCamera.a */; };
 		6525E8981DB1E38300431A91 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6525E8971DB1E38300431A91 /* Pacifico.ttf */; };
 		655A9D851DB0734F00BB1A9C /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 655A9D841DB0734F00BB1A9C /* FontAwesome.ttf */; };
+		65FA44CE1DBAC9F500EC82B8 /* Dosis-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65FA44CD1DBAC9F500EC82B8 /* Dosis-SemiBold.otf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 /* End PBXBuildFile section */
 
@@ -138,6 +139,7 @@
 		2E93A99B909740CEA10FE6BD /* libRCTCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCamera.a; sourceTree = "<group>"; };
 		6525E8971DB1E38300431A91 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		655A9D841DB0734F00BB1A9C /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		65FA44CD1DBAC9F500EC82B8 /* Dosis-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-SemiBold.otf"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		D2536BDA4F6744F5BB20CA7A /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 			isa = PBXGroup;
 			children = (
 				655A9D841DB0734F00BB1A9C /* FontAwesome.ttf */,
+				65FA44CD1DBAC9F500EC82B8 /* Dosis-SemiBold.otf */,
 				6525E8971DB1E38300431A91 /* Pacifico.ttf */,
 				13B07FAE1A68108700A75B9A /* herby */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -547,6 +550,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				6525E8981DB1E38300431A91 /* Pacifico.ttf in Resources */,
+				65FA44CE1DBAC9F500EC82B8 /* Dosis-SemiBold.otf in Resources */,
 				655A9D851DB0734F00BB1A9C /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,31 +16,30 @@ class LaunchScene extends Component {
         this.props.navigator.push(this.props.loginScene);
     }
 
-    _onToOnBord() {
+    _onToOnBoard() {
         // should call navigator here to move to login page
-        this.props.navigator.push(this.props.onBordingOne);
+        this.props.navigator.push(this.props.onBoardingOne);
     }
+
 
     render() {
         return (
             <View style={Styles.container}>
                 <View style={[{ flex: 4, alignItems: 'center' }]}>
-                    <Image style={Styles.icon} source={require('../../../media/Icon.png') }/>
-                    <Text style={{ fontFamily: 'Pacifico', fontSize: 52, marginTop: 10 }}>smartHi</Text>
+                    <Image style={Styles.icon} source={require('../../../media/smartHi_splash1.png') }/>
+                    {/* <Text style={{ fontFamily: 'Dosis-SemiBold', fontSize: 52, marginTop: 10 }}>smartHi</Text> */}
                 </View>
-                <View style={[Styles.container, { flex: 2 }]}>
+                <View style={[Styles.container, { flex: 1 }]}>
                     <TouchableOpacity style={Styles.loginButton} onPress={this._onToLogin.bind(this) }>
-                        <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 20 }}> Login </Text>
+                        <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 18 }}>  REGISTER </Text>
                     </TouchableOpacity>
-                    <Text style={{ color: "black", fontFamily: "Avenir Next", fontSize: 20 }}> or </Text>
+                    <Text style={{ color: "black", fontFamily: "Avenir Next", fontSize: 20 }}>  </Text>
                     <TouchableOpacity style={Styles.signUpButton} onPress={this._onToRegister.bind(this) }>
-                        <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 20 }}> Register </Text>
+                        <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 18 }}> LOGIN </Text>
                     </TouchableOpacity>
                 </View>
                 <View style={[Styles.container, { flex: 1 }]}>
-                <TouchableOpacity style={Styles.signUpButton} onPress={this._onToOnBord.bind(this) }>
-                    <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 20 }}> test </Text>
-                </TouchableOpacity>
+
                 </View>
             </View>
         );
@@ -59,27 +58,29 @@ const Styles = StyleSheet.create({
 
     icon: {
         marginTop: 100,
-        height: 246 / 1.7,
-        width: 240 / 1.7,
+        height: 260 ,
+        width: 300,
     },
 
 
 
     loginButton: {
-        flex: 1,
-        marginHorizontal: 30,
-        borderRadius: 3,
-        backgroundColor: '#4A90E2',
+
+        height:60,
+        marginHorizontal: 80,
+        borderRadius: 40,
+        backgroundColor: '#15B4F1',
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'stretch',
     },
 
     signUpButton: {
-        flex: 1,
-        marginHorizontal: 30,
-        borderRadius: 3,
-        backgroundColor: '#50E3C2',
+
+        height:60,
+        marginHorizontal: 80,
+        borderRadius: 40,
+        backgroundColor: '#A3DE00',
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'stretch',

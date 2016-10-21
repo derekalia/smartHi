@@ -7,7 +7,7 @@ import {connect} from 'react-redux';
 import {SwitchSceneAction} from '../../../actions';
 import {HerbyBar}         from '../../../common/controls.js';
 
-class onBordingOne extends Component {
+class onBoardingOne extends Component {
     render() {
         return (
             <View style={[{flex:1  }]}>
@@ -46,12 +46,14 @@ class onBordingOne extends Component {
             </View>
         );
     }
+
+
     _goToAnotherScene() {
-        this.props.SwitchSceneAction(onBordingTwoId);
+        this.props.navigator.push(this.props.onBoardingTwo);
     }
 }
 //
 // Connect SwitchSceneAction to props
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ SwitchSceneAction }, dispatch); }
-module.exports = connect(null,mapActionToProps)(onBordingOne);
+module.exports = connect(null,mapActionToProps)(onBoardingOne);
