@@ -29,14 +29,18 @@ class ReviewStartScene extends Component {
                 <HerbyBar name='Rate' navigator={this.props.navigator} forward='Rate Queue' forwardCallback={()=>this._goRateQueue()}/>
                 <View style={{flex:1}}>
                     <View style={{flex:1,alignItems:'center',justifyContent:'center',}}>
-                    <Text style={{fontWeight:'bold',fontSize:18,color:'black',}}>Take a picture of the receipt</Text>
+                      <Text style={{fontWeight:'bold',fontSize:20,color:'black',}}>Take a picture of the receipt</Text>
                     </View>
                     <View style={{flex:1,alignItems:'center',justifyContent:'center',}}>
-                        <Image source={require('../../../media/receipt1.png') } style={{ height: 340-50, width: 245-50,justifyContent:'center',}}/>
+                        <Image source={require('../../../media/receipt.png') } style={{ height: 240, width: 300,justifyContent:'center',}}/>
                     </View>
                     <View style={{flex:1,alignItems:'center',justifyContent:'center',}}>
-                    <HerbyButton2 name='Take a picture' onPress={()=>this._goCamera()}/>
+                    <TouchableOpacity style={{width:200,height:50,backgroundColor:'#A4DC10',borderRadius:40,justifyContent:'center'}} onPress={()=>this._goCamera()}>
+                      <Text style={{alignSelf:'center',color:'white',fontSize:18}}>SCAN BARCODE</Text>
+                    </TouchableOpacity>
+
                     </View>
+
                 </View>
             </View>
         );
