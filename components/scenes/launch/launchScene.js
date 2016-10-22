@@ -31,11 +31,11 @@ class LaunchScene extends Component {
                 </View>
                 <View style={[Styles.container, { flex: 1 }]}>
                     <TouchableOpacity style={Styles.loginButton} onPress={this._onToLogin.bind(this) }>
-                        <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 18 }}>  REGISTER </Text>
+                        <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 18 }}> LOGIN </Text>
                     </TouchableOpacity>
                     <Text style={{ color: "black", fontFamily: "Avenir Next", fontSize: 20 }}>  </Text>
                     <TouchableOpacity style={Styles.signUpButton} onPress={this._onToRegister.bind(this) }>
-                        <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 18 }}> LOGIN </Text>
+                        <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 18 }}> REGISTER </Text>
                     </TouchableOpacity>
                 </View>
                 <View style={[Styles.container, { flex: 1 }]}>

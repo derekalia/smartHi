@@ -42,12 +42,12 @@ class LoginScene extends Component {
     render() {
         return (
             <View style={Styles.container}>
-                <View style={[{ flex: 2, alignItems: 'center', marginTop: 50 }]}>
-                    <Image style={Styles.icon} source={require('../../../media/Icon.png') }/>
-                    <Text style={{ fontFamily: 'Pacifico', fontSize: 38, marginTop: 10 }}>Hashtag</Text>
+                <View style={[{ flex: 2.5, alignItems: 'center', }]}>
+                    <Image style={Styles.icon} source={require('../../../media/smartHi_splash1.png') }/>
+                    {/* <Text style={{ fontFamily: 'Pacifico', fontSize: 38, marginTop: 10 }}>Hashtag</Text> */}
                 </View>
 
-                <View style={[{ flexDirection: 'row', width: 300, alignItems: 'center', alignItems: "center", justifyContent: "center", marginLeft: 40 }]}>
+                <View style={[{ flexDirection: 'row', width: 300, alignItems: 'center', alignItems: "center", justifyContent: "center", marginLeft: 40,marginTop:40 }]}>
                     <TextInput style={[Styles.input, { fontSize: 20, flex: 3 }]}
                         autoCapitalize  = "none"
                         autoCorrect     = {false}
@@ -79,13 +79,23 @@ class LoginScene extends Component {
 
                 <View style={[Styles.container]}>
                     <TouchableOpacity style={Styles.loginButton} onPress={this._submit.bind(this) }>
-                        <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 20 }}> Login </Text>
+                        <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 18 }}> LOGIN </Text>
                     </TouchableOpacity>
+                    {/* <TouchableOpacity style={{width:200,height:50,backgroundColor:'#A4DC10',borderRadius:40,justifyContent:'center'}} onPress={()=>this._goToAnotherScene()}>
+                      <Text style={{alignSelf:'center',color:'white',fontSize:18}}>YES</Text>
+                    </TouchableOpacity> */}
+
                     <View style={{ flex: 1, justifyContent: "center", alignItems: 'center' }}>
                         <Text style={{ color: "red", fontSize: 16, justifyContent: "center" }}>{this.state.showMessage ? this.props.userMessage : ""}</Text>
                     </View>
                 </View>
-            </View>
+
+
+                </View>
+
+
+
+
         );
     }
 }
@@ -97,9 +107,9 @@ const Styles = StyleSheet.create({
     },
 
     icon: {
-        marginTop: 70,
-        height: 246 / 2.7,
-        width: 240 / 2.7,
+      marginTop: 100,
+      height: 260 ,
+      width: 300,
     },
 
     separator: {
@@ -110,11 +120,11 @@ const Styles = StyleSheet.create({
     loginButton: {
         flex: 1,
         height: 40,
-        marginHorizontal: 44,
-        marginTop: 50,
+        marginHorizontal: 50,
+        marginTop: 30,
         marginBottom: 30,
-        borderRadius: 3,
-        backgroundColor: '#4A90E2',
+        borderRadius: 40,
+        backgroundColor: '#15b4f1',
         justifyContent: 'center',
         alignItems: 'center',
         alignSelf: 'stretch',
@@ -124,7 +134,7 @@ const Styles = StyleSheet.create({
         flex: 1,
         height: 52,
         marginHorizontal: 30,
-        marginTop: 10,
+        marginTop: 0,
         marginBottom: 10,
         borderRadius: 3,
         backgroundColor: '#50E3C2',

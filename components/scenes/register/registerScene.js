@@ -49,13 +49,13 @@ class LoginScene extends Component {
     render() {
         return (
             <View>
-                <View style={[{ flex: 1, alignItems: 'center', marginTop: 20 }]}>
-                    <Image style={Styles.icon} source={require('../../../media/Icon.png') }/>
-                    <Text style={{ fontFamily: 'Pacifico', fontSize: 38, marginTop: 10 }}>Hashtag</Text>
+                <View style={[{ flex: 1, alignItems: 'center', marginTop: 30 }]}>
+                    <Image style={Styles.icon} source={require('../../../media/smartHi_splash1.png') }/>
+                    {/* <Text style={{ fontFamily: 'Pacifico', fontSize: 38, marginTop: 10 }}>Hashtag</Text> */}
                 </View>
 
 
-                <View style={{flex:1,alignItems: 'center',marginTop:10, }}>
+                <View style={{flex:1,alignItems: 'center',marginTop:0, }}>
 
                 <View style={[{ flexDirection: 'row', width: 300, alignItems: 'center', alignItems: "center", }]}>
                     <TextInput style={[Styles.input, { fontSize: 20, flex: 3 }]}
@@ -119,16 +119,15 @@ class LoginScene extends Component {
                 </View>
 
                 <View style={{ borderWidth: 1, borderColor: "#dddddd", width: 290, alignItems: 'center', alignItems: "center", justifyContent: "center",  }}/>
-
-
-                  <View style={{height:50,marginTop:10,}}>
+                  <View style={{height:30,marginTop:15}}>
                     <TouchableOpacity style={Styles.loginButton}
                         onPress = {this._submit.bind(this) }
                         >
-                        <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 20 }}> Register </Text>
+                        <Text style={{ color: "white", fontFamily: "Avenir Next", fontSize: 20, }}> REGISTER </Text>
                     </TouchableOpacity>
                     </View>
                 </View>
+
                 <View style={{marginTop:65,alignItems:'center',backgroundColor:'white',height:30,justifyContent:'center',opacity:.7}}>
                   <Text style={{color:'red',fontWeight:'bold'}}>{this.state.showMessage ? this.props.userMessage : ""}</Text>
                 </View>
@@ -144,17 +143,17 @@ const Styles = StyleSheet.create({
     },
 
     icon: {
-        marginTop: 70,
-        height: 246 / 2.7,
-        width: 240 / 2.7,
+        marginTop: 40,
+        height: 220,
+        width: 250,
     },
 
     loginButton: {
-        height: 60,
-        width:290,
-        marginTop:20,
-        borderRadius: 3,
-        backgroundColor: '#4A90E2',
+        height: 55,
+        width:260,
+        marginTop:18,
+        borderRadius: 40,
+        backgroundColor: '#15b4f1',
         alignItems: 'center',
         alignSelf: 'stretch',
         justifyContent:'center'

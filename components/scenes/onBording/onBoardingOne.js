@@ -38,7 +38,7 @@ class onBoardingOne extends Component {
                       <Text style={{alignSelf:'center',color:'white',fontSize:18}}>NEXT</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={{width:200,height:70,borderRadius:40,justifyContent:'center'}} onPress={()=>this._goToAnotherScene()}>
+                    <TouchableOpacity style={{width:200,height:70,borderRadius:40,justifyContent:'center'}} onPress={()=>this._goToSkip()}>
                       <Text style={{alignSelf:'center',color:'#424242',fontSize:18}}>Skip</Text>
                     </TouchableOpacity>
                   </View>
@@ -50,6 +50,9 @@ class onBoardingOne extends Component {
 
     _goToAnotherScene() {
         this.props.navigator.push(this.props.onBoardingTwo);
+    }
+    _goToSkip() {
+        this.props.navigator.push(this.props.launchScene);
     }
 }
 //
