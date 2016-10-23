@@ -39,7 +39,8 @@ class ProductFrame extends Component {
 
         <View style={{flex:1,top:-20,backgroundColor:'#ECECEC',borderWidth:0,borderColor:'black'}}>
 
-        <View style={{flexDirection:'row',top:5,borderRadius:2, justifyContent: 'space-between',alignItems:'center',marginHorizontal:6,backgroundColor:'white',}}>
+        <View style={{borderRadius:2,top:5,marginHorizontal:6,backgroundColor:'white',}}>
+        <View style={{flexDirection:'row', justifyContent: 'space-between',alignItems:'center',}}>
           <TouchableOpacity onPress={()=> this._switchFiltering()} style={{alignSelf:'center'}}>
               <View style={{height:40,margin:10,width:150,backgroundColor:'white',borderColor: '#9b9b9b',borderWidth:1, borderRadius:22,justifyContent:'center'}}>
                   <Text style={{fontSize:14,color:'#9b9b9b',alignSelf:'center'}}>
@@ -55,12 +56,13 @@ class ProductFrame extends Component {
               </View>
           </TouchableOpacity>
         </View>
+        {this._renderFilters()}
+        </View>
 
         <View style={{height:10}}/>
 
           <View style={{marginHorizontal:6}}>
-            <ScrollView style={{backgroundColor:'white',borderRadius:2,}}>
-                {this._renderFilters()}
+            <ScrollView style={{backgroundColor:'white',borderRadius:2,}}>                
                 {/* <View style={{flex:1,margin:5,borderBottomColor:'#DEDEDE',borderBottomWidth:1,marginHorizontal:10}}/> */}
                 {/*Search results section*/}
                 <ProductList productList={this.props.products} goProduct={(id)=> this._goProduct(id)}/>
