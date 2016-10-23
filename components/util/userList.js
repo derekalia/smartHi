@@ -17,13 +17,14 @@ class UserList extends Component {
     }
     render() {
         return (
-              <View style={{minHeight:100,}}>              
+              <View style={{backgroundColor:'white',marginTop:5,marginHorizontal:5,borderRadius:2,paddingBottom:0 }}>
+              {/* <View style={{borderBottomColor:'#DEDEDE',borderBottomWidth:1,marginHorizontal:8,marginTop:5}}/>                */}
                 {this._renderUsers()}
             </View>
         );
     }
 
-    // BatsFix. Should we be using list instead? 
+    // BatsFix. Should we be using list instead?
     _renderUsers() {
         var users = [];
         if (this.props.userList != null) {

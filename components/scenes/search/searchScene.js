@@ -97,7 +97,7 @@ class SearchScene extends Component {
                          <Image style={{ height: 32, width: 32,alignSelf:'flex-start', }} source={require("../../../media/plusButton11.png") }/>
                     </TouchableOpacity>
                 </View>
-                <HerbyFrameBar entries={['PRODUCTS','STORES','MAPS','USERS']} setFrame={(t)=>this._setFrame(t)}/>
+                <HerbyFrameBar entries={['Products','Stores','Maps','Users']} setFrame={(t)=>this._setFrame(t)}/>
                 <Navigator
                     ref="navigator"
                     configureScene={this.configureScene}

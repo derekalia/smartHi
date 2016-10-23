@@ -69,7 +69,7 @@ class ProductFrame extends Component {
                 {/* <View style={{height:200}}/> */}
             </ScrollView>
           </View>
-          
+
         </View>
 
         );
