@@ -62,13 +62,14 @@ class ProductFrame extends Component {
         <View style={{height:10}}/>
 
           <View style={{marginHorizontal:6}}>
-            <ScrollView style={{backgroundColor:'white',borderRadius:2,}}>                
+            <ScrollView style={{backgroundColor:'white',borderRadius:2,}}>
                 {/* <View style={{flex:1,margin:5,borderBottomColor:'#DEDEDE',borderBottomWidth:1,marginHorizontal:10}}/> */}
                 {/*Search results section*/}
                 <ProductList productList={this.props.products} goProduct={(id)=> this._goProduct(id)}/>
                 {/* <View style={{height:200}}/> */}
             </ScrollView>
           </View>
+          
         </View>
 
         );

@@ -84,9 +84,9 @@ class SearchScene extends Component {
 
     render() {
         return (
-            <View style={[{flex:1,marginTop:20,justifyContent:'flex-start'}]}>
-                 <View style={{flexDirection: 'row',marginHorizontal:8}}>
-                    <View style={[{ flex: 5,}]}>
+            <View style={[{flex:1,marginTop:20,justifyContent:'flex-start',backgroundColor: '#ECECEC'}]}>
+                 <View style={{flexDirection: 'row',backgroundColor: 'white'}}>
+                    <View style={[{ flex: 4,marginHorizontal:10}]}>
                       <View style={{height: 34,borderWidth:3,borderColor:'#ECECEC',borderRadius:8,backgroundColor: '#ECECEC',}}>
                         <TextInput style={{marginHorizontal:10,height:28, fontSize:20, backgroundColor: '#ECECEC',}}
                                    onEndEditing={()=>this._startSearch()}
@@ -94,7 +94,7 @@ class SearchScene extends Component {
                       </View>
                     </View>
                     <TouchableOpacity style={{flex: .6,}} onPress={()=>this._showFiltersModal(true)}>
-                         <Image style={{ height: 32, width: 32,alignSelf:'center', }} source={require("../../../media/plusButton11.png") }/>
+                         <Image style={{ height: 32, width: 32,alignSelf:'flex-start', }} source={require("../../../media/plusButton11.png") }/>
                     </TouchableOpacity>
                 </View>
                 <HerbyFrameBar entries={['PRODUCTS','STORES','MAPS','USERS']} setFrame={(t)=>this._setFrame(t)}/>
