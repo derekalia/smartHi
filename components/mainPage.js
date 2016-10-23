@@ -50,7 +50,7 @@ class MainPage extends Component {
             <TabBarIOS
                 unselectedTintColor="grey"
                 tintColor="#4A90E2"
-                barTintColor="#F9F9F9"
+                barTintColor="white"
                 >
                 <TabBarIOS.Item
                     title="Home"
