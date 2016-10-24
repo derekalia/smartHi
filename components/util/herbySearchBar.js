@@ -64,9 +64,10 @@ export class HerbySearchBar extends Component {
         this.maxHeight = height;
 
         var modalHeight = this.maxHeight*0.8;
-        var modalWidth  = this.maxWidth*0.9;
+        var modalWidth  = this.maxWidth*0.95;
         return(
-        <View style={{zIndex:999,backgroundColor:'white'}}>
+        <View style={{backgroundColor:'white'}}>
+
         <Modal
             animationType={'fade'}
             transparent={true}
@@ -77,26 +78,37 @@ export class HerbySearchBar extends Component {
                           alignSelf:'center',
                           width:modalWidth,
                           height: modalHeight,
-                          borderRadius:10,
+                          borderRadius:6,
                           backgroundColor:'white',
                           justifyContent:'center',
-                          alignItems:'center'}}>
-                <View style={{width:300,alignItems:'center',marginTop:10,paddingBottom:10,borderBottomWidth:0, borderColor:'#DEDEDE',}}>
-                   <Text style={{fontSize:20,fontWeight:'bold',color:'black'}}>Select Tags</Text>
+                          alignItems:'center'
+                        }}>
+                <View style={{width:300,alignItems:'center',height:50,borderBottomWidth:1, borderColor:'#DEDEDE',justifyContent:'center'}}>
+                   <Text style={{fontSize:18,color:'black'}}>Select Tags</Text>
                 </View>
-                <View style={{marginTop:0,padding:5,marginBottom:0,flex:3}}>
+
+                {/* <View style={{width:300,alignItems:'center',borderBottomWidth:1, borderColor:'#DEDEDE',height:1}}/> */}
+
+                <View style={{marginTop:0,padding:0,marginBottom:0,flex:1,}}>
                     <FilterList style={{flex:1}} productCount={1} addRemoveFilter={(t)=>this._addRemoveFilter(t)} noButton={true}/>
                 </View>
-                <View style={{marginTop:5,
+                <View style={{marginTop:0,height:60,
                               width:300,
-                              marginBottom:10,
-                              alignItems:'center',flexDirection:'row',justifyContent:'space-around',borderTopWidth:0, borderColor:'#DEDEDE'}}>
-                   <HerbyButton2 name='Done' onPress={()=>this._showFilters(false)}/>
-                   <HerbyButton2 name='Cancel' onPress={()=>this._showFilters(false)}/>
+
+                              alignItems:'center',flexDirection:'row',justifyContent:'space-around',borderTopWidth:1, borderColor:'#DEDEDE'}}>
+
+                    <TouchableOpacity onPress={()=>this._showFilters(false)} style={{width:90,height:40,borderRadius:6,backgroundColor:'#DEDEDE',justifyContent:'center'}}>
+                      <Text style={{alignSelf:'center',color:'white'}}>Done</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={()=>this._showFilters(false)} style={{width:90,height:40,borderRadius:6,backgroundColor:'white',borderColor:'#DEDEDE',borderWidth:1,justifyContent:'center'}}>
+                      <Text style={{alignSelf:'center',color:'#DEDEDE'}}>Cancel</Text>
+                    </TouchableOpacity>
+
                 </View>
             </View>
             </View>
          </Modal>
+
          <View style={{flexDirection: "row",marginTop:20,marginLeft:10,marginRight:10,}}>
             <View style={[{ flex: 5,}]}>
               <View style={{height: 34,borderWidth:3,borderColor:'#ECECEC',borderRadius:8,backgroundColor: '#ECECEC',}}>

@@ -3,7 +3,7 @@
 //
 
 import React, { Component } from 'react';
-import {Modal,TextInput,Image,StyleSheet, Text, View, ScrollView, ListView, TouchableOpacity, Navigator } from 'react-native'
+import {Modal,TextInput,Image,StyleSheet, Text,Dimensions, View, ScrollView, ListView, TouchableOpacity, Navigator } from 'react-native'
 
 //get state management components
 import {bindActionCreators} from 'redux';
@@ -83,12 +83,19 @@ class SearchScene extends Component {
     }
 
     render() {
+      var {width,height} = Dimensions.get('window');
+      this.maxWidth = width;
+      this.maxHeight = height;
+
+      var modalHeight = this.maxHeight*0.8;
+      var modalWidth  = this.maxWidth*0.95;
+
         return (
             <View style={[{flex:1,marginTop:20,justifyContent:'flex-start',backgroundColor: '#ECECEC'}]}>
-                 <View style={{flexDirection: 'row',backgroundColor: 'white'}}>
-                    <View style={[{ flex: 4,marginHorizontal:10}]}>
+                 <View style={{flexDirection: 'row',backgroundColor: 'white',paddingTop:6}}>
+                    <View style={[{ flex: 4,marginHorizontal:10,}]}>
                       <View style={{height: 34,borderWidth:3,borderColor:'#ECECEC',borderRadius:8,backgroundColor: '#ECECEC',}}>
-                        <TextInput style={{marginHorizontal:10,height:28, fontSize:20, backgroundColor: '#ECECEC',}}
+                        <TextInput style={{marginHorizontal:10,height:28, fontSize:16, backgroundColor: '#ECECEC',}}
                                    onEndEditing={()=>this._startSearch()}
                                    autoCorrect={false} placeholder='Search' returnKeyType='search' onChangeText={(t)=> this._setSearchTerm(t)} clearButtonMode='always'/>
                       </View>
@@ -107,12 +114,55 @@ class SearchScene extends Component {
                     showFilters = {this.state.showFilters}
                     addRemoveFilter={(t) => this._addRemoveFilter(t) }
                     />
-                <Modal animationType={'slide'} transparent={true} visible={this.state.showFiltersModal}>
+
+                {/* <Modal animationType={'slide'} transparent={true} visible={this.state.showFiltersModal}>
                     <View style={{flex:1,backgroundColor:'#FEFEFE',marginTop:20}}>
                         <HerbyButton2 name="Done" onPress={()=>this._showFiltersModal(false)}/>
                         <FilterList addRemoveFilter={(t)=>this._addRemoveFilter(t)}/>
                     </View>
-                </Modal>
+                </Modal> */}
+
+                <Modal
+                    animationType={'fade'}
+                    transparent={true}
+                    visible={this.state.showFiltersModal}
+                    onRequestClose={() => {this._showFilters(false)}}>
+                    <View style={{flex:1,backgroundColor:'lightgray',opacity:1}}>
+                      <View style={{marginTop:66,
+                                  alignSelf:'center',
+                                  width:modalWidth,
+                                  height: modalHeight,
+                                  borderRadius:6,
+                                  backgroundColor:'white',
+                                  justifyContent:'center',
+                                  alignItems:'center'
+                                }}>
+                        <View style={{width:300,alignItems:'center',height:50,borderBottomWidth:1, borderColor:'#DEDEDE',justifyContent:'center'}}>
+                           <Text style={{fontSize:18,color:'black'}}>Select Tags</Text>
+                        </View>
+
+                        {/* <View style={{width:300,alignItems:'center',borderBottomWidth:1, borderColor:'#DEDEDE',height:1}}/> */}
+
+                        <View style={{marginTop:0,padding:0,marginBottom:0,flex:1,}}>
+                            <FilterList style={{flex:1}} productCount={1} addRemoveFilter={(t)=>this._addRemoveFilter(t)} noButton={true}/>
+                        </View>
+                        <View style={{marginTop:0,height:60,
+                                      width:300,
+
+                                      alignItems:'center',flexDirection:'row',justifyContent:'space-around',borderTopWidth:1, borderColor:'#DEDEDE'}}>
+
+                            <TouchableOpacity onPress={()=>this._showFiltersModal(false)} style={{width:90,height:40,borderRadius:6,backgroundColor:'#DEDEDE',justifyContent:'center'}}>
+                              <Text style={{alignSelf:'center',color:'white'}}>Done</Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity onPress={()=>this._showFiltersModal(false)} style={{width:90,height:40,borderRadius:6,backgroundColor:'white',borderColor:'#DEDEDE',borderWidth:1,justifyContent:'center'}}>
+                              <Text style={{alignSelf:'center',color:'#DEDEDE'}}>Cancel</Text>
+                            </TouchableOpacity>
+
+                        </View>
+                    </View>
+                    </View>
+                 </Modal>
+
             </View>
         );
     }
