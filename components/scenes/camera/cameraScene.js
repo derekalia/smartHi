@@ -36,7 +36,7 @@ class CameraScene extends Component {
         super(props);
         this.state  = {cameraType: Camera.constants.Type.back};
         this._isFrontTaken = false;
-        this._isBackTaken  = false;
+        this._isBackTaken  = true;
     }
 
     render() {
@@ -48,12 +48,12 @@ class CameraScene extends Component {
                 style={Styles.container}
                 onBarCodeRead={this._onBarCodeRead}>
                     <View style={{marginTop:440,flexDirection:'row'}}>
-                        <TouchableHighlight onPress={()=> this._takePictureBack()}
+                        {/* <TouchableHighlight onPress={()=> this._takePictureBack()}
                             style={[{height:32,width:100},Styles.cameraButton]}>
                             <Text style={{fontSize:16,textAlign:'center'}}>Back Pic</Text>
-                        </TouchableHighlight>
+                        </TouchableHighlight> */}
                         <TouchableHighlight onPress={()=> this._takePictureFront()} style={[{height:32,width:100},Styles.cameraButton]}>
-                            <Text>Front Pic</Text>
+                            <Text>SCAN</Text>
                         </TouchableHighlight>
                     </View>
             </Camera>
@@ -68,7 +68,7 @@ class CameraScene extends Component {
     _onComplete() {
         // upload the pictures
         this._isFrontTaken = false;
-        this._isBackTaken  = false;
+        // this._isBackTaken  = false;
         // upload Action.
         this.props.UploadProductImageAction();
     }
