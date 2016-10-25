@@ -40,7 +40,7 @@ class SettingsScene extends Component {
         this.props.ResetPasswordAction();
     }
 
-    // Retailer settings dialog 
+    // Retailer settings dialog
     _goLicensee() {
         if (this.props.retailer != null) {
             this.props.SwitchSceneAction(LicenseeSceneId);
@@ -51,7 +51,7 @@ class SettingsScene extends Component {
     }
 
 
-    // Processor settings dialog 
+    // Processor settings dialog
     _goProducer() {
         if (this.props.producer != null) {
             this.props.SwitchSceneAction(ProcessorSceneId);
@@ -67,16 +67,86 @@ class SettingsScene extends Component {
                 <HerbyBar navigator={this.props.navigator} name="Settings"/>
 
                 {/*Popup settings area*/}
-             
+
                 {/*Main settings area*/}
                 <View style={{backgroundColor:'#EFEFF4',flex:1,}}>
-                <HerbyHeader name="GENERAL"/>
-                <HerbyInput  name="UserName" value={this._userName}/>
+                <ScrollView>
+                <View>
+                  <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'#666666'}}> </Text>
+                </View>
+
+                <View style={{backgroundColor:"white"}}>
+
+                <View style={{borderTopWidth:1,borderTopColor:'#C7C7CC'}}/>
+
+                  <View style={{flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
+                    <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>Change Name</Text>
+                    <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
+                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
+                    </View>
+                  </View>
+
+                  <View style={{flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
+                    <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>Change Email</Text>
+                    <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
+                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
+                    </View>
+                  </View>
+
+                  <View style={{flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
+                    <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>Reset Password</Text>
+                    <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
+                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
+                    </View>
+                  </View>
+                </View>
+
+
+                <View>
+                  <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'#666666'}}> </Text>
+                </View>
+
+                <View style={{backgroundColor:"white"}}>
+                <View style={{borderTopWidth:1,borderTopColor:'#C7C7CC'}}/>
+
+                  <View style={{flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
+                    <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>Notifcation Settings</Text>
+                    <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
+                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
+                    </View>
+                  </View>
+                </View>
+                {/* <HerbyInput  name="UserName" value={this._userName}/>
                 <HerbyInput  name="Email" value={this._email}/>
-                <HerbyButton name="Reset Password" onPress={()=> this._showResetPassword(true)}/>
-                <HerbyHeader name="AUTHENTICATION"/>
+                <HerbyButton name="Reset Password" onPress={()=> this._showResetPassword(true)}/> */}
+                <View>
+                  <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'#666666'}}></Text>
+                </View>
+                <View style={{borderTopWidth:1,borderTopColor:'#C7C7CC'}}/>
+                <TouchableHighlight onPress={()=> this._goLicensee()}>
+                <View style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
+                  <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>Licensee Authentication</Text>
+                  <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
+                    <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
+                  </View>
+                </View>
+                </TouchableHighlight>
+                <View>
+                  <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'#666666'}}></Text>
+                </View>
+                <View style={{borderTopWidth:1,borderTopColor:'#C7C7CC'}}/>
+                <View style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
+                  <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>Sign Out</Text>
+                  <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
+                    <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
+                  </View>
+                </View>
+
+
+                {/* <HerbyHeader name="AUTHENTICATION"/>
                 <HerbyButton name="Licensee Settings" onPress={()=> this._goLicensee()}/>
-                <HerbyButton name="Producer Settings" onPress={()=> this._goProducer()}/>
+                <HerbyButton name="Producer Settings" onPress={()=> this._goProducer()}/> */}
+                </ScrollView>
                 </View>
                 <HerbyModal show={this.state.showResetPassword} onClose={()=>this._showResetPassword(false)}>
                     <HerbyButton2 name="Continue" onPress={()=>this._resetPassword()}/>
