@@ -124,12 +124,12 @@ class SettingsScene extends Component {
                 </View>
                 <View style={{borderTopWidth:1,borderTopColor:'#C7C7CC'}}/>
                 <TouchableHighlight onPress={()=> this._goLicensee()}>
-                <View style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
-                  <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>Licensee Authentication</Text>
-                  <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
-                    <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
+                  <View style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
+                    <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>Licensee Authentication</Text>
+                    <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
+                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
+                    </View>
                   </View>
-                </View>
                 </TouchableHighlight>
                 <View>
                   <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'#666666'}}></Text>
