@@ -6,14 +6,15 @@ const client = new Lokka({
   //transport: new Transport('http://graphql-swapi.parseapp.com/')
 });
 
-function createProduct(productName, productActivity) {
+function createProduct(productName, productActivity,producerId) {
     var productDescription="I am high yes I am high. and if you want go get high, get one of these " + productName + " to get high"; 
     const parameters = {
         productName: productName,
         productDescription: productDescription,
         productActivity: productActivity,
+        producerId: producerId,
     };
-    const query = `($productName: String!,$productDescription: String!, $productActivity: String!){
+    const query = `($productName: String!,$productDescription: String!, $productActivity: String!, $producerId: ID!){
         newProduct:
         createProduct(
             effect: "happy,50,relaxed,50,stoned,80,"
@@ -33,6 +34,7 @@ function createProduct(productName, productActivity) {
             name: $productName,
             image:["image1.png","image2.png"],
             description: $productDescription,
+            producerId: $producerId,
         ){id,name}
     }`;
 
@@ -43,6 +45,19 @@ function createProduct(productName, productActivity) {
         console.log(error);
     });
 }
-for (var i=0; i < 100; i++) {
-    createProduct("product" + i,"relax,sleep,chill");
+
+function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+client.query(`{
+    allProducers{ id, name }
+}`).then((result)=> {
+    var allProducers = result.allProducers;
+    console.log("got producers");
+    for (var i=0; i < 100; i++) {
+        var producerIndex = getRandom(0,allProducers.length-1);
+        console.log("linking to producer " + allProducers[producerIndex].name);
+        createProduct("product" + i,"relax,sleep,chill",allProducers[producerIndex].id);
+    }
+});
