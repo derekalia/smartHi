@@ -227,7 +227,7 @@ export class HerbyBar extends Component {
 
     render() {
         return (
-        <View style={{height:60,backgroundColor:'white',borderBottomWidth:1,borderColor:'#B2B2B2',zIndex:10}}>
+        <View style={{height:60,backgroundColor:'white',borderBottomWidth:.5,borderColor:'#929292',zIndex:10}}>
         <View style={{flexDirection:'row',marginTop:20,marginHorizontal:10,flex:1}}>
             <View style={{flex:1,}}>
                 {this._getBack()}
