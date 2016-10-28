@@ -143,7 +143,6 @@ class ProductScene extends Component {
         if (this.props.loading) {
             return (<HerbyLoading/>);
         }
-        console.log(this.props.product);
         return (
         <View>
           <HerbyBar name={this.props.product.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>

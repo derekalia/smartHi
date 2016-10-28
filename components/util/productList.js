@@ -18,7 +18,6 @@ class ProductList extends Component {
     render() {
         return (
               <View style={{minHeight:100,}}>
-
                 {this._renderProducts()}
             </View>
         );
@@ -32,8 +31,12 @@ class ProductList extends Component {
         var products = [];
         if (this.props.productList != null) {
             for (var i=0; i < this.props.productList.length; i++) {
-                var productId = this.props.productList[i].id;
                 var product   = this.props.productList[i];
+                if (product.product != null) {
+                    product = this.props.productList[i].product;
+                    product.price = this.props.productList[i].price;
+                }
+                var productId = product.id;
                 products.push(
                     <ProductItem goProduct={(productId) => this.props.goProduct(productId)} product={product} key={productId}/>
                 );

@@ -13,6 +13,8 @@ class RetailerInfo extends Component {
     _onRating(rating) {
     }
     render() {
+        //BatsFix. Parse this.props.retailer.ratingCount later;
+        var ratingCount = 324;
         return (
         <View style={{backgroundColor:'#ECECEC'}}>
         <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:4,marginTop: 8}}>
@@ -41,7 +43,7 @@ class RetailerInfo extends Component {
                           rating={this.props.retailer.rating}
                           selectedStar={(rating) => this._onRating(rating)  }
                           />
-                      <Text style={{ fontSize: 18,marginTop:2 }}> ({this.props.retailer.ratingCount}) </Text>
+                      <Text style={{ fontSize: 18,marginTop:2 }}> ({ratingCount}) </Text>
                     </View>
                 </View>
             </View>

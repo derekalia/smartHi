@@ -13,24 +13,11 @@ export const PRODUCT_SUCCESS = 'PRODUCT_SUCCESS';
 export const PRODUCT_ERROR = 'PRODUCT_ERROR';
 
 export function GetProductAction(productId, switchTab) {
-    return async function (dispatch,getState){
-        NotifyBusy(dispatch);
-        try {
-            // BatsFix. For test purposes use product 1. Remove this later.
-            var product = await GetProduct(1);
-            dispatch({
-                type:SWITCH_SCENE,
-                sceneId: ProductSceneId,
-                item: product,
-                itemId: productId,
-            });
-            NotifyDone(dispatch,null);
-        } 
-        catch(error) {
-            console.log("GetProductActionWorker:"+error);
-            NotifyDone(dispatch,"Error getting product");
-        }
-    }
+    return ({ 
+        type:SWITCH_SCENE,
+        sceneId: ProductSceneId,
+        itemId: productId,
+    });
 }
 
 export function UpdateProductAction(productId) {
@@ -41,6 +28,7 @@ export function UpdateProductAction(productId) {
         NotifyDone(dispatch,"Updated product");
     }
 }
+
 export function GoUpdateProductAction(productId,producerId) {
     return async function(dispatch,getState) {
         NotifyBusy(dispatch);

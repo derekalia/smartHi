@@ -12,23 +12,11 @@ export const RETAILER_SUCCESS = 'RETAILER_SUCCESS';
 export const RETAILER_ERROR   = 'RETAILER_ERROR';
 
 export function GetRetailerAction(retailerId) {
-
-    return async function (dispatch, getState) {
-        NotifyBusy(dispatch);
-        try {
-            var retailer =  await GetRetailer(1);
-            dispatch({
-                type:SWITCH_SCENE,
-                sceneId: RetailerSceneId,
-                item: retailer,
-            });
-            NotifyDone(dispatch,null);
-        }
-        catch(error) {
-            console.log("GetRetailerAction:"+error);
-            NotifyDone(dispatch,"GetRetailer failed");
-        }
-    }
+   return({
+        type:SWITCH_SCENE,
+        sceneId: RetailerSceneId,
+        itemId: retailerId,
+   });
 }
 
 export function LicenseeLoginAction(name,password) {

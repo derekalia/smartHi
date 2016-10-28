@@ -22,7 +22,6 @@ class ProductInfo extends Component {
             case 'rosin':  infoMessage = "Rosin is a solventless extraction method using heat an pressure. Rosin offers full spectrum of flavor and potiency from plant material."; break;
             case 'sativa': infoMessage = "sorry, the same here, no information whatsoever"; break;
         }
-        console.log("showing info now");
         this.setState({showInfo:true,infoMessage:infoMessage});
     }
     _hideInfo() {
@@ -93,6 +92,34 @@ class ProductInfo extends Component {
         </View>
         );
     }
+    _renderRating() {
+        //BatsFix. parse this.props.product.ratingCount later
+        var ratingCount = 356;
+        return (
+        <View style={{ marginTop: 5, marginHorizontal: 10,flexDirection: "row" }}>
+            <View style={{flex:1.2,alignItems: 'flex-start', flexDirection: "row",marginTop:8}}>
+                <StarRating
+                    disabled={true}
+                    maxStars={5}
+                    starSize={28}
+                    starColor={'#D0021B'}
+                    rating={this.props.product.rating}
+                    selectedStar={(rating) => this._onRating(rating) }
+                    />
+                <Text style={{ fontSize: 20,marginTop:1 }}> ({ratingCount}) </Text>
+            </View>
+            <View style={{flex:1,flexDirection: "row",justifyContent:'flex-end' }}>
+              <TouchableOpacity style={Styles.tagCategory} onPress={()=>this._showInfo('rosin')}>
+                  <Text style={Styles.tagTextCategory}>rosin</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={Styles.tagType} onPress={()=>this._showInfo('sativa')}>
+                  <Text style={Styles.tagTextType}>sativa</Text>
+              </TouchableOpacity>
+            </View>
+        </View>
+
+        );
+    }
     render() {
         return (
           <ScrollView style={{backgroundColor:'#ECECEC'}}>
@@ -101,27 +128,6 @@ class ProductInfo extends Component {
                 {/* Overall rating */}
                 <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 8 }}>
                     <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.props.product.name}</Text>
-                </View>
-                <View style={{ marginTop: 5, marginHorizontal: 10,flexDirection: "row" }}>
-                    <View style={{flex:1.2,alignItems: 'flex-start', flexDirection: "row",marginTop:8}}>
-                        <StarRating
-                            disabled={true}
-                            maxStars={5}
-                            starSize={28}
-                            starColor={'#D0021B'}
-                            rating={this.props.product.rating}
-                            selectedStar={(rating) => this._onRating(rating) }
-                            />
-                        <Text style={{ fontSize: 20,marginTop:1 }}> ({this.props.product.ratingCount}) </Text>
-                    </View>
-                    <View style={{flex:1,flexDirection: "row",justifyContent:'flex-end' }}>
-                      <TouchableOpacity style={Styles.tagCategory} onPress={()=>this._showInfo('rosin')}>
-                          <Text style={Styles.tagTextCategory}>rosin</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity style={Styles.tagType} onPress={()=>this._showInfo('sativa')}>
-                          <Text style={Styles.tagTextType}>sativa</Text>
-                      </TouchableOpacity>
-                    </View>
                 </View>
                 {/* Description */}
                 <View style={{ marginHorizontal: 10 }}>

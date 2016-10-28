@@ -6,10 +6,15 @@ import {Dimensions,StyleSheet, Text, View, ScrollView, Image, TextInput, Touchab
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
+// import apollo helper
+import {graphql} from 'react-apollo';
+import gql from 'graphql-tag';
+
+
 import StarRating from 'react-native-star-rating';
 //get internal components
 import {GetProductAction,ShowMapAction} from '../../../actions';
-import {HerbyBar,HerbyFrameBar,HerbyPicker} from '../../../common/controls.js';
+import {HerbyLoading,HerbyBar,HerbyFrameBar,HerbyPicker} from '../../../common/controls.js';
 import HerbySearchBar from '../../util/herbySearchBar.js';
 
 
@@ -133,9 +138,13 @@ class RetailerScene extends Component {
     // from state or props
     //
     render() {
+        if (this.props.loading) {
+            return (<HerbyLoading/>);
+        }
+        console.log(this.props.retailer);
         return (
         <View style={{backgroundColor:'#ECECEC'}}>
-        <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+        <HerbyBar name={this.props.retailer.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
         <ScrollView
             style={{flex:1,marginTop:0,height:this._height,backgroundColor:'#ECECEC'}}
             stickyHeaderIndices={[1]}>
@@ -151,7 +160,7 @@ class RetailerScene extends Component {
                 renderScene={this.renderScene}
                 initialRoute = {RetailerFrames[InfoFrameId]}
                 initialRouteStack = {RetailerFrames}
-                retailer={this.props.item}
+                retailer={this.props.retailer}
                 goProduct={(t)=>this.props.GetProductAction(t)}
                 showMap = {()=>this._showMap()}
             />
@@ -166,8 +175,56 @@ class RetailerScene extends Component {
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,ShowMapAction }, dispatch); }
 
-module.exports = connect(null, mapActionToProps)(RetailerScene);
+//
+// BatsFix. Attach apollo query to the component. This creates props loading and products on HomeScene
+//
+const apolloRetailer = gql`query($itemId: ID!){
+    Retailer(id:$itemId)
+    {
+        id,
+        name,
+        description,
+        image,
+        address,
+        rating,
+        ratingCount,
+        products {
+            price,
+            product {id,name,image,rating,ratingCount,activity,thc,cbd,thca},
+        },
+        retailerReviews {
+            id,
+            name,
+            comment,
+            user {id,name},
+            rating
+        },
+    }
+}`;
+/*
+const apolloProducts = gql`query($itemId: String!) {
+    allProducts(first:20,filter:{activity_contains:$itemId}){
+      id,
+      name,
+      activity,
+      rating,
+      ratingCount,
+      thc,
+      cbd,
+    }
+}`;
+*/
+//
+// BatsFix. Maps data obtained from the query to props.
+//
+function mapDataToProps({props,data}) {
+    return ({
+        loading: data.loading,
+        retailer: data.Retailer,
+    });
+}
 
+module.exports = graphql(apolloRetailer,{props:mapDataToProps})(connect(null,mapActionToProps)(RetailerScene));
 
 const Styles = StyleSheet.create({
     container: {
