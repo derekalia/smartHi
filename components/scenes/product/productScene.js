@@ -78,7 +78,7 @@ class ProductRelated extends Component {
                       <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Related Products</Text>
                   </View>
               </View>
-              
+
                 <ProductList productList={this.props.product.related} goProduct={(id)=>this._goProduct(id)}/>
 
             </ScrollView>
@@ -140,8 +140,8 @@ class ProductScene extends Component {
               style={{marginTop:0,height:this._height,backgroundColor:'#ECECEC'}}
               stickyHeaderIndices={[1]}>
               <Image source={require('../../../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
-              {/* <HerbyFrameBar entries={['INFO','REVIEWS','RETAILERS','RELATED']} setFrame={(t)=>this._setFrame(t)}/> */}
-              <HerbyFrameBar entries={['Info','Reviews','Retailers','Related']} setFrame={(t)=>this._setFrame(t)}/>
+              <HerbyFrameBar entries={['INFO','REVIEWS','RETAILERS','RELATED']} setFrame={(t)=>this._setFrame(t)}/>
+              {/* <HerbyFrameBar entries={['Info','Reviews','Retailers','Related']} setFrame={(t)=>this._setFrame(t)}/> */}
               <Navigator
                   style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
                   ref="navigator"

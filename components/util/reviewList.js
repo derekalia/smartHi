@@ -109,14 +109,14 @@ class ReviewList extends Component {
                     <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Reviews</Text>
                 </View>
                 <View style={Styles.column}>
-                    <View style={Styles.row}>
+                    {/* <View style={Styles.row}>
                         <TextInput
-                            style={{ height: 30, width: 345, borderColor: 'gray', borderWidth: 1, margin: 2, borderRadius: 4, fontSize: 15,marginTop:10 }}
+                            style={{ height: 30, flex:1, borderColor: 'gray', borderWidth: 1, margin: 2, borderRadius: 4, fontSize: 15,marginTop:10 }}
                             onChangeText={(text) => this.setState({ text }) }
                             value={this.state.text}
                             placeholder={' Say something'}
                             />
-                    </View>
+                    </View> */}
                     <ReviewItem goReview={()=>this._goReview()}/>
                     <ReviewItem goReview={()=>this._goReview()}/>
                     <ReviewItem goReview={()=>this._goReview()}/>
