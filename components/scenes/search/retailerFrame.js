@@ -53,7 +53,7 @@ class RetailerFrame extends Component {
         return(
           <View style={{backgroundColor:'#ECECEC',borderWidth:0,borderColor:'black'}}>
 
-          <View style={{borderRadius:2,top:5,marginHorizontal:6,backgroundColor:'white',}}>
+          <View style={{borderRadius:2,top:6,marginHorizontal:6,backgroundColor:'white',}}>
 
           <View style={{flexDirection:'row', justifyContent: 'space-between',alignItems:'center',}}>
             <TouchableOpacity onPress={()=> this._switchFiltering()} style={{alignSelf:'center'}}>

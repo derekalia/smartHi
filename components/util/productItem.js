@@ -80,7 +80,7 @@ class ProductItem extends Component {
         // BatsFix. this should come from the product
         var iS = 'Rosin2.png';
         return (
-                <TouchableHighlight onPress={() => this.props.goProduct(this.props.product.id)} underlayColor={'white'}>
+                <TouchableHighlight style={{backgroundColor:'white'}} onPress={() => this.props.goProduct(this.props.product.id)} underlayColor={'white'}>
                 <View>
 
                     <View style={{flex: 1, flexDirection: 'row', margin: 5,borderWidth:0,borderColor:'#ECECEC',marginHorizontal:10,alignItems:'center'}}>

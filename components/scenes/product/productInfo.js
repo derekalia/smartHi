@@ -95,9 +95,9 @@ class ProductInfo extends Component {
     }
     render() {
         return (
-          <View style={{backgroundColor:'#ECECEC'}}>
-            <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:4}}>
-                <View style={{backgroundColor:'#ECECEC',flex:1,height:8,marginHorizontal:0}}/>
+          <ScrollView style={{backgroundColor:'#ECECEC'}}>
+            <View style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:2,marginTop:6}}>
+
                 {/* Overall rating */}
                 <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 8 }}>
                     <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.props.product.name}</Text>
@@ -224,21 +224,20 @@ class ProductInfo extends Component {
                     <View style={{ height: 40, justifyContent: 'center' }}>
                         <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Producer</Text>
                     </View>
-                    <View style={{}}>
+                    <View style={{marginBottom:10}}>
                       <ProducerItem producer={this.props.product.producer} goProducer={(t) => this.props.goProducer(t)}/>
                     </View>
                 </View>
-                <View style={{ height: 70, justifyContent: 'center' }}/>
+                {/* <View style={{ height: 70, justifyContent: 'center' }}/> */}
 
-                </ScrollView>
-                <View style={{flex:1.3}}/>
+                </View>
+
 
                 <View style={{marginTop:20}}>
                 <HerbyModal  show={this.state.showInfo}>
                     <View style={{flex:1,alignItems:'center',backgroundColor:'rgba(0, 0, 0, 0.5)'}}>
                         <View style={{flex:1}}/>
                         <View style={{flex:1.2,backgroundColor:'white',borderRadius:10,width:320}}>
-
                             <View style={{flex:.8,marginTop:20}}><TouchableOpacity style={[Styles.tagCategory,{width:100,alignSelf:'center'}]}>
                               <Text style={Styles.tagTextCategory}>rosin</Text>
                             </TouchableOpacity>
@@ -260,7 +259,8 @@ class ProductInfo extends Component {
                     </View>
                  </HerbyModal>
                  </View>
-            </View>
+                 <View style={{height:100}}/>
+            </ScrollView>
         );
     }
 }
@@ -269,25 +269,26 @@ module.exports=ProductInfo;
 
 const Styles = StyleSheet.create({
     tagType: {
-        margin: 4,
-        borderRadius: 20,
-        borderWidth: 1,
-        borderColor: "#F7A700",
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        alignItems: 'center',
+      margin: 4,
+      borderRadius: 20,
+      borderWidth: 1.5,
+      borderColor: "#F7A700",
+      backgroundColor: 'white',
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     tagTextType: {
         color: "#F7A700",
-        marginTop: 7,
-        marginBottom: 7,
+        margin:8,
+        marginTop:(5),
         marginHorizontal: 10,
         fontSize:16,
+        fontFamily:'Dosis-Semibold'
     },
     tagCategory: {
         margin: 4,
         borderRadius: 20,
-        borderWidth: 1,
+        borderWidth: 1.5,
         borderColor: "#7BD500",
         backgroundColor: 'white',
         justifyContent: 'center',
@@ -295,10 +296,11 @@ const Styles = StyleSheet.create({
     },
     tagTextCategory: {
         color: "#7BD500",
-        marginTop: 7,
-        marginBottom: 7,
+        margin:8,
+        marginTop:(5),
         marginHorizontal: 10,
         fontSize:16,
+        fontFamily:'Dosis-Semibold'
     },
     tagEffect: {
         margin: 4,

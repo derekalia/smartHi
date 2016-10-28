@@ -27,7 +27,6 @@ class ProducerSocial extends Component {
     render() {
         return (
             <ScrollView style={{backgroundColor:'transparent'}}>
-                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
                 <HerbyFrameBar entries={['FOLLOWER','FOLLOWING']} setFrame={(t)=>this._setFrame(t)}/>
                 <UserList userList={this.state.frameId == 0?this.props.producer.following:this.props.producer.follower}/>
             </ScrollView>
@@ -39,8 +38,8 @@ class ProducerSocial extends Component {
 class ProducerInfo extends Component {
     render() {
         return (
-        <View>
-            <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+        <View style={{backgroundColor:'white',flex:1,marginHorizontal:6,marginTop:6,borderRadius:3}}>
+
             <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
                 <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.props.producer.name} - Issaquah, WA</Text>
                 <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
@@ -71,8 +70,7 @@ class ProducerInfo extends Component {
 class ProducerReview extends Component {
     render() {
         return (
-          <View>
-          <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+          <View style={{backgroundColor:'white',flex:1,marginHorizontal:6,marginTop:6,borderRadius:3}}>
             <ReviewList/>
             </View>
         );
@@ -112,7 +110,7 @@ class ProducerScene extends Component {
     _getSearchBar() {
         if (this.state.frameId == MenuFrameId) {
             return (
-                <HerbySearchBar entries={['ALL','FLOWER','CONCENTRATE','INFUSED',]}/>
+                <HerbySearchBar entries={['ALL','FLOWER','CONCENTRATE','INFUSED','EDIBLES']}/>
             );
         }
         return null;
@@ -135,19 +133,20 @@ class ProducerScene extends Component {
 
     render() {
         return (
-        <View style={{flex:1}}>
+        <View style={{flex:1,backgroundColor:'#ECECEC'}}>
         <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
-        <ScrollView 
-            style={{marginTop:0,height:this._height,backgroundColor:'white'}} 
+        <ScrollView
+            style={{marginTop:0,height:this._height,backgroundColor:'#ECECEC'}}
             stickyHeaderIndices={[1]}>
             <Image source={require('../../../media/forged1.png') } style={{ height: 190, width: 380 }}/>
             <View>
                 <HerbyFrameBar entries={['INFO','PRODUCTS','REVIEWS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
-                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+
                 {this._getSearchBar()}
             </View>
+
             <Navigator
-                style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
+                style={{height:this._height,backgroundColor:'white',justifyContent: 'flex-start',marginTop:6,marginHorizontal:6}}
                 ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
@@ -156,6 +155,7 @@ class ProducerScene extends Component {
                 producer={this.props.item}
                 goProduct={(t)=>this.props.GetProductAction(t)}
             />
+
         </ScrollView>
         </View>
         );

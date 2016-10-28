@@ -17,7 +17,8 @@ class ProductList extends Component {
     // BatsFix. minHeight is needed to ensure product is visible
     render() {
         return (
-              <View style={{minHeight:100,}}>              
+              <View style={{minHeight:100,}}>
+
                 {this._renderProducts()}
             </View>
         );

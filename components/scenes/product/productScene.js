@@ -24,7 +24,7 @@ import ProductInfo    from './productInfo.js';
 class ProductReview extends Component {
     render() {
         return (
-            <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:4}}>
+            <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:2}}>
                 <View style={{backgroundColor:'#ECECEC',flex:1,height:6,marginHorizontal:0}}/>
                 <ReviewList/>
             </ScrollView>
@@ -46,7 +46,7 @@ class ProductRetailer extends Component {
     render() {
         return (
             <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:4}}>
-            <View style={{backgroundColor:'#ECECEC',flex:1,height:10}}/>
+            <View style={{backgroundColor:'#ECECEC',flex:1,height:6}}/>
 
             <View style={{ marginHorizontal: 10, marginTop: 5,marginBottom:5 }}>
                 <View style={{ height: 40}}>
@@ -85,7 +85,7 @@ class ProductRelated extends Component {
                       <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Related Products</Text>
                   </View>
               </View>
-              
+
                 <ProductList productList={this.props.product.related} goProduct={(id)=>this._goProduct(id)}/>
 
             </ScrollView>
@@ -151,8 +151,8 @@ class ProductScene extends Component {
               style={{marginTop:0,height:this._height,backgroundColor:'#ECECEC'}}
               stickyHeaderIndices={[1]}>
               <Image source={require('../../../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
-              {/* <HerbyFrameBar entries={['INFO','REVIEWS','RETAILERS','RELATED']} setFrame={(t)=>this._setFrame(t)}/> */}
-              <HerbyFrameBar entries={['Info','Reviews','Retailers','Related']} setFrame={(t)=>this._setFrame(t)}/>
+              <HerbyFrameBar entries={['INFO','REVIEWS','RETAILERS','RELATED']} setFrame={(t)=>this._setFrame(t)}/>
+              {/* <HerbyFrameBar entries={['Info','Reviews','Retailers','Related']} setFrame={(t)=>this._setFrame(t)}/> */}
               <Navigator
                   style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
                   ref="navigator"
