@@ -21,7 +21,7 @@ import ProductInfo    from './productInfo.js';
 class ProductReview extends Component {
     render() {
         return (
-            <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:4}}>
+            <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:2}}>
                 <View style={{backgroundColor:'#ECECEC',flex:1,height:6,marginHorizontal:0}}/>
                 <ReviewList/>
             </ScrollView>
@@ -43,7 +43,7 @@ class ProductRetailer extends Component {
     render() {
         return (
             <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:4}}>
-            <View style={{backgroundColor:'#ECECEC',flex:1,height:10}}/>
+            <View style={{backgroundColor:'#ECECEC',flex:1,height:6}}/>
 
             <View style={{ marginHorizontal: 10, marginTop: 5,marginBottom:5 }}>
                 <View style={{ height: 40}}>

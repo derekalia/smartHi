@@ -39,7 +39,7 @@ class ProductFrame extends Component {
 
         <View style={{flex:1,top:-20,backgroundColor:'#ECECEC',borderWidth:0,borderColor:'black'}}>
 
-        <View style={{borderRadius:2,top:5,marginHorizontal:6,backgroundColor:'white',}}>
+        <View style={{borderRadius:2,top:6,marginHorizontal:6,backgroundColor:'white',}}>
         <View style={{flexDirection:'row', justifyContent: 'space-between',alignItems:'center',}}>
           <TouchableOpacity onPress={()=> this._switchFiltering()} style={{alignSelf:'center'}}>
               <View style={{height:40,margin:10,width:150,backgroundColor:'white',borderColor: '#9b9b9b',borderWidth:1, borderRadius:22,justifyContent:'center'}}>

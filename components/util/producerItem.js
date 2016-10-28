@@ -29,6 +29,7 @@ class ProducerItem extends Component {
         //
         return (
             <TouchableOpacity style={{
+              flex:1,
                 flexDirection: 'row',
                 height:90,
                 marginBottom: 10,marginTop:10,backgroundColor:'transparent'
@@ -114,9 +115,9 @@ const Styles = StyleSheet.create({
     },
     bg: {
         position: 'absolute',
-        width: 355,
+        width: 340,
         height: 100,
-        borderTopLeftRadius: 60,
+
         borderRadius: 6
     },
     storeName: {

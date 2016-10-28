@@ -20,7 +20,7 @@ class UserFrame extends Component {
 
     render() {
         return(
-        <ScrollView style={{marginTop: 0,}}>
+        <ScrollView style={{marginTop: 1,}}>
             <UserList userList={this.props.users}/>
         </ScrollView>
         );
