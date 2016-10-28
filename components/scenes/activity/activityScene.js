@@ -13,10 +13,14 @@ import {StyleSheet, Text, View, ScrollView, TouchableOpacity,TouchableHighlight,
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
+// import apollo helper
+import {graphql} from 'react-apollo';
+import gql from 'graphql-tag';
+
 //get internal components
 import ProductList        from '../../util/productList.js';
 import {GetProductAction} from '../../../actions';
-import {HerbyBar}         from '../../../common/controls.js';
+import {HerbyLoading,HerbyBar}         from '../../../common/controls.js';
 
 class ActivityScene extends Component {
     constructor(props) {
@@ -31,8 +35,11 @@ class ActivityScene extends Component {
     }
 
     render() {
-        var name = this.props.item.activity;
+        var name = this.props.itemId;
         name = name[0].toUpperCase() + name.slice(1);
+        if (this.props.loading) {
+            return (<HerbyLoading/>);
+        }
         return (
             <View style={[{ flex: 1 }]}>
             <HerbyBar name={name}  navigator={this.props.navigator}/>
@@ -47,14 +54,14 @@ class ActivityScene extends Component {
                                 source={require('../../../media/ActivitySceneImages/adventure11.png')}>
 
                         <Text style={{ textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 5, textShadowColor: "black", fontSize: 24, color: "white", margin: 8}}>
-                            {this.props.item.activity}
+                            {this.props.itemId}
                         </Text>
 
                     </Image>
                 </View>
 
                 <ScrollView style={{flex:1}}>
-                    <ProductList productList={this.props.item.productList} goProduct={(t)=> this._goProduct(t)}/>
+                    <ProductList productList={this.props.products} goProduct={(t)=> this._goProduct(t)}/>
                 </ScrollView>
             </ScrollView>
             </View>
@@ -67,7 +74,32 @@ class ActivityScene extends Component {
 // Connect GetProductAction to props
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction }, dispatch); }
-module.exports = connect(null,mapActionToProps)(ActivityScene);
+
+//
+// BatsFix. Attach apollo query to the component. This creates props loading and products on HomeScene
+//
+const apolloProducts = gql`query($itemId: String!) {
+    allProducts(filter:{activity_contains:$itemId}){
+      id,
+      name,
+      activity,
+      rating,
+      ratingCount,
+      thc,
+      cbd,
+    }
+}`;
+//
+// BatsFix. Maps data obtained from the query to props.
+//
+function mapDataToProps({props,data}) {
+    return ({
+        loading: data.loading,
+        products: data.allProducts,
+    });
+}
+
+module.exports = graphql(apolloProducts,{props:mapDataToProps})(connect(null,mapActionToProps)(ActivityScene));
 
 const Styles = StyleSheet.create({
     container: {
