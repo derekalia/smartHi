@@ -16,7 +16,7 @@ export function GetRetailerAction(retailerId) {
     return async function (dispatch, getState) {
         NotifyBusy(dispatch);
         try {
-            var retailer =  await GetRetailer(retailerId);
+            var retailer =  await GetRetailer(1);
             dispatch({
                 type:SWITCH_SCENE,
                 sceneId: RetailerSceneId,

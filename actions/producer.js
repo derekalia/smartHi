@@ -18,7 +18,7 @@ export function GetProducerAction(producerId) {
         NotifyBusy(dispatch);
         try {
             // BatsFix. Fetch producer data first using retailerId
-            var producer = await GetProducer(producerId,true);        
+            var producer = await GetProducer(1,true);        
 
             dispatch({
                 type:SWITCH_SCENE,
