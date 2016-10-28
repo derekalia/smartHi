@@ -21,8 +21,8 @@ import ProductInfo    from './productInfo.js';
 class ProductReview extends Component {
     render() {
         return (
-            <ScrollView style={{backgroundColor:'white'}}>
-                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+            <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:4}}>
+                <View style={{backgroundColor:'#ECECEC',flex:1,height:6,marginHorizontal:0}}/>
                 <ReviewList/>
             </ScrollView>
         );
@@ -42,8 +42,8 @@ class ProductRetailer extends Component {
 
     render() {
         return (
-            <ScrollView style={{backgroundColor:'white'}}>
-            <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+            <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:4}}>
+            <View style={{backgroundColor:'#ECECEC',flex:1,height:10}}/>
 
             <View style={{ marginHorizontal: 10, marginTop: 5,marginBottom:5 }}>
                 <View style={{ height: 40}}>
@@ -71,16 +71,16 @@ class ProductRelated extends Component {
     render() {
         return (
 
-            <ScrollView style={{backgroundColor:'white'}}>
+            <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:4}}>
               <View style={{backgroundColor:'#ECECEC',height:10,marginHorizontal:0}}/>
               <View style={{ marginHorizontal: 10, marginTop: 5,marginBottom:5 }}>
                   <View style={{ height: 40, justifyContent: 'center' }}>
                       <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Related Products</Text>
                   </View>
               </View>
-              <ScrollView>
+              
                 <ProductList productList={this.props.product.related} goProduct={(id)=>this._goProduct(id)}/>
-                </ScrollView>
+
             </ScrollView>
         );
     }
@@ -137,10 +137,11 @@ class ProductScene extends Component {
         <View>
           <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
           <ScrollView
-              style={{marginTop:0,height:this._height,backgroundColor:'white'}}
+              style={{marginTop:0,height:this._height,backgroundColor:'#ECECEC'}}
               stickyHeaderIndices={[1]}>
               <Image source={require('../../../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
-              <HerbyFrameBar entries={['INFO','REVIEWS','RETAILERS','RELATED']} setFrame={(t)=>this._setFrame(t)}/>
+              {/* <HerbyFrameBar entries={['INFO','REVIEWS','RETAILERS','RELATED']} setFrame={(t)=>this._setFrame(t)}/> */}
+              <HerbyFrameBar entries={['Info','Reviews','Retailers','Related']} setFrame={(t)=>this._setFrame(t)}/>
               <Navigator
                   style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
                   ref="navigator"

@@ -9,8 +9,9 @@ import {connect} from 'react-redux';
 import StarRating from 'react-native-star-rating';
 //get internal components
 import {GetProductAction,ShowMapAction} from '../../../actions';
-import {HerbyBar,HerbyFrameBar} from '../../../common/controls.js';
+import {HerbyBar,HerbyFrameBar,HerbyPicker} from '../../../common/controls.js';
 import HerbySearchBar from '../../util/herbySearchBar.js';
+
 
 import ReviewList         from '../../util/reviewList.js';
 import ProductList        from '../../util/productList.js';
@@ -20,10 +21,19 @@ import RetailerInfo       from './retailerInfo.js';
 class RetailerMenu extends Component {
     render() {
         return (
-        <ScrollView>
-            <ProductList style={{ marginHorizontal: 10}} productList={this.props.retailer.products} goProduct={(id)=>this.props.goProduct(id)}/>
+
+        <View style={{backgroundColor:'white',marginHorizontal:8,marginTop:8}}>
+        <View style={{flexDirection:"row",alignSelf:'flex-start',justifyContent:'center',alignItems:'center',marginLeft:10,flex:1,height:25,marginTop:10}}>
+          <Text style={{fontWeight:'bold',fontSize:16}}>Sort By: </Text>
+          <View style={{backgroundColor:'#ECECEC',flexDirection:"row",alignItems:'center',justifyContent:'center',alignSelf:'center',height:20,width:80,borderRadius:4,height:25}}>
+            <HerbyPicker options={['Price ','Distance ','Rating ']} style={{fontSize:16}} />
+            <Image style={{width:14,height:8,marginRight:3,alignItems:'flex-end'}} source={require("../../../media/Triangle1.png")} />
+          </View>
+          </View>
+
+            <ProductList style={{ marginHorizontal: 8,}} productList={this.props.retailer.products} goProduct={(id)=>this.props.goProduct(id)}/>
             <View style={{width:300,height:110}}></View>
-        </ScrollView>
+        </View>
 
         );
     };
@@ -49,7 +59,6 @@ class RetailerSocial extends Component {
     render() {
         return (
             <ScrollView style={{backgroundColor:'transparent'}}>
-                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
                 <HerbyFrameBar entries={['FOLLOWER','FOLLOWING']} setFrame={(t)=>this._setFrame(t)}/>
                 <UserList userList={this.state.frameId == 0?this.props.retailer.following:this.props.retailer.follower}/>
             </ScrollView>
@@ -125,15 +134,14 @@ class RetailerScene extends Component {
     //
     render() {
         return (
-        <View>
+        <View style={{backgroundColor:'#ECECEC'}}>
         <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
         <ScrollView
-            style={{flex:1,marginTop:0,height:this._height,backgroundColor:'white'}}
+            style={{flex:1,marginTop:0,height:this._height,backgroundColor:'#ECECEC'}}
             stickyHeaderIndices={[1]}>
             <Image source={require('../../../media/ikes1.png') } style={{ height: 190, width: 380 }}/>
             <View>
                 <HerbyFrameBar entries={['INFO','MENU','REVIEWS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
-                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
                 {this._getSearchBar()}
             </View>
             <Navigator

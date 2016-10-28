@@ -111,10 +111,6 @@ class LicenseeLoginScene extends Component {
 
                   </View>
                 </View>
-
-                <View style={{flexDirection:'row'}}>
-                    <HerbyButton2 name="Continue" onPress={()=>this._licenseeLogin()}/>
-                </View>
                     {/* <HerbyInput name="State" value=''/>
                     <HerbyInput name="Email" value=''/>
                     <HerbyInput name="UBI" value=''/>
@@ -124,12 +120,9 @@ class LicenseeLoginScene extends Component {
                     </View> */}
                     {/* <HerbyNotification/> */}
                 </View>
-
-
         );
     }
 }
-
 
 //
 // Connect LoginLicenseeAction to props

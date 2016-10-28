@@ -31,10 +31,11 @@ class ProductInfo extends Component {
 
     render() {
         return (
-            <ScrollView>
-                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+          <View style={{backgroundColor:'#ECECEC'}}>
+            <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:4}}>
+                <View style={{backgroundColor:'#ECECEC',flex:1,height:8,marginHorizontal:0}}/>
                 {/* Overall rating */}
-                <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 10 }}>
+                <View style={{ justifyContent: "flex-end", marginTop: 10, marginHorizontal: 8 }}>
                     <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.props.product.name}</Text>
                 </View>
                 <View style={{ marginTop: 5, marginHorizontal: 10,flexDirection: "row" }}>
@@ -206,7 +207,10 @@ class ProductInfo extends Component {
                       <ProducerItem producer={this.props.product.producer} goProducer={(t) => this.props.goProducer(t)}/>
                     </View>
                 </View>
-                <View style={{ height: 120, justifyContent: 'center' }}/>
+                <View style={{ height: 70, justifyContent: 'center' }}/>
+
+                </ScrollView>
+                <View style={{flex:1.3}}/>
 
                 <View style={{marginTop:20}}>
                 <HerbyModal  show={this.state.showInfo}>
@@ -236,7 +240,8 @@ class ProductInfo extends Component {
                  </HerbyModal>
                  </View>
 
-            </ScrollView>
+
+            </View>
         );
     }
 }

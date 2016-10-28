@@ -12,7 +12,7 @@ class HerbySearchBarItem extends Component {
     render () {
         var selected = (this.props.selected == this.props.name);
         return(
-        <TouchableOpacity onPress={()=>this._onPress()} style={{marginHorizontal:10,marginTop:7,borderBottomWidth:selected?1:0,borderColor:'#468EE5',}}>
+        <TouchableOpacity onPress={()=>this._onPress()} style={{marginHorizontal:10,marginTop:7,borderBottomWidth:selected?2:0,borderColor:'#468EE5',}}>
            <Text style={{marginBottom:16,color:selected?'#468EE5':'#9B9B9B',}}>{this.props.name}</Text>
         </TouchableOpacity>
         );
@@ -66,6 +66,7 @@ export class HerbySearchBar extends Component {
         var modalHeight = this.maxHeight*0.8;
         var modalWidth  = this.maxWidth*0.95;
         return(
+        <View style={{backgroundColor:'#ECECEC'}}>
         <View style={{backgroundColor:'white'}}>
 
         <Modal
@@ -109,12 +110,13 @@ export class HerbySearchBar extends Component {
             </View>
          </Modal>
 
-         <View style={{flexDirection: "row",marginTop:20,marginLeft:10,marginRight:10,}}>
+
+         <View style={{flexDirection: "row",marginTop:10,marginLeft:10,marginRight:10,}}>
             <View style={[{ flex: 5,}]}>
               <View style={{height: 34,borderWidth:3,borderColor:'#ECECEC',borderRadius:8,backgroundColor: '#ECECEC',}}>
                 <TextInput style={{marginHorizontal:10,
                   height:28,
-                  fontSize: 20,
+                  fontSize: 16,
                   backgroundColor: '#ECECEC',}}
                     autoCapitalize  = "none"
                     autoCorrect     = {false}
@@ -129,18 +131,25 @@ export class HerbySearchBar extends Component {
             <TouchableOpacity style={{flex: .6,marginRight:0,}} onPress={()=>this._showFilters(true)}>
                 <Image style={{width:34,height:34}} source={require("../../media/plusButton11.png")}/>
             </TouchableOpacity>
+            </View>
         </View>
-        <ScrollView horizontal={true} style={{height:42, marginTop:10,marginBottom:20,borderBottomWidth:10,borderColor:'#ECECEC'}}>
+
+
+        <ScrollView horizontal={true} style={{height:50, marginTop:0,paddingTop:10,marginBottom:0,backgroundColor:'white',borderBottomWidth:.5,borderBottomColor:'#929292'}}>
             {this._getMenu()}
         </ScrollView>
-        <View style={{flexDirection:"row",alignSelf:'flex-start',justifyContent:'center',alignItems:'center',marginLeft:10,zIndex:999,flex:1,height:25,top:-5}}>
+
+        {/* <View style={{backgroundColor:'white',marginHorizontal:8}}>
+        <View style={{flexDirection:"row",alignSelf:'flex-start',justifyContent:'center',alignItems:'center',marginLeft:10,flex:1,height:25,marginTop:10}}>
           <Text style={{fontWeight:'bold',fontSize:16}}>Sort By: </Text>
           <View style={{backgroundColor:'#ECECEC',flexDirection:"row",alignItems:'center',justifyContent:'center',alignSelf:'center',height:20,width:80,borderRadius:4,height:25}}>
             <HerbyPicker options={['Price ','Distance ','Rating ']} style={{fontSize:16}} />
             <Image style={{width:14,height:8,marginRight:3,alignItems:'flex-end'}} source={require("../../media/Triangle1.png")} />
           </View>
+          </View>
+        </View> */}
         </View>
-        </View>
+
         );
     }
 }

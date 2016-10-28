@@ -14,7 +14,8 @@ class RetailerInfo extends Component {
     }
     render() {
         return (
-        <View>
+        <View style={{backgroundColor:'#ECECEC'}}>
+        <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:4,marginTop: 8}}>
             <View style={{ marginTop: 10, marginHorizontal: 10 }}>
             <View style={{flexDirection:'row'}}>
                 <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.props.retailer.name}</Text>
@@ -30,9 +31,7 @@ class RetailerInfo extends Component {
                 </TouchableOpacity>
                 </View>
             </View>
-
                 <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
-
                   <View style={{flex:1.5,alignItems:'flex-start',flexDirection:'row',marginTop:1}}>
                       <StarRating
                           disabled={true}
@@ -44,9 +43,6 @@ class RetailerInfo extends Component {
                           />
                       <Text style={{ fontSize: 18,marginTop:2 }}> ({this.props.retailer.ratingCount}) </Text>
                     </View>
-
-
-
                 </View>
             </View>
             <View style={{ marginHorizontal: 10 }}>
@@ -54,6 +50,7 @@ class RetailerInfo extends Component {
                     <Text>{this.props.retailer.description}</Text>
                 </View>
             </View>
+            </ScrollView>
         </View>
         );
     }
