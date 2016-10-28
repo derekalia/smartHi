@@ -5,13 +5,15 @@ const client = new Lokka({
   transport: new Transport('https://api.graph.cool/simple/v1/ciuettdq20nfv0174kpc512my')
 });
 
-function updateProduct(productId) {
+function updateProduct(productId,thc,cbd) {
     const parameters = {
-        productId: productId
+        productId: productId,
+        thc: thc,
+        cbd: cbd,
     };
-    const query = `($productId: ID!){
+    const query = `($productId: ID!,$thc:BigDecimal!,$cbd:BigDecimal!){
         updateProduct: 
-        updateProduct(id:$productId,activity:"work,hike,eat")
+        updateProduct(id:$productId,thc:$thc,cbd:$cbd)
         {
             id,
             name,
@@ -38,9 +40,10 @@ client.query(`{
     }
 }`).then( result => {
     var allProducts = result.allProducts;
-    for (var i=0; i < 20; i++) {
-         var index = getRandom(0, allProducts.length-1);
-         updateProduct(allProducts[index].id);
+    for (var i=0; i < allProducts.length; i++) {
+         var thc = getRandom(0, 50);
+         var cbd = getRandom(0, 50);
+         updateProduct(allProducts[i].id,thc,cbd);
     }
 }).catch((error) => {
     console.log(error);

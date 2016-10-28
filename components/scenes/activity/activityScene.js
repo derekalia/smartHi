@@ -79,7 +79,7 @@ function mapActionToProps(dispatch) { return bindActionCreators({ GetProductActi
 // BatsFix. Attach apollo query to the component. This creates props loading and products on HomeScene
 //
 const apolloProducts = gql`query($itemId: String!) {
-    allProducts(filter:{activity_contains:$itemId}){
+    allProducts(first:20,filter:{activity_contains:$itemId}){
       id,
       name,
       activity,
