@@ -199,7 +199,10 @@ const apolloProduct = gql`query($itemId: ID!){
             retailer {id,name,rating,address,},
         },
         producer {
-            id
+            id,
+            name,
+            rating,
+            ratingCount,
         }, 
         productReviews {
             id,

@@ -7,13 +7,18 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import StarRating from 'react-native-star-rating';
 
+// import apollo helper
+import {graphql} from 'react-apollo';
+import gql from 'graphql-tag';
+
+
 //get internal components
 import {GetProductAction} from '../../../actions';
 import ReviewList         from '../../util/reviewList.js';
 import ProductList        from '../../util/productList.js';
 import UserList           from '../../util/userList.js';
 import ProducerMenu       from './producerMenu.js';
-import {HerbyBar,HerbyFrameBar}    from '../../../common/controls.js';
+import {HerbyLoading,HerbyBar,HerbyFrameBar}    from '../../../common/controls.js';
 import HerbySearchBar from '../../util/herbySearchBar.js';
 
 class ProducerSocial extends Component {
@@ -37,6 +42,8 @@ class ProducerSocial extends Component {
 
 class ProducerInfo extends Component {
     render() {
+        //BatsFix. Parse this.props.producer.ratingCount later;
+        var ratingCount = 300;
         return (
         <View style={{backgroundColor:'white',flex:1,marginHorizontal:6,marginTop:6,borderRadius:3}}>
 
@@ -51,7 +58,7 @@ class ProducerInfo extends Component {
                         rating={this.props.producer.rating}
                         selectedStar={(rating) => this._onRating(rating) }
                         />
-                    <Text style={{ fontSize: 19 }}> ({this.props.producer.ratingCount}) </Text>
+                    <Text style={{ fontSize: 19 }}> ({ratingCount}) </Text>
                 </View>
             </View>
 
@@ -132,9 +139,13 @@ class ProducerScene extends Component {
     }
 
     render() {
+        if (this.props.loading) {
+            return (<HerbyLoading/>);
+        }
+
         return (
         <View style={{flex:1,backgroundColor:'#ECECEC'}}>
-        <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+        <HerbyBar name={this.props.producer.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
         <ScrollView
             style={{marginTop:0,height:this._height,backgroundColor:'#ECECEC'}}
             stickyHeaderIndices={[1]}>
@@ -152,7 +163,7 @@ class ProducerScene extends Component {
                 renderScene={this.renderScene}
                 initialRoute = {ProducerFrames[InfoFrameId]}
                 initialRouteStack = {ProducerFrames}
-                producer={this.props.item}
+                producer={this.props.producer}
                 goProduct={(t)=>this.props.GetProductAction(t)}
             />
 
@@ -167,7 +178,42 @@ class ProducerScene extends Component {
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction, }, dispatch); }
 
-module.exports = connect(null, mapActionToProps)(ProducerScene);
+//
+// BatsFix. Attach apollo query to the component. This creates props loading and product on HomeScene
+//
+const apolloProducer = gql`query($itemId: ID!){
+    Producer(id:$itemId)
+    {
+        id,
+        name,
+        image,
+        description,
+        rating,
+        ratingCount,
+        products {
+           id,
+           name,
+           rating,
+           ratingCount,
+           thc,
+           cbd,
+           thca,
+           activity,
+        },
+    }
+}`;
+ 
+//
+// BatsFix. Maps data obtained from the query to props.
+//
+function mapDataToProps({props,data}) {
+    return ({
+        loading: data.loading,
+        producer: data.Producer,
+    });
+}
+
+module.exports = graphql(apolloProducer,{props:mapDataToProps})(connect(null,mapActionToProps)(ProducerScene));
 
 const Styles = StyleSheet.create({
     container: {

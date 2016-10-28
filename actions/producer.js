@@ -13,25 +13,11 @@ export const PRODUCER_SUCCESS = 'PRODUCER_SUCCESS';
 export const PRODUCER_ERROR   = 'PRODUCER_ERROR';
 
 export function GetProducerAction(producerId) {
-
-    return async function (dispatch, getState) {
-        NotifyBusy(dispatch);
-        try {
-            // BatsFix. Fetch producer data first using retailerId
-            var producer = await GetProducer(1,true);        
-
-            dispatch({
-                type:SWITCH_SCENE,
-                sceneId: ProducerSceneId,
-                item: producer,
-            });
-            NotifyDone(dispatch,null);
-        }
-        catch(error) {
-            console.log("GetProducerAction:"+error);
-            NotifyDone(dispatch,"Error getting producer");
-        }
-    }
+    return ({
+        type:SWITCH_SCENE,
+        sceneId: ProducerSceneId,
+        itemId: producerId,
+    });
 }
 
 export function UpdateProducerAction(producerId) {
