@@ -8,10 +8,13 @@ import {Dimensions,StyleSheet, Text, View, ListView, ListViewDataSource, ScrollV
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import StarRating from 'react-native-star-rating';
+// import apollo helper
+import {graphql} from 'react-apollo';
+import gql from 'graphql-tag';
 
 //get internal components
 import {GetProductAction,GetRetailerAction,GetProducerAction,} from '../../../actions';
-import {HerbyPicker,HerbyBar,HerbyFrameBar} from '../../../common/controls.js';
+import {HerbyLoading,HerbyPicker,HerbyBar,HerbyFrameBar} from '../../../common/controls.js';
 
 import ReviewList     from '../../util/reviewList.js';
 import RetailerList   from '../../util/retailerList.js';
@@ -58,7 +61,7 @@ class ProductRetailer extends Component {
                 </View>
                 </View>
             </View>
-            <RetailerList retailerList={this.props.product.retailers} goRetailer={(id) => this._goRetailer(id)}/>
+            <RetailerList retailerList={this.props.product.prices} goRetailer={(id) => this._goRetailer(id)}/>
             </ScrollView>
         );
     }
@@ -69,6 +72,10 @@ class ProductRelated extends Component {
         this.props.goProduct(id);
     }
     render() {
+        // BatsFix. For now return empty if related is null
+        if (this.props.product.related == null) {
+            return null;
+        }
         return (
 
             <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:4}}>
@@ -133,9 +140,13 @@ class ProductScene extends Component {
 
     render() {
         var scrollerHeight = this._height;
+        if (this.props.loading) {
+            return (<HerbyLoading/>);
+        }
+        console.log(this.props.product);
         return (
         <View>
-          <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+          <HerbyBar name={this.props.product.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
           <ScrollView
               style={{marginTop:0,height:this._height,backgroundColor:'#ECECEC'}}
               stickyHeaderIndices={[1]}>
@@ -149,7 +160,7 @@ class ProductScene extends Component {
                   renderScene={this.renderScene}
                   initialRoute = {ProductFrames[ProductFrameId]}
                   initialRouteStack = {ProductFrames}
-                  product={this.props.item}
+                  product={this.props.product}
                   goProduct={(t)=>this.props.GetProductAction(t)}
                   goRetailer={(t)=>this.props.GetRetailerAction(t)}
                   goProducer={(t)=>this.props.GetProducerAction(t)}
@@ -166,4 +177,54 @@ class ProductScene extends Component {
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,GetRetailerAction,GetProducerAction,}, dispatch); }
 
-module.exports = connect(null, mapActionToProps)(ProductScene);
+//
+// BatsFix. Attach apollo query to the component. This creates props loading and product on HomeScene
+//
+const apolloProduct = gql`query($itemId: ID!){
+    Product(id:$itemId)
+    {
+        id,
+        name,
+        image,
+        description,
+        rating,
+        ratingCount,
+        thc,
+        cbd,
+        thca,
+        quality,
+        flavor,
+        potency,
+        prices {
+            price,
+            retailer {id,name,rating,address,},
+        },
+        producer {
+            id
+        }, 
+        productReviews {
+            id,
+            name,
+            comment,
+            user {id,name},
+            rating
+        },
+        users {
+            id,
+            name,
+        }
+    }
+}`;
+ 
+
+//
+// BatsFix. Maps data obtained from the query to props.
+//
+function mapDataToProps({props,data}) {
+    return ({
+        loading: data.loading,
+        product: data.Product,
+    });
+}
+
+module.exports = graphql(apolloProduct,{props:mapDataToProps})(connect(null,mapActionToProps)(ProductScene));

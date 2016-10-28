@@ -16,18 +16,22 @@ const initialState = {
     homeTab: {
         sceneId: HomeSceneId,
         item: null,
+        itemId: null,
     },
     searchTab: {
         sceneId: SearchSceneId,
         item: null,
+        itemId: null,
     },
     reviewTab: {
         sceneId: ReviewStartSceneId,
         item: null,
+        itemId: null,
     },
     profileTab: {
         sceneId: ProfileSceneId,
         item: null,
+        itemId: null,
     },
     tabId: HomeTabId, // current tab id.
     // 
@@ -54,10 +58,10 @@ export default function NavigationReducer(state, action) {
                 // intends to reset the tab.
                 //
                 switch(action.tabId) {
-                    case HomeTabId: newState.homeTab = {sceneId:HomeSceneId,item: null}; break;
-                    case SearchTabId: newState.homeTab = {sceneId:SearchSceneId,item:null}; break;
-                    case ReviewTabId: newState.reviewTab = {sceneId:ReviewStartSceneId, item:null}; break;
-                    case ProfileTabId: newState.profileTab = {sceneId:ProfileSceneId, item: null}; break;
+                    case HomeTabId: newState.homeTab = {sceneId:HomeSceneId,item: null, itemId: null}; break;
+                    case SearchTabId: newState.homeTab = {sceneId:SearchSceneId,item:null, itemId: null}; break;
+                    case ReviewTabId: newState.reviewTab = {sceneId:ReviewStartSceneId, item:null, itemId: null}; break;
+                    case ProfileTabId: newState.profileTab = {sceneId:ProfileSceneId, item: null, itemId: null}; break;
                 }
             }
             return newState;
@@ -67,7 +71,7 @@ export default function NavigationReducer(state, action) {
             // Setting scene for the current tab
             //
             newState = Object.assign({}, state);
-            newState[newState.tabId] = {sceneId: action.sceneId, item: action.item};
+            newState[newState.tabId] = {sceneId: action.sceneId, item: action.item, itemId: action.itemId};
 
             return newState;
 

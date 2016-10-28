@@ -69,6 +69,7 @@ class HomeTab extends Component {
                 // Later probably need to throttle that
                 var currentScene = Object.assign({}, TabScenes[i]);
                 currentScene.item = nextProps.item;
+                currentScene.itemId = nextProps.itemId;
                 this.refs.navigator.push(currentScene);
                 break;
              }
@@ -78,7 +79,7 @@ class HomeTab extends Component {
     renderScene(route, navigator) {
         return (
             <View style={{flex:1}}>
-                <route.component tabId={HomeTabId} navigator={navigator} item={route.item}/>
+                <route.component tabId={HomeTabId} navigator={navigator} item={route.item} itemId={route.itemId}/>
             </View>
         );
     }
@@ -94,7 +95,6 @@ class HomeTab extends Component {
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
                 initialRoute = {TabScenes[HomeIndex]}
-                item={this.props.item}
                 />
         );
     }
@@ -104,7 +104,8 @@ function mapStateToProps(state) {
     return { 
         tabId: state.NavigationReducer.tabId,
         scene: state.NavigationReducer.homeTab,
-        item: state.NavigationReducer.homeTab.item 
+        item: state.NavigationReducer.homeTab.item,
+        itemId: state.NavigationReducer.homeTab.itemId,
     } 
 }
 module.exports = connect(mapStateToProps)(HomeTab);

@@ -28,7 +28,71 @@ class ProductInfo extends Component {
     _hideInfo() {
         this.setState({showInfo:false,infoMessage:""});
     }
-
+    _renderSymptom() {
+        //BatsFix. parse this.props.product.symptom later.
+        var symptom = ["head","cold","eye"];
+        return (
+        <View style={{ flexDirection: "row" }}>
+            <TouchableOpacity style={Styles.tagSymptom}>
+                <Text style={Styles.tagTextSymptom}>{symptom[0]}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={Styles.tagSymptom}>
+                <Text style={Styles.tagTextSymptom}>{symptom[1]}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={Styles.tagSymptom}>
+                <Text style={Styles.tagTextSymptom}>{symptom[2]}</Text>
+            </TouchableOpacity>
+        </View>
+        );
+    }
+    _renderActivity() {
+        //BatsFix. parse this.props.product.activity later.
+        var activity=["hike","sleep","relax"];
+        return (
+        <View style={{ flexDirection: "row" }}>
+            <TouchableOpacity style={Styles.tagActivity}>
+                <Text style={Styles.tagTextActivity}>{activity[0]}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={Styles.tagActivity}>
+                <Text style={Styles.tagTextActivity}>{activity[1]}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={Styles.tagActivity}>
+                <Text style={Styles.tagTextActivity}>{activity[2]}</Text>
+            </TouchableOpacity>
+        </View>
+        );
+    }
+    _renderEffect() {
+        //BatsFix. parse this.props.product.effect later.
+        var strength=[50,200,150];
+        var effect = ["head","eye","joint"];
+        return(
+        <View style={{ flexDirection: "row" }}>
+            <View style={{ flex: 1.4 }}>
+                <TouchableOpacity style={Styles.tagEffect}>
+                    <Text style={Styles.tagTextEffect}>{effect[0]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagEffect}>
+                    <Text style={Styles.tagTextEffect}>{effect[1]}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={Styles.tagEffect}>
+                    <Text style={Styles.tagTextEffect}>{effect[2]}</Text>
+                </TouchableOpacity>
+            </View>
+            <View style={{ flex: 3 }}>
+                <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: strength[0] }]}>
+                    <Text style={Styles.tagTextEffect}> </Text>
+                </View>
+                <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: strength[1] }]}>
+                    <Text style={Styles.tagTextEffect}> </Text>
+                </View>
+                <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: strength[2] }]}>
+                    <Text style={Styles.tagTextEffect}> </Text>
+                </View>
+            </View>
+        </View>
+        );
+    }
     render() {
         return (
           <View style={{backgroundColor:'#ECECEC'}}>
@@ -141,63 +205,20 @@ class ProductInfo extends Component {
                     <View style={{ height: 40, justifyContent: 'center' }}>
                         <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Effects</Text>
                     </View>
-                    <View style={{ flexDirection: "row" }}>
-                        <View style={{ flex: 1.4 }}>
-                            <TouchableOpacity style={Styles.tagEffect}>
-                                <Text style={Styles.tagTextEffect}>{this.props.product.effect[0].name}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagEffect}>
-                                <Text style={Styles.tagTextEffect}>{this.props.product.effect[1].name}</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={Styles.tagEffect}>
-                                <Text style={Styles.tagTextEffect}>{this.props.product.effect[2].name}</Text>
-                            </TouchableOpacity>
-                        </View>
-                        <View style={{ flex: 3 }}>
-                            <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: this.props.product.effect[0].strength }]}>
-                                <Text style={Styles.tagTextEffect}> </Text>
-                            </View>
-                            <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: this.props.product.effect[1].strength }]}>
-                                <Text style={Styles.tagTextEffect}> </Text>
-                            </View>
-                            <View style={[Styles.tagEffect, { backgroundColor: '#4A90E2', width: this.props.product.effect[2].strength }]}>
-                                <Text style={Styles.tagTextEffect}> </Text>
-                            </View>
-                        </View>
-                    </View>
+                    {this._renderEffect()}
                 </View>
                 {/* Related activities */}
                 <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                     <View style={{ height: 40, justifyContent: 'center' }}>
                         <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Activies</Text>
                     </View>
-                    <View style={{ flexDirection: "row" }}>
-                        <TouchableOpacity style={Styles.tagActivity}>
-                            <Text style={Styles.tagTextActivity}>{this.props.product.activity[0]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagActivity}>
-                            <Text style={Styles.tagTextActivity}>{this.props.product.activity[1]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagActivity}>
-                            <Text style={Styles.tagTextActivity}>{this.props.product.activity[2]}</Text>
-                        </TouchableOpacity>
-                    </View>
+                    {this._renderActivity()}
                 </View>
                 <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                     <View style={{ height: 40, justifyContent: 'center' }}>
                         <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Symptoms</Text>
                     </View>
-                    <View style={{ flexDirection: "row" }}>
-                        <TouchableOpacity style={Styles.tagSymptom}>
-                            <Text style={Styles.tagTextSymptom}>{this.props.product.symptom[0]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagSymptom}>
-                            <Text style={Styles.tagTextSymptom}>{this.props.product.symptom[1]}</Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity style={Styles.tagSymptom}>
-                            <Text style={Styles.tagTextSymptom}>{this.props.product.symptom[2]}</Text>
-                        </TouchableOpacity>
-                    </View>
+                    {this._renderSymptom()}
                 </View>
                 <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                     <View style={{ height: 40, justifyContent: 'center' }}>
@@ -239,8 +260,6 @@ class ProductInfo extends Component {
                     </View>
                  </HerbyModal>
                  </View>
-
-
             </View>
         );
     }

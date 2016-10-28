@@ -26,8 +26,14 @@ class RetailerList extends Component {
         //so using explicit render
         var retailers=[];
         for (var i=0; i < this.props.retailerList.length; i++) {
-             var retailerId = this.props.retailerList[i].id;
-             var retailer   = this.props.retailerList[i];
+             retailer = this.props.retailerList[i];
+             if (this.props.retailerList[i].price != null) {
+                 //BatsFix. This is actually a price object with retailer object inside it.
+                 retailer = this.props.retailerList[i].retailer;
+                 retailer.price = this.props.retailerList[i].price;
+             }
+             var retailerId = retailer.id;
+
              retailers.push(
                 <RetailerItem key={retailerId} goRetailer={(retailerId) => this.props.goRetailer(retailerId)} retailer={retailer}/>
              );

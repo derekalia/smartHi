@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import {Picker,Modal,ScrollView, Animated, Dimensions, StyleSheet, Text, View, Slider, Image, TextInput, TouchableHighlight, TouchableOpacity,} from 'react-native'
 
+export class HerbyLoading extends Component {
+    render() {
+        return (
+            <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#EDEDED'}}>
+                <Text>Loading...</Text>
+            </View>
+        );
+    }
+}
+
 export class HerbyRange extends Component {
     render() {
         return (

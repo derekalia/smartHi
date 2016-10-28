@@ -19,7 +19,53 @@ class ProductItem extends Component {
     _onStarRating(r) {
         //Doesnt do anything but StarRating requires this.
     }
-
+    _renderActivity() {
+        //BatsFix. parse this.props.activity to render these.
+       var aC = '#48BBEC'; // attribute color
+       var aH = 33; // attribute height;
+       var aBR = 30; // attribute border radius
+       var activity=["hike","sleep","relax"];
+        return (
+        <View style={{marginTop:5,width:160}}>
+          <ScrollView horizontal={true}>
+            <TouchableHighlight style={{ borderColor:aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}}>
+                <Text style={{fontSize:14, color: aC, alignSelf: 'center',marginHorizontal:10}}>{activity[0]}</Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={{ borderColor:aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}}>
+                <Text style={{fontSize:14, color: aC, alignSelf: 'center',marginHorizontal:10}}>{activity[1]}</Text>
+            </TouchableHighlight>
+            <TouchableHighlight style={{flex:1, borderColor:aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}}>
+                <Text style={{fontSize:14, color: aC, alignSelf:'center',marginHorizontal:10}}>{activity[2]}</Text>
+            </TouchableHighlight>
+            </ScrollView>
+        </View>
+        );
+    }
+    _renderRating() {
+        // BatsFix. fix rating count later.
+        var ratingCount = 300;
+        return(
+        <View style={{  flexDirection: 'row',marginTop:5}}>
+            <StarRating disabled={false} maxStars={5} starColor={'red'} starSize={15} rating={this.props.product.rating} selectedStar={(r)=>this.onStarRating(r)}/>
+            <Text style={{ fontSize: 14, color: 'black'}}> ({ratingCount}) </Text>
+            <View style={{flex: 1,alignItems:'flex-end'}}>
+              <Text style={{fontSize: 14,  color:'black'}}>{this.props.product.name}</Text>
+            </View>
+        </View>
+        );
+    }
+    _renderPrice() {
+        if (this.props.product.price == null) {
+            return null;
+        }
+        return (
+        <View style={{  flex:1,flexDirection: 'row',}}>
+            <View style={{alignItems:'flex-end'}}>
+              <Text style={{flex: 1, fontSize: 16, color:'black'}}>${this.props.product.price}/Gram</Text>
+            </View>
+        </View>
+        );
+    }
     render() {
         //
         // BatsFix. This needs to be flexible with regard to a device with and height.
@@ -30,9 +76,6 @@ class ProductItem extends Component {
         var bR = 5;   // box radius
         var fB = 16;  // font big
         var fS = 14;  // font small
-        var aC = '#48BBEC'; // attribute color
-        var aH = 33; // attribute height;
-        var aBR = 30; // attribute border radius
 
         // BatsFix. this should come from the product
         var iS = 'Rosin2.png';
@@ -47,43 +90,19 @@ class ProductItem extends Component {
                             </View>
                             <View style={{flex: 1, flexDirection: 'column', padding:5,}}>
                                 {/*Product pricing*/}
-                                <View style={{  flexDirection: 'row',}}>
-                                    <Text style={{flex: 1, fontSize: fB, fontWeight: 'bold', color:'black'}}>{this.props.product.name}</Text>
-                                    <View style={{alignItems:'flex-end'}}>
-                                      <Text style={{flex: 1, fontSize: fB, color:'black'}}>${this.props.product.price}/Gram</Text>
-                                    </View>
-                                </View>
+                                {this._renderPrice()}
                                 {/*Product rating*/}
-                                <View style={{  flexDirection: 'row',marginTop:5}}>
-                                    <StarRating disabled={false} maxStars={5} starColor={'red'} starSize={15} rating={this.props.product.rating} selectedStar={(r)=>this.onStarRating(r)}/>
-                                    <Text style={{ fontSize: fS, color: 'black'}}> ({this.props.product.ratingCount}) </Text>
-                                    <View style={{flex: 1,alignItems:'flex-end'}}>
-                                      <Text style={{fontSize: fS,  color:'black'}}>{this.props.product.name}</Text>
-                                    </View>
-                                </View>
+                                {this._renderRating()}
                                 {/*Product attributes */}
                                 <View style={{flexDirection:'row'}}>
-                                <View style={{marginTop:5,width:160}}>
-                                  <ScrollView horizontal={true}>
-                                    <TouchableHighlight style={{ borderColor:aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}}>
-                                        <Text style={{fontSize:fS, color: aC, alignSelf: 'center',marginHorizontal:10}}>{this.props.product.activity[0]}</Text>
-                                    </TouchableHighlight>
-                                    <TouchableHighlight style={{ borderColor:aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}}>
-                                        <Text style={{fontSize:fS, color: aC, alignSelf: 'center',marginHorizontal:10}}>{this.props.product.activity[1]}</Text>
-                                    </TouchableHighlight>
-                                    <TouchableHighlight style={{flex:1, borderColor:aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}}>
-                                        <Text style={{fontSize:fS, color: aC, alignSelf:'center',marginHorizontal:10}}>{this.props.product.activity[2]}</Text>
-                                    </TouchableHighlight>
-                                    </ScrollView>
-                                </View>
-
+                                {this._renderActivity()}
 
                                 <View style={{flex:1,flexDirection:'column',justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
                                     <View style={{}}>
-                                    <Text style={{color:'#858585'}}>THC: 27%</Text>
+                                    <Text style={{color:'#858585'}}>THC: {this.props.product.thc}%</Text>
                                     </View>
                                     <View>
-                                    <Text style={{color:'#858585'}}>CBD: 27%</Text>
+                                    <Text style={{color:'#858585'}}>CBD: {this.props.product.cbd}%</Text>
                                     </View>
                                     </View>
                                 </View>

@@ -6,7 +6,6 @@ export const REGISTER_PROCESS = 'LOGIN_PROCESS';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_ERROR   = 'REGISTER_ERROR';
 
-import {NEWS_SUCCESS}  from './news.js';
 import {PROFILE_SUCCESS}  from './profile.js';
 import {GetLatestNews,GetUserProfile} from './data.js';
 import {NotifyBusy,NotifyDone,} from './navigation.js';
@@ -25,13 +24,6 @@ async function LoginActionWorker(dispatch,userCredentials) {
             profile: profile,
         });
 
-        // Get latest news async
-        var latestNews = await GetLatestNews();
-        dispatch({
-            type: NEWS_SUCCESS,
-            staffPick: latestNews.staffPick,
-            trending: latestNews.trending,
-        });
         NotifyDone(dispatch,"Logged on");
     } 
     catch(error) {

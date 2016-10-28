@@ -16,11 +16,13 @@ export function GetProductAction(productId, switchTab) {
     return async function (dispatch,getState){
         NotifyBusy(dispatch);
         try {
-            var product = await GetProduct(productId);
+            // BatsFix. For test purposes use product 1. Remove this later.
+            var product = await GetProduct(1);
             dispatch({
                 type:SWITCH_SCENE,
                 sceneId: ProductSceneId,
                 item: product,
+                itemId: productId,
             });
             NotifyDone(dispatch,null);
         } 

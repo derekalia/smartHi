@@ -16,22 +16,20 @@ class RetailerItem extends Component {
     constructor(props) {
         super(props);
         // these should come from the app state.
-        this.state = this.props.retailer;
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.setState(nextProps.retailer);
     }
 
     render() {
         // BatsFix. There shouldn't be any hardcoded data in this function.
+
+        // BatsFix. parse this.props.retailer.ratingCount later.
+        var ratingCount = 434;
         return (
             <TouchableOpacity  style={{
                 justifyContent:'center',
                 flexDirection: 'row',
                 height:100,
                 marginBottom: 10,
-            }}  onPress={() => this.props.goRetailer(this.state.id) }>
+            }}  onPress={() => this.props.goRetailer(this.props.retailer.id) }>
                 <Image style={Styles.bg} source={require('../../media/ikes1.png') } />
                 <View style={{ backgroundColor: 'transparent',flexDirection: 'column', margin: 4,marginHorizontal:6 }}>
 
@@ -44,7 +42,7 @@ class RetailerItem extends Component {
                             fontSize: 22,
                             textShadowOffset: { width: 1.5, height: 1.5 },
                             textShadowColor: 'black',
-                            textShadowRadius: 4}}>{this.state.name}</Text>
+                            textShadowRadius: 4}}>{this.props.retailer.name}</Text>
                             </View>
                       <View style={{flex:1,justifyContent:'flex-end',alignItems:"flex-end",alignSelf:"flex-end"}}>
                         <Text style={{
@@ -65,7 +63,7 @@ class RetailerItem extends Component {
                                 maxStars={5}
                                 starSize={24}
                                 starColor={'red'}
-                                rating={this.state.rating}
+                                rating={this.props.retailer.rating}
                                 selectedStar={(rating) => this.onStarRatingPress(rating) }
                                 />
                                 <Text style={{
@@ -73,7 +71,7 @@ class RetailerItem extends Component {
                                     fontSize: 20,
                                     textShadowOffset: { width: 1.5, height: 1.5 },
                                     textShadowColor: 'black',
-                                    textShadowRadius: 4}}> ({this.state.ratingCount})</Text>
+                                    textShadowRadius: 4}}> ({ratingCount})</Text>
 
                     </View>
 
@@ -84,7 +82,7 @@ class RetailerItem extends Component {
                             textShadowOffset: { width: 1.5, height: 1.5 },
                             textShadowColor: 'black',
                             textShadowRadius: 4
-                        }}>{this.state.address}</Text>
+                        }}>{this.props.retailer.address}</Text>
                     </View>
 
             </TouchableOpacity>
