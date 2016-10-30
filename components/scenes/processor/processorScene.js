@@ -3,7 +3,7 @@
 //
 // Import modules
 import React, { Component } from 'react';
-import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity, Platform, TouchableHighlight } from 'react-native';
+import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity , Platform, TouchableHighlight } from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
@@ -24,13 +24,13 @@ class ProcessorProducts extends Component {
     render() {
         var products = this.props.producer.products;
         return (
-            <ScrollView style={{flex:1}}>
+            <ScrollView style={{backgroundColor:'white',marginTop:6,borderRadius:3,marginHorizontal:6}}>
             <View style={{flexDirection:'row',marginTop:15, alignItems:'center',marginBottom:10}}>
               <View style={{marginLeft:8}}>
               <TouchableHighlight style={{backgroundColor:'#468EE5',borderRadius:8,height:30,alignItems:
             'center',justifyContent:'center'}} onPress={()=>this.props.goProduct(-1)}>
-                <Text style={{color:'white',marginHorizontal:10,alignItems:
-              'center',justifyContent:'center',alignSelf:'center'}}>Add New Product</Text>
+                <Text style={{color:'white',marginHorizontal:20,alignItems:
+              'center',justifyContent:'center',alignSelf:'center',fontSize:16}}>Add New Product</Text>
               </TouchableHighlight>
               </View>
             </View>
@@ -44,7 +44,7 @@ class ProcessorRetailers extends Component {
     //BatsFix. Is this even necessary???
     render() {
         return (
-            <ScrollView style={{backgroundColor:'transparent',}}>
+            <ScrollView style={{backgroundColor:'white',marginTop:6,borderRadius:3,marginHorizontal:6}}>
                 <RetailerList retailerList={this.props.producer.retailers} goRetailer={this.props.goRetailer}/>
             </ScrollView>
         );
@@ -63,7 +63,6 @@ class ProcessorSocial extends Component {
     render() {
         return (
             <ScrollView style={{backgroundColor:'transparent'}}>
-                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
                 <HerbyFrameBar entries={['FOLLOWER','FOLLOWING']} setFrame={(t)=>this._setFrame(t)}/>
                 <UserList userList={this.state.frameId == 0?this.props.producer.following:this.props.producer.follower}/>
             </ScrollView>
@@ -77,8 +76,8 @@ class ProcessorHeader extends Component {
     }
     render() {
         return(
-        <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
-        <TouchableHighlight style={{backgroundColor:'white'}} onPress={()=>this.props.goUpdate()}>
+        <View style={{paddingTop:20,alignItems:'center',justifyContent:'center',backgroundColor:'white'}}>
+        <TouchableOpacity   style={{backgroundColor:'white'}} onPress={()=>this.props.goUpdate()}>
         <View style={{flexDirection:'row',borderWidth: 1.7, borderColor:'#4A90E2',width:350,borderRadius:10}}>
           <View style={{marginLeft:10, marginTop:10,marginBottom:10,marginRight:20}}>
             <Image source={require('../../../media/bluePlus1.png')} style={{ height: 75, width: 75}}/>
@@ -87,7 +86,7 @@ class ProcessorHeader extends Component {
             <Text style={{color:'#4A90E2', fontSize:16,fontWeight:'bold'}}>Create Company Page</Text>
           </View>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
             {/* <Text style={{fontSize:18,fontWeight:'bold'}}>{this.props.producer.name}</Text> */}
             {/* <Text style={{fontSize:15}}>{this.props.producer.description}</Text> */}
                 {/* <View style={{flexDirection:'row'}}>
@@ -157,12 +156,12 @@ class ProcessorScene extends Component {
         <View>
              <HerbyBar navigator={this.props.navigator} name="Processor" forward="Settings" forwardCallback={()=>this._goSettings()}/>
              <ScrollView
-                  style={{marginTop:0,height:this._height,backgroundColor:'transparent',}}
+                  style={{marginTop:0,height:this._height,backgroundColor:'#ECECEC',}}
                   stickyHeaderIndices={[1]}>
                   <ProcessorHeader producer={this.props.producer} goUpdate={(t)=>this._goUpdate(t)}/>
                   <HerbyFrameBar entries={['PRODUCTS','RETAILERS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
                   <Navigator
-                      style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
+                      style={{height:this._height,backgroundColor:'#ECECEC',justifyContent: 'flex-start'}}
                       ref="navigator"
                       configureScene={this.configureScene}
                       renderScene={this.renderScene}
@@ -177,7 +176,6 @@ class ProcessorScene extends Component {
         );
     }
 }
-
 
 //
 // Connect to producer state

@@ -24,8 +24,7 @@ class LicenseeProducts extends Component {
         var products = this.props.retailer.products;
         return (
             <ScrollView style={{flex:1}}>
-            <View style={{flexDirection:'row',marginTop:15, alignItems:'center',marginBottom:10}}>
-              <Text>Products: </Text>
+            <View style={{flexDirection:'row',marginTop:15, alignItems:'center',marginBottom:10,backgroundColor:'#ECECEC'}}>              
             </View>
                 <ProductList productList={this.props.retailer.products} goProduct={this.props.goProduct}/>
             </ScrollView>
@@ -44,7 +43,7 @@ class LicenseeSocial extends Component {
     render() {
         return (
             <ScrollView style={{backgroundColor:'transparent'}}>
-                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+                {/* <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/> */}
                 <HerbyFrameBar entries={['FOLLOWER','FOLLOWING']} setFrame={(t)=>this._setFrame(t)}/>
                 <UserList userList={this.state.frameId == 0?this.props.retailer.following:this.props.retailer.follower}/>
             </ScrollView>
@@ -58,13 +57,23 @@ class LicenseeHeader extends Component {
     }
     render() {
         return(
-        <View style={{marginTop:20,}}>
-            <Image source={require('../../../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
-            <Text style={{fontSize:18,fontWeight:'bold'}}>{this.props.retailer.name}</Text>
-            <Text style={{fontSize:15}}>{this.props.retailer.description}</Text>
-            <View style={{flexDirection:'row'}}>
-            <HerbyButton2 name='Update Licensee Info' onPress={()=>this.props.goUpdate()}/>
+          <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
+          <TouchableHighlight style={{backgroundColor:'white'}} onPress={()=>this.props.goUpdate()}>
+          <View style={{flexDirection:'row',borderWidth: 1.5, borderColor:'#4A90E2',width:350,borderRadius:10}}>
+            <View style={{marginLeft:10, marginTop:10,marginBottom:10,marginRight:20}}>
+              <Image source={require('../../../media/bluePlus1.png')} style={{ height: 75, width: 75}}/>
             </View>
+            <View style={{alignSelf:'center',justifyContent:'center'}}>
+              <Text style={{color:'#4A90E2', fontSize:16,fontWeight:'bold'}}>Create Store</Text>
+            </View>
+          </View>
+        </TouchableHighlight>
+            {/* <Image source={require('../../../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
+            <Text style={{fontSize:18,fontWeight:'bold'}}>{this.props.retailer.name}</Text>
+            <Text style={{fontSize:15}}>{this.props.retailer.description}</Text> */}
+            {/* <View style={{flexDirection:'row'}}> */}
+            {/* <HerbyButton2 name='Update Licensee Info' onPress={()=>this.props.goUpdate()}/> */}
+            {/* </View> */}
         </View>
         );
     }

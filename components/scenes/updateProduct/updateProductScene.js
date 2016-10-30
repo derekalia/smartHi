@@ -59,7 +59,7 @@ class UpdateProductScene extends Component {
                 {this._renderRating()}
 
                 {this._renderDescription()}
-                <View style={{ marginTop: 5, marginHorizontal: 10 }}>
+                {/* <View style={{ marginTop: 5, marginHorizontal: 10 }}>
                   <View><Text>Scan Barcode</Text>
                   <TouchableHighlight onPress={()=>this._showImagePicker()} style={{marginTop:5,backgroundColor:'#468ee5',marginTop:10,height:30,width:150,borderRadius:8,justifyContent:'center',alignSelf:'flex-start'}}>
                     <Text style={{color:'white',alignSelf:'center'}}>
@@ -75,7 +75,7 @@ class UpdateProductScene extends Component {
                       <Text>6000 0000 0000 0001</Text><Text> Edit</Text><Text> Remove</Text>
                       </View>
                       </View>
-                      </View>
+                      </View> */}
                 {this._renderDetailRating()}
 
                 {this._renderTestResults()}
@@ -163,8 +163,8 @@ class UpdateProductScene extends Component {
                   <Text style={{fontSize:16,fontWeight:'bold'}}>Product Name</Text>
               </View>
 
-              <View style={{flexDirection:'row',marginTop:10,alignItems:'center'}}>
-                  <TextInput style={{color:"black",marginLeft:0,height:35,borderRadius:3,flex:1,backgroundColor:'white',borderWidth:1,borderColor:'lightgray'}} placeholder={"Enter product name here"} onChangeText={(t)=>this._setName(t)}/>
+              <View style={{flexDirection:'row',marginTop:10,alignItems:'center',borderWidth:1,borderColor:'grey',borderRadius:4}}>
+                  <TextInput style={{marginLeft:3,color:"black",height:35,borderRadius:3,flex:1,backgroundColor:'white'}} placeholder={"Enter product name here"} onChangeText={(t)=>this._setName(t)}/>
               </View>
 
             </View>
@@ -192,7 +192,7 @@ class UpdateProductScene extends Component {
             <View style={{ height: 40, justifyContent: 'center' }}>
                 <Text style={{ fontSize: 16, fontWeight: 'bold', }}>Description</Text>
             </View>
-            <View style={{ flexDirection: "row",borderColor: 'gray', borderWidth: 1, margin: 2, borderRadius: 4, }}>
+            <View style={{ flexDirection: "row",borderColor: 'gray', borderWidth: 1, margin: 0, borderRadius: 4, }}>
                 <TextInput
                     style={{ height: 60, flex:1, margin: 4, fontSize: 16, }}
                     onChangeText={(text) => this._setDescription(text) }
@@ -286,6 +286,7 @@ class UpdateProductScene extends Component {
                 {this._renderFiltersArray(this._symptom)}
                 </ScrollView>
             </View>
+            <View style={{height:60}}/>
         </View>
         );
     }

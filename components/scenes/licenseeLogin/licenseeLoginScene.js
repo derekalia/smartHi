@@ -44,9 +44,6 @@ class LicenseeLoginScene extends Component {
 
               <HerbyBar name="Authentication"  navigator={this.props.navigator}/>
 
-
-
-
                 <View>
                   <Text style={{fontSize:14,paddingLeft:20,paddingTop:16,paddingBottom:10,color:'#666666'}}>USER INFO</Text>
                 </View>
@@ -87,7 +84,7 @@ class LicenseeLoginScene extends Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={()=>this._producerLogin()} style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
-                  <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>Processor</Text>
+                  <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>Producer</Text>
                   <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
                     <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
                   </View>
