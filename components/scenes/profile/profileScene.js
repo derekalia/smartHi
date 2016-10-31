@@ -28,10 +28,12 @@ import {HerbyButton2,} from '../../../common/controls.js';
 class UserReviews extends Component {
     render() {
         return (
-            <ScrollView style={{backgroundColor:'transparent'}}>
-                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+          <View>
+            <ScrollView style={{backgroundColor:'#ECECEC',marginTop:0}}>
+                {/* <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/> */}
                 <ProductList productList={this.props.user.reviewProducts} goProduct={this.props.goReview}/>
             </ScrollView>
+            </View>
         );
     }
 }
@@ -59,7 +61,7 @@ class UserFavorites extends Component {
         else
         if (this.state.frameId == 2) {
             return (
-              <View style={{marginTop:10}}>
+              <View style={{marginLeft:18,marginTop:-10}}>
                 <ProducerList producerList={this.props.user.producers} goProducer={this.props.goProducer}/>
               </View>
             )
@@ -67,11 +69,15 @@ class UserFavorites extends Component {
     }
     render() {
         return (
-            <ScrollView style={{}}>
-                <View style={{backgroundColor:'#ECECEC',flex:1,height:8,marginHorizontal:0}}/>
-                <HerbyFrameBar entries={['PRODUCTS','STORES','PRODUCERS']} setFrame={(t)=>this._setFrame(t)}/>
-                {this._getFavorites()}
-            </ScrollView>
+          <View>
+            <HerbyFrameBar entries={['PRODUCTS','STORES','PRODUCERS']} setFrame={(t)=>this._setFrame(t)}/>
+                  <ScrollView >
+
+                  {this._getFavorites()}
+
+              </ScrollView>
+          </View>
+
         );
     }
 }
@@ -87,7 +93,7 @@ class UserSocial extends Component {
     render() {
         return (
             <ScrollView style={{backgroundColor:'transparent'}}>
-                <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/>
+                {/* <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/> */}
                 <HerbyFrameBar entries={['FOLLOWER','FOLLOWING']} setFrame={(t)=>this._setFrame(t)}/>
                 <UserList userList={this.state.frameId == 0?this.props.user.following:this.props.user.follower}/>
             </ScrollView>
@@ -104,10 +110,10 @@ class UserHeader extends Component {
 
           <View style={{flexDirection:'row',marginBottom:10}}>
               <View style={{alignItems:'center',flex:1}}>
-                <Text style={{ fontSize: 22, margin: 8, fontWeight: "bold" }}>{this.props.name}</Text>
-                <Text style={{ fontSize: 16, marginTop: 1 }}>{this.props.address}</Text>
+                <Text style={{ fontSize: 22, margin: 8,marginBottom: 2, fontWeight: "bold" }}>{this.props.name}</Text>
+                <Text style={{ fontSize: 16 }}>{this.props.address}</Text>
                 <View style={{flexDirection:'row',marginBottom:20,justifyContent:'center',alignItems:'center',marginTop:5}}>
-                  <Text style={{ fontSize: 16, marginTop: 1 }}> {this.props.score} </Text>
+                  <Text style={{ fontSize: 16, marginTop: 2 }}> {this.props.score} </Text>
                   <Image style={{height:20,width:20}} source={require('../../../media/Oval129.png')}/>
                   <Text style={{fontWeight:'bold'}}> Karma</Text>
                 </View>
@@ -208,7 +214,7 @@ class ProfileScene extends Component {
                   <UserHeader name={this.props.item.name} address={this.props.item.address} score={this.props.item.score}/>
                   <HerbyFrameBar entries={['FAVORITES','REVIEWS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
                   <Navigator
-                      style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
+                      style={{height:this._height,backgroundColor:'#ECECEC',justifyContent: 'flex-start'}}
                       ref="navigator"
                       configureScene={this.configureScene}
                       renderScene={this.renderScene}
