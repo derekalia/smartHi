@@ -45,13 +45,17 @@ class SearchScene extends Component {
         super(props);
         this._searchTerm = "";
         this._attributes = [];
-        this.state = { frameId: ProductId,showFiltersModal:false, showFilters:true };
+        this.state = { frameId: ProductId,showFiltersModal:false, showFilters:true, searchTerm: "", searchCount: 0 };
     }
 
     renderScene(route, navigator) {
         return (
             <ScrollView style={{flex:1,}}>
-                <route.component addRemoveFilter={navigator.props.addRemoveFilter} showFilters={navigator.showFilters}/>
+                <route.component 
+                    addRemoveFilter={navigator.props.addRemoveFilter} 
+                    showFilters={navigator.props.showFilters} 
+                    searchCount={navigator.props.searchCount}
+                    searchTerm={navigator.props.searchTerm}/>
             </ScrollView>
         );
     }
@@ -66,7 +70,7 @@ class SearchScene extends Component {
     }
 
     _startSearch() {
-        this.setState({showFilters:false});
+        this.setState({showFilters:false,searchTerm:this._searchTerm, searchCount: 20});
         this.props.StartSearchAction(this._searchTerm, this._attributes, SearchFrames[this.state.frameId].type );
     }
 
@@ -89,7 +93,6 @@ class SearchScene extends Component {
 
       var modalHeight = this.maxHeight*0.8;
       var modalWidth  = this.maxWidth*0.95;
-
         return (
             <View style={[{flex:1,marginTop:20,justifyContent:'flex-start',backgroundColor: '#ECECEC'}]}>
                  <View style={{flexDirection: 'row',backgroundColor: 'white',paddingTop:6}}>
@@ -112,6 +115,8 @@ class SearchScene extends Component {
                     initialRoute = {SearchFrames[ProductId]}
                     initialRouteStack = {SearchFrames}
                     showFilters = {this.state.showFilters}
+                    searchTerm = {this.state.searchTerm}
+                    searchCount = {this.state.searchCount}
                     addRemoveFilter={(t) => this._addRemoveFilter(t) }
                     />
 

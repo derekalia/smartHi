@@ -9,10 +9,15 @@ import {StyleSheet, Text, View, Slider, ListView,TouchableOpacity, ListViewDataS
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
+// import apollo helper
+import {graphql} from 'react-apollo';
+import gql from 'graphql-tag';
+
+
 import FilterList   from '../../util/filterList.js';
 import ProductList   from '../../util/productList.js';
 import {GetProductAction}   from '../../../actions';
-import {HerbyMulti,HerbyRange} from '../../../common/controls.js';
+import {HerbyLoading,HerbyMulti,HerbyRange} from '../../../common/controls.js';
 
 class ProductFrame extends Component {
 
@@ -21,6 +26,12 @@ class ProductFrame extends Component {
         this._searchTerm = "";
         this._attributes = [];
         this.state = {showFilters:true};
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.searchTerm != nextProps.searchTerm) {
+            this.setState({showFilters:false});
+        }
     }
 
     _goProduct(productId) {
@@ -35,6 +46,9 @@ class ProductFrame extends Component {
     }
 
     render() {
+        if (this.props.loading) {
+            return (<HerbyLoading/>);
+        }
         return(
 
         <View style={{flex:1,top:-20,backgroundColor:'#ECECEC',borderWidth:0,borderColor:'black'}}>
@@ -71,7 +85,6 @@ class ProductFrame extends Component {
           </View>
 
         </View>
-
         );
     }
     _renderFilters() {
@@ -118,4 +131,30 @@ function mapStateToProps(state) {
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction }, dispatch); }
 
-module.exports = connect(mapStateToProps,mapActionToProps)(ProductFrame);
+//
+// BatsFix. Attach apollo query to the component. This creates props loading and products
+//
+const apolloProducts = gql`query($searchCount: Int!,$searchTerm: String!) {
+    allProducts(first:$searchCount,filter:{description_contains:$searchTerm}){
+      id,
+      name,
+      image,
+      activity,
+      rating,
+      ratingCount,
+      thc,
+      cbd,
+    }
+}`;
+
+//
+// BatsFix. Maps data obtained from the query to props.
+//
+function mapDataToProps({props,data}) {
+    return ({
+        loading: data.loading,
+        products: data.allProducts,
+    });
+}
+
+module.exports = graphql(apolloProducts,{props:mapDataToProps})(connect(null,mapActionToProps)(ProductFrame));

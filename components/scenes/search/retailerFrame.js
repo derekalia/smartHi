@@ -10,7 +10,11 @@ import {connect} from 'react-redux';
 
 import RetailerList   from '../../util/retailerList.js';
 import {GetRetailerAction}   from '../../../actions';
-import {HerbyMulti} from '../../../common/controls.js';
+import {HerbyMulti,HerbyLoading} from '../../../common/controls.js';
+
+// import apollo helper
+import {graphql} from 'react-apollo';
+import gql from 'graphql-tag';
 
 
 class RetailerFrame extends Component {
@@ -18,11 +22,13 @@ class RetailerFrame extends Component {
         super(props);
         this.state = {showFilters:true};
     }
+
     componentWillReceiveProps(nextProps) {
-        if (nextProps.hideFilters == true) {
+        if (this.props.searchTerm != nextProps.searchTerm) {
             this.setState({showFilters:false});
         }
     }
+
     _goRetailer(retailerId) {
         //
         // Go to product page
@@ -50,6 +56,9 @@ class RetailerFrame extends Component {
         return null;
     }
     render() {
+        if (this.props.loading) {
+            return (<HerbyLoading/>);
+        }
         return(
           <View style={{backgroundColor:'#ECECEC',borderWidth:0,borderColor:'black'}}>
 
@@ -106,4 +115,27 @@ function mapStateToProps(state) {
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetRetailerAction }, dispatch); }
 
-module.exports = connect(mapStateToProps,mapActionToProps)(RetailerFrame);
+//
+// BatsFix. Attach apollo query to the component. This creates props loading and products
+//
+const apolloRetailers = gql`query($searchCount: Int!,$searchTerm: String!) {
+    allRetailers(first:$searchCount,filter:{description_contains:$searchTerm}){
+      id,
+      name,
+      image,
+      rating,
+    }
+}`;
+
+//
+// BatsFix. Maps data obtained from the query to props.
+//
+function mapDataToProps({props,data}) {
+    return ({
+        loading: data.loading,
+        retailerList: data.allRetailers,
+    });
+}
+
+module.exports = graphql(apolloRetailers,{props:mapDataToProps})(connect(null,mapActionToProps)(RetailerFrame));
+//module.exports = connect(mapStateToProps,mapActionToProps)(RetailerFrame);
