@@ -11,7 +11,7 @@ import Camera from 'react-native-camera';
 
 
 import {HerbyBar}         from '../../../common/controls.js';
-import {UploadProductImageAction} from '../../../actions';
+import {UploadProductImageAction,GetRateQueueAction} from '../../../actions';
 
 
 var Styles = StyleSheet.create({
@@ -39,40 +39,44 @@ class CameraScene extends Component {
         this._isBackTaken  = true;
     }
 
+    _goRateQueue() {
+        this.props.GetRateQueueAction();
+    }
+
     render() {
         return (
         <View style={{flex:1}}>
-            <HerbyBar navigator={this.props.navigator} name="Camera"/>
+            {/* <HerbyBar navigator={this.props.navigator} name="Camera"/> */}
             <Camera
                 ref="cam"
                 style={Styles.container}
                 onBarCodeRead={this._onBarCodeRead}>
                     <View>
                     <View>
-                    <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'flex-start' }}>
+                    <View style={{ flex: 1, flexDirection: "row", alignSelf:'flex-start',top:-270,justifyContent:'flex-start',marginHorizontal:-15}}>
+                      <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'flex-start' }}>
                         <TouchableOpacity style={{flexDirection: "row",alignItems:'center'}}>
                             <Image  source={require("../../../media/BackArrowWhite1.png") } style={{ width: 12, height: 19 }} />
                             <Text style={{ fontSize: 18, color: "white" }}> Back </Text>
                         </TouchableOpacity>
-
-                        <TouchableOpacity style={{flexDirection: "row",alignItems:'center',padding:8,marginHorizontal:10,backgroundColor:"#50E3C2",borderRadius:7}}>
+                      </View>
+                        <TouchableOpacity onPress={()=>this._goRateQueue()} style={{flexDirection: "row",alignItems:'center',padding:8,marginHorizontal:10,backgroundColor:"#50E3C2",borderRadius:5}}>
                             <Text style={{ fontSize: 18, color: "white" }}> Rate Queue </Text>
                         </TouchableOpacity>
-
                       </View>
                     </View>
 
-                    <View style={{marginTop:0,flexDirection:'row'}}>
+                    <View style={{flex:1,flexDirection:'row',top:220}}>
                         {/* <TouchableHighlight onPress={()=> this._takePictureBack()}
                             style={[{height:32,width:100},Styles.cameraButton]}>
                             <Text style={{fontSize:16,textAlign:'center'}}>Back Pic</Text>
                         </TouchableHighlight> */}
-                        <TouchableHighlight onPress={()=> this._takePictureFront()} style={[{height:32,width:100},Styles.cameraButton]}>
-                            <Text>RECEIPT</Text>
+                        <TouchableHighlight onPress={()=> this._takePictureFront()} style={{alignItems:'center',justifyContent:'center',padding:10,borderRadius:5,paddingLeft:30,paddingRight:30}}>
+                            <Text style={{color:'white',fontSize:18}}>RECEIPT</Text>
                         </TouchableHighlight>
 
-                        <TouchableHighlight onPress={()=> this._takePictureFront()} style={[{height:32,padding:10,},Styles.cameraButton]}>
-                            <Text>BARCODE</Text>
+                        <TouchableHighlight onPress={()=> this._takePictureFront()} style={{alignItems:'center',justifyContent:'center',padding:10,backgroundColor:"#15B4F1",borderRadius:5,marginLeft:43,paddingLeft:30,paddingRight:30}}>
+                            <Text style={{color:'white',fontSize:18,}}>BARCODE</Text>
                         </TouchableHighlight>
                     </View>
 
@@ -118,5 +122,5 @@ class CameraScene extends Component {
 //
 // Connect UploadProductImageAction
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ UploadProductImageAction }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({GetRateQueueAction, UploadProductImageAction }, dispatch); }
 module.exports = connect(null,mapActionToProps)(CameraScene);
