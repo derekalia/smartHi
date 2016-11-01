@@ -47,14 +47,35 @@ class CameraScene extends Component {
                 ref="cam"
                 style={Styles.container}
                 onBarCodeRead={this._onBarCodeRead}>
-                    <View style={{marginTop:440,flexDirection:'row'}}>
+                    <View>
+                    <View>
+                    <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'flex-start' }}>
+                        <TouchableOpacity style={{flexDirection: "row",alignItems:'center'}}>
+                            <Image  source={require("../../../media/BackArrowWhite1.png") } style={{ width: 12, height: 19 }} />
+                            <Text style={{ fontSize: 18, color: "white" }}> Back </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={{flexDirection: "row",alignItems:'center',padding:8,marginHorizontal:10,backgroundColor:"#50E3C2",borderRadius:7}}>
+                            <Text style={{ fontSize: 18, color: "white" }}> Rate Queue </Text>
+                        </TouchableOpacity>
+
+                      </View>
+                    </View>
+
+                    <View style={{marginTop:0,flexDirection:'row'}}>
                         {/* <TouchableHighlight onPress={()=> this._takePictureBack()}
                             style={[{height:32,width:100},Styles.cameraButton]}>
                             <Text style={{fontSize:16,textAlign:'center'}}>Back Pic</Text>
                         </TouchableHighlight> */}
                         <TouchableHighlight onPress={()=> this._takePictureFront()} style={[{height:32,width:100},Styles.cameraButton]}>
-                            <Text>SCAN</Text>
+                            <Text>RECEIPT</Text>
                         </TouchableHighlight>
+
+                        <TouchableHighlight onPress={()=> this._takePictureFront()} style={[{height:32,padding:10,},Styles.cameraButton]}>
+                            <Text>BARCODE</Text>
+                        </TouchableHighlight>
+                    </View>
+
                     </View>
             </Camera>
         </View>
