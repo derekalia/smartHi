@@ -6,22 +6,54 @@ export const REGISTER_PROCESS = 'LOGIN_PROCESS';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
 export const REGISTER_ERROR   = 'REGISTER_ERROR';
 
+import gql from 'graphql-tag';
+import apolloClient from './apollo.js';
+
 import {PROFILE_SUCCESS}  from './profile.js';
 import {GetLatestNews,GetUserProfile} from './data.js';
 import {NotifyBusy,NotifyDone,} from './navigation.js';
 
 async function LoginActionWorker(dispatch,userCredentials) {
+    const signIn = gql`
+      mutation signIn($email:String!,$password:String!) {
+          signinUser(email:{email: $email,password:$password}) {
+            token,
+            user { 
+                id, 
+                name,
+                address,
+                image,
+                score,
+                follower {id,name},
+                following {id,name},
+            }
+          }
+     }`;
+
     // Notify busy
     NotifyBusy(dispatch);
     try {
         // Login
-        DevLogin(dispatch, userCredentials.name, userCredentials.password);
+        // DevLogin(dispatch, userCredentials.name, userCredentials.password);
+        result = await apolloClient.mutate({mutation:signIn,variables:{email:"someone1@yahoo.com",password:"some"}});
 
+        console.log(result);
+        var token = result.data.signinUser.token;
+        var user = result.data.signinUser.user;
+        
         // Get user profile here.
         var profile = GetUserProfile(0);
         dispatch({
             type: PROFILE_SUCCESS,
-            profile: profile,
+            profile: user,
+        });
+
+        //BatsFix. Later use the token to access graph.cool
+        dispatch({ 
+            type: LOGIN_SUCCESS, 
+            name: user.name, 
+            tokenType: "testTokenType", 
+            accessToken: token, 
         });
 
         NotifyDone(dispatch,"Logged on");
