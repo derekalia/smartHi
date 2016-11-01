@@ -19,13 +19,15 @@ async function LoginActionWorker(dispatch,userCredentials) {
           signinUser(email:{email: $email,password:$password}) {
             token,
             user { 
-                id, 
+                id,
                 name,
-                address,
                 image,
                 score,
-                follower {id,name},
-                following {id,name},
+                follower  {id, name, score, image},
+                following {id, name, score, image},
+                retailers {id, name, image, rating, ratingCount, address},
+                producers {id, name, image, rating, ratingCount},
+                products  {id, name, image, rating, ratingCount, image},
             }
           }
      }`;
@@ -37,12 +39,14 @@ async function LoginActionWorker(dispatch,userCredentials) {
         // DevLogin(dispatch, userCredentials.name, userCredentials.password);
         result = await apolloClient.mutate({mutation:signIn,variables:{email:"someone1@yahoo.com",password:"some"}});
 
-        console.log(result);
+        //console.log(result);
         var token = result.data.signinUser.token;
         var user = result.data.signinUser.user;
         
         // Get user profile here.
-        var profile = GetUserProfile(0);
+        // var profile = GetUserProfile(0);
+        // console.log(profile);
+
         dispatch({
             type: PROFILE_SUCCESS,
             profile: user,
@@ -56,7 +60,7 @@ async function LoginActionWorker(dispatch,userCredentials) {
             accessToken: token, 
         });
 
-        NotifyDone(dispatch,"Logged on");
+        NotifyDone(dispatch,null);
     } 
     catch(error) {
         console.log("LoginActionWorker:" + error);
