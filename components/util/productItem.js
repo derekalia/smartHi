@@ -24,26 +24,30 @@ class ProductItem extends Component {
        var aC = '#48BBEC'; // attribute color
        var aH = 33; // attribute height;
        var aBR = 30; // attribute border radius
-       var activity=["hike","sleep","relax"];
+       var activities = this.props.product.activity.split(",");
+       var activity=[];
+       for (var i=0; i < activities.length; i++) {
+            activity.push(
+                <TouchableHighlight style={{ borderColor:aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}} key={activities[i]}>
+                    <Text style={{fontSize:14, color: aC, alignSelf: 'center',marginHorizontal:10}}>{activities[i]}</Text>
+                </TouchableHighlight>
+            );
+       }
         return (
         <View style={{marginTop:5,width:160}}>
           <ScrollView horizontal={true}>
-            <TouchableHighlight style={{ borderColor:aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}}>
-                <Text style={{fontSize:14, color: aC, alignSelf: 'center',marginHorizontal:10}}>{activity[0]}</Text>
-            </TouchableHighlight>
-            <TouchableHighlight style={{ borderColor:aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}}>
-                <Text style={{fontSize:14, color: aC, alignSelf: 'center',marginHorizontal:10}}>{activity[1]}</Text>
-            </TouchableHighlight>
-            <TouchableHighlight style={{flex:1, borderColor:aC, borderWidth: 1, borderRadius:aBR, height:aH, margin:3, justifyContent:'center'}}>
-                <Text style={{fontSize:14, color: aC, alignSelf:'center',marginHorizontal:10}}>{activity[2]}</Text>
-            </TouchableHighlight>
-            </ScrollView>
+            {activity}
+          </ScrollView>
         </View>
         );
     }
     _renderRating() {
         // BatsFix. fix rating count later.
-        var ratingCount = 300;
+        var ratingCount = 0;
+        var ratings = this.props.product.ratingCount;
+        for (var i=0; i < ratings.length; i++) {
+            ratingCount += ratings[i]
+        }
         return(
         <View style={{  flexDirection: 'row',marginTop:5}}>
             <StarRating disabled={false} maxStars={5} starColor={'red'} starSize={15} rating={this.props.product.rating} selectedStar={(r)=>this.onStarRating(r)}/>
