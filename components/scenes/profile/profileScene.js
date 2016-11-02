@@ -265,7 +265,7 @@ const apolloProfile = gql`query($itemId: ID!) {
         following {id, name, score, image},
         retailers {id, name, image, rating, ratingCount, address},
         producers {id, name, image, rating, ratingCount},
-        products  {id, name, image, rating, ratingCount, image},
+        products  {id, name, image, rating, ratingCount, image, activity,},
     }
 }`;
 //
