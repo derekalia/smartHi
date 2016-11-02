@@ -24,10 +24,11 @@ class ProductItem extends Component {
        var aC = '#48BBEC'; // attribute color
        var aH = 33; // attribute height;
        var aBR = 30; // attribute border radius
-       var activities = [];
-       if (this.props.product.activity != null) {
-           activities = this.props.product.activity.split(",");
-       }
+       //BatsFix. Wait parsing till licensee and processor info is pulled from graph.cool
+       var activities = ["relax","chill","sleep"];
+       //if (this.props.product.activity != null) {
+       //    activities = this.props.product.activity.split(",");
+       //}
        var activity=[];
        for (var i=0; i < activities.length; i++) {
             activity.push(
