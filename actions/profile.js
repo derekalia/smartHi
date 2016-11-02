@@ -12,14 +12,11 @@ import {GetUserProfile} from './data.js';
 import {NotifyBusy,NotifyDone} from './navigation.js';
 
 export function GetProfileAction(userId) {
-    return function(dispatch, getState) {
-        var user = GetUserProfile(userId);
-        dispatch({
-            type:SWITCH_SCENE,
-            sceneId: ProfileSceneId,
-            item: user,
-        });
-    }
+    return ({
+        type:SWITCH_SCENE,
+        sceneId: ProfileSceneId,
+        itemId: userId,
+    });
 }
 
 export function ResetPasswordAction() {

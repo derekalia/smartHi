@@ -89,16 +89,17 @@ class ProfileTab extends Component {
         }
       
         // Check if need to reset tab.
-        if (sceneId == ProfileSceneId) {
+        if (sceneId == ProfileSceneId && nextProps.itemId == null ) {
             // reset scenes.
             this.refs.navigator.popToTop();
             return;
         }
-      
+              
         for(var i=0; i < TabScenes.length; i++) {
              if (TabScenes[i].index == sceneId) {
                 var currentScene = Object.assign({}, TabScenes[i]);
                 currentScene.item = nextProps.item;
+                currentScene.itemId = nextProps.itemId;
                 if (sceneId == LicenseeSceneId || sceneId == ProcessorSceneId) {
                     this.refs.navigator.resetTo(currentScene);
                 }
@@ -112,13 +113,23 @@ class ProfileTab extends Component {
 
     renderScene(route, navigator) {
         if (route.index == ProfileSceneId) {
+            // BatsFix. This is very hacky. Because apolloStack relies on incoming props we have to do
+            // this to keep the profile in sync. Consider using plain old action instead of 
+            // attached apollo query sometime later.
+
+            var itemId = route.itemId;
+            var isCurrentUser = false;
+            if (itemId == null || itemId == navigator.props.user.id) {
+                itemId = navigator.props.user.id;
+                isCurrentUser = true;
+            }
             return (
-                <route.component tabId={ProfileTabId} navigator={navigator} item={navigator.props.user}/>
+                <route.component tabId={ProfileTabId} navigator={navigator} itemId={itemId} isCurrentUser={isCurrentUser}/>
             );
         }
         else {
             return (
-                <route.component tabId={ProfileTabId} navigator={navigator} item={route.item}/>
+                <route.component tabId={ProfileTabId} navigator={navigator} item={route.item} itemId={route.itemId}/>
             );
         }
     }
@@ -145,6 +156,7 @@ function mapStateToProps(state) {
         tabId: state.NavigationReducer.tabId, 
         scene: state.NavigationReducer.profileTab, 
         item: state.NavigationReducer.profileTab.item, 
+        itemId: state.NavigationReducer.profileTab.itemId, 
         user: state.UserReducer.profile 
     }
 } 

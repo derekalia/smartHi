@@ -9,6 +9,11 @@ import {Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, Touchab
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
+// import apollo helper
+import {graphql} from 'react-apollo';
+import gql from 'graphql-tag';
+
+
 import StarRating from 'react-native-star-rating';
 
 
@@ -23,7 +28,7 @@ import ProductList from '../../util/productList.js';
 import RetailerList from '../../util/retailerList.js';
 import UserList from '../../util/userList.js';
 import ProducerList from '../../util/producerList.js';
-import {HerbyButton2,} from '../../../common/controls.js';
+import {HerbyLoading,HerbyButton2,} from '../../../common/controls.js';
 
 class UserReviews extends Component {
     render() {
@@ -182,14 +187,14 @@ class ProfileScene extends Component {
     }
 
     _getNavBar() {
-        if (this.props.tabId != ProfileTabId) {
+        if (this.props.tabId != ProfileTabId || this.props.isCurrentUser == false) {
             // Allow heart action if the profile scene is not in the profile tab. BatsFix. Is that correct?
             return (
-              <HerbyBar name={this.props.item.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+              <HerbyBar name={this.props.profile.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
             );
         }
         return (
-            <HerbyBar name={this.props.item.name} navigator={this.props.navigator} forwardCallback={()=>this._goSettings()} forward='Settings'/>
+            <HerbyBar name={this.props.profile.name} navigator={this.props.navigator} forwardCallback={()=>this._goSettings()} forward='Settings'/>
         );
     }
 
@@ -205,13 +210,16 @@ class ProfileScene extends Component {
         if (this.props.tabId == ProfileTabId) {
             hackMargin = -20;
         }
+        if (this.props.loading) {
+            return (<HerbyLoading/>);
+        }
         return (
         <View>
              {this._getNavBar()}
              <ScrollView
                   style={{marginTop:hackMargin,height:this._height,backgroundColor:'transparent',}}
                   stickyHeaderIndices={[1]}>
-                  <UserHeader name={this.props.item.name} address={this.props.item.address} score={this.props.item.score}/>
+                  <UserHeader name={this.props.profile.name} address={this.props.profile.address} score={this.props.profile.score}/>
                   <HerbyFrameBar entries={['FAVORITES','REVIEWS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
                   <Navigator
                       style={{height:this._height,backgroundColor:'#ECECEC',justifyContent: 'flex-start'}}
@@ -220,7 +228,7 @@ class ProfileScene extends Component {
                       renderScene={this.renderScene}
                       initialRoute = {ProfileFrames[FavoritesFrameId]}
                       initialRouteStack = {ProfileFrames}
-                      user={this.props.item}
+                      user={this.props.profile}
                       goReview={(t)=> this._goReview(t)}
                       goProduct={(t)=>this.props.GetProductAction(t)}
                       goProducer={(t)=>this.props.GetProducerAction(t)}
@@ -244,4 +252,30 @@ function mapActionToProps(dispatch) {
         dispatch);
 }
 
-module.exports = connect(null, mapActionToProps)(ProfileScene);
+//
+// BatsFix. Attach apollo query to the component. This creates props loading and products on HomeScene
+//
+const apolloProfile = gql`query($itemId: ID!) {
+    User(id:$itemId) { 
+        id,
+        name,
+        image,
+        score,
+        follower  {id, name, score, image},
+        following {id, name, score, image},
+        retailers {id, name, image, rating, ratingCount, address},
+        producers {id, name, image, rating, ratingCount},
+        products  {id, name, image, rating, ratingCount, image},
+    }
+}`;
+//
+// BatsFix. Maps data obtained from the query to props.
+//
+function mapDataToProps({props,data}) {
+    return ({
+        loading: data.loading,
+        profile: data.User,
+    });
+}
+
+module.exports = graphql(apolloProfile,{props:mapDataToProps})(connect(null,mapActionToProps)(ProfileScene));
