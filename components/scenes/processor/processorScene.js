@@ -6,13 +6,17 @@ import React, { Component } from 'react';
 import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity , Platform, TouchableHighlight } from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
+// import apollo helper
+import {graphql} from 'react-apollo';
+import gql from 'graphql-tag';
+
 
 import StarRating from 'react-native-star-rating';
 
 // Import internals
 import {GoUpdateProductAction,GetRetailerAction,SwitchSceneAction,} from '../../../actions';
 import {UpdateProductSceneId,UpdateProcessorSceneId,SettingsSceneId,ProfileTabId,} from '../../../common/const.js';
-import {HerbyFrameBar,HerbyBar,}   from '../../../common/controls.js';
+import {HerbyLoading,HerbyFrameBar,HerbyBar,}   from '../../../common/controls.js';
 import ProductList from '../../util/productList.js';
 import RetailerList from '../../util/retailerList.js';
 import UserList from '../../util/userList.js';
@@ -44,6 +48,9 @@ class ProcessorRetailers extends Component {
     //BatsFix. Is this even necessary???
     render() {
         return (
+            <View></View>
+        );
+        return (
             <ScrollView style={{backgroundColor:'white',marginTop:6,borderRadius:3,marginHorizontal:6}}>
                 <RetailerList retailerList={this.props.producer.retailers} goRetailer={this.props.goRetailer}/>
             </ScrollView>
@@ -61,10 +68,11 @@ class ProcessorSocial extends Component {
         this.setState({frameId:frameId});
     }
     render() {
+        // BatsFix. There is no list of users the producer follows currently
         return (
             <ScrollView style={{backgroundColor:'transparent'}}>
                 <HerbyFrameBar entries={['FOLLOWER','FOLLOWING']} setFrame={(t)=>this._setFrame(t)}/>
-                <UserList userList={this.state.frameId == 0?this.props.producer.following:this.props.producer.follower}/>
+                <UserList userList={this.state.frameId == 0?this.props.producer.users:null}/>
             </ScrollView>
         );
     }
@@ -151,6 +159,9 @@ class ProcessorScene extends Component {
         if (this.props.tabId == ProfileTabId) {
             hackMargin = -20;
         }
+        if (this.props.loading) {
+            return (<HerbyLoading/>);
+        }
 
         return (
         <View>
@@ -158,7 +169,7 @@ class ProcessorScene extends Component {
              <ScrollView
                   style={{marginTop:0,height:this._height,backgroundColor:'#ECECEC',}}
                   stickyHeaderIndices={[1]}>
-                  <ProcessorHeader producer={this.props.producer} goUpdate={(t)=>this._goUpdate(t)}/>
+                  <ProcessorHeader producer={this.props.processor} goUpdate={(t)=>this._goUpdate(t)}/>
                   <HerbyFrameBar entries={['PRODUCTS','RETAILERS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
                   <Navigator
                       style={{height:this._height,backgroundColor:'#ECECEC',justifyContent: 'flex-start'}}
@@ -167,7 +178,7 @@ class ProcessorScene extends Component {
                       renderScene={this.renderScene}
                       initialRoute = {ProcessorFrames[ProductsFrameId]}
                       initialRouteStack = {ProcessorFrames}
-                      producer={this.props.producer}
+                      producer={this.props.processor}
                       goProduct={(t)=>this.props.GoUpdateProductAction(t)}
                       goRetailer={(t)=>this.props.GetRetailerAction(t)}
                   />
@@ -197,4 +208,47 @@ function mapActionToProps(dispatch) {
         dispatch);
 }
 
-module.exports = connect(mapStateToProps, mapActionToProps)(ProcessorScene);
+//
+// BatsFix. Attach apollo query to the component. This creates props loading and product on HomeScene
+//
+const apolloProcessor = gql`query($itemId: ID!){
+    Producer(id:$itemId)
+    {
+        id,
+        name,
+        image,
+        description,
+        rating,
+        ratingCount,
+        products {
+           id,
+           name,
+           rating,
+           ratingCount,
+           thc,
+           cbd,
+           thca,
+           activity,
+           prices { 
+                retailer {id, name, image}
+           }
+        },
+        users {
+            id,
+            name,
+            image,
+        }
+    }
+}`;
+ 
+//
+// BatsFix. Maps data obtained from the query to props.
+//
+function mapDataToProps({props,data}) {
+    return ({
+        loading: data.loading,
+        processor: data.Producer,
+    });
+}
+
+module.exports = graphql(apolloProcessor,{props:mapDataToProps})(connect(mapStateToProps,mapActionToProps)(ProcessorScene));

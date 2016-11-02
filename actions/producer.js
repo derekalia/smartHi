@@ -49,6 +49,7 @@ export function ProducerLoginAction(name,password) {
             dispatch({
                 type:SWITCH_SCENE,
                 sceneId: ProcessorSceneId,
+                itemId: "ciuovh084pyfu01339caubi0n",
             });
             NotifyDone(dispatch,null);
         }

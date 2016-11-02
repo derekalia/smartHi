@@ -36,6 +36,7 @@ export function LicenseeLoginAction(name,password) {
             dispatch({
                 type:SWITCH_SCENE,
                 sceneId: LicenseeSceneId,
+                itemId:"ciuovqxwnq0s20133thkfjgzt", 
             });
             NotifyDone(dispatch, null);
         }
