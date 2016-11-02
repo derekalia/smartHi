@@ -55,10 +55,10 @@ class CameraScene extends Component {
                     <View>
                     <View style={{ flex: 1, flexDirection: "row", alignSelf:'flex-start',top:-270,justifyContent:'flex-start',marginHorizontal:-15}}>
                       <View style={{ flex: 1, flexDirection: "row", alignItems: 'center',justifyContent:'flex-start' }}>
-                        <TouchableOpacity style={{flexDirection: "row",alignItems:'center'}}>
+                        {/* <TouchableOpacity style={{flexDirection: "row",alignItems:'center'}}>
                             <Image  source={require("../../../media/BackArrowWhite1.png") } style={{ width: 12, height: 19 }} />
                             <Text style={{ fontSize: 18, color: "white" }}> Back </Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                       </View>
                         <TouchableOpacity onPress={()=>this._goRateQueue()} style={{flexDirection: "row",alignItems:'center',padding:8,marginHorizontal:10,backgroundColor:"#50E3C2",borderRadius:5}}>
                             <Text style={{ fontSize: 18, color: "white" }}> Rate Queue </Text>
