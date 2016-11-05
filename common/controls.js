@@ -196,7 +196,7 @@ export class HerbyBar extends Component {
             </View>
             );
         }
-        return (<View style={{flex:1}}/>);
+        return (<View style={{}}/>);
     }
     //
     // Shows back button if there is no forward button or back prop is present.
@@ -226,11 +226,11 @@ export class HerbyBar extends Component {
         if (this.props.forward != null && this.props.forwardCallback != null) {
             //BatsFix. paddingTop 10 had to be used to line up correctly. Find a better way!
             return(
-            <View style={{alignSelf:'flex-end',alignItems:'flex-end',justifyContent:'flex-end'}}>
-            <TouchableOpacity onPress={()=> this.props.forwardCallback()} style={{flexDirection:'row',alignSelf:'flex-end',alignItems:'flex-end',justifyContent:'flex-end'}}>
-                <Text style={{ fontSize: 18, color: "#007AFF",alignSelf:'flex-end',alignItems:'flex-end',justifyContent:'flex-end'}}>{this.props.forward}</Text>
+
+            <TouchableOpacity onPress={()=> this.props.forwardCallback()} style={{alignSelf:'flex-end'}}>
+                <Text style={{ fontSize: 18, color: "#007AFF"}}>{this.props.forward}</Text>
             </TouchableOpacity>
-            </View>
+
             );
         }
     }
@@ -243,9 +243,9 @@ export class HerbyBar extends Component {
                 {this._getBack()}
             </View>
             <View style={{flex:1,alignItems:'center',justifyContent:'center',flexDirection:'row'}}>
-                <Text style={{ fontSize: 18,alignSelf:'center' }}>{this.props.name}</Text>
+                <Text style={{ fontSize: 18,alignSelf:'center'}}>{this.props.name}</Text>
             </View>
-            <View style={{ flex: 1, flexDirection: "row", alignItems: 'flex-end',justifyContent:'flex-end',alignSelf:'center' }}>
+            <View style={{flex:1,justifyContent:'center'}}>
                 {this._getForward()}
                 {this._getHeart()}
             </View>

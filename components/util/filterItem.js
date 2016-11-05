@@ -15,7 +15,7 @@ const tagColor = {
     effect:   "#4A90E2",
     symptoms:  "#ED3C52",
     activity: "#BE00E3",
-} 
+}
 
 class FilterItem extends Component {
     constructor(props) {
@@ -70,6 +70,7 @@ const Styles = StyleSheet.create({
         alignItems: 'center',
     },
     tagText: {
+        flex:1,
         marginTop: 10,
         marginBottom: 10,
         marginHorizontal: 15,

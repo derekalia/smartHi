@@ -29,7 +29,7 @@ class RateStoreScene extends Component {
     _onRating(rating) {
         this._rating = rating;
     }
-    
+
     _onPost() {
         Alert.alert("Thank you!","Really awesome feedback", [{text:'OK', onPress:()=> console.log('Ok')}]);
         this.props.RateStoreAction(this.props.id,this._comment,this._rating);
@@ -37,11 +37,12 @@ class RateStoreScene extends Component {
 
     render() {
         return (
-          <View style={{flex:1}}>
+          <View>
           <HerbyBar navigator={navigator} name="Rate Store"/>
+          <View style={{flex:1}}>
           <ScrollView style={{backgroundColor:'white',}}>
               <View style={{ flex: 1 }}>
-                  <View style={{ height: 238, justifyContent: "flex-end" }}>
+                  <View style={{ flex:1, justifyContent: "flex-end" }}>
                       <Image source={require('../../../media/ikes1.png') } style={{ height: 190, width: 380 }}/>
                   </View>
                   {/*Rating and link to map*/}
@@ -100,6 +101,7 @@ class RateStoreScene extends Component {
                   </View>
           </ScrollView>
           </View>
+          </View>
         );
     }
 }
@@ -113,7 +115,7 @@ function mapStateToProps(state) {
     }
 }
 //
-// connect to RateStoreAction 
+// connect to RateStoreAction
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ RateStoreAction, }, dispatch); }
 

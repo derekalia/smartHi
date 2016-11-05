@@ -52,9 +52,9 @@ class RateProductScene extends Component {
 
                     {this._renderDetailRating()}
 
-                    {this._renderDescription()}
+                    {/* {this._renderDescription()} */}
 
-                    {this._renderTestResults()}
+                    {/* {this._renderTestResults()} */}
 
                     {this._renderFilters()}
 
@@ -128,12 +128,12 @@ class RateProductScene extends Component {
         return (
         <View>
             <View style={{flexDirection:'row', marginTop: 10, marginHorizontal: 10 }}>
-            <View style={{justifyContent: "flex-start"}}>
-                <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
-            </View>
-            <View style={{justifyContent: "flex-end"}}>
-                <Text style={{ fontSize: 22, fontWeight: 'bold' }}>$40</Text>
-            </View>
+              <View style={{justifyContent: "flex-start"}}>
+                  <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
+              </View>
+              <View style={{justifyContent: "flex-end",alignItems:'flex-end',alignItems:'flex-end',flex:1}}>
+                  <Text style={{ fontSize: 22, fontWeight: 'bold'}}>$40</Text>
+              </View>
             </View>
             <View style={{ marginTop: 5, marginHorizontal: 10,flexDirection: "row" }}>
                 <View style={{flex:1.2,alignItems: 'flex-start', flexDirection: "row",marginTop:8}}>
@@ -173,9 +173,9 @@ class RateProductScene extends Component {
             </View>
             <View style={{ flexDirection: "row" }}>
                 <View style={{ flex: 1, }}>
-                    <TouchableOpacity style={[Styles.tagType, { borderColor: 'white', alignItems: 'flex-start' }]}>
+                    {/* <TouchableOpacity style={[Styles.tagType, { borderColor: 'white', alignItems: 'flex-start' }]}>
                         <Text style={[{ color: 'black', margin: 5,fontSize:16 }]}>Quality</Text>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
                     <TouchableOpacity style={[Styles.tagType, { borderColor: 'white', alignItems: 'flex-start' }]}>
                         <Text style={[{ color: 'black', margin: 5,fontSize:16 }]}>Flavor</Text>
                     </TouchableOpacity>
@@ -184,11 +184,11 @@ class RateProductScene extends Component {
                     </TouchableOpacity>
                 </View>
                 <View style={{ flex: 3 }}>
-                    <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
+                    {/* <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
                         <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
                             rating={this.state.quality}
                             selectedStar={(rating) => this._onQuality(rating)}/>
-                    </View>
+                    </View> */}
                     <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
                         <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
                             rating={this.state.flavor}
@@ -233,7 +233,7 @@ class RateProductScene extends Component {
             <View style={{ height: 40, justifyContent: 'center' }}>
                 <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Comment</Text>
             </View>
-            <View style={{ flexDirection: "row",borderColor: 'gray', borderWidth: 1, margin: 2, borderRadius: 4, }}>
+            <View style={{ flexDirection: "row",borderColor: 'gray', borderWidth: 1, margin: 0, borderRadius: 4, }}>
                 <TextInput
                     style={{ height: 60, flex:1, margin: 4, fontSize: 16, }}
                     onChangeText={(text) => this.setState({ text }) }
@@ -242,7 +242,7 @@ class RateProductScene extends Component {
                     multiline = {true}
                 />
             </View>
-            <TouchableOpacity style={{  margin: 4,
+            <TouchableOpacity style={{  marginTop: 10,
                 borderRadius: 10,
                 borderWidth: 1,
                 borderColor: "#ED3C52",
@@ -267,9 +267,12 @@ class RateProductScene extends Component {
     _renderEffectFilters() {
         {
             return (
-            <ScrollView horizontal={true} style={{flex:1}}>
-                {this._renderFiltersArray(this._effect)}
-            </ScrollView>
+            <View style={{flexDirection:'row',flexWrap:'wrap',width:360}}>
+                  {this._renderFiltersArray(this._effect)}
+                  <TouchableOpacity style={{borderColor: "#4A90E2",borderWidth:1,borderRadius:100,width:40,height:40,justifyContent:'center',margin:5}}>
+                    <View style={{borderColor: "#4A90E2",width:1,height:20,borderWidth:.5,alignItems:'center',alignSelf:'center',justifyContent:'center'}}><View style={{borderColor: "#4A90E2",width:20,borderWidth:.5,alignItems:'center',alignSelf:'center',justifyContent:'center'}}></View></View>
+                  </TouchableOpacity>
+            </View>
             );
         }
     }
@@ -303,28 +306,36 @@ class RateProductScene extends Component {
     _renderFilters() {
         return (
         <View>
-            <View style={{ marginHorizontal: 10, marginTop: 15 }}>
+            <View style={{marginHorizontal: 10, marginTop: 15,}}>
                 <View style={{ height: 40, justifyContent: 'center' }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Select Applicable Effects</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Effects</Text>
                 </View>
+
                 {this._renderEffectFilters()}
+
             </View>
             {/* Related activities */}
             <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                 <View style={{ height: 40, justifyContent: 'center' }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Select Applicable Activities</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Activities</Text>
                 </View>
-                <ScrollView horizontal={true}>
+                <View style={{flexDirection:'row',flexWrap:'wrap',width:357}}>
                 {this._renderFiltersArray(this._activity)}
-                </ScrollView>
+                <TouchableOpacity style={{borderColor: "#BE00E3",borderWidth:1,borderRadius:100,width:40,height:40,justifyContent:'center',margin:5}}>
+                  <View style={{borderColor: "#BE00E3",width:1,height:20,borderWidth:.5,alignItems:'center',alignSelf:'center',justifyContent:'center'}}><View style={{borderColor: "#BE00E3",width:20,borderWidth:.5,alignItems:'center',alignSelf:'center',justifyContent:'center'}}></View></View>
+                </TouchableOpacity>
+                </View>
             </View>
             <View style={{ marginHorizontal: 10, marginTop: 15 }}>
                 <View style={{ height: 40, justifyContent: 'center' }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Select Applicable Symptoms</Text>
+                    <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Symptoms</Text>
                 </View>
-                <ScrollView horizontal={true}>
+                <View style={{flexDirection:'row',flexWrap:'wrap',width:357}}>
                 {this._renderFiltersArray(this._symptom)}
-                </ScrollView>
+                <TouchableOpacity style={{borderColor: "#ED3C52",borderWidth:1,borderRadius:100,width:40,height:40,justifyContent:'center',margin:5}}>
+                  <View style={{borderColor: "#ED3C52",width:1,height:20,borderWidth:.5,alignItems:'center',alignSelf:'center',justifyContent:'center'}}><View style={{borderColor: "#ED3C52",width:20,borderWidth:.5,alignItems:'center',alignSelf:'center',justifyContent:'center'}}></View></View>
+                </TouchableOpacity>
+                </View>
             </View>
         </View>
         );
