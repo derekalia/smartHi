@@ -176,6 +176,11 @@ export class HerbyBar extends Component {
         }
         this.state = {showFullHeart:showFullHeart};
     }
+    componentWillReceiveProps(nextProps) {
+        if (this.props.showFullHeart != null) {
+            this.setState({showFullHeart:this.props.showFullHeart});
+        }
+    }
     _onLike() {
         if (this.state.showFullHeart == false) {
             this.setState({showFullHeart:true});

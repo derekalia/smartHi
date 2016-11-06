@@ -79,7 +79,7 @@ class HomeTab extends Component {
     renderScene(route, navigator) {
         return (
             <View style={{flex:1}}>
-                <route.component tabId={HomeTabId} navigator={navigator} item={route.item} itemId={route.itemId}/>
+                <route.component tabId={HomeTabId} navigator={navigator} item={route.item} itemId={route.itemId} currentUserId={navigator.props.currentUserId}/>
             </View>
         );
     }
@@ -95,6 +95,7 @@ class HomeTab extends Component {
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
                 initialRoute = {TabScenes[HomeIndex]}
+                currentUserId = {this.props.user.id}
                 />
         );
     }
@@ -106,6 +107,7 @@ function mapStateToProps(state) {
         scene: state.NavigationReducer.homeTab,
         item: state.NavigationReducer.homeTab.item,
         itemId: state.NavigationReducer.homeTab.itemId,
+        user: state.UserReducer.profile 
     } 
 }
 module.exports = connect(mapStateToProps)(HomeTab);

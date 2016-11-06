@@ -137,7 +137,18 @@ class ProductScene extends Component {
     _onLike() {
         // BatsFix. Implement like action for this product.
     }
-
+    _isProductUser() {
+        var users = this.props.product.users;
+        if (users == null ) {
+            return false;
+        }
+        for (var i=0; i < users.length; i++) {
+            if (users[i].id == this.props.currentUserId) {
+                return true;
+            }
+        }
+        return false;
+    }
     render() {
         var scrollerHeight = this._height;
         if (this.props.loading) {
@@ -145,7 +156,7 @@ class ProductScene extends Component {
         }
         return (
         <View>
-          <HerbyBar name={this.props.product.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+          <HerbyBar name={this.props.product.name} navigator={this.props.navigator} onLike={()=>this._onLike()} showFullHeart = {this._isProductUser()} />
           <ScrollView
               style={{marginTop:0,height:this._height,backgroundColor:'#ECECEC'}}
               stickyHeaderIndices={[1]}>
