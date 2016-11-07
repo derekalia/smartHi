@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, ScrollView, TouchableOpacity,TouchableHighlight, Image } from 'react-native'
+import {StyleSheet, Text, View, ScrollView, TouchableOpacity,TouchableHighlight, Image,Dimensions } from 'react-native'
 //get state management components
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
@@ -8,16 +8,23 @@ import {SwitchSceneAction} from '../../../actions';
 import {HerbyBar}         from '../../../common/controls.js';
 
 class onBoardingOne extends Component {
+
+
     render() {
+      var {width,height} = Dimensions.get('window');
+      this.maxWidth = width;
+      this.maxHeight = height;
+
         return (
-            <View style={[{flex:1  }]}>
+            <View style={[{flex:1,flexDirection: 'column',justifyContent: 'space-between'}]}>
             {/* <HerbyBar name="Scene Test"  navigator={this.props.navigator}/> */}
-                <View style={{flex:.5}}></View>
-                <View style={{flex:1,width:400,height:200}}>
-                  <Image source={require('../../../media/super1.png')} style={{width:400,height:300}}/>
+
+                <View style={{flex:.4}}/>
+                <View style={{flex:2}}>
+                  <Image source={require('../../../media/super1.png')} style={{alignSelf:'center',width:this.maxWidth*.95,height:this.maxHeight*.36}}/>
                 </View>
 
-                  <View style={{flex:.8, alignItems:'center'}}>
+                  <View style={{flex:1, alignItems:'center'}}>
                     <View>
                       <Text style={{fontWeight:'bold',color:'#606060',fontSize:18}}>FIND THE RIGHT CANNABIS</Text>
                     </View>
