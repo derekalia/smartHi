@@ -10,10 +10,10 @@ import {HerbyBar}         from '../../../common/controls.js';
 class onBoardingTwo extends Component {
     render() {
         return (
-          <View style={[{flex:1  }]}>
+          <View style={[{flex:1}]}>
           {/* <HerbyBar name="Scene Test"  navigator={this.props.navigator}/> */}
-              <View style={{flex:1}}></View>
-              <View style={{ justifyContent:'center',alignItems:'center'}}>
+              <View style={{flex:.6}}></View>
+              <View style={{flex:1, justifyContent:'center',alignItems:'center'}}>
                 <Image source={require('../../../media/friends_onboarding1.png')} style={{width:340,height:240}}/>
               </View>
 
@@ -26,7 +26,7 @@ class onBoardingTwo extends Component {
                   </View>
                 </View>
 
-                <View style={{flex:.2,flexDirection:'row',alignItems:'center',justifyContent:'center',marginBottom:20,marginTop:20}}>
+                <View style={{flex:.3,flexDirection:'row',alignItems:'center',justifyContent:'center',marginBottom:20,marginTop:20}}>
                   <View style={{height:15,width:15,backgroundColor:'#CFEFFB',borderRadius:10}}></View>
                   <View style={{height:15,width:15,backgroundColor:'#15B4F1',borderRadius:10, marginLeft:10}}></View>
                   <View style={{height:15,width:15,backgroundColor:'#CFEFFB',borderRadius:10, marginLeft:10}}></View>
