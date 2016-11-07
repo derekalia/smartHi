@@ -124,12 +124,12 @@ class ProfileTab extends Component {
                 isCurrentUser = true;
             }
             return (
-                <route.component tabId={ProfileTabId} navigator={navigator} itemId={itemId} isCurrentUser={isCurrentUser}/>
+                <route.component tabId={ProfileTabId} navigator={navigator} itemId={itemId} isCurrentUser={isCurrentUser} currentUserId={navigator.props.currentUserId}/>
             );
         }
         else {
             return (
-                <route.component tabId={ProfileTabId} navigator={navigator} item={route.item} itemId={route.itemId}/>
+                <route.component tabId={ProfileTabId} navigator={navigator} item={route.item} itemId={route.itemId} currentUserId={navigator.props.currentUserId}/>
             );
         }
     }
@@ -146,6 +146,7 @@ class ProfileTab extends Component {
                 renderScene={this.renderScene}
                 initialRoute = {TabScenes[0]}
                 user={this.props.user}
+                currentUserId={this.props.user.id}
                 />
         );
     }

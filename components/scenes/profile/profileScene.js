@@ -18,7 +18,7 @@ import StarRating from 'react-native-star-rating';
 
 
 // Import internals
-import {GetProductReviewAction,GetProductAction,GetRetailerAction,GetProducerAction,SwitchSceneAction,} from '../../../actions';
+import {AddToFollowUser,GetProductReviewAction,GetProductAction,GetRetailerAction,GetProducerAction,SwitchSceneAction,} from '../../../actions';
 import {SettingsSceneId,ProfileTabId,} from '../../../common/const.js';
 import {HerbyFrameBar,HerbyBar,}   from '../../../common/controls.js';
 import ProducerItem from '../../util/producerItem.js';
@@ -184,13 +184,27 @@ class ProfileScene extends Component {
     }
     _onLike() {
       //BatsFix. Should call like user action here.
+      console.log("users are" + this.props.profile.id + " and current " + this.props.currentUserId);
+      this.props.AddToFollowUser(this.props.profile.id,this.props.currentUserId);
     }
-
+     _isUserUser() {
+        var users = this.props.profile.follower;
+        if (users == null ) {
+            return false;
+        }
+        for (var i=0; i < users.length; i++) {
+            if (users[i].id == this.props.currentUserId) {
+                return true;
+            }
+        }
+        return false;
+    }
+  
     _getNavBar() {
         if (this.props.tabId != ProfileTabId || this.props.isCurrentUser == false) {
             // Allow heart action if the profile scene is not in the profile tab. BatsFix. Is that correct?
             return (
-              <HerbyBar name={this.props.profile.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+              <HerbyBar name={this.props.profile.name} navigator={this.props.navigator} onLike={()=>this._onLike()} showFullHeart={this._isUserUser()}/>
             );
         }
         return (
@@ -244,6 +258,7 @@ class ProfileScene extends Component {
 //
 function mapActionToProps(dispatch) {
     return bindActionCreators({
+        AddToFollowUser,
         GetProductReviewAction,
         GetProductAction,
         GetProducerAction,

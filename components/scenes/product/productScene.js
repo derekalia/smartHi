@@ -13,7 +13,7 @@ import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 
 //get internal components
-import {GetProductAction,GetRetailerAction,GetProducerAction,} from '../../../actions';
+import {AddToProductUser,GetProductAction,GetRetailerAction,GetProducerAction,} from '../../../actions';
 import {HerbyLoading,HerbyPicker,HerbyBar,HerbyFrameBar} from '../../../common/controls.js';
 
 import ReviewList     from '../../util/reviewList.js';
@@ -136,6 +136,7 @@ class ProductScene extends Component {
 
     _onLike() {
         // BatsFix. Implement like action for this product.
+        this.props.AddToProductUser(this.props.product.id, this.props.currentUserId);
     }
     _isProductUser() {
         var users = this.props.product.users;
@@ -185,7 +186,7 @@ class ProductScene extends Component {
 // BatsFix. This function is used to convert action to props passed to this component.
 // In this example, there is now prop called GetRetailerAction.
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,GetRetailerAction,GetProducerAction,}, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ AddToProductUser,GetProductAction,GetRetailerAction,GetProducerAction,}, dispatch); }
 
 //
 // BatsFix. Attach apollo query to the component. This creates props loading and product on HomeScene
@@ -237,6 +238,7 @@ function mapDataToProps({props,data}) {
     return ({
         loading: data.loading,
         product: data.Product,
+        refetch: data.refetch,
     });
 }
 

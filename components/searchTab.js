@@ -73,7 +73,7 @@ class SearchTab extends Component {
     renderScene(route, navigator) {
         return (
             <View style={{flex:1}}>
-                <route.component tabId={SearchTabId} navigator={navigator} item={route.item} itemId={route.itemId}/>
+                <route.component tabId={SearchTabId} navigator={navigator} item={route.item} itemId={route.itemId} currentUserId={navigator.props.currentUserId}/>
             </View>
         );
     }
@@ -89,6 +89,7 @@ class SearchTab extends Component {
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
                 initialRoute = {TabScenes[0]}
+                currentUserId = {this.props.user.id}
             />
         );
     }
@@ -102,7 +103,8 @@ function mapStateToProps(state) {
         tabId: state.NavigationReducer.tabId, 
         scene: state.NavigationReducer.searchTab, 
         item: state.NavigationReducer.searchTab.item,
-        itemId: state.NavigationReducer.searchTab.itemId
+        itemId: state.NavigationReducer.searchTab.itemId,
+        user: state.UserReducer.profile,
     } 
 }
 

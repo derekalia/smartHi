@@ -13,7 +13,7 @@ import gql from 'graphql-tag';
 
 import StarRating from 'react-native-star-rating';
 //get internal components
-import {GetProductAction,ShowMapAction} from '../../../actions';
+import {AddToRetailerUser,GetProductAction,ShowMapAction} from '../../../actions';
 import {HerbyLoading,HerbyBar,HerbyFrameBar,HerbyPicker} from '../../../common/controls.js';
 import HerbySearchBar from '../../util/herbySearchBar.js';
 
@@ -102,6 +102,7 @@ class RetailerScene extends Component {
 
     _onLike() {
         // BatsFix. Implement like action for this product.
+        this.props.AddToRetailerUser(this.props.retailer.id, this.props.currentUserId);
     }
 
     _showMap() {
@@ -115,6 +116,19 @@ class RetailerScene extends Component {
             );
         }
         return null;
+    }
+
+    _isRetailerUser() {
+        var users = this.props.retailer.users;
+        if (users == null ) {
+            return false;
+        }
+        for (var i=0; i < users.length; i++) {
+            if (users[i].id == this.props.currentUserId) {
+                return true;
+            }
+        }
+        return false;
     }
 
     configureScene(route, routeStack) {
@@ -144,7 +158,7 @@ class RetailerScene extends Component {
         console.log(this.props.retailer);
         return (
         <View style={{backgroundColor:'#ECECEC'}}>
-        <HerbyBar name={this.props.retailer.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+        <HerbyBar name={this.props.retailer.name} navigator={this.props.navigator} onLike={()=>this._onLike()} showFullHeart = {this._isRetailerUser()} />
         <ScrollView
             style={{flex:1,marginTop:0,height:this._height,backgroundColor:'#ECECEC'}}
             stickyHeaderIndices={[1]}>
@@ -173,7 +187,7 @@ class RetailerScene extends Component {
 // BatsFix. This function is used to convert action to props passed to this component.
 // In this example, there is now prop called GetProductAction.
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,ShowMapAction }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ AddToRetailerUser,GetProductAction,ShowMapAction }, dispatch); }
 
 //
 // BatsFix. Attach apollo query to the component. This creates props loading and products on HomeScene
@@ -199,21 +213,13 @@ const apolloRetailer = gql`query($itemId: ID!){
             user {id,name},
             rating
         },
+        users {
+            id,
+            name,
+        }
     }
 }`;
-/*
-const apolloProducts = gql`query($itemId: String!) {
-    allProducts(first:20,filter:{activity_contains:$itemId}){
-      id,
-      name,
-      activity,
-      rating,
-      ratingCount,
-      thc,
-      cbd,
-    }
-}`;
-*/
+
 //
 // BatsFix. Maps data obtained from the query to props.
 //

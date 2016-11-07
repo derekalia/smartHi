@@ -13,7 +13,7 @@ import gql from 'graphql-tag';
 
 
 //get internal components
-import {GetProductAction} from '../../../actions';
+import {AddToProducerUser,GetProductAction} from '../../../actions';
 import ReviewList         from '../../util/reviewList.js';
 import ProductList        from '../../util/productList.js';
 import UserList           from '../../util/userList.js';
@@ -112,6 +112,7 @@ class ProducerScene extends Component {
 
     _onLike() {
         // BatsFix. Implement like action for this product.
+        this.props.AddToProducerUser(this.props.producer.id, this.props.currentUserId);
     }
 
     _getSearchBar() {
@@ -138,6 +139,19 @@ class ProducerScene extends Component {
         );
     }
 
+    _isProducerUser() {
+        var users = this.props.producer.users;
+        if (users == null ) {
+            return false;
+        }
+        for (var i=0; i < users.length; i++) {
+            if (users[i].id == this.props.currentUserId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     render() {
         if (this.props.loading) {
             return (<HerbyLoading/>);
@@ -145,7 +159,7 @@ class ProducerScene extends Component {
 
         return (
         <View style={{flex:1,backgroundColor:'#ECECEC'}}>
-        <HerbyBar name={this.props.producer.name} navigator={this.props.navigator} onLike={()=>this._onLike()}/>
+        <HerbyBar name={this.props.producer.name} navigator={this.props.navigator} onLike={()=>this._onLike()} showFullHeart = {this._isProducerUser()} />
         <ScrollView
             style={{marginTop:0,height:this._height,backgroundColor:'#ECECEC'}}
             stickyHeaderIndices={[1]}>
@@ -176,7 +190,7 @@ class ProducerScene extends Component {
 // BatsFix. This function is used to convert action to props passed to this component.
 // In this example, there is now prop called GetProductAction.
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction, }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ AddToProducerUser,GetProductAction, }, dispatch); }
 
 //
 // BatsFix. Attach apollo query to the component. This creates props loading and product on HomeScene
@@ -200,6 +214,10 @@ const apolloProducer = gql`query($itemId: ID!){
            thca,
            activity,
         },
+        users {
+            id,
+            name,
+        }
     }
 }`;
  
