@@ -47,10 +47,10 @@ class ProductReviewScene extends Component {
     }
     render() {
         return (
-        <View style={{flex:1}}>
+        <View style={{flex:1,backgroundColor:'#ECECEC'}}>
         <HerbyBar name="Review Details"  navigator={this.props.navigator}/>
-        <ScrollView style={{flex:1, backgroundColor:'white',marginBottom:50}}>
-            <View style={{ flex: 1 }}>
+        <ScrollView style={{flex:1, backgroundColor:'#ECECEC',marginBottom:50,marginHorizontal:6,marginTop:6,borderRadius:3}}>
+            <View style={{ flex: 1,backgroundColor:'white' }}>
                 <ProductItem product = {this.props.item.product} goProduct={(t)=>this.props.GetProductAction(t)}/>
 
                 {this._renderCommentBox()}
@@ -156,10 +156,10 @@ class ProductReviewScene extends Component {
         var filters = [];
         for (var i=0; i  < filterArray.length; i++) {
             var entry = filterArray[i];
-            var ratio = entry.strength*2; 
+            var ratio = entry.strength*2;
             filters.push(
-            <TouchableOpacity 
-                style ={{width:ratio,margin: 5, borderRadius: 20, height: 40, borderWidth: 1, justifyContent: 'center', alignItems:'center',backgroundColor:'blue'}}
+            <TouchableOpacity
+                style ={{width:ratio,margin: 5, borderRadius: 20, height: 40, borderWidth: 0, justifyContent: 'center', alignItems:'center',backgroundColor:'#4A90E2'}}
                 key={i}
                 >
                 <Text style={{marginTop:10,marginBottom:10,marginHorizontal:15,color:'white'}}>
@@ -178,7 +178,7 @@ class ProductReviewScene extends Component {
                     <Text style={{ fontSize: 20, fontWeight: 'bold', }}>Effects</Text>
                 </View>
                 <View style={{flex:1,flexDirection:'row'}}>
-                    <View style={{borderRightWidth:2, borderColor:'blue',paddingRight:10,marginRight:10}}>
+                    <View style={{borderRightWidth:2, borderColor:'black',paddingRight:10,marginRight:10}}>
                         {this._renderFiltersArray(this._effect)}
                     </View>
                     <View style={{flex:1}}>
