@@ -26,6 +26,11 @@ class ProductItem extends Component {
        var aBR = 30; // attribute border radius
        //BatsFix. Wait parsing till licensee and processor info is pulled from graph.cool
        var activities = [];
+       //BatsFix. Array.isArray should be removed later once test data is not used anymore
+       if (Array.isArray(this.props.product.activity)) {
+           activities = this.props.product.activity;
+       }
+       else
        if (this.props.product.activity != null) {
            activities = this.props.product.activity.split(",");
        }
