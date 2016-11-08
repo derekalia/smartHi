@@ -16,10 +16,21 @@ import {SwitchTabAction,GetProductReviewAction} from '../../actions';
 class ReviewItem extends Component {
     constructor(props) {
         super(props);
-        this.state={
-            userName: 'Sue',
-            time: '2 hours ago',
-            comment: 'This is a comment.'
+        if (this.props.reviewItem == null) {
+            this.state={
+                id: 'somefakeid',
+                time: '2 hours ago',
+                name: 'Good',
+                comment: 'This is a comment.',
+                rating: 4,
+                user: {
+                    id: "test",
+                    name: "testUser"
+                }
+            }
+        }
+        else {
+            this.state = this.props.reviewItem;
         }
     }
     _onRating(t) {
@@ -27,23 +38,24 @@ class ReviewItem extends Component {
 
     render () {
         // BatsFix. there should be no hard coded content here.
+        console.log(this.props.reviewItem);
         return (
             <View style={Styles.row} style={{ margin: 2, marginTop: 15, flex: 1 }}>
-            <TouchableOpacity onPress={()=>this.props.goReview()}>
+            <TouchableOpacity onPress={()=>this.props.goReview(this.state.id)}>
                 <View style={Styles.row}>
                     <View style={{ height: 30, width: 30, borderWidth: 15, borderColor: 'lightblue', marginRight: 10 }}></View>
                     <View style={Styles.column}>
                       <View style={Styles.row}>
 
                         <Text style={{ fontSize: 14, fontWeight: 'bold', marginTop: -2,marginRight:10 }}>
-                            {this.state.userName}
+                            {this.state.user.name}
                         </Text>
                         <StarRating
                             disabled={true}
                             maxStars={5}
                             starSize={15}
                             starColor={'red'}
-                            rating={4}
+                            rating={this.state.rating}
                             selectedStar={(t)=>this._onRating(t)}
                             />
                             </View>
@@ -83,58 +95,57 @@ class ReviewList extends Component {
         //What happens with producers, retailers?
         this.props.SwitchTabAction(ReviewTabId);
     }
-    _goReview() {
-        this.props.GetProductReviewAction(1);
+    _goReview(id) {
+        this.props.GetProductReviewAction(id);
+    }
+    _getReviewItems() {
+        if (this.props.reviewList == null) {
+            return(
+                <View style={Styles.column}>
+                <ReviewItem goReview={(id)=>this._goReview(id)}/>
+                <ReviewItem goReview={(id)=>this._goReview(id)}/>
+                <ReviewItem goReview={(id)=>this._goReview(id)}/>
+                </View>
+            );
+        }
+        var reviews = [];
+        for (var i=0; i < this.props.reviewList.length; i++) {
+            reviews.push(
+                <ReviewItem goReview={(id)=>this._goReview(id)} reviewItem={this.props.reviewList[i]} key={this.props.reviewList[i].id}/>
+            );
+        }
+        return (
+            <View style={Styles.column}>
+                {reviews}
+            </View>
+        );
     }
     render() {
         return (
            <View style={{ marginHorizontal: 10, marginTop: 0}}>
-           <View style={{flex:1,marginBottom:10 }}>
-           <TouchableOpacity style={{  margin: 4, marginTop:20,
-             borderRadius: 10,
-             borderWidth: 1,
-             borderColor: "#ED3C52",
-             backgroundColor: '#ED3C52',
-             justifyContent: 'center',
-             alignItems: 'center'}}
-             onPress={()=>this._goRate()}
-             >
-               <Text style={{color: "white",fontWeight:'bold',fontSize:16,
-               marginTop: 7,
-               marginBottom: 7,
-               marginHorizontal: 10,}}> Rate Item </Text>
-           </TouchableOpacity>
-           </View>
-                <View style={{ justifyContent: 'center' }}>
-                    <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Reviews</Text>
-                </View>
-                <View style={Styles.column}>
-                    {/* <View style={Styles.row}>
-                        <TextInput
-                            style={{ height: 30, flex:1, borderColor: 'gray', borderWidth: 1, margin: 2, borderRadius: 4, fontSize: 15,marginTop:10 }}
-                            onChangeText={(text) => this.setState({ text }) }
-                            value={this.state.text}
-                            placeholder={' Say something'}
-                            />
-                    </View> */}
-                    <ReviewItem goReview={()=>this._goReview()}/>
-                    <ReviewItem goReview={()=>this._goReview()}/>
-                    <ReviewItem goReview={()=>this._goReview()}/>
-                    {/* <View style={{flex:1}}>
-                    <TouchableOpacity style={{  margin: 4, marginTop:20,
-                      borderRadius: 10,
-                      borderWidth: 1,
-                      borderColor: "#ED3C52",
-                      backgroundColor: '#ED3C52',
-                      justifyContent: 'center',
-                      alignItems: 'center'}}>
-                        <Text style={{color: "white",fontWeight:'bold',fontSize:16,
-                        marginTop: 7,
-                        marginBottom: 7,
-                        marginHorizontal: 10,}}> Show More </Text>
-                    </TouchableOpacity>
-                    </View> */}
-                </View>
+               <View style={{flex:1,marginBottom:10 }}>
+               <TouchableOpacity style={{  margin: 4, marginTop:20,
+                 borderRadius: 10,
+                 borderWidth: 1,
+                 borderColor: "#ED3C52",
+                 backgroundColor: '#ED3C52',
+                 justifyContent: 'center',
+                 alignItems: 'center'}}
+                 onPress={()=>this._goRate()}
+                 >
+                   <Text style={{color: "white",fontWeight:'bold',fontSize:16,
+                   marginTop: 7,
+                   marginBottom: 7,
+                   marginHorizontal: 10,}}> Rate Item </Text>
+               </TouchableOpacity>
+               </View>
+
+               <View style={{ justifyContent: 'center' }}>
+                   <Text style={{ fontSize: 20, fontWeight: 'bold' }}>Reviews</Text>
+               </View>
+
+               {/*Review Items*/}
+               {this._getReviewItems()}
             </View>
         );
     }

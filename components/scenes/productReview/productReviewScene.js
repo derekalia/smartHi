@@ -9,49 +9,39 @@ import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
+// import apollo helper
+import {graphql} from 'react-apollo';
+import gql from 'graphql-tag';
+
+
 import {RateProductAction,GetProductAction,GetProfileAction,} from '../../../actions';
 import StarRating from 'react-native-star-rating';
 
 import FilterItem   from '../../util/filterItem.js';
 import ProductItem   from '../../util/productItem.js';
-import {HerbyBar} from '../../../common/controls.js';
+import {HerbyLoading,HerbyBar} from '../../../common/controls.js';
 import {FiltersActivity, FiltersEffect, FiltersType,FiltersCategory,FiltersSymptoms} from '../../../common/filters.js';
 
 class ProductReviewScene extends Component {
     constructor(props) {
         super(props);
-        this.state = {product:this.props.item.product,review:this.props.item.review};
-        this._effect = [];
-        this._symptom = [];
-        this._activity = [];
-        var filters = this.state.review.effect;
-        //BatsFix. Should really have a constructor for filter...
-        for (var i=0; i < filters.length; i++) {
-            var filter = filters[i];
-            this._effect.push({name:filter.name,strength:filter.strength,type:'effect',selected:true});
-        }
-        filters = this.state.review.symptom;
-        for (var i=0; i < filters.length; i++) {
-            var name = filters[i];
-            this._symptom.push({name:name,type:'symptoms',selected:true});
-        }
-        filters = this.state.review.activity;
-        for (var i=0; i < filters.length; i++) {
-            var name = filters[i];
-            this._activity.push({name:name,type:'activity',selected:true});
-        }
     }
     _getUser() {
         //BatsFix. add call to GetUserActionProfile here
         this.props.GetProfileAction(1);
     }
     render() {
+        if (this.props.loading) {
+            return (<HerbyLoading/>);
+        }
+        console.log("printing productReview");
+        console.log(this.props.productReview);
         return (
         <View style={{flex:1}}>
         <HerbyBar name="Review Details"  navigator={this.props.navigator}/>
         <ScrollView style={{flex:1, backgroundColor:'white',marginBottom:50}}>
             <View style={{ flex: 1 }}>
-                <ProductItem product = {this.props.item.product} goProduct={(t)=>this.props.GetProductAction(t)}/>
+                <ProductItem product = {this.props.productReview.product} goProduct={(t)=>this.props.GetProductAction(t)}/>
 
                 {this._renderCommentBox()}
 
@@ -112,17 +102,17 @@ class ProductReviewScene extends Component {
                 <View style={{ flex: 3 }}>
                     <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
                         <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
-                            rating={this.state.review.quality}
+                            rating={this.props.productReview.quality}
                             selectedStar={(rating) => this._onQuality(rating)}/>
                     </View>
                     <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
                         <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
-                            rating={this.state.review.flavor}
+                            rating={this.props.productReview.flavor}
                             selectedStar={(rating) => this._onFlavor(rating)}/>
                    </View>
                     <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
                         <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
-                            rating={this.state.review.potency}
+                            rating={this.props.productReview.potency}
                             selectedStar={(rating) => this._onPotency(rating)}/>
                    </View>
                 </View>
@@ -213,8 +203,34 @@ class ProductReviewScene extends Component {
 
 function mapActionToProps(dispatch) { return bindActionCreators({ RateProductAction,GetProductAction,GetProfileAction, }, dispatch); }
 
-module.exports = connect(null, mapActionToProps)(ProductReviewScene);
+//
+// BatsFix. Attach apollo query to the component. This creates props loading and products on HomeScene
+//
+const apolloProductReview = gql`query($itemId: ID!) {
+    ProductReview(id:$itemId){
+      id,
+      name,
+      comment,
+      rating,
+      activity,
+      effect,
+      symptom,
+      user {id,name,score,image},
+      product {id, name, rating, ratingCount, activity, thc, thca, cbd, image },
+    }
+}`;
+//
+// BatsFix. Maps data obtained from the query to props.
+//
+function mapDataToProps({props,data}) {
+    return ({
+        error:  data.error,
+        loading: data.loading,
+        productReview: data.ProductReview,
+    });
+}
 
+module.exports = graphql(apolloProductReview,{props:mapDataToProps})(connect(null,mapActionToProps)(ProductReviewScene));
 
 const Styles = StyleSheet.create({
     tagType: {

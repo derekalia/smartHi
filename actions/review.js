@@ -75,10 +75,12 @@ export function GetProductReviewAction(reviewId) {
     // Product item and its review by a particular user
     // are separate objects
     return function(dispatch,getState) {
-        var review  = GetProductReview(reviewId);
+        console.log("getting review id " + reviewId);
+        var review  = GetProductReview(1);
         dispatch({
             type: SWITCH_SCENE,
             item: review,
+            itemId: reviewId,
             sceneId: ProductReviewSceneId,
         });
     }

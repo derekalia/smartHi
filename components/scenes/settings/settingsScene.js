@@ -82,21 +82,24 @@ class SettingsScene extends Component {
                   <View style={{flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
                     <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black',fontSize:16}}>Change Name</Text>
                     <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
-                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
+                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} 
+                             source={require('../../../media/More1.png') }/>
                     </View>
                   </View>
 
                   <View style={{flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
                     <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black',fontSize:16}}>Change Email</Text>
                     <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
-                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
+                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} 
+                             source={require('../../../media/More1.png') }/>
                     </View>
                   </View>
 
                   <View style={{flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
                     <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black',fontSize:16}}>Reset Password</Text>
                     <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
-                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
+                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} 
+                             source={require('../../../media/More1.png') }/>
                     </View>
                   </View>
                 </View>
@@ -112,7 +115,8 @@ class SettingsScene extends Component {
                   <View style={{flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
                     <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black',fontSize:16}}>Notifcation Settings</Text>
                     <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
-                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
+                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} 
+                             source={require('../../../media/More1.png') }/>
                     </View>
                   </View>
                 </View>
@@ -127,7 +131,8 @@ class SettingsScene extends Component {
                   <View style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
                     <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black',fontSize:16}}>Licensee Authentication</Text>
                     <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
-                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
+                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} 
+                             source={require('../../../media/More1.png') }/>
                     </View>
                   </View>
                 </TouchableHighlight>
@@ -138,7 +143,8 @@ class SettingsScene extends Component {
                 <View style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
                   <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black',fontSize:16}}>Sign Out</Text>
                   <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
-                    <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
+                    <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} 
+                           source={require('../../../media/More1.png') }/>
                   </View>
                 </View>
 

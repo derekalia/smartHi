@@ -26,7 +26,7 @@ class ProductReview extends Component {
         return (
             <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:2}}>
                 <View style={{backgroundColor:'#ECECEC',flex:1,height:6,marginHorizontal:0}}/>
-                <ReviewList/>
+                <ReviewList reviewList={this.props.product.productReviews}/>
             </ScrollView>
         );
     }
