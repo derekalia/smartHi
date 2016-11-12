@@ -43,27 +43,52 @@ class HomeScene extends Component {
         }
         console.log(this.props.products);
         return (
-            <View style={[{flex: 1 }]}>
+            <View style={[{flex: 1,backgroundColor:'#ECECEC' }]}>
                 <ScrollView>
 
                     {/* Activities */}
                     {/* Section Header */}
-                    <View style={{ alignItems: 'flex-end', marginLeft: 5, height:40,flexDirection:'row',justifyContent: 'flex-start',marginBottom:0 }}>
+                    <View style={{backgroundColor:'white',paddingBottom:15,paddingTop:10,margin:6}}>
+                    <View style={{ alignItems: 'flex-end', marginLeft: 5,flexDirection:'row',justifyContent: 'flex-start',marginBottom:0 }}>
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Activity </Text>
                     </View>
                     <ActivityList count={this.state.activityCount}/>
+                    </View>
 
                     {/* Staff Picks */}
-                    <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 15,marginBottom:5 }]}>
+                    <View style={{backgroundColor:'white',paddingBottom:0,paddingTop:10,margin:6}}>
+                    <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5,marginBottom:5 }]}>
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Staff Pick </Text>
                     </View>
                     <ProductItem product={this.props.products[0]} goProduct={(id) => this._goProduct(id) }/>
+                        <View style={{alignSelf:'center',margin:10}}>
+                            <Text>Show More</Text>
+                        </View>
+                    </View>
 
                     {/* Trending */}
-                    <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 15,marginBottom:5 }]}>
+                    <View style={{backgroundColor:'white',paddingBottom:0,paddingTop:10,margin:6}}>
+                    <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, marginBottom:5 }]}>
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Trending </Text>
                     </View>
                     <ProductItem product={this.props.products[1]} goProduct={(id) => this._goProduct(id) }/>
+                        <View style={{alignSelf:'center',margin:10}}>
+                            <Text>Show More</Text>
+                        </View>
+                    </View>
+
+                    {/* Trending */}
+                    <View style={{backgroundColor:'white',paddingBottom:0,paddingTop:10,margin:6}}>
+                    <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, marginBottom:5 }]}>
+                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Popular Effects </Text>
+                        <Text style={{ fontSize: 16}}> Choose products based off dominant effects  </Text>
+                    </View>
+                    
+                        <View style={{alignSelf:'center',margin:10}}>
+                            <Text>Show More</Text>
+                        </View>
+                    </View>
+
                 </ScrollView>
             </View>
         );
