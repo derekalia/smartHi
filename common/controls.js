@@ -2,10 +2,30 @@ import React, { Component } from 'react';
 import {Picker,Modal,ScrollView, Animated, Dimensions, StyleSheet, Text, View, Slider, Image, TextInput, TouchableHighlight, TouchableOpacity,} from 'react-native'
 
 export class HerbyLoading extends Component {
+    constructor(props) {
+        super(props);
+    }
+    _getBusy() {
+        if (this.props.showBusy == false) {
+            return null;
+        }
+        return(
+            <Image style={{height:50,width:50,alignSelf:'center'}} source={require('../media/busy.gif')}/>
+        );
+    }
+    _getMessage() {
+        if (this.props.message == null) {
+            return null;
+        }
+        return(
+            <Text style={{alignSelf:'center'}}>{this.props.message}</Text>
+        );
+    }
     render() {
         return (
-            <View style={{flex:1,justifyContent:'center',alignItems:'center',backgroundColor:'#EDEDED'}}>
-                <Text>Loading...</Text>
+            <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
+                {this._getBusy()}
+                {this._getMessage()}
             </View>
         );
     }

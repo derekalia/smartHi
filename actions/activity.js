@@ -13,9 +13,15 @@ export const ACTIVITY_ERROR   = 'ACTIVITY_ERROR';
 
 
 export function GetActivityAction(activityType) {
-    return {
+    return function (dispatch, getState) {
+        var products = GetActivityProducts(activityType);
+        var item = {productList:products,activity:activityType};
+        // then switch scene
+        dispatch({
 			type: SWITCH_SCENE,
 			sceneId: ActivitySceneId,
-            itemId: activityType,
-	}
+            item: item,
+		});
+
+    }
 }

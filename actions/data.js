@@ -779,3 +779,12 @@ export function UploadProductRating() {
 export function UploadStoreRating() {
 
 }
+
+export async function GetUserToken(userName,password) {
+    return new Promise(function(resolve,reject) {
+        //setTimeout(function() {resolve({name:"cheech",userId:0,token:"testUserToken"});},2000);
+        throw "bad call example";
+    });
+}
+
+

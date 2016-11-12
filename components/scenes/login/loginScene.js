@@ -1,13 +1,15 @@
 //loginscenes.js
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
+import {Alert,StyleSheet, Text, View, Image, TextInput, TouchableOpacity, Navigator} from 'react-native'
 
 //get state management components
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 //get internal components
-import {LoginAction, LogoffAction} from '../../../actions';
+import HerbyNotification from '../../util/herbyNotification.js';
+
+import {LoginUser,LoginAction, LogoffAction} from '../../../actions';
 
 
 class LoginScene extends Component {
@@ -15,28 +17,34 @@ class LoginScene extends Component {
         super(props);
         this._userName = "";
         this._userPassword = "";
-        this.state = { showMessage: false };
-    }
-
-    _hideMessage() {
-        if (this.state.showMessage == true) {
-            this.setState({ showMessage: false });
-        }
+        this.state = { loading: false,error: null };
     }
 
     _enterUserName(event) {
-        this._hideMessage();
+        this.setState({error:null});
         this._userName = event.nativeEvent.text;
     }
 
     _enterUserPassword(event) {
-        this._hideMessage();
+        this.setState({error:null});
         this._userPassword = event.nativeEvent.text
     }
 
-    _submit() {
-        this.setState({ showMessage: true });
-        this.props.LoginAction({ name: this._userName, password: this._userPassword });
+    async _submit() {
+            this.setState({loading:true});
+        LoginUser(this._userName,this._userPassword).then((result)=> {
+            if (result.error == null) {
+                this.setState({loading:false});
+                this.props.LoginAction(result);
+            }
+            else {
+                this.setState({loading:false, error:result.error});
+            }
+        });
+    }
+
+    _onCancel() {
+        this.setState({loading: false, error: null});
     }
 
     render() {
@@ -89,13 +97,8 @@ class LoginScene extends Component {
                         <Text style={{ color: "red", fontSize: 16, justifyContent: "center" }}>{this.state.showMessage ? this.props.userMessage : ""}</Text>
                     </View>
                 </View>
-
-
+                <HerbyNotification showBusy={this.state.loading} message={this.state.error}/>
                 </View>
-
-
-
-
         );
     }
 }

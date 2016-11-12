@@ -11,7 +11,6 @@ import {Navigator,View } from 'react-native';
 // Import const ids.
 import {LoginSceneId,RegisterSceneId,LaunchSceneId, onBoardingOneId,onBoardingTwoId,onBoardingThreeId} from '../common/const.js';
 
-import HerbyNotification from './util/herbyNotification.js';
 
 //get internal components
 import LaunchScene   from './scenes/launch/launchScene.js';
@@ -74,7 +73,6 @@ class LoginPage extends Component {
                         />
                 }
                 />
-            <HerbyNotification/>
             </View>
         );
     }

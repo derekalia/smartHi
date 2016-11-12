@@ -5,8 +5,6 @@
 // Import modules
 import React, { Component } from 'react';
 import {StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 
 
 class HerbyNotification extends Component {
@@ -22,7 +20,7 @@ class HerbyNotification extends Component {
         );
     }
     _getMessage() {
-        if (this.props.showMessage == false) {
+        if (this.props.message == null) {
             return null;
         }
         return(
@@ -31,7 +29,7 @@ class HerbyNotification extends Component {
     }
     render() {
         return (
-            <View style={{position:'absolute',left:0,bottom:0,right:0,height:this.props.showMessage || this.props.showBusy?50:0}}>
+            <View style={{position:'absolute',left:0,bottom:0,right:0,height:this.props.message || this.props.showBusy?50:0}}>
                 {this._getBusy()}
                 {this._getMessage()}
             </View>
@@ -39,11 +37,4 @@ class HerbyNotification extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        showMessage: state.NavigationReducer.showMessage,
-        showBusy:    state.NavigationReducer.showBusy,
-        message:     state.NavigationReducer.message,
-    }
-}
-module.exports = connect(mapStateToProps)(HerbyNotification);
+module.exports = HerbyNotification;
