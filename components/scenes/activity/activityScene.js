@@ -53,7 +53,7 @@ class ActivityScene extends Component {
                                 justifyContent:'flex-end'  }} 
                                 source={require('../../../media/ActivitySceneImages/adventure11.png')}>
 
-                        <Text style={{ textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 5, textShadowColor: "black", fontSize: 24, color: "white", margin: 8}}>
+                        <Text style={{ textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 5, textShadowColor: "black", fontSize: 24, color: "white",backgroundColor:'transparent', margin: 8}}>
                             {this.props.itemId}
                         </Text>
 

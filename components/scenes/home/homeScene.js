@@ -7,86 +7,107 @@
 //
 
 import React, { Component } from 'react';
-import {StyleSheet, Text, View, ScrollView, TouchableOpacity,TouchableHighlight } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, TouchableHighlight } from 'react-native'
 
 //get state management components
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 // import apollo helper
-import {graphql} from 'react-apollo';
+import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 
 //get internal components
-import ActivityList     from '../../util/activityList.js';
-import ProductItem      from '../../util/productItem.js';
-import {GoSearchAction, GetProductAction} from '../../../actions';
-
-import {HerbyLoading} from '../../../common/controls.js';
+import ActivityList from '../../util/activityList.js';
+import ProductItem from '../../util/productItem.js';
+import { GoSearchAction, GetProductAction } from '../../../actions';
+import { HerbyLoading, HerbyFrameBar, HerbyBar, } from '../../../common/controls.js';
 
 class HomeScene extends Component {
     constructor(props) {
         super(props);
-        this.state = {activityCount: 6};
+        this.state = { activityCount: 6 };
     }
 
     _goProduct(productId) {
         //
         // Go to product page
         //
-       this.props.GetProductAction(productId);
+        this.props.GetProductAction(productId);
     }
 
     render() {
         if (this.props.loading) {
-            return (<HerbyLoading/>);
+            return (<HerbyLoading />);
         }
         console.log(this.props.products);
         return (
-            <View style={[{flex: 1,backgroundColor:'#ECECEC' }]}>
-                <ScrollView>
+            <View style={[{ flex: 1, backgroundColor: '#ECECEC' }]}>
+                <HerbyBar navigator={this.props.navigator} name="Home" />
+                <ScrollView style={{flex: 1,}}>
 
                     {/* Activities */}
                     {/* Section Header */}
-                    <View style={{backgroundColor:'white',paddingBottom:15,paddingTop:10,margin:6}}>
-                    <View style={{ alignItems: 'flex-end', marginLeft: 5,flexDirection:'row',justifyContent: 'flex-start',marginBottom:0 }}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Activity </Text>
-                    </View>
-                    <ActivityList count={this.state.activityCount}/>
+                    <View style={{ backgroundColor: 'white', paddingBottom: 15, paddingTop: 10, margin: 6, marginBottom: 2 }}>
+                        <View style={{ alignItems: 'flex-end', marginLeft: 5, flexDirection: 'row', justifyContent: 'flex-start', marginBottom: 0 }}>
+                            <Text style={{ fontSize: 18, fontWeight: '600', }}> Activity </Text>
+                        </View>
+                        <ActivityList count={this.state.activityCount} />
                     </View>
 
                     {/* Staff Picks */}
-                    <View style={{backgroundColor:'white',paddingBottom:0,paddingTop:10,margin:6}}>
-                    <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5,marginBottom:5 }]}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Staff Pick </Text>
-                    </View>
-                    <ProductItem product={this.props.products[0]} goProduct={(id) => this._goProduct(id) }/>
-                        <View style={{alignSelf:'center',margin:10}}>
-                            <Text>Show More</Text>
+                    <View style={{ backgroundColor: 'white', paddingBottom: 0, paddingTop: 10, margin: 6, marginBottom: 2 }}>
+                        <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, marginBottom: 5 }]}>
+                            <Text style={{ fontSize: 18, fontWeight: '600' }}> Staff Pick </Text>
                         </View>
+                        <ProductItem product={this.props.products[0]} goProduct={(id) => this._goProduct(id)} />
+                        <TouchableOpacity style={{ alignSelf: 'center', margin: 10, height: 8, flex: 1, width: 330 }}>
+                            <Text style={{ textAlign: 'center' }}>Show More</Text>
+                        </TouchableOpacity>
                     </View>
 
                     {/* Trending */}
-                    <View style={{backgroundColor:'white',paddingBottom:0,paddingTop:10,margin:6}}>
-                    <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, marginBottom:5 }]}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Trending </Text>
-                    </View>
-                    <ProductItem product={this.props.products[1]} goProduct={(id) => this._goProduct(id) }/>
-                        <View style={{alignSelf:'center',margin:10}}>
-                            <Text>Show More</Text>
+                    <View style={{ backgroundColor: 'white', paddingBottom: 0, paddingTop: 10, margin: 6, marginBottom: 2 }}>
+                        <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, marginBottom: 5 }]}>
+                            <Text style={{ fontSize: 18, fontWeight: '600' }}> Trending </Text>
                         </View>
+                        <ProductItem product={this.props.products[1]} goProduct={(id) => this._goProduct(id)} />
+                        <TouchableOpacity style={{ alignSelf: 'center', margin: 10, height: 8, flex: 1, width: 330 }}>
+                            <Text style={{ textAlign: 'center' }}>Show More</Text>
+                        </TouchableOpacity>
                     </View>
 
                     {/* Trending */}
-                    <View style={{backgroundColor:'white',paddingBottom:0,paddingTop:10,margin:6}}>
-                    <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, marginBottom:5 }]}>
-                        <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Popular Effects </Text>
-                        <Text style={{ fontSize: 16}}> Choose products based off dominant effects  </Text>
-                    </View>
-                    
-                        <View style={{alignSelf:'center',margin:10}}>
-                            <Text>Show More</Text>
+                    <View style={{ backgroundColor: 'white', paddingBottom: 10, paddingTop: 10, margin: 6, flex: 1, }}>
+                        
+                        <View style={{flex:1, alignItems: 'flex-start', marginLeft: 5, marginBottom: 5 }}>
+                            <Text style={{ fontSize: 18, fontWeight: '600', }}> Popular Effects </Text>
+                            <Text style={{ fontSize: 16, paddingTop: 6 }}> Choose products based off dominant effects  </Text>
                         </View>
+
+                        <View style={{ flexDirection: 'row', flex: 1, marginLeft: 6, marginTop: 6, flexWrap: true,height:80 }}>
+                            <View style={{ borderWidth: 1.5, borderRadius: 40, borderColor: "#00B3F4", margin: 4, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' }}>
+                                <Text style={{ fontSize: 16, color: "#00B3F4", margin: 8, justifyContent: 'center', alignSelf: 'center', alignItems: 'center', marginHorizontal: 10, backgroundColor: 'transparent' }}> sleep </Text>
+                            </View>
+                            <View style={{ borderWidth: 1.5, borderRadius: 40, borderColor: "#00B3F4", margin: 4, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' }}>
+                                <Text style={{ fontSize: 16, color: "#00B3F4", margin: 8, marginHorizontal: 10, backgroundColor: 'transparent', }}> energetic </Text>
+                            </View>
+                            <View style={{ borderWidth: 1.5, borderRadius: 40, borderColor: "#00B3F4", margin: 4, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' }}>
+                                <Text style={{ fontSize: 16, color: "#00B3F4", margin: 8, marginHorizontal: 10, backgroundColor: 'transparent', }}> euphoric  </Text>
+                            </View>
+                            <View style={{ borderWidth: 1.5, borderRadius: 40, borderColor: "#00B3F4", margin: 4, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' }}>
+                                <Text style={{ fontSize: 16, color: "#00B3F4", margin: 8, marginHorizontal: 10, backgroundColor: 'transparent', }}> focused  </Text>
+                            </View>
+                        </View>
+
+                        <TouchableOpacity style={{ alignSelf: 'center', margin: 0, flex: 1, width: 330,marginTop:20 }}>
+                            <Text style={{ textAlign: 'center' }}>Show More</Text>
+                        </TouchableOpacity>
+
+                    </View>
+
+                    <View style={{ height: 90 }}>
+
                     </View>
 
                 </ScrollView>
@@ -101,7 +122,7 @@ class HomeScene extends Component {
 function mapStateToProps(state) {
     return {
         staffPick: state.NewsReducer.staffPick,
-        trending:  state.NewsReducer.trending,
+        trending: state.NewsReducer.trending,
     }
 }
 
@@ -128,14 +149,14 @@ const apolloProducts = gql`{
 //
 // BatsFix. Maps data obtained from the query to props.
 //
-function mapDataToProps({props,data}) {
+function mapDataToProps({props, data}) {
     return ({
         loading: data.loading,
         products: data.allProducts,
     });
 }
 
-module.exports = graphql(apolloProducts,{props:mapDataToProps})(connect(mapStateToProps,mapActionToProps)(HomeScene));
+module.exports = graphql(apolloProducts, { props: mapDataToProps })(connect(mapStateToProps, mapActionToProps)(HomeScene));
 
 const Styles = StyleSheet.create({
     container: {
