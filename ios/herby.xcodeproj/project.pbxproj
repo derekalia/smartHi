@@ -24,9 +24,13 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		42F5709FD17147809574AF0C /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E93A99B909740CEA10FE6BD /* libRCTCamera.a */; };
 		6525E8981DB1E38300431A91 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6525E8971DB1E38300431A91 /* Pacifico.ttf */; };
+		65267FD61DD970DD00A14E54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65267FD51DD970DD00A14E54 /* GoogleService-Info.plist */; };
+		65267FE21DD970E400A14E54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65267FD51DD970DD00A14E54 /* GoogleService-Info.plist */; };
 		655A9D851DB0734F00BB1A9C /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 655A9D841DB0734F00BB1A9C /* FontAwesome.ttf */; };
 		65FA44CE1DBAC9F500EC82B8 /* Dosis-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65FA44CD1DBAC9F500EC82B8 /* Dosis-SemiBold.otf */; };
+		6891E94E6E1E92DF5577F853 /* libPods-herby.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F63D1D1F632B4AE468B46635 /* libPods-herby.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		9D58BEB0A33DF1D6C34D527C /* libPods-herbyTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 11C9DAC6619A77BFF006AD58 /* libPods-herbyTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +130,7 @@
 		00E356EE1AD99517003FC87E /* herbyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = herbyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* herbyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = herbyTests.m; sourceTree = "<group>"; };
+		11C9DAC6619A77BFF006AD58 /* libPods-herbyTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-herbyTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* herby.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = herby.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,11 +143,17 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2E93A99B909740CEA10FE6BD /* libRCTCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCamera.a; sourceTree = "<group>"; };
 		6525E8971DB1E38300431A91 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
+		65267FD51DD970DD00A14E54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		655A9D841DB0734F00BB1A9C /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		65FA44CD1DBAC9F500EC82B8 /* Dosis-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-SemiBold.otf"; sourceTree = "<group>"; };
+		697F8BC8A35145E24D244232 /* Pods-herbyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-herbyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-herbyTests/Pods-herbyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		82914B7894C4A2943322BBBF /* Pods-herby.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-herby.debug.xcconfig"; path = "Pods/Target Support Files/Pods-herby/Pods-herby.debug.xcconfig"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		D2536BDA4F6744F5BB20CA7A /* RCTCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RCTCamera.xcodeproj"; sourceTree = "<group>"; };
+		DD6B4C4DB472613964B626A6 /* Pods-herby.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-herby.release.xcconfig"; path = "Pods/Target Support Files/Pods-herby/Pods-herby.release.xcconfig"; sourceTree = "<group>"; };
+		F63D1D1F632B4AE468B46635 /* libPods-herby.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-herby.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD01ADFBE05822D6822CE710 /* Pods-herbyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-herbyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-herbyTests/Pods-herbyTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +162,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
+				9D58BEB0A33DF1D6C34D527C /* libPods-herbyTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,12 +181,24 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				42F5709FD17147809574AF0C /* libRCTCamera.a in Frameworks */,
+				6891E94E6E1E92DF5577F853 /* libPods-herby.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		008A52637EA264FD076B34D8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				82914B7894C4A2943322BBBF /* Pods-herby.debug.xcconfig */,
+				DD6B4C4DB472613964B626A6 /* Pods-herby.release.xcconfig */,
+				697F8BC8A35145E24D244232 /* Pods-herbyTests.debug.xcconfig */,
+				FD01ADFBE05822D6822CE710 /* Pods-herbyTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		00C302A81ABCB8CE00DB3ED1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,6 +280,7 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
+				65267FD51DD970DD00A14E54 /* GoogleService-Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -322,6 +347,8 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* herbyTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				008A52637EA264FD076B34D8 /* Pods */,
+				CCE4458B638AFB1452D151D9 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -336,6 +363,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CCE4458B638AFB1452D151D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F63D1D1F632B4AE468B46635 /* libPods-herby.a */,
+				11C9DAC6619A77BFF006AD58 /* libPods-herbyTests.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -343,9 +379,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "herbyTests" */;
 			buildPhases = (
+				E0D6544B232C7A685A304310 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				12C0D3118F9FA8BFC0C06649 /* [CP] Embed Pods Frameworks */,
+				162DFEFB4C08BB5AA2EBC383 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -361,10 +400,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "herby" */;
 			buildPhases = (
+				66161FB6A55EBEB0AE69BC34 /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				1BCD0C8D240A8D0505892F87 /* [CP] Embed Pods Frameworks */,
+				DCEFBE0A53FEAEF0D9DD0E19 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -544,6 +586,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65267FE21DD970E400A14E54 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -556,6 +599,7 @@
 				6525E8981DB1E38300431A91 /* Pacifico.ttf in Resources */,
 				65FA44CE1DBAC9F500EC82B8 /* Dosis-SemiBold.otf in Resources */,
 				655A9D851DB0734F00BB1A9C /* FontAwesome.ttf in Resources */,
+				65267FD61DD970DD00A14E54 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,6 +619,96 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+		};
+		12C0D3118F9FA8BFC0C06649 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-herbyTests/Pods-herbyTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		162DFEFB4C08BB5AA2EBC383 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-herbyTests/Pods-herbyTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1BCD0C8D240A8D0505892F87 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-herby/Pods-herby-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		66161FB6A55EBEB0AE69BC34 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		DCEFBE0A53FEAEF0D9DD0E19 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-herby/Pods-herby-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E0D6544B232C7A685A304310 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -621,6 +755,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 697F8BC8A35145E24D244232 /* Pods-herbyTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = RC858KA5BD;
@@ -643,6 +778,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD01ADFBE05822D6822CE710 /* Pods-herbyTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -662,6 +798,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 82914B7894C4A2943322BBBF /* Pods-herby.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -688,6 +825,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD6B4C4DB472613964B626A6 /* Pods-herby.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
