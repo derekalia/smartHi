@@ -144,6 +144,7 @@
 		2E93A99B909740CEA10FE6BD /* libRCTCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCamera.a; sourceTree = "<group>"; };
 		6525E8971DB1E38300431A91 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
 		655A9D841DB0734F00BB1A9C /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		65EF71221DDA5DF6007A94B5 /* herby.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = herby.entitlements; path = herby/herby.entitlements; sourceTree = "<group>"; };
 		65F92EA31DDA49C400A478CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		65FA44CD1DBAC9F500EC82B8 /* Dosis-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-SemiBold.otf"; sourceTree = "<group>"; };
 		697F8BC8A35145E24D244232 /* Pods-herbyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-herbyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-herbyTests/Pods-herbyTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -275,6 +276,7 @@
 		13B07FAE1A68108700A75B9A /* herby */ = {
 			isa = PBXGroup;
 			children = (
+				65EF71221DDA5DF6007A94B5 /* herby.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -433,6 +435,11 @@
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = RC858KA5BD;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -819,6 +826,7 @@
 			baseConfigurationReference = 82914B7894C4A2943322BBBF /* Pods-herby.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = herby/herby.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = RC858KA5BD;
@@ -846,6 +854,7 @@
 			baseConfigurationReference = DD6B4C4DB472613964B626A6 /* Pods-herby.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = herby/herby.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = RC858KA5BD;
 				HEADER_SEARCH_PATHS = (
