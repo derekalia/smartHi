@@ -24,9 +24,9 @@
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		42F5709FD17147809574AF0C /* libRCTCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E93A99B909740CEA10FE6BD /* libRCTCamera.a */; };
 		6525E8981DB1E38300431A91 /* Pacifico.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6525E8971DB1E38300431A91 /* Pacifico.ttf */; };
-		65267FD61DD970DD00A14E54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65267FD51DD970DD00A14E54 /* GoogleService-Info.plist */; };
-		65267FE21DD970E400A14E54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65267FD51DD970DD00A14E54 /* GoogleService-Info.plist */; };
 		655A9D851DB0734F00BB1A9C /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 655A9D841DB0734F00BB1A9C /* FontAwesome.ttf */; };
+		65F92EA11DDA49C400A478CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65F92EA41DDA49C400A478CA /* GoogleService-Info.plist */; };
+		65F92EA21DDA49C400A478CA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65F92EA41DDA49C400A478CA /* GoogleService-Info.plist */; };
 		65FA44CE1DBAC9F500EC82B8 /* Dosis-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 65FA44CD1DBAC9F500EC82B8 /* Dosis-SemiBold.otf */; };
 		6891E94E6E1E92DF5577F853 /* libPods-herby.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F63D1D1F632B4AE468B46635 /* libPods-herby.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
@@ -143,8 +143,8 @@
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		2E93A99B909740CEA10FE6BD /* libRCTCamera.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTCamera.a; sourceTree = "<group>"; };
 		6525E8971DB1E38300431A91 /* Pacifico.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Pacifico.ttf; sourceTree = "<group>"; };
-		65267FD51DD970DD00A14E54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		655A9D841DB0734F00BB1A9C /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
+		65F92EA31DDA49C400A478CA /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Base; path = "Base.lproj/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		65FA44CD1DBAC9F500EC82B8 /* Dosis-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Dosis-SemiBold.otf"; sourceTree = "<group>"; };
 		697F8BC8A35145E24D244232 /* Pods-herbyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-herbyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-herbyTests/Pods-herbyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
@@ -280,7 +280,7 @@
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
-				65267FD51DD970DD00A14E54 /* GoogleService-Info.plist */,
+				65F92EA41DDA49C400A478CA /* GoogleService-Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 			);
@@ -586,7 +586,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65267FE21DD970E400A14E54 /* GoogleService-Info.plist in Resources */,
+				65F92EA21DDA49C400A478CA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -599,7 +599,7 @@
 				6525E8981DB1E38300431A91 /* Pacifico.ttf in Resources */,
 				65FA44CE1DBAC9F500EC82B8 /* Dosis-SemiBold.otf in Resources */,
 				655A9D851DB0734F00BB1A9C /* FontAwesome.ttf in Resources */,
-				65267FD61DD970DD00A14E54 /* GoogleService-Info.plist in Resources */,
+				65F92EA11DDA49C400A478CA /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -750,6 +750,14 @@
 			path = herby;
 			sourceTree = "<group>";
 		};
+		65F92EA41DDA49C400A478CA /* GoogleService-Info.plist */ = {
+			isa = PBXVariantGroup;
+			children = (
+				65F92EA31DDA49C400A478CA /* Base */,
+			);
+			name = "GoogleService-Info.plist";
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -770,6 +778,11 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/herby.app/herby";
@@ -789,6 +802,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

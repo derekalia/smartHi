@@ -6,7 +6,7 @@ target 'herby' do
   # use_frameworks!
 
   # Pods for herby
-
+  pod ‘Firebase/Core’
   target 'herbyTests' do
     inherit! :search_paths
     # Pods for testing
