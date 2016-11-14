@@ -85,7 +85,7 @@ class HomeScene extends Component {
                             <Text style={{ fontSize: 16, paddingTop: 6 }}> Choose products based off dominant effects  </Text>
                         </View>
 
-                        <View style={{ flexDirection: 'row', flex: 1, marginLeft: 6, marginTop: 6, flexWrap: true,height:80 }}>
+                        <View style={{ flexDirection: 'row', flex: 1, marginLeft: 6, marginTop: 6, flexWrap: 'wrap',height:80 }}>
                             <View style={{ borderWidth: 1.5, borderRadius: 40, borderColor: "#00B3F4", margin: 4, justifyContent: 'center', alignSelf: 'center', alignItems: 'center' }}>
                                 <Text style={{ fontSize: 16, color: "#00B3F4", margin: 8, justifyContent: 'center', alignSelf: 'center', alignItems: 'center', marginHorizontal: 10, backgroundColor: 'transparent' }}> sleep </Text>
                             </View>
