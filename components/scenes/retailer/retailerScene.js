@@ -5,15 +5,10 @@ import {Dimensions,StyleSheet, Text, View, ScrollView, Image, TextInput, Touchab
 //get internal components
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-
-// import apollo helper
-import {graphql} from 'react-apollo';
-import gql from 'graphql-tag';
-
-
 import StarRating from 'react-native-star-rating';
+
 //get internal components
-import {AddToRetailerUser,GetProductAction,ShowMapAction} from '../../../actions';
+import {AddToRetailerUser,GetRetailer,GoProductAction,ShowMapAction} from '../../../actions';
 import {HerbyLoading,HerbyBar,HerbyFrameBar,HerbyPicker} from '../../../common/controls.js';
 import HerbySearchBar from '../../util/herbySearchBar.js';
 
@@ -86,9 +81,29 @@ const RetailerFrames = [
 class RetailerScene extends Component {
     constructor(props) {
         super(props);
+        this.state = {loading:true,message:null,retailer:null,frameId:InfoFrameId};
         var {width,height} = Dimensions.get('window');
         this._height = height;
-        this.state={frameId:InfoFrameId};
+        this._mounted = false;
+    }
+
+    componentDidMount() {
+        this.setState({loading:true});
+        this._mounted = true;
+        GetRetailer(this.props.itemId,(retailer,error)=> {
+           if (this._mounted) {
+               if (error== null) {
+                   this.setState({loading:false,retailer:retailer});
+               }
+               else {
+                   this.setState({loading:false,message:error});
+               }
+           }
+        });
+    }
+
+    componentWillUnmount() {
+        this._mounted = false;
     }
 
     _setFrame(frameId) {
@@ -97,12 +112,12 @@ class RetailerScene extends Component {
     }
 
     _goProduct(product: string) {
-        this.props.GetProductAction(producerId);
+        this.props.GoProductAction(producerId);
     }
 
     _onLike() {
         // BatsFix. Implement like action for this product.
-        this.props.AddToRetailerUser(this.props.retailer.id, this.props.currentUserId);
+        this.props.AddToRetailerUser(this.state.retailer.id, this.props.currentUserId);
     }
 
     _showMap() {
@@ -119,7 +134,8 @@ class RetailerScene extends Component {
     }
 
     _isRetailerUser() {
-        var users = this.props.retailer.users;
+        
+        var users = this.state.retailer.users;
         if (users == null ) {
             return false;
         }
@@ -128,6 +144,7 @@ class RetailerScene extends Component {
                 return true;
             }
         }
+        
         return false;
     }
 
@@ -152,13 +169,13 @@ class RetailerScene extends Component {
     // from state or props
     //
     render() {
-        if (this.props.loading) {
-            return (<HerbyLoading/>);
+        if (this.state.loading || this.state.message != null) {
+            return (<HerbyLoading showBusy={this.state.loading} message={this.state.message}/>);
         }
-        console.log(this.props.retailer);
+
         return (
         <View style={{backgroundColor:'#ECECEC'}}>
-        <HerbyBar name={this.props.retailer.name} navigator={this.props.navigator} onLike={()=>this._onLike()} showFullHeart = {this._isRetailerUser()} />
+        <HerbyBar name={this.state.retailer.name} navigator={this.props.navigator} onLike={()=>this._onLike()} showFullHeart = {this._isRetailerUser()} />
         <ScrollView
             style={{flex:1,marginTop:0,height:this._height,backgroundColor:'#ECECEC'}}
             stickyHeaderIndices={[1]}>
@@ -174,7 +191,7 @@ class RetailerScene extends Component {
                 renderScene={this.renderScene}
                 initialRoute = {RetailerFrames[InfoFrameId]}
                 initialRouteStack = {RetailerFrames}
-                retailer={this.props.retailer}
+                retailer={this.state.retailer}
                 goProduct={(t)=>this.props.GetProductAction(t)}
                 showMap = {()=>this._showMap()}
             />
@@ -187,50 +204,9 @@ class RetailerScene extends Component {
 // BatsFix. This function is used to convert action to props passed to this component.
 // In this example, there is now prop called GetProductAction.
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ AddToRetailerUser,GetProductAction,ShowMapAction }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ AddToRetailerUser,GoProductAction,ShowMapAction }, dispatch); }
 
-//
-// BatsFix. Attach apollo query to the component. This creates props loading and products on HomeScene
-//
-const apolloRetailer = gql`query($itemId: ID!){
-    Retailer(id:$itemId)
-    {
-        id,
-        name,
-        description,
-        image,
-        address,
-        rating,
-        ratingCount,
-        products {
-            price,
-            product {id,name,image,rating,ratingCount,activity,thc,cbd,thca},
-        },
-        retailerReviews {
-            id,
-            name,
-            comment,
-            user {id,name},
-            rating
-        },
-        users {
-            id,
-            name,
-        }
-    }
-}`;
-
-//
-// BatsFix. Maps data obtained from the query to props.
-//
-function mapDataToProps({props,data}) {
-    return ({
-        loading: data.loading,
-        retailer: data.Retailer,
-    });
-}
-
-module.exports = graphql(apolloRetailer,{props:mapDataToProps})(connect(null,mapActionToProps)(RetailerScene));
+module.exports = connect(null,mapActionToProps)(RetailerScene);
 
 const Styles = StyleSheet.create({
     container: {

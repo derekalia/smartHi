@@ -38,7 +38,7 @@ function GetLatestImpl() {
     })
 }
 
-function GetProducerImpl(producerId) {
+function GetProducerItem(producerId) {
     var ref = firebase.database().ref('producers/'+producerId);
     return ref.once('value')
     .then(function(snapshot){
@@ -46,6 +46,7 @@ function GetProducerImpl(producerId) {
         return producer;
     });
 }
+
 
 function GetRetailerList(rid) {
     var retailers = [];
@@ -69,6 +70,7 @@ const PRODUCER  = 2;
 const FOLLOWERS = 4;
 const FOLLOWING = 8;
 const REVIEWS   = 16;
+const PRODUCTS  = 32;
 
 function GetProductImpl(productId,onProduct) {
     var product = null;
@@ -86,7 +88,7 @@ function GetProductImpl(productId,onProduct) {
            if (productAttributes == requiredAttributes) 
                onProduct(product);
         });
-        GetProducerImpl(product.pid).then((producer)=>{
+        GetProducer(product.pid).then((producer)=>{
             product.producer = producer;
             productAttributes |= PRODUCER;
             if (productAttributes == requiredAttributes) {
@@ -95,6 +97,71 @@ function GetProductImpl(productId,onProduct) {
         });
     });
 }
+
+function GetUserList(uid) {
+    var users = [];
+    var usersCount = uid.length;
+    var ref = firebase.database().ref('users');
+
+    return new Promise(function(resolve,reject) {
+        for (var i=0; i < uid.length; i++) {
+            ref.child(uid[i]).once('value')
+            .then(function(snapshot){
+                users.push(snapshot.val());
+                if (users.length == usersCount) {
+                    resolve(users);
+                }
+            });
+        }
+    });
+}
+
+function GetProductList(pid) {
+    var products = [];
+    var productsCount = pid.length;
+
+    var ref = firebase.database().ref('products');
+    return new Promise(function(resolve,reject) {
+        for (var i=0; i < pid.length; i++) {
+            ref.child(pid[i]).once('value')
+            .then(function(snapshot){
+                products.push(snapshot.val());
+                if (products.length == productsCount) {
+                    resolve(products);
+                }
+            });
+        }
+    });
+}
+
+function GetRetailerImpl(retailerId,onRetailer) {
+    var retailer = null;
+    //  BatsFix. this function returns only when required attributes match
+    var retailerAttributes  = 0; 
+    var requiredAttributes = PRODUCTS|FOLLOWERS;
+
+    var ref = firebase.database().ref('retailers/'+retailerId);
+    return ref.once('value')
+    .then(function(snapshot){
+        retailer = snapshot.val();
+        GetProductList(retailer.pid).then((products)=>{
+           retailer.products = products;
+           retailerAttributes |= PRODUCTS;
+           if (retailerAttributes == requiredAttributes) 
+               onRetailer(retailer);
+        });
+        
+        GetUserList(retailer.follower).then((followers)=>{
+            retailer.followers = followers;
+            retailerAttributes |= FOLLOWERS;
+            if (retailerAttributes == requiredAttributes) {
+                onRetailer(retailer);
+            }
+        });
+        
+    });
+}
+
 
 function GetActivityProductsImpl(activityType,onActivityProducts) {
     var ref = firebase.database().ref('products');
@@ -110,8 +177,17 @@ LoginImpl("test@yahoo.com","test12").then(()=>{
     //GetProductImpl('1',(product)=>{
     //    console.log(product);
     //});
-    GetActivityProductsImpl('hike',(products)=> {
-        console.log(products);
+    //GetActivityProductsImpl('hike',(products)=> {
+    //    console.log(products);
+    //});
+    try {
+    GetRetailerImpl('1',(retailer)=> {
+        console.log(retailer);
     });
+    } 
+    catch(error) {
+        console.log("caught an error");
+        console.log(error);
+    }
 });
 

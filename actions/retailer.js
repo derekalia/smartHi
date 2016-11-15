@@ -1,17 +1,18 @@
-import {
-    SWITCH_TAB,
-    SWITCH_SCENE,
-    SWITCH_TAB_SCENE,
-} from './navigation.js';
+import {SWITCH_SCENE} from './navigation.js';
 
 import {LicenseeSceneId,RetailerSceneId,HomeTabId,} from '../common/const.js';
-import {GetRetailer} from './data.js';
+import {GetRetailerImpl} from './fireBase.js';
+
 import {NotifyBusy,NotifyDone} from './navigation.js';
 
 export const RETAILER_SUCCESS = 'RETAILER_SUCCESS';
 export const RETAILER_ERROR   = 'RETAILER_ERROR';
 
-export function GetRetailerAction(retailerId) {
+export function GetRetailer(retailerId,onRetailer) {
+    return GetRetailerImpl(retailerId,onRetailer);
+}
+
+export function GoRetailerAction(retailerId) {
    return({
         type:SWITCH_SCENE,
         sceneId: RetailerSceneId,

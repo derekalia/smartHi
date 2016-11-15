@@ -97,4 +97,32 @@ const apolloProduct = gql`query($itemId: ID!){
         }
     }
 }`;
- 
+
+const apolloRetailer = gql`query($itemId: ID!){
+    Retailer(id:$itemId)
+    {
+        id,
+        name,
+        description,
+        image,
+        address,
+        rating,
+        ratingCount,
+        products {
+            price,
+            product {id,name,image,rating,ratingCount,activity,thc,cbd,thca},
+        },
+        retailerReviews {
+            id,
+            name,
+            comment,
+            user {id,name},
+            rating
+        },
+        users {
+            id,
+            name,
+        }
+    }
+}`;
+

@@ -194,9 +194,9 @@ class ProductScene extends Component {
                   initialRoute = {ProductFrames[ProductFrameId]}
                   initialRouteStack = {ProductFrames}
                   product={this.state.product}
-                  goProduct={(t)=>this.props.GetProductAction(t)}
-                  goRetailer={(t)=>this.props.GetRetailerAction(t)}
-                  goProducer={(t)=>this.props.GetProducerAction(t)}
+                  goProduct={(t)=>this.props.GoProductAction(t)}
+                  goRetailer={(t)=>this.props.GoRetailerAction(t)}
+                  goProducer={(t)=>this.props.GoProducerAction(t)}
               />
           </ScrollView>
         </View>
