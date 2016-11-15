@@ -162,13 +162,46 @@ function GetRetailerImpl(retailerId,onRetailer) {
     });
 }
 
-
 function GetActivityProductsImpl(activityType,onActivityProducts) {
     var ref = firebase.database().ref('products');
     return ref.orderByKey().limitToFirst(10).once('value')
     .then(function(snapshot){
         var products = snapshot.val();
         onActivityProducts(products);
+    });
+}
+
+function GetProducerImpl(producerId,onProducer) {
+    var producer = null;
+    //  BatsFix. this function returns only when required attributes match
+    var producerAttributes  = 0; 
+    var requiredAttributes = PRODUCTS|FOLLOWERS|FOLLOWING;
+
+    var ref = firebase.database().ref('producers/'+producerId);
+    return ref.once('value')
+    .then(function(snapshot){
+        producer = snapshot.val();
+        GetProductList(producer.pid).then((products)=>{
+           producer.products = products;
+           producerAttributes |= PRODUCTS;
+           if (producerAttributes == requiredAttributes) 
+               onProducer(producer);
+        });
+        
+        GetUserList(producer.follower).then((followers)=>{
+            producer.followers = followers;
+            producerAttributes |= FOLLOWERS;
+            if (producerAttributes == requiredAttributes) {
+                onProducer(producer);
+            }
+        });
+        GetUserList(producer.following).then((following)=>{
+            producer.following = following;
+            producerAttributes |= FOLLOWING;
+            if (producerAttributes == requiredAttributes) {
+                onProducer(producer);
+            }
+        });
     });
 }
 
@@ -180,14 +213,11 @@ LoginImpl("test@yahoo.com","test12").then(()=>{
     //GetActivityProductsImpl('hike',(products)=> {
     //    console.log(products);
     //});
-    try {
-    GetRetailerImpl('1',(retailer)=> {
-        console.log(retailer);
+    //GetRetailerImpl('1',(retailer)=> {
+    //    console.log(retailer);
+    //});
+    GetProducerImpl('1',(producer)=> {
+        console.log(producer);
     });
-    } 
-    catch(error) {
-        console.log("caught an error");
-        console.log(error);
-    }
 });
 

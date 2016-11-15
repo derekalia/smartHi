@@ -191,4 +191,36 @@ export function GetRetailerImpl(retailerId,onRetailer) {
     });
 }
 
+export function GetProducerImpl(producerId,onProducer) {
+    var producer = null;
+    //  BatsFix. this function returns only when required attributes match
+    var producerAttributes  = 0; 
+    var requiredAttributes = PRODUCTS|FOLLOWERS|FOLLOWING;
 
+    var ref = firebase.database().ref('producers/'+producerId);
+    return ref.once('value')
+    .then(function(snapshot){
+        producer = snapshot.val();
+        GetProductList(producer.pid).then((products)=>{
+           producer.products = products;
+           producerAttributes |= PRODUCTS;
+           if (producerAttributes == requiredAttributes) 
+               onProducer(producer);
+        });
+        
+        GetUserList(producer.follower).then((followers)=>{
+            producer.followers = followers;
+            producerAttributes |= FOLLOWERS;
+            if (producerAttributes == requiredAttributes) {
+                onProducer(producer);
+            }
+        });
+        GetUserList(producer.following).then((following)=>{
+            producer.following = following;
+            producerAttributes |= FOLLOWING;
+            if (producerAttributes == requiredAttributes) {
+                onProducer(producer);
+            }
+        });
+    });
+}

@@ -1,24 +1,27 @@
 import {
-    SWITCH_TAB,
     SWITCH_SCENE,
-    SWITCH_TAB_SCENE,
-    MODAL_SUCCESS,
 } from './navigation.js';
 
 import {ProcessorSceneId,ProducerSceneId,HomeTabId} from '../common/const.js';
-import {GetProducer} from './data.js';
-import {NotifyBusy,NotifyDone,} from './navigation.js';
+import {GetProducerImpl} from './fireBase.js';
 
-export const PRODUCER_SUCCESS = 'PRODUCER_SUCCESS';
-export const PRODUCER_ERROR   = 'PRODUCER_ERROR';
+export function GetProducer(producerId,onProducer) {
+    return GetProducerImpl(producerId,onProducer);
+}
 
-export function GetProducerAction(producerId) {
+export function GoProducerAction(producerId) {
     return ({
         type:SWITCH_SCENE,
         sceneId: ProducerSceneId,
         itemId: producerId,
     });
 }
+
+
+import {NotifyBusy,NotifyDone,} from './navigation.js';
+
+export const PRODUCER_SUCCESS = 'PRODUCER_SUCCESS';
+export const PRODUCER_ERROR   = 'PRODUCER_ERROR';
 
 export function UpdateProducerAction(producerId) {
     return function (dispatch, getState) {
