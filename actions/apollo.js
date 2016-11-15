@@ -59,3 +59,42 @@ const apolloTrendProducts = gql`{
     }
 }`;
 
+const apolloProduct = gql`query($itemId: ID!){
+    Product(id:$itemId)
+    {
+        id,
+        name,
+        image,
+        description,
+        rating,
+        ratingCount,
+        thc,
+        cbd,
+        thca,
+        quality,
+        flavor,
+        potency,
+        prices {
+            price,
+            retailer {id,name,rating,address,},
+        },
+        producer {
+            id,
+            name,
+            rating,
+            ratingCount,
+        }, 
+        productReviews {
+            id,
+            name,
+            comment,
+            user {id,name},
+            rating
+        },
+        users {
+            id,
+            name,
+        }
+    }
+}`;
+ 

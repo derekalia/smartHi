@@ -13,7 +13,7 @@ import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 
 //get internal components
-import {AddToProductUser,GetProductAction,GetRetailerAction,GetProducerAction,} from '../../../actions';
+import {AddToProductUser,GetProduct,GoProductAction,GoRetailerAction,GoProducerAction,} from '../../../actions';
 import {HerbyLoading,HerbyPicker,HerbyBar,HerbyFrameBar} from '../../../common/controls.js';
 
 import ReviewList     from '../../util/reviewList.js';
@@ -61,7 +61,7 @@ class ProductRetailer extends Component {
                 </View>
                 </View>
             </View>
-            <RetailerList retailerList={this.props.product.prices} goRetailer={(id) => this._goRetailer(id)}/>
+            <RetailerList retailerList={this.props.product.retailers} goRetailer={(id) => this._goRetailer(id)}/>
             </ScrollView>
         );
     }
@@ -110,6 +110,27 @@ class ProductScene extends Component {
         super(props);
         var {width,height} = Dimensions.get('window');
         this._height = height;
+        this.state = {loading:true,message:null,product:null};
+        this._mounted = false;
+    }
+
+    componentDidMount() {
+        this.setState({loading:true});
+        this._mounted = true;
+        GetProduct(this.props.itemId,(product,error)=> {
+           if (this._mounted) {
+               if (error== null) {
+                   this.setState({loading:false,product:product});
+               }
+               else {
+                   this.setState({loading:false,message:error});
+               }
+           }
+        });
+    }
+
+    componentWillUnmount() {
+        this._mounted = false;
     }
 
     _setFrame(frameId) {
@@ -136,10 +157,10 @@ class ProductScene extends Component {
 
     _onLike() {
         // BatsFix. Implement like action for this product.
-        this.props.AddToProductUser(this.props.product.id, this.props.currentUserId);
+        this.props.AddToProductUser(this.state.product.id, this.props.currentUserId);
     }
     _isProductUser() {
-        var users = this.props.product.users;
+        var users = this.state.product.users;
         if (users == null ) {
             return false;
         }
@@ -151,13 +172,14 @@ class ProductScene extends Component {
         return false;
     }
     render() {
-        var scrollerHeight = this._height;
-        if (this.props.loading) {
-            return (<HerbyLoading/>);
+
+        if (this.state.loading || this.state.message != null) {
+            return (<HerbyLoading showBusy={this.state.loading} message={this.state.message}/>);
         }
+        var scrollerHeight = this._height;
         return (
         <View>
-          <HerbyBar name={this.props.product.name} navigator={this.props.navigator} onLike={()=>this._onLike()} showFullHeart = {this._isProductUser()} />
+          <HerbyBar name={this.state.product.name} navigator={this.props.navigator} onLike={()=>this._onLike()} showFullHeart = {this._isProductUser()} />
           <ScrollView
               style={{marginTop:0,height:this._height,backgroundColor:'#ECECEC'}}
               stickyHeaderIndices={[1]}>
@@ -171,7 +193,7 @@ class ProductScene extends Component {
                   renderScene={this.renderScene}
                   initialRoute = {ProductFrames[ProductFrameId]}
                   initialRouteStack = {ProductFrames}
-                  product={this.props.product}
+                  product={this.state.product}
                   goProduct={(t)=>this.props.GetProductAction(t)}
                   goRetailer={(t)=>this.props.GetRetailerAction(t)}
                   goProducer={(t)=>this.props.GetProducerAction(t)}
@@ -182,64 +204,9 @@ class ProductScene extends Component {
     }
 }
 
+//
+// Map actions to props.
+//
+function mapActionToProps(dispatch) { return bindActionCreators({ AddToProductUser,GetProduct,GoProductAction,GoRetailerAction,GoProducerAction,}, dispatch); }
 
-// BatsFix. This function is used to convert action to props passed to this component.
-// In this example, there is now prop called GetRetailerAction.
-//
-function mapActionToProps(dispatch) { return bindActionCreators({ AddToProductUser,GetProductAction,GetRetailerAction,GetProducerAction,}, dispatch); }
-
-//
-// BatsFix. Attach apollo query to the component. This creates props loading and product on HomeScene
-//
-const apolloProduct = gql`query($itemId: ID!){
-    Product(id:$itemId)
-    {
-        id,
-        name,
-        image,
-        description,
-        rating,
-        ratingCount,
-        thc,
-        cbd,
-        thca,
-        quality,
-        flavor,
-        potency,
-        prices {
-            price,
-            retailer {id,name,rating,address,},
-        },
-        producer {
-            id,
-            name,
-            rating,
-            ratingCount,
-        }, 
-        productReviews {
-            id,
-            name,
-            comment,
-            user {id,name},
-            rating
-        },
-        users {
-            id,
-            name,
-        }
-    }
-}`;
- 
-
-//
-// BatsFix. Maps data obtained from the query to props.
-//
-function mapDataToProps({props,data}) {
-    return ({
-        loading: data.loading,
-        product: data.Product,
-        refetch: data.refetch,
-    });
-}
-
-module.exports = graphql(apolloProduct,{props:mapDataToProps})(connect(null,mapActionToProps)(ProductScene));
+module.exports = connect(null,mapActionToProps)(ProductScene);

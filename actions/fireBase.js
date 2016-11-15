@@ -53,3 +53,62 @@ export async function GetActivityProductsImpl(activityType,onActivityProducts) {
         onActivityProducts(products);
     });
 }
+
+function GetProducerImpl(producerId) {
+    var ref = firebase.database().ref('producers/'+producerId);
+    return ref.once('value')
+    .then(function(snapshot){
+        var producer = snapshot.val();
+        return producer;
+    });
+}
+
+function GetRetailerList(rid) {
+    var retailers = [];
+    var retailersCount = rid.length;
+    var ref = firebase.database().ref('retailers');
+    return new Promise(function(resolve,reject) {
+        for (var i=0; i < rid.length; i++) {
+            ref.child(rid[i]).once('value')
+            .then(function(snapshot){
+                retailers.push(snapshot.val());
+                if (retailers.length == retailersCount) {
+                    resolve(retailers);
+                }
+            });
+        }
+    });
+}
+
+const RETAILERS = 1;
+const PRODUCER  = 2;
+const FOLLOWERS = 4;
+const FOLLOWING = 8;
+const REVIEWS   = 16;
+const USERS     = 32;
+
+export async function GetProductImpl(productId,onProduct) {
+    //  BatsFix. this function returns only when required attributes match
+    var product = null;
+    var productAttributes  = 0; 
+    var requiredAttributes = RETAILERS|PRODUCER;
+
+    var ref = firebase.database().ref('products/'+productId);
+    return ref.once('value')
+    .then(function(snapshot){
+        product = snapshot.val();
+        GetRetailerList(product.rid).then((retailers)=>{
+           product.retailers = retailers;
+           productAttributes |= RETAILERS;
+           if (productAttributes == requiredAttributes) 
+               onProduct(product);
+        });
+        GetProducerImpl(product.pid).then((producer)=>{
+            product.producer = producer;
+            productAttributes |= PRODUCER;
+            if (productAttributes == requiredAttributes) {
+                onProduct(product);
+            }
+        });
+    });
+}
