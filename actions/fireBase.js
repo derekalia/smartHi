@@ -53,7 +53,6 @@ function GetUserList(uid) {
         for (var i=0; i < uid.length; i++) {
             ref.child(uid[i]).once('value')
             .then(function(snapshot){
-                console.log("got user" + snapshot.val());
                 users.push(snapshot.val());
                 if (users.length == usersCount) {
                     resolve(users);
@@ -161,7 +160,7 @@ export function GetRetailerImpl(retailerId,onRetailer) {
     var retailer = null;
     //  BatsFix. this function returns only when required attributes match
     var retailerAttributes  = 0; 
-    var requiredAttributes = PRODUCTS|FOLLOWERS;
+    var requiredAttributes = PRODUCTS|FOLLOWERS|FOLLOWING;
 
     var ref = firebase.database().ref('retailers/'+retailerId);
     return ref.once('value')
@@ -175,8 +174,16 @@ export function GetRetailerImpl(retailerId,onRetailer) {
         });
         
         GetUserList(retailer.follower).then((followers)=>{
-            retailer.followers = followers;
+            retailer.followers  = followers;
             retailerAttributes |= FOLLOWERS;
+            if (retailerAttributes == requiredAttributes) {
+                onRetailer(retailer);
+            }
+        });
+
+        GetUserList(retailer.following).then((following)=>{
+            retailer.following  = following;
+            retailerAttributes |= FOLLOWING;
             if (retailerAttributes == requiredAttributes) {
                 onRetailer(retailer);
             }

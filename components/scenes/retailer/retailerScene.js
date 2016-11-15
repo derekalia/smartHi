@@ -60,7 +60,7 @@ class RetailerSocial extends Component {
         return (
             <View>
                 <HerbyFrameBar entries={['FOLLOWER','FOLLOWING']} setFrame={(t)=>this._setFrame(t)}/>
-                <UserList userList={this.state.frameId == 0?this.props.retailer.following:this.props.retailer.follower} style={{marginTop:0}}/>
+                <UserList userList={this.state.frameId == 0?this.props.retailer.following:this.props.retailer.followers} style={{marginTop:0}}/>
             </View>
         );
     }
