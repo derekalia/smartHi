@@ -52,12 +52,11 @@
       "scale" : "2x"
     },
     {
-      "extent" : "full-screen",
-      "idiom" : "iphone",
-      "subtype" : "retina4",
-      "filename" : "smartHi_Home-1.png",
-      "minimum-system-version" : "7.0",
       "orientation" : "portrait",
+      "idiom" : "iphone",
+      "extent" : "full-screen",
+      "minimum-system-version" : "7.0",
+      "subtype" : "retina4",
       "scale" : "2x"
     }
   ],

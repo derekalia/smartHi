@@ -39,8 +39,8 @@ class ActivityItem extends Component {
         return (
             <TouchableOpacity style={{marginLeft:10,marginTop:10,height:170}} onPress={()=> this._goActivity()}>
                 <Image style={{ width: 170, height: 170, justifyContent: 'center', alignItems: 'center', alignSelf: 'center' }} source={imageTile[this.props.imageIndex]}>
-                    <View style={{ borderWidth: 1.5, borderRadius: 20, borderColor: "white" }}>
-                        <Text style={{ textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 5, textShadowColor: "black", fontSize: 20, color: "white", margin: 8 }}>
+                    <View style={{ borderWidth: 1.5, borderRadius: 40, borderColor: "white" }}>
+                        <Text style={{ textShadowOffset: { width: 1, height: 1 }, textShadowRadius: 5, textShadowColor: "black", fontSize: 18, color: "white", margin: 6,marginHorizontal:10,backgroundColor:'transparent' }}>
                             {this.props.activity}
                         </Text>
                     </View>
