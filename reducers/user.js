@@ -14,6 +14,7 @@ const initialState = {
             name: "",
             tokenType: "",
             accessToken: "",
+            userId: null,
     },
     profile : {
         id:'9999',
@@ -59,9 +60,10 @@ export default function UserReducer(state, action) {
             // Then modify the item needed in the new
             // state. 
             newState.user.loggedIn = true;
-            newState.user.name = action.name;
+            newState.user.name        = action.name;
             newState.user.accessToken = action.accessToken;
             newState.user.tokenType   = action.tokenType;
+            newState.user.userId      = action.userId;
 
             // BatsFix. Following need to be returned with logon token etc.
             return newState;

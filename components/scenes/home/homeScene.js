@@ -12,36 +12,51 @@ import {StyleSheet, Text, View, ScrollView, TouchableOpacity,TouchableHighlight 
 //get state management components
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-// import apollo helper
-import {graphql} from 'react-apollo';
-import gql from 'graphql-tag';
-
 
 //get internal components
 import ActivityList     from '../../util/activityList.js';
 import ProductItem      from '../../util/productItem.js';
-import {GoSearchAction, GetProductAction} from '../../../actions';
+import {GetLatestNews,GoActivityAction, GoProductAction} from '../../../actions';
 
 import {HerbyLoading} from '../../../common/controls.js';
 
 class HomeScene extends Component {
     constructor(props) {
         super(props);
-        this.state = {activityCount: 6};
+        this.state = {loading:true,message:null,activityCount: 6,products:null};
+        this._mounted = false;
     }
 
     _goProduct(productId) {
         //
         // Go to product page
         //
-       this.props.GetProductAction(productId);
+       this.props.GoProductAction(productId);
+    }
+
+    componentDidMount() {
+        this.setState({loading:true});
+        this._mounted = true;
+        GetLatestNews((products,error)=> {
+           if (this._mounted) {
+               if (error== null) {
+                   this.setState({loading:false,products:products});
+               }
+               else {
+                   this.setState({loading:false,message:error});
+               }
+           }
+        });
+    }
+
+    componentWillUnmount() {
+        this._mounted = false;
     }
 
     render() {
-        if (this.props.loading) {
-            return (<HerbyLoading/>);
+        if (this.state.loading || this.state.message != null) {
+            return (<HerbyLoading showBusy={this.state.loading} message={this.state.message}/>);
         }
-        console.log(this.props.products);
         return (
             <View style={[{flex: 1 }]}>
                 <ScrollView>
@@ -57,13 +72,13 @@ class HomeScene extends Component {
                     <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 15,marginBottom:5 }]}>
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Staff Pick </Text>
                     </View>
-                    <ProductItem product={this.props.products[0]} goProduct={(id) => this._goProduct(id) }/>
+                    <ProductItem product={this.state.products[0]} goProduct={(id) => this._goProduct(id) }/>
 
                     {/* Trending */}
                     <View style={[Styles.container, { alignItems: 'flex-start', marginLeft: 5, height: 20, marginTop: 15,marginBottom:5 }]}>
                         <Text style={{ fontSize: 18, fontWeight: 'bold' }}> Trending </Text>
                     </View>
-                    <ProductItem product={this.props.products[1]} goProduct={(id) => this._goProduct(id) }/>
+                    <ProductItem product={this.state.products[1]} goProduct={(id) => this._goProduct(id) }/>
                 </ScrollView>
             </View>
         );
@@ -71,46 +86,11 @@ class HomeScene extends Component {
 }
 
 //
-// Connect state.SearchReducer.activities and state.SearchReducer.effects to props.
+// Connect GoActivityAction, GoProductAction to props
 //
-function mapStateToProps(state) {
-    return {
-        staffPick: state.NewsReducer.staffPick,
-        trending:  state.NewsReducer.trending,
-    }
-}
+function mapActionToProps(dispatch) { return bindActionCreators({ GoActivityAction,GoProductAction }, dispatch); }
 
-//
-// Connect GoSearchAction, GetProductAction to props
-//
-function mapActionToProps(dispatch) { return bindActionCreators({ GoSearchAction, GetProductAction }, dispatch); }
-
-//
-// BatsFix. Attach apollo query to the component. This creates props loading and products on HomeScene
-//
-const apolloProducts = gql`{
-    allProducts(first:2,filter:{trend:None}){
-      id,
-      name,
-      trend,
-      activity,
-      rating,
-      ratingCount,
-      thc,
-      cbd,
-    }
-}`;
-//
-// BatsFix. Maps data obtained from the query to props.
-//
-function mapDataToProps({props,data}) {
-    return ({
-        loading: data.loading,
-        products: data.allProducts,
-    });
-}
-
-module.exports = graphql(apolloProducts,{props:mapDataToProps})(connect(mapStateToProps,mapActionToProps)(HomeScene));
+module.exports = connect(null,mapActionToProps)(HomeScene);
 
 const Styles = StyleSheet.create({
     container: {

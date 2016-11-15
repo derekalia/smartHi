@@ -13,33 +13,51 @@ import {StyleSheet, Text, View, ScrollView, TouchableOpacity,TouchableHighlight,
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-// import apollo helper
-import {graphql} from 'react-apollo';
-import gql from 'graphql-tag';
-
 //get internal components
 import ProductList        from '../../util/productList.js';
-import {GetProductAction} from '../../../actions';
+import {GetActivityProducts,GoProductAction} from '../../../actions';
 import {HerbyLoading,HerbyBar}         from '../../../common/controls.js';
 
 class ActivityScene extends Component {
     constructor(props) {
         super(props);
+        this.state = {loading:true,message:null,products:null};
+        this._mounted = false;
+    }
+
+    componentDidMount() {
+        this.setState({loading:true});
+        this._mounted = true;
+        GetActivityProducts(this.props.itemId,(products,error)=> {
+           if (this._mounted) {
+               if (error== null) {
+                   this.setState({loading:false,products:products});
+               }
+               else {
+                   this.setState({loading:false,message:error});
+               }
+           }
+        });
+    }
+
+    componentWillUnmount() {
+        this._mounted = false;
     }
 
     _goProduct(productId) {
         //
         // Go to product page
         //
-       this.props.GetProductAction(productId);
+       this.props.GoProductAction(productId);
     }
 
     render() {
+        if (this.state.loading || this.state.message != null) {
+            return (<HerbyLoading showBusy={this.state.loading} message={this.state.message}/>);
+        }
         var name = this.props.itemId;
         name = name[0].toUpperCase() + name.slice(1);
-        if (this.props.loading) {
-            return (<HerbyLoading/>);
-        }
+
         return (
             <View style={[{ flex: 1 }]}>
             <HerbyBar name={name}  navigator={this.props.navigator}/>
@@ -61,7 +79,7 @@ class ActivityScene extends Component {
                 </View>
 
                 <ScrollView style={{flex:1}}>
-                    <ProductList productList={this.props.products} goProduct={(t)=> this._goProduct(t)}/>
+                    <ProductList productList={this.state.products} goProduct={(t)=> this._goProduct(t)}/>
                 </ScrollView>
             </ScrollView>
             </View>
@@ -73,33 +91,9 @@ class ActivityScene extends Component {
 //
 // Connect GetProductAction to props
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ GoProductAction }, dispatch); }
 
-//
-// BatsFix. Attach apollo query to the component. This creates props loading and products on HomeScene
-//
-const apolloProducts = gql`query($itemId: String!) {
-    allProducts(first:20,filter:{activity_contains:$itemId}){
-      id,
-      name,
-      activity,
-      rating,
-      ratingCount,
-      thc,
-      cbd,
-    }
-}`;
-//
-// BatsFix. Maps data obtained from the query to props.
-//
-function mapDataToProps({props,data}) {
-    return ({
-        loading: data.loading,
-        products: data.allProducts,
-    });
-}
-
-module.exports = graphql(apolloProducts,{props:mapDataToProps})(connect(null,mapActionToProps)(ActivityScene));
+module.exports = connect(null,mapActionToProps)(ActivityScene);
 
 const Styles = StyleSheet.create({
     container: {

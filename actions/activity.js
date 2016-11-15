@@ -1,27 +1,15 @@
-import {
-    SWITCH_TAB,
-    SWITCH_SCENE,
-    SWITCH_TAB_SCENE,
-} from './navigation.js';
-
 import {ActivitySceneId} from '../common/const.js';
-import {GetActivityProducts} from './data.js';
+import {SWITCH_SCENE} from './navigation.js';
+import {GetActivityProductsImpl} from './fireBase.js';
 
-export const ACTIVITY_START   = 'ACTIVITY_START';
-export const ACTIVITY_SUCCESS = 'ACTIVITY_SUCCESS';
-export const ACTIVITY_ERROR   = 'ACTIVITY_ERROR';
-
+export async function GetActivityProducts(activityType,onActivityProducts) {
+    GetActivityProductsImpl(activityType,onActivityProducts);
+}
 
 export function GetActivityAction(activityType) {
-    return function (dispatch, getState) {
-        var products = GetActivityProducts(activityType);
-        var item = {productList:products,activity:activityType};
-        // then switch scene
-        dispatch({
+    return ({
 			type: SWITCH_SCENE,
 			sceneId: ActivitySceneId,
-            item: item,
-		});
-
-    }
+            itemId: activityType,
+    });
 }

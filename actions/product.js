@@ -13,11 +13,22 @@ export const PRODUCT_SUCCESS = 'PRODUCT_SUCCESS';
 export const PRODUCT_ERROR = 'PRODUCT_ERROR';
 
 export function GetProductAction(productId, switchTab) {
-    return ({ 
-        type:SWITCH_SCENE,
-        sceneId: ProductSceneId,
-        itemId: productId,
-    });
+    return async function (dispatch,getState){
+        NotifyBusy(dispatch);
+        try {
+            var product = await GetProduct(productId);
+            dispatch({
+                type:SWITCH_SCENE,
+                sceneId: ProductSceneId,
+                item: product,
+            });
+            NotifyDone(dispatch,null);
+        } 
+        catch(error) {
+            console.log("GetProductActionWorker:"+error);
+            NotifyDone(dispatch,"Error getting product");
+        }
+    }
 }
 
 export function UpdateProductAction(productId) {
@@ -28,7 +39,6 @@ export function UpdateProductAction(productId) {
         NotifyDone(dispatch,"Updated product");
     }
 }
-
 export function GoUpdateProductAction(productId,producerId) {
     return async function(dispatch,getState) {
         NotifyBusy(dispatch);

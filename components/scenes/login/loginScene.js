@@ -18,6 +18,13 @@ class LoginScene extends Component {
         this._userName = "";
         this._userPassword = "";
         this.state = { loading: false,error: null };
+        this._mounted = false;
+    }
+    componentWillUnmount() {
+        this._mounted = false;
+    }
+    componentDidMount() {
+        this._mounted = true;
     }
 
     _enterUserName(event) {
@@ -31,20 +38,18 @@ class LoginScene extends Component {
     }
 
     async _submit() {
-            this.setState({loading:true});
-        LoginUser(this._userName,this._userPassword).then((result)=> {
-            if (result.error == null) {
-                this.setState({loading:false});
-                this.props.LoginAction(result);
-            }
-            else {
-                this.setState({loading:false, error:result.error});
+        this.setState({loading:true});
+        LoginUser(this._userName,this._userPassword,(userId,error)=>{
+            if (this._mounted) {
+                if (error  == null) {
+                    this.setState({loading:false});
+                    this.props.LoginAction(userId);
+                }
+                else {
+                    this.setState({loading:false,error:error});
+                }
             }
         });
-    }
-
-    _onCancel() {
-        this.setState({loading: false, error: null});
     }
 
     render() {

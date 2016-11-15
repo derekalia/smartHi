@@ -1,21 +1,16 @@
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOFF_SUCCESS = 'LOGOFF_SUCCESS';
 
-import {LoginUserWorker} from './fireBase.js';
+import {LoginUserImpl} from './fireBase.js';
 
-export async function LoginUser(userName,password) {
-    return LoginUserWorker(userName,password).catch(function(error){
-        return {error:error};
-    });
+export async function LoginUser(userName,password,onLoginUser) {
+    return LoginUserImpl(userName,password,onLoginUser);
 }
 
-export function LoginAction(data) {
-        console.log("logging on a user"+data.name);
+export function LoginAction(userId) {
         return ({ 
-            type: LOGIN_SUCCESS, 
-            name: data.name, 
-            userToken: data.token , 
-            userId: data.userId, 
+            type:   LOGIN_SUCCESS, 
+            userId: userId, 
         });
 }
 

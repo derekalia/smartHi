@@ -26,3 +26,36 @@ const apolloClient = new ApolloClient({
 });
 
 module.exports = apolloClient;
+
+// import apollo helper
+import {graphql} from 'react-apollo';
+import gql from 'graphql-tag';
+
+
+// activity products
+const apolloActivityProducts = gql`query($itemId: String!) {
+    allProducts(first:20,filter:{activity_contains:$itemId}){
+      id,
+      name,
+      activity,
+      rating,
+      ratingCount,
+      thc,
+      cbd,
+    }
+}`;
+
+// Trend products
+const apolloTrendProducts = gql`{
+    allProducts(first:2,filter:{trend:None}){
+      id,
+      name,
+      trend,
+      activity,
+      rating,
+      ratingCount,
+      thc,
+      cbd,
+    }
+}`;
+
