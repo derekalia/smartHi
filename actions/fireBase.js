@@ -18,62 +18,27 @@ var fireBaseConfig = {
 
 const app = firebase.initializeApp(fireBaseConfig);
 
-function GetProducer(producerId) {
-    var ref = firebase.database().ref('producers/'+producerId);
+function GetItem(itemPath) {
+    var ref = firebase.database().ref(itemPath);
     return ref.once('value')
     .then(function(snapshot){
-        var producer = snapshot.val();
-        return producer;
+        var item = snapshot.val();
+        return item;
     });
 }
 
-function GetRetailerList(rid) {
-    var retailers = [];
-    var retailersCount = rid.length;
-    var ref = firebase.database().ref('retailers');
+function GetItemList(itemList,itemPath) {
+    var items = [];
+    var itemsCount = itemList.length;
+
+    var ref = firebase.database().ref(itemPath);
     return new Promise(function(resolve,reject) {
-        for (var i=0; i < rid.length; i++) {
-            ref.child(rid[i]).once('value')
+        for (var i=0; i < itemList.length; i++) {
+            ref.child(itemList[i]).once('value')
             .then(function(snapshot){
-                retailers.push(snapshot.val());
-                if (retailers.length == retailersCount) {
-                    resolve(retailers);
-                }
-            });
-        }
-    });
-}
-
-function GetUserList(uid) {
-    var users = [];
-    var usersCount = uid.length;
-    var ref = firebase.database().ref('users');
-
-    return new Promise(function(resolve,reject) {
-        for (var i=0; i < uid.length; i++) {
-            ref.child(uid[i]).once('value')
-            .then(function(snapshot){
-                users.push(snapshot.val());
-                if (users.length == usersCount) {
-                    resolve(users);
-                }
-            });
-        }
-    });
-}
-
-function GetProductList(pid) {
-    var products = [];
-    var productsCount = pid.length;
-
-    var ref = firebase.database().ref('products');
-    return new Promise(function(resolve,reject) {
-        for (var i=0; i < pid.length; i++) {
-            ref.child(pid[i]).once('value')
-            .then(function(snapshot){
-                products.push(snapshot.val());
-                if (products.length == productsCount) {
-                    resolve(products);
+                items.push(snapshot.val());
+                if (items.length == itemsCount) {
+                    resolve(items);
                 }
             });
         }
@@ -140,13 +105,13 @@ export function GetProductImpl(productId,onProduct) {
     return ref.once('value')
     .then(function(snapshot){
         product = snapshot.val();
-        GetRetailerList(product.rid).then((retailers)=>{
+        GetItemList(product.rid,'retailers').then((retailers)=>{
            product.retailers = retailers;
            productAttributes |= RETAILERS;
            if (productAttributes == requiredAttributes) 
                onProduct(product);
         });
-        GetProducer(product.pid).then((producer)=>{
+        GetItem('producers/'+product.pid).then((producer)=>{
             product.producer = producer;
             productAttributes |= PRODUCER;
             if (productAttributes == requiredAttributes) {
@@ -166,14 +131,14 @@ export function GetRetailerImpl(retailerId,onRetailer) {
     return ref.once('value')
     .then(function(snapshot){
         retailer = snapshot.val();
-        GetProductList(retailer.pid).then((products)=>{
+        GetItemList(retailer.pid,'products').then((products)=>{
            retailer.products = products;
            retailerAttributes |= PRODUCTS;
            if (retailerAttributes == requiredAttributes) 
                onRetailer(retailer);
         });
         
-        GetUserList(retailer.follower).then((followers)=>{
+        GetItemList(retailer.follower,'users').then((followers)=>{
             retailer.followers  = followers;
             retailerAttributes |= FOLLOWERS;
             if (retailerAttributes == requiredAttributes) {
@@ -181,7 +146,7 @@ export function GetRetailerImpl(retailerId,onRetailer) {
             }
         });
 
-        GetUserList(retailer.following).then((following)=>{
+        GetItemList(retailer.following,'users').then((following)=>{
             retailer.following  = following;
             retailerAttributes |= FOLLOWING;
             if (retailerAttributes == requiredAttributes) {
@@ -201,21 +166,21 @@ export function GetProducerImpl(producerId,onProducer) {
     return ref.once('value')
     .then(function(snapshot){
         producer = snapshot.val();
-        GetProductList(producer.pid).then((products)=>{
+        GetItemList(producer.pid,'products').then((products)=>{
            producer.products = products;
            producerAttributes |= PRODUCTS;
            if (producerAttributes == requiredAttributes) 
                onProducer(producer);
         });
         
-        GetUserList(producer.follower).then((followers)=>{
+        GetItemList(producer.follower,'users').then((followers)=>{
             producer.followers = followers;
             producerAttributes |= FOLLOWERS;
             if (producerAttributes == requiredAttributes) {
                 onProducer(producer);
             }
         });
-        GetUserList(producer.following).then((following)=>{
+        GetItemList(producer.following,'users').then((following)=>{
             producer.following = following;
             producerAttributes |= FOLLOWING;
             if (producerAttributes == requiredAttributes) {
