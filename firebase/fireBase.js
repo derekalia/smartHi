@@ -1,3 +1,11 @@
+const RETAILERS = 1;
+const PRODUCER  = 2;
+const FOLLOWERS = 4;
+const FOLLOWING = 8;
+const REVIEWS   = 16;
+const PRODUCTS  = 32;
+const REVIEW_PRODUCTS=64;
+
 const Firebase=require('firebase');
 
 // Initialize Firebase
@@ -9,68 +17,32 @@ var fireBaseConfig = {
 };
 const firebase = Firebase.initializeApp(fireBaseConfig);
 
-function LoginImpl(userName,password) {
-    return firebase.auth().signInWithEmailAndPassword(userName, password)
-    .then((result)=> {
-        // return uid of the user.
-        console.log(result.uid);
-        return result.uid;
-    })
-    .catch(function(error) {
-        console.log(error);
-        throw  "User name is bad or password is invalid"; 
-    });
-}
-
-function GetUserImpl(userId) {
-    var ref = firebase.database().ref("users/"+userId);
-    return ref.once('value')
-    .then(function(snapshot){
-        return snapshot.val();
-    });
-}
-
-function GetLatestImpl() {
-    var ref = firebase.database().ref('products/0');
-    return ref.once('value')
-    .then(function(snapshot){
-        return snapshot.val();
-    })
-}
-
-function GetProducerItem(producerId) {
-    var ref = firebase.database().ref('producers/'+producerId);
+function GetItem(itemPath) {
+    var ref = firebase.database().ref(itemPath);
     return ref.once('value')
     .then(function(snapshot){
         var producer = snapshot.val();
-        return producer;
+        return item;
     });
 }
 
+function GetItemList(itemList,itemPath) {
+    var items = [];
+    var itemsCount = itemList.length;
 
-function GetRetailerList(rid) {
-    var retailers = [];
-    var retailersCount = rid.length;
-    var ref = firebase.database().ref('retailers');
+    var ref = firebase.database().ref(itemPath);
     return new Promise(function(resolve,reject) {
-        for (var i=0; i < rid.length; i++) {
-            ref.child(rid[i]).once('value')
+        for (var i=0; i < itemList.length; i++) {
+            ref.child(itemList[i]).once('value')
             .then(function(snapshot){
-                retailers.push(snapshot.val());
-                if (retailers.length == retailersCount) {
-                    resolve(retailers);
+                items.push(snapshot.val());
+                if (items.length == itemsCount) {
+                    resolve(items);
                 }
             });
         }
     });
 }
-
-const RETAILERS = 1;
-const PRODUCER  = 2;
-const FOLLOWERS = 4;
-const FOLLOWING = 8;
-const REVIEWS   = 16;
-const PRODUCTS  = 32;
 
 function GetProductImpl(productId,onProduct) {
     var product = null;
@@ -82,55 +54,19 @@ function GetProductImpl(productId,onProduct) {
     return ref.once('value')
     .then(function(snapshot){
         product = snapshot.val();
-        GetRetailerList(product.rid).then((retailers)=>{
+        GetItemList(product.rid,'retailers').then((retailers)=>{
            product.retailers = retailers;
            productAttributes |= RETAILERS;
            if (productAttributes == requiredAttributes) 
                onProduct(product);
         });
-        GetProducer(product.pid).then((producer)=>{
+        GetItem('producers/'+product.pid).then((producer)=>{
             product.producer = producer;
             productAttributes |= PRODUCER;
             if (productAttributes == requiredAttributes) {
                 onProduct(product);
             }
         });
-    });
-}
-
-function GetUserList(uid) {
-    var users = [];
-    var usersCount = uid.length;
-    var ref = firebase.database().ref('users');
-
-    return new Promise(function(resolve,reject) {
-        for (var i=0; i < uid.length; i++) {
-            ref.child(uid[i]).once('value')
-            .then(function(snapshot){
-                users.push(snapshot.val());
-                if (users.length == usersCount) {
-                    resolve(users);
-                }
-            });
-        }
-    });
-}
-
-function GetProductList(pid) {
-    var products = [];
-    var productsCount = pid.length;
-
-    var ref = firebase.database().ref('products');
-    return new Promise(function(resolve,reject) {
-        for (var i=0; i < pid.length; i++) {
-            ref.child(pid[i]).once('value')
-            .then(function(snapshot){
-                products.push(snapshot.val());
-                if (products.length == productsCount) {
-                    resolve(products);
-                }
-            });
-        }
     });
 }
 
@@ -144,14 +80,14 @@ function GetRetailerImpl(retailerId,onRetailer) {
     return ref.once('value')
     .then(function(snapshot){
         retailer = snapshot.val();
-        GetProductList(retailer.pid).then((products)=>{
+        GetItemList(retailer.pid,'products').then((products)=>{
            retailer.products = products;
            retailerAttributes |= PRODUCTS;
            if (retailerAttributes == requiredAttributes) 
                onRetailer(retailer);
         });
         
-        GetUserList(retailer.follower).then((followers)=>{
+        GetItemList(retailer.follower,'users').then((followers)=>{
             retailer.followers = followers;
             retailerAttributes |= FOLLOWERS;
             if (retailerAttributes == requiredAttributes) {
@@ -181,21 +117,21 @@ function GetProducerImpl(producerId,onProducer) {
     return ref.once('value')
     .then(function(snapshot){
         producer = snapshot.val();
-        GetProductList(producer.pid).then((products)=>{
+        GetItemList(producer.pid,'products').then((products)=>{
            producer.products = products;
            producerAttributes |= PRODUCTS;
            if (producerAttributes == requiredAttributes) 
                onProducer(producer);
         });
         
-        GetUserList(producer.follower).then((followers)=>{
+        GetItemList(producer.follower,'users').then((followers)=>{
             producer.followers = followers;
             producerAttributes |= FOLLOWERS;
             if (producerAttributes == requiredAttributes) {
                 onProducer(producer);
             }
         });
-        GetUserList(producer.following).then((following)=>{
+        GetItemList(producer.following,'users').then((following)=>{
             producer.following = following;
             producerAttributes |= FOLLOWING;
             if (producerAttributes == requiredAttributes) {
@@ -205,6 +141,92 @@ function GetProducerImpl(producerId,onProducer) {
     });
 }
 
+function LoginImpl(userName,password) {
+    return firebase.auth().signInWithEmailAndPassword(userName, password)
+    .then((result)=> {
+        // return uid of the user.
+        console.log(result.uid);
+        return result.uid;
+    })
+    .catch(function(error) {
+        console.log(error);
+        throw  "User name is bad or password is invalid"; 
+    });
+}
+
+function GetLatestImpl() {
+    var ref = firebase.database().ref('products/0');
+    return ref.once('value')
+    .then(function(snapshot){
+        return snapshot.val();
+    })
+}
+
+
+function GetProfileImpl(userId,onProfile) {
+    var profile = null;
+    var profileAttributes = 0;
+    var requiredAttributes = PRODUCER|RETAILERS|PRODUCTS|REVIEW_PRODUCTS|FOLLOWERS|FOLLOWING;
+    var ref = firebase.database().ref('users');
+    return ref.orderByChild('id').startAt(userId).endAt(userId).once('value')
+    .then(function(snapshot){
+        profile = snapshot.val()[1];
+        // Get favorite producers list
+        GetItemList(profile.pid,'producers').then((producers)=>{
+            profile.producers = producers;
+            profileAttributes |= PRODUCER;
+            if (profileAttributes == requiredAttributes) {
+                onProfile(profile,null);
+            }
+        });
+        // Get favorite retailer list
+        GetItemList(profile.rid,'retailers').then((retailers)=>{
+            profile.retailers = retailers;
+            profileAttributes |= RETAILERS;
+            if (profileAttributes == requiredAttributes) {
+                onProfile(profile,null);
+            }
+        });
+        // Get favorite product list
+        GetItemList(profile.fpid,'products').then((products)=>{
+            console.log("got favorite products");
+            profile.products = products;
+            profileAttributes |= PRODUCTS;
+            if (profileAttributes == requiredAttributes) {
+                onProfile(profile,null);
+            }
+        });
+        // Get rate queue product list
+        GetItemList(profile.rpid,'products').then((products)=>{
+            profile.reviewProducts = products;
+            profileAttributes |= REVIEW_PRODUCTS;
+            if (profileAttributes == requiredAttributes) {
+                onProfile(profile,null);
+            }
+        });
+        // Get follower list
+        GetItemList(profile.follower,'users').then((followers)=>{
+            profile.followers = followers;
+            profileAttributes |= FOLLOWERS;
+            if (profileAttributes == requiredAttributes) {
+                onProfile(profile,null);
+            }
+        });
+        // Get following list
+        GetItemList(profile.following,'users').then((following)=>{
+            profile.following = following;
+            profileAttributes |= FOLLOWING;
+            if (profileAttributes == requiredAttributes) {
+                onProfile(profile,null);
+            }
+        });
+    })
+    .catch((error)=>{
+        console.log("caught error");
+        console.log(error);
+        onProfile(null,error);
+    });
+}
 
 LoginImpl("test@yahoo.com","test12").then(()=>{
     //GetProductImpl('1',(product)=>{
@@ -216,8 +238,12 @@ LoginImpl("test@yahoo.com","test12").then(()=>{
     //GetRetailerImpl('1',(retailer)=> {
     //    console.log(retailer);
     //});
-    GetProducerImpl('1',(producer)=> {
-        console.log(producer);
+    //GetProducerImpl('1',(producer)=> {
+    //    console.log(producer);
+    //});
+    GetProfileImpl('1',(profile,error)=> {
+          console.log("got profile");
+          console.log(profile);
     });
 });
 
