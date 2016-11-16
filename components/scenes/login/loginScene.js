@@ -39,11 +39,11 @@ class LoginScene extends Component {
 
     async _submit() {
         this.setState({loading:true});
-        LoginUser(this._userName,this._userPassword,(userId,error)=>{
+        LoginUser(this._userName,this._userPassword,(profile,error)=>{
             if (this._mounted) {
                 if (error  == null) {
                     this.setState({loading:false});
-                    this.props.LoginAction(userId);
+                    this.props.LoginAction(profile);
                 }
                 else {
                     this.setState({loading:false,error:error});

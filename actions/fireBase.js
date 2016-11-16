@@ -7,6 +7,7 @@ const FOLLOWING = 8;
 const REVIEWS   = 16;
 const USERS     = 32;
 const PRODUCTS  = 64;
+const REVIEW_PRODUCTS = 128;
 
 // Initialize Firebase
 var fireBaseConfig = {
@@ -45,12 +46,76 @@ function GetItemList(itemList,itemPath) {
     });
 }
 
+function GetProfile(userId,onProfile) {
+    // BatsFix. for now always use profile 1
+    userId = '1';
+    var profile = null;
+    var profileAttributes = 0;
+    var requiredAttributes = PRODUCER|RETAILERS|PRODUCTS|REVIEW_PRODUCTS|FOLLOWERS|FOLLOWING;
+    var ref = firebase.database().ref('users');
+    return ref.orderByChild('id').startAt(userId).endAt(userId).once('value')
+    .then(function(snapshot){
+        profile = snapshot.val()[1];
+        profile.uid = userId;
+        // Get favorite producers list
+        GetItemList(profile.pid,'producers').then((producers)=>{
+            profile.producers = producers;
+            profileAttributes |= PRODUCER;
+            if (profileAttributes == requiredAttributes) {
+                onProfile(profile,null);
+            }
+        });
+        // Get favorite retailer list
+        GetItemList(profile.rid,'retailers').then((retailers)=>{
+            profile.retailers = retailers;
+            profileAttributes |= RETAILERS;
+            if (profileAttributes == requiredAttributes) {
+                onProfile(profile,null);
+            }
+        });
+        // Get favorite product list
+        GetItemList(profile.fpid,'products').then((products)=>{
+            console.log("got favorite products");
+            profile.products = products;
+            profileAttributes |= PRODUCTS;
+            if (profileAttributes == requiredAttributes) {
+                onProfile(profile,null);
+            }
+        });
+        // Get rate queue product list
+        GetItemList(profile.rpid,'products').then((products)=>{
+            profile.reviewProducts = products;
+            profileAttributes |= REVIEW_PRODUCTS;
+            if (profileAttributes == requiredAttributes) {
+                onProfile(profile,null);
+            }
+        });
+        // Get follower list
+        GetItemList(profile.follower,'users').then((followers)=>{
+            profile.followers = followers;
+            profileAttributes |= FOLLOWERS;
+            if (profileAttributes == requiredAttributes) {
+                onProfile(profile,null);
+            }
+        });
+        // Get following list
+        GetItemList(profile.following,'users').then((following)=>{
+            profile.following = following;
+            profileAttributes |= FOLLOWING;
+            if (profileAttributes == requiredAttributes) {
+                onProfile(profile,null);
+            }
+        });
+    });
+}
+
 export function LoginUserImpl(userName,password,onLoginUser) {
     return firebase.auth().signInWithEmailAndPassword(userName, password)
     .then((result)=> {
         // return uid of the user.
         console.log("calling back on user logged on");
-        onLoginUser(result.uid,null); 
+        GetProfile(result.uid,onLoginUser);
+        //onLoginUser(result.uid,null); 
     })
     .catch(function(error) {
         console.log("LoginUserImpl:error");

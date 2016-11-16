@@ -7,10 +7,10 @@ export async function LoginUser(userName,password,onLoginUser) {
     return LoginUserImpl(userName,password,onLoginUser);
 }
 
-export function LoginAction(userId) {
+export function LoginAction(profile) {
         return ({ 
             type:   LOGIN_SUCCESS, 
-            userId: userId, 
+            profile: profile,
         });
 }
 

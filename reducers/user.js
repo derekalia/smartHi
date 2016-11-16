@@ -12,22 +12,9 @@ import {
 const initialState = {
     user: { loggedIn: false, 
             name: "",
-            tokenType: "",
-            accessToken: "",
             userId: null,
     },
-    profile : {
-        id:'9999',
-        name:'Unknown',
-        address:'Bed Bath and Beyond',
-        score:'0',
-        products:[], 
-        producers: [],
-        retailers: [],
-        following: [],
-        follower: [],
-        reviewsProducts: [],
-    },
+    profile : null,
     rateQueue: [],
 }
 
@@ -60,10 +47,9 @@ export default function UserReducer(state, action) {
             // Then modify the item needed in the new
             // state. 
             newState.user.loggedIn = true;
-            newState.user.name        = action.name;
-            newState.user.accessToken = action.accessToken;
-            newState.user.tokenType   = action.tokenType;
-            newState.user.userId      = action.userId;
+            newState.user.name        = action.profile.name;
+            newState.user.userId      = action.profile.id;
+            newState.profile          = action.profile;
 
             // BatsFix. Following need to be returned with logon token etc.
             return newState;
