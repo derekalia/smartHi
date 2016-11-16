@@ -102,6 +102,8 @@ class ProductItem extends Component {
                               <Image style={{  width: 90,height: 90, marginRight: 0,borderRadius:4}} source={require('../../media/Rosin2.png')}/>
                             </View>
                             <View style={{flex: 1, flexDirection: 'column', padding:5,}}>
+                                {/*Product Name*/}
+                               <Text> {this.props.product.name}</Text>    
                                 {/*Product pricing*/}
                                 {this._renderPrice()}
                                 {/*Product rating*/}
