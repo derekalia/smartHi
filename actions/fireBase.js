@@ -30,12 +30,12 @@ function GetItem(itemPath) {
 
 function GetItemList(itemList,itemPath) {
     var items = [];
-    var itemsCount = itemList.length;
+    var itemsCount = Array.isArray(itemList)?itemList.length:itemList.keys().length;
 
     var ref = firebase.database().ref(itemPath);
     return new Promise(function(resolve,reject) {
-        for (var i=0; i < itemList.length; i++) {
-            ref.child(itemList[i]).once('value')
+        for (var key in itemList) {
+            ref.child(key).once('value')
             .then(function(snapshot){
                 items.push(snapshot.val());
                 if (items.length == itemsCount) {
@@ -46,16 +46,18 @@ function GetItemList(itemList,itemPath) {
     });
 }
 
-function GetProfile(userId,onProfile) {
-    // BatsFix. for now always use profile 1
-    userId = '1';
+export function GetProfileImpl(userId,onProfile) {
     var profile = null;
     var profileAttributes = 0;
     var requiredAttributes = PRODUCER|RETAILERS|PRODUCTS|REVIEW_PRODUCTS|FOLLOWERS|FOLLOWING;
     var ref = firebase.database().ref('users');
     return ref.orderByChild('id').startAt(userId).endAt(userId).once('value')
     .then(function(snapshot){
-        profile = snapshot.val()[1];
+        var temp = snapshot.val();
+        for (var key in temp) {
+            profile = temp[key];
+            break;
+        }
         profile.uid = userId;
         // Get favorite producers list
         GetItemList(profile.pid,'producers').then((producers)=>{
@@ -66,6 +68,7 @@ function GetProfile(userId,onProfile) {
             }
         });
         // Get favorite retailer list
+        console.log(profile.rid);
         GetItemList(profile.rid,'retailers').then((retailers)=>{
             profile.retailers = retailers;
             profileAttributes |= RETAILERS;
@@ -75,7 +78,6 @@ function GetProfile(userId,onProfile) {
         });
         // Get favorite product list
         GetItemList(profile.fpid,'products').then((products)=>{
-            console.log("got favorite products");
             profile.products = products;
             profileAttributes |= PRODUCTS;
             if (profileAttributes == requiredAttributes) {
@@ -112,7 +114,7 @@ function GetProfile(userId,onProfile) {
 export function LoginUserImpl(userName,password,onLoginUser) {
     return firebase.auth().signInWithEmailAndPassword(userName, password)
     .then((result)=> {
-        GetProfile(result.uid,onLoginUser);
+        GetProfileImpl(result.uid,onLoginUser);
     })
     .catch(function(error) {
         console.log("LoginUserImpl:error");
