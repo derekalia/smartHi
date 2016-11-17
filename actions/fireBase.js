@@ -28,14 +28,23 @@ function GetItem(itemPath) {
     });
 }
 
+//
+// Gets all itemList array elements or all child properties of itemList.
+//
 function GetItemList(itemList,itemPath) {
     var items = [];
-    var itemsCount = Array.isArray(itemList)?itemList.length:itemList.keys().length;
-
+    var isArray = Array.isArray(itemList);
+    var itemsCount = isArray?itemList.length:itemList.keys().length;
     var ref = firebase.database().ref(itemPath);
     return new Promise(function(resolve,reject) {
         for (var key in itemList) {
-            ref.child(key).once('value')
+            if (isArray) {
+                childPath = itemList[key]
+            }
+            else {
+                childPath = key;
+            }
+            ref.child(childPath).once('value')
             .then(function(snapshot){
                 items.push(snapshot.val());
                 if (items.length == itemsCount) {
@@ -50,15 +59,10 @@ export function GetProfileImpl(userId,onProfile) {
     var profile = null;
     var profileAttributes = 0;
     var requiredAttributes = PRODUCER|RETAILERS|PRODUCTS|REVIEW_PRODUCTS|FOLLOWERS|FOLLOWING;
-    var ref = firebase.database().ref('users');
-    return ref.orderByChild('id').startAt(userId).endAt(userId).once('value')
+    var ref = firebase.database().ref('users/'+userId);
+    return ref.once('value')
     .then(function(snapshot){
-        var temp = snapshot.val();
-        for (var key in temp) {
-            profile = temp[key];
-            break;
-        }
-        profile.uid = userId;
+         profile = snapshot.val();
         // Get favorite producers list
         GetItemList(profile.pid,'producers').then((producers)=>{
             profile.producers = producers;
@@ -68,7 +72,6 @@ export function GetProfileImpl(userId,onProfile) {
             }
         });
         // Get favorite retailer list
-        console.log(profile.rid);
         GetItemList(profile.rid,'retailers').then((retailers)=>{
             profile.retailers = retailers;
             profileAttributes |= RETAILERS;

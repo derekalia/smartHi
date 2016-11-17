@@ -1,6 +1,10 @@
 const data=require('../actions/testData.js');
+var users = {};
+for (var i=0; i < data.TestUsers.length;i++) {
+     users[data.TestUsers[i].id] = data.TestUsers[i]; 
+}
 const testData = {
-    users:     data.TestUsers,
+    users:     users,
     products:  data.TestProducts,
     producers: data.TestProducers,
     retailers: data.TestRetailers,
