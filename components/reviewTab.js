@@ -88,7 +88,7 @@ class ReviewTab extends Component {
 
     renderScene(route, navigator) {
         return (
-                <route.component tabId={ReviewTabId} navigator={navigator} currentUserId={navigator.props.currentUserId}/>
+                <route.component tabId={ReviewTabId} navigator={navigator} currentUser={navigator.props.currentUser}/>
         );
     }
 
@@ -103,7 +103,7 @@ class ReviewTab extends Component {
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
                 initialRoute = {TabScenes[ReviewStartIndex]}
-                currentUserId = {this.props.user.id}
+                currentUser  = {this.props.user}
             />
         );
     }

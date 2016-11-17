@@ -117,7 +117,7 @@ class RetailerScene extends Component {
 
     _onLike() {
         // BatsFix. Implement like action for this product.
-        this.props.AddToRetailerUser(this.state.retailer.id, this.props.currentUserId);
+        this.props.AddToRetailerUser(this.state.retailer.id, this.props.currentUser.id);
     }
 
     _showMap() {
@@ -134,17 +134,11 @@ class RetailerScene extends Component {
     }
 
     _isRetailerUser() {
-        
-        var users = this.state.retailer.users;
-        if (users == null ) {
-            return false;
+        for (var i=0; i < this.props.currentUser.rid.length;i++) {
+             if (this.props.currentUser.rid[i] == this.state.retailer.id) {
+                 return true;
+             }
         }
-        for (var i=0; i < users.length; i++) {
-            if (users[i].id == this.props.currentUserId) {
-                return true;
-            }
-        }
-        
         return false;
     }
 

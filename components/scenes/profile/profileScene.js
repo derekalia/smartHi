@@ -9,17 +9,12 @@ import {Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, Touchab
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-// import apollo helper
-import {graphql} from 'react-apollo';
-import gql from 'graphql-tag';
-
-
 import StarRating from 'react-native-star-rating';
 
 
 // Import internals
-import {AddToFollowUser,GetProductReviewAction,GetProductAction,GetRetailerAction,GetProducerAction,SwitchSceneAction,} from '../../../actions';
-import {SettingsSceneId,ProfileTabId,} from '../../../common/const.js';
+import {AddToFollowUser,GetProfile,GoProductReviewAction,GoProductAction,GoRetailerAction,GoProducerAction,SwitchSceneAction,} from '../../../actions';
+import {SettingSceneId,ProfileTabId,} from '../../../common/const.js';
 import {HerbyFrameBar,HerbyBar,}   from '../../../common/controls.js';
 import ProducerItem from '../../util/producerItem.js';
 import ProductItem from '../../util/productItem.js';
@@ -33,20 +28,21 @@ import {HerbyLoading,HerbyButton2,} from '../../../common/controls.js';
 class UserReviews extends Component {
     render() {
         return (
-          <View>
+        <View>
             <ScrollView style={{backgroundColor:'#ECECEC',marginTop:0}}>
-                {/* <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/> */}
                 <ProductList productList={this.props.user.reviewProducts} goProduct={this.props.goReview}/>
             </ScrollView>
-            </View>
+        </View>
         );
     }
 }
+
 class UserFavorites extends Component {
     constructor(props) {
         super(props);
         this.state = { frameId: 0 };
     }
+
     _setFrame(frameId) {
         this.setState({frameId:frameId});
     }
@@ -72,16 +68,15 @@ class UserFavorites extends Component {
             )
         }
     }
+
     render() {
         return (
-          <View>
-            <HerbyFrameBar entries={['PRODUCTS','STORES','PRODUCERS']} setFrame={(t)=>this._setFrame(t)}/>
-                  <ScrollView >
-
+        <View>
+              <HerbyFrameBar entries={['PRODUCTS','STORES','PRODUCERS']} setFrame={(t)=>this._setFrame(t)}/>
+              <ScrollView >
                   {this._getFavorites()}
-
               </ScrollView>
-          </View>
+         </View>
 
         );
     }
@@ -92,9 +87,11 @@ class UserSocial extends Component {
         super(props);
         this.state = {frameId:0};
     }
+
     _setFrame(frameId) {
         this.setState({frameId:frameId});
     }
+
     render() {
         return (
             <ScrollView style={{backgroundColor:'transparent'}}>
@@ -105,6 +102,7 @@ class UserSocial extends Component {
         );
     }
 }
+
 class UserHeader extends Component {
     render() {
         return(
@@ -140,7 +138,6 @@ const ProfileFrames = [
     {title: "social",    component: UserSocial,      index: SocialFrameId},
 ];
 
-
 class ProfileScene extends Component {
 
     constructor(props) {
@@ -148,11 +145,32 @@ class ProfileScene extends Component {
         var {width,height} = Dimensions.get('window');
         this._height = height;
         // these should come from the app state.
-        this.state = {user:this.props.user,frameId:FavoritesFrameId};
+        this.state = {loading:true,message:null,profile:null,frameId:FavoritesFrameId};
+        this._mounted = false;
     }
 
-    componentWillReceiveProps(nextProps) {
-        this.setState({user:nextProps.user});
+    componentDidMount() {
+        this.setState({loading:true});
+        this._mounted = true;
+        if (this.props.itemId == null) {
+            this.setState({loading:false,profile:this.props.currentUser});
+        }
+        else {
+            GetProfile(this.props.itemId,(profile,error)=> {
+               if (this._mounted) {
+                   if (error== null) {
+                       this.setState({loading:false,profile:profile});
+                   }
+                   else {
+                       this.setState({loading:false,message:error});
+                   }
+               }
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        this._mounted = false;
     }
 
     _goSettings() {
@@ -164,11 +182,7 @@ class ProfileScene extends Component {
         this.setState({frameId: frameId});
     }
 
-
     renderScene(route, navigator) {
-        // BatsFix.
-        // to pass a prop to the component, that prop
-        // first needs to be passed to the navigator object.
         return (
                 <route.component
                     user={navigator.props.user}
@@ -182,50 +196,57 @@ class ProfileScene extends Component {
     configureScene(route, routeStack) {
         return Navigator.SceneConfigs.PushFromRight;
     }
+
     _onLike() {
-      //BatsFix. Should call like user action here.
-      console.log("users are" + this.props.profile.id + " and current " + this.props.currentUserId);
-      this.props.AddToFollowUser(this.props.profile.id,this.props.currentUserId);
+        //BatsFix. Should call like user action here.
+        AddToFollowUser(this.state.profile.id,this.props.currentUser.id);
     }
-     _isUserUser() {
-        var users = this.props.profile.follower;
-        if (users == null ) {
-            return false;
-        }
-        for (var i=0; i < users.length; i++) {
-            if (users[i].id == this.props.currentUserId) {
-                return true;
-            }
+
+    _isUserUser() {
+        for (var i=0; i < this.props.currentUser.followers.length; i++) {
+             if (this.props.currentUser.followers[i].id == this.props.profile.id) {
+                 return true;
+             }
         }
         return false;
     }
-  
+
+    _isCurrentUser() {
+        //BatsFix. need to check if the current profile is for the current logged on user
+        return false;
+    }
+
     _getNavBar() {
-        if (this.props.tabId != ProfileTabId || this.props.isCurrentUser == false) {
-            // Allow heart action if the profile scene is not in the profile tab. BatsFix. Is that correct?
+        //
+        // Allow heart action if this is not current user profile
+        // Otherwise show settings button
+        //
+        if (this._isCurrentUser()) {
             return (
-              <HerbyBar name={this.props.profile.name} navigator={this.props.navigator} onLike={()=>this._onLike()} showFullHeart={this._isUserUser()}/>
+              <HerbyBar name={this.state.profile.name} navigator={this.props.navigator} onLike={()=>this._onLike()} showFullHeart={this._isUserUser()}/>
             );
         }
         return (
-            <HerbyBar name={this.props.profile.name} navigator={this.props.navigator} forwardCallback={()=>this._goSettings()} forward='Settings'/>
+            <HerbyBar name={this.state.profile.name} navigator={this.props.navigator} forwardCallback={()=>this._goSettings()} forward='Settings'/>
         );
     }
 
-    _goReview(t) {
-        console.log("Going to review by this user of product" + t);
-        //This gets a review of product identified by 't' by user this.props.id.
-        this.props.GetProductReviewAction(t,this.props.id);
+    _goReview(productId) {
+        //This gets a review of product identified by productId 
+        this.props.GoProductReviewAction(productId);
     }
+
     render() {
-        // BatsFix. nothing below should be hardcoded!
+       
+        if (this.state.loading || this.state.message != null) {
+            return (<HerbyLoading showBusy={this.state.loading} message={this.state.message}/>);
+        }
+        //
         // BatsFix. workaround weird margin issue.
+        //
         var hackMargin = 0;
         if (this.props.tabId == ProfileTabId) {
             hackMargin = -20;
-        }
-        if (this.props.loading) {
-            return (<HerbyLoading/>);
         }
         return (
         <View>
@@ -233,7 +254,7 @@ class ProfileScene extends Component {
              <ScrollView
                   style={{marginTop:hackMargin,height:this._height,backgroundColor:'transparent',}}
                   stickyHeaderIndices={[1]}>
-                  <UserHeader name={this.props.profile.name} address={this.props.profile.address} score={this.props.profile.score}/>
+                  <UserHeader name={this.state.profile.name} address={this.state.profile.address} score={this.state.profile.score}/>
                   <HerbyFrameBar entries={['FAVORITES','REVIEWS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
                   <Navigator
                       style={{height:this._height,backgroundColor:'#ECECEC',justifyContent: 'flex-start'}}
@@ -242,11 +263,11 @@ class ProfileScene extends Component {
                       renderScene={this.renderScene}
                       initialRoute = {ProfileFrames[FavoritesFrameId]}
                       initialRouteStack = {ProfileFrames}
-                      user={this.props.profile}
+                      user={this.state.profile}
                       goReview={(t)=> this._goReview(t)}
-                      goProduct={(t)=>this.props.GetProductAction(t)}
-                      goProducer={(t)=>this.props.GetProducerAction(t)}
-                      goRetailer={(t)=>this.props.GetRetailerAction(t)}
+                      goProduct={(t)=>this.props.GoProductAction(t)}
+                      goProducer={(t)=>this.props.GoProducerAction(t)}
+                      goRetailer={(t)=>this.props.GoRetailerAction(t)}
                   />
              </ScrollView>
         </View>
@@ -254,43 +275,17 @@ class ProfileScene extends Component {
     }
 }
 
+//
 //  This function is used to convert action to props passed to this component.
 //
 function mapActionToProps(dispatch) {
     return bindActionCreators({
-        AddToFollowUser,
-        GetProductReviewAction,
-        GetProductAction,
-        GetProducerAction,
-        GetRetailerAction,
+        GoProductReviewAction,
+        GoProductAction,
+        GoProducerAction,
+        GoRetailerAction,
         SwitchSceneAction, },
         dispatch);
 }
 
-//
-// BatsFix. Attach apollo query to the component. This creates props loading and products on HomeScene
-//
-const apolloProfile = gql`query($itemId: ID!) {
-    User(id:$itemId) { 
-        id,
-        name,
-        image,
-        score,
-        follower  {id, name, score, image},
-        following {id, name, score, image},
-        retailers {id, name, image, rating, ratingCount, address},
-        producers {id, name, image, rating, ratingCount},
-        products  {id, name, image, rating, ratingCount, image, activity,},
-    }
-}`;
-//
-// BatsFix. Maps data obtained from the query to props.
-//
-function mapDataToProps({props,data}) {
-    return ({
-        loading: data.loading,
-        profile: data.User,
-    });
-}
-
-module.exports = graphql(apolloProfile,{props:mapDataToProps})(connect(null,mapActionToProps)(ProfileScene));
+module.exports = connect(null,mapActionToProps)(ProfileScene);

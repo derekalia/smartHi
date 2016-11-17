@@ -157,17 +157,13 @@ class ProductScene extends Component {
 
     _onLike() {
         // BatsFix. Implement like action for this product.
-        this.props.AddToProductUser(this.state.product.id, this.props.currentUserId);
+        this.props.AddToProductUser(this.state.product.id, this.props.currentUser.id);
     }
     _isProductUser() {
-        var users = this.state.product.users;
-        if (users == null ) {
-            return false;
-        }
-        for (var i=0; i < users.length; i++) {
-            if (users[i].id == this.props.currentUserId) {
-                return true;
-            }
+        for (var i=0; i < this.props.currentUser.fpid.length; i++) {
+             if (this.props.currentUser.fpid[i] == this.state.product.id) {
+                 return true;
+             }
         }
         return false;
     }

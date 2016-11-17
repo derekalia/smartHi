@@ -112,10 +112,7 @@ function GetProfile(userId,onProfile) {
 export function LoginUserImpl(userName,password,onLoginUser) {
     return firebase.auth().signInWithEmailAndPassword(userName, password)
     .then((result)=> {
-        // return uid of the user.
-        console.log("calling back on user logged on");
         GetProfile(result.uid,onLoginUser);
-        //onLoginUser(result.uid,null); 
     })
     .catch(function(error) {
         console.log("LoginUserImpl:error");
@@ -131,7 +128,6 @@ export function GetLatestNewsImpl(onLatestNews) {
     .then(function(snapshot) {
         products.push(snapshot.val());
         if (products.length == 2) {
-            console.log("calling back1");
             onLatestNews(products,null);
         }
     });

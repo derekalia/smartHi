@@ -79,7 +79,7 @@ class HomeTab extends Component {
     renderScene(route, navigator) {
         return (
             <View style={{flex:1}}>
-                <route.component tabId={HomeTabId} navigator={navigator} item={route.item} itemId={route.itemId} currentUserId={navigator.props.currentUserId}/>
+                <route.component tabId={HomeTabId} navigator={navigator} item={route.item} itemId={route.itemId} currentUser={navigator.props.currentUser}/>
             </View>
         );
     }
@@ -95,7 +95,7 @@ class HomeTab extends Component {
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
                 initialRoute = {TabScenes[HomeIndex]}
-                currentUserId = {this.props.user.id}
+                currentUser  = {this.props.user}
                 />
         );
     }

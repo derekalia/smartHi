@@ -125,7 +125,7 @@ class ProducerScene extends Component {
 
     _onLike() {
         // BatsFix. Implement like action for this product.
-        this.props.AddToProducerUser(this.props.producer.id, this.props.currentUserId);
+        this.props.AddToProducerUser(this.props.producer.id, this.props.currentUser.id);
     }
 
     _getSearchBar() {
@@ -153,14 +153,10 @@ class ProducerScene extends Component {
     }
 
     _isProducerUser() {
-        var users = this.state.producer.followers;
-        if (users == null ) {
-            return false;
-        }
-        for (var i=0; i < users.length; i++) {
-            if (users[i].id == this.props.currentUserId) {
-                return true;
-            }
+        for (var i=0; i < this.props.currentUser.pid.length; i++) {
+             if (this.props.currentUser.pid[i] == this.state.producer.id) {
+                 return true;
+             }
         }
         return false;
     }

@@ -151,4 +151,79 @@ const apolloProducer = gql`query($itemId: ID!){
         }
     }
 }`;
- 
+
+export async function AddToProductUser(productId,userId) {
+    const addToProductUser = gql`
+     mutation addToProductUser($productId:ID!,$userId:ID!) {
+          addToProductUser(productsProductId: $productId,usersUserId:$userId) {
+            usersUser { 
+                id,
+                name,
+            }
+          }
+     }`;
+     try {
+        result = await apolloClient.mutate({mutation:addToProductUser,variables:{productId:productId,userId:userId}});
+     }
+     catch(error) {
+        console.log("AddToProductUser:error");
+        console.log(error);
+     }
+}
+
+export async function AddToRetailerUser(retailerId,userId) {
+    const addToRetailerUser = gql`
+      mutation addToRetailerUser($retailerId:ID!,$userId:ID!) {
+          addToRetailerUser(retailersRetailerId: $retailerId,usersUserId:$userId) {
+            usersUser { 
+                id,
+                name,
+            }
+          }
+     }`;
+     try {
+        result =  await apolloClient.mutate({mutation:addToRetailerUser,variables:{retailerId:retailerId,userId:userId}});
+     }
+     catch(error) {
+        console.log("AddToRetailerUser:error");
+        console.log(error);
+     }
+}
+
+export async function AddToProducerUser(producerId,userId) {
+    const addToProducerUser = gql`
+      mutation addToProducerUser($producerId:ID!,$userId:ID!) {
+          addToProducerUser(producersProducerId: $producerId,usersUserId:$userId) {
+            usersUser { 
+                id,
+                name,
+            }
+          }
+     }`;
+     try {
+        result =  await apolloClient.mutate({mutation:addToProducerUser,variables:{producerId:producerId,userId:userId}});
+     }
+     catch(error) {
+        console.log("AddToProducerUser:error");
+        console.log(error);
+     }
+}
+
+export async function AddToFollowUser(followingUserId,followerUserId) {
+    const addToFollow = gql`
+      mutation addToFollow($followingUserId:ID!,$followerUserId:ID!) {
+          addToFollow(followingUserId: $followingUserId,followerUserId:$followerUserId) {
+            followerUser { 
+                id,
+                name,
+            }
+          }
+     }`;
+     try {
+        result =  await apolloClient.mutate({mutation:addToFollow,variables:{followingUserId:followingUserId,followerUserId:followerUserId}});
+     }
+     catch(error) {
+        console.log("AddToFollowUser:error");
+        console.log(error);
+     }
+}

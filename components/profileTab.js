@@ -83,7 +83,6 @@ class ProfileTab extends Component {
 
     componentWillReceiveProps(nextProps) {
         var sceneId = nextProps.scene.sceneId;
-
         if (nextProps.tabId != ProfileTabId) {
             return;
         }
@@ -112,26 +111,9 @@ class ProfileTab extends Component {
     }
 
     renderScene(route, navigator) {
-        if (route.index == ProfileSceneId) {
-            // BatsFix. This is very hacky. Because apolloStack relies on incoming props we have to do
-            // this to keep the profile in sync. Consider using plain old action instead of 
-            // attached apollo query sometime later.
-
-            var itemId = route.itemId;
-            var isCurrentUser = false;
-            if (itemId == null || itemId == navigator.props.user.id) {
-                itemId = navigator.props.user.id;
-                isCurrentUser = true;
-            }
-            return (
-                <route.component tabId={ProfileTabId} navigator={navigator} itemId={itemId} isCurrentUser={isCurrentUser} currentUserId={navigator.props.currentUserId}/>
-            );
-        }
-        else {
-            return (
-                <route.component tabId={ProfileTabId} navigator={navigator} item={route.item} itemId={route.itemId} currentUserId={navigator.props.currentUserId}/>
-            );
-        }
+        return (
+            <route.component tabId={ProfileTabId} navigator={navigator} itemId={route.itemId} currentUser={navigator.props.currentUser}/>
+        );
     }
 
     configureScene(route, routeStack) {
@@ -145,8 +127,7 @@ class ProfileTab extends Component {
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
                 initialRoute = {TabScenes[0]}
-                user={this.props.user}
-                currentUserId={this.props.user.id}
+                currentUser={this.props.user}
                 />
         );
     }

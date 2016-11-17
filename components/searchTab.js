@@ -73,7 +73,7 @@ class SearchTab extends Component {
     renderScene(route, navigator) {
         return (
             <View style={{flex:1}}>
-                <route.component tabId={SearchTabId} navigator={navigator} item={route.item} itemId={route.itemId} currentUserId={navigator.props.currentUserId}/>
+                <route.component tabId={SearchTabId} navigator={navigator} item={route.item} itemId={route.itemId} currentUser={navigator.props.currentUser}/>
             </View>
         );
     }
@@ -89,7 +89,7 @@ class SearchTab extends Component {
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
                 initialRoute = {TabScenes[0]}
-                currentUserId = {this.props.user.id}
+                currentUser  = {this.props.user}
             />
         );
     }
