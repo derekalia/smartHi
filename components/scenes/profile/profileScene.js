@@ -204,7 +204,7 @@ class ProfileScene extends Component {
 
     _isUserUser() {
         for (var i=0; i < this.props.currentUser.followers.length; i++) {
-             if (this.props.currentUser.followers[i].id == this.props.profile.id) {
+             if (this.props.currentUser.followers[i].id == this.state.profile.id) {
                  return true;
              }
         }
@@ -213,6 +213,9 @@ class ProfileScene extends Component {
 
     _isCurrentUser() {
         //BatsFix. need to check if the current profile is for the current logged on user
+        if (this.state.profile.id == this.props.currentUser.id) {
+            return true;
+        }
         return false;
     }
 
@@ -221,7 +224,7 @@ class ProfileScene extends Component {
         // Allow heart action if this is not current user profile
         // Otherwise show settings button
         //
-        if (this._isCurrentUser()) {
+        if (!this._isCurrentUser()) {
             return (
               <HerbyBar name={this.state.profile.name} navigator={this.props.navigator} onLike={()=>this._onLike()} showFullHeart={this._isUserUser()}/>
             );
