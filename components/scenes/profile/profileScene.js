@@ -97,7 +97,7 @@ class UserSocial extends Component {
             <ScrollView style={{backgroundColor:'transparent'}}>
                 {/* <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/> */}
                 <HerbyFrameBar entries={['FOLLOWER','FOLLOWING']} setFrame={(t)=>this._setFrame(t)}/>
-                <UserList userList={this.state.frameId == 0?this.props.user.following:this.props.user.follower}/>
+                <UserList userList={this.state.frameId == 0?this.props.user.following:this.props.user.followers}/>
             </ScrollView>
         );
     }
