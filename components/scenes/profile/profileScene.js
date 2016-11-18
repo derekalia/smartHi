@@ -14,7 +14,7 @@ import StarRating from 'react-native-star-rating';
 
 // Import internals
 import {AddToFollowUser,GetProfile,GoProductReviewAction,GoProductAction,GoRetailerAction,GoProducerAction,SwitchSceneAction,} from '../../../actions';
-import {SettingSceneId,ProfileTabId,} from '../../../common/const.js';
+import {SettingsSceneId,ProfileTabId,} from '../../../common/const.js';
 import {HerbyFrameBar,HerbyBar,}   from '../../../common/controls.js';
 import ProducerItem from '../../util/producerItem.js';
 import ProductItem from '../../util/productItem.js';
