@@ -13,7 +13,9 @@ class HerbyModal extends Component {
             animationType={'fade'}
             transparent={true}
             visible={this.props.show}>
+            <View style={{flex:1,backgroundColor:'rgba(52,52,52,0.5)',alignItems:'center',justifyContent:'center'}}>
             {this.props.children}
+            </View>
          </Modal>
          );
     }

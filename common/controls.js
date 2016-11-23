@@ -366,17 +366,6 @@ export class HerbyButton extends Component {
 
         );
     }
-    /*
-        <TouchableOpacity style={{paddingLeft:20,paddingTop:16,paddingBottom:16,backgroundColor:'white',}}
-            onPress={()=>this._onPress()}>
-            <View style={{marginLeft:0,flexDirection:'row',height:26,alignItems:'stretch'}}>
-                <TouchableHighlight style={{marginLeft:0,alignItems:'flex-start'}}><Text>{this.props.name}</Text></TouchableHighlight>
-                <View style={{alignItems:'flex-end',flex:1,marginRight:20}}>
-                    <Image source={require('../media/ForwardArrow2.png') } style={{ width: 8, height: 14,alignItems:'flex-end' }}/>
-                </View>
-            </View>
-        </TouchableOpacity>
-    */
 }
 
 const HerbyButton2Styles = StyleSheet.create({
@@ -442,7 +431,7 @@ export class HerbyInput extends Component {
     }
     render() {
         return(
-        <View style={{backgroundColor:'white',flexDirection:'row',borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
+        <View style={[{backgroundColor:'white',flexDirection:'row',borderBottomWidth:1,borderBottomColor:'#C7C7CC'},this.props.style]}>
             <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>{this.props.name}</Text>
             <TextInput style={{textAlign:'right',flex:1,fontSize:16,marginRight:10,color:'black'}}
                        placeholder={this.props.value}

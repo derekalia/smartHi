@@ -26,7 +26,7 @@ class SettingsScene extends Component {
     }
 
     _resetPassword() {
-        this.props.ResetPasswordAction();
+        //BatsFix. Call reset password here. 
     }
 
     // Licensee login scene dialog
@@ -44,55 +44,49 @@ class SettingsScene extends Component {
                 {/*Main settings area*/}
                 <View style={{backgroundColor:'#EFEFF4',flex:1,}}>
                 <ScrollView>
+
+                {/*Separator Bar*/}
                 <View>
                   <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'#666666'}}> </Text>
                 </View>
 
-                <View style={{backgroundColor:"white"}}>
+                <HerbyButton name='Change Name'/>
+                <HerbyButton name='Change Email'/>
+                <HerbyButton name='Reset Password' onPress={()=>this._goResetPassword(true)}/>
 
-                <View style={{borderTopWidth:1,borderTopColor:'#C7C7CC'}}/>
-                    <HerbyButton name='Change Name'/>
-                    <HerbyButton name='Change Email'/>
-                    <HerbyButton name='Reset Password'/>
-               </View>
-
-
+                {/*Separator Bar*/}
                 <View>
                   <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'#666666'}}> </Text>
                 </View>
 
-                <View style={{backgroundColor:"white"}}>
-                <View style={{borderTopWidth:1,borderTopColor:'#C7C7CC'}}/>
+                <HerbyButton name='Notification Settings'/>
 
-                  <View style={{flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
-                    <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black',fontSize:16}}>Notifcation Settings</Text>
-                    <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
-                      <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} 
-                             source={require('../../../media/More1.png') }/>
-                    </View>
-                  </View>
+                {/*Separator Bar*/}
+                <View>
+                    <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'#666666'}}></Text>
                 </View>
 
-               <View>
-                  <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'#666666'}}></Text>
-                </View>
-
-                <View style={{borderTopWidth:1,borderTopColor:'#C7C7CC'}}/>
                 <HerbyButton name='Licensee Authentication' onPress={()=>this._goLicensee()}/>
 
-               <View>
-                  <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'#666666'}}></Text>
+                {/*Separator Bar*/}
+                <View>
+                    <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'#666666'}}></Text>
                 </View>
-
-                <View style={{borderTopWidth:1,borderTopColor:'#C7C7CC'}}/>
 
                 <HerbyButton name='Sign Out'/>
 
-               </ScrollView>
+                </ScrollView>
                 </View>
-                <HerbyModal show={this.state.showResetPassword} onClose={()=>this._showResetPassword(false)}>
-                    <HerbyButton2 name="Continue" onPress={()=>this._resetPassword()}/>
-                    <HerbyButton2 name="Cancel" onPress={()=>this._showResetPassword(false)}/>
+
+                <HerbyModal show={this.state.showResetPassword} onClose={()=>this._goResetPassword(false)}>
+                    <View style={{backgroundColor:'white',alignSelf:'center',alignItems:'center',justifyContent:'center'}}>
+                        <HerbyInput style={{marginLeft:20,marginRight:20}} value="Password"/>
+                        <HerbyInput style={{marginLeft:20,marginRight:20}} value="Password"/>
+                        <View style={{flexDirection:'row'}}>
+                            <HerbyButton2 name="Continue" onPress={()=>this._resetPassword()}/>
+                            <HerbyButton2 name="Cancel" onPress={()=>this._goResetPassword(false)}/>
+                        </View>
+                    </View>
                 </HerbyModal>
             </View>
         );
@@ -102,7 +96,7 @@ class SettingsScene extends Component {
 // This function is used to convert state to props passed to this component
 function mapStateToProps(state) {
     return {
-        user: state.UserReducer.user,
+        user:     state.UserReducer.user,
         producer: state.ProducerReducer.producer,
         retailer: state.RetailerReducer.retailer,
     }
