@@ -356,6 +356,17 @@ export class HerbyButton extends Component {
     }
     render() {
         return(
+        <TouchableOpacity onPress={()=>this._onPress()} style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
+          <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>{this.props.name}</Text>
+          <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
+            <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} 
+                   source={require('../media/More1.png') }/>
+          </View>
+        </TouchableOpacity>
+
+        );
+    }
+    /*
         <TouchableOpacity style={{paddingLeft:20,paddingTop:16,paddingBottom:16,backgroundColor:'white',}}
             onPress={()=>this._onPress()}>
             <View style={{marginLeft:0,flexDirection:'row',height:26,alignItems:'stretch'}}>
@@ -365,8 +376,7 @@ export class HerbyButton extends Component {
                 </View>
             </View>
         </TouchableOpacity>
-        );
-    }
+    */
 }
 
 const HerbyButton2Styles = StyleSheet.create({
@@ -407,7 +417,9 @@ export class HerbyButton2 extends Component {
 export class HerbyHeader extends Component {
     render() {
         return(
-        <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,}}>{this.props.name}</Text>
+        <View style={{borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
+            <Text style={{fontSize:14,paddingLeft:20,paddingTop:16,paddingBottom:10,color:'#666666'}}>{this.props.name}</Text>
+        </View>
         );
     }
 }
@@ -430,20 +442,14 @@ export class HerbyInput extends Component {
     }
     render() {
         return(
-        <View style={{
-            height:36,
-            paddingLeft:20,
-            paddingTop:10,
-            paddingBottom:10,
-            marginLeft:0,
-            flexDirection:'row',
-            alignItems:'stretch',
-            backgroundColor:'white',
-            borderBottomWidth:1,
-            borderBottomColor:'#C8C8CC'}}>
-            {this._renderName()}
-          <TextInput style={{width:320,alignItems:'stretch'}} placeholder = {this.props.value} onChange = {this._onChange.bind(this)}
-          />
+        <View style={{backgroundColor:'white',flexDirection:'row',borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
+            <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>{this.props.name}</Text>
+            <TextInput style={{textAlign:'right',flex:1,fontSize:16,marginRight:10,color:'black'}}
+                       placeholder={this.props.value}
+                       autoCorrect={false}
+                       secureTextEntry={this.props.secureTextEntry?true:false}
+                       onChange = {this._onChange.bind(this)}
+            />
         </View>
         );
     }

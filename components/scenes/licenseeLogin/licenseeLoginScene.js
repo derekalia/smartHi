@@ -10,113 +10,103 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 //get internal components
-import {LicenseeLoginAction} from '../../../actions';
-import {ProducerLoginAction} from '../../../actions';
-import {HerbyButton2,HerbyInput,HerbyBar,}         from '../../../common/controls.js';
+import {ProducerLogin,ProducerLoginAction,RetailerLogin,RetailerLoginAction} from '../../../actions';
+import {HerbyHeader,HerbyButton2,HerbyButton,HerbyInput,HerbyBar,}         from '../../../common/controls.js';
 import HerbyNotification from '../../util/herbyNotification.js';
 
 class LicenseeLoginScene extends Component {
     constructor(props) {
         super(props);
         this.state = {
-        trueSwitchIsOn: true,
-        falseSwitchIsOn: false,
+            loading:false,
+            error: null,
+            isAutoSync: true,
         };
+        this._mounted = false;
     }
 
+    componentWillUnmount() {
+        this._mounted = false;
+    }
+
+    componentDidMount() {
+        this._mounted = true;
+    }
+
+    _retailerLogin() {
+        //
+        // Go to product page
+        //
+        this.setState({loading:true});
+        RetailerLogin(this._email,this._password,(profile,error)=>{
+            if (this._mounted) {
+                if (error  == null) {
+                    this.setState({loading:false});
+                    this.props.RetailerLoginAction(profile);
+                }
+                else {
+                    this.setState({loading:false,error:error});
+                }
+            }
+        });
+    }
 
     _producerLogin() {
         //
         // Go to product page
         //
-       this.props.ProducerLoginAction();
+        this.setState({loading:true});
+        ProducerLogin(this._email,this._password,(profile,error)=>{
+            if (this._mounted) {
+                if (error  == null) {
+                    this.setState({loading:false});
+                    this.props.ProducerLoginAction(profile);
+                }
+                else {
+                    this.setState({loading:false,error:error});
+                }
+            }
+        });
     }
-    _licenseeLogin() {
-        //
-        // Go to product page
-        //
-       this.props.LicenseeLoginAction();
+
+    _setState(state) {
+        this._state = state;
+    }
+    _setEmail(email) {
+        this._email = email;
+    }
+    _setPassword(password) {
+        this._password = password;
     }
 
     render() {
         return (
             <View style={{flex:1,backgroundColor:'#EFEFF4'}}>
+                <HerbyBar name="Authentication"  navigator={this.props.navigator}/>
 
-              <HerbyBar name="Authentication"  navigator={this.props.navigator}/>
+                <HerbyHeader name='USER INFO'/>
+                <HerbyInput name='State'    value='Washington'        onChange={(t)=>this._setState(t)}/>
+                <HerbyInput name='Email'    value='ike@uncleikes.com' onChange={(t)=>this._setEmail(t)}/>
+                <HerbyInput name='Password' value='*****************' onChange={(t)=>this._setPassword(t)} secureTextEntry={true}/>
 
-                <View>
-                  <Text style={{fontSize:14,paddingLeft:20,paddingTop:16,paddingBottom:10,color:'#666666'}}>USER INFO</Text>
-                </View>
+                <HerbyHeader name='LICENSE TYPE'/>                
+                <HerbyButton name="Retail"   onPress={()=>this._retailerLogin()}/>
+                <HerbyButton name="Producer" onPress={()=>this._producerLogin()}/>
 
-                <View style={{borderTopWidth:1,borderTopColor:'#C7C7CC'}}/>
-                <View style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
-                  <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>State</Text>
-                  <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
-                    <Text  style={{color:'grey',fontSize:16,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',marginRight:10}}>Washington</Text>
-                  </View>
-                </View>
-
-
-                <View style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
-                  <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>Email</Text>
-                  <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
-                    <Text  style={{color:'grey',fontSize:16,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',marginRight:10}}>ike@uncleikes.com</Text>
-                  </View>
-                </View>
-
-                <View style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
-                  <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>Password</Text>
-                  <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
-                  <Text  style={{color:'grey',fontSize:16,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',marginRight:10}}>******</Text>
-                  </View>
-                </View>
-
-                <View>
-                  <Text style={{fontSize:14,paddingLeft:20,paddingTop:16,paddingBottom:10,color:'#666666'}}>LICENSE TYPE</Text>
-                </View>
-
-                <View style={{borderTopWidth:1,borderTopColor:'#C7C7CC'}}/>
-                <TouchableOpacity onPress={()=>this._licenseeLogin()} style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
-                  <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>Retail</Text>
-                  <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
-                    <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
-                  </View>
-                </TouchableOpacity>
-
-                <TouchableOpacity onPress={()=>this._producerLogin()} style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
-                  <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>Producer</Text>
-                  <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
-                    <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} source={require('../../../media/More1.png') }/>
-                  </View>
-                </TouchableOpacity>
-
-                <View>
-                  <Text style={{fontSize:14,paddingLeft:20,paddingTop:16,paddingBottom:10,color:'#666666'}}>STATUS</Text>
-                </View>
-
-                <View style={{borderTopWidth:1,borderTopColor:'#C7C7CC'}}/>
+                <HerbyHeader name='STATUS'/>
                 <View style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
                   <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>Sync Off</Text>
                   <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
-
-                  <View>
-                    <Switch
-                      style={{marginRight:10}}
-                      onValueChange={(value) => this.setState({trueSwitchIsOn: value})}
-                      value={this.state.trueSwitchIsOn} />
-                  </View>
-
+                      <View>
+                          <Switch
+                              style={{marginRight:10}}
+                              onValueChange={(value) => this.setState({isAutoSync: value})}
+                              value={this.state.isAutoSync} />
+                      </View>
                   </View>
                 </View>
-                    {/* <HerbyInput name="State" value=''/>
-                    <HerbyInput name="Email" value=''/>
-                    <HerbyInput name="UBI" value=''/>
-                    <HerbyInput name="Password"  value=''/>
-                    <View style={{flexDirection:'row'}}>
-                        <HerbyButton2 name="Continue" onPress={()=>this._licenseeLogin()}/>
-                    </View> */}
-                    {/* <HerbyNotification/> */}
-                </View>
+                <HerbyNotification showBusy={this.state.loading} message={this.state.error}/>
+            </View>
         );
     }
 }
@@ -125,5 +115,5 @@ class LicenseeLoginScene extends Component {
 // Connect LoginLicenseeAction to props
 //
 
-function mapActionToProps(dispatch) { return bindActionCreators({ LicenseeLoginAction,ProducerLoginAction }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ RetailerLoginAction,ProducerLoginAction }, dispatch); }
 module.exports = connect(null,mapActionToProps)(LicenseeLoginScene);

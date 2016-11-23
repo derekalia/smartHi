@@ -152,6 +152,57 @@ const apolloProducer = gql`query($itemId: ID!){
     }
 }`;
 
+const apolloLicensee = gql`query($itemId: ID!){
+    Retailer(id:$itemId)
+    {
+        id,
+        name,
+        image,
+        address,
+        rating,
+        ratingCount,
+        products {
+            price,
+            product {id,name,image,rating,ratingCount},
+        },
+        users {
+            id,
+            name,
+            image,
+        }
+    }
+}`;
+
+const apolloProcessor = gql`query($itemId: ID!){
+    Producer(id:$itemId)
+    {
+        id,
+        name,
+        image,
+        description,
+        rating,
+        ratingCount,
+        products {
+           id,
+           name,
+           rating,
+           ratingCount,
+           thc,
+           cbd,
+           thca,
+           activity,
+           prices { 
+                retailer {id, name, image}
+           }
+        },
+        users {
+            id,
+            name,
+            image,
+        }
+    }
+}`;
+ 
 export async function AddToProductUser(productId,userId) {
     const addToProductUser = gql`
      mutation addToProductUser($productId:ID!,$userId:ID!) {

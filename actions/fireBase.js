@@ -255,3 +255,14 @@ export function GetProducerImpl(producerId,onProducer) {
         });
     });
 }
+
+export function RetailerLoginImpl(userName,userPassword,onLogin) {
+    // BatsFix. For now use 1.
+    var retailerId = '1';
+    GetRetailerImpl(retailerId,onLogin);
+}
+export function ProducerLoginImpl(userName,userPassword,onLogin) {
+    // BatsFix. For now use 1.
+    var producerId = '1';
+    GetProducerImpl(producerId,onLogin);
+}
