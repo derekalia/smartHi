@@ -1,7 +1,7 @@
 import {SWITCH_SCENE} from './navigation.js';
 
 import {LicenseeSceneId,RetailerSceneId,HomeTabId,} from '../common/const.js';
-import {GetRetailerImpl} from './fireBase.js';
+import {GetRetailerImpl,RetailerLoginImpl} from './fireBase.js';
 
 import {NotifyBusy,NotifyDone} from './navigation.js';
 
@@ -20,31 +20,23 @@ export function GoRetailerAction(retailerId) {
    });
 }
 
-export function LicenseeLoginAction(name,password) {
+export function RetailerLogin(userName,userPassword,onLogin) {
+    RetailerLoginImpl(userName,userPassword,onLogin);
+}
+
+export function RetailerLoginAction(retailer) {
     return async function(dispatch, getState) {
-        NotifyBusy(dispatch);
-        try {
-            //BatsFix. For now assume producer login always succeeds
-            var retailerId = '1';
-           
-            // Pass true to get full info on a retailer.
-            var retailer = await GetRetailer(retailerId,true);
-            dispatch({
-                type:RETAILER_SUCCESS,
-                retailer: retailer,
-            });
-            // Finally switch screen
-            dispatch({
-                type:SWITCH_SCENE,
-                sceneId: LicenseeSceneId,
-                itemId:"ciuovqxwnq0s20133thkfjgzt", 
-            });
-            NotifyDone(dispatch, null);
-        }
-        catch(error) {
-            NotifyDone(dispatch,"LicenseeLogin failed");
-        }
-   }
+        dispatch({
+            type:RETAILER_SUCCESS,
+            retailer: retailer,
+        });
+
+        dispatch({
+            type:SWITCH_SCENE,
+            sceneId: LicenseeSceneId,
+            itemId:retailer.id, 
+        });
+    }
 }
 
 export function UpdateRetailerAction(retailerId,name,description,image) {

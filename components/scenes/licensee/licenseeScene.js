@@ -133,10 +133,8 @@ class LicenseeScene extends Component {
         if (this.props.tabId == ProfileTabId) {
             hackMargin = -20;
         }
-        if (this.props.loading) {
-            return (<HerbyLoading/>);
-        }
         console.log(this.props.licensee);
+        return (<HerbyLoading/>);
         return (
         <View>
              <HerbyBar navigator={this.props.navigator} name="Retailer" forward="Settings" forwardCallback={()=>this._goSettings()}/>

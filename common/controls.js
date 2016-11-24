@@ -356,15 +356,15 @@ export class HerbyButton extends Component {
     }
     render() {
         return(
-        <TouchableOpacity style={{paddingLeft:20,paddingTop:16,paddingBottom:16,backgroundColor:'white',}}
-            onPress={()=>this._onPress()}>
-            <View style={{marginLeft:0,flexDirection:'row',height:26,alignItems:'stretch'}}>
-                <TouchableHighlight style={{marginLeft:0,alignItems:'flex-start'}}><Text>{this.props.name}</Text></TouchableHighlight>
-                <View style={{alignItems:'flex-end',flex:1,marginRight:20}}>
-                    <Image source={require('../media/ForwardArrow2.png') } style={{ width: 8, height: 14,alignItems:'flex-end' }}/>
-                </View>
-            </View>
+        <TouchableOpacity onPress={()=>this._onPress()} style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
+          <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>{this.props.name}</Text>
+          <View style={{flex:1,flexDirection:'row',justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
+            <Text style={{textAlign:'right',fontSize:16,marginRight:20,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>{this.props.value}</Text>
+            <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center',width:8+2,height:12+4,marginRight:10}} 
+                   source={require('../media/More1.png') }/>
+          </View>
         </TouchableOpacity>
+
         );
     }
 }
@@ -407,7 +407,9 @@ export class HerbyButton2 extends Component {
 export class HerbyHeader extends Component {
     render() {
         return(
-        <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,}}>{this.props.name}</Text>
+        <View style={{borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
+            <Text style={{fontSize:14,paddingLeft:20,paddingTop:16,paddingBottom:10,color:'#666666'}}>{this.props.name}</Text>
+        </View>
         );
     }
 }
@@ -429,21 +431,19 @@ export class HerbyInput extends Component {
         }
     }
     render() {
+        var textAlign='right';
+        if (this.props.isCentered) {
+            textAlign = 'center';
+        }
         return(
-        <View style={{
-            height:36,
-            paddingLeft:20,
-            paddingTop:10,
-            paddingBottom:10,
-            marginLeft:0,
-            flexDirection:'row',
-            alignItems:'stretch',
-            backgroundColor:'white',
-            borderBottomWidth:1,
-            borderBottomColor:'#C8C8CC'}}>
-            {this._renderName()}
-          <TextInput style={{width:320,alignItems:'stretch'}} placeholder = {this.props.value} onChange = {this._onChange.bind(this)}
-          />
+        <View style={[{backgroundColor:'white',flexDirection:'row',borderBottomWidth:1,borderBottomColor:'#C7C7CC'},this.props.style]}>
+            <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>{this.props.name}</Text>
+            <TextInput style={{textAlign:textAlign,flex:1,fontSize:16,marginRight:10,color:'black'}}
+                       placeholder={this.props.value}
+                       autoCorrect={false}
+                       secureTextEntry={this.props.secureTextEntry?true:false}
+                       onChange = {this._onChange.bind(this)}
+            />
         </View>
         );
     }
