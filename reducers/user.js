@@ -1,6 +1,7 @@
 import {
     PROFILE_SUCCESS,
     LOGIN_SUCCESS,
+    LOGOFF_SUCCESS,
     LOGIN_ERROR,
     LOGIN_PROCESS,
     REGISTER_PROCESS,
@@ -50,9 +51,20 @@ export default function UserReducer(state, action) {
             newState.user.name        = action.profile.name;
             newState.user.userId      = action.profile.id;
             newState.profile          = action.profile;
+            console.log("set the new profile now");
 
             // BatsFix. Following need to be returned with logon token etc.
             return newState;
+
+        case LOGOFF_SUCCESS:
+            newState = Object.assign({}, state);
+            // Then modify the item needed in the new
+            // state. 
+            newState.user.loggedIn    = false;
+           
+            // BatsFix. Following need to be returned with logon token etc.
+            return newState;
+
 
         case LOGIN_ERROR:
             newState = Object.assign({}, state);

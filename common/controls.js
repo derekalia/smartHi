@@ -358,8 +358,9 @@ export class HerbyButton extends Component {
         return(
         <TouchableOpacity onPress={()=>this._onPress()} style={{backgroundColor:'white',flexDirection:"row",borderBottomWidth:1,borderBottomColor:'#C7C7CC'}}>
           <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>{this.props.name}</Text>
-          <View style={{flex:1,justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
-            <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'flex-end',width:8+2,height:12+4,marginRight:10}} 
+          <View style={{flex:1,flexDirection:'row',justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
+            <Text style={{textAlign:'right',fontSize:16,marginRight:20,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>{this.props.value}</Text>
+            <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center',width:8+2,height:12+4,marginRight:10}} 
                    source={require('../media/More1.png') }/>
           </View>
         </TouchableOpacity>
@@ -430,10 +431,14 @@ export class HerbyInput extends Component {
         }
     }
     render() {
+        var textAlign='right';
+        if (this.props.isCentered) {
+            textAlign = 'center';
+        }
         return(
         <View style={[{backgroundColor:'white',flexDirection:'row',borderBottomWidth:1,borderBottomColor:'#C7C7CC'},this.props.style]}>
             <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>{this.props.name}</Text>
-            <TextInput style={{textAlign:'right',flex:1,fontSize:16,marginRight:10,color:'black'}}
+            <TextInput style={{textAlign:textAlign,flex:1,fontSize:16,marginRight:10,color:'black'}}
                        placeholder={this.props.value}
                        autoCorrect={false}
                        secureTextEntry={this.props.secureTextEntry?true:false}

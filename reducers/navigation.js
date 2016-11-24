@@ -4,6 +4,7 @@ import {
     SWITCH_TAB_SCENE,
     NOTIFY_BUSY,
     NOTIFY_DONE,
+    LOGOFF_SUCCESS,
 } from '../actions/index.js';
 
 import {HomeSceneId,HomeTabId,
@@ -44,6 +45,16 @@ const initialState = {
 
 export default function NavigationReducer(state, action) {
     switch (action.type) {
+        case LOGOFF_SUCCESS:
+            //
+            // Setting scene for a new tab
+            //
+            newState = Object.assign({}, state);
+            newState.tabId    = HomeTabId; 
+            newState[newState.tabId] = {sceneId: HomeSceneId, item: null};
+            return newState;
+
+           
         case SWITCH_TAB:
             newState = Object.assign({}, state);
             if (newState.tabId != action.tabId) {

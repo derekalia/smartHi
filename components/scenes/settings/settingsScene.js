@@ -1,23 +1,25 @@
 //
 // Description: settingScene.js
-// Used for testing various UI components
 //
 import React, { Component } from 'react';
-import {Animated, Dimensions, StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView, Image, TextInput, TouchableHighlight, Navigator} from 'react-native'
+import {Alert,StyleSheet, Text, View,ScrollView, Image,} from 'react-native'
 //get state management components
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {SwitchSceneAction, GetProductAction, ResetPasswordAction,} from '../../../actions';
-import {LicenseeSceneId,LicenseeLoginSceneId,ProcessorSceneId,ProcessorLoginSceneId,} from '../../../common/const.js';
-import {HerbyBar,HerbyButton,HerbyButton2,HerbyHeader,HerbyInput,HerbyAlert} from '../../../common/controls.js';
-import HerbyModal from '../../util/herbyModal.js';
-import HerbyNotification from '../../util/herbyNotification.js';
+import {SwitchSceneAction,LogoffAction} from '../../../actions';
+import {LicenseeLoginSceneId} from '../../../common/const.js';
+import {HerbyBar,HerbyButton,HerbyButton2,HerbyHeader,HerbyInput} from '../../../common/controls.js';
+
+import ChangeNameModal          from './changeNameModal.js';
+import ChangeEmailModal         from './changeEmailModal.js';
+import ResetPasswordModal       from './resetPasswordModal.js';
+import ChangeNotificationModal  from './changeNotificationModal.js';
 
 class SettingsScene extends Component {
     constructor(props) {
         super(props);
-        this.state = {showResetPassword:false,showChangeEmail:false,showChangeName:false}
+        this.state = {showResetPassword:false,showChangeEmail:false,showChangeName:false,showChangeNotification:false}
     }
 
     // Reset password dialog
@@ -25,13 +27,29 @@ class SettingsScene extends Component {
         this.setState({showResetPassword:value});
     }
 
-    _resetPassword() {
-        //BatsFix. Call reset password here. 
-    }
-
-    // Licensee login scene dialog
+    // Licensee login scene dialog. Actually go to licensee login scene.
     _goLicensee() {
         this.props.SwitchSceneAction(LicenseeLoginSceneId);
+    }
+
+    // Change name dialog
+    _goChangeName(value) {
+        this.setState({showChangeName:value});
+    }
+
+    // Change email dialog
+    _goChangeEmail(value) {
+        this.setState({showChangeEmail:value});
+    }
+
+    // Change notification settings dialog
+    _goChangeNotification(value) {
+        this.setState({showChangeNotification:value});
+    }
+
+    // Signout
+    _goSignout() {
+        this.props.LogoffAction();
     }
 
     render() {
@@ -50,8 +68,8 @@ class SettingsScene extends Component {
                   <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'#666666'}}> </Text>
                 </View>
 
-                <HerbyButton name='Change Name'/>
-                <HerbyButton name='Change Email'/>
+                <HerbyButton name='Change Name'    value={this.props.user.name} onPress={()=>this._goChangeName(true)}/>
+                <HerbyButton name='Change Email'   value='this@this.com'        onPress={()=>this._goChangeEmail(true)}/>
                 <HerbyButton name='Reset Password' onPress={()=>this._goResetPassword(true)}/>
 
                 {/*Separator Bar*/}
@@ -59,7 +77,7 @@ class SettingsScene extends Component {
                   <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'#666666'}}> </Text>
                 </View>
 
-                <HerbyButton name='Notification Settings'/>
+                <HerbyButton name='Notification Settings' onPress={()=>this._goChangeNotification(true)}/>
 
                 {/*Separator Bar*/}
                 <View>
@@ -73,21 +91,14 @@ class SettingsScene extends Component {
                     <Text style={{paddingLeft:20,paddingTop:16,paddingBottom:16,color:'#666666'}}></Text>
                 </View>
 
-                <HerbyButton name='Sign Out'/>
+                <HerbyButton name='Sign Out' onPress={()=>this._goSignout()}/>
 
                 </ScrollView>
                 </View>
-
-                <HerbyModal show={this.state.showResetPassword} onClose={()=>this._goResetPassword(false)}>
-                    <View style={{backgroundColor:'white',alignSelf:'center',alignItems:'center',justifyContent:'center'}}>
-                        <HerbyInput style={{marginLeft:20,marginRight:20}} value="Password"/>
-                        <HerbyInput style={{marginLeft:20,marginRight:20}} value="Password"/>
-                        <View style={{flexDirection:'row'}}>
-                            <HerbyButton2 name="Continue" onPress={()=>this._resetPassword()}/>
-                            <HerbyButton2 name="Cancel" onPress={()=>this._goResetPassword(false)}/>
-                        </View>
-                    </View>
-                </HerbyModal>
+                <ResetPasswordModal      visible={this.state.showResetPassword}       onClose={()=>this._goResetPassword(false)}      user={this.props.user}/>
+                <ChangeNameModal         visible={this.state.showChangeName}          onClose={()=>this._goChangeName(false)}         user={this.props.user}/>
+                <ChangeEmailModal        visible={this.state.showChangeEmail}         onClose={()=>this._goChangeEmail(false)}        user={this.props.user}/>
+                <ChangeNotificationModal visible={this.state.showChangeNotification}  onClose={()=>this._goChangeNotification(false)} user={this.props.user}/>
             </View>
         );
     }
@@ -103,6 +114,6 @@ function mapStateToProps(state) {
 }
 //  This function is used to convert action to props passed to this component.
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction,SwitchSceneAction,ResetPasswordAction,}, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({SwitchSceneAction,LogoffAction}, dispatch); }
 
 module.exports = connect(mapStateToProps, mapActionToProps)(SettingsScene);
