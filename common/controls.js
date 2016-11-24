@@ -360,7 +360,7 @@ export class HerbyButton extends Component {
           <Text style={{fontSize:16,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>{this.props.name}</Text>
           <View style={{flex:1,flexDirection:'row',justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center'}}>
             <Text style={{textAlign:'right',fontSize:16,marginRight:20,paddingLeft:20,paddingTop:16,paddingBottom:16,color:'black'}}>{this.props.value}</Text>
-            <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center',width:8+2,height:12+4,marginRight:10}} 
+            <Image style={{justifyContent:'flex-end',alignItems:'flex-end',alignSelf:'center',width:8+2,height:12+4,marginRight:10}}
                    source={require('../media/More1.png') }/>
           </View>
         </TouchableOpacity>

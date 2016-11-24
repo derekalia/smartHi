@@ -102,18 +102,18 @@ class ReviewTab extends Component {
                 ref="navigator"
                 configureScene={this.configureScene}
                 renderScene={this.renderScene}
-                initialRoute = {TabScenes[ReviewStartIndex]}
+                initialRoute = {TabScenes[CameraIndex]}
                 currentUser  = {this.props.user}
             />
         );
     }
 }
 
-function mapStateToProps(state) { 
-    return { 
+function mapStateToProps(state) {
+    return {
         tabId: state.NavigationReducer.tabId,
-        scene: state.NavigationReducer.reviewTab, 
+        scene: state.NavigationReducer.reviewTab,
         user: state.UserReducer.profile,
     }
-} 
+}
 module.exports = connect(mapStateToProps)(ReviewTab);
