@@ -17,3 +17,15 @@ export function GetProfileAction(userId) {
         itemId: userId,
     });
 }
+
+export function ChangeUserName(userId,userName,onFinish) {
+    onFinish(null);
+}
+
+export function ChangeUserEmail(userId,userEmail,onFinish) {
+    onFinish(null);
+}
+
+export function ResetUserPassword(userId,password,password2,onFinish) {
+    onFinish(null);
+}

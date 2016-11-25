@@ -4,6 +4,8 @@
 import React, { Component } from 'react';
 import {Alert,StyleSheet, Text, View, Image, TextInput} from 'react-native'
 
+import {ResetUserPassword} from '../../../actions';
+
 import {HerbyButton,HerbyButton2,HerbyHeader,HerbyInput} from '../../../common/controls.js';
 import HerbyModal from '../../util/herbyModal.js';
 
@@ -22,8 +24,12 @@ class ResetPasswordModal extends Component {
     }
 
     _resetPassword() {
-        //BatsFix. reset password here 
-        //Alert.alert("Passwords do not match");
+        ResetUserPassword(this.props.user.id,this._password,this._password2,(error)=>{
+            if (error == null) {
+                this.props.onClose();
+            }
+            //BatsFix. otherwise show animated error here
+        });
     }
 
     render() {

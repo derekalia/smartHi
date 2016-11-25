@@ -4,6 +4,8 @@
 import React, { Component } from 'react';
 import {Alert,StyleSheet, Text, View, Image, TextInput} from 'react-native'
 
+import {ChangeUserName} from '../../../actions';
+
 import {HerbyButton,HerbyButton2,HerbyHeader,HerbyInput} from '../../../common/controls.js';
 import HerbyModal from '../../util/herbyModal.js';
 
@@ -18,7 +20,13 @@ class ChangeNameModal extends Component {
         this._name = name;
     }
     _changeName() {
-        //BatsFix. change name function called here. this should update the profile also    
+        ChangeUserName(this.props.user.id,this._name,(error)=>{
+            if (error == null) {
+                this.props.onClose();
+            }
+            //BatsFix. otherwise show animated error here
+        });
+
     }
     render() {
         return(
