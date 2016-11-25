@@ -7,43 +7,63 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 //get internal components
-import {RegisterAction} from '../../../actions';
+import {RegisterUser,LoginAction} from '../../../actions';
+import HerbyNotification from '../../util/herbyNotification.js';
 
 
-class LoginScene extends Component {
+
+class RegisterScene extends Component {
     constructor(props) {
         super(props);
+        this._userEmail = "";
         this._userName = "";
         this._userPassword = "";
         this._userPassword2 = "";
-        this.state = { showMessage: false };
+        this.state = { loading: false,error: null};
+        this._mounted = false;
     }
 
-    _hideMessage() {
-        if (this.state.showMessage == true) {
-            this._message = "";
-            this.setState({ showMessage: false });
-        }
+    componentWillUnmount() {
+        this._mounted = false;
+    }
+
+    componentDidMount() {
+        this._mounted = true;
+    }
+
+    _enterUserEmail(event) {
+        this.setState({ error: null });
+        this._userEmail = event.nativeEvent.text;
     }
 
     _enterUserName(event) {
-        this._hideMessage();
+        this.setState({ error: null });
         this._userName = event.nativeEvent.text;
     }
 
     _enterUserPassword(event) {
-        this._hideMessage();
+        this.setState({ error: null });
         this._userPassword = event.nativeEvent.text
     }
 
     _confirmUserPassword(event) {
-        this._hideMessage();
+        this.setState({ error: null });
         this._userPassword2 = event.nativeEvent.text;
     }
 
     _submit() {
-        this.setState({ showMessage: true });
-        this.props.RegisterAction({ name: this._userName, password: this._userPassword, password2: this._userPassword2 });
+        this.setState({loading:true});
+        RegisterUser(this._userEmail,this._userName,this._userPassword,(profile,error)=>{
+            if (this._mounted) {
+                if (error  == null) {
+                    this.setState({loading:false});
+                    this.props.LoginAction(profile);
+                }
+                else {
+                    this.setState({loading:false,error:error});
+                }
+            }
+        });
     }
 
     render() {
@@ -54,7 +74,6 @@ class LoginScene extends Component {
                     {/* <Text style={{ fontFamily: 'Pacifico', fontSize: 38, marginTop: 10 }}>Hashtag</Text> */}
                 </View>
 
-
                 <View style={{flex:1,alignItems: 'center',marginTop:0, }}>
 
                 <View style={[{ flexDirection: 'row', width: 300, alignItems: 'center', alignItems: "center", }]}>
@@ -63,7 +82,7 @@ class LoginScene extends Component {
                         autoCorrect     = {false}
                         placeholder     = "Email"
                         returnKeyType   = "next"
-                        onChange        = {this._enterUserName.bind(this) }
+                        onChange        = {this._enterUserEmail.bind(this) }
                         />
                     <View style={{ alignItems: 'center', alignItems: "center" }}>
                         <Image style={{ margin: 9, width: 30, height: 30 }} source={require("../../../media/mailicon1.png") }/>
@@ -87,7 +106,6 @@ class LoginScene extends Component {
 
                 <View style={{ borderWidth: 1, borderColor: "#dddddd", width: 290, alignItems: 'center', alignItems: "center", justifyContent: "center" }}/>
 
-
                 <View style={[{ flexDirection: 'row', width: 300, alignItems: 'center', alignItems: "center",marginTop: 10 }]}>
                     <TextInput style={[Styles.input, { fontSize: 20, flex: 3 }]}
                         password        = {true}
@@ -102,8 +120,6 @@ class LoginScene extends Component {
                 </View>
 
                 <View style={{ borderWidth: 1, borderColor: "#dddddd", width: 290, alignItems: 'center', alignItems: "center", justifyContent: "center" }}/>
-
-
 
                 <View style={[{ flexDirection: 'row', width: 300, alignItems: 'center', alignItems: "center", marginTop: 10 }]}>
                     <TextInput style={[Styles.input, { fontSize: 20, flex: 3 }]}
@@ -128,9 +144,7 @@ class LoginScene extends Component {
                     </View>
                 </View>
 
-                <View style={{marginTop:65,alignItems:'center',backgroundColor:'white',height:30,justifyContent:'center',opacity:.7}}>
-                  <Text style={{color:'red',fontWeight:'bold'}}>{this.state.showMessage ? this.props.userMessage : ""}</Text>
-                </View>
+                <HerbyNotification showBusy={this.state.loading} message={this.state.error}/>
             </View>
         );
     }
@@ -170,13 +184,6 @@ const Styles = StyleSheet.create({
     },
 });
 
+function mapActionToProps(dispatch) { return bindActionCreators({ LoginAction }, dispatch); }
 
-// BatsFix. This function is used to convert state to props passed to this component
-// In this example, there is now prop called user that contains state.UserReducer.user section
-// Why is it UserReducer???
-function mapStateToProps(state) { return { userMessage: state.UserReducer.message } }
-// BatsFix. This function is used to convert action to props passed to this component.
-// In this example, there is now prop called RegisterAction.
-function mapActionToProps(dispatch) { return bindActionCreators({ RegisterAction }, dispatch); }
-
-module.exports = connect(mapStateToProps, mapActionToProps)(LoginScene);
+module.exports = connect(null, mapActionToProps)(RegisterScene);

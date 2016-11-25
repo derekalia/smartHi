@@ -1,4 +1,4 @@
-import * as firebase from 'firebase';
+const firebase=require('firebase');
 
 const RETAILERS = 1;
 const PRODUCER  = 2;
@@ -33,10 +33,15 @@ function GetItem(itemPath) {
 //
 function GetItemList(itemList,itemPath) {
     var items = [];
-    var isArray = Array.isArray(itemList);
-    var itemsCount = isArray?itemList.length:itemList.keys().length;
     var ref = firebase.database().ref(itemPath);
     return new Promise(function(resolve,reject) {
+        if (itemList == null) {
+            // Return an empty array if incoming list is null
+            resolve(items);
+        }
+        var isArray = Array.isArray(itemList);
+        var itemsCount = isArray?itemList.length:itemList.keys().length;
+
         for (var key in itemList) {
             if (isArray) {
                 childPath = itemList[key]
@@ -52,17 +57,28 @@ function GetItemList(itemList,itemPath) {
                 }
             });
         }
+        // If the list is empty comes here
+        resolve(items);
     });
 }
 
-export function GetProfileImpl(userId,onProfile) {
+function GetProfileImpl(userId,onProfile) {
     var profile = null;
     var profileAttributes = 0;
     var requiredAttributes = PRODUCER|RETAILERS|PRODUCTS|REVIEW_PRODUCTS|FOLLOWERS|FOLLOWING;
     var ref = firebase.database().ref('users/'+userId);
     return ref.once('value')
     .then(function(snapshot){
-         profile = snapshot.val();
+        profile = snapshot.val();
+         
+        if (profile.pid == null) { profile.pid = [] };
+        if (profile.rid == null) { profile.rid = [] };
+        if (profile.fpid == null) { profile.fpid = [] };
+        if (profile.rpid == null) { profile.rpid = [] };
+        if (profile.pid == null) { profile.pid = [] };
+        if (profile.follower == null) { profile.follower = [] };
+        if (profile.following == null) { profile.following = [] };
+        
         // Get favorite producers list
         GetItemList(profile.pid,'producers').then((producers)=>{
             profile.producers = producers;
@@ -114,7 +130,7 @@ export function GetProfileImpl(userId,onProfile) {
     });
 }
 
-export function LoginUserImpl(userName,password,onLoginUser) {
+function LoginUserImpl(userName,password,onLoginUser) {
     return firebase.auth().signInWithEmailAndPassword(userName, password)
     .then((result)=> {
         GetProfileImpl(result.uid,onLoginUser);
@@ -126,7 +142,49 @@ export function LoginUserImpl(userName,password,onLoginUser) {
     });
 }
 
-export function GetLatestNewsImpl(onLatestNews) {
+function CreateProfileImpl(userId,userName,onCreateProfile) {
+    var profile =  
+    {   id: userId,
+        name:userName,
+        address:'Seattle, WA',
+        score:'0',
+        follower:[],
+        following:[],
+        fpid:[],
+        pid:[],
+        rid:[],
+        rpid:[],
+    }
+    var ref = firebase.database().ref("users");
+    ref.child(userId).set(profile,(error)=>{
+        if (error == null ) {
+            GetProfileImpl(userId,onCreateProfile);     
+        }
+        else {
+            onCreateProfile(null,error);
+        }
+    })
+    .catch(function(error) {
+        console.log("CreateProfileImpl:error");
+        console.log(error);
+        onCreateProfile(null," " + error);
+    });
+}
+
+function CreateUserImpl(userEmail,userName,password,onCreateUser) {
+    return firebase.auth().createUserWithEmailAndPassword(userEmail, password)
+    .then((result)=> {
+        // Now need to create new user profile.
+        CreateProfileImpl(result.uid,userName,onCreateUser);
+    })
+    .catch(function(error) {
+        console.log("CreateUserImpl:error");
+        console.log(error);
+        onCreateUser(null," "+error); 
+    });
+}
+
+function GetLatestNewsImpl(onLatestNews) {
     var products = [];
     var ref = firebase.database().ref("products/0");
     ref.once("value")
@@ -151,7 +209,7 @@ export function GetLatestNewsImpl(onLatestNews) {
     });
 }
 
-export function GetActivityProductsImpl(activityType,onActivityProducts) {
+function GetActivityProductsImpl(activityType,onActivityProducts) {
     var ref = firebase.database().ref('products');
     return ref.orderByKey().limitToFirst(10).once('value')
     .then(function(snapshot){
@@ -161,7 +219,7 @@ export function GetActivityProductsImpl(activityType,onActivityProducts) {
 }
 
 
-export function GetProductImpl(productId,onProduct) {
+function GetProductImpl(productId,onProduct) {
     //  BatsFix. this function returns only when required attributes match
     var product = null;
     var productAttributes  = 0; 
@@ -187,7 +245,7 @@ export function GetProductImpl(productId,onProduct) {
     });
 }
 
-export function GetRetailerImpl(retailerId,onRetailer) {
+function GetRetailerImpl(retailerId,onRetailer) {
     var retailer = null;
     //  BatsFix. this function returns only when required attributes match
     var retailerAttributes  = 0; 
@@ -222,7 +280,7 @@ export function GetRetailerImpl(retailerId,onRetailer) {
     });
 }
 
-export function GetProducerImpl(producerId,onProducer) {
+function GetProducerImpl(producerId,onProducer) {
     var producer = null;
     //  BatsFix. this function returns only when required attributes match
     var producerAttributes  = 0; 
@@ -256,13 +314,37 @@ export function GetProducerImpl(producerId,onProducer) {
     });
 }
 
-export function RetailerLoginImpl(userName,userPassword,onLogin) {
+function RetailerLoginImpl(userName,userPassword,onLogin) {
     // BatsFix. For now use 1.
     var retailerId = '1';
     GetRetailerImpl(retailerId,onLogin);
 }
-export function ProducerLoginImpl(userName,userPassword,onLogin) {
+
+function ProducerLoginImpl(userName,userPassword,onLogin) {
     // BatsFix. For now use 1.
     var producerId = '1';
     GetProducerImpl(producerId,onLogin);
 }
+
+module.exports.GetProductImpl          = GetProductImpl;
+
+module.exports.GetRetailerImpl         = GetRetailerImpl;
+
+module.exports.GetProducerImpl         = GetProducerImpl;
+
+module.exports.GetProfileImpl          = GetProfileImpl;
+
+module.exports.CreateProfileImpl       = CreateProfileImpl;
+
+module.exports.LoginUserImpl           = LoginUserImpl;
+
+module.exports.RetailerLoginImpl       = RetailerLoginImpl;
+
+module.exports.ProducerLoginImpl       = ProducerLoginImpl;
+
+module.exports.CreateUserImpl          = CreateUserImpl;
+
+module.exports.GetLatestNewsImpl       = GetLatestNewsImpl;
+
+module.exports.GetActivityProductsImpl = GetActivityProductsImpl;
+
