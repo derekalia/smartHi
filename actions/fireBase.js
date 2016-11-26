@@ -42,6 +42,10 @@ function GetItemList(itemList,itemPath) {
         var isArray = Array.isArray(itemList);
         var itemsCount = isArray?itemList.length:itemList.keys().length;
 
+        if (itemsCount == 0) {
+            resolve(items);
+        }
+
         for (var key in itemList) {
             if (isArray) {
                 childPath = itemList[key]
@@ -57,8 +61,6 @@ function GetItemList(itemList,itemPath) {
                 }
             });
         }
-        // If the list is empty comes here
-        resolve(items);
     });
 }
 
@@ -307,21 +309,21 @@ function GetProducerImpl(producerId,onProducer) {
            producer.products = products;
            producerAttributes |= PRODUCTS;
            if (producerAttributes == requiredAttributes) 
-               onProducer(producer);
+                onProducer(producer,null);
         });
         
         GetItemList(producer.follower,'users').then((followers)=>{
             producer.followers = followers;
             producerAttributes |= FOLLOWERS;
             if (producerAttributes == requiredAttributes) {
-                onProducer(producer);
+                onProducer(producer,null);
             }
         });
         GetItemList(producer.following,'users').then((following)=>{
             producer.following = following;
             producerAttributes |= FOLLOWING;
             if (producerAttributes == requiredAttributes) {
-                onProducer(producer);
+                onProducer(producer,null);
             }
         });
     });
