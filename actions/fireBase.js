@@ -62,6 +62,19 @@ function GetItemList(itemList,itemPath) {
     });
 }
 
+function ChangeUserNameImpl(userId,userName,onFinish) {
+    var ref = firebase.database().ref('users/'+userId);
+    ref.update({'name':userName},(error)=>{
+        onFinish(error); 
+    })
+    .catch(function(error) {
+        console.log("ChangeUserNameImpl:error");
+        console.log(error);
+        onFinish(" " + error); 
+    });
+}
+module.exports.ChangeUserNameImpl = ChangeUserNameImpl;
+
 function GetProfileImpl(userId,onProfile) {
     var profile = null;
     var profileAttributes = 0;

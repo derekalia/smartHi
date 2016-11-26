@@ -26,7 +26,6 @@ class ChangeNameModal extends Component {
             }
             //BatsFix. otherwise show animated error here
         });
-
     }
     render() {
         return(

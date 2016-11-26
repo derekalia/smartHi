@@ -107,7 +107,7 @@ class SettingsScene extends Component {
 // This function is used to convert state to props passed to this component
 function mapStateToProps(state) {
     return {
-        user:     state.UserReducer.user,
+        user:     state.UserReducer.profile,
         producer: state.ProducerReducer.producer,
         retailer: state.RetailerReducer.retailer,
     }
