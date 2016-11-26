@@ -25,10 +25,12 @@ class ProducerSocial extends Component {
         this.setState({frameId:frameId});
     }
     render() {
+        var userList = this.state.frameId == 0? this.props.producer.followers:this.props.producer.following;
+        var userListLength = userList.length;
         return (
             <ScrollView style={{backgroundColor:'transparent'}}>
                 <HerbyFrameBar entries={['FOLLOWER','FOLLOWING']} setFrame={(t)=>this._setFrame(t)}/>
-                <UserList userList={this.state.frameId == 0?this.props.producer.followers:this.props.producer.following}/>
+                <UserList userList={userList} count={userListLength}/>
             </ScrollView>
         );
     }
