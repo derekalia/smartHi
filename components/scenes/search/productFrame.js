@@ -11,7 +11,7 @@ import {connect} from 'react-redux';
 
 import FilterList   from '../../util/filterList.js';
 import ProductList   from '../../util/productList.js';
-import {SearchProducts,GetProductAction}   from '../../../actions';
+import {SearchProducts,GoProductAction}   from '../../../actions';
 import {HerbyLoading,HerbyMulti,HerbyRange} from '../../../common/controls.js';
 
 class ProductFrame extends Component {
@@ -53,7 +53,8 @@ class ProductFrame extends Component {
         //
         // Go to product page
         //
-       this.props.GetProductAction(productId);
+        console.log('_goProduct: Going to product'+productId);
+        this.props.GoProductAction(productId);
     }
 
     _switchFiltering() {
@@ -145,6 +146,6 @@ function mapStateToProps(state) {
 //
 // Connect StartSearchAction to props
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction }, dispatch); }
+function mapActionToProps(dispatch) { return bindActionCreators({ GoProductAction }, dispatch); }
 
 module.exports = connect(null,mapActionToProps)(ProductFrame);
