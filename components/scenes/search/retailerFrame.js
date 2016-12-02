@@ -9,31 +9,46 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
 import RetailerList   from '../../util/retailerList.js';
-import {GetRetailerAction}   from '../../../actions';
+import {SearchRetailers,GoRetailerAction}   from '../../../actions';
 import {HerbyMulti,HerbyLoading} from '../../../common/controls.js';
-
-// import apollo helper
-import {graphql} from 'react-apollo';
-import gql from 'graphql-tag';
-
 
 class RetailerFrame extends Component {
     constructor(props) {
         super(props);
-        this.state = {showFilters:true};
+        this._searchTerm = "";
+        this._attributes = [];
+        this.state = {loading: false, error: null, showFilters:true, retailerList:[]};
+        this._mounted = false;
     }
-
+    componentWillUnmount() {
+        this._mounted = false;
+    }
+    componentDidMount() {
+        this._mounted = true;
+    }
     componentWillReceiveProps(nextProps) {
         if (this.props.searchTerm != nextProps.searchTerm) {
-            this.setState({showFilters:false});
+            this._searchRetailers(nextProps.searchTerm);
         }
     }
-
+    _searchRetailers(searchTerm) {
+        this.setState({loading:true});
+        SearchRetailers(searchTerm,(retailerList,error)=>{
+            if (this._mounted) {
+                if (error  == null) {
+                    this.setState({loading:false,retailerList:retailerList, showFilters:false});
+                }
+                else {
+                    this.setState({loading:false,error:error});
+                }
+            }
+        });
+    }
     _goRetailer(retailerId) {
         //
         // Go to product page
         //
-       this.props.GetRetailerAction(retailerId);
+       this.props.GoRetailerAction(retailerId);
     }
     _switchFiltering() {
         this.setState({showFilters:!this.state.showFilters});
@@ -56,8 +71,8 @@ class RetailerFrame extends Component {
         return null;
     }
     render() {
-        if (this.props.loading) {
-            return (<HerbyLoading/>);
+        if (this.state.loading || this.state.message != null) {
+            return (<HerbyLoading showBusy={this.state.loading} message={this.state.message}/>);
         }
         return(
           <View style={{backgroundColor:'#ECECEC',borderWidth:0,borderColor:'black'}}>
@@ -91,8 +106,7 @@ class RetailerFrame extends Component {
               <ScrollView style={{backgroundColor:'white',borderRadius:2,}}>
                   {/* <View style={{flex:1,margin:5,borderBottomColor:'#DEDEDE',borderBottomWidth:1,marginHorizontal:10}}/> */}
                   {/*Search results section*/}
-                  <RetailerList retailerList={this.props.retailerList} goRetailer={(id)=> this._goRetailer(id)}/>
-                  {/* <View style={{height:200}}/> */}
+                  <RetailerList retailerList={this.state.retailerList} goRetailer={(id)=> this._goRetailer(id)}/>
               </ScrollView>
             </View>
 
@@ -102,40 +116,8 @@ class RetailerFrame extends Component {
 }
 
 //
-// Connect state.SearchReducer.retailers  to props
+// Connect GoRetailerAction to props
 //
-function mapStateToProps(state) {
-    return {
-        retailerList: state.SearchReducer.retailers,
-    }
-}
+function mapActionToProps(dispatch) { return bindActionCreators({ GoRetailerAction }, dispatch); }
 
-//
-// Connect GetRetailerAction to props
-//
-function mapActionToProps(dispatch) { return bindActionCreators({ GetRetailerAction }, dispatch); }
-
-//
-// BatsFix. Attach apollo query to the component. This creates props loading and products
-//
-const apolloRetailers = gql`query($searchCount: Int!,$searchTerm: String!) {
-    allRetailers(first:$searchCount,filter:{description_contains:$searchTerm}){
-      id,
-      name,
-      image,
-      rating,
-    }
-}`;
-
-//
-// BatsFix. Maps data obtained from the query to props.
-//
-function mapDataToProps({props,data}) {
-    return ({
-        loading: data.loading,
-        retailerList: data.allRetailers,
-    });
-}
-
-module.exports = graphql(apolloRetailers,{props:mapDataToProps})(connect(null,mapActionToProps)(RetailerFrame));
-//module.exports = connect(mapStateToProps,mapActionToProps)(RetailerFrame);
+module.exports = connect(null,mapActionToProps)(RetailerFrame);

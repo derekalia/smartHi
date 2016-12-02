@@ -12,10 +12,14 @@ export function SearchProducts(searchTerm, onSearchResult) {
     SearchImpl('product',searchTerm,onSearchResult);
 }
 
-export function SearchRetailersImpl(searchTerm, onSearchResult) {
+export function SearchRetailers(searchTerm, onSearchResult) {
+    console.log('SearchRetailers:'+searchTerm);
+    SearchImpl('retailer',searchTerm,onSearchResult);
 }
 
-export function SearchUsersImpl(searchTerm, onSearchResult) {
+export function SearchUsers(searchTerm, onSearchResult) {
+    console.log('SearchUsers:'+searchTerm);
+    SearchImpl('user',searchTerm,onSearchResult);
 }
 
 export function GoSearchAction(searchTerm) {

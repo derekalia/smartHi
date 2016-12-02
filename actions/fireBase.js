@@ -345,11 +345,16 @@ function SearchImpl(searchType,searchTerm,onSearchResult) {
     var ref = firebase.database().ref();
     var searchParameters = {};
     var searchUpdateCount = 0;
-    console.log('SearchImpl:');
+
     switch(searchType) {
         case 'product': 
-            console.log('   searchTerm:'+searchTerm);
             searchParameters.productName = searchTerm; 
+            break;
+        case 'retailer':
+            searchParameters.retailerName = searchTerm; 
+            break;
+        case 'user':
+            searchParameters.userName = searchTerm;
             break;
         default:
             onSearchResult(null,'Unknown searchType');
@@ -359,12 +364,10 @@ function SearchImpl(searchType,searchTerm,onSearchResult) {
     searchParameters.type = searchType;
 
     var searchId = ref.child('searchRequest').push(searchParameters).key;
-    console.log('   searchId:'+searchId); 
     ref.child('searchResult/'+searchId).on('value',(snap)=>{
         if (snap.val() != null) {
             snap.ref.off();
             snap.ref.remove();
-            console.log(snap.val());
             var hits = snap.val().hits;
             //BatsFix. compose the products here. This may
             // change in the future to optimize traffic

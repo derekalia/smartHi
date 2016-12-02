@@ -45,6 +45,15 @@ const apolloProducts = gql`query($searchCount: Int!,$searchTerm: String!) {
     }
 }`;
 
+// retailers
+const apolloRetailers = gql`query($searchCount: Int!,$searchTerm: String!) {
+    allRetailers(first:$searchCount,filter:{description_contains:$searchTerm}){
+      id,
+      name,
+      image,
+      rating,
+    }
+}`;
 
 // activity products
 const apolloActivityProducts = gql`query($itemId: String!) {
