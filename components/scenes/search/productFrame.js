@@ -40,7 +40,7 @@ class ProductFrame extends Component {
         SearchProducts(searchTerm,(productList,error)=>{
             if (this._mounted) {
                 if (error  == null) {
-                    this.setState({loading:false,productList:productList});
+                    this.setState({loading:false,productList:productList, showFilters:false});
                 }
                 else {
                     this.setState({loading:false,error:error});
