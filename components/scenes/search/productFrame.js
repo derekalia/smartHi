@@ -61,8 +61,11 @@ class ProductFrame extends Component {
     }
 
     render() {
-        return(
+        if (this.state.loading || this.state.message != null) {
+            return (<HerbyLoading showBusy={this.state.loading} message={this.state.message}/>);
+        }
 
+        return(
         <View style={{flex:1,top:-20,backgroundColor:'#ECECEC',borderWidth:0,borderColor:'black'}}>
 
         <View style={{borderRadius:2,top:6,marginHorizontal:6,backgroundColor:'white',}}>
