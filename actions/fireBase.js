@@ -365,8 +365,14 @@ function SearchImpl(searchType,searchTerm,onSearchResult) {
             snap.ref.off();
             snap.ref.remove();
             console.log(snap.val());
+            var hits = snap.val().hits;
             //BatsFix. compose the products here. This may
             // change in the future to optimize traffic
+            var resultList = [];
+            for (var i=0; i < hits.length;i++) {
+                 resultList.push(hits[i]._source); 
+            }
+            onSearchResult(resultList,null);
         }
     });
 }

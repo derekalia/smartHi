@@ -38,6 +38,8 @@ class ProductFrame extends Component {
     async _searchProduct(searchTerm) {
         this.setState({loading:true});
         SearchProducts(searchTerm,(productList,error)=>{
+            console.log('_searchProduct:');
+            console.log(productList);
             if (this._mounted) {
                 if (error  == null) {
                     this.setState({loading:false,productList:productList});
