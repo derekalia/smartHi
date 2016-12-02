@@ -369,8 +369,10 @@ function SearchImpl(searchType,searchTerm,onSearchResult) {
             //BatsFix. compose the products here. This may
             // change in the future to optimize traffic
             var resultList = [];
-            for (var i=0; i < hits.length;i++) {
-                 resultList.push(hits[i]._source); 
+            if (hits != null) {
+                for (var i=0; i < hits.length;i++) {
+                     resultList.push(hits[i]._source); 
+                }
             }
             onSearchResult(resultList,null);
         }
