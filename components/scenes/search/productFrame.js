@@ -9,14 +9,9 @@ import {StyleSheet, Text, View, Slider, ListView,TouchableOpacity, ListViewDataS
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-// import apollo helper
-import {graphql} from 'react-apollo';
-import gql from 'graphql-tag';
-
-
 import FilterList   from '../../util/filterList.js';
 import ProductList   from '../../util/productList.js';
-import {GetProductAction}   from '../../../actions';
+import {SearchProducts,GetProductAction}   from '../../../actions';
 import {HerbyLoading,HerbyMulti,HerbyRange} from '../../../common/controls.js';
 
 class ProductFrame extends Component {
@@ -25,13 +20,33 @@ class ProductFrame extends Component {
         super(props);
         this._searchTerm = "";
         this._attributes = [];
-        this.state = {showFilters:true};
+        this.state = {loading: false, error: null, showFilters:true, productList:[]};
+        this._mounted = false;
     }
-
+    componentWillUnmount() {
+        this._mounted = false;
+    }
+    componentDidMount() {
+        this._mounted = true;
+    }
     componentWillReceiveProps(nextProps) {
         if (this.props.searchTerm != nextProps.searchTerm) {
-            this.setState({showFilters:false});
+            this._searchProduct(nextProps.searchTerm);
         }
+    }
+
+    async _searchProduct(searchTerm) {
+        this.setState({loading:true});
+        SearchProducts(searchTerm,(productList,error)=>{
+            if (this._mounted) {
+                if (error  == null) {
+                    this.setState({loading:false,productList:productList});
+                }
+                else {
+                    this.setState({loading:false,error:error});
+                }
+            }
+        });
     }
 
     _goProduct(productId) {
@@ -46,9 +61,6 @@ class ProductFrame extends Component {
     }
 
     render() {
-        if (this.props.loading) {
-            return (<HerbyLoading/>);
-        }
         return(
 
         <View style={{flex:1,top:-20,backgroundColor:'#ECECEC',borderWidth:0,borderColor:'black'}}>
@@ -79,7 +91,7 @@ class ProductFrame extends Component {
             <ScrollView style={{backgroundColor:'white',borderRadius:2,}}>
                 {/* <View style={{flex:1,margin:5,borderBottomColor:'#DEDEDE',borderBottomWidth:1,marginHorizontal:10}}/> */}
                 {/*Search results section*/}
-                <ProductList productList={this.props.products} goProduct={(id)=> this._goProduct(id)}/>
+                <ProductList productList={this.state.productList} goProduct={(id)=> this._goProduct(id)}/>
                 {/* <View style={{height:200}}/> */}
             </ScrollView>
           </View>
@@ -87,6 +99,7 @@ class ProductFrame extends Component {
         </View>
         );
     }
+
     _renderFilters() {
         if (this.state.showFilters == false) {
             return null;
@@ -131,30 +144,4 @@ function mapStateToProps(state) {
 //
 function mapActionToProps(dispatch) { return bindActionCreators({ GetProductAction }, dispatch); }
 
-//
-// BatsFix. Attach apollo query to the component. This creates props loading and products
-//
-const apolloProducts = gql`query($searchCount: Int!,$searchTerm: String!) {
-    allProducts(first:$searchCount,filter:{description_contains:$searchTerm}){
-      id,
-      name,
-      image,
-      activity,
-      rating,
-      ratingCount,
-      thc,
-      cbd,
-    }
-}`;
-
-//
-// BatsFix. Maps data obtained from the query to props.
-//
-function mapDataToProps({props,data}) {
-    return ({
-        loading: data.loading,
-        products: data.allProducts,
-    });
-}
-
-module.exports = graphql(apolloProducts,{props:mapDataToProps})(connect(null,mapActionToProps)(ProductFrame));
+module.exports = connect(null,mapActionToProps)(ProductFrame);

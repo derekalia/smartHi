@@ -71,7 +71,6 @@ class SearchScene extends Component {
 
     _startSearch() {
         this.setState({showFilters:false,searchTerm:this._searchTerm, searchCount: 20});
-        this.props.StartSearchAction(this._searchTerm, this._attributes, SearchFrames[this.state.frameId].type );
     }
 
     _setSearchTerm(term) {

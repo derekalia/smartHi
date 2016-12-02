@@ -341,6 +341,38 @@ function ProducerLoginImpl(userName,userPassword,onLogin) {
     GetProducerImpl(producerId,onLogin);
 }
 
+function SearchImpl(searchType,searchTerm,onSearchResult) {
+    var ref = firebase.database().ref();
+    var searchParameters = {};
+    var searchUpdateCount = 0;
+    console.log('SearchImpl:');
+    switch(searchType) {
+        case 'product': 
+            console.log('   searchTerm:'+searchTerm);
+            searchParameters.productName = searchTerm; 
+            break;
+        default:
+            onSearchResult(null,'Unknown searchType');
+            // If unknown type return immediately
+            return;
+    }
+    searchParameters.type = searchType;
+
+    var searchId = ref.child('searchRequest').push(searchParameters).key;
+    console.log('   searchId:'+searchId); 
+    ref.child('searchResult/'+searchId).on('value',(snap)=>{
+        if (snap.val() != null) {
+            snap.ref.off();
+            snap.ref.remove();
+            console.log(snap.val());
+            //BatsFix. compose the products here. This may
+            // change in the future to optimize traffic
+        }
+    });
+}
+
+module.exports.SearchImpl = SearchImpl;
+
 module.exports.GetProductImpl          = GetProductImpl;
 
 module.exports.GetRetailerImpl         = GetRetailerImpl;

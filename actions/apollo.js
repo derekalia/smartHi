@@ -31,6 +31,20 @@ module.exports = apolloClient;
 import {graphql} from 'react-apollo';
 import gql from 'graphql-tag';
 
+// products query
+const apolloProducts = gql`query($searchCount: Int!,$searchTerm: String!) {
+    allProducts(first:$searchCount,filter:{description_contains:$searchTerm}){
+      id,
+      name,
+      image,
+      activity,
+      rating,
+      ratingCount,
+      thc,
+      cbd,
+    }
+}`;
+
 
 // activity products
 const apolloActivityProducts = gql`query($itemId: String!) {

@@ -5,24 +5,17 @@ import {
 } from './navigation.js';
 
 import {SearchTabId, SearchSceneId, ProductFrameId, RetailerFrameId, MapFrameId, UserFrameId,} from '../common/const.js';
-import {SearchProducts,SearchRetailers,SearchUsers} from './fireBase.js';
+import {SearchImpl} from './fireBase.js';
 
-export function StartSearchAction(searchTerm,frameId,onSearchResult) {
-    if (frameId == ProductFrameId) {
-        SearchProducts(searchTerm,onSearchResult);
-    }
-    else
-    if (frameId == RetailerFrameId) {
-        SearchRetailers(searchTerm,onSearchResult);
-    }
-    else
-    if (frameId == MapFrameId) {
-        SearchRetailers(searchTerm,onSearchResult);
-    }
-    else
-    if (frameId == UserFrameId) {
-        SearchUsers(searchTerm,onSearchResult);
-    }
+export function SearchProducts(searchTerm, onSearchResult) {
+    console.log('SearchProducts:' + searchTerm);
+    SearchImpl('product',searchTerm,onSearchResult);
+}
+
+export function SearchRetailersImpl(searchTerm, onSearchResult) {
+}
+
+export function SearchUsersImpl(searchTerm, onSearchResult) {
 }
 
 export function GoSearchAction(searchTerm) {
