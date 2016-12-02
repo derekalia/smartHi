@@ -69,9 +69,9 @@ class ProducerInfo extends Component {
 class ProducerReview extends Component {
     render() {
         return (
-          <View style={{backgroundColor:'white',flex:1,marginHorizontal:6,marginTop:6,borderRadius:3}}>
+        <ScrollView style={{backgroundColor:'white',flex:1,marginHorizontal:6,marginTop:6,borderRadius:3}}>
             <ReviewList/>
-            </View>
+        </ScrollView>
         );
     }
 }

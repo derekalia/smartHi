@@ -16,8 +16,7 @@ class RetailerInfo extends Component {
         //BatsFix. Parse this.props.retailer.ratingCount later;
         var ratingCount = 324;
         return (
-        <View style={{backgroundColor:'#ECECEC'}}>
-        <ScrollView style={{flex:1,backgroundColor:'white', marginHorizontal:8,borderRadius:4,marginTop: 8}}>
+        <ScrollView style={{backgroundColor:'white', marginHorizontal:8,borderRadius:4,marginTop: 8}}>
             <View style={{ marginTop: 10, marginHorizontal: 10 }}>
             <View style={{flexDirection:'row'}}>
                 <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.props.retailer.name}</Text>
@@ -52,8 +51,7 @@ class RetailerInfo extends Component {
                     <Text>{this.props.retailer.description}</Text>
                 </View>
             </View>
-            </ScrollView>
-        </View>
+        </ScrollView>
         );
     }
 }

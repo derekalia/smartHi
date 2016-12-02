@@ -21,29 +21,26 @@ import RetailerInfo       from './retailerInfo.js';
 class RetailerMenu extends Component {
     render() {
         return (
-
-        <View style={{backgroundColor:'white',marginHorizontal:8,marginTop:8}}>
-        <View style={{flexDirection:"row",alignSelf:'flex-start',justifyContent:'center',alignItems:'center',marginLeft:10,flex:1,height:25,marginTop:10}}>
-          <Text style={{fontWeight:'bold',fontSize:16}}>Sort By: </Text>
-          <View style={{backgroundColor:'#ECECEC',flexDirection:"row",alignItems:'center',justifyContent:'center',alignSelf:'center',height:20,width:80,borderRadius:4,height:25}}>
-            <HerbyPicker options={['Price ','Distance ','Rating ']} style={{fontSize:16}} />
-            <Image style={{width:14,height:8,marginRight:3,alignItems:'flex-end'}} source={require("../../../media/Triangle1.png")} />
-          </View>
-          </View>
-
-            <ProductList style={{ marginHorizontal: 8,}} productList={this.props.retailer.products} goProduct={(id)=>this.props.goProduct(id)}/>
-            <View style={{width:300,height:110}}></View>
-        </View>
-
+        <ScrollView style={{flex:1,backgroundColor:'white',marginHorizontal:8,marginTop:8,marginBottom:8}}>
+            <View style={{flexDirection:"row",alignSelf:'flex-start',justifyContent:'center',alignItems:'center',marginLeft:10,flex:1,height:25,marginTop:10}}>
+                <Text style={{fontWeight:'bold',fontSize:16}}>Sort By: </Text>
+                <View style={{backgroundColor:'#ECECEC',flexDirection:"row",alignItems:'center',justifyContent:'center',alignSelf:'center',width:80,borderRadius:4,height:25}}>
+                    <HerbyPicker options={['Price ','Distance ','Rating ']} style={{fontSize:16}} />
+                    <Image style={{width:14,height:8,marginRight:3,alignItems:'flex-end'}} source={require("../../../media/Triangle1.png")} />
+                </View>
+            </View>
+        <ProductList style={{ marginHorizontal: 8,}} productList={this.props.retailer.products} goProduct={(id)=>this.props.goProduct(id)}/>
+        </ScrollView>
         );
     };
 }
+
 class RetailerReview extends Component {
     render() {
         return (
-            <View style={{backgroundColor:'white',marginHorizontal:8,marginTop:8}}>
+            <ScrollView style={{backgroundColor:'white',marginHorizontal:8,marginTop:8,marginBottom:8}}>
                 <ReviewList/>
-            </View>
+            </ScrollView>
         );
     }
 }
@@ -58,10 +55,10 @@ class RetailerSocial extends Component {
     }
     render() {
         return (
-            <View>
+            <ScrollView>
                 <HerbyFrameBar entries={['FOLLOWER','FOLLOWING']} setFrame={(t)=>this._setFrame(t)}/>
                 <UserList userList={this.state.frameId == 0?this.props.retailer.following:this.props.retailer.followers} style={{marginTop:0}}/>
-            </View>
+            </ScrollView>
         );
     }
 }
@@ -81,9 +78,9 @@ const RetailerFrames = [
 class RetailerScene extends Component {
     constructor(props) {
         super(props);
-        this.state = {loading:true,message:null,retailer:null,frameId:InfoFrameId};
         var {width,height} = Dimensions.get('window');
         this._height = height;
+        this.state = {loading:true,message:null,retailer:null,frameId:InfoFrameId};
         this._mounted = false;
     }
 
@@ -166,12 +163,11 @@ class RetailerScene extends Component {
         if (this.state.loading || this.state.message != null) {
             return (<HerbyLoading showBusy={this.state.loading} message={this.state.message}/>);
         }
-
         return (
-        <View style={{backgroundColor:'#ECECEC'}}>
+        <View style={{flex:1,backgroundColor:'#ECECEC'}}>
         <HerbyBar name={this.state.retailer.name} navigator={this.props.navigator} onLike={()=>this._onLike()} showFullHeart = {this._isRetailerUser()} />
         <ScrollView
-            style={{flex:1,marginTop:0,height:this._height,backgroundColor:'#ECECEC'}}
+            style={{marginTop:0,height:this._height,backgroundColor:'#ECECEC'}}
             stickyHeaderIndices={[1]}>
             <Image source={require('../../../media/ikes1.png') } style={{ height: 190, width: 380 }}/>
             <View>

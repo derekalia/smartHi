@@ -13,9 +13,9 @@ class ProducerMenu extends Component {
     }
     render() {
         return (
-        <View>
+        <ScrollView>
            <ProductList style={{ marginHorizontal: 10 }} productList={this.props.producer.products} goProduct={(id)=>this.props.goProduct(id)}/>
-        </View>
+        </ScrollView>
         );
     };
 }
