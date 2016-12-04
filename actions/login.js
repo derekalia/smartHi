@@ -3,11 +3,11 @@ export const LOGOFF_SUCCESS = 'LOGOFF_SUCCESS';
 
 import {LoginUserImpl,CreateUserImpl} from './fireBase.js';
 
-export async function LoginUser(userName,password,onLoginUser) {
+export function LoginUser(userName,password,onLoginUser) {
     return LoginUserImpl(userName,password,onLoginUser);
 }
 
-export async function RegisterUser(userEmail,userName,password,onLoginUser) {
+export function RegisterUser(userEmail,userName,password,onLoginUser) {
     return CreateUserImpl(userEmail,userName,password,onLoginUser);
 }
 

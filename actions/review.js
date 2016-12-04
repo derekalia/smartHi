@@ -1,127 +1,71 @@
-import {
-    SWITCH_TAB,
-    SWITCH_SCENE,
-    SWITCH_TAB_SCENE,
-} from './navigation.js';
+import { SWITCH_SCENE } from './navigation.js';
 
-import {RateQueueSceneId,CameraSceneId,ProductInfoSceneId,RateProductSceneId,RateStoreSceneId,ProductReviewSceneId,} from '../common/const.js';
-import {GetRateQueue,UploadProductImage,UploadProductRating,UploadStoreRating,GetProductItem,GetProductReview} from './data.js';
+import { 
+    CameraSceneId,
+    RateQueueSceneId,
+    ProductInfoSceneId,
+    ProductRateSceneId,
+    RetailerRateSceneId,
+    ProductReviewSceneId,
+}   from '../common/const.js';
 
-export const IMAGE_SUCCESS        = 'IMAGE_SUCCESS';
-export const IMAGE_RESET          = 'IMAGE_RESET';
-export const RATE_PRODUCT_SUCCESS = 'RATE_PRODUCT_SUCCESS';
-export const RATE_STORE_SUCCESS   = 'RATE_STORE_SUCCESS';
-export const RATE_QUEUE_SUCCESS   = 'RATE_QUEUE_SUCCESS';
+export function UploadProductScan() {
+    console.log('UploadProductScan:Not implemented yet');
+}
 
-export function GetCameraAction() {
+export function RateProduct() {
+    console.log('RateProduct:Not implemented yet');
+}
+
+export function RateRetailer() {
+    console.log('RateRetailer:Not implemented yet');
+}
+
+export function GoCameraAction() {
     return ({
         type: SWITCH_SCENE,
         sceneId: CameraSceneId,
     });
 }
 
-
-export function GetRateQueueAction() {
-    return function (dispatch, getState) {
-        // Get current user queue.
-        var result = GetRateQueue();
-        // This updates the rate queue in user reducer.
-        dispatch({
-            type:RATE_QUEUE_SUCCESS,
-            rateQueue: result,
-        });
-        // Then switch to rate queue scene
-        dispatch({
-            type:SWITCH_SCENE,
-            sceneId:RateQueueSceneId,
-        });
-    }
+export function GoRateQueueAction() {
+    return ({
+        type:SWITCH_SCENE,
+        itemId: null,
+        sceneId:RateQueueSceneId,
+    });
 }
 
-export function UploadProductImageAction() {
-    return function (dispatch, getState) {
-        var result = UploadProductImage();        
-        // BatsFix. If image upload and analysis was successfull do
-        if (result != null) {
-            // Then dispatch productInfo data
-            dispatch({
-                type: IMAGE_SUCCESS,
-                productInfo: result.productInfo,
-                storeInfo: result.storeInfo,
-            });
-
-            // Then show product data scene 
-            dispatch({
-                type: SWITCH_SCENE,
-                sceneId: ProductInfoSceneId,
-            });
-        }
-        else {
-            // If there was an error analyzing image go directly
-            // to rating the product
-            dispatch({
-                type: IMAGE_RESET,
-            });
-
-            dispatch({
-                type: SWITCH_SCENE,
-                sceneId: RateProductSceneId,
-            });
-        }
-    }
+export function GoProductInfoAction(productInfo) {
+    // BatsFix. Question here is what does productInfo have?
+    return ({
+        type:SWITCH_SCENE,
+        itemId: productInfo,
+        sceneId:ProductInfoSceneId,
+    });
 }
 
-export function GetProductReviewAction(reviewId) {
-    // Product item and its review by a particular user
-    // are separate objects
-    return function(dispatch,getState) {
-        console.log("getting review id " + reviewId);
-        var review  = GetProductReview(1);
-        dispatch({
+export function GoProductRateAction(productId) {
+    return ({
             type: SWITCH_SCENE,
-            item: review,
+            itemId:  productId,
+            sceneId: ProductRateSceneId,
+    });
+}
+
+export function GoRetailerRateAction(productId) {
+    return ({
+            type: SWITCH_SCENE,
+            itemId:  retailerId,
+            sceneId: RetailerRateSceneId,
+    });
+}
+
+export function GoProductReviewAction(reviewId) {
+    return ({
+            type: SWITCH_SCENE,
             itemId: reviewId,
             sceneId: ProductReviewSceneId,
-        });
-    }
+    });
 }
 
-//
-// Go to product rating page with the specified item
-//
-export function ConfirmProductInfoAction(pid) {
-    return function(dispatch,getState) {
-        var productItem = GetProductItem(pid);
-        dispatch({
-            type: SWITCH_SCENE,
-            sceneId: RateProductSceneId,
-            item: productItem,
-        });
-    }
-}
-
-export function RateProductAction() {
-     return function (dispatch, getState) {
-        var result = UploadProductRating();        
-        dispatch({
-            type: RATE_PRODUCT_SUCCESS,
-        });
-        dispatch({
-            type: SWITCH_SCENE,
-            sceneId: RateStoreSceneId,
-        });
-    }
-}
-
-export function RateStoreAction() {
-     return function (dispatch, getState) {
-        var result = UploadStoreRating();        
-        dispatch({
-            type: RATE_STORE_SUCCESS,
-        });
-        dispatch({
-            type:SWITCH_SCENE,
-            sceneId:CameraSceneId,
-        });
-    }
-}

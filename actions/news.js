@@ -1,5 +1,5 @@
 import {GetLatestNewsImpl} from './fireBase.js';
 
-export async function GetLatestNews(onLatestNews) {
+export function GetLatestNews(onLatestNews) {
     GetLatestNewsImpl(onLatestNews);
 }

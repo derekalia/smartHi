@@ -4,7 +4,7 @@ import {
     SWITCH_TAB_SCENE,
 } from './navigation.js';
 
-import {SearchTabId, SearchSceneId, ProductFrameId, RetailerFrameId, MapFrameId, UserFrameId,} from '../common/const.js';
+import {SearchTabId, SearchSceneId} from '../common/const.js';
 import {SearchImpl} from './fireBase.js';
 
 export function SearchProducts(searchTerm, onSearchResult) {

@@ -1,12 +1,16 @@
-import {
-    SWITCH_SCENE,
-} from './navigation.js';
+import { SWITCH_SCENE } from './navigation.js';
 
-import {ProcessorSceneId,ProducerSceneId,HomeTabId} from '../common/const.js';
+export const PRODUCER_SUCCESS = 'PRODUCER_SUCCESS';
+
+import {ProcessorSceneId,ProducerSceneId} from '../common/const.js';
 import {ProducerLoginImpl,GetProducerImpl} from './fireBase.js';
 
 export function GetProducer(producerId,onProducer) {
     return GetProducerImpl(producerId,onProducer);
+}
+
+export function ProducerLogin(userName,userPassword,onLogin) {
+    ProducerLoginImpl(userName,userPassword,onLogin);
 }
 
 export function GoProducerAction(producerId) {
@@ -15,10 +19,6 @@ export function GoProducerAction(producerId) {
         sceneId: ProducerSceneId,
         itemId: producerId,
     });
-}
-
-export function ProducerLogin(userName,userPassword,onLogin) {
-    ProducerLoginImpl(userName,userPassword,onLogin);
 }
 
 export function ProducerLoginAction(producer) {
@@ -35,20 +35,3 @@ export function ProducerLoginAction(producer) {
         });
    }
 }
-
-import {NotifyBusy,NotifyDone,} from './navigation.js';
-
-export const PRODUCER_SUCCESS = 'PRODUCER_SUCCESS';
-export const PRODUCER_ERROR   = 'PRODUCER_ERROR';
-
-export function UpdateProducerAction(producerId) {
-    return function (dispatch, getState) {
-        //Call update producer action here.
-        //Then notify the user that the producer data was
-        //updated.
-        NotifyBusy(dispatch);
-        NotifyDone(dispatch,"Updated successfully");
-    }
-}
-
-

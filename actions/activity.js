@@ -2,7 +2,7 @@ import {ActivitySceneId} from '../common/const.js';
 import {SWITCH_SCENE} from './navigation.js';
 import {GetActivityProductsImpl} from './fireBase.js';
 
-export async function GetActivityProducts(activityType,onActivityProducts) {
+export function GetActivityProducts(activityType,onActivityProducts) {
     GetActivityProductsImpl(activityType,onActivityProducts);
 }
 

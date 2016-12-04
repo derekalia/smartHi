@@ -1,4 +1,8 @@
-import {TestUsers} from './testData.js';
+const data=require('../actions/testData.js');
+const TestUsers = data.TestUsers;
+const TestProducts = data.TestProducts;
+const TestRetailers = data.TestRetailers;
+const TestProducers = data.TestProducers;
 
 function GetRelatedProducts(id){
     var products = [];
@@ -85,46 +89,23 @@ function GetUserItems(pid) {
     return userItems;
 }
 
-async function FetchData(queryValue) {
-    var queryString = JSON.stringify({query:queryValue})
-    var response =  await fetch("https://lcbapi.forged.io/api/GQLCi", {
-                    method: 'post',
-                    headers: {
-                    'Accept':'application/json',
-                    'Content-Type': 'application/json',
-                    }, 
-                    body: queryString,
-                    credentials:'include',
-                 });
-
-     // Make sure to catch bad response.
-     if (response.status != 200) {
-         console.log("FetchData:" + response.status);
-         throw "FetchData:" + response.status;
-     }
-
-     var response= JSON.parse(response._bodyText);
-
-     return response.data;
-}
-
 export function SearchUsersImpl(searchTerm,onSearchResult) {
     var users = [];
     for (var i=0; i < TestUsers.length; i++) {
          users.push(TestUsers[i]);
     }
-    onSearchResult(users,null); 
+    onSearchResult(users,null);
 }
 
 export function SearchRetailersImpl(searchTerm,onSearchResult) {
     // BatsFix. use the term later!
     var retailers = [];
-    
+
     for (var i=0; i < TestRetailers.length; i++) {
         var retailer = TestRetailers[i];
         retailers.push(retailer);
     }
-    onSearchResult(retailers,null); 
+    onSearchResult(retailers,null);
 }
 
 export function SearchProductsImpl(searchTerm,onSearchResult) {
@@ -139,7 +120,7 @@ export function SearchProductsImpl(searchTerm,onSearchResult) {
 
 export function GetProductReviewImpl(reviewId,onProductReview) {
     // returns a review item...
-    var productReview =  
+    var productReview =
     {
         // This is the full review
         review: {
@@ -169,20 +150,21 @@ export function GetRateQueueImpl(onRateQueue) {
 }
 
 export function GetLatestNewsImpl(onLatestNews) {
-    var staffPick = TestProducts[0];
-    var trending  = TestProducts[1];
-    onLatestNews({staffPick:staffPick,trending:trending},null);
+    var latestNews = [TestProducts[0],TestProducts[1]];
+    onLatestNews(latestNews,null);
 }
 
 export function GetProductImpl(id,onProduct) {
     var product = null;
-    product = TestProducts[id]; 
+    product = TestProducts[id];
     product.related = GetRelatedProducts(product.id);
-    onProduct(product,null); 
+    product.producer = GetProducerItem(0);
+    product.retailers = GetRetailerItems(product.rid);
+    onProduct(product,null);
 }
 
 export function GetRetailerImpl(id,onRetailer) {
- 
+
     var retailer = TestRetailers[0];
 
     retailer.products  = GetProductItems(retailer.pid);
@@ -191,31 +173,25 @@ export function GetRetailerImpl(id,onRetailer) {
     return onRetailer(retailer,null);
 }
 
-export function GetProducerImpl(id,fullInfo,onProducer) {
-    var producer = TestProducers[i];
+export function GetProducerImpl(id,onProducer) {
+    var producer = TestProducers[id];
     producer.products = GetProductItems(producer.pid);
-    if (fullInfo) {
-        producer.retailers = GetRetailerItems(producer.rid);
-        producer.following = GetUserItems(producer.following);
-        producer.follower  = GetUserItems(producer.follower);
-    }
+    producer.retailers = GetRetailerItems(producer.rid);
+    producer.following = GetUserItems(producer.following);
+    producer.follower  = GetUserItems(producer.follower);
+
     onProducer(producer,null);
 }
 
 export function GetProfileImpl(id,onUserProfile) {
-    var profile = {};
-    var user  = TestUsers[0];
+    var profile = {...TestUsers[0]};
 
-    profile.id = user.id;
-    profile.name = user.name;
-    profile.address = user.address;
-    profile.score = user.score;
-    profile.products  = GetProductItems(user.fpid);
-    profile.producers = GetProducerItems(user.pid);
-    profile.retailers = GetRetailerItems(user.rid);
-    profile.following = GetUserItems(user.following);
-    profile.follower  = GetUserItems(user.follower);
-    profile.reviewProducts = GetProductItems(user.rpid);
+    profile.products  = GetProductItems(profile.fpid);
+    profile.producers = GetProducerItems(profile.pid);
+    profile.retailers = GetRetailerItems(profile.rid);
+    profile.following = GetUserItems(profile.following);
+    profile.follower  = GetUserItems(profile.follower);
+    profile.reviewProducts = GetProductItems(profile.rpid);
     onUserProfile(profile,null);
 }
 
@@ -226,23 +202,10 @@ export function LoginUserImpl(name,password,onUserProfile) {
 
 export function GetActivityProductsImpl(activityType,onActivityProducts) {
     // BatsFix. use the term later!
+    console.log("Getting products impl");
     var products = [];
     for (var i=0; i < TestProducts.length; i+=2) {
         products.push(TestProducts[i]);
     }
     onActivityProducts(products,null);
-}
-
-//
-// BatsFix. Following are for review tab
-//
-export function UploadProductImageImpl() {
-    return ({productInfo:TestProducts[0],storeInfo:TestRetailers[1]});
-}
-export function UploadProductRatingImpl() {
-
-}
-
-export function UploadStoreRatingImpl() {
-
 }
