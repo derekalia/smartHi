@@ -6,9 +6,6 @@ import React, { Component } from 'react';
 import {Alert,TextInput, Modal,Dimensions,StyleSheet, View, Text, ScrollView, Image, Navigator, TouchableOpacity, Platform, TouchableHighlight } from 'react-native';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-// import apollo helper
-import {graphql} from 'react-apollo';
-import gql from 'graphql-tag';
 
 import StarRating from 'react-native-star-rating';
 
@@ -133,15 +130,14 @@ class LicenseeScene extends Component {
         if (this.props.tabId == ProfileTabId) {
             hackMargin = -20;
         }
-        console.log(this.props.licensee);
-        return (<HerbyLoading/>);
+        console.log(this.props.retailer);
         return (
         <View>
              <HerbyBar navigator={this.props.navigator} name="Retailer" forward="Settings" forwardCallback={()=>this._goSettings()}/>
              <ScrollView
                   style={{marginTop:0,height:this._height,backgroundColor:'transparent',}}
                   stickyHeaderIndices={[1]}>
-                  <LicenseeHeader retailer={this.props.licensee} goUpdate={(t)=>this._goUpdate(t)}/>
+                  <LicenseeHeader retailer={this.props.retailer} goUpdate={(t)=>this._goUpdate(t)}/>
                   <HerbyFrameBar entries={['PRODUCTS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
                   <Navigator
                       style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
@@ -150,7 +146,7 @@ class LicenseeScene extends Component {
                       renderScene={this.renderScene}
                       initialRoute = {LicenseeFrames[ProductsFrameId]}
                       initialRouteStack = {LicenseeFrames}
-                      retailer={this.props.licensee}
+                      retailer={this.props.retailer}
                       goProduct={(t)=>this.props.GetProductAction(t)}
                   />
              </ScrollView>
@@ -179,39 +175,4 @@ function mapActionToProps(dispatch) {
         dispatch);
 }
 
-//
-// BatsFix. Attach apollo query to the component. This creates props loading and products on HomeScene
-//
-const apolloLicensee = gql`query($itemId: ID!){
-    Retailer(id:$itemId)
-    {
-        id,
-        name,
-        image,
-        address,
-        rating,
-        ratingCount,
-        products {
-            price,
-            product {id,name,image,rating,ratingCount},
-        },
-        users {
-            id,
-            name,
-            image,
-        }
-    }
-}`;
-
-
-//
-// BatsFix. Maps data obtained from the query to props.
-//
-function mapDataToProps({props,data}) {
-    return ({
-        loading: data.loading,
-        licensee: data.Retailer,
-    });
-}
-
-module.exports = graphql(apolloLicensee,{props:mapDataToProps})(connect(mapStateToProps,mapActionToProps)(LicenseeScene));
+module.exports = connect(mapStateToProps,mapActionToProps)(LicenseeScene);

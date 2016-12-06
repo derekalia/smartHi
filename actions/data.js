@@ -163,9 +163,13 @@ export function GetProductImpl(id,onProduct) {
     onProduct(product,null);
 }
 
+export function RetailerLoginImpl(userName,userPassword,onLogin) {
+    GetRetailerImpl(0,onLogin);
+}
+
 export function GetRetailerImpl(id,onRetailer) {
 
-    var retailer = TestRetailers[0];
+    var retailer = TestRetailers[id];
 
     retailer.products  = GetProductItems(retailer.pid);
     retailer.follower  = GetUserItems(retailer.follower);
