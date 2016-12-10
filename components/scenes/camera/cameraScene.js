@@ -28,7 +28,7 @@ class CameraScene extends Component {
             <HerbyButton2 style={{width:128}} name="Rate Queue" onPress={()=>this._goRateQueue()}/>
         </View>
         <View style={{flex:5}}/>
-        <View style={{flex:1,alignItems:'center',marginTop:20}}>
+        <View style={{flex:1,alignItems:'center',marginBottom:20}}>
             <HerbyButton2 style={{width:128}} name="Scan" onPress={()=>this._goRateQueue()}/>
         </View>
 
