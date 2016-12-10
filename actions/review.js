@@ -4,27 +4,49 @@ import {
     CameraSceneId,
     RateQueueSceneId,
     ProductInfoSceneId,
-    ProductRateSceneId,
-    RetailerRateSceneId,
+    RateProductSceneId,
+    RateRetailerSceneId,
     ProductReviewSceneId,
 }   from '../common/const.js';
+
+import {GetRateQueueImpl} from './fireBase.js';
+
+export function GetRateQueue(userId,onRateQueue) {
+    GetRateQueueImpl(userId,onRateQueue);
+}
 
 export function UploadProductScan() {
     console.log('UploadProductScan:Not implemented yet');
 }
 
-export function RateProduct() {
+export function RateProduct(ratingData,onFinish) {
     console.log('RateProduct:Not implemented yet');
+    console.log(ratingData);
+    onFinish(null);
 }
 
-export function RateRetailer() {
+export function RateRetailer(ratingData,onFinish) {
     console.log('RateRetailer:Not implemented yet');
+    console.log(ratingData);
+    onFinish(null);
 }
 
 export function GoCameraAction() {
     return ({
         type: SWITCH_SCENE,
         sceneId: CameraSceneId,
+    });
+}
+
+//
+// BatsFix. Is this even necessary?
+//
+export function GoProductInfoAction(productInfo) {
+    // BatsFix. Question here is what does productInfo have?
+    return ({
+        type:SWITCH_SCENE,
+        itemId: productInfo,
+        sceneId:ProductInfoSceneId,
     });
 }
 
@@ -36,28 +58,19 @@ export function GoRateQueueAction() {
     });
 }
 
-export function GoProductInfoAction(productInfo) {
-    // BatsFix. Question here is what does productInfo have?
-    return ({
-        type:SWITCH_SCENE,
-        itemId: productInfo,
-        sceneId:ProductInfoSceneId,
-    });
-}
-
-export function GoProductRateAction(productId) {
+export function GoRateProductAction(productId) {
     return ({
             type: SWITCH_SCENE,
             itemId:  productId,
-            sceneId: ProductRateSceneId,
+            sceneId: RateProductSceneId,
     });
 }
 
-export function GoRetailerRateAction(productId) {
+export function GoRateRetailerAction(retailerId) {
     return ({
             type: SWITCH_SCENE,
             itemId:  retailerId,
-            sceneId: RetailerRateSceneId,
+            sceneId: RateRetailerSceneId,
     });
 }
 

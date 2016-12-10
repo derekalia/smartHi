@@ -139,7 +139,7 @@ export function GetProductReviewImpl(reviewId,onProductReview) {
     onProductReview(productReview,null);
 }
 
-export function GetRateQueueImpl(onRateQueue) {
+export function GetRateQueueImpl(userId,onRateQueue) {
     // returns the queue for the current user.
     // for test purposes push all test products
     var productItems = [];
@@ -148,6 +148,8 @@ export function GetRateQueueImpl(onRateQueue) {
     }
     onRateQueue(productItems,null);
 }
+
+module.exports.GetRateQueueImpl = GetRateQueueImpl;
 
 export function GetLatestNewsImpl(onLatestNews) {
     var latestNews = [TestProducts[0],TestProducts[1]];
@@ -213,3 +215,37 @@ export function GetActivityProductsImpl(activityType,onActivityProducts) {
     }
     onActivityProducts(products,null);
 }
+
+function SearchImpl(searchType,searchTerm,onSearchResult) {
+    var searchParameters = {};
+    var searchUpdateCount = 0;
+    var resultList = [];
+
+    switch(searchType) {
+        case 'product': 
+            var resultList = [];
+            for (var i=0; i < TestProducts.length; i ++) {
+                resultList.push(TestProducts[i]);
+            }
+            break;
+        case 'retailer':
+            for (var i=0; i < TestRetailers.length; i ++) {
+                resultList.push(TestRetailers[i]);
+            }
+            break;
+        case 'user':
+            for (var i=0; i < TestUsers.length; i ++) {
+                resultList.push(TestUsers[i]);
+            }
+            break;
+        default:
+            onSearchResult(null,'Unknown searchType');
+            // If unknown type return immediately
+            return;
+    }
+    onSearchResult(resultList,null);
+}
+
+module.exports.SearchImpl = SearchImpl;
+
+

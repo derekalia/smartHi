@@ -9,7 +9,7 @@ import {
 
 import {HomeSceneId,HomeTabId,
         SearchSceneId,SearchTabId,
-        ReviewStartSceneId,ReviewTabId,
+        CameraSceneId,ReviewTabId,
         ProfileSceneId,ProfileTabId
 } from '../common/const.js';
 
@@ -25,7 +25,7 @@ const initialState = {
         itemId: null,
     },
     reviewTab: {
-        sceneId: ReviewStartSceneId,
+        sceneId: CameraSceneId,
         item: null,
         itemId: null,
     },
@@ -71,7 +71,7 @@ export default function NavigationReducer(state, action) {
                 switch(action.tabId) {
                     case HomeTabId: newState.homeTab = {sceneId:HomeSceneId,item: null, itemId: null}; break;
                     case SearchTabId: newState.homeTab = {sceneId:SearchSceneId,item:null, itemId: null}; break;
-                    case ReviewTabId: newState.reviewTab = {sceneId:ReviewStartSceneId, item:null, itemId: null}; break;
+                    case ReviewTabId: newState.reviewTab = {sceneId:CameraSceneId, item:null, itemId: null}; break;
                     case ProfileTabId: newState.profileTab = {sceneId:ProfileSceneId, item: null, itemId: null}; break;
                 }
             }

@@ -22,7 +22,7 @@ class CameraScene extends Component {
 
     render() {
         return (
-        <Camera ref="cam" style={{flex:1,margin:20}} onBarCodeRead={(e)=>this._onBarCodeRead(e)}>
+        <Camera ref="cam" style={{flex:1}} onBarCodeRead={(e)=>this._onBarCodeRead(e)}>
         
         <View style={{flex:1,alignItems:'center',marginTop:20}}>
             <HerbyButton2 style={{width:128}} name="Rate Queue" onPress={()=>this._goRateQueue()}/>

@@ -9,9 +9,9 @@ import {StyleSheet, Text, View, Slider, ListView, ListViewDataSource, ScrollView
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {HerbyBar,HerbyButton2,}         from '../../../common/controls.js';
+import {HerbyLoading,HerbyBar,HerbyButton2,}         from '../../../common/controls.js';
+import {GoRateRetailerAction,RateProduct,GetProduct} from '../../../actions';
 
-import {GetRetailerAction,GetProducerAction,RateProductAction,} from '../../../actions';
 import StarRating from 'react-native-star-rating';
 import ReviewList   from '../../util/reviewList.js';
 import FilterItem   from '../../util/filterItem.js';
@@ -24,8 +24,7 @@ class RateProductScene extends Component {
     constructor(props) {
         super(props);
         // these should come from the app state.
-        this.state = this.props.product;
-        this.state.showSlider = false;
+
         this._selectedFilterIndex = 0;
         this._effect   = FiltersEffect;
         this._symptom  = FiltersSymptoms;
@@ -36,9 +35,37 @@ class RateProductScene extends Component {
         for (var i=0; i < this._effect.length; i++) { this._effect[i].selected = false };
         for (var i=0; i < this._symptom.length; i++) { this._symptom[i].selected = false };
         for (var i=0; i < this._activity.length; i++) { this._activity[i].selected = false };
+
+        this.state = {loading:true,message:null,product: null,showSlider:false};
+        this._mounted = false;
     }
 
+    componentDidMount() {
+        this.setState({loading:true});
+        this._mounted = true;
+        console.log("item id is now " + this.props.itemId);
+        GetProduct(this.props.itemId,(product,error)=> {
+           if (this._mounted) {
+               if (error== null) {
+                   this.setState({loading:false,product:product});
+               }
+               else {
+                   this.setState({loading:false,message:error});
+               }
+           }
+        });
+    }
+
+    componentWillUnmount() {
+        this._mounted = false;
+    }
+
+
     render() {
+        if (this.state.loading || this.state.message != null) {
+            return (<HerbyLoading showBusy={this.state.loading} message={this.state.message}/>);
+        }
+
         return (
         <View style={{flex:1}}>
             <HerbyBar navigator={this.props.navigator} name="RateProduct"/>
@@ -51,10 +78,6 @@ class RateProductScene extends Component {
                     {this._renderRating()}
 
                     {this._renderDetailRating()}
-
-                    {/* {this._renderDescription()} */}
-
-                    {/* {this._renderTestResults()} */}
 
                     {this._renderFilters()}
 
@@ -84,7 +107,7 @@ class RateProductScene extends Component {
                                         </View>
 
                                         <View style={{flex:1,flexDirection:'row',alignItems:'center',justifyContent:'center',marginTop:10}}>
-                                          <TouchableOpacity style={{width:100,alignSelf:'center',borderRadius:4,width:100,height:42,backgroundColor:'white',borderColor:'black',borderWidth:1,justifyContent:'center'}} onPress={()=>this._hideInfo()}>
+                                          <TouchableOpacity style={{width:100,alignSelf:'center',borderRadius:4,width:100,height:42,backgroundColor:'white',borderColor:'black',borderWidth:1,justifyContent:'center'}} onPress={()=>this._setEffectValue(-1)}>
                                             <Text style={{fontSize:16,justifyContent:'center',alignSelf:'center'}}>Cancel</Text>
                                           </TouchableOpacity>
 
@@ -100,7 +123,23 @@ class RateProductScene extends Component {
     }
 
     _submitRating() {
-        this.props.RateProductAction();
+        //BatsFix. What should go here?
+        var rating = {};
+        rating.id      = this.state.product.id;
+        rating.rating  = this.state.rating;
+        rating.quality = this.state.quality;
+        rating.potency = this.state.potency;
+        rating.flavor  = this.state.flavor;
+        rating.comment = this._comment;
+
+        RateProduct(rating,(error)=> {
+           // BatsFix. Should we do something here?
+           if (this._mounted) {
+               if (error== null) {
+                   this.props.GoRateRetailerAction(0);        
+               }
+           }
+        });
     }
 
     _onRating(rating) {
@@ -124,21 +163,22 @@ class RateProductScene extends Component {
         });
     }
 
+    _onComment(text) {
+        this._comment = text;
+    }
+
     _renderRating() {
         return (
         <View>
             <View style={{flexDirection:'row', marginTop: 10, marginHorizontal: 10 }}>
               <View style={{justifyContent: "flex-start"}}>
-                  <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.name}</Text>
-              </View>
-              <View style={{justifyContent: "flex-end",alignItems:'flex-end',alignItems:'flex-end',flex:1}}>
-                  <Text style={{ fontSize: 22, fontWeight: 'bold'}}>$40</Text>
+                  <Text style={{ fontSize: 22, fontWeight: 'bold' }}>{this.state.product.name}</Text>
               </View>
             </View>
             <View style={{ marginTop: 5, marginHorizontal: 10,flexDirection: "row" }}>
                 <View style={{flex:1.2,alignItems: 'flex-start', flexDirection: "row",marginTop:8}}>
                     <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
-                        rating={this.state.rating}
+                        rating={this.state.product.rating}
                         selectedStar={(rating) => this._onRating(rating)}/>
 
                 </View>
@@ -159,7 +199,7 @@ class RateProductScene extends Component {
         <View style={{ marginHorizontal: 10 }}>
             <View style={{ flex: 1,justifyContent: 'center',marginTop:10,marginBottom:5 }}>
                   <Text style={{fontSize:16}}>
-                  {this.state.description}
+                  {this.state.product.description}
                  </Text>
             </View>
         </View>
@@ -186,17 +226,17 @@ class RateProductScene extends Component {
                 <View style={{ flex: 3 }}>
                     {/* <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
                         <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
-                            rating={this.state.quality}
+                            rating={this.state.product.quality}
                             selectedStar={(rating) => this._onQuality(rating)}/>
                     </View> */}
                     <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
                         <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
-                            rating={this.state.flavor}
+                            rating={this.state.product.flavor}
                             selectedStar={(rating) => this._onFlavor(rating)}/>
                    </View>
                     <View style={{ flexDirection: "row", alignItems: 'center', height: 40 }}>
                         <StarRating disabled={false} maxStars={5} starSize={30} starColor={'#D0021B'}
-                            rating={this.state.potency}
+                            rating={this.state.product.potency}
                             selectedStar={(rating) => this._onPotency(rating)}/>
                    </View>
                 </View>
@@ -217,10 +257,10 @@ class RateProductScene extends Component {
                   <Text style={{width:60,textAlign:'center',fontWeight:'bold',fontSize: 16}}>TOTAL</Text>
                 </View>
                 <View style={{flex:1,flexDirection:'row',justifyContent: 'space-between',height:30}}>
-                  <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.thca}%</Text>
-                  <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.thc}%</Text>
-                  <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.cbd}%</Text>
-                  <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.cbd}%</Text>
+                  <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.product.thca}%</Text>
+                  <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.product.thc}%</Text>
+                  <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.product.cbd}%</Text>
+                  <Text style={{width:60,textAlign:'center',fontSize: 16}}>{this.state.product.cbd}%</Text>
                 </View>
             </View>
         </View>
@@ -236,7 +276,7 @@ class RateProductScene extends Component {
             <View style={{ flexDirection: "row",borderColor: 'gray', borderWidth: 1, margin: 0, borderRadius: 4, }}>
                 <TextInput
                     style={{ height: 60, flex:1, margin: 4, fontSize: 16, }}
-                    onChangeText={(text) => this.setState({ text }) }
+                    onChangeText={(text) => this._onComment(text) }
                     placeholder={'Say something'}
                     numberOfLines = {4}
                     multiline = {true}
@@ -278,7 +318,9 @@ class RateProductScene extends Component {
     }
 
     _setEffectValue(value) {
-        this._effect[this._selectedFilterIndex].strength = value;
+        if (value != -1) {
+            this._effect[this._selectedFilterIndex].strength = value;
+        }
         this.setState({showSlider:false});
     }
 
@@ -349,10 +391,11 @@ function mapStateToProps(state) {
         product: state.ReviewReducer.product,
     }
 }
-// BatsFix. This function is used to convert action to props passed to this component.
-// In this example, there is now prop called GetRetailerAction.
+
 //
-function mapActionToProps(dispatch) { return bindActionCreators({ GetRetailerAction,GetProducerAction,RateProductAction, }, dispatch); }
+// Connect GoRateRetailerAction
+//
+function mapActionToProps(dispatch) { return bindActionCreators({ GoRateRetailerAction, }, dispatch); }
 
 module.exports = connect(mapStateToProps, mapActionToProps)(RateProductScene);
 
