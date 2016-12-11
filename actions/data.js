@@ -189,6 +189,10 @@ export function GetProducerImpl(id,onProducer) {
     onProducer(producer,null);
 }
 
+export function ProducerLoginImpl(userName,userPassword,onLogin) {
+    GetProducerImpl(0,onLogin);
+}
+
 export function GetProfileImpl(id,onUserProfile) {
     var profile = {...TestUsers[0]};
 

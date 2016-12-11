@@ -2,7 +2,7 @@ import { SWITCH_SCENE } from './navigation.js';
 
 export const PRODUCER_SUCCESS = 'PRODUCER_SUCCESS';
 
-import {ProcessorSceneId,ProducerSceneId} from '../common/const.js';
+import {ProducerProfileSceneId,ProducerSceneId} from '../common/const.js';
 import {ProducerLoginImpl,GetProducerImpl} from './fireBase.js';
 
 export function GetProducer(producerId,onProducer) {
@@ -30,7 +30,7 @@ export function ProducerLoginAction(producer) {
 
         dispatch({
             type:SWITCH_SCENE,
-            sceneId: ProcessorSceneId,
+            sceneId: ProducerProfileSceneId,
             itemId: producer.id,
         });
    }

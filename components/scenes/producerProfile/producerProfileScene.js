@@ -1,5 +1,5 @@
 //
-// Description: processorScene.js
+// Description: producerProfileScene.js
 //
 // Import modules
 import React, { Component } from 'react';
@@ -14,15 +14,15 @@ import gql from 'graphql-tag';
 import StarRating from 'react-native-star-rating';
 
 // Import internals
-import {GoUpdateProductAction,GetRetailerAction,SwitchSceneAction,} from '../../../actions';
-import {UpdateProductSceneId,UpdateProcessorSceneId,SettingsSceneId,ProfileTabId,} from '../../../common/const.js';
+import {GoUpdateProductAction,GoRetailerAction,SwitchSceneAction,} from '../../../actions';
+import {UpdateProductSceneId,UpdateProducerSceneId,SettingsSceneId,ProfileTabId,} from '../../../common/const.js';
 import {HerbyLoading,HerbyFrameBar,HerbyBar,}   from '../../../common/controls.js';
 import ProductList from '../../util/productList.js';
 import RetailerList from '../../util/retailerList.js';
 import UserList from '../../util/userList.js';
 import {HerbyButton2,} from '../../../common/controls.js';
 
-class ProcessorProducts extends Component {
+class ProducerProducts extends Component {
     //BatsFix. should there be a product categorization and breakdown here? what about
     //pricing?
     render() {
@@ -44,7 +44,7 @@ class ProcessorProducts extends Component {
     }
 }
 
-class ProcessorRetailers extends Component {
+class ProducerRetailers extends Component {
     //BatsFix. Is this even necessary???
     render() {
         return (
@@ -59,7 +59,7 @@ class ProcessorRetailers extends Component {
 }
 
 
-class ProcessorSocial extends Component {
+class ProducerSocial extends Component {
     constructor(props) {
         super(props);
         this.state = {frameId:0};
@@ -78,7 +78,7 @@ class ProcessorSocial extends Component {
     }
 }
 
-class ProcessorHeader extends Component {
+class ProducerHeader extends Component {
     constructor(props) {
         super(props);
     }
@@ -109,14 +109,14 @@ const ProductsFrameId  = 0;
 const RetailersFrameId = 1;
 const SocialFrameId    = 2;
 
-const ProcessorFrames = [
-    {title: "Products",  component: ProcessorProducts,   index: ProductsFrameId},
-    {title: "Retailers", component: ProcessorRetailers,  index: RetailersFrameId},
-    {title: "Social",    component: ProcessorSocial,     index: SocialFrameId},
+const ProducerFrames = [
+    {title: "Products",  component: ProducerProducts,   index: ProductsFrameId},
+    {title: "Retailers", component: ProducerRetailers,  index: RetailersFrameId},
+    {title: "Social",    component: ProducerSocial,     index: SocialFrameId},
 ];
 
 
-class ProcessorScene extends Component {
+class ProducerScene extends Component {
 
     constructor(props) {
         super(props);
@@ -127,11 +127,11 @@ class ProcessorScene extends Component {
     }
 
     _goUpdate() {
-        this.props.SwitchSceneAction(UpdateProcessorSceneId);
+        this.props.SwitchSceneAction(UpdateProducerSceneId);
     }
 
     _setFrame(frameId) {
-        this.refs.navigator.jumpTo(ProcessorFrames[frameId]);
+        this.refs.navigator.jumpTo(ProducerFrames[frameId]);
         this.setState({frameId: frameId});
     }
 
@@ -165,22 +165,22 @@ class ProcessorScene extends Component {
 
         return (
         <View>
-             <HerbyBar navigator={this.props.navigator} name="Processor" forward="Settings" forwardCallback={()=>this._goSettings()}/>
+             <HerbyBar navigator={this.props.navigator} name="Producer" forward="Settings" forwardCallback={()=>this._goSettings()}/>
              <ScrollView
                   style={{marginTop:0,height:this._height,backgroundColor:'#ECECEC',}}
                   stickyHeaderIndices={[1]}>
-                  <ProcessorHeader producer={this.props.processor} goUpdate={(t)=>this._goUpdate(t)}/>
+                  <ProducerHeader producer={this.props.processor} goUpdate={(t)=>this._goUpdate(t)}/>
                   <HerbyFrameBar entries={['PRODUCTS','RETAILERS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
                   <Navigator
                       style={{height:this._height,backgroundColor:'#ECECEC',justifyContent: 'flex-start'}}
                       ref="navigator"
                       configureScene={this.configureScene}
                       renderScene={this.renderScene}
-                      initialRoute = {ProcessorFrames[ProductsFrameId]}
-                      initialRouteStack = {ProcessorFrames}
+                      initialRoute = {ProducerFrames[ProductsFrameId]}
+                      initialRouteStack = {ProducerFrames}
                       producer={this.props.processor}
                       goProduct={(t)=>this.props.GoUpdateProductAction(t)}
-                      goRetailer={(t)=>this.props.GetRetailerAction(t)}
+                      goRetailer={(t)=>this.props.GoRetailerAction(t)}
                   />
              </ScrollView>
         </View>
@@ -198,57 +198,14 @@ function mapStateToProps(state) {
 }
 
 //
-// Connect to GoUpdateProductAction,GetRetailerAction,SwitchSceneAction
+// Connect to GoUpdateProductAction,GoRetailerAction,SwitchSceneAction
 //
 function mapActionToProps(dispatch) {
     return bindActionCreators({
         GoUpdateProductAction,
-        GetRetailerAction,
+        GoRetailerAction,
         SwitchSceneAction, },
         dispatch);
 }
 
-//
-// BatsFix. Attach apollo query to the component. This creates props loading and product on HomeScene
-//
-const apolloProcessor = gql`query($itemId: ID!){
-    Producer(id:$itemId)
-    {
-        id,
-        name,
-        image,
-        description,
-        rating,
-        ratingCount,
-        products {
-           id,
-           name,
-           rating,
-           ratingCount,
-           thc,
-           cbd,
-           thca,
-           activity,
-           prices { 
-                retailer {id, name, image}
-           }
-        },
-        users {
-            id,
-            name,
-            image,
-        }
-    }
-}`;
- 
-//
-// BatsFix. Maps data obtained from the query to props.
-//
-function mapDataToProps({props,data}) {
-    return ({
-        loading: data.loading,
-        processor: data.Producer,
-    });
-}
-
-module.exports = graphql(apolloProcessor,{props:mapDataToProps})(connect(mapStateToProps,mapActionToProps)(ProcessorScene));
+module.exports = connect(mapStateToProps,mapActionToProps)(ProducerScene);

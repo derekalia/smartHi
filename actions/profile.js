@@ -1,6 +1,6 @@
 import {SWITCH_SCENE} from './navigation.js';
 
-import {ProfileSceneId} from '../common/const.js';
+import {ProfileSceneId,SettingsSceneId,} from '../common/const.js';
 import {GetProfileImpl,ChangeUserNameImpl,} from './fireBase.js';
 
 export function GetProfile(userId,onProfile) {
@@ -24,6 +24,14 @@ export function GoProfileAction(userId) {
         type:SWITCH_SCENE,
         sceneId: ProfileSceneId,
         itemId: userId,
+    });
+}
+
+export function GoSettingsAction() {
+    return ({
+        type:SWITCH_SCENE,
+        sceneId: SettingsSceneId,
+        itemId: null 
     });
 }
 

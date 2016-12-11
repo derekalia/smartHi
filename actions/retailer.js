@@ -2,7 +2,7 @@ import {SWITCH_SCENE} from './navigation.js';
 
 export const RETAILER_SUCCESS = 'RETAILER_SUCCESS';
 
-import {LicenseeSceneId,RetailerSceneId} from '../common/const.js';
+import {RetailerProfileSceneId,RetailerSceneId,UpdateRetailerSceneId} from '../common/const.js';
 
 import {GetRetailerImpl,RetailerLoginImpl} from './fireBase.js';
 
@@ -26,6 +26,14 @@ export function GoRetailerAction(retailerId) {
    });
 }
 
+export function GoUpdateRetailerAction(retailerId) {
+    return({
+        type:SWITCH_SCENE,
+        sceneId: UpdateRetailerSceneId,
+        itemId: retailerId,
+    });
+}
+
 export function RetailerLoginAction(retailer) {
     return async function(dispatch, getState) {
         dispatch({
@@ -35,7 +43,7 @@ export function RetailerLoginAction(retailer) {
 
         dispatch({
             type:SWITCH_SCENE,
-            sceneId: LicenseeSceneId,
+            sceneId: RetailerProfileSceneId,
             itemId:retailer.id, 
         });
     }

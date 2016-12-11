@@ -1,5 +1,5 @@
 //
-// Description: licenseeScene.js
+// Description: retailerProfileScene.js
 //
 // Import modules
 import React, { Component } from 'react';
@@ -10,14 +10,14 @@ import {bindActionCreators} from 'redux';
 import StarRating from 'react-native-star-rating';
 
 // Import internals
-import {GetProductAction,SwitchSceneAction,} from '../../../actions';
-import {UpdateRetailerSceneId,SettingsSceneId,ProfileTabId,} from '../../../common/const.js';
+import {GoProductAction,GoUpdateRetailerAction,GoSettingsAction,} from '../../../actions';
+import {ProfileTabId} from '../../../common/const.js';
 import {HerbyLoading,HerbyFrameBar,HerbyBar,}   from '../../../common/controls.js';
 import ProductList from '../../util/productList.js';
 import UserList from '../../util/userList.js';
 import {HerbyButton2,} from '../../../common/controls.js';
 
-class LicenseeProducts extends Component {
+class RetailerProducts extends Component {
     //BatsFix. should there be a product categorization and breakdown here? what about
     //pricing?
     render() {
@@ -32,7 +32,7 @@ class LicenseeProducts extends Component {
     }
 }
 
-class LicenseeSocial extends Component {
+class RetailerSocial extends Component {
     constructor(props) {
         super(props);
         this.state = {frameId:0};
@@ -43,7 +43,6 @@ class LicenseeSocial extends Component {
     render() {
         return (
             <ScrollView style={{backgroundColor:'transparent'}}>
-                {/* <View style={{backgroundColor:'#ECECEC',flex:1,height:10,marginHorizontal:0}}/> */}
                 <HerbyFrameBar entries={['FOLLOWER','FOLLOWING']} setFrame={(t)=>this._setFrame(t)}/>
                 <UserList userList={this.state.frameId == 0?this.props.retailer.following:this.props.retailer.follower}/>
             </ScrollView>
@@ -51,29 +50,23 @@ class LicenseeSocial extends Component {
     }
 }
 
-class LicenseeHeader extends Component {
+class RetailerHeader extends Component {
     constructor(props) {
         super(props);
     }
     render() {
         return(
-          <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
-          <TouchableHighlight style={{backgroundColor:'white'}} onPress={()=>this.props.goUpdate()}>
-          <View style={{flexDirection:'row',borderWidth: 1.5, borderColor:'#4A90E2',width:350,borderRadius:10}}>
-            <View style={{marginLeft:10, marginTop:10,marginBottom:10,marginRight:20}}>
-              <Image source={require('../../../media/bluePlus1.png')} style={{ height: 75, width: 75}}/>
+        <View style={{marginTop:20,alignItems:'center',justifyContent:'center'}}>
+        <TouchableHighlight style={{backgroundColor:'white'}} onPress={()=>this.props.goUpdate()}>
+            <View style={{flexDirection:'row',borderWidth: 1.5, borderColor:'#4A90E2',width:350,borderRadius:10}}>
+                <View style={{marginLeft:10, marginTop:10,marginBottom:10,marginRight:20}}>
+                  <Image source={require('../../../media/bluePlus1.png')} style={{ height: 75, width: 75}}/>
+                </View>
+                <View style={{alignSelf:'center',justifyContent:'center'}}>
+                  <Text style={{color:'#4A90E2', fontSize:16,fontWeight:'bold'}}>Create Store</Text>
+                </View>
             </View>
-            <View style={{alignSelf:'center',justifyContent:'center'}}>
-              <Text style={{color:'#4A90E2', fontSize:16,fontWeight:'bold'}}>Create Store</Text>
-            </View>
-          </View>
         </TouchableHighlight>
-            {/* <Image source={require('../../../media/RosinXJ.png') } style={{ height: 190, width: 380,justifyContent:'center',}}/>
-            <Text style={{fontSize:18,fontWeight:'bold'}}>{this.props.retailer.name}</Text>
-            <Text style={{fontSize:15}}>{this.props.retailer.description}</Text> */}
-            {/* <View style={{flexDirection:'row'}}> */}
-            {/* <HerbyButton2 name='Update Licensee Info' onPress={()=>this.props.goUpdate()}/> */}
-            {/* </View> */}
         </View>
         );
     }
@@ -82,13 +75,13 @@ class LicenseeHeader extends Component {
 const ProductsFrameId  = 0;
 const SocialFrameId    = 1;
 
-const LicenseeFrames = [
-    {title: "Products",  component: LicenseeProducts,   index: ProductsFrameId},
-    {title: "Social",    component: LicenseeSocial,     index: SocialFrameId},
+const RetailerFrames = [
+    {title: "Products",  component: RetailerProducts,   index: ProductsFrameId},
+    {title: "Social",    component: RetailerSocial,     index: SocialFrameId},
 ];
 
 
-class LicenseeScene extends Component {
+class RetailerScene extends Component {
 
     constructor(props) {
         super(props);
@@ -98,17 +91,17 @@ class LicenseeScene extends Component {
         this._height = height;
     }
 
-    _goUpdate() {
-        this.props.SwitchSceneAction(UpdateRetailerSceneId);
-    }
-
     _setFrame(frameId) {
-        this.refs.navigator.jumpTo(LicenseeFrames[frameId]);
+        this.refs.navigator.jumpTo(RetailerFrames[frameId]);
         this.setState({frameId: frameId});
     }
 
+    _goUpdate() {
+        this.props.GoUpdateRetailerAction();
+    }
+
     _goSettings() {
-        this.props.SwitchSceneAction(SettingsSceneId);
+        this.props.GoSettingsAction();
     }
 
     renderScene(route, navigator) {
@@ -130,24 +123,23 @@ class LicenseeScene extends Component {
         if (this.props.tabId == ProfileTabId) {
             hackMargin = -20;
         }
-        console.log(this.props.retailer);
         return (
         <View>
              <HerbyBar navigator={this.props.navigator} name="Retailer" forward="Settings" forwardCallback={()=>this._goSettings()}/>
              <ScrollView
                   style={{marginTop:0,height:this._height,backgroundColor:'transparent',}}
                   stickyHeaderIndices={[1]}>
-                  <LicenseeHeader retailer={this.props.retailer} goUpdate={(t)=>this._goUpdate(t)}/>
+                  <RetailerHeader retailer={this.props.retailer} goUpdate={(t)=>this._goUpdate(t)}/>
                   <HerbyFrameBar entries={['PRODUCTS','SOCIAL']} setFrame={(t)=>this._setFrame(t)}/>
                   <Navigator
                       style={{height:this._height,backgroundColor:'transparent',justifyContent: 'flex-start'}}
                       ref="navigator"
                       configureScene={this.configureScene}
                       renderScene={this.renderScene}
-                      initialRoute = {LicenseeFrames[ProductsFrameId]}
-                      initialRouteStack = {LicenseeFrames}
+                      initialRoute = {RetailerFrames[ProductsFrameId]}
+                      initialRouteStack = {RetailerFrames}
                       retailer={this.props.retailer}
-                      goProduct={(t)=>this.props.GetProductAction(t)}
+                      goProduct={(t)=>this.props.GoProductAction(t)}
                   />
              </ScrollView>
         </View>
@@ -166,13 +158,14 @@ function mapStateToProps(state) {
 }
 
 //
-// Connect to SwitchSceneAction
+// Connect to GoSettingsAction,GoUpdateRetailerAction,GoProductAction
 //
 function mapActionToProps(dispatch) {
     return bindActionCreators({
-        GetProductAction,
-        SwitchSceneAction, },
+        GoProductAction,
+        GoSettingsAction,
+        GoUpdateRetailerAction},
         dispatch);
 }
 
-module.exports = connect(mapStateToProps,mapActionToProps)(LicenseeScene);
+module.exports = connect(mapStateToProps,mapActionToProps)(RetailerScene);
