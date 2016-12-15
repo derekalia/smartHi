@@ -13,6 +13,7 @@ import {bindActionCreators} from 'redux';
 
 import {UpdateRetailer} from '../../../actions';
 import {HerbyButton2,HerbyBar,} from '../../../common/controls.js';
+import HerbyNotification from '../../util/herbyNotification.js';
 
 class UpdateRetailerScene extends Component {
     constructor(props) {
@@ -42,7 +43,7 @@ class UpdateRetailerScene extends Component {
         UpdateRetailer(retailerData,(error)=>{
             if (this._mounted) {
                 if (error  == null) {
-                    this.setState({loading:false});
+                    this.setState({loading:false,error:null});
                 }
                 else {
                     this.setState({loading:false,error:error});
@@ -97,6 +98,7 @@ class UpdateRetailerScene extends Component {
         return(
         <View style={{flex:1}}>
             <HerbyBar navigator={this.props.navigator} name="Update Store" back="Back" forward="Done" forwardCallback={()=>this._updateRetailer()}/>
+            <HerbyNotification showBusy={this.state.loading} message={this.state.error}/>
             <ScrollView style={{backgroundColor:'white',marginTop:0,marginBottom:50,flex:1,}}>
                 <Image source={this.state.imageSource} style={{ height: 190, width: 380,justifyContent:'center'}}/>
                 <TouchableOpacity onPress={()=>this._showImagePicker()} 
@@ -168,9 +170,4 @@ function mapStateToProps(state) {
     }
 }
 
-
-function mapActionToProps(dispatch) {
-    return bindActionCreators({UpdateRetailerAction,},dispatch);
-}
-
-module.exports = connect(mapStateToProps, mapActionToProps)(UpdateRetailerScene);
+module.exports = connect(mapStateToProps)(UpdateRetailerScene);
