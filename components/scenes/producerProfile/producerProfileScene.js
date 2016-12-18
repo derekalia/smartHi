@@ -178,7 +178,7 @@ class ProducerScene extends Component {
                       renderScene={this.renderScene}
                       initialRoute = {ProducerFrames[ProductsFrameId]}
                       initialRouteStack = {ProducerFrames}
-                      producer={this.props.processor}
+                      producer={this.props.producer}
                       goProduct={(t)=>this.props.GoUpdateProductAction(t)}
                       goRetailer={(t)=>this.props.GoRetailerAction(t)}
                   />

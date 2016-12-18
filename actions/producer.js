@@ -9,6 +9,11 @@ export function GetProducer(producerId,onProducer) {
     return GetProducerImpl(producerId,onProducer);
 }
 
+export function UpdateProducer(producerData,onFinish) {
+    console.log('UpdateRetailer: Not implemented yet');
+    onFinish(null);
+}
+
 export function ProducerLogin(userName,userPassword,onLogin) {
     ProducerLoginImpl(userName,userPassword,onLogin);
 }

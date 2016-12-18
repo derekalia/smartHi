@@ -11,7 +11,7 @@ import ImagePicker from 'react-native-image-picker';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
-import {UpdateProducerAction,SwitchSceneAction,} from '../../../actions';
+import {UpdateProducer} from '../../../actions';
 import {HerbyButton2,HerbyBar,} from '../../../common/controls.js';
 
 class UpdateProducerScene extends Component {
@@ -21,16 +21,37 @@ class UpdateProducerScene extends Component {
         this.state = {
             imageSource:this._defaultImage,
         }
-        this._title = this.props.producer.title,
+        this._mounted = false;
+        this._name = this.props.producer.name,
         this._description = this.props.producer.description;
+
+    }
+    componentWillUnmount() {
+        this._mounted = false;
+    }
+    componentDidMount() {
+        this._mounted = true;
     }
 
     _updateProducer() {
-        var sourceImage = null;
-        if (this.state.imageSource != this._defaultImage ) {
-            sourceImage = this.state.imageSource;
-        }
-        this.props.UpdateProducerAction(this._title,this._description, sourceImage);
+        this.setState({loading:true});
+        var producerData = {};
+        producerData.id          = this.props.producer.id;
+        producerData.name        = this._name;
+        producerData.description = this._description;
+        producerData.sourceImage  = this.state.imageSource;
+
+        // BatsFix. Should this be getting back retailer properties from firebase?
+        UpdateProducer(producerData,(error)=>{
+            if (this._mounted) {
+                if (error  == null) {
+                    this.setState({loading:false,error:null});
+                }
+                else {
+                    this.setState({loading:false,error:error});
+                }
+            }
+        });
     }
     _setDescription(t) {
         this._description = t;
@@ -108,9 +129,4 @@ function mapStateToProps(state) {
     }
 }
 
-
-function mapActionToProps(dispatch) {
-    return bindActionCreators({UpdateProducerAction,},dispatch);
-}
-
-module.exports = connect(mapStateToProps, mapActionToProps)(UpdateProducerScene);
+module.exports = connect(mapStateToProps)(UpdateProducerScene);

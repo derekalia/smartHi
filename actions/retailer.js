@@ -14,8 +14,9 @@ export function GetRetailer(retailerId,onRetailer) {
     return GetRetailerImpl(retailerId,onRetailer);
 }
 
-export function UpdateRetailer(retailerId,name,description,image) {
+export function UpdateRetailer(retailerData,onFinish) {
     console.log('UpdateRetailer: Not implemented yet');
+    onFinish(null);
 }
 
 export function GoRetailerAction(retailerId) {
